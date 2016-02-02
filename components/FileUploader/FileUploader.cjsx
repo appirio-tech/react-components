@@ -15,11 +15,9 @@ FileUploader = ({ multiple, onChange, loading}) ->
     }
     <UploadedFilesContainer/>
 
-    <div className="dropzone-container">
-      <Dropzone multiple={multiple} onDrop={onChange} className="Dropzone">
-        <button>Choose files to upload.</button>
-      </Dropzone>
-    </div>
+    <Dropzone multiple={multiple} onDrop={onChange} className="Dropzone">
+      <p>click or drag files here to upload</p>
+    </Dropzone>
   </div>
 
 module.exports = FileUploader
