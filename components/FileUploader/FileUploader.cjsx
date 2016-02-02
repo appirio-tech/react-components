@@ -5,7 +5,7 @@ require './FileUploaderStyles'
 React                  = require 'react'
 UploadedFilesContainer = require '../UploadedFiles/UploadedFilesContainer'
 Dropzone               = require 'react-dropzone'
-Loader                 = require 'appirio-tech-ng-ui-components/components/Loader/Loader.cjsx'
+Loader                 = require '../Loader/Loader.cjsx'
 
 FileUploader = ({ multiple, onChange, loading}) ->
   <div className="FileUploader">

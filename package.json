@@ -15,9 +15,10 @@
     "build": "webpack --config webpack.config.js; cp example/index.html dist/"
   },
   "dependencies": {
-    "appirio-styles": "0.x.x",
-    "appirio-tech-client-app-layer": "0.x.x",
-    "react-dropzone": "3.x.x",
-    "react-redux": "4.x.x"
+    "appirio-styles": "0.0.23",
+    "appirio-tech-api-schemas": "^5.0.69",
+    "classnames": "^2.2.3",
+    "react-dropzone": "^3.3.2",
+    "react-redux": "^4.2.1"
   }
 }

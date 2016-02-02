@@ -9,9 +9,9 @@ FileUploaderExamples = ->
 
     <FileUploader/>
 
-    <h1>multiple is true</h1>
+    <h1>loading is true</h1>
 
-    <FileUploader multiple={true} id={'123'} assetType={'work'} category={'development'}/>
+    <FileUploader loading={true} id={'123'} assetType={'work'} category={'development'}/>
   </div>
 
 module.exports = FileUploaderExamples

@@ -5,7 +5,7 @@
 ## Install
 
 ```shell
-npm install appirio-tech-file-uploader
+npm install appirio-tech-react-components
 ```
 
 ## Developing
