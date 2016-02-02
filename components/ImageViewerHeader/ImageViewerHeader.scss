@@ -1,0 +1,58 @@
+@import "work/work-includes";
+
+.ImageViewerHeader {
+
+  main {
+    width: 100vw;
+    padding: 20px;
+
+    > hr {
+      height    : 2px;
+      width     : 100%;
+      margin-top: 20px;
+    }
+
+    .header {
+      width  : 100%;
+
+      .user {
+        min-width: 240px;
+
+        .titles {
+          text-align: left;
+          margin-left: 15px;
+          max-width: 225px;
+          overflow: hidden;
+
+          .name {
+            font-size  : 16px;
+            font-weight: 200;
+          }
+
+          .title {
+            color: $gray;
+          }
+        }
+      }
+
+      .icons {
+        text-align: right;
+        margin-right: 60px;
+
+        .icon {
+          width: 25px;
+          height: 25px;
+        }
+
+        .icon.download {
+          width: 22px;
+          height: 25px;
+        }
+
+        > * {
+          margin-left: 15px;
+        }
+      }
+    }
+  }
+}
