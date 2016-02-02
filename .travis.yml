@@ -1,0 +1,20 @@
+language: node_js
+node_js:
+- 5.2.0
+before_install:
+- npm install
+sudo: false
+before_deploy:
+- npm-prepublish --verbose
+deploy:
+- provider: npm
+  email: "$NPM_EMAIL"
+  api_key: "$NPM_API_KEY"
+  on:
+    tags: true
+env:
+  global:
+  # NPM_EMAIL
+  - secure: "XVgfIy4vm0kOX+saefkpE98aHSzvSk0S9OydHC2/TfNnnfJfrdySOPyuVhfgtap/pKd9R2VtofSCIAy1bRNeE3wsFOpXNv/V/wQQ40cyJGQRL6uCJDkc7yvYnhCh5ZD6Jh2kJzB2FcT8V18+u12Azftbxz+SM0/wk4tgw5akRtUGVEZ01PaivY4VIESJ2qBJZiXeKfMCtCDi/a3OnUMUA6b8tbP+n35zl6JZGJtJhwcYqliyxzgnIR5bCDqPcab32cHsdcb7E8+Q/Co8vYc2ZVI6aQ/Oe+Cd2ON+WyTHZoWfKlKnXuYJ3DUnUxaDRTgfz+AdFZHwvlwfuDLexoTOS5Lps/aNh5/4kt7LwJyj3N4kxW/XgoZzJvn6foIYCqd6RnvTp05PVTUWiLKQwiMN9QxTLPhVv0RBqo+N9sDflq4eORv9WlsRF3XawZIr8GSqLiu7WM8w9wzdn66V94j4qO+gHQH/U3ck4z4Bie+QeDeOc8oYckbH5PaUcoRc3vEnGy9YKMwZ0RwJKZHXLE+g4xbDzJfhovC6835Hb6Sj81muSz4E8WVAsnyEtLs+JaWHA90qpfwsNB11aZHB7YO0HrHnMKA9P1F6A8eRagj6Ynhbl5Ko4Agtz0bqHVhyWi9bcF1V8WneuJSreC9naoWVvLYoyKc4UY/Qt7j7mdynm7w="
+  # NPM_API_KEY
+  - secure: "S9r5O41PS0+95/N5CTr8Euf5GISLmE8E6Rn9UWhuigjfuiquU3D7MWtl+v3Nyog7HH4k7wP13yg7UtmXekB9T5axSg3ViXiFAedGH7breS0nl0CCUCFCJdNiBDxiMTCDpI2C0KWKvTFdU1aCXJfRhVfDQE1kjJksdQ1BQvr0rLF5OIjh0JgRl6lmR9gMI3kY9hB/m6DRbvjonVe5T9yoWGKWPDODdkLT3GXW7hAQABluX01ARodHwvo5t/5dfIVjm3A2TKt7UHpR33ZM18zZ6qaJKsHosoWZ7JxuN4FrUvfxC4G/bXQML4a8MG566qV2Jr8cl6CYWY9sVyFWwgncbJdJEsYXongr6Mm41wREX0efXh0Fy9rDSGmXxVJSqY33MyYXGNQHzQ38V+dNascQ2V4Sk++3kfGGcDQ5s3yQpFdYXTORBra+O/eYwP8midJlLSJLD+vmrzTg/NWiFJeCvr0mqOMuQ+1Rwyf7xx6Qa2vhq8Bb8qEZgoPlefgHl5ivUzHT7JFiCcuigyeAGuOdR8Rdi6CEvmRpEy8KDvc/VtdBEXRCx2MZ/SGT4Q0h3Q4bdbeFDaXz8slLqt9uKhzHI5e+1CU5csHwpzkXrnsX/JZWYZtCT+3QopMwZYuDUNYF0hIJNCps6NCODrU2MulokcbTxUDMSkA8GQlNriGgF/0="

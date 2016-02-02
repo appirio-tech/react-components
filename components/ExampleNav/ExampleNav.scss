@@ -1,0 +1,15 @@
+.ExampleNav {
+  position: fixed;
+  bottom: 0;
+  background-color: #fff;
+  opacity: 0.6;
+
+  li {
+    display: inline-block;
+  }
+
+  a {
+    margin: 10px;
+    display: inline-block;
+  }
+}

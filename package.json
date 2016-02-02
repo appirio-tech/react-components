@@ -1,0 +1,23 @@
+{
+  "name": "appirio-tech-react-components",
+  "version": "0.0.0",
+  "main": "./index.coffee",
+  "devDependencies": {
+    "react-router": "^1.0.3",
+    "history": "^1.17.0",
+    "npm-prepublish": "^1.2.1",
+    "appirio-tech-webpack-config": "0.x.x"
+  },
+  "scripts": {
+    "example": "webpack-dev-server -d --progress --inline --colors",
+    "dev": "webpack-dev-server -d --progress --inline --colors --dev",
+    "clean": "rm -r dist",
+    "build": "webpack --config webpack.config.js; cp example/index.html dist/"
+  },
+  "dependencies": {
+    "appirio-styles": "0.x.x",
+    "appirio-tech-client-app-layer": "0.x.x",
+    "react-dropzone": "3.x.x",
+    "react-redux": "4.x.x"
+  }
+}
