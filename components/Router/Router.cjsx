@@ -15,6 +15,8 @@ CheckboxExamples              = require '../Checkbox/CheckboxExamples.cjsx'
 ImageViewerHeaderExamples     = require '../ImageViewerHeader/ImageViewerHeaderExamples.cjsx'
 ImageViewerExamples           = require '../ImageViewer/ImageViewerExamples.cjsx'
 LoaderExamples                = require '../Loader/LoaderExamples.cjsx'
+ManageStepsExamples           = require '../ManageSteps/ManageStepsExamples.cjsx'
+StepRowExamples               = require '../StepRow/StepRowExamples.cjsx'
 
 { Router, Route, Link, IndexRoute, browserHistory } = require 'react-router'
 
@@ -39,6 +41,10 @@ component = ->
         <Route path="/ImageViewerExamples" component={ImageViewerExamples} />
 
         <Route path="/LoaderExamples" component={LoaderExamples} />
+
+        <Route path="/ManageStepsExamples" component={ManageStepsExamples}/>
+
+        <Route path="/StepRowExamples" component={StepRowExamples} />
       </Route>
     </Router>
   </Provider>

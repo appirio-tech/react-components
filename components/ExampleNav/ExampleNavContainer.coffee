@@ -16,6 +16,10 @@ navs =
     'ImageViewerExamples'
     'LoaderExamples'
   ]
+  ManageSteps: [
+    'ManageStepsExamples'
+    'StepRowExamples'
+  ]
 
 
 container =

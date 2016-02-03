@@ -18,7 +18,11 @@
     "appirio-styles": "0.0.23",
     "appirio-tech-api-schemas": "^5.0.69",
     "classnames": "^2.2.3",
+    "lodash": "^4.0.0",
+    "moment": "^2.11.2",
+    "react-datetime": "^2.0.2",
     "react-dropzone": "^3.3.2",
-    "react-redux": "^4.2.1"
+    "react-redux": "^4.2.1",
+    "react-select": "^0.9.1"
   }
 }
