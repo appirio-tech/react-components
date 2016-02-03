@@ -12,7 +12,7 @@ component = ({ links, onClick, onBack }) ->
     {
       if onBack
         <li>
-          <a onClick={onBack} className="back">&lsaquo; back</a>
+          <a onClick={onBack} className="back">&#8604; back</a>
         </li>
     }
     {
