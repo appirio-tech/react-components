@@ -12,15 +12,25 @@
   }
 
   .Dropzone {
-    text-align: center;
-    border: 3px dashed $grey;
-    margin: 10px;
+    display: inline-block;
+  }
 
-    p {
-      font-size: 20px;
-      margin: 30px 0px;
-      color: $grey;
+  .drag-and-drop {
+    .Dropzone {
+      text-align: center;
+      border    : 3px dashed $grey;
+      margin    : 10px;
+      display   : block;
+
+      p {
+        font-size: 20px;
+        margin: 30px 0px;
+        color: $grey;
+      }
     }
   }
 
+  .dropzone-container {
+    text-align: center;
+  }
 }

@@ -14,11 +14,11 @@ component = ({data, state}) ->
 
       <Link to="/FileUploaderContainerExamples">FileUploaderContainer</Link>
 
+      <Link to="/FileUploaderExamples">FileUploader</Link>
+
       <Link to="/UploadedFileExamples">UploadedFile</Link>
 
       <Link to="/UploadedFilesExamples">UploadedFiles</Link>
-
-      <Link to="/FileUploaderExamples">FileUploader</Link>
 
       <Link to="/CheckboxExamples">Checkbox</Link>
 

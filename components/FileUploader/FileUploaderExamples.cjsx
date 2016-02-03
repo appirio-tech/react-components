@@ -12,6 +12,10 @@ FileUploaderExamples = ->
     <h1>loading is true</h1>
 
     <FileUploader loading={true} id={'123'} assetType={'work'} category={'development'}/>
+
+    <h1>dragNdrop is true</h1>
+
+    <FileUploader id={'123'} assetType={'work'} category={'development'} dragAndDrop={true}/>
   </div>
 
 module.exports = FileUploaderExamples
