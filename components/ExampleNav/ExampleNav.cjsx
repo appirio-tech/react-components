@@ -1,33 +1,32 @@
 'use strict'
 
-require './ExampleNav.scss'
+require './ExampleNavStyle'
 
 React      = require 'react'
 classNames = require 'classnames'
 
 { Link } = require 'react-router'
 
-component = ({data, state}) ->
+component = ({ links, onClick, onBack }) ->
   <ul className="ExampleNav">
-    <li>
-      <Link to="/">Avatar</Link>
-
-      <Link to="/FileUploaderContainerExamples">FileUploaderContainer</Link>
-
-      <Link to="/FileUploaderExamples">FileUploader</Link>
-
-      <Link to="/UploadedFileExamples">UploadedFile</Link>
-
-      <Link to="/UploadedFilesExamples">UploadedFiles</Link>
-
-      <Link to="/CheckboxExamples">Checkbox</Link>
-
-      <Link to="/ImageViewerHeaderExamples">ImageViewerHeader</Link>
-
-      <Link to="/ImageViewerExamples">ImageViewer</Link>
-
-      <Link to="/LoaderExamples">Loader</Link>
-    </li>
+    {
+      if onBack
+        <li>
+          <a onClick={onBack} className="back">&lsaquo; back</a>
+        </li>
+    }
+    {
+      links?.map (link, i) ->
+        <li key={i}>
+          {
+            if onClick
+              <a onClick={-> onClick(link)}>{link}</a>
+            else
+              <Link to={link}>{link}</Link>
+          }
+        </li>
+    }
   </ul>
 
 module.exports = component
+
