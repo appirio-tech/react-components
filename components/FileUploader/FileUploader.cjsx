@@ -8,7 +8,7 @@ Dropzone               = require 'react-dropzone'
 Loader                 = require '../Loader/Loader.cjsx'
 classNames             = require 'classnames'
 
-FileUploader = ({ multiple, onChange, loading, dragAndDrop }) ->
+FileUploader = ({ multiple, onChange, loading, dragAndDrop, disableClick }) ->
   dzContainerClassNames = classNames
     'dropzone-container': true
     'drag-and-drop': dragAndDrop
@@ -21,12 +21,15 @@ FileUploader = ({ multiple, onChange, loading, dragAndDrop }) ->
     <UploadedFilesContainer/>
 
     <div className={ dzContainerClassNames }>
-      <Dropzone multiple={multiple} onDrop={onChange} className="Dropzone">
+      <Dropzone multiple={multiple} onDrop={onChange} className="Dropzone" disableClick={disableClick}>
         {
           if dragAndDrop
             <p>click or drag files here to upload</p>
           else
-            <button>choose files to upload</button>
+            if disableClick
+              <button disabled>choose files to upload</button>
+            else
+              <button>choose files to upload</button>
         }
       </Dropzone>
     </div>
