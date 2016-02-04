@@ -16,6 +16,14 @@ FileUploaderExamples = ->
     <h1>dragNdrop is true</h1>
 
     <FileUploader id={'123'} assetType={'work'} category={'development'} dragAndDrop={true}/>
+
+    <h1>disabled is true with drag</h1>
+
+    <FileUploader id={'123'} assetType={'work'} category={'development'} disableClick={true} dragAndDrop={true}/>
+
+    <h1>disabled is true with button</h1>
+
+    <FileUploader id={'123'} assetType={'work'} category={'development'} disableClick={true}/>
   </div>
 
 module.exports = FileUploaderExamples
