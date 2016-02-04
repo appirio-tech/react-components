@@ -23,9 +23,11 @@ FileUploader = ({ multiple, onChange, loading, dragAndDrop, disableClick }) ->
     <div className={ dzContainerClassNames }>
       <Dropzone multiple={multiple} onDrop={onChange} className="Dropzone" disableClick={disableClick}>
         {
-          if dragAndDrop
+          if dragAndDrop && !disableClick
             <p>click or drag files here to upload</p>
-          else
+          else if dragAndDrop && disableClick
+            <p>file upload disabled</p>
+          else if !dragAndDrop
             if disableClick
               <button disabled>choose files to upload</button>
             else
