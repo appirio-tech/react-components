@@ -45,6 +45,7 @@ StepRow = ({
   submitting
   dirty
   isNew
+  permissions
 }) ->
   loader = <loader />
   showPicker = null
@@ -72,14 +73,16 @@ StepRow = ({
 
   <form className="StepRow flex middle" onSubmit={handleSubmit}>
     {# loader }
+    {
+      if true
+        <input type="text" className="name" {...name} />
 
-    <input type="text" className="name" {...name} />
+        <DateTime className="DateTime" {...startsAt} />
 
-    <DateTime className="DateTime" {...startsAt} />
+        <DateTime className="DateTime" {...details.submissionsDueBy} />
 
-    <DateTime className="DateTime" {...details.submissionsDueBy} />
-
-    <DateTime className="DateTime" {...endsAt} />
+        <DateTime className="DateTime" {...endsAt} />
+    }
 
     {StepType}
 
@@ -105,6 +108,7 @@ StepRow.propTypes =
   fields       : PropTypes.object.isRequired
   handleSubmit : PropTypes.func.isRequired
   submitting   : PropTypes.bool.isRequired
+  permissions  : PropTypes.array.isRequired
   dirty        : PropTypes.bool
   isNew        : PropTypes.bool
 

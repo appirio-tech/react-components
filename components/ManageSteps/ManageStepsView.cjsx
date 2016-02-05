@@ -6,14 +6,14 @@ React      = require 'react'
 classNames = require 'classnames'
 StepRow    = require '../StepRow/StepRow.coffee'
 
-component = ({projectId, stepIds, fetching}) ->
+component = ({projectId, stepIds, fetching, permissions}) ->
   <div className="ManageSteps">
     <div className="add-a-Step">
       <h5>add a Step</h5>
 
       <hr  />
 
-      <StepRow projectId={projectId} formKey="new" isNew={true} />
+      <StepRow projectId={projectId} formKey="new" isNew={true} permissions={permissions} />
     </div>
 
     <div className="project-Steps">
@@ -42,7 +42,8 @@ component = ({projectId, stepIds, fetching}) ->
                     <StepRow
                       formKey={stepId.toString()}
                       projectId={projectId}
-                      stepId={stepId} />
+                      stepId={stepId}
+                      permissions={permissions} />
                   </li>
               }
             </ul>
@@ -60,6 +61,7 @@ component = ({projectId, stepIds, fetching}) ->
 component.propTypes =
   projectId: React.PropTypes.string.isRequired
   stepIds: React.PropTypes.array.isRequired
+  permissions: React.PropTypes.array.isRequired
   fetching: React.PropTypes.bool
 
 module.exports = component
