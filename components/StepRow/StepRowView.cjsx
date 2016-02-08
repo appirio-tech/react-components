@@ -108,22 +108,22 @@ StepRow = ({
           <div className="flex middle">
             <input type="text" className="name" disabled=true placeholder="Name edit disabled" />
 
-            <input type="text" className="DateTime" disabled=true placeholder="Date edit disabled"/>
+            <input type="text" className="DateTime disabled" disabled=true placeholder="Date edit disabled"/>
 
-            <input type="text" className="DateTime" disabled=true placeholder="Date edit disabled"/>
+            <input type="text" className="DateTime disabled" disabled=true placeholder="Date edit disabled"/>
 
-            <input type="text" className="DateTime" disabled=true placeholder="Date edit disabled"/>
+            <input type="text" className="DateTime disabled" disabled=true placeholder="Date edit disabled"/>
           </div>
         else
           debugger
           <div className="flex middle">
             <input type="text" className="name" disabled=true {...name} />
 
-            <p className="startsAt">{startsAt.value}</p>
+            <p className="DateTime disabled">{startsAt.value}</p>
 
-            <p className="dueBy">{details.submissionsDueBy.value}</p>
+            <p className="DateTime disabled">{details.submissionsDueBy.value}</p>
 
-            <p className="endsAt">{endsAt.value}</p>
+            <p className="DateTime disabled">{endsAt.value}</p>
           </div>
     }
 

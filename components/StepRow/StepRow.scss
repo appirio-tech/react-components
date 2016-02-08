@@ -8,6 +8,10 @@
   .DateTime {
     margin-left: 20px;
     width: 135px;
+
+    &.disabled {
+      width: 138px;
+    }
   }
 
   .Select {
@@ -22,11 +26,6 @@
     margin-left : 30px;
     margin-right: 10px;
     width       : 162px;
-  }
-
-  .endsAt, .startsAt {
-    width       : 135px;
-    margin-left : 20px;
   }
 
   button{
