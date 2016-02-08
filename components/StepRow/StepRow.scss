@@ -24,7 +24,14 @@
     width       : 162px;
   }
 
-  button[type="submit"] {
-    margin-left: 15px;
+  .endsAt, .startsAt {
+    width       : 135px;
+    margin-left : 20px;
+  }
+
+  button{
+   &.addButton {
+     margin-left: 15px;
+   }
   }
 }
