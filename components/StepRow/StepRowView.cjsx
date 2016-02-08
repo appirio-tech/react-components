@@ -5,7 +5,6 @@ require 'react-datetime/css/react-datetime.css'
 require 'react-select/dist/react-select.css'
 
 React      = require 'react'
-moment     = require 'moment'
 PropTypes  = React.PropTypes
 DateTime   = require 'react-datetime'
 Select     = require 'react-select'
@@ -115,7 +114,6 @@ StepRow = ({
             <input type="text" className="DateTime disabled" disabled=true placeholder="Date edit disabled"/>
           </div>
         else
-          debugger
           <div className="flex middle">
             <input type="text" className="name" disabled=true {...name} />
 

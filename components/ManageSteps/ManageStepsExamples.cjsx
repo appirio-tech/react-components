@@ -14,7 +14,7 @@ initialData =
 
 storeInstance = store(initialData)
 
-permissions = ['READ']
+permissions = ['UPDATE']
 
 component = ->
   <Provider store={storeInstance}>

@@ -24,7 +24,6 @@ StepRow = React.createClass
     handleSubmit : PropTypes.func.isRequired
     submitting   : PropTypes.bool.isRequired
     projectId    : PropTypes.string.isRequired
-    permissions  : PropTypes.array.isRequired
     stepId       : PropTypes.string
     isNew        : PropTypes.bool
 
