@@ -8,6 +8,10 @@
   .DateTime {
     margin-left: 20px;
     width: 135px;
+
+    &.disabled {
+      width: 138px;
+    }
   }
 
   .Select {
@@ -24,7 +28,10 @@
     width       : 162px;
   }
 
-  button[type="submit"] {
-    margin-left: 15px;
+  button {
+
+   &.addButton {
+     margin-left: 15px;
+   }
   }
 }

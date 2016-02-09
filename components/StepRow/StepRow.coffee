@@ -20,6 +20,7 @@ fields = [
 StepRow = React.createClass
   propTypes:
     fields       : PropTypes.object.isRequired
+    permissions  : PropTypes.array.isRequired
     handleSubmit : PropTypes.func.isRequired
     submitting   : PropTypes.bool.isRequired
     projectId    : PropTypes.string.isRequired

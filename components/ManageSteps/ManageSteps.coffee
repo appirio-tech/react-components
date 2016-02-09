@@ -15,12 +15,13 @@ ManageSteps = React.createClass
     loadStepsByProject projectId
 
   render: ->
-    { projectId, stepsByProject } = this.props
+    { projectId, stepsByProject, permissions } = this.props
 
     props =
       projectId: projectId
       stepIds: stepsByProject?.items || []
       fetching: stepsByProject?.isFetching
+      permissions: permissions || []
 
     React.createElement ManageStepsView, props
 

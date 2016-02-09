@@ -2,42 +2,13 @@
 
 require './StepRow.scss'
 require 'react-datetime/css/react-datetime.css'
-require 'react-select/dist/react-select.css'
 
-React      = require 'react'
-PropTypes  = React.PropTypes
-DateTime   = require 'react-datetime'
-Select     = require 'react-select'
-classNames = require 'classnames'
-find       = require 'lodash/find'
-
-types = [
-  label: 'Design Concepts'
-  value: 'designConcepts'
-,
-  label: 'Complete Designs'
-  value: 'completeDesigns'
-,
-  label: 'Final Fixes'
-  value: 'finalFixes'
-,
-  label: 'Development'
-  value: 'code'
-]
-
-statuses = [
-  label: 'Project Launched'
-  value: 'PROJECT_LAUNCHED'
-,
-  label: 'Scheduled'
-  value: 'SCHEDULED'
-,
-  label: 'In Progress'
-  value: 'OPEN'
-,
-  label: 'Closed'
-  value: 'CLOSED'
-]
+React          = require 'react'
+PropTypes      = React.PropTypes
+DateTime       = require 'react-datetime'
+classNames     = require 'classnames'
+StepTypeSelect = require './StepTypeSelect'
+StatusSelect   = require './StatusSelect'
 
 StepRow = ({ 
   fields: { name, startsAt, details, endsAt, stepType, status }
@@ -45,10 +16,10 @@ StepRow = ({
   submitting
   dirty
   isNew
+  permissions
 }) ->
-  loader = <loader />
-  showPicker = null
-  typeLabel = find(types, (t) -> t.value == stepType.value)?.label
+  editable = permissions.indexOf('UPDATE') > -1
+  isNew    = isNew || false
 
   submitClassNames = classNames
     'icon'  : true
@@ -57,45 +28,48 @@ StepRow = ({
     'plus'  : isNew
     'checkmark' : !isNew
 
-  if isNew
-    StepType = <Select
-      {...stepType}
-      className   = "types"
-      options     = {types}
-      clearable   = false
-      placeholder = "Step Type"
-      onBlur      = { (event) ->
-        status.onBlur(status.value) }
-    />
-  else
-    StepType = <p className="types">{typeLabel}</p>
-
   <form className="StepRow flex middle" onSubmit={handleSubmit}>
-    {# loader }
+    {
+      if editable
+        <div className="flex middle">
+          <input type="text" className="name" {...name} />
 
-    <input type="text" className="name" {...name} />
+          <DateTime className="DateTime" {...startsAt} />
 
-    <DateTime className="DateTime" {...startsAt} />
+          <DateTime className="DateTime" {...details.submissionsDueBy} />
 
-    <DateTime className="DateTime" {...details.submissionsDueBy} />
+          <DateTime className="DateTime" {...endsAt} />
+        </div>
+      else
+        if isNew
+          <div className="flex middle">
+            <input type="text" className="name" disabled=true placeholder="Name edit disabled" />
 
-    <DateTime className="DateTime" {...endsAt} />
+            <input type="text" className="DateTime disabled" disabled=true placeholder="Date edit disabled"/>
 
-    {StepType}
+            <input type="text" className="DateTime disabled" disabled=true placeholder="Date edit disabled"/>
 
-    <Select
-      {...status}
-      className   = "statuses"
-      options     = {statuses}
-      clearable   = false
-      placeholder = "Status"
-      onBlur      = { (event) ->
-        status.onBlur(status.value) }
-    />
+            <input type="text" className="DateTime disabled" disabled=true placeholder="Date edit disabled"/>
+          </div>
+        else
+          <div className="flex middle">
+            <p className="name">{name.value}</p>
+
+            <p className="DateTime disabled">{startsAt.value}</p>
+
+            <p className="DateTime disabled">{details.submissionsDueBy.value}</p>
+
+            <p className="DateTime disabled">{endsAt.value}</p>
+          </div>
+    }
+
+    <StepTypeSelect isNew={isNew} formProps={stepType} editable={editable} />
+
+    <StatusSelect isNew={isNew} formProps={status} editable={editable} />
 
     {
-      if dirty || isNew
-        <button className="clean" type="submit">
+      if editable && (dirty || isNew)
+        <button className="clean addButton" type="submit">
           <div className={submitClassNames} />
         </button>
     }
@@ -105,6 +79,7 @@ StepRow.propTypes =
   fields       : PropTypes.object.isRequired
   handleSubmit : PropTypes.func.isRequired
   submitting   : PropTypes.bool.isRequired
+  permissions  : PropTypes.array.isRequired
   dirty        : PropTypes.bool
   isNew        : PropTypes.bool
 

@@ -26,13 +26,21 @@ storeInstance = store(initialData)
 component = ->
   <Provider store={storeInstance}>
     <div className="StepRowExample">
-      <h1>Example with state edit</h1>
+      <h1>Existing step in editable state</h1>
 
-      <StepRow formKey="abc" projectId="abc" stepId="abc" />
+      <StepRow formKey="abc" projectId="abc" stepId="abc" permissions={['UPDATE']} />
 
-      <h1> Example with no data or state</h1>
+      <h1>Existing step in view-only mode</h1>
 
-      <StepRow projectId="def" formKey="new" isNew={true} />
+      <StepRow formKey="abc" projectId="abc" stepId="abc" permissions={['READ']} />
+
+      <h1>New step in editable state</h1>
+
+      <StepRow projectId="def" formKey="new" isNew={true} permissions={['UPDATE']} />
+
+      <h1>New step in view-only mode</h1>
+
+      <StepRow projectId="def" formKey="new" isNew={true} permissions={['READ']} />
     </div>
   </Provider>
 
