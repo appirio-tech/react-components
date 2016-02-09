@@ -2,42 +2,13 @@
 
 require './StepRow.scss'
 require 'react-datetime/css/react-datetime.css'
-require 'react-select/dist/react-select.css'
 
-React      = require 'react'
-PropTypes  = React.PropTypes
-DateTime   = require 'react-datetime'
-Select     = require 'react-select'
-classNames = require 'classnames'
-find       = require 'lodash/find'
-
-types = [
-  label: 'Design Concepts'
-  value: 'designConcepts'
-,
-  label: 'Complete Designs'
-  value: 'completeDesigns'
-,
-  label: 'Final Fixes'
-  value: 'finalFixes'
-,
-  label: 'Development'
-  value: 'code'
-]
-
-statuses = [
-  label: 'Project Launched'
-  value: 'PROJECT_LAUNCHED'
-,
-  label: 'Scheduled'
-  value: 'SCHEDULED'
-,
-  label: 'In Progress'
-  value: 'OPEN'
-,
-  label: 'Closed'
-  value: 'CLOSED'
-]
+React          = require 'react'
+PropTypes      = React.PropTypes
+DateTime       = require 'react-datetime'
+classNames     = require 'classnames'
+StepTypeSelect = require './StepTypeSelect'
+StatusSelect   = require './StatusSelect'
 
 StepRow = ({ 
   fields: { name, startsAt, details, endsAt, stepType, status }
@@ -47,10 +18,8 @@ StepRow = ({
   isNew
   permissions
 }) ->
-  loader = <loader />
-  showPicker = null
-  typeLabel = find(types, (t) -> t.value == stepType.value)?.label
-  statusLabel = find(statuses, (s) -> s.value == status.value)?.label
+  editable = permissions.indexOf('UPDATE') > -1
+  isNew    = isNew || false
 
   submitClassNames = classNames
     'icon'  : true
@@ -59,40 +28,9 @@ StepRow = ({
     'plus'  : isNew
     'checkmark' : !isNew
 
-  if isNew
-    if permissions.indexOf('UPDATE') > -1
-      StepType = <Select
-        {...stepType}
-        className   = "types"
-        options     = {types}
-        clearable   = false
-        placeholder = "Step Type"
-        onBlur      = { (event) ->
-          status.onBlur(status.value) }
-      />
-
-      Status = <Select
-        {...status}
-        className   = "statuses"
-        options     = {statuses}
-        clearable   = false
-        placeholder = "Status"
-        onBlur      = { (event) ->
-          status.onBlur(status.value) }
-      />
-    else
-      StepType = <Select className="types" placeholder="Type disabled" disabled />
-
-      Status = <Select className="status" placeholder="Status disabled" disabled />
-  else
-    StepType = <p className="types">{typeLabel}</p>
-
-    Status = <p className="status">{statusLabel}</p>
-
   <form className="StepRow flex middle" onSubmit={handleSubmit}>
-    {# loader }
     {
-      if permissions.indexOf('UPDATE') > -1
+      if editable
         <div className="flex middle">
           <input type="text" className="name" {...name} />
 
@@ -115,7 +53,7 @@ StepRow = ({
           </div>
         else
           <div className="flex middle">
-            <input type="text" className="name" disabled=true {...name} />
+            <p className="name">{name.value}</p>
 
             <p className="DateTime disabled">{startsAt.value}</p>
 
@@ -125,20 +63,15 @@ StepRow = ({
           </div>
     }
 
-    {StepType}
+    <StepTypeSelect isNew={isNew} formProps={stepType} editable={editable} />
 
-    {Status}
+    <StatusSelect isNew={isNew} formProps={status} editable={editable} />
 
     {
-      if dirty || isNew
-        if permissions.indexOf('UPDATE') > -1
-          <button className="clean addButton" type="submit">
-            <div className={submitClassNames} />
-          </button>
-        else
-          <button className="clean addButton" disabled=true>
-            <div className={submitClassNames} />
-          </button>
+      if editable && (dirty || isNew)
+        <button className="clean addButton" type="submit">
+          <div className={submitClassNames} />
+        </button>
     }
   </form>
 
