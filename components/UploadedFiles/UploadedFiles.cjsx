@@ -5,7 +5,7 @@ require './UploadedFilesStyles'
 React        = require 'react'
 UploadedFile = require '../UploadedFile/UploadedFile'
 
-UploadedFiles = ({ files, onDelete, enableCaptions }) ->
+UploadedFiles = ({ files, onDelete, enableCaptions, disabled }) ->
   <ul className="UploadedFiles flex wrap">
     {
       files?.map (file, i) ->
@@ -27,6 +27,7 @@ UploadedFiles = ({ files, onDelete, enableCaptions }) ->
             enableCaptions={enableCaptions}
             captions={captions}
             onDelete={onDeleteProxy}
+            disabled={disabled}
           />
         </li>
     }

@@ -5,7 +5,7 @@ require './UploadedFileStyles'
 React      = require 'react'
 classnames = require 'classnames'
 
-UploadedFile = ({ status, preview, progress, fileName, enableCaptions, captions, onDelete }) ->
+UploadedFile = ({ status, preview, progress, fileName, enableCaptions, captions, onDelete, disabled }) ->
   <div className="UploadedFile">
     <main className="flex column middle center" >
       {
@@ -37,9 +37,14 @@ UploadedFile = ({ status, preview, progress, fileName, enableCaptions, captions,
       <p className="file-name">{ fileName }</p>
       {
         unless status == 'uploading'
-          <button className="clean" type="button" onClick={onDelete}>
-            <div className="icon cross"/>
-          </button>
+          if disabled
+            <button className="clean" type="button" disabled>
+              <div className="icon cross"/>
+            </button>
+          else
+            <button className="clean" type="button" onClick={onDelete}>
+              <div className="icon cross"/>
+            </button>
       }
     </div>
 

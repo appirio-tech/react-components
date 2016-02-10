@@ -35,6 +35,7 @@ container =
     dispatch      : PropTypes.func.isRequired
     files         : PropTypes.array.isRequired
     enableCaptions: PropTypes.bool
+    disabled      : PropTypes.bool
 
   onDelete: (file) ->
     this.props.dispatch deleteAttachment file
@@ -45,12 +46,13 @@ container =
     dispatch getAttachments { id, assetType, category }
 
   render: ->
-    { files, enableCaptions } = this.props
+    { files, enableCaptions, disabled } = this.props
 
     createElement UploadedFiles,
       files         : files
       onDelete      : this.onDelete
       enableCaptions: enableCaptions
+      disabled      : disabled
 
 module.exports = connect(mapStateToProps)(createClass(container))
 
