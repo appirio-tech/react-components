@@ -15,11 +15,13 @@ mapStateToProps = (state) ->
 
 container =
   propTypes:
-    id       : PropTypes.string.isRequired
-    assetType: PropTypes.string.isRequired
-    category : PropTypes.string.isRequired
-    dispatch : PropTypes.func.isRequired
-    loading  : PropTypes.bool
+    id          : PropTypes.string.isRequired
+    assetType   : PropTypes.string.isRequired
+    category    : PropTypes.string.isRequired
+    dispatch    : PropTypes.func.isRequired
+    loading     : PropTypes.bool
+    dragAndDrop : PropTypes.bool
+    disableClick: PropTypes.bool
 
   onChange: (files) ->
     { dispatch, id, assetType, category } = this.props
@@ -30,9 +32,9 @@ container =
   render: ->
     { onChange } = this
 
-    { loading } = this.props
+    { loading, dragAndDrop, disableClick } = this.props
 
-    createElement FileUploader, { onChange, loading }
+    createElement FileUploader, { onChange, loading, dragAndDrop, disableClick }
 
 module.exports = connect(mapStateToProps)(createClass(container))
 
