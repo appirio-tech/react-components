@@ -18,7 +18,7 @@ FileUploader = ({ multiple, onChange, loading, dragAndDrop, disableClick }) ->
       if loading
         <Loader />
     }
-    <UploadedFilesContainer/>
+    <UploadedFilesContainer disabled={disableClick} />
 
     <div className={ dzContainerClassNames }>
       <Dropzone multiple={multiple} onDrop={onChange} className="Dropzone" disableClick={disableClick}>
