@@ -1,0 +1,13 @@
+@import "work/work-includes";
+
+.PageSection {
+
+  .page-section__progress {
+    position       : relative;
+    height         : 50px;
+    margin-top     : 10px;
+    display: flex;
+    justify-content: center;
+  }
+
+}

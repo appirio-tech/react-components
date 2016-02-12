@@ -14,7 +14,8 @@ navs =
     'CheckboxExamples'
     'ImageViewerHeaderExamples'
     'ImageViewerExamples'
-    'LoaderExamples'
+    'LoaderExamples',
+    'PageSectionExamples'
   ]
   ManageSteps: [
     'ManageStepsExamples'
