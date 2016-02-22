@@ -21,7 +21,7 @@ ManageSteps = React.createClass
       projectId: projectId
       stepIds: stepsByProject?.items || []
       fetching: stepsByProject?.isFetching
-      permissions: permissions || []
+      permissions: permissions || ['CREATE', 'UPDATE', 'DELETE']
 
     React.createElement ManageStepsView, props
 
