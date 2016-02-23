@@ -37,7 +37,7 @@ StepRow = ({
         clearable   = false
         placeholder = "Step Type"
         onBlur      = { (event) ->
-          status.onBlur(status.value) }
+          formProps.onBlur(formProps.value) }
       />
     else
       <Select className="types" placeholder="Type disabled" disabled />

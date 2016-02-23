@@ -30,13 +30,13 @@ StepRow = ({
 
   if editable
     <Select
-      {...status}
+      {...formProps}
       className   = "statuses"
       options     = {statuses}
       clearable   = false
       placeholder = "Status"
       onBlur      = { (event) ->
-        status.onBlur(status.value) }
+        formProps.onBlur(formProps.value) }
     />
   else
     if isNew
