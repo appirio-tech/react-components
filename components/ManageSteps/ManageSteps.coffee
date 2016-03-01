@@ -8,6 +8,7 @@ ManageStepsView        = require './ManageStepsView'
 ManageSteps = React.createClass
   propTypes:
     projectId: React.PropTypes.string.isRequired
+    permissions: React.PropTypes.array
 
   componentWillMount: ->
     { loadStepsByProject, projectId } = this.props
