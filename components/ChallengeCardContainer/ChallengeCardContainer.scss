@@ -1,0 +1,35 @@
+@import '../../../styles/tc-styles';
+@import 'topcoder/tc-includes';
+
+.challengeCardContainer {
+  border-radius: $base-unit;
+
+  .category-challenges-container {
+    background: $tc-gray-neutral-light;
+    margin: 20px 0;
+  }
+
+  .view-more {
+    width: 100%;
+    background: $tc-gray-neutral-light;
+    border-top: 1px solid $tc-gray-10;
+    border-bottom: 1px solid $tc-gray-10;
+    border-left: 0;
+    border-right: 0;
+    color: $tc-gray-50;
+    font-weight: 500;
+    text-transform: none;
+    border-radius: 0;
+    outline: none;
+  }
+
+  .loading {
+    bottom: 10px;
+    background: $tc-orange;
+    color: $tc-white;
+    width: 100%;
+    text-align: center;
+    padding-top: 5px;
+    margin: 0;
+  }
+}

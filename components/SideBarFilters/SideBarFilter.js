@@ -15,6 +15,7 @@ export const MODE = {
   OPEN_FOR_REGISTRATION: 'Open for registration',
   ONGOING_CHALLENGES: 'Ongoing challenges',
   PAST_CHALLENGES: 'Past challenges',
+  OPEN_FOR_REVIEW: 'Open for review',
   CUSTOM: 'custom',
 };
 
@@ -61,6 +62,7 @@ class SideBarFilter extends ChallengeFilter {
       case MODE.ALL_CHALLENGES: return () => true;
       case MODE.MY_CHALLENGES: return item => item.myChallenge;
       case MODE.OPEN_FOR_REGISTRATION: return item => item.registrationOpen.startsWith('Yes');
+      case MODE.OPEN_FOR_REVIEW: return item => item.currentPhaseName === 'Review';
       case MODE.ONGOING_CHALLENGES:
         return item => !item.registrationOpen.startsWith('Yes')
           && item.status === 'Active';

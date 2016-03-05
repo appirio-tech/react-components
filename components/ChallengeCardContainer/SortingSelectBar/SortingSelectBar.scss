@@ -1,0 +1,72 @@
+@import '../../../styles/tc-styles';
+@import 'topcoder/tc-includes';
+
+$view-options-toggle-right-margin: $base-unit * 2;
+$down-arrow-size: $base-unit * 2;
+
+.sortingBar {
+  display: flex;
+  padding: $base-unit;
+  position: relative;
+
+  .title {
+    padding: $base-unit * 2;
+    margin: 0;
+    border: none;
+  }
+
+  .view-options-toggle-container, .view-options {
+    position: absolute;
+  }
+
+  .view-options-toggle-container {
+    right: $view-options-toggle-right-margin;
+    top: $base-unit;
+    display: flex;
+    align-items: center;
+  }
+
+  .view-options-toggle-container-label {
+    font-weight: 300;
+    margin-right: $base-unit * 2;
+  }
+
+  .view-options {
+    right: $view-options-toggle-right-margin;
+    top: $base-unit * 10;
+    z-index: 1;
+    background: white;
+    border-radius: $base-unit;
+    padding: $base-unit;
+    box-shadow: 1px 5px 15px $tc-gray-20;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .view-option {
+    font-weight: 300;
+    padding: $base-unit * 2;
+    outline: none;
+    border: 0;
+    color: $tc-black;
+    text-align: left;
+  }
+
+  .view-options-toggle {
+    color: $tc-gray-50;
+    border: 1px solid $tc-gray-50;
+    font-size: 12px;
+    outline: none;
+    display: flex;
+    align-items: center;
+  }
+
+  .down-arrow {
+    width: 0;
+    height: 0;
+    border-left: $down-arrow-size solid transparent;
+    border-right: $down-arrow-size solid transparent;
+    border-top: $down-arrow-size solid $tc-gray-50;
+    margin-left: $base-unit;
+  }
+}

@@ -22,6 +22,7 @@ import SideBarFilter, { MODE as SideBarFilterModes } from '../SideBarFilters/Sid
 import SideBarFilters from '../SideBarFilters';
 import './ChallengeFiltersExample.scss';
 import ChallengeCard from '../ChallengeCard/ChallengeCard';
+import ChallengeCardContainer from '../ChallengeCardContainer/ChallengeCardContainer';
 import SRMCard from '../SRMCard/SRMCard';
 import ChallengesSidebar from '../ChallengesSidebar/ChallengesSidebar';
 import '../ChallengeCard/ChallengeCard.scss';
@@ -262,15 +263,6 @@ class ChallengeFiltersExample extends React.Component {
 
   // ReactJS render method.
   render() {
-    const cardify = challenge => (
-      <ChallengeCard
-        challenge={challenge}
-        onTechTagClicked={(tag) => {
-          if (this.challengeFilters) this.challengeFilters.setKeywords(tag);
-        }}
-        key={challenge.challengeId}
-      />
-    );
     // TODO: This is bad code. Generation of myChallengesId array is O(N),
     // using it to mark `My Challenges` using that array is O(N^2). Not that
     // critical for now, as nobody has huge amount of challenges he is participating,
@@ -293,8 +285,39 @@ class ChallengeFiltersExample extends React.Component {
       return item;
     });
 
-    const filterChallenges = challenges.filter(
-      this.state.sidebarFilter.getFilterFunction()).map(cardify);
+    const { sidebarFilter } = this.state
+    const { mode: sidebarFilterMode, name: sidebarFilterName } = sidebarFilter
+
+    let challengeCardContainer
+    if (sidebarFilterMode === 'custom') {
+      const cardify = challenge => (
+        <ChallengeCard
+          challenge={challenge}
+          onTechTagClicked={(tag) => {
+            if (this.challengeFilters) this.challengeFilters.setKeywords(tag);
+          }}
+          key={challenge.challengeId}
+        />
+      )
+
+      challengeCardContainer = (
+        <div className="challenge-cards-container">
+          <div className="ChallengeCardExamples example-lg">
+            {challenges.filter(sidebarFilter.getFilterFunction()).map(cardify)}
+          </div>
+        </div>
+      )
+    } else {
+      challengeCardContainer = (
+        <ChallengeCardContainer
+          onTechTagClicked={(tag) => this.challengeFilters.setKeywords(tag)}
+          challenges={challenges}
+          currentFilterName={sidebarFilterName}
+          expanded={sidebarFilterMode !== 'All Challenges'}
+          additionalFilter={sidebarFilter.getFilterFunction()}
+        />
+      )
+    }
 
     return (
       <div className="ChallengeFiltersExample">
@@ -340,11 +363,7 @@ class ChallengeFiltersExample extends React.Component {
         </div>
 
         <div className={`tc-content-wrapper ${this.state.currentCardType === 'Challenges' ? '' : 'hidden'}`}>
-          <div className="challenge-cards-container">
-            <div className="ChallengeCardExamples example-lg">
-              {filterChallenges}
-            </div>
-          </div>
+          {challengeCardContainer}
 
           <Sticky
             className="sidebar-container"

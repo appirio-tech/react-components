@@ -39,6 +39,7 @@ const DEFAULT_FILTERS = [
   new SideBarFilter(MODE.OPEN_FOR_REGISTRATION),
   new SideBarFilter(MODE.ONGOING_CHALLENGES),
   new SideBarFilter(MODE.PAST_CHALLENGES),
+  new SideBarFilter(MODE.OPEN_FOR_REVIEW),
 ];
 
 /*
@@ -50,7 +51,8 @@ const FILTER_ID = {
   OPEN_FOR_REGISTRATION: 2,
   ONGOING_CHALLENGES: 3,
   PAST_CHALLENGES: 4,
-  FIRST_USER_DEFINED: 5,
+  OPEN_FOR_REVIEW: 5,
+  FIRST_USER_DEFINED: 6,
 };
 
 /*
@@ -252,6 +254,7 @@ class SideBarFilters extends React.Component {
         {filters[FILTER_ID.OPEN_FOR_REGISTRATION]}
         {filters[FILTER_ID.ONGOING_CHALLENGES]}
         {filters[FILTER_ID.PAST_CHALLENGES]}
+        {filters[FILTER_ID.OPEN_FOR_REVIEW]}
         {
           myFilters.length ?
             <span>
