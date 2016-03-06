@@ -21,7 +21,7 @@ StandardListItemExamples = ->
     <h1>Icon Hidden</h1>
     <StandardListItem labelText='This is a test' hideIcon=true  />
 
-    <h1>Lab Hidden</h1>
+    <h1>Label Hidden</h1>
     <StandardListItem imgSrc='../components/Avatar/place-holder.svg' hideLabel=true  />
 
   </div>

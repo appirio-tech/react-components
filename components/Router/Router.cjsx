@@ -50,7 +50,7 @@ component = ->
 
         <Route path="/PanelExamples" component={PanelExamples} />
 
-        <Route path="/StandardListItem" component={StandardListItemExamples} />
+        <Route path="/StandardListItemExamples" component={StandardListItemExamples} />
       </Route>
     </Router>
   </Provider>
