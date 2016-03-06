@@ -1,0 +1,19 @@
+@import "work/work-includes";
+
+.panel {
+
+  .panel-header {
+    line-height       : 23px;
+    font-size         : 18px;
+    display           : flex;
+    justify-content   : space-between;
+    background-color  : $gray-light;
+    padding           : 10px;
+  }
+
+  .panel-body {
+    border            : 1px solid $gray-light;
+    padding           : 10px;
+  }
+
+}
