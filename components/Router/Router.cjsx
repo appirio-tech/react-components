@@ -17,6 +17,7 @@ ImageViewerExamples           = require '../ImageViewer/ImageViewerExamples.cjsx
 LoaderExamples                = require '../Loader/LoaderExamples.cjsx'
 ManageStepsExamples           = require '../ManageSteps/ManageStepsExamples.cjsx'
 StepRowExamples               = require '../StepRow/StepRowExamples.cjsx'
+PanelExamples                 = require '../Panel/PanelExamples.jsx'
 
 { Router, Route, Link, IndexRoute, browserHistory } = require 'react-router'
 
@@ -45,6 +46,8 @@ component = ->
         <Route path="/ManageStepsExamples" component={ManageStepsExamples}/>
 
         <Route path="/StepRowExamples" component={StepRowExamples} />
+
+        <Route path="/PanelExamples" component={PanelExamples} />
       </Route>
     </Router>
   </Provider>
