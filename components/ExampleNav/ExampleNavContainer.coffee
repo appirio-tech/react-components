@@ -4,6 +4,9 @@
 ExampleNav                     = require './ExampleNav'
 
 navs =
+  NavbarDropdown: [
+    'NavbarDropdownExamples'
+  ]
   FileUploader: [
     'FileUploaderContainerExamples'
     'FileUploaderExamples'

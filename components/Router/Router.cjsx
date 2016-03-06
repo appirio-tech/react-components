@@ -17,6 +17,7 @@ ImageViewerExamples           = require '../ImageViewer/ImageViewerExamples.cjsx
 LoaderExamples                = require '../Loader/LoaderExamples.cjsx'
 ManageStepsExamples           = require '../ManageSteps/ManageStepsExamples.cjsx'
 StepRowExamples               = require '../StepRow/StepRowExamples.cjsx'
+NavbarDropdownExamples        = require '../NavbarDropdown/NavbarDropdownExamples.cjsx'
 
 { Router, Route, Link, IndexRoute, browserHistory } = require 'react-router'
 
@@ -25,6 +26,8 @@ component = ->
     <Router history={browserHistory}>
       <Route path="/" component={ExampleApp}>
         <IndexRoute component={AvatarExamples}/>
+
+        <Route path="/NavbarDropdownExamples" component={NavbarDropdownExamples}/>
 
         <Route path="/FileUploaderContainerExamples" component={FileUploaderContainerExamples}/>
 
