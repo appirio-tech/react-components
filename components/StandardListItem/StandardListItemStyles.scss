@@ -1,0 +1,58 @@
+.StandardListItem {
+
+  display: -webkit-flex;
+  display:         flex;
+  -webkit-align-items: center;
+          align-items: center;
+
+  text-align: center;
+
+  width: 100%;
+
+  // background-color: honeydew;
+  padding: 20px 15px;
+
+  &.top {
+    -webkit-flex-direction: column-reverse;;
+            flex-direction: column-reverse;
+
+    .icon {
+        width: 32px;
+        height: 32px;
+    }
+
+// Add margin only if label present
+    .label + .icon {
+      margin-bottom: 7px;
+    }
+
+  }
+
+  &.left {
+    -webkit-flex-direction: row-reverse;
+            flex-direction: row-reverse;
+    justify-content: flex-end;
+
+    .label + .icon {
+      margin-right: 10px;
+    }
+
+  }
+
+  &.right{
+    -webkit-justify-content: space-between;
+            justify-content: space-between;
+
+    .label + .icon {
+      margin-left: 10px;
+    }
+  }
+
+  &.left, &.right {
+    .icon {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+}
