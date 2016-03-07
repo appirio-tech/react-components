@@ -17,7 +17,7 @@ ImageViewerExamples           = require '../ImageViewer/ImageViewerExamples.cjsx
 LoaderExamples                = require '../Loader/LoaderExamples.cjsx'
 ManageStepsExamples           = require '../ManageSteps/ManageStepsExamples.cjsx'
 StepRowExamples               = require '../StepRow/StepRowExamples.cjsx'
-NavbarDropdownExamples        = require '../NavbarDropdown/NavbarDropdownExamples.cjsx'
+NavbarDropdownExamples        = require '../NavbarDropdown/NavbarDropdownExamples.jsx'
 
 { Router, Route, Link, IndexRoute, browserHistory } = require 'react-router'
 
