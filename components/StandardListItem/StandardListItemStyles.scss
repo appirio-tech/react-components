@@ -1,3 +1,5 @@
+$breakpoint-mobile: 768px;
+
 .StandardListItem {
 
   display: flex;
@@ -7,21 +9,24 @@
 
   width: 100%;
 
-  padding: 20px 15px;
+  padding: 15px 20px;
+
+  @media (max-width: $breakpoint-mobile) {
+    padding: 12px 15px;
+  }
 
   &.top {
     flex-direction: column-reverse;
 
     .icon {
-        width: 32px;
-        height: 32px;
+      width: 32px;
+      height: 32px;
     }
 
-// Add margin only if label present
+    // Add margin only if label present
     .label + .icon {
       margin-bottom: 7px;
     }
-
   }
 
   &.left {
@@ -31,7 +36,6 @@
     .label + .icon {
       margin-right: 10px;
     }
-
   }
 
   &.right{
@@ -48,5 +52,4 @@
       height: 16px;
     }
   }
-
 }
