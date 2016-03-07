@@ -4,6 +4,9 @@
 ExampleNav                     = require './ExampleNav'
 
 navs =
+  NavbarDropdown: [
+    'NavbarDropdownExamples'
+  ]
   FileUploader: [
     'FileUploaderContainerExamples'
     'FileUploaderExamples'
@@ -14,8 +17,7 @@ navs =
     'CheckboxExamples'
     'ImageViewerHeaderExamples'
     'ImageViewerExamples'
-    'LoaderExamples',
-    'PanelExamples'
+    'LoaderExamples'
   ]
   ManageSteps: [
     'ManageStepsExamples'
