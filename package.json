@@ -3,15 +3,27 @@
   "version": "0.0.0",
   "main": "./index.coffee",
   "devDependencies": {
-    "react-router": "^1.0.3",
+    "angular": "^1.4.x",
+    "appirio-tech-webpack-config": "appirio-tech/webpack-config#feature/react-unit-tests",
     "history": "^1.17.0",
+    "karma": "^0.13.21",
     "npm-prepublish": "^1.2.1",
-    "appirio-tech-webpack-config": "0.x.x"
+    "react-router": "^1.0.3",
+    "karma": "^0.13.15",
+    "karma-babel-preprocessor": "^6.0.1",
+    "karma-webpack": "^1.7.0",
+    "webpack": "^1.12.9",
+    "webpack-dev-server": "^1.10.1",
+    "zepto": "0.0.4",
+    "file-loader": "^0.8.5",
+    "font-awesome": "^4.5.0",
+    "fs": "0.0.2"
   },
   "scripts": {
     "example": "webpack-dev-server -d --progress --inline --colors",
     "dev": "webpack-dev-server -d --progress --inline --colors --dev",
     "clean": "rm -r dist",
+    "test": "karma start",
     "build": "webpack --config webpack.config.js; cp example/index.html dist/"
   },
   "dependencies": {
