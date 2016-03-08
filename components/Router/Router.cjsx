@@ -19,8 +19,8 @@ ManageStepsExamples           = require '../ManageSteps/ManageStepsExamples.cjsx
 StepRowExamples               = require '../StepRow/StepRowExamples.cjsx'
 PanelExamples                 = require '../Panel/PanelExamples.jsx'
 StandardListItemExamples      = require '../StandardListItem/StandardListItemExamples.cjsx'
-NavbarDropdownExamples        = require '../NavbarDropdown/NavbarDropdownExamples.jsx'
-UserDropdownMenuExamples      = require '../UserDropdownMenu/UserDropdownMenuExamples.cjsx'
+DropdownExamples              = require '../Dropdown/DropdownExamples.jsx'
+UserDropdownMenuExamples      = require '../UserDropdownMenu/UserDropdownMenuExamples.jsx'
 
 { Router, Route, Link, IndexRoute, browserHistory } = require 'react-router'
 
@@ -54,7 +54,7 @@ component = ->
 
         <Route path="/StandardListItemExamples" component={StandardListItemExamples} />
 
-        <Route path="/NavbarDropdownExamples" component={NavbarDropdownExamples}/>
+        <Route path="/DropdownExamples" component={DropdownExamples}/>
         
         <Route path="/UserDropdownMenuExamples" component={UserDropdownMenuExamples}/>
       </Route>

@@ -37,9 +37,10 @@
     }
   }
 
-  .NavbarDropdown {
+  .Dropdown {
     margin-top: 8px;
     padding-bottom: 10px;
+    width: 96%;
 
     ul {
       padding-top: 0;
@@ -57,7 +58,7 @@
     }
   }
 
-  .NavbarDropdown:before {
+  .Dropdown:before {
     right: 13px;
   }
 }
