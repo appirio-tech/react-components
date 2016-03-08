@@ -13,7 +13,7 @@ Install dependencies by running the following in the root of the project:
 ## NPM Commands
 - To run locally, run `npm run dev` and head to `localhost:8080`
 - To create the build: `npm run build`
-- To run the test runner and view specs.html: `TODO: need to update`
+- To run the test runner: `TODO: need to update`
 
 ## Recommended Developer Tools
 
@@ -47,35 +47,30 @@ Code expander
   - **Note:** Add the last snippet of code to `reg_replace.sublime-settings` by navigating to  `Sublime Text -> Preferences -> Package Settings -> Reg Replace -> Settings-User`
 
 JavaScript linting
-- Install [ESLint](http://eslint.org/docs/user-guide/getting-started) with `npm i -g eslint`
-- For new projects, you can create a local `.eslintrc.json` file by running `eslint --init`
-  - **Note:** If you're using ES6, make sure you add `"modules": true` to `"ecmaFeatures"` and `"node": true` to `"env"` in your `.eslintrc.json` file
-  - **Note:** If you are using React, make sure you have `eslint` and `eslint-plugin-react` as `devDependencies` in your `package.json` file
-  - **Optional**: Add `"lint": "eslint ."` to your `package.json` file to run linting at any time via `npm run lint`
+- `npm run lint` will lint your files for you. Please make sure all `.jsx` and `.js` code passes linting, otherwise the Travis build will fail.
 
 Automatic JavaScript linting in Sublime Text
 - Install [SublimeLinter](http://sublimelinter.readthedocs.org/en/latest/installation.html) following the instructions under "Installing via Package Control"
 - Install [SublimeLinter-eslint](https://github.com/roadhump/SublimeLinter-eslint) with the package manager. The package is called `SublimeLinter-contrib-eslint`
 
 ### Testing
-
-
-### Description of Files and Folders
+TODO: add testing commands
 
 ## Contributing
 
 ### Style Guide and Naming Conventions
 
+Please use `npm run lint` to make sure your code follows the proper code style specifications for ES6.
+
 ### Pull Requests
 
-To contribute to the repository, please create a feature branch off of the dev branch. Once you're finished working on the feature, make a pull request to merge it into dev. Then, make sure to delete the branch when it's no longer used. Please make sure that every pull request has passed the build checks, which appear just before the "Merge pull request" button in github.
+To contribute to the repository, please create a feature branch off of the dev branch. Once you're finished working on the feature, make a pull request to merge it into dev. Please make sure that every pull request has passed the build checks, which appear just before the "Merge pull request" button in github.
 
 ### Adding New Content
 
 SCSS Files
   - Use SCSS syntax, but do not overly nest
   - Use variables, mixins, and classes as much as possible from our [style guide](https://github.com/appirio-tech/styles)
-  - Reuse our [UI Components](https://github.com/appirio-tech/ng-ui-components)
   - When adding media queries, nest them inside the element, rather than creating a new section
   ```
   .box {
@@ -98,6 +93,7 @@ SCSS Files
 
 JavaScript
   - See this section on [naming conventions and style guide](https://github.com/appirio-tech/topcoder-app/blob/dev/README.md#style-guide-and-naming-conventions)
+
 ## Using React Components in your app
 
 ## Install
