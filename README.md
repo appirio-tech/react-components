@@ -56,17 +56,20 @@ Automatic JavaScript linting in Sublime Text
 
 ## Contributing
 
-### Code Style
-
-Please use `npm run lint` to make sure your code follows the proper code style specifications for ES6.
-
 ### Pull Requests
 
 To contribute to the repository, please create a feature branch off of the dev branch. Once you're finished working on the feature, make a pull request to merge it into dev. Please make sure that every pull request has passed the build checks, which appear just before the "Merge pull request" button in github.
 
-### Adding New Content
+### Code Style
+
+JavaScript
+  - Please use ES2015 syntax whenever possible
+  - Specific rules are enforced via `.eslintrc.json`
+  - Run `npm run lint` to check your code against the linter
 
 SCSS Files
+  - This repository uses flexbox for arranging content
+  - The use of any extra CSS libraries should be discussed with the team
   - Use SCSS syntax, but do not overly nest
   - Use variables, mixins, and classes as much as possible from our [style guide](https://github.com/appirio-tech/styles)
   - When adding media queries, nest them inside the element, rather than creating a new section
@@ -87,11 +90,6 @@ SCSS Files
     }
   }
   ```
-  - This repository uses flexbox for arranging content. The use of any extra CSS libraries should be discussed with the team
-
-JavaScript
-  - Please use ES2015 syntax whenever possible
-  - Specific rules are enforced via `.eslintrc.json`
 
 ## Using the react-components repository in your app
 
