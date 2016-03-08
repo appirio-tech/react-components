@@ -14,6 +14,7 @@ Install dependencies by running the following in the root of the project:
 - To run locally, run `npm run dev` and head to `localhost:8080`
 - To create the build: `npm run build`
 - To run the test runner: `TODO: need to update`
+- To make sure your code passes linting: `npm run lint`
 
 ## Recommended Developer Tools
 
