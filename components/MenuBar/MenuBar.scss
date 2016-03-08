@@ -3,7 +3,7 @@
 .MenuBar {
 
   display: flex;
-  // FIX ME: use roboto fonts after member search challenge results are merged
+  font-family: 'roboto', 'Arial';
 
   &.horizontal {
     flex-direction: row;
@@ -13,7 +13,6 @@
       display: flex;
       justify-content: center;
       margin: 0px 15px;
-      width: 30px;
 
       a {
         padding-bottom: 6px;
@@ -34,8 +33,15 @@
     justify-content: center;
 
     &.selected {
-      color: $black;
       border-bottom: 2px solid $primary-light;
+
+      a {
+        color: $black;
+      }
+    }
+
+    &.mobile {
+      width: 30px;
     }
 
     a {

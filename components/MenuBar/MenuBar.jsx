@@ -1,7 +1,5 @@
 import { PropTypes, Component } from 'react'
 
-import StandardListItem from '../StandardListItem/StandardListItem'
-
 require('./MenuBar.scss')
 
 class MenuBar extends Component {
@@ -15,11 +13,11 @@ class MenuBar extends Component {
     const handleResize = this.handleResize
     const thisRef = this
     this.state.handler = function() { handleResize(thisRef) }
-    window.addEventListener('resize', this.state.handler);
+    window.addEventListener('resize', this.state.handler)
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.state.handler);
+    window.removeEventListener('resize', this.state.handler)
   }
 
   handleResize(thisRef) {
@@ -28,9 +26,9 @@ class MenuBar extends Component {
       breakPoint = MenuBar.MobileBreakPoint
     }
     if (window.innerWidth > breakPoint) {
-      thisRef.setState({mobile: false});
+      thisRef.setState({mobile: false})
     } else {
-      thisRef.setState({mobile: true});
+      thisRef.setState({mobile: true})
     }
   }
 
@@ -46,8 +44,11 @@ class MenuBar extends Component {
         {
           this.props.items.map(item => {
             let itemClass = orientation
+            if (this.state.mobile) {
+              itemClass += ' mobile'
+            }
             if (window.location.href.indexOf(item.link) !== -1) {
-              itemClass = ' selected'
+              itemClass += ' selected'
             }
             if (this.state.mobile) {
               return (
@@ -70,6 +71,6 @@ MenuBar.propTypes = {
   mobileBreakPoint  : PropTypes.number
 }
 
-MenuBar.MobileBreakPoint = 768;
+MenuBar.MobileBreakPoint = 768
 
 export default MenuBar
