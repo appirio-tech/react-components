@@ -1,8 +1,10 @@
 language: node_js
 node_js:
 - 5.2.0
-before_install:
+install:
 - npm install
+script:
+- npm run lint
 sudo: false
 before_deploy:
 - npm-prepublish --verbose
