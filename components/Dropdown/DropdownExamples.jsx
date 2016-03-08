@@ -1,24 +1,24 @@
 'use strict'
 
 require('./DropdownExamples.scss')
-let Dropdown = require('./Dropdown.jsx')
-let React    = require('react')
-let items = [
-      'Review',
-      'Web Arena',
-      'Applet Arena',
-    ]
+const Dropdown = require('./Dropdown.jsx')
+const React    = require('react')
+const items = [
+    'Review',
+    'Web Arena',
+    'Applet Arena'
+  ]
 
-let DropdownExamples = {
-  render: function() {
-    let dom = 
+const DropdownExamples = {
+  render() {
+    const dom = (
       <section>
         <div className="dropdown-example full-width">
           <Dropdown pointerShadow>
             <a className="dropdown-menu-header">Full Width Dropdown</a>
             <ul className="dropdown-menu-list">
               {
-                items.map(function(link, i) {
+                items.map((link, i) => {
                   return <li key={i}><a href="javascript:;">{link}</a></li>
                 })
               }
@@ -31,7 +31,7 @@ let DropdownExamples = {
             <a className="dropdown-menu-header">Limited Width Dropdown</a>
             <ul className="dropdown-menu-list">
               {
-                items.map(function(link, i) {
+                items.map((link, i) => {
                   return <li key={i}><a href="javascript:;">{link}</a></li>
                 })
               }
@@ -44,7 +44,7 @@ let DropdownExamples = {
             <a className="dropdown-menu-header">Limited Width Dropdown No Pointer Shadow</a>
             <ul className="dropdown-menu-list">
               {
-                items.map(function(link, i) {
+                items.map((link, i) => {
                   return <li key={i}><a href="javascript:;">{link}</a></li>
                 })
               }
@@ -57,7 +57,7 @@ let DropdownExamples = {
             <a className="dropdown-menu-header">Limited Width Dropdown No Pointer</a>
             <ul className="dropdown-menu-list">
               {
-                items.map(function(link, i) {
+                items.map((link, i) => {
                   return <li key={i}><a href="javascript:;">{link}</a></li>
                 })
               }
@@ -70,7 +70,7 @@ let DropdownExamples = {
             <a className="dropdown-menu-header">Dropdown No Pointer</a>
             <ul className="dropdown-menu-list">
               {
-                items.map(function(link, i) {
+                items.map((link, i) => {
                   return <li key={i}><a href="javascript:;">{link}</a></li>
                 })
               }
@@ -78,9 +78,10 @@ let DropdownExamples = {
           </Dropdown>
         </div>
       </section>
+    )
       
-    return dom;
+    return dom
   }
 }
 
-module.exports = React.createClass(DropdownExamples);
+module.exports = React.createClass(DropdownExamples)

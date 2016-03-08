@@ -1,13 +1,13 @@
 'use strict'
 
 require('./Dropdown.scss')
-let React    = require('react')
+const React    = require('react')
 
-let Dropdown = {
-  getInitialState: function() {
+const Dropdown = {
+  getInitialState() {
     return { isHidden: true }
   },
-  onClickOutside: function(evt) {
+  onClickOutside(evt) {
     let currNode = evt.target
     let isDropdown = false
 
@@ -17,38 +17,38 @@ let Dropdown = {
         break
       }
 
-      currNode = currNode.parentNode;
+      currNode = currNode.parentNode
     } while(currNode.tagName)
 
     if(!isDropdown) {
       this.setState({ isHidden: true })
     }
   },
-  onClick: function(evt) {
-    let dropdownClicked = new Event('dropdownClicked')
+  onClick(evt) {
+    const dropdownClicked = new Event('dropdownClicked')
 
     document.dispatchEvent(dropdownClicked)
 
     this.setState({ isHidden: !this.state.isHidden })
-    evt.stopPropagation();
+    evt.stopPropagation()
   },
-  onClickOtherDropdown: function() {
+  onClickOtherDropdown() {
     this.setState({ isHidden: true })
   },
-  componentDidMount: function() {
+  componentDidMount() {
     document.removeEventListener('click', this.onClickOutside)
     document.removeEventListener('dropdownClicked', this.onClickOtherDropdown)
 
     document.addEventListener('click', this.onClickOutside)
     document.addEventListener('dropdownClicked', this.onClickOtherDropdown)
   },
-  componentWillUnmount: function() {
+  componentWillUnmount() {
     document.removeEventListener('click', this.onClickOutside)
     document.removeEventListener('dropdownClicked', this.onClickOtherDropdown)
   },
-  render: function() {
-    let pointerShadow = this.props.pointerShadow
-    let noPointer = this.props.noPointer
+  render() {
+    const pointerShadow = this.props.pointerShadow
+    const noPointer = this.props.noPointer
     let ndClasses = 'Dropdown'
 
     if (pointerShadow) {
@@ -73,6 +73,6 @@ let Dropdown = {
       </div>
     )
   }
-};
+}
 
-module.exports = React.createClass(Dropdown);
+module.exports = React.createClass(Dropdown)
