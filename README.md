@@ -56,7 +56,7 @@ Automatic JavaScript linting in Sublime Text
 
 ## Contributing
 
-### Style Guide and Naming Conventions
+### Code Style
 
 Please use `npm run lint` to make sure your code follows the proper code style specifications for ES6.
 
