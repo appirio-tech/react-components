@@ -93,7 +93,7 @@ JavaScript
   - Please use ES2015 syntax whenever possible
   - Specific rules are enforced via `.eslintrc.json`
 
-## Using React Components in your app
+## Using the react-components repository in your app
 
 ## Install
 
