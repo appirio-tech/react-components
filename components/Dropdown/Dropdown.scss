@@ -1,14 +1,14 @@
 @import "work/work-includes";
 
 .Dropdown {
-  margin-top: 15px;
+  margin-top: 30px;
   background-color: #fff;
   box-shadow: 0px 2px 7px 1px rgba(0, 0, 0, 0.17);
   border-radius: 5px;
   display: inline-block;
   position: absolute;
   left: 0;
-  width: 96%;
+  width: 100%;
 
   ul {
     height: 100%;
@@ -45,7 +45,7 @@
   border-radius: 5px;
 }
 
-.Dropdown.pointer-hidden:before {
+.Dropdown.pointer-hide:before {
   display: none;
 }
 
