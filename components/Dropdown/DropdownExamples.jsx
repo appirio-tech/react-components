@@ -1,17 +1,17 @@
 'use strict'
 
 require('./DropdownExamples.scss')
-var Dropdown = require('./Dropdown.jsx'),
-    React    = require('react'),
-    items = [
+let Dropdown = require('./Dropdown.jsx')
+let React    = require('react')
+let items = [
       'Review',
       'Web Arena',
       'Applet Arena',
     ]
 
-var DropdownExamples = {
+let DropdownExamples = {
   render: function() {
-    var dom = 
+    let dom = 
       <section>
         <div className="dropdown-example full-width">
           <Dropdown pointerShadow>

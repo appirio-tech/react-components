@@ -1,15 +1,15 @@
 'use strict'
 
-require('./Dropdown.scss');
-var React    = require('react');
+require('./Dropdown.scss')
+let React    = require('react')
 
-var Dropdown = {
+let Dropdown = {
   getInitialState: function() {
-    return { isHidden: true };
+    return { isHidden: true }
   },
   onClickOutside: function(evt) {
-    var currNode = evt.target,
-        isDropdown = false
+    let currNode = evt.target
+    let isDropdown = false
 
     do {
       if(currNode.className.indexOf('dropdown-wrap') > -1) {
@@ -25,8 +25,7 @@ var Dropdown = {
     }
   },
   onClick: function(evt) {
-    var openDropdowns = document.getElementsByClassName('Dropdown'),
-        dropdownClicked = new Event('dropdownClicked')
+    let dropdownClicked = new Event('dropdownClicked')
 
     document.dispatchEvent(dropdownClicked)
 
@@ -48,9 +47,9 @@ var Dropdown = {
     document.removeEventListener('dropdownClicked', this.onClickOtherDropdown)
   },
   render: function() {
-    var pointerShadow = this.props.pointerShadow,
-        noPointer = this.props.noPointer,
-        ndClasses = 'Dropdown'
+    let pointerShadow = this.props.pointerShadow
+    let noPointer = this.props.noPointer
+    let ndClasses = 'Dropdown'
 
     if (pointerShadow) {
       ndClasses += ' pointer-shadow'
