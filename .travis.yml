@@ -3,6 +3,8 @@ node_js:
 - 5.2.0
 install:
 - npm install
+script:
+- npm run lint
 sudo: false
 before_deploy:
 - npm-prepublish --verbose
