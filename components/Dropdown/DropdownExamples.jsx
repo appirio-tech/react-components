@@ -4,10 +4,10 @@ require('./DropdownExamples.scss')
 const Dropdown = require('./Dropdown.jsx')
 const React    = require('react')
 const items = [
-    'Review',
-    'Web Arena',
-    'Applet Arena'
-  ]
+  'Review',
+  'Web Arena',
+  'Applet Arena'
+]
 
 const DropdownExamples = {
   render() {
