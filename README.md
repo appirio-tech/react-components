@@ -90,7 +90,8 @@ SCSS Files
   - This repository uses flexbox for arranging content. The use of any extra CSS libraries should be discussed with the team
 
 JavaScript
-  - See this section on [naming conventions and style guide](https://github.com/appirio-tech/topcoder-app/blob/dev/README.md#style-guide-and-naming-conventions)
+  - Please use ES2015 syntax whenever possible
+  - Specific rules are enforced via `.eslintrc.json`
 
 ## Using React Components in your app
 
