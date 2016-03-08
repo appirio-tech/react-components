@@ -15,7 +15,7 @@
     "dev": "webpack-dev-server -d --progress --inline --colors --dev",
     "clean": "rm -r dist",
     "build": "webpack --config webpack.config.js; cp example/index.html dist/",
-    "lint": "eslint ."
+    "lint": "eslint --ext .js,.jsx ."
   },
   "dependencies": {
     "appirio-styles": "0.0.25",
