@@ -1,9 +1,9 @@
 'use strict'
 
-require('./NavbarDropdown.scss');
+require('./Dropdown.scss');
 var React    = require('react');
 
-var NavbarDropdown = {
+var Dropdown = {
   getInitialState: function() {
     return { isHidden: true };
   },
@@ -13,7 +13,7 @@ var NavbarDropdown = {
   render: function() {
     var pointerShadow = this.props.pointerShadow,
         noPointer = this.props.noPointer,
-        ndClasses = 'NavbarDropdown';
+        ndClasses = 'Dropdown';
 
     if (pointerShadow) {
       ndClasses += ' pointer-shadow';
@@ -35,8 +35,8 @@ var NavbarDropdown = {
           { this.props.children[1] }        
         </div>
       </div>
-    );
+    )
   }
 };
 
-module.exports = React.createClass(NavbarDropdown);
+module.exports = React.createClass(Dropdown);

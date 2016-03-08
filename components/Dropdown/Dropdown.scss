@@ -1,6 +1,6 @@
 @import "work/work-includes";
 
-.NavbarDropdown {
+.Dropdown {
   margin-top: 15px;
   background-color: #fff;
   box-shadow: 0px 2px 7px 1px rgba(0, 0, 0, 0.17);
@@ -28,11 +28,11 @@
   }
 }
 
-.NavbarDropdown.hide {
+.Dropdown.hide {
   display: none;
 }
 
-.NavbarDropdown:before {
+.Dropdown:before {
   content: " ";
   width: 15px;
   height: 15px;
@@ -45,10 +45,10 @@
   border-radius: 5px;
 }
 
-.NavbarDropdown.pointer-hidden:before {
+.Dropdown.pointer-hidden:before {
   display: none;
 }
 
-.NavbarDropdown.pointer-shadow:before {
+.Dropdown.pointer-shadow:before {
   box-shadow: 0px 2px 7px 1px rgba(0, 0, 0, 0.17);
 }
