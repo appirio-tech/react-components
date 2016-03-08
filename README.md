@@ -100,11 +100,3 @@ JavaScript
 ```
 npm install appirio-tech-react-components
 ```
-
-## Developing
-
-```
-nvm use
-npm install
-npm run dev
-```
