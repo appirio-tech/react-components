@@ -54,9 +54,6 @@ Automatic JavaScript linting in Sublime Text
 - Install [SublimeLinter](http://sublimelinter.readthedocs.org/en/latest/installation.html) following the instructions under "Installing via Package Control"
 - Install [SublimeLinter-eslint](https://github.com/roadhump/SublimeLinter-eslint) with the package manager. The package is called `SublimeLinter-contrib-eslint`
 
-### Testing
-TODO: add testing commands
-
 ## Contributing
 
 ### Style Guide and Naming Conventions
