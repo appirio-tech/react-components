@@ -7,7 +7,7 @@ import Panel from '../Panel/Panel'
 const SearchSuggestions = {
   getInitialState() {
     return { iSEmpty: true }
-	},
+  },
   render() {
     const recentList = this.props.recentSearch
     const popularList = this.props.popularSearch
@@ -27,7 +27,7 @@ const SearchSuggestions = {
 						<ul className="search-suggestion-result-list">
 							{
 								recentList.map((search, i) => {
-                  return <li key={ i }><StandardListItem labelText={ search } hideIcon /></li>
+  return <li key={ i }><StandardListItem labelText={ search } hideIcon /></li>
 								}) 
 							}
 						</ul>
@@ -53,7 +53,7 @@ const SearchSuggestions = {
 						<ul className="search-suggestion-result-list">
 							{
 								popularList.map((search, i) => {
-                  return <li key={ i }><StandardListItem labelText={ search } hideIcon /></li>
+  return <li key={ i }><StandardListItem labelText={ search } hideIcon /></li>
 								}) 
 							}
 						</ul>
@@ -68,7 +68,7 @@ const SearchSuggestions = {
 				{ recentSearches }
 			</div>
 		)
-	}
+  }
 }
 
 module.exports = React.createClass(SearchSuggestions)
