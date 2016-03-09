@@ -1,7 +1,7 @@
 import { PropTypes, Component } from 'react'
 
 require('./StandardListItemStyles.scss')
-const React = require('react');
+// const React = require('react')
  // showIcon: true -> render the icon
  // showLabel: true -> render the label
  // imgSrc: source for the icon
@@ -10,15 +10,15 @@ const React = require('react');
 
 class StandardListItem extends Component {
   constructor(props) {
-   super(props)
-   this.placeIcon = (this.props.placeIcon && this.props.placeIcon !== '') ? this.props.placeIcon : 'top'
+    super(props)
+    this.placeIcon = (this.props.placeIcon && this.props.placeIcon !== '') ? this.props.placeIcon : 'top'
   //  this.showIcon = (this.props.showIcon !== null) ? this.props.showIcon : true;
   //  this.showLabel = (this.props.showLabel !== null) ? this.props.showLabel : true;
   }
   render() {
     const classes = 'StandardListItem ' + this.placeIcon
-    let label;
-    let icon;
+    let label
+    let icon
 
     if (this.props.showLabel){
       label = <p className="label">{this.props.labelText}</p>

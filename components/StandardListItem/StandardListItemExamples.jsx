@@ -2,11 +2,9 @@
 
 
 import StandardListItem from './StandardListItem'
-const React        = require('react');
+const React        = require('react')
 
 const StandardListItemExamples = () => (
-
-
   <div className="StandardListItemExamples flex column middle center light-bg">
     <h1>Default</h1>
 
@@ -24,10 +22,9 @@ const StandardListItemExamples = () => (
     <StandardListItem labelText="This is a test" showIcon={false}  />
 
     <h1>Label Hidden</h1>
-    <StandardListItem imgSrc="../components/Avatar/place-holder.svg" showLabel={true}  />
+    <StandardListItem imgSrc="../components/Avatar/place-holder.svg" showLabel={false}  />
 
   </div>
-
 )
 
 module.exports = StandardListItemExamples
