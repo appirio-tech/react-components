@@ -15,7 +15,7 @@ describe('Manage Steps View', () => {
       }
 
       const html = render(createElement(ExampleTest, props))
-      let $ = cheerio.load(html)
+      const $ = cheerio.load(html)
       const items = $('li')
 
       items.length.should.equal(2)
