@@ -2,15 +2,15 @@
 
 
 import StandardListItem from './StandardListItem'
-var React        = require('react');
+let React        = require('react');
 
 const StandardListItemExamples = () => (
 
 
-  <div className="StandardListItemExamples flex column middle center light-bg">
+  <div className='StandardListItemExamples flex column middle center light-bg'>
     <h1>Default</h1>
 
-    <StandardListItem imgSrc="../components/Avatar/place-holder.svg" labelText="This is a test"  />
+    <StandardListItem imgSrc='../components/Avatar/place-holder.svg' labelText='This is a test'  />
 
     <h1>Icon on the Left</h1>
 
