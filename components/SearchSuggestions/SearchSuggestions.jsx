@@ -5,14 +5,14 @@ const StandardListItem = require('../StandardListItem/StandardListItem.cjsx')
 import Panel from '../Panel/Panel'
 
 const SearchSuggestions = {
-	getInitialState() {
-		return { iSEmpty: true }
-	}, 
-	render() {
-		const recentList = this.props.recentSearch
-		const popularList = this.props.popularSearch
+  getInitialState() {
+    return { iSEmpty: true }
+	},
+  render() {
+    const recentList = this.props.recentSearch
+    const popularList = this.props.popularSearch
 
-		const recentSearches = !recentList ? '' : (
+    const recentSearches = !recentList ? '' : (
 			<div className="recent-search-suggestions">
 				<Panel>
 					<div className="panel-header">
@@ -27,7 +27,7 @@ const SearchSuggestions = {
 						<ul className="search-suggestion-result-list">
 							{
 								recentList.map((search, i) => {
-									return <li key={ i }><StandardListItem labelText={ search } hideIcon /></li>
+                  return <li key={ i }><StandardListItem labelText={ search } hideIcon /></li>
 								}) 
 							}
 						</ul>
@@ -43,7 +43,7 @@ const SearchSuggestions = {
 			</div>
 		)
 
-		const popularSearch = !popularList ? '' :(
+    const popularSearch = !popularList ? '' :(
 			<div className="popular-search-suggestions">
 				<Panel>
 					<div className="panel-header">
@@ -53,7 +53,7 @@ const SearchSuggestions = {
 						<ul className="search-suggestion-result-list">
 							{
 								popularList.map((search, i) => {
-									return <li key={ i }><StandardListItem labelText={ search } hideIcon /></li>
+                  return <li key={ i }><StandardListItem labelText={ search } hideIcon /></li>
 								}) 
 							}
 						</ul>
@@ -62,7 +62,7 @@ const SearchSuggestions = {
 			</div>
 		)
 
-		return (
+    return (
 			<div className={ ((recentList && !popularList) ? 'empty-state' : null) + ' SearchSuggestions'}>
 				{ popularSearch }
 				{ recentSearches }
