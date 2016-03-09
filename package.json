@@ -22,7 +22,7 @@
     "dev": "webpack-dev-server -d --progress --inline --colors --dev",
     "clean": "rm -r dist",
     "build": "webpack --config webpack.config.js; cp example/index.html dist/",
-    "lint": "eslint --ext .js,.jsx ."
+    "lint": "eslint --ext .js,.jsx .",
     "test": "cross-env NODE_ENV=test mocha --reporter progress --compilers js:babel-core/register --require ignore-styles --recursive \"./components/**/*.spec.js\"",
     "test:watch": "npm run test -- --watch"
   },
