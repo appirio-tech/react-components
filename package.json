@@ -4,6 +4,8 @@
   "main": "./index.coffee",
   "devDependencies": {
     "appirio-tech-webpack-config": "0.x.x",
+    "eslint": "^2.3.0",
+    "eslint-plugin-react": "^4.2.0",
     "babel-core": "^6.6.5",
     "chai": "^3.5.0",
     "cheerio": "^0.20.0",
@@ -20,6 +22,7 @@
     "dev": "webpack-dev-server -d --progress --inline --colors --dev",
     "clean": "rm -r dist",
     "build": "webpack --config webpack.config.js; cp example/index.html dist/",
+    "lint": "eslint --ext .js,.jsx .",
     "test": "cross-env NODE_ENV=test mocha --reporter progress --compilers js:babel-core/register --require ignore-styles --recursive \"./components/**/*.spec.js\"",
     "test:watch": "npm run test -- --watch"
   },

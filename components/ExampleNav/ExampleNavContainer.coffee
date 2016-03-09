@@ -14,7 +14,9 @@ navs =
     'CheckboxExamples'
     'ImageViewerHeaderExamples'
     'ImageViewerExamples'
-    'LoaderExamples'
+    'LoaderExamples',
+    'PanelExamples',
+    'StandardListItemExamples'
   ]
   ManageSteps: [
     'ManageStepsExamples'
