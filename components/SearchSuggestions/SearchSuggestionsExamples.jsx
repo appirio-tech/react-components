@@ -5,7 +5,7 @@ const recentList = ['Photoshop', 'IBM Bluemix', 'Sketch', 'iOS Icon Design Chall
 const popularList = ['Java', 'Javascript', 'CoffeeScript']
 
 const SearchSuggestionsExamples = () => {
-	return (
+  return (
 		<section>
 			<SearchSuggestions recentSearch={ recentList } popularSearch={ popularList } />
 			<SearchSuggestions recentSearch={ recentList } />
