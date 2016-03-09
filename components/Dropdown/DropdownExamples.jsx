@@ -26,6 +26,19 @@ const DropdownExamples = {
           </Dropdown>
         </div>
 
+        <div className="dropdown-example no-pointer">
+          <Dropdown noPointer pointerShadow>
+            <a className="dropdown-menu-header">Dropdown No Pointer</a>
+            <ul className="dropdown-menu-list">
+              {
+                items.map((link, i) => {
+                  return <li key={i}><a href="javascript:;">{link}</a></li>
+                })
+              }
+            </ul>
+          </Dropdown>
+        </div>
+
         <div className="dropdown-example limited-width">
           <Dropdown pointerShadow>
             <a className="dropdown-menu-header">Limited Width Dropdown</a>
@@ -65,9 +78,9 @@ const DropdownExamples = {
           </Dropdown>
         </div>
 
-        <div className="dropdown-example no-pointer">
-          <Dropdown noPointer pointerShadow>
-            <a className="dropdown-menu-header">Dropdown No Pointer</a>
+        <div className="dropdown-example limited-width pointer-left-example">
+          <Dropdown pointerLeft>
+            <a className="dropdown-menu-header">Limited Width Dropdown Left Pointer</a>
             <ul className="dropdown-menu-list">
               {
                 items.map((link, i) => {
@@ -77,6 +90,7 @@ const DropdownExamples = {
             </ul>
           </Dropdown>
         </div>
+        
       </section>
     )
       

@@ -32,6 +32,11 @@
   display: none;
 }
 
+.Dropdown.pointer-left:before {
+  right: initial;
+  left: 15px;
+}
+
 .Dropdown:before {
   content: " ";
   width: 15px;

@@ -49,6 +49,7 @@ const Dropdown = {
   render() {
     const pointerShadow = this.props.pointerShadow
     const noPointer = this.props.noPointer
+    const pointerLeft = this.props.pointerLeft
     let ndClasses = 'Dropdown'
 
     if (pointerShadow) {
@@ -57,6 +58,10 @@ const Dropdown = {
 
     if (noPointer) {
       ndClasses += ' pointer-hide'
+    }
+
+    if (pointerLeft) {
+      ndClasses += ' pointer-left'
     }
 
     if (this.state.isHidden) {

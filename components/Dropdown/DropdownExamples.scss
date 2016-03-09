@@ -23,10 +23,9 @@
 	width: 25%;
 	display: inline-block;
 	margin-right: 25px;
-
-	.Dropdown:before {
-		right: initial;
-		left: 15px;
-	}
+	text-align: right;
 }
 
+.limited-width.pointer-left-example {
+	text-align: left;
+}
