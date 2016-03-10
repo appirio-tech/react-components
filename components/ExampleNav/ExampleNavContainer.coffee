@@ -16,7 +16,8 @@ navs =
     'ImageViewerExamples'
     'LoaderExamples',
     'PanelExamples',
-    'StandardListItemExamples'
+    'StandardListItemExamples',
+    'QuickLinksExample'
   ]
   ManageSteps: [
     'ManageStepsExamples'

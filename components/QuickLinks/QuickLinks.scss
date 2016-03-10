@@ -1,0 +1,48 @@
+@import "work/work-includes";
+
+$logo-placeholder-bg: #B47DD6;
+
+.QuickLinks {
+
+  .Dropdown {
+    width: auto;
+    margin-top: 20px;
+    left: initial;
+    right: -17px;
+
+    .dropdown-menu-list {
+      padding: 20px;
+
+      .dropdown-menu-list-item {
+        display: inline-block;
+
+        .icon-placeholder {
+          width: 30px;
+          height: 30px;
+          background-color: $logo-placeholder-bg;
+          margin: 0 auto;
+          margin-bottom: 6px;
+        }      
+
+        .StandardListItem {
+          padding: 0;
+
+          .label {
+            font-size: 12px;
+            line-height: 26px;
+          }
+        }
+      }
+
+      .dropdown-menu-list-item:not(:last-child) {
+        margin-right: 30px;
+        text-align: center;
+      }
+    }
+  }
+
+  .Dropdown:before {
+    right: 47px;
+  }
+
+}
