@@ -1,7 +1,6 @@
 import { PropTypes, Component } from 'react'
 
 require('./StandardListItemStyles.scss')
-// const React = require('react')
  // showIcon: true -> render the icon
  // showLabel: true -> render the label
  // imgSrc: source for the icon
