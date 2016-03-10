@@ -20,7 +20,7 @@ const SearchBar = {
       this.setState({ searchState: 'empty' })
     }
   },
-  onKeyUp(evt) {
+  onKeyUp() {
     this.setState({ searchValue: this.refs.searchValue.value })
   },
   clearSearch() {
@@ -30,8 +30,8 @@ const SearchBar = {
   },
   render() {
     /* Sample JSON data */
-    let recentList = ['Photoshop', 'IBM Bluemix', 'Sketch', 'iOS Icon Design Challenges', 'React.js']
-    let popularList = ['Java', 'Javascript', 'CoffeeScript']
+    const recentList = ['Photoshop', 'IBM Bluemix', 'Sketch', 'iOS Icon Design Challenges', 'React.js']
+    const popularList = ['Java', 'Javascript', 'CoffeeScript']
 
     const searchState = this.state.searchState
     const searchValue = this.state.searchValue
