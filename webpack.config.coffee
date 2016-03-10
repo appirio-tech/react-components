@@ -15,4 +15,8 @@ config.plugins.push(new webpack.ProvidePlugin({
   React: 'react'
 }))
 
+<<<<<<< HEAD
 module.exports = config
+=======
+module.exports = config
+>>>>>>> dev

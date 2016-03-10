@@ -1,24 +1,16 @@
-'use strict'
+import Panel from './Panel'
 
-var Panel = require('./Panel.jsx')
-var React  = require('react')
+const PanelExample = () => (
+  <Panel expandTrigger="expand-trigger">
+    <div className="panel-header">
+      Header
+      <a className="expand-trigger">Click Me</a>
+    </div>
 
-var PanelExample = {
-  render: function() {
-    var dom =
-      <div>
-        <Panel expandTrigger="expand-trigger">
-          <div className="panel-header">
-            Header
-            <a className="expand-trigger">Click Me</a>
-          </div>
-          <div className="panel-body">
-            Body
-          </div>
-        </Panel>
-      </div>
-    return dom;
-  }
-}
+    <div className="panel-body">
+      Body
+    </div>
+  </Panel>
+)
 
-module.exports = React.createClass(PanelExample)
+module.exports = PanelExample
