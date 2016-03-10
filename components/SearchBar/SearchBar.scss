@@ -1,0 +1,140 @@
+@import "work/work-includes";
+
+$placeholder-color: #A3A3AE;
+$border-color: #D8D8DB;
+$input-field-color: #394146;
+$empty-icon-wrap-bg: #F0F0F0;
+$active-icon-wrap-bg: #888894;
+$white: #FFFFFF;
+
+.SearchBar {
+  background-color: $white;
+  height: 40px;
+  width: 100%;
+  border: 1px solid $border-color;
+  border-radius: 4px;
+  position: relative;
+  padding-left: 15px;
+  padding-right: 46px;
+
+  .search-bar__text,
+  .search-typeahead-text {
+    outline: 0px;
+    border: 0px none;
+    font-size: 17px;
+    color: $input-field-color;
+    line-height: 20px;
+    width: 90%;
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    z-index: 20;
+  }
+
+  .search-typeahead-text {
+    color: $placeholder-color;
+    display: none;
+    z-index: 10;
+    left: 17.5px;
+    letter-spacing: 0.05em;
+  }
+
+  .search-bar__clear {
+    position: absolute;
+    top: 50%;
+    right: 60px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 30;
+  }
+
+  .search-icon-wrap {
+    width: 46px;
+    height: 40px;
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    background-color: $empty-icon-wrap-bg;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+
+    .search-bar__icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .SearchSuggestions {
+    display: none;
+    position: absolute;
+    top: 43px;
+    left: 0;
+    width: 100%;
+
+    strong {
+      font-weight: 600;
+    }
+  }
+}
+
+.SearchBar.state-empty {
+  .search-bar__clear {
+    display: none;
+  }
+}
+
+.SearchBar.state-empty:before {
+  content: "Search Topcoder for challenges, people or content";
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #A3A3AE;
+  font-size: 17px;
+  line-height: 20px;
+
+  @media screen and (max-width: 768px) {
+    content: "Search Topcoder";
+  }
+}
+
+.SearchBar.state-focused:before,
+.SearchBar.state-filled:before {
+  content: "";
+}
+
+.SearchBar.state-focused {
+  border-color: $placeholder-color;
+
+  .search-typeahead-text {
+    display: block;
+  }
+
+  .search-icon-wrap {
+    background-color: $active-icon-wrap-bg;
+  }
+
+  .SearchSuggestions {
+    display: block;
+  }
+}
+
+.SearchBar.state-filled {
+  border-color: $border-color;
+
+  .search-typeahead-text {
+    display: none;
+  }
+
+  .search-icon-wrap {
+    background-color: $active-icon-wrap-bg;
+  }
+
+  .SearchSuggestions {
+    display: none;
+  }
+}
