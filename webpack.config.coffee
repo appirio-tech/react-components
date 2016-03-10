@@ -10,9 +10,4 @@ config = webpackConfig
       './example.coffee'
     ]
 
-# import X from Y added to files when using these globals
-config.plugins.push(new webpack.ProvidePlugin({
-  React: 'react'
-}))
-
 module.exports = config
