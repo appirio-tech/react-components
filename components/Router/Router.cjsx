@@ -19,6 +19,7 @@ ManageStepsExamples           = require '../ManageSteps/ManageStepsExamples.cjsx
 StepRowExamples               = require '../StepRow/StepRowExamples.cjsx'
 PanelExamples                 = require '../Panel/PanelExamples.jsx'
 StandardListItemExamples      = require '../StandardListItem/StandardListItemExamples.cjsx'
+QuickLinksExample             = require '../QuickLinks/QuickLinksExample.jsx'
 
 { Router, Route, Link, IndexRoute, browserHistory } = require 'react-router'
 
@@ -51,6 +52,8 @@ component = ->
         <Route path="/PanelExamples" component={PanelExamples} />
 
         <Route path="/StandardListItemExamples" component={StandardListItemExamples} />
+
+        <Route path="/QuickLinksExample" component={QuickLinksExample} />
       </Route>
     </Router>
   </Provider>
