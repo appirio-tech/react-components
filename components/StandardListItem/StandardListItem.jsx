@@ -11,12 +11,9 @@ require('./StandardListItemStyles.scss')
 class StandardListItem extends Component {
   constructor(props) {
     super(props)
-    this.placeIcon = (this.props.placeIcon && this.props.placeIcon !== '') ? this.props.placeIcon : 'top'
-  //  this.showIcon = (this.props.showIcon !== null) ? this.props.showIcon : true;
-  //  this.showLabel = (this.props.showLabel !== null) ? this.props.showLabel : true;
   }
   render() {
-    const classes = 'StandardListItem ' + this.placeIcon
+    const classes = 'StandardListItem ' + this.props.placeIcon
     let label
     let icon
 
@@ -42,7 +39,8 @@ StandardListItem.propTypes = {
 
 StandardListItem.defaultProps = {
   showIcon: true,
-  showLabel: true
+  showLabel: true,
+  placeIcon: 'top'
 }
 
 export default StandardListItem
