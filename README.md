@@ -72,6 +72,7 @@ SCSS Files
   - The use of any extra CSS libraries should be discussed with the team
   - Use SCSS syntax, but do not overly nest
   - Use variables, mixins, and classes as much as possible from our [style guide](https://github.com/appirio-tech/styles)
+  - To include variables from the style guide mentioned above, place `@import 'topcoder/tc-includes;'` at the top of your `.scss` file. Locally, you can look in `./node_modules/appirio-styles/styles/topcoder/_tc-colors.scss` to find many colors already defined (e.g. `#A3A3AE` => `$accent-gray`)
   - When adding media queries, nest them inside the element, rather than creating a new section
   ```
   .box {
