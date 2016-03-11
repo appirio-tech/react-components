@@ -10,7 +10,11 @@ const primaryNavigationItems = [
 
 const MenuBarExample = () => (
   
-  <MenuBar items={primaryNavigationItems} mobileBreakPoint={767} orientation="horizontal" />
+  <div>
+    <MenuBar items={primaryNavigationItems} orientation="horizontal" />
+    <MenuBar items={primaryNavigationItems} orientation="vertical" />
+    <MenuBar items={primaryNavigationItems} orientation="horizontal" mobileBreakPoint={767} />
+  </div>
 )
 
 module.exports = MenuBarExample

@@ -6,29 +6,24 @@ class MenuBar extends Component {
   constructor(props) {
     super(props)
     this.state = {mobile: false}
+    this.handleResize = this.handleResize.bind(this)
   }
 
   componentWillMount() {
-    this.handleResize(this)
-    const handleResize = this.handleResize
-    const thisRef = this
-    this.state.handler = function() { handleResize(thisRef) }
-    window.addEventListener('resize', this.state.handler)
+    this.handleResize()
+    window.addEventListener('resize', this.handleResize)
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.state.handler)
+    window.removeEventListener('resize', this.handleResize)
   }
 
-  handleResize(thisRef) {
-    let breakPoint = thisRef.props.mobileBreakPoint
-    if (!breakPoint) {
-      breakPoint = MenuBar.MobileBreakPoint
-    }
+  handleResize() {
+    let breakPoint = this.props.mobileBreakPoint
     if (window.innerWidth > breakPoint) {
-      thisRef.setState({mobile: false})
+      this.setState({mobile: false})
     } else {
-      thisRef.setState({mobile: true})
+      this.setState({mobile: true})
     }
   }
 
@@ -71,6 +66,6 @@ MenuBar.propTypes = {
   mobileBreakPoint  : PropTypes.number
 }
 
-MenuBar.MobileBreakPoint = 768
+MenuBar.defaultProps = { mobileBreakPoint: 768 }
 
 export default MenuBar
