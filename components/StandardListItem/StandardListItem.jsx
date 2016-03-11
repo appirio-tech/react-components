@@ -1,4 +1,5 @@
-import {React, PropTypes, Component } from 'react'
+import {PropTypes, Component } from 'react'
+import React from 'react'
 
 require('./StandardListItemStyles.scss')
  // showIcon: true -> render the icon
