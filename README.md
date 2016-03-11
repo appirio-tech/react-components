@@ -12,9 +12,9 @@ Install dependencies by running the following in the root of the project:
 
 ## NPM Commands
 - To run locally, run `npm run dev` and head to `localhost:8080`
-- To create the build: `npm run build`
-- To run the test runner: `TODO: need to update`
+- To run the test runner: `npm test`
 - To make sure your code passes linting: `npm run lint`
+- To create the build: `npm run build`
 
 ## Recommended Developer Tools
 
@@ -90,6 +90,11 @@ SCSS Files
     }
   }
   ```
+
+### Writing Tests
+- `npm test` will run the current tests
+- Place your test files in the same directory as the component it's testing
+- Test files should be named `ComponentName.spec.js`
 
 ## Using the react-components repository in your app
 

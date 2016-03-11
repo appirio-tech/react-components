@@ -2,6 +2,7 @@
 
 
 import StandardListItem from './StandardListItem'
+import React from 'react'
 
 const StandardListItemExamples = () => (
   <div className="StandardListItemExamples flex column middle center light-bg">
