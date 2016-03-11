@@ -19,7 +19,7 @@ class MenuBar extends Component {
   }
 
   handleResize() {
-    let breakPoint = this.props.mobileBreakPoint
+    const breakPoint = this.props.mobileBreakPoint
     if (window.innerWidth > breakPoint) {
       this.setState({mobile: false})
     } else {
