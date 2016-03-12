@@ -1,0 +1,121 @@
+@import "work/work-includes";
+
+$navbar-bg: #FAFAFB;
+$border-color: #CFCFD2;
+$placeholder-bg: #B47DD6;
+
+$iphone6: 768px;
+
+.Navbar {
+  height: 60px;
+  background-color: $navbar-bg;
+  border-bottom: 1px solid $border-color;
+  padding: 10px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  @media screen and (max-width: $iphone6) {
+    height: 40px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .topcoder-logo {
+    width: 56px;
+    height: 24px;
+    background-color: $placeholder-bg;
+    margin-right: 40px;
+    flex: 0 0 auto;
+
+    @media screen and (min-width: 1376px) {
+      width: 155px;
+    }
+
+    @media screen and (max-width: $iphone6) {
+      width: 40px;
+      margin-right: 26px;
+      order: 1;
+    }
+  }
+
+  .search-bar-wrap {
+    .icon-placeholder {
+      display: none;
+
+      @media screen and (max-width: $iphone6) {
+        display: block;
+        height: 25px;
+        width: 25px;
+        background-color: $placeholder-bg;
+        margin: 9.5px;
+        order: 2;
+      }
+    }
+
+    .SearchBar {
+      margin-right: 45px;
+      max-width: 789px;
+
+      @media screen and (max-width: $iphone6) {
+        display: none;
+      }
+    }
+  }
+
+  .MenuBar {
+    margin-right: 30px;
+
+    @media screen and (max-width: $iphone6) {
+      order: 1;
+    }
+  }
+
+  .collapse-group {
+    flex: 1 0 auto;
+    position: relative;
+
+    @media screen and (max-width :$iphone6) {
+      width: 43px;
+      height: 43px;
+      background-color: #A3A3AE;
+      order: 3;
+    }
+
+    .icon-placeholder {
+      display: none;
+
+      @media screen and (max-width: $iphone6) {
+        display: initial;
+        height: 24px;
+        width: 24px;
+        background-color: $placeholder-bg;
+        margin: 10px;
+      }
+    }
+
+    .quick-links-wrap {
+      margin-right: 30px;
+      display: inline-block;
+
+      @media screen and (max-width: $iphone6) {
+        display: none;
+      }
+
+      .Dropdown {
+        right: -46px;
+        top: 10px;
+      }
+    }
+
+    .UserDropdownMenu {
+      flex-shrink: 0;
+      background-color: transparent;
+
+      @media screen and (max-width: $iphone6) {
+        display: none;
+      }
+    }
+  }
+}
