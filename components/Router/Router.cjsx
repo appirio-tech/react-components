@@ -18,8 +18,9 @@ LoaderExamples                = require '../Loader/LoaderExamples.cjsx'
 ManageStepsExamples           = require '../ManageSteps/ManageStepsExamples.cjsx'
 StepRowExamples               = require '../StepRow/StepRowExamples.cjsx'
 PanelExamples                 = require '../Panel/PanelExamples.jsx'
-StandardListItemExamples      = require '../StandardListItem/StandardListItemExamples.cjsx'
+StandardListItemExamples      = require '../StandardListItem/StandardListItemExamples.jsx'
 MenuBarExamples               = require '../MenuBar/MenuBarExamples.jsx'
+
 
 { Router, Route, Link, IndexRoute, browserHistory } = require 'react-router'
 
