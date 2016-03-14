@@ -1,3 +1,4 @@
+import React from 'react'
 import MenuBar from './MenuBar'
 
 require('./MenuBarExamples.scss')
@@ -9,7 +10,7 @@ const primaryNavigationItems = [
 ]
 
 const MenuBarExample = () => (
-  
+
   <div>
     <MenuBar items={primaryNavigationItems} orientation="horizontal" />
     <MenuBar items={primaryNavigationItems} orientation="vertical" />
