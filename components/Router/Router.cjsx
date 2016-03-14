@@ -22,6 +22,7 @@ StandardListItemExamples      = require '../StandardListItem/StandardListItemExa
 MenuBarExamples               = require '../MenuBar/MenuBarExamples.jsx'
 DropdownExamples              = require '../Dropdown/DropdownExamples.jsx'
 UserDropdownMenuExamples          = require '../UserDropdownMenu/UserDropdownMenuExamples.jsx'
+TCFooterExamples              = require '../TCFooter/TCFooterExamples.jsx'
 
 { Router, Route, Link, IndexRoute, browserHistory } = require 'react-router'
 
@@ -60,6 +61,8 @@ component = ->
         <Route path="/DropdownExamples" component={DropdownExamples} />
 
         <Route path="/UserDropdownMenuExamples" component={UserDropdownMenuExamples} />
+
+        <Route path="/TCFooterExamples" component={TCFooterExamples} />
       </Route>
     </Router>
   </Provider>

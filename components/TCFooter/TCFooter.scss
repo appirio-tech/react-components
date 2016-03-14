@@ -1,0 +1,134 @@
+@import 'topcoder/tc-includes';
+
+.TCFooter {
+  width: 100%;
+  background-color: $gray-darkest;
+  padding: 1px 20px 30px 20px;
+}
+
+.TCFooter .MenuBar {
+  padding-top: 40px;
+
+  li  + li  {
+    margin-left: 50px;
+  }
+
+  li {
+    text-align: center;
+    font-weight: normal;
+
+    a {
+      color: #fff;
+      font-size: 16px;
+      line-height: 21px;
+    }
+    a:hover {
+        color: #0096ff;
+    }
+  }
+}
+
+.social-links {
+    font-size: 13px;
+    line-height: 1.2em;
+    text-align: center;
+    font-weight: normal;
+    margin: 35px 0;
+    color: #fff;
+
+  a {
+    display: inline-block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: 23px 0;
+
+    + a {
+      margin-left: 30px;
+    }
+  }
+}
+
+.copyright-notice {
+  text-align: center;
+    font-size: 12px;
+    line-height: 14px;
+    color: #656565;
+}
+
+
+@media only screen and (max-width : 1024px) {
+  .TCFooter, .fold-pusher {
+    height: 200px;
+  }
+  .TCFooter .menu-item {
+    display: none;
+    margin-top: 30px;
+  }
+
+  .menu-visible .TCFooter .menu-item {
+    display: block;
+  }
+
+  .social-links {
+    .fb-link {
+      background-image: url(ico-facebook.svg);
+      width: 27px;
+      height: 27px;
+    }
+
+    .twitter-link {
+      background-image: url(ico-twitter.svg);
+      width: 28px;
+      height: 24px;
+    }
+
+    .linkedin-link {
+      background-image: url(ico-linkedin.svg);
+      width: 27px;
+      height: 27px;
+    }
+
+    .google-link {
+      background-image: url(ico-google.svg);
+      width: 27px;
+      height: 27px;
+    }
+  }
+}
+
+@media only screen and (min-width : 1025px) {
+  .TCFooter, .fold-pusher {
+    height: 270px;
+  }
+
+  .copyright-notice {
+    font-size: 15px;
+      color: #fff;
+  }
+
+  .social-links {
+    margin-bottom: 3px;
+
+    a {
+      width: 26px;
+      height: 26px;
+      margin-top: 13px;
+    }
+
+    .fb-link {
+      background-image: url(ico-facebook_desktop.svg);
+    }
+
+    .twitter-link {
+      background-image: url(ico-twitter_desktop.svg);
+    }
+
+    .linkedin-link {
+      background-image: url(ico-linkedin_desktop.svg);
+    }
+
+    .google-link {
+      background-image: url(ico-google_desktop.svg);
+    }
+  }
+}
