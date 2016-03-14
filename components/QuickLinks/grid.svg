@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.6 (26304) - http://www.bohemiancoding.com/sketch -->
+    <title>grid</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Scaling" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Components---Desktop" transform="translate(-1000.000000, -446.000000)" fill="#888894">
+            <path d="M1000,446 L1004,446 L1004,450 L1000,450 L1000,446 Z M1006,446 L1010,446 L1010,450 L1006,450 L1006,446 Z M1012,446 L1016,446 L1016,450 L1012,450 L1012,446 Z M1000,452 L1004,452 L1004,456 L1000,456 L1000,452 Z M1006,452 L1010,452 L1010,456 L1006,456 L1006,452 Z M1012,452 L1016,452 L1016,456 L1012,456 L1012,452 Z M1000,458 L1004,458 L1004,462 L1000,462 L1000,458 Z M1006,458 L1010,458 L1010,462 L1006,462 L1006,458 Z M1012,458 L1016,458 L1016,462 L1012,462 L1012,458 Z" id="grid"></path>
+        </g>
+    </g>
+</svg>
