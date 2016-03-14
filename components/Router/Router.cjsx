@@ -24,6 +24,7 @@ DropdownExamples              = require '../Dropdown/DropdownExamples.jsx'
 UserDropdownMenuExamples      = require '../UserDropdownMenu/UserDropdownMenuExamples.jsx'
 QuickLinksExample             = require '../QuickLinks/QuickLinksExample.jsx'
 SearchSuggestionsExamples     = require '../SearchSuggestions/SearchSuggestionsExamples.jsx'
+SearchBarExample             = require '../SearchBar/SearchBarExamples.jsx'
 
 { Router, Route, Link, IndexRoute, browserHistory } = require 'react-router'
 
@@ -66,6 +67,8 @@ component = ->
         <Route path="/QuickLinksExample" component={QuickLinksExample} />
 
         <Route path="/SearchSuggestionsExamples" component={SearchSuggestionsExamples} />
+
+        <Route path="/SearchBarExample" component={SearchBarExample} />
       </Route>
     </Router>
   </Provider>
