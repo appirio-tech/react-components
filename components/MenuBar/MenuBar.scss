@@ -1,9 +1,8 @@
 @import 'topcoder/tc-includes';
 
 .MenuBar {
-
   display: flex;
-  font-family: 'roboto', 'Arial';
+  font-family: 'Roboto', Arial;
 
   &.horizontal {
     flex-direction: row;
@@ -21,7 +20,7 @@
   }
 
   &.vertical {
-    flex-direction: column;    
+    flex-direction: column;
 
     li {
       padding: 10px 0px;
