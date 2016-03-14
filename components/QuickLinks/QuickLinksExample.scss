@@ -1,0 +1,21 @@
+@import "work/work-includes";
+
+.example-wrap {
+  width: 332px;
+  background-color: #FAFAFB;
+  padding: 23px 30px;
+  position: relative;
+
+  .QuickLinks {
+    position: absolute;
+    right: 30px;
+
+    .dropdown-menu-header {
+      position: absolute;
+      right: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+    } 
+  }
+
+}

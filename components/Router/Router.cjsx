@@ -20,7 +20,11 @@ StepRowExamples               = require '../StepRow/StepRowExamples.cjsx'
 PanelExamples                 = require '../Panel/PanelExamples.jsx'
 StandardListItemExamples      = require '../StandardListItem/StandardListItemExamples.jsx'
 MenuBarExamples               = require '../MenuBar/MenuBarExamples.jsx'
-
+DropdownExamples              = require '../Dropdown/DropdownExamples.jsx'
+UserDropdownMenuExamples      = require '../UserDropdownMenu/UserDropdownMenuExamples.jsx'
+QuickLinksExample             = require '../QuickLinks/QuickLinksExample.jsx'
+SearchSuggestionsExamples     = require '../SearchSuggestions/SearchSuggestionsExamples.jsx'
+SearchBarExample             = require '../SearchBar/SearchBarExamples.jsx'
 
 { Router, Route, Link, IndexRoute, browserHistory } = require 'react-router'
 
@@ -55,6 +59,16 @@ component = ->
         <Route path="/StandardListItemExamples" component={StandardListItemExamples} />
 
         <Route path="/MenuBarExamples" component={MenuBarExamples} />
+
+        <Route path="/DropdownExamples" component={DropdownExamples} />
+
+        <Route path="/UserDropdownMenuExamples" component={UserDropdownMenuExamples} />
+
+        <Route path="/QuickLinksExample" component={QuickLinksExample} />
+
+        <Route path="/SearchSuggestionsExamples" component={SearchSuggestionsExamples} />
+
+        <Route path="/SearchBarExample" component={SearchBarExample} />
       </Route>
     </Router>
   </Provider>
