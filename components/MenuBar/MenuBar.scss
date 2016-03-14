@@ -1,0 +1,55 @@
+@import 'topcoder/tc-includes';
+
+.MenuBar {
+
+  display: flex;
+  font-family: 'roboto', 'Arial';
+
+  &.horizontal {
+    flex-direction: row;
+    justify-content: center;
+
+    li {
+      display: flex;
+      justify-content: center;
+      margin: 0px 15px;
+
+      a {
+        padding-bottom: 6px;
+      }
+    }
+  }
+
+  &.vertical {
+    flex-direction: column;    
+
+    li {
+      padding: 10px 0px;
+    }
+  }
+
+  li {
+    display: flex;
+    justify-content: center;
+
+    &.selected {
+      border-bottom: 2px solid $primary-light;
+
+      a {
+        color: $black;
+      }
+    }
+
+    &.mobile {
+      width: 30px;
+    }
+
+    a {
+      text-transform: uppercase;
+      font-size: 12px;
+      line-height: 14px;
+      // FIX ME: use variable
+      color: #737380;
+    }
+  }
+}

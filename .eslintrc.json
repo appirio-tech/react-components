@@ -21,6 +21,7 @@
     "no-unneeded-ternary": 2,
     "react/jsx-uses-vars": 2,
     "react/jsx-no-bind": 2,
+    "react/jsx-uses-react": 2,
     "react/prefer-es6-class": [2, "always"],
     "react/jsx-pascal-case": 2,
     "react/jsx-closing-bracket-location": 2,
