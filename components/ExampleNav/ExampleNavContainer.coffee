@@ -8,7 +8,8 @@ navs =
     'DropdownExamples',
     'UserDropdownMenuExamples',
     'QuickLinksExample',
-    'SearchSuggestionsExamples'
+    'SearchSuggestionsExamples',
+    'SearchBarExample'
   ]
   FileUploader: [
     'FileUploaderContainerExamples'
