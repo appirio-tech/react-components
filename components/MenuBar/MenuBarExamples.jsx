@@ -1,4 +1,5 @@
 import MenuBar from './MenuBar'
+import React from 'react'
 
 require('./MenuBarExamples.scss')
 

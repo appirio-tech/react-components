@@ -44,7 +44,7 @@ class TCFooter extends Component {
 
     return (
       <div className="TCFooter">
-        <MenuBar items={otherNavigationItems} orientation="horizontal" />
+        <MenuBar items={otherNavigationItems} orientation="horizontal" mobileBreakPoint={0} />
         <div className="social-links">
           <p>Topcoder is also on</p>
           <a href="https://www.facebook.com/topcoder" className="fb-link" target="fbwindow"/>
