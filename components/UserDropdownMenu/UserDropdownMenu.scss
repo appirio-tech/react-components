@@ -1,0 +1,64 @@
+@import "work/work-includes";
+
+.UserDropdownMenu {
+  padding: 15px 20px;
+  background-color: #FAFAFB;
+  display: inline-block;
+  position: relative;
+
+  .dropdown-menu-header {
+    .user-image {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      background-color: #B47DD6;
+      margin-right: 10px;
+      border-radius: 50%;
+      vertical-align: middle;
+    }
+
+    .username {
+      font-family: "Roboto", Arial, Helvetica, sans-serif;
+      font-size: 14px;
+      line-height: 16px;
+      color: #737380;
+      margin-right: 10px;
+      display: inline-block;
+
+      @media screen and (max-width: 768px) {
+        display: none;
+      }
+    }
+
+    .dropdown-arrow {
+      position: relative;
+      top: -2px;
+      display: inline-block;
+    }
+  }
+
+  .Dropdown {
+    margin-top: 8px;
+    padding-bottom: 10px;
+    width: 96%;
+
+    ul {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    ul:first-child {
+      padding-top: 10px;
+    }
+
+    ul:not(:last-child) {
+      li:last-child {
+        border-bottom: 1px solid #F0F0F0;
+      }
+    }
+  }
+
+  .Dropdown:before {
+    right: 13px;
+  }
+}

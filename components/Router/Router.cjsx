@@ -21,6 +21,7 @@ PanelExamples                 = require '../Panel/PanelExamples.jsx'
 StandardListItemExamples      = require '../StandardListItem/StandardListItemExamples.jsx'
 MenuBarExamples               = require '../MenuBar/MenuBarExamples.jsx'
 DropdownExamples              = require '../Dropdown/DropdownExamples.jsx'
+UserDropdownMenuExamples          = require '../UserDropdownMenu/UserDropdownMenuExamples.jsx'
 
 { Router, Route, Link, IndexRoute, browserHistory } = require 'react-router'
 
@@ -57,6 +58,8 @@ component = ->
         <Route path="/MenuBarExamples" component={MenuBarExamples} />
 
         <Route path="/DropdownExamples" component={DropdownExamples} />
+
+        <Route path="/UserDropdownMenuExamples" component={UserDropdownMenuExamples} />
       </Route>
     </Router>
   </Provider>
