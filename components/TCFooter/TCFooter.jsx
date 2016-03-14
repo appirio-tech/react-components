@@ -31,10 +31,9 @@ class TCFooter extends Component {
   }
 
   render() {
-    let mbClasses = 'TCFooter'
     const domain = this.props.domain
     const currentYear = moment().format('YYYY')
-    let otherNavigationItems = [
+    const otherNavigationItems = [
       {img: '', text: 'SITE MAP', link: 'https://www.' + domain + '/sitemap'},
       {img: '', text: 'ABOUT', link: 'https://www.' + domain + '/about'},
       {img: '', text: 'CONTACT US', link: 'https://www.' + domain + '/contact-us'},
@@ -44,7 +43,7 @@ class TCFooter extends Component {
     ]
 
     return (
-      <div className={mbClasses}>
+      <div className="TCFooter">
         <MenuBar items={otherNavigationItems} orientation="horizontal" />
         <div className="social-links">
           <p>Topcoder is also on</p>
