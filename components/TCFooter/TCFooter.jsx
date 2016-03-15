@@ -1,16 +1,16 @@
-import React, { PropTypes, Component } from 'react'
+import React from 'react'
 import MenuBar from '../MenuBar/MenuBar'
 import moment from 'moment'
 
 require('./TCFooter.scss')
 
-var TCFooter = ({domain}) => {
+const TCFooter = ({domain}) => {
   const currentYear = moment().format('YYYY')
   const otherNavigationItems = [
     {img: '', text: 'SITE MAP', link: 'https://www.' + domain + '/sitemap'},
     {img: '', text: 'ABOUT', link: 'https://www.' + domain + '/about'},
     {img: '', text: 'CONTACT US', link: 'https://www.' + domain + '/contact-us'},
-    {img: '', text: 'HELP CENTER', link: 'https://help.' + domain, target:"_blank"},
+    {img: '', text: 'HELP CENTER', link: 'https://help.' + domain, target:'_blank'},
     {img: '', text: 'PRIVACY POLICY', link: 'https://www.' + domain + '/community/how-it-works/privacy-policy/'},
     {img: '', text: 'TERMS', link: 'https://www.' + domain + '/community/how-it-works/terms/'}
   ]
