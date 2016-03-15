@@ -1,7 +1,7 @@
 require('./Navbar.scss')
 
 import MenuBar from '../MenuBar/MenuBar'
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import SearchBar from '../SearchBar/SearchBar'
 import QuickLinks from '../QuickLinks/QuickLinks'
 import UserDropdownMenu from '../UserDropdownMenu/UserDropdownMenu'
@@ -12,7 +12,7 @@ const primaryNavigationItems = [
   {img: '../components/MenuBar/nav-learn.svg', text: 'Learn', link: 'javascript:;'}
 ]
 
-const Navbar = {
+class Navbar extends Component {
   render() {
     return (
       <div className="Navbar flex middle space-between">
@@ -32,4 +32,4 @@ const Navbar = {
   }
 }
 
-module.exports = React.createClass(Navbar)
+export default Navbar

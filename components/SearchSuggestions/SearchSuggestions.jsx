@@ -1,14 +1,16 @@
-'use strict'
-
 require('./SearchSuggestions.scss')
-const React = require('react')
-import StandardListItem from '../StandardListItem/StandardListItem.jsx'
+
+import React, { Component } from 'react'
+import StandardListItem from '../StandardListItem/StandardListItem'
 import Panel from '../Panel/Panel'
 
-const SearchSuggestions = {
-  getInitialState() {
-    return { iSEmpty: true }
-  },
+class SearchSuggestions extends Component {
+   constructor(props) {
+   	super(props)
+
+   	this.state = { iSEmpty: true }
+  }
+
   render() {
     const recentList = this.props.recentSearch
     const popularList = this.props.popularSearch
@@ -27,13 +29,13 @@ const SearchSuggestions = {
 					<div className="panel-body">
 						<ul className="search-suggestion-result-list">
 							{
-								recentList.map((search, i) => {
-  return <li key={ i }><StandardListItem labelText={ search } hideIcon /></li>
+								!recentList ? '' : recentList.map((search, i) => {
+  return <li key={ i }><StandardListItem labelText={ search } showIcon={ false } /></li>
 								}) 
 							}
 						</ul>
 							{
-								popularList ? null :  (
+								popularList ? '' :  (
 									<a href="javascript:;" className="footer-link">
 										Learn more about the new Search here
 									</a>
@@ -54,7 +56,7 @@ const SearchSuggestions = {
 						<ul className="search-suggestion-result-list">
 							{
 								popularList.map((search, i) => {
-  return <li key={ i }><StandardListItem labelText={ search } hideIcon /></li>
+  return <li key={ i }><StandardListItem labelText={ search } showIcon={ false } /></li>
 								}) 
 							}
 						</ul>
@@ -72,4 +74,4 @@ const SearchSuggestions = {
   }
 }
 
-module.exports = React.createClass(SearchSuggestions)
+export default SearchSuggestions

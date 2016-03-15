@@ -1,10 +1,14 @@
-@import "work/work-includes";
+@import "topcoder/tc-includes";
 
 $logo-placeholder-bg: #B47DD6;
 
 .QuickLinks {
   position: relative;
   display: inline-block;
+
+  .dropdown-menu-header {
+    cursor: pointer;
+  }
 
   .Dropdown {
     width: 278px;

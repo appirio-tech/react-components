@@ -1,33 +1,42 @@
-'use strict'
-
 require('./SearchBar.scss')
-const React    = require('react')
-const SearchSuggestions = require('../SearchSuggestions/SearchSuggestions.jsx')
+
+import React, {Component} from 'react'
+import SearchSuggestions from '../SearchSuggestions/SearchSuggestions'
 
 //states: empty, filled, focused
 
-const SearchBar = {
-  getInitialState() {
-    return { searchState: 'empty' }
-  },
+class SearchBar extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { searchState: 'empty' }
+    this.onFocus = this.onFocus.bind(this)
+    this.onBlur = this.onBlur.bind(this)
+    this.onKeyUp = this.onKeyUp.bind(this)
+    this.clearSearch = this.clearSearch.bind(this)
+  }
+
   onFocus() {
     this.setState({ searchState: 'focused' })
-  },
+  }
+
   onBlur() {
     if(this.state.searchValue) {
       this.setState({ searchState: 'filled' })
     } else {
       this.setState({ searchState: 'empty' })
     }
-  },
+  }
+
   onKeyUp() {
     this.setState({ searchValue: this.refs.searchValue.value })
-  },
+  }
+
   clearSearch() {
     this.refs.searchValue.value = null
     this.setState({ searchValue: this.refs.searchValue.value })
     this.setState({ searchState: 'empty' })
-  },
+  }
+
   render() {
     /* Sample JSON data */
     const recentList = ['Photoshop', 'IBM Bluemix', 'Sketch', 'iOS Icon Design Challenges', 'React.js']
@@ -35,6 +44,7 @@ const SearchBar = {
 
     const searchState = this.state.searchState
     const searchValue = this.state.searchValue
+
     let classString = 'SearchBar'
     let typeaheadText = ''
     let isPartial = false
@@ -54,20 +64,20 @@ const SearchBar = {
       }
 
     } else {
-      popularForDisplay = null
-      typeaheadText = null
+      popularForDisplay = ''
+      typeaheadText = ''
     }
 
     if(searchState === 'empty') {
       classString += ' state-empty'
-      typeaheadText = null
+      typeaheadText = ''
     } else if(searchState === 'focused') {
       classString += ' state-focused'
     } else if(searchState === 'filled') {
       classString += ' state-filled'
     }
 
-    const dom = (
+    return (
       <div className={ classString }>
         <input className="search-bar__text" onFocus={ this.onFocus } onBlur={ this.onBlur } onKeyUp={ this.onKeyUp } ref="searchValue" />
         <span className="search-typeahead-text">{ typeaheadText }</span>
@@ -79,8 +89,7 @@ const SearchBar = {
       </div>
     )
 
-    return dom
   }
 }
 
-module.exports = React.createClass(SearchBar)
+export default SearchBar

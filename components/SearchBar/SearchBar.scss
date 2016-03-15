@@ -1,5 +1,4 @@
-@import "work/work-includes";
-@import "topcoder/_tc-colors";
+@import "topcoder/tc-includes";
 
 $border-color: #D8D8DB;
 $active-icon-wrap-bg: #888894;
@@ -91,7 +90,7 @@ $active-icon-wrap-bg: #888894;
   top: 50%;
   transform: translateY(-50%);
   color: $accent-gray;
-  font-size: 17px;
+  font-size: 15px;
   line-height: 20px;
 
   @media screen and (max-width: 768px) {

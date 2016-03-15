@@ -1,7 +1,8 @@
 'use strict'
 
 const React = require('react')
-const SearchSuggestions = require('./SearchSuggestions.jsx')
+import SearchSuggestions from './SearchSuggestions'
+
 const recentList = ['Photoshop', 'IBM Bluemix', 'Sketch', 'iOS Icon Design Challenges', 'React.js']
 const popularList = ['Java', 'Javascript', 'CoffeeScript']
 

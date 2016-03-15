@@ -1,12 +1,11 @@
-'use strict'
-
 require('./QuickLinks.scss')
-const Dropdown = require('../Dropdown/Dropdown.jsx')
-const React    = require('react')
 
-import StandardListItem  from '../StandardListItem/StandardListItem.jsx'
+import React, { Component } from 'react'
+import Dropdown from '../Dropdown/Dropdown'
 
-const QuickLinks = {
+import StandardListItem  from '../StandardListItem/StandardListItem'
+
+class QuickLinks extends Component {
   render() {
     return (
       <div className="QuickLinks">
@@ -32,4 +31,4 @@ const QuickLinks = {
   }
 }
 
-module.exports = React.createClass(QuickLinks)
+export default QuickLinks
