@@ -5,11 +5,11 @@ import StandardListItem from '../StandardListItem/StandardListItem'
 import Panel from '../Panel/Panel'
 
 class SearchSuggestions extends Component {
-	constructor(props) {
-		super(props)
+  constructor(props) {
+    super(props)
 
-		this.state = { iSEmpty: true }
-	}
+    this.state = { iSEmpty: true }
+  }
 
   render() {
     const recentList = this.props.recentSearch
