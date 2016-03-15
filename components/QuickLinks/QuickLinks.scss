@@ -1,4 +1,4 @@
-@import "work/work-includes";
+@import "topcoder/tc-includes";
 
 $logo-placeholder-bg: #B47DD6;
 
@@ -6,17 +6,23 @@ $logo-placeholder-bg: #B47DD6;
   position: relative;
   display: inline-block;
 
+  .dropdown-menu-header {
+    cursor: pointer;
+  }
+
   .Dropdown {
-    width: 278px;
+    width: auto;
     margin-top: 20px;
     left: initial;
     right: -16px;
 
     .dropdown-menu-list {
       padding: 20px;
+      white-space: nowrap;
 
       .dropdown-menu-list-item {
         display: inline-block;
+        cursor: pointer;
 
         .icon-placeholder {
           width: 30px;

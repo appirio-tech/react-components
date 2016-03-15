@@ -9,7 +9,8 @@ navs =
     'UserDropdownMenuExamples',
     'QuickLinksExample',
     'SearchSuggestionsExamples',
-    'SearchBarExample'
+    'SearchBarExample',
+    'NavbarExample'
   ]
   FileUploader: [
     'FileUploaderContainerExamples'

@@ -1,17 +1,12 @@
-'use strict'
-
 require('./QuickLinksExample.scss')
-const QuickLinks = require('./QuickLinks.jsx')
-const React    = require('react')
 
-const QuickLinksExample = {
-  render() {
-    return (
-      <div className="example-wrap">
-        <QuickLinks />
-      </div>
-    )
-  }
-}
+import React from'react'
+import QuickLinks from './QuickLinks'
 
-module.exports = React.createClass(QuickLinksExample)
+const QuickLinksExample = () => (
+	<div className="example-wrap">
+		<QuickLinks />
+	</div>
+)
+
+module.exports = QuickLinksExample

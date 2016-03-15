@@ -1,12 +1,8 @@
-'use strict'
+import SearchBar from './SearchBar'
+import React from 'react'
 
-const SearchBar = require('./SearchBar.jsx')
-const React    = require('react')
+const SearchBarExamples = () => (
+  <SearchBar />
+)
 
-const SearchBarExamples = {
-  render() {      
-    return <SearchBar />
-  }
-}
-
-module.exports = React.createClass(SearchBarExamples)
+module.exports = SearchBarExamples
