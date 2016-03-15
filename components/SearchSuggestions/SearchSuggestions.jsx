@@ -20,7 +20,7 @@ class SearchSuggestions extends Component {
 				<Panel>
 					<div className="panel-header">
 						<div className="label">Recent Search</div>
-						<div className="recent-search-panel-actions">
+						<div className="recent-search-panel-actions transition">
 							<div className="recent-search-panel-action">
 								<a href="javascript:;">Edit</a>
 							</div>
@@ -36,7 +36,7 @@ class SearchSuggestions extends Component {
 						</ul>
 							{
 								popularList ? '' :  (
-									<a href="javascript:;" className="footer-link">
+									<a href="javascript:;" className="footer-link transition">
 										Learn more about the new Search here
 									</a>
 								)

@@ -4,7 +4,8 @@ $navbar-bg: #FAFAFB;
 $border-color: #CFCFD2;
 $placeholder-bg: #B47DD6;
 
-$iphone6: 400px;
+/* Breakpoints - update as necessary */
+$mobile: 768px;
 $super-wide: 1376px;
 
 .Navbar {
@@ -17,7 +18,7 @@ $super-wide: 1376px;
   left: 0;
   width: 100%;
 
-  @media screen and (max-width: $iphone6) {
+  @media screen and (max-width: $mobile) {
     height: 40px;
     padding-top: 0;
     padding-bottom: 0;
@@ -34,7 +35,7 @@ $super-wide: 1376px;
       width: 155px;
     }
 
-    @media screen and (max-width: $iphone6) {
+    @media screen and (max-width: $mobile) {
       width: 40px;
       margin-right: 15px;
       order: 1;
@@ -49,7 +50,7 @@ $super-wide: 1376px;
       margin-right: 32px;
     }    
 
-    @media screen and (max-width: $iphone6) {
+    @media screen and (max-width: $mobile) {
       flex: 0 0 60px;
       order: 2;
       background-color: $accent-gray;
@@ -62,7 +63,7 @@ $super-wide: 1376px;
     .icon-placeholder {
       display: none;
 
-      @media screen and (max-width: $iphone6) {
+      @media screen and (max-width: $mobile) {
         display: block;
         height: 25px;
         width: 25px;
@@ -75,7 +76,7 @@ $super-wide: 1376px;
       margin-right: 45px;
       max-width: 789px;
 
-      @media screen and (max-width: $iphone6) {
+      @media screen and (max-width: $mobile) {
         display: none;
       }
     }
@@ -84,7 +85,7 @@ $super-wide: 1376px;
   .MenuBar {
     margin-right: 30px;
 
-    @media screen and (max-width: $iphone6) {
+    @media screen and (max-width: $mobile) {
       order: 1;
       margin-right: 7px;
     }
@@ -93,10 +94,12 @@ $super-wide: 1376px;
       position: relative;
 
       a {
-        padding-bottom: 0;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
+        @media screen and (max-width: $mobile) {
+          padding-bottom: 0;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+        }
       }
     }
   }
@@ -105,7 +108,7 @@ $super-wide: 1376px;
     flex: 0 0 auto;
     position: relative;
 
-    @media screen and (max-width :$iphone6) {
+    @media screen and (max-width :$mobile) {
       width: 40px;
       height: 40px;
       order: 3;
@@ -114,7 +117,7 @@ $super-wide: 1376px;
 
     .icon-placeholder {
 
-      @media screen and (max-width: $iphone6) {
+      @media screen and (max-width: $mobile) {
         display: block;
         height: 24px;
         width: 24px;
@@ -131,7 +134,7 @@ $super-wide: 1376px;
       display: inline-block;
       vertical-align: middle;
 
-      @media screen and (max-width: $iphone6) {
+      @media screen and (max-width: $mobile) {
         display: none;
       }
 
@@ -145,7 +148,7 @@ $super-wide: 1376px;
       flex-shrink: 0;
       background-color: transparent;
 
-      @media screen and (max-width: $iphone6) {
+      @media screen and (max-width: $mobile) {
         display: none;
       }
     }
