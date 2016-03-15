@@ -1,0 +1,139 @@
+@import "topcoder/tc-includes";
+
+$navbar-bg: #FAFAFB;
+$border-color: #CFCFD2;
+$placeholder-bg: #B47DD6;
+
+$iphone6: 750px;
+$super-wide: 1376px;
+
+.Navbar {
+  height: 60px;
+  background-color: $navbar-bg;
+  border-bottom: 1px solid $border-color;
+  padding: 10px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  @media screen and (max-width: $iphone6) {
+    height: 40px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .topcoder-logo {
+    width: 56px;
+    height: 24px;
+    background-color: $placeholder-bg;
+    margin-right: 40px;
+    flex: 0 0 auto;
+
+    @media screen and (min-width: $super-wide) {
+      width: 155px;
+    }
+
+    @media screen and (max-width: $iphone6) {
+      width: 40px;
+      margin-right: 15px;
+      order: 1;
+    }
+  }
+
+  .search-bar-wrap {
+    flex: 1 1 auto;
+    margin-right: 35px;
+
+    @media screen and (min-width: $super-wide) {
+      margin-right: 32px;
+    }    
+
+    @media screen and (max-width: $iphone6) {
+      flex: 0 0 60px;
+      order: 2;
+      background-color: $accent-gray;
+      width: 60px;
+      height: 40px;
+      display: flex;
+      margin-right: 10px;
+    }
+
+    .icon-placeholder {
+      display: none;
+
+      @media screen and (max-width: $iphone6) {
+        display: block;
+        height: 25px;
+        width: 25px;
+        background-color: $placeholder-bg;
+        margin: auto;
+      }
+    }
+
+    .SearchBar {
+      margin-right: 45px;
+      max-width: 789px;
+
+      @media screen and (max-width: $iphone6) {
+        display: none;
+      }
+    }
+  }
+
+  .MenuBar {
+    margin-right: 30px;
+
+    @media screen and (max-width: $iphone6) {
+      order: 1;
+      margin-right: 7px;
+    }
+  }
+
+  .collapse-group {
+    flex: 0 0 auto;
+    position: relative;
+
+    @media screen and (max-width :$iphone6) {
+      width: 40px;
+      height: 40px;
+      order: 3;
+      cursor: pointer;
+    }
+
+    .icon-placeholder {
+      display: none;
+
+      @media screen and (max-width: $iphone6) {
+        display: block;
+        height: 24px;
+        width: 24px;
+        background-color: $placeholder-bg;
+        margin: 10px;
+      }
+    }
+
+    .quick-links-wrap {
+      margin-right: 30px;
+      display: inline-block;
+
+      @media screen and (max-width: $iphone6) {
+        display: none;
+      }
+
+      .Dropdown {
+        right: -46px;
+        top: 10px;
+      }
+    }
+
+    .UserDropdownMenu {
+      flex-shrink: 0;
+      background-color: transparent;
+
+      @media screen and (max-width: $iphone6) {
+        display: none;
+      }
+    }
+  }
+}
