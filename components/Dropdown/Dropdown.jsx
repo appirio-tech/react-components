@@ -1,12 +1,18 @@
-'use strict'
-
 require('./Dropdown.scss')
-const React    = require('react')
 
-const Dropdown = {
-  getInitialState() {
-    return { isHidden: true }
-  },
+import React, { Component } from 'react'
+
+class Dropdown extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = { isHidden: true }
+
+    this.onClickOutside = this.onClickOutside.bind(this)
+    this.onClick = this.onClick.bind(this)
+    this.onClickOtherDropdown = this.onClickOtherDropdown.bind(this)
+  }
+
   onClickOutside(evt) {
     let currNode = evt.target
     let isDropdown = false
@@ -18,12 +24,16 @@ const Dropdown = {
       }
 
       currNode = currNode.parentNode
+
+      if(!currNode.tagName)
+        break
     } while(currNode.tagName)
 
     if(!isDropdown) {
       this.setState({ isHidden: true })
     }
-  },
+  }
+
   onClick(evt) {
     const dropdownClicked = new Event('dropdownClicked')
 
@@ -31,21 +41,25 @@ const Dropdown = {
 
     this.setState({ isHidden: !this.state.isHidden })
     evt.stopPropagation()
-  },
+  }
+
   onClickOtherDropdown() {
     this.setState({ isHidden: true })
-  },
+  }
+
   componentDidMount() {
     document.removeEventListener('click', this.onClickOutside)
     document.removeEventListener('dropdownClicked', this.onClickOtherDropdown)
 
     document.addEventListener('click', this.onClickOutside)
     document.addEventListener('dropdownClicked', this.onClickOtherDropdown)
-  },
+  }
+
   componentWillUnmount() {
     document.removeEventListener('click', this.onClickOutside)
     document.removeEventListener('dropdownClicked', this.onClickOtherDropdown)
-  },
+  }
+
   render() {
     const pointerShadow = this.props.pointerShadow
     const noPointer = this.props.noPointer
@@ -70,14 +84,24 @@ const Dropdown = {
 
     return (
       <div className="dropdown-wrap" onClick={ this.onClick } ref="Dropdown">
-        { this.props.children[0] }
+        {
+          this.props.children.map((child) => {
+            if(child.props.className.indexOf('dropdown-menu-header') > -1)
+              return child
+          })
+        }
 
         <div className = {ndClasses}>
-          { this.props.children[1] }        
+          {
+            this.props.children.map((child) => {
+              if(child.props.className.indexOf('dropdown-menu-list') > -1)
+                return child
+            })
+          }
         </div>
       </div>
     )
   }
 }
 
-module.exports = React.createClass(Dropdown)
+export default Dropdown

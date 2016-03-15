@@ -1,17 +1,23 @@
-@import "work/work-includes";
+@import "topcoder/tc-includes";
+
+$user-dropdown-bg: #FAFAFB;
+$placeholder-bg: #B47DD6;
+$username-color: #737380;
 
 .UserDropdownMenu {
   padding: 15px 20px;
-  background-color: #FAFAFB;
+  background-color: $user-dropdown-bg;
   display: inline-block;
   position: relative;
 
   .dropdown-menu-header {
+    cursor: pointer;
+    
     .user-image {
       display: inline-block;
       width: 30px;
       height: 30px;
-      background-color: #B47DD6;
+      background-color: $placeholder-bg;
       margin-right: 10px;
       border-radius: 50%;
       vertical-align: middle;
@@ -21,7 +27,7 @@
       font-family: "Roboto", Arial, Helvetica, sans-serif;
       font-size: 14px;
       line-height: 16px;
-      color: #737380;
+      color: $username-color;
       margin-right: 10px;
       display: inline-block;
 
@@ -43,8 +49,15 @@
     width: 96%;
 
     ul {
-      padding-top: 0;
-      padding-bottom: 0;
+      padding: 0;
+
+      .user-menu-item {
+        padding: 0 20px;
+      }
+
+      .user-menu-item:hover {
+        background-color: $gray-light;
+      }
     }
 
     ul:first-child {
@@ -52,8 +65,9 @@
     }
 
     ul:not(:last-child) {
-      li:last-child {
-        border-bottom: 1px solid #F0F0F0;
+      li:last-child a {
+        border-bottom: 1px solid $gray-light;
+        display: block;
       }
     }
   }

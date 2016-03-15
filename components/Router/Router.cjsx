@@ -21,7 +21,11 @@ PanelExamples                 = require '../Panel/PanelExamples.jsx'
 StandardListItemExamples      = require '../StandardListItem/StandardListItemExamples.jsx'
 MenuBarExamples               = require '../MenuBar/MenuBarExamples.jsx'
 DropdownExamples              = require '../Dropdown/DropdownExamples.jsx'
-UserDropdownMenuExamples          = require '../UserDropdownMenu/UserDropdownMenuExamples.jsx'
+UserDropdownMenuExamples      = require '../UserDropdownMenu/UserDropdownMenuExamples.jsx'
+QuickLinksExample             = require '../QuickLinks/QuickLinksExample.jsx'
+SearchSuggestionsExamples     = require '../SearchSuggestions/SearchSuggestionsExamples.jsx'
+SearchBarExample              = require '../SearchBar/SearchBarExamples.jsx'
+NavbarExample                 = require '../Navbar/NavbarExample.jsx'
 TCFooterExamples              = require '../TCFooter/TCFooterExamples.jsx'
 
 { Router, Route, Link, IndexRoute, browserHistory } = require 'react-router'
@@ -61,6 +65,14 @@ component = ->
         <Route path="/DropdownExamples" component={DropdownExamples} />
 
         <Route path="/UserDropdownMenuExamples" component={UserDropdownMenuExamples} />
+
+        <Route path="/QuickLinksExample" component={QuickLinksExample} />
+
+        <Route path="/SearchSuggestionsExamples" component={SearchSuggestionsExamples} />
+
+        <Route path="/SearchBarExample" component={SearchBarExample} />
+
+        <Route path="/NavbarExample" component={NavbarExample} />
 
         <Route path="/TCFooterExamples" component={TCFooterExamples} />
       </Route>

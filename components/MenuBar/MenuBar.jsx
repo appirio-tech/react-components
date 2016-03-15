@@ -1,4 +1,4 @@
-import { PropTypes, Component } from 'react'
+import React, { PropTypes, Component } from 'react'
 
 require('./MenuBar.scss')
 const React = require('react')
@@ -6,7 +6,8 @@ const React = require('react')
 class MenuBar extends Component {
   constructor(props) {
     super(props)
-    this.state = {mobile: false}
+
+    this.state = { mobile: false }
     this.handleResize = this.handleResize.bind(this)
   }
 
@@ -21,20 +22,24 @@ class MenuBar extends Component {
 
   handleResize() {
     const breakPoint = this.props.mobileBreakPoint
+
     if (window.innerWidth > breakPoint) {
-      this.setState({mobile: false})
+      this.setState({ mobile: false })
     } else {
-      this.setState({mobile: true})
+      this.setState({ mobile: true })
     }
   }
 
   render() {
     let mbClasses = 'MenuBar'
     let orientation = this.props.orientation
+
     if (!orientation || ['horizontal', 'vertical'].indexOf(orientation) === -1) {
       orientation = 'horizontal'
     }
+
     mbClasses += (' ' + orientation)
+
     return (
       <ul className={mbClasses}>
         {
@@ -63,8 +68,8 @@ class MenuBar extends Component {
 }
 
 MenuBar.propTypes = {
-  items             : PropTypes.array.isRequired,
-  mobileBreakPoint  : PropTypes.number
+  items           : PropTypes.array.isRequired,
+  mobileBreakPoint: PropTypes.number
 }
 
 MenuBar.defaultProps = { mobileBreakPoint: 768 }

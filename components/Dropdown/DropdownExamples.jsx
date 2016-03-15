@@ -1,8 +1,8 @@
-'use strict'
-
 require('./DropdownExamples.scss')
-const Dropdown = require('./Dropdown.jsx')
-const React    = require('react')
+
+import Dropdown from './Dropdown'
+import React from 'react'
+
 const items = [
   'Review',
   'Web Arena',
@@ -11,7 +11,7 @@ const items = [
 
 const DropdownExamples = {
   render() {
-    const dom = (
+    return (
       <section>
         <div className="dropdown-example full-width">
           <Dropdown pointerShadow>
@@ -93,8 +93,6 @@ const DropdownExamples = {
         
       </section>
     )
-      
-    return dom
   }
 }
 

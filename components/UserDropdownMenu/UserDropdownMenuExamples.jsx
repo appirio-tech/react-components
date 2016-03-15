@@ -1,7 +1,5 @@
-'use strict'
-
-const React = require('react')
-const UserDropdownMenu = require('./UserDropdownMenu.jsx')
+import React from 'react'
+import UserDropdownMenu from './UserDropdownMenu'
 
 const UserDropdownMenuExamples = () => {
   return <UserDropdownMenu username="vic-tor" />
