@@ -50,13 +50,14 @@ class MenuBar extends Component {
             if (window.location.href.indexOf(item.link) !== -1) {
               itemClass += ' selected'
             }
+            const linkTarget = item.target ? item.target : '_self';
             if (this.state.mobile) {
               return (
-                <li key={item.text} className={itemClass}><a href={item.link}><img src={item.img} /></a></li>
+                <li key={item.text} className={itemClass}><a href={item.link} target={linkTarget}><img src={item.img} /></a></li>
               )
             } else {
               return (
-                <li key={item.text} className={itemClass}><a href={item.link}>{item.text}</a></li>
+                <li key={item.text} className={itemClass}><a href={item.link} target={linkTarget}>{item.text}</a></li>
               )
             }
           })
