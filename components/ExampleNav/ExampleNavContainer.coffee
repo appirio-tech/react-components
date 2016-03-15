@@ -10,7 +10,9 @@ navs =
     'QuickLinksExample',
     'SearchSuggestionsExamples',
     'SearchBarExample',
-    'NavbarExample'
+    'NavbarExample',
+    'TCFooterExamples',
+    'MenuBarExamples'
   ]
   FileUploader: [
     'FileUploaderContainerExamples'
@@ -24,8 +26,7 @@ navs =
     'ImageViewerExamples'
     'LoaderExamples',
     'PanelExamples',
-    'StandardListItemExamples',
-    'MenuBarExamples'
+    'StandardListItemExamples'
   ]
   ManageSteps: [
     'ManageStepsExamples'
