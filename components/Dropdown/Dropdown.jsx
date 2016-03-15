@@ -24,6 +24,9 @@ class Dropdown extends Component {
       }
 
       currNode = currNode.parentNode
+
+      if(!currNode.tagName)
+        break
     } while(currNode.tagName)
 
     if(!isDropdown) {
@@ -81,10 +84,20 @@ class Dropdown extends Component {
 
     return (
       <div className="dropdown-wrap" onClick={ this.onClick } ref="Dropdown">
-        { this.props.children[0] }
+        {
+          this.props.children.map((child) => {
+            if(child.props.className === 'dropdown-menu-header')
+              return child
+          })
+        }
 
         <div className = {ndClasses}>
-          { this.props.children[1] }        
+          {
+            this.props.children.map((child) => {
+              if(child.props.className === 'dropdown-menu-list')
+                return child
+            })
+          }
         </div>
       </div>
     )

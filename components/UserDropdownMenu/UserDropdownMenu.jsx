@@ -1,5 +1,3 @@
-'use strict'
-
 require('./UserDropdownMenu.scss')
 
 import React, { Component } from 'react'
@@ -29,6 +27,7 @@ class UserDropdownMenu extends Component {
 
   render() {
     const publicDOM = <div><button>Log in</button><button>Join</button></div>
+    
     const loggedInDOM = (
       <div className="UserDropdownMenu">
         <Dropdown pointerShadow>

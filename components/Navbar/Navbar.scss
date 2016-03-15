@@ -4,7 +4,7 @@ $navbar-bg: #FAFAFB;
 $border-color: #CFCFD2;
 $placeholder-bg: #B47DD6;
 
-$iphone6: 750px;
+$iphone6: 400px;
 $super-wide: 1376px;
 
 .Navbar {
@@ -88,6 +88,17 @@ $super-wide: 1376px;
       order: 1;
       margin-right: 7px;
     }
+
+    &.horizontal li {
+      position: relative;
+
+      a {
+        padding-bottom: 0;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
   }
 
   .collapse-group {
@@ -102,20 +113,23 @@ $super-wide: 1376px;
     }
 
     .icon-placeholder {
-      display: none;
 
       @media screen and (max-width: $iphone6) {
         display: block;
         height: 24px;
         width: 24px;
         background-color: $placeholder-bg;
-        margin: 10px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
       }
     }
 
     .quick-links-wrap {
       margin-right: 30px;
       display: inline-block;
+      vertical-align: middle;
 
       @media screen and (max-width: $iphone6) {
         display: none;

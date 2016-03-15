@@ -11,13 +11,14 @@ $logo-placeholder-bg: #B47DD6;
   }
 
   .Dropdown {
-    width: 278px;
+    width: auto;
     margin-top: 20px;
     left: initial;
     right: -16px;
 
     .dropdown-menu-list {
       padding: 20px;
+      white-space: nowrap;
 
       .dropdown-menu-list-item {
         display: inline-block;

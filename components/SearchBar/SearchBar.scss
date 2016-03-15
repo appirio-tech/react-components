@@ -13,6 +13,68 @@ $active-icon-wrap-bg: #888894;
   padding-left: 15px;
   padding-right: 46px;
 
+  &.state-empty {
+    .search-bar__clear {
+      display: none;
+    }
+  }
+
+  &.state-empty:before {
+    content: "Search Topcoder for challenges, people or content";
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $accent-gray;
+    font-size: 15px;
+    line-height: 20px;
+    width: 75%;
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+
+    @media screen and (max-width: 768px) {
+      content: "Search Topcoder";
+    }
+  }
+
+  &.state-focused:before,
+  &.state-filled:before {
+    content: "";
+  }
+
+  &.state-focused {
+    border-color: $accent-gray;
+
+    .search-typeahead-text {
+      display: block;
+    }
+
+    .search-icon-wrap {
+      background-color: $active-icon-wrap-bg;
+    }
+
+    .SearchSuggestions {
+      display: block;
+    }
+  }
+
+  &.state-filled {
+    border-color: $border-color;
+
+    .search-typeahead-text {
+      display: none;
+    }
+
+    .search-icon-wrap {
+      background-color: $active-icon-wrap-bg;
+    }
+
+    .SearchSuggestions {
+      display: none;
+    }
+  }
+
   .search-bar__text,
   .search-typeahead-text {
     outline: 0px;
@@ -74,63 +136,5 @@ $active-icon-wrap-bg: #888894;
     strong {
       font-weight: 600;
     }
-  }
-}
-
-.SearchBar.state-empty {
-  .search-bar__clear {
-    display: none;
-  }
-}
-
-.SearchBar.state-empty:before {
-  content: "Search Topcoder for challenges, people or content";
-  position: absolute;
-  left: 15px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: $accent-gray;
-  font-size: 15px;
-  line-height: 20px;
-
-  @media screen and (max-width: 768px) {
-    content: "Search Topcoder";
-  }
-}
-
-.SearchBar.state-focused:before,
-.SearchBar.state-filled:before {
-  content: "";
-}
-
-.SearchBar.state-focused {
-  border-color: $accent-gray;
-
-  .search-typeahead-text {
-    display: block;
-  }
-
-  .search-icon-wrap {
-    background-color: $active-icon-wrap-bg;
-  }
-
-  .SearchSuggestions {
-    display: block;
-  }
-}
-
-.SearchBar.state-filled {
-  border-color: $border-color;
-
-  .search-typeahead-text {
-    display: none;
-  }
-
-  .search-icon-wrap {
-    background-color: $active-icon-wrap-bg;
-  }
-
-  .SearchSuggestions {
-    display: none;
   }
 }
