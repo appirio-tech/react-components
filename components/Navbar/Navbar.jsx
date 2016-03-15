@@ -21,7 +21,7 @@ class Navbar extends Component {
           <div className="icon-placeholder"></div>
           <SearchBar />
         </div>
-        <MenuBar items={primaryNavigationItems} mobileBreakPoint={767} orientation="horizontal" />
+        <MenuBar items={primaryNavigationItems} orientation="horizontal" />
         <div className="collapse-group">
           <div className="icon-placeholder"></div>
           <div className="quick-links-wrap"><QuickLinks /></div>
