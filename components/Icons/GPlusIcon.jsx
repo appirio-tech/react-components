@@ -2,11 +2,11 @@ import React from 'react'
 
 const GPlusIcon = ({ width, height, fill }) => {
 
-  const w = (width || 32) + 'px';
-  const h = (height || 32) + 'px';
-  let viewBox = '0 0';
-  viewBox += ' ' + (width || 32);
-  viewBox += ' ' + (height || 32);
+  const w = (width || 32) + 'px'
+  const h = (height || 32) + 'px'
+  let viewBox = '0 0'
+  viewBox += ' ' + (width || 32)
+  viewBox += ' ' + (height || 32)
   return (
     <svg width={ w } height={ h } viewBox={ viewBox } version="1.1" xmlns="http://www.w3.org/2000/svg">
       <g id="Register-Web" stroke="none" strokeWidth="1" fill="none" fill-rule="evenodd">
