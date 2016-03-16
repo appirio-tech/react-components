@@ -1,6 +1,10 @@
 import React from 'react'
 import MenuBar from '../MenuBar/MenuBar'
 import Panel from '../Panel/Panel'
+import FacebookIcon from '../Icons/FacebookIcon'
+import TwitterIcon from '../Icons/TwitterIcon'
+import LinkedInIcon from '../Icons/LinkedInIcon'
+import GPlusIcon from '../Icons/GPlusIcon'
 import moment from 'moment'
 
 require('./TCFooter.scss')
@@ -33,10 +37,18 @@ const TCFooter = ({domain}) => {
       </div>
       <div className="social-links">
         <p>Topcoder is also on</p>
-        <a href="https://www.facebook.com/topcoder" className="fb-link" target="fbwindow"/>
-        <a href="http://www.twitter.com/topcoder" className="twitter-link" target="twwindow"/>
-        <a href="https://www.linkedin.com/company/topcoder" className="linkedin-link" target="inwindow"/>
-        <a href="https://plus.google.com/u/0/b/104268008777050019973/104268008777050019973/posts" className="google-link" target="gpwindow"/>
+        <a href="https://www.facebook.com/topcoder" target="fbwindow">
+          <FacebookIcon />
+        </a>
+        <a href="http://www.twitter.com/topcoder" target="twwindow">
+          <TwitterIcon />
+        </a>
+        <a href="https://www.linkedin.com/company/topcoder" target="inwindow">
+          <LinkedInIcon />
+        </a>
+        <a href="https://plus.google.com/u/0/b/104268008777050019973/104268008777050019973/posts" target="gpwindow">
+          <GPlusIcon />
+        </a>
       </div>
       <p className="copyright-notice">© {currentYear} Topcoder. All Rights Reserved</p>
     </div>

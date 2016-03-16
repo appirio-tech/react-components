@@ -73,32 +73,6 @@
   .menu-visible .TCFooter .menu-item {
     display: block;
   }
-
-  .social-links {
-    .fb-link {
-      background-image: url(ico-facebook.svg);
-      width: 27px;
-      height: 27px;
-    }
-
-    .twitter-link {
-      background-image: url(ico-twitter.svg);
-      width: 28px;
-      height: 24px;
-    }
-
-    .linkedin-link {
-      background-image: url(ico-linkedin.svg);
-      width: 27px;
-      height: 27px;
-    }
-
-    .google-link {
-      background-image: url(ico-google.svg);
-      width: 27px;
-      height: 27px;
-    }
-  }
 }
 
 @media only screen and (min-width : 768px) {
@@ -146,22 +120,6 @@
       width: 26px;
       height: 26px;
       margin-top: 13px;
-    }
-
-    .fb-link {
-      background-image: url(ico-facebook_desktop.svg);
-    }
-
-    .twitter-link {
-      background-image: url(ico-twitter_desktop.svg);
-    }
-
-    .linkedin-link {
-      background-image: url(ico-linkedin_desktop.svg);
-    }
-
-    .google-link {
-      background-image: url(ico-google_desktop.svg);
     }
   }
 }
