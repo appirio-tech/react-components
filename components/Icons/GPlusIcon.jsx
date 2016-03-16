@@ -1,6 +1,6 @@
 import React from 'react'
 
-const GPlusIcon = ({ width, height, fill }) => {
+const GPlusIcon = ({ width, height }) => {
 
   const w = (width || 32) + 'px'
   const h = (height || 32) + 'px'
