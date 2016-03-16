@@ -41,7 +41,7 @@ class Panel extends Component {
     }
 
     return (
-      <div className="panel">
+      <div className="Panel">
         {header}
         {body}
       </div>

@@ -1,5 +1,6 @@
 import React from 'react'
 import MenuBar from '../MenuBar/MenuBar'
+import Panel from '../Panel/Panel'
 import moment from 'moment'
 
 require('./TCFooter.scss')
@@ -17,8 +18,18 @@ const TCFooter = ({domain}) => {
 
   return (
     <div className="TCFooter">
-      <div className="other-nav-items">
-        <MenuBar items={otherNavigationItems} orientation="horizontal" mobileBreakPoint={1024} />
+      <div className="other-nav-items non-mobile">
+        <MenuBar items={otherNavigationItems} orientation="horizontal" mobileBreakPoint={767} />
+      </div>
+      <div className="other-nav-items mobile">
+        <Panel expandTrigger="expand-trigger">
+          <div className="panel-header">
+            Links
+          </div>
+          <div className="panel-body">
+            <MenuBar items={otherNavigationItems} orientation="vertical" mobileBreakPoint={0} />
+          </div>
+        </Panel>
       </div>
       <div className="social-links">
         <p>Topcoder is also on</p>

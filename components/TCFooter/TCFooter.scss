@@ -4,28 +4,7 @@
   width: 100%;
   background-color: $gray-darkest;
   padding: 1px 20px 30px 20px;
-}
-
-.TCFooter .MenuBar {
-  padding-top: 40px;
-
-  li  + li  {
-    margin-left: 50px;
-  }
-
-  li {
-    text-align: center;
-    font-weight: normal;
-
-    a {
-      color: #fff;
-      font-size: 16px;
-      line-height: 21px;
-    }
-    a:hover {
-        color: #0096ff;
-    }
-  }
+  font-family: 'Roboto', Arial;
 }
 
 .social-links {
@@ -33,7 +12,7 @@
     line-height: 1.2em;
     text-align: center;
     font-weight: normal;
-    margin: 35px 0;
+    margin: 30px 2px 0;
     color: #fff;
 
   a {
@@ -56,17 +35,39 @@
 }
 
 
-@media only screen and (max-width : 1024px) {
-  .TCFooter, .fold-pusher {
-    height: 200px;
+@media only screen and (max-width : 767px) {
+
+  .TCFooter .other-nav-items.mobile {
+
+    .Panel {
+      .panel-header {
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+      .panel-body {
+        padding: 0px;
+      }
+    }
+    .MenuBar {
+      width: 100%;
+      li {
+        background-color: $white;
+        border-bottom: 1px solid $gray-light;
+      }
+    }
   }
+  
   .TCFooter .menu-item {
     display: none;
     margin-top: 30px;
   }
 
-  .TCFooter .other-nav-items {
+  .TCFooter .other-nav-items.non-mobile {
     display: none;
+  }
+
+  .TCFooter .other-nav-items.mobile {
+    display: block;
   }
 
   .menu-visible .TCFooter .menu-item {
@@ -100,9 +101,30 @@
   }
 }
 
-@media only screen and (min-width : 1025px) {
-  .TCFooter, .fold-pusher {
-    height: 270px;
+@media only screen and (min-width : 768px) {
+
+  .TCFooter .other-nav-items.non-mobile {
+    .MenuBar {
+      padding-top: 20px;
+
+      li  + li  {
+        margin-left: 15px;
+      }
+
+      li {
+        text-align: center;
+        font-weight: normal;
+
+        a {
+          color: #fff;
+          font-size: 16px;
+          line-height: 21px;
+        }
+        a:hover {
+            color: #0096ff;
+        }
+      }
+    }
   }
 
   .copyright-notice {
@@ -110,8 +132,15 @@
       color: #fff;
   }
 
+  .TCFooter .other-nav-items.non-mobile {
+    display: block;
+  }
+
+  .TCFooter .other-nav-items.mobile {
+    display: none;
+  }
+
   .social-links {
-    margin-bottom: 3px;
 
     a {
       width: 26px;
