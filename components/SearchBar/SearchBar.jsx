@@ -55,7 +55,7 @@ class SearchBar extends Component {
         isPartial = popularList[i].toLowerCase().indexOf(searchValue.toLowerCase()) === 0
 
         if(!typeaheadText && isPartial) {
-          typeaheadText = popularList[i]
+          typeaheadText = searchValue + popularList[i].substring(searchValue.length)
         }
 
         if(isPartial) {

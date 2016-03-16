@@ -79,6 +79,10 @@
 				color: $accent-gray-dark;
 				font-size: 16px;
 				line-height: 30px;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				width: 95%;
+				overflow-x: hidden;
 			}
 		}
 
@@ -100,6 +104,9 @@
 			bottom: 0;
 			border: 0px none;
 			outline: 0px none;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			overflow-x: hidden;
 		}
 
 		.footer-link:hover, .footer-link:active {

@@ -1,6 +1,6 @@
 require('./Dropdown.scss')
 
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 
 class Dropdown extends Component {
   constructor(props) {
@@ -25,7 +25,7 @@ class Dropdown extends Component {
 
       currNode = currNode.parentNode
 
-      if(!currNode.tagName)
+      if(!currNode)
         break
     } while(currNode.tagName)
 
@@ -86,7 +86,7 @@ class Dropdown extends Component {
       <div className="dropdown-wrap" onClick={ this.onClick } ref="Dropdown">
         {
           this.props.children.map((child) => {
-            if(child.props.className.indexOf('dropdown-menu-header') > -1)
+            if(child.props.className === 'dropdown-menu-header')
               return child
           })
         }
@@ -94,7 +94,7 @@ class Dropdown extends Component {
         <div className = {ndClasses}>
           {
             this.props.children.map((child) => {
-              if(child.props.className.indexOf('dropdown-menu-list') > -1)
+              if(child.props.className === 'dropdown-menu-list')
                 return child
             })
           }
@@ -102,6 +102,10 @@ class Dropdown extends Component {
       </div>
     )
   }
+}
+
+Dropdown.propTypes = {
+  children: PropTypes.array.isRequired
 }
 
 export default Dropdown

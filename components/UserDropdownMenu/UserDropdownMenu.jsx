@@ -37,7 +37,7 @@ class UserDropdownMenu extends Component {
             <img className="dropdown-arrow" src={ require('./arrow-small-down.svg') } />
           </div>
   
-          <div className="dropdown-menu-list user-menu-items-list">
+          <div className="dropdown-menu-list">
             {
               userDropdownLists.map((list, i) => {
                 return ( <ul key={ i }>

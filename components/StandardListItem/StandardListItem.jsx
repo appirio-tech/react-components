@@ -13,7 +13,7 @@ class StandardListItem extends Component {
     super(props)
   }
   render() {
-    const classes = 'StandardListItem ' + this.props.placeIcon
+    const classes = 'StandardListItem transition ' + this.props.placeIcon
     let label
     let icon
 
@@ -33,7 +33,7 @@ StandardListItem.propTypes = {
   showIcon : PropTypes.bool,
   showLabel : PropTypes.bool,
   imgSrc : PropTypes.string,
-  labelText : PropTypes.string,
+  labelText : PropTypes.node,
   placeIcon : PropTypes.string
 }
 
