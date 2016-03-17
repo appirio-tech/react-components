@@ -1,15 +1,9 @@
 import React from 'react'
 
 const FacebookIcon = ({ width, height, fill }) => {
-
-  const w = (width || 32) + 'px'
-  const h = (height || 32) + 'px'
   const f = (fill || '#3B5998')
-  let viewBox = '0 0'
-  viewBox += ' ' + (width || 32)
-  viewBox += ' ' + (height || 32)
   return (
-    <svg width={ w } height={ h } viewBox={ viewBox } version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <svg width={ width || '32px' } height={ height || '32px' } viewBox="0 0 27 27" version="1.1" xmlns="http://www.w3.org/2000/svg">
       <title>ico-facebook</title>
       <desc>Created with Sketch.</desc>
       <defs></defs>

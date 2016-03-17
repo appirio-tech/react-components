@@ -73,6 +73,20 @@
   .menu-visible .TCFooter .menu-item {
     display: block;
   }
+
+  .social-links {
+
+    a {
+      width: 27px;
+      height: 27px;
+      margin-top: 10px;
+
+      svg {
+        width: 27px;
+        height: 27px;
+      }
+    }
+  }
 }
 
 @media only screen and (min-width : 768px) {
@@ -117,9 +131,14 @@
   .social-links {
 
     a {
-      width: 26px;
-      height: 26px;
+      width: 32px;
+      height: 32px;
       margin-top: 13px;
+
+      svg {
+        width: 32px;
+        height: 32px;
+      }
     }
   }
 }

@@ -1,14 +1,8 @@
 import React from 'react'
 
 const GPlusIcon = ({ width, height }) => {
-
-  const w = (width || 32) + 'px'
-  const h = (height || 32) + 'px'
-  let viewBox = '0 0'
-  viewBox += ' ' + (width || 32)
-  viewBox += ' ' + (height || 32)
   return (
-    <svg width={ w } height={ h } viewBox={ viewBox } version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <svg width={ width || '32px' } height={ height || '32px' } viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg">
       <g id="Register-Web" stroke="none" strokeWidth="1" fill="none" fill-rule="evenodd">
         <g id="LogIn-W-Empty" transform="translate(-457.000000, -598.000000)">
           <g id="Log-In-Icons" transform="translate(362.000000, 585.984000)">
