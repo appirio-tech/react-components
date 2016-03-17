@@ -1,5 +1,7 @@
 @import 'topcoder/tc-includes';
 
+$menu-bar-item-text-color: #737380;
+
 .MenuBar {
   display: flex;
   font-family: 'Roboto', Arial;
@@ -23,13 +25,12 @@
     flex-direction: column;
 
     li {
-      padding: 10px 0px;
+      padding: 10px 15px;
     }
   }
 
   li {
     display: flex;
-    justify-content: center;
 
     &.selected {
       border-bottom: 2px solid $primary-light;
@@ -47,8 +48,7 @@
       text-transform: uppercase;
       font-size: 12px;
       line-height: 14px;
-      // FIX ME: use variable
-      color: #737380;
+      color: $menu-bar-item-text-color;
     }
   }
 }

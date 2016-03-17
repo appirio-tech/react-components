@@ -1,17 +1,23 @@
 @import 'topcoder/tc-includes';
 
-.panel {
+$panel-header-text-color: #737380;
+$panel-header-bg-color: #DFDFE1;
+
+.Panel {
   .panel-header {
-    line-height     : 23px;
-    font-size       : 18px;
+    line-height     : 16px;
+    font-size       : 14px;
     display         : flex;
     justify-content : space-between;
-    background-color: $gray;
+    background-color: $panel-header-bg-color;
     padding         : 10px;
+    color           : $panel-header-text-color
   }
 
   .panel-body {
-    border : 1px solid $gray;
+    border-left : 1px solid $accent-gray;
+    border-right : 1px solid $accent-gray;
+    border-bottom : 1px solid $accent-gray;
     padding: 10px;
   }
 }
