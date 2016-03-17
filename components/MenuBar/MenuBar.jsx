@@ -5,12 +5,13 @@ require('./MenuBar.scss')
 
 export default class MenuBar extends Component {
   componentWillMount() {
+    this.handleResize = this.handleResize.bind(this)
     this.handleResize()
-    window.addEventListener('resize', this.handleResize.bind(this))
+    window.addEventListener('resize', this.handleResize)
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.handleResize.bind(this))
+    window.removeEventListener('resize', this.handleResize)
   }
 
   handleResize() {
