@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react'
-import classNames from 'classNames'
+import classNames from 'classnames'
 
 require('./MenuBar.scss')
 
