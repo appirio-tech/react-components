@@ -1,22 +1,33 @@
 language: node_js
 node_js:
-- 5.2.0
+- 5.5.0
 install:
 - npm install
 script:
-- npm run lint
+- npm run lint && npm run build-navbar
 sudo: false
-before_deploy:
-- npm-prepublish --verbose
 deploy:
-- provider: npm
-  email: "$NPM_EMAIL"
-  api_key: "$NPM_API_KEY"
+- provider: s3
+  cache_control: private, no-store, no-cache, must-revalidate, max-age=0
+  detect_encoding: true
+  access_key_id: $AWS_KEY
+  secret_access_key: $AWS_SECRET
+  bucket: components.topcoder-dev.com
+  skip_cleanup: true
+  local_dir: dist
   on:
-    tags: true
+    branch: dev
 env:
+  matrix:
+    - CXX=g++-4.8
   global:
-  # NPM_EMAIL
-  - secure: "kmo0afPY5HwJ5SryNY0XRRRekxd1teBR6lSiw2jtjU64sOdpjN7ZhGWy9q0lReGk6hloPfXewXRlpCbcDRFoxvJUdAbQoAN8gq/BxrwGmWlBepgUew1O6WLkpvqXCMe6lUmPEznjil2anjLHfm/cKiqwaY1n8MI+PSna6eNwAlffx72uPL1TzrijJjb7kKqTtjTHZzNiiUn2jZrc35G+MeryZmnd5xXV7cXgYb+flEMC5sDqhcO2aewYiCGMK2b3f7QDJFbGD4+v+HjN1XispJgCxDLTRLJ0HD8HPj87w/7s7PHqCuRUwga1Z2HTRDniqM7mb7TZ5RK990Olp4d1Fw/ApXhUEe4fwgTdN9PSwOzOrY4VGNyytYvJuMVqSVGIHx6Y2BuCt3gzPeM0ev8bjhE9PItYmDTr5FhNI1XLT7PKu+Ktp72bmdEVqNfnv7jXRKba9AeSBQVk70jKMpYAuGI/d/xXeaD2vImBhCflc0UArYfXf+JYMEwzhiMZQfq6csvg0UV/nlD9xidgBLt8QUGdFaQTjsQLt9CWbwcKM7/yFcfkOKEHrM5By1Do4gtSDxmK5F+81210YMO30OVwllHk/f+jOspti9EJv6r0vAZOkKXXL15VsyKQSrF/p6k+brVf0cQcnUMiSiNsl/aEftNW2ys5VCIRJcEol5bHt90="
-  # NPM_API_KEY
-  - secure: "OoRE9rbEzfAomE1h+PRDHJb0SgcyManma54qs72nwlBA3N4D+hV2Swy0xAidnVqdNvBlA4p9QmcrE0km+ZGVacFEhvleUGFDn5weWde2bukzkkdHtbaYQjyhxbrqfLA9G9vzs1BlHjhrR7Arl2TQuT21XnfagFBQ/LCgCRRu9yHHkZ4TejhuYu/9Fgdq08wnBpLZn7wllUq0OtrDgEgjK7avZ+yv5ob6zccxr3NAAchbdPJ2yUo82VvD+YdQaWbLq9ac5cwa0I6f/RuQUiZcLZItk/H3NuQqg32746QdwIqKpw5dh9wzddbckIK3WVsoJmE+7WpGAOgUU/TxmPijH6j1YwQ9uqcBGsax8RUFR+mG7imlS4YpL67K438JPUG7NCPgnN19zN/c+4WkVoKlLYEncyPp0C3sBbmauR0uuuVBWWUJL/1xBCuPyhT9JGXaocms/Ldshxr+TYf1tfQQ3uzs6wO3cniw3wIgXbgMF6NBwQdQpgUlSh++XJKgIG2I228GI3qMq8zJu/N/1oEKVkKkO8Z9Y3Vd5uo2VMbkp0KJJEfXnE8GZBBaajD+F8jONRQqYEDhK8EMYuqKhsQZMw3RgPtvOZNG+bhcnbElNnMjhd8CTKioKXAslkTP6Esi4Ce2PS6YR4CskjZaO7IT9KRqHvVZN42vlIVbhb2J0RI="
+    # DEV_AWS_KEY
+    - secure: a5X4QlY2JD/sJnEBkT5WwwfWjYKq3ldRf/+Dh5x2oHB0swGzYyFxzVlezddPF8xDML+CcVoLHkd8WNM2F7qcxHZTDC5spH/ym2gX6YlRwFRTTFBRCJehgYs8Vit/s14f8gkuVV8fe2ubMiV+fpAw80tb3E+t+nCckmXwe8gDqDbHto5VIozTiqDOV/WvkPzaRQofTeNzSqjrAH/iRq8hJUx16shCO2ccdiLu7rnOuys+UwjWFRyjdLP01UZXd5u6a5XK3vigLGPBAqsEwSMgScATJjNIHwYofE5Q3ztD85jz/JoQatQf7LCnQUqkLT+xldMkOZuTlTHvzmVUOl2WYpVxWV9hXwBemvyuRPPtzIrZkKXi6OUgvpYwGgWn8eS1qulB1DYPrUWBtIYGQoxEchfNlmcrCIJ7BrbL9xiNUM8J+ZCWtNS01eSapMHdhAIUMLEsAjxBY+ArLuYAD+URB0d+JZrr9cORGnrGDB+1wI12Z/Qu5LEDp/TMOisK2PXEsaqzlaazr9lj2FXTYJQyyFMMWzq1v1o5lZ5mEJ5ea36eGApV1iQNmPrg7omhDHwKtBpMDFQWZ0Y1SrkIk3QTX6JfzsrehwAhAK2fZ25EaC6zcppAo0ia5/VZoWzxHFQyhkC47hRrM7C6nCriQPDc9kKsmTSX5rp5e/DNpiZ67qM=
+    # DEV_AWS_SECRET
+    - secure: p+od0xD/9vpMbR2AI6gZWknNAtvvIfq6jXIF98DEsDlqrrMFv4SwtuXLlCmX5PBnB/cWOkwgRhymI7/3+fLrDC+wqlhDEWyzSpVOvAcVAb5LEP7IDen0W8kTj2q9I2VRX+keL7lxQCknAf/21sRZeJfJhLGR+O3NcytEdsjlpFCopA6luZYv1QSd+nRJiTsI7I69T0hr7jZk+YioyjEEp/4qzI2qyJH7E5Ry+DD3gXnC3zva48Huq6rvOtLpgFmio1b1rNAcA55Q9Y3vb1jJyZhKpRvtel9OM9ekTxANEGJVaMzxyZXT7EFTxwxS+ub5c2HRzxedMnD3tY29ku2JJx7Ofm+Yxt9DZXSK7EV99xxE71kIhI9lZFiWZviym08MHGc4pee6+Cl6ZkiV44v4XnwbgUq8GCOkmDMQBQtGhXq7dC6jB/r7P7CJs+DIGDF7qNt/xizVOC1THS8GUCN68aWMVperP+IlUXo5d2XekhO6vjHk6o44K8A1s7yblBWXj54B6NfJnBzUK2X0g6Y2xdW6tmoKtad1r1I3062skc+UiU+6m4fGS8pLFElJNj+8N7QANoEw9oJDZfuQ47uVQzPjAA1/qdcy3ksMek0siNFbpZnMqzOJTPf2Xe7YgKuCPg0QczESXIjOeEIU0om7SWmGEIuMFqt6obQW0M3VHn0=
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - g++-4.8

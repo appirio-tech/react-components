@@ -13,9 +13,6 @@ $super-wide: 1376px;
   background-color: $navbar-bg;
   border-bottom: 1px solid $border-color;
   padding: 10px 20px;
-  position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
 
   @media screen and (max-width: $mobile) {
