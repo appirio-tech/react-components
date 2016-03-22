@@ -28,6 +28,7 @@ SearchBarExample              = require '../SearchBar/SearchBarExamples.jsx'
 NavbarExample                 = require '../Navbar/NavbarExample.jsx'
 TCFooterExamples              = require '../TCFooter/TCFooterExamples.jsx'
 CarouselExamples              = require '../Carousel/CarouselExamples.jsx'
+SubNavExamples                = require '../SubNav/SubNavExamples.jsx'
 
 { Router, Route, Link, IndexRoute, browserHistory } = require 'react-router'
 
@@ -78,6 +79,8 @@ component = ->
         <Route path="/TCFooterExamples" component={TCFooterExamples} />
 
         <Route path="/CarouselExamples" component={CarouselExamples} />
+
+        <Route path="/SubNavExamples" component={SubNavExamples} />
       </Route>
     </Router>
   </Provider>
