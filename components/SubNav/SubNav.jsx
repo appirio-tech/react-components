@@ -1,6 +1,6 @@
 require('./SubNav.scss')
 
-import React, { Component } from 'react'
+import React from 'react'
 import Carousel from '../Carousel/Carousel'
 import StandardListItem from '../StandardListItem/StandardListItem'
 
@@ -33,7 +33,7 @@ const tcSubNav = {
 }
 
 const SubNav = ({ primaryMenu = 'compete' }) => {
-  var subNav = tcSubNav[primaryMenu]
+  const subNav = tcSubNav[primaryMenu]
   const subNavMap = (item, idx) => {
     return (
       <StandardListItem key={idx} labelText={item.text} imgSrc={item.img} />
