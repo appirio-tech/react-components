@@ -27,6 +27,7 @@ SearchSuggestionsExamples     = require '../SearchSuggestions/SearchSuggestionsE
 SearchBarExample              = require '../SearchBar/SearchBarExamples.jsx'
 NavbarExample                 = require '../Navbar/NavbarExample.jsx'
 TCFooterExamples              = require '../TCFooter/TCFooterExamples.jsx'
+CarouselExamples              = require '../Carousel/CarouselExamples.jsx'
 
 { Router, Route, Link, IndexRoute, browserHistory } = require 'react-router'
 
@@ -75,6 +76,8 @@ component = ->
         <Route path="/NavbarExample" component={NavbarExample} />
 
         <Route path="/TCFooterExamples" component={TCFooterExamples} />
+
+        <Route path="/CarouselExamples" component={CarouselExamples} />
       </Route>
     </Router>
   </Provider>
