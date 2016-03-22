@@ -4,11 +4,10 @@ $subnav-item-bg-color: #B47DD6;
 $subnav-item-text-color: #7A7F83;
 
 .SubNav {
-  padding: 20px 0px;
   background-color: $accent-gray-dark;
 
   .StandardListItem {
-    padding: 0px;
+    padding: 20px 0px;
 
     .label {
       color: $subnav-item-text-color;
