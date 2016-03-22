@@ -35,15 +35,15 @@ export default class Carousel extends Component {
   validatePagers() {
     const pageDownClass = classNames({
       'page-down' : true,
-      'hidden': this.state.firstVisibleItem == 0
+      hidden: this.state.firstVisibleItem === 0
     })
     const pageUpClass = classNames({
       'page-up' : true,
-      'hidden': this.lastElementVisible(this.state.firstVisibleItem)
+      hidden: this.lastElementVisible(this.state.firstVisibleItem)
     })
     const node = ReactDOM.findDOMNode(this)
-    const pageDownNode = node.querySelector(".page-down")
-    const pageUpNode = node.querySelector(".page-up")
+    const pageDownNode = node.querySelector('.page-down')
+    const pageUpNode = node.querySelector('.page-up')
     pageDownNode.className = pageDownClass
     pageUpNode.className = pageUpClass
   }
@@ -53,8 +53,8 @@ export default class Carousel extends Component {
     const node = ReactDOM.findDOMNode(this)
     const parentNode = node.parentNode
     const maxWidth = parentNode.getBoundingClientRect().width
-    const visibleAreaNode = node.querySelector(".visible-area")
-    visibleAreaNode.style.width = maxWidth + "px"
+    const visibleAreaNode = node.querySelector('.visible-area')
+    visibleAreaNode.style.width = maxWidth + 'px'
     const itemNodes = visibleAreaNode.children
     let width = 0
     if (firstVisibleItem > 0) {
@@ -63,8 +63,8 @@ export default class Carousel extends Component {
       // account the right margin for page-down (see Carousel.scss)
       width += 15
     }
-    for (var i = 0; i < itemNodes.length; i++) {
-      var itemNode = itemNodes[i]
+    for (let i = 0; i < itemNodes.length; i++) {
+      const itemNode = itemNodes[i]
       width += itemNode.getBoundingClientRect().width
       if (i < itemNodes.length - 1) {
         // account 30px for every carousel-item (see Carousel.scss)
@@ -103,7 +103,6 @@ export default class Carousel extends Component {
         </div>
       )
     }
-    const windowWidth = window.innerWidth
 
     return (
       <div className="Carousel hidden">
