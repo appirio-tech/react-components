@@ -20,6 +20,9 @@ config.output.libraryTarget = 'var'
 config.plugins.push new ExtractTextPlugin '[name].css'
 
 # React would be provided externally by the application using the components
-config.externals = {"react" : "React"}
+config.externals =
+  "react"       : "React"
+  "react-dom"   : "ReactDOM"
+  "moment"      : "moment"
 
 module.exports = config
