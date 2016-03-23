@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/appirio-tech/react-components.svg?branch=master)](https://travis-ci.org/appirio-tech/react-components)
+[![npm version](https://badge.fury.io/js/appirio-tech-react-components.svg)](https://badge.fury.io/js/appirio-tech-react-components) [![Build Status](https://travis-ci.org/appirio-tech/react-components.svg?branch=master)](https://travis-ci.org/appirio-tech/react-components)
 
 # React Components
 
