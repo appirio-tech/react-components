@@ -1,5 +1,6 @@
 webpackConfig = require 'appirio-tech-webpack-config'
 webpack = require('webpack')
+ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 config = webpackConfig
   dirname: __dirname
@@ -9,12 +10,16 @@ config = webpackConfig
       './index.coffee'
     ]
 
-config.output.filename = 'TCNavComponents.[name].js';
-config.output.publicPath = 'http://local.topcoder.com/mf/js/app/header/partials/'
+# exports javascript as library
+config.output.filename = '[name].js';
+config.output.publicPath = 'http://components.topcoder-dev.com/'
+config.output.library = '[name]';
 config.output.libraryTarget = 'var'
-console.log config.output
 
+# CSS file without hash name
+config.plugins.push new ExtractTextPlugin '[name].css'
 
+# React would be provided externally by the application using the components
 config.externals = {"react" : "React"}
 
 module.exports = config
