@@ -7,9 +7,9 @@ import QuickLinks from '../QuickLinks/QuickLinks'
 import UserDropdownMenu from '../UserDropdownMenu/UserDropdownMenu'
 
 const primaryNavigationItems = [
-  {img: require('./nav-community.svg'), text: 'Community', link: 'javascript:;'},
-  {img: require('./nav-compete.svg'), text: 'Compete', link: 'javascript:;', selected: true},
-  {img: require('./nav-learn.svg'), text: 'Learn', link: 'javascript:;'}
+  {img: require('./nav-community.svg'), text: 'Community', link: '/community'},
+  {img: require('./nav-compete.svg'), text: 'Compete', link: '/compete', selected: true},
+  {img: require('./nav-learn.svg'), text: 'Learn', link: '/learn'}
 ]
 
 class Navbar extends Component {
