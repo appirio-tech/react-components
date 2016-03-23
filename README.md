@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/appirio-tech/react-components.svg?branch=master)](https://travis-ci.org/appirio-tech/react-components)
+
 # React Components
 
 This repository is used to distribute reusable React components.
