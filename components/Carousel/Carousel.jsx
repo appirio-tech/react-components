@@ -33,14 +33,14 @@ export default class Carousel extends Component {
   }
 
   validatePagers() {
-    const pageDownClass = classNames({
-      'page-down' : true,
-      hidden: this.state.firstVisibleItem === 0
-    })
-    const pageUpClass = classNames({
-      'page-up' : true,
-      hidden: this.lastElementVisible(this.state.firstVisibleItem)
-    })
+    const pageDownClass = classNames(
+      'page-down',
+      { hidden: this.state.firstVisibleItem === 0 }
+    )
+    const pageUpClass = classNames(
+      'page-up',
+      { hidden: this.lastElementVisible(this.state.firstVisibleItem) }
+    )
     const node = ReactDOM.findDOMNode(this)
     const pageDownNode = node.querySelector('.page-down')
     const pageUpNode = node.querySelector('.page-up')
@@ -105,7 +105,7 @@ export default class Carousel extends Component {
     }
 
     return (
-      <div className="Carousel hidden">
+      <div className="Carousel">
         <div className="page-down" onClick={this.handlePageDown}>
           <LeftArrowIcon fill="#FFFFFF" />
         </div>

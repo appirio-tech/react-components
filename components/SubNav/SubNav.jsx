@@ -9,8 +9,7 @@ const tcSubNav = {
     {img: require('./placeholder.svg'), text: 'Design Challenges', link: '/challenges/design/active'},
     {img: require('./placeholder.svg'), text: 'Development Challenges', link: '/challenges/develop/active'},
     {img: require('./placeholder.svg'), text: 'Data Science Challenges', link: '/challenges/data/active'},
-    // TODO dynamic domain
-    {img: require('./placeholder.svg'), text: 'Competitive Programming', link: 'https://arena.topcoder.com'}
+    {img: require('./placeholder.svg'), text: 'Competitive Programming', link: process.env.ARENA_URL}
   ],
   learn : [
     {img: require('./placeholder.svg'), text: 'Getting Started', link: '/getting-started'},
@@ -21,11 +20,9 @@ const tcSubNav = {
   ],
   community : [
     {img: require('./placeholder.svg'), text: 'Overview', link: '/community/members'},
-    // TODO dynamic domain
-    {img: require('./placeholder.svg'), text: 'TCO16', link: '//tco16.topcoder.com'},
+    {img: require('./placeholder.svg'), text: 'TCO16', link: process.env.TCO16_URL},
     {img: require('./placeholder.svg'), text: 'Programs', link: '/community/member-overview'},
-    // TODO dynamic domain
-    {img: require('./placeholder.svg'), text: 'Forums', link: '//apps.topcoder.com/forums'},
+    {img: require('./placeholder.svg'), text: 'Forums', link: process.env.FORUMS_APP_URL},
     {img: require('./placeholder.svg'), text: 'Statistics', link: '/community/statistics'},
     {img: require('./placeholder.svg'), text: 'Events', link: '/community/events'},
     {img: require('./placeholder.svg'), text: 'Blog', link: '/blog'}

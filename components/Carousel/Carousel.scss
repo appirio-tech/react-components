@@ -5,9 +5,6 @@ $pager-bg-color: #737380;
 .Carousel {
   display: flex;
   flex-direction: row;
-  &.hidden {
-    // visibility: hidden;
-  }
 
   .page-down {
     width: 20px;
