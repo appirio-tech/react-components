@@ -18,45 +18,38 @@ const userDropdownLists = [
   ]
 ]
 
-class UserDropdownMenu extends Component {
-  constructor(props) {
-    super(props)
+const UserDropdownMenu = ({username}) => {
 
-    this.state = { isLoggedIn: true }
-  }
-
-  render() {
-    const publicDOM = <div><button>Log in</button><button>Join</button></div>
-    
-    const loggedInDOM = (
-      <div className="UserDropdownMenu">
-        <Dropdown pointerShadow>
-          <div className="dropdown-menu-header">
-            <span className="user-image"></span>
-            <span className="username">{ this.props.username }</span>
-            <img className="dropdown-arrow" src={ require('./arrow-small-down.svg') } />
-          </div>
+  const publicDOM = <div><button>Log in</button><button>Join</button></div>
   
-          <div className="dropdown-menu-list">
-            {
-              userDropdownLists.map((list, i) => {
-                return ( <ul key={ i }>
-                  {
-                    list.map((link, j) => {
-                      return <li className="user-menu-item transition" key={ j }><a href={ link.link }>{ link.label }</a></li>
-                    })
-                  }
-                </ul> )
-              })
-            }
+  const loggedInDOM = (
+    <div className="UserDropdownMenu">
+      <Dropdown pointerShadow>
+        <div className="dropdown-menu-header">
+          <span className="user-image"></span>
+          <span className="username">{ username }</span>
+          <img className="dropdown-arrow" src={ require('./arrow-small-down.svg') } />
+        </div>
 
-          </div>
-        </Dropdown>
-      </div>
-    )
+        <div className="dropdown-menu-list">
+          {
+            userDropdownLists.map((list, i) => {
+              return ( <ul key={ i }>
+                {
+                  list.map((link, j) => {
+                    return <li className="user-menu-item transition" key={ j }><a href={ link.link }>{ link.label }</a></li>
+                  })
+                }
+              </ul> )
+            })
+          }
 
-    return this.state.isLoggedIn ? loggedInDOM : publicDOM
-  }
+        </div>
+      </Dropdown>
+    </div>
+  )
+
+  return username ? loggedInDOM : publicDOM
 }
 
 export default UserDropdownMenu
