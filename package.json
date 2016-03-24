@@ -19,7 +19,7 @@
   },
   "scripts": {
     "example": "webpack-dev-server -d --progress --inline --colors",
-    "dev": "webpack-dev-server -d --progress --inline --colors --dev",
+    "dev": "webpack-dev-server -d --progress --inline --colors --dev --tc",
     "clean": "rm -r dist",
     "build": "webpack --config webpack.config.js; cp example/index.html dist/",
     "lint": "eslint --ext .js,.jsx .",
