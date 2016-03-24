@@ -1,0 +1,21 @@
+@import 'topcoder/tc-includes';
+
+$subnav-item-bg-color: #B47DD6;
+$subnav-item-text-color: #7A7F83;
+
+.SubNav {
+  background-color: $accent-gray-dark;
+
+  .StandardListItem {
+    padding: 20px 0px;
+
+    .label {
+      color: $subnav-item-text-color;
+    }
+
+    .label:active,
+    .label:hover {
+      color: $white;
+    }
+  }
+}
