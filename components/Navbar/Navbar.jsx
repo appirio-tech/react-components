@@ -12,7 +12,7 @@ const primaryNavigationItems = [
   {img: require('./nav-learn.svg'), text: 'Learn', link: '/learn'}
 ]
 
-const Navbar = ({username}) => {
+const Navbar = ({username, domain}) => {
   return (
     <div className="Navbar flex middle space-between">
       <div className="topcoder-logo"></div>
@@ -23,7 +23,7 @@ const Navbar = ({username}) => {
       <MenuBar items={primaryNavigationItems} orientation="horizontal" />
       <div className="collapse-group">
         <div className="icon-placeholder"></div>
-        <div className="quick-links-wrap"><QuickLinks /></div>
+        <div className="quick-links-wrap"><QuickLinks domain={domain} /></div>
         <UserDropdownMenu username={username} />
       </div>
     </div>
