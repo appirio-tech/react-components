@@ -1,6 +1,6 @@
 @import "topcoder/tc-includes";
 
-$logo-placeholder-bg: #B47DD6;
+$link-text-hover-color: #7A7F83;
 
 .QuickLinks {
   position: relative;
@@ -22,22 +22,22 @@ $logo-placeholder-bg: #B47DD6;
 
       .dropdown-menu-list-item {
         display: inline-block;
-        cursor: pointer;
-
-        .icon-placeholder {
-          width: 30px;
-          height: 30px;
-          background-color: $logo-placeholder-bg;
-          margin: 0 auto;
-          margin-bottom: 6px;
-        }      
+        cursor: pointer;      
 
         .StandardListItem {
           padding: 0;
 
+          &:active,
+          &:hover {
+            .label {
+              color: $link-text-hover-color;
+            }
+          }
+
           .label {
             font-size: 12px;
             line-height: 26px;
+            color: $accent-gray-dark;
           }
         }
       }

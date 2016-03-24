@@ -2,7 +2,7 @@ import Navbar from './Navbar'
 import React from 'react'
 
 const NavbarExample = () => (
-	<Navbar />
+	<Navbar username="vic-tor" />
 )
 
 module.exports = NavbarExample

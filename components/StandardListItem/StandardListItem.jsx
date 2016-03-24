@@ -1,4 +1,4 @@
-import {PropTypes, Component } from 'react'
+import {PropTypes } from 'react'
 import React from 'react'
 
 require('./StandardListItemStyles.scss')
@@ -8,39 +8,45 @@ require('./StandardListItemStyles.scss')
  // labelText: The text for the label
  // placeIcon: defines the position of the icon. Either: top | left | right.  Default to top
 
-class StandardListItem extends Component {
-  constructor(props) {
-    super(props)
+const StandardListItem = ({showIcon, showLabel, imgSrc, labelText, linkUrl, linkTarget='_self', placeIcon='top'}) => {
+  const classes = 'StandardListItem transition ' + placeIcon
+  let label
+  let icon
+  let item
+
+  if (showLabel) {
+    label = <p className="label">{labelText}</p>
   }
-  render() {
-    const classes = 'StandardListItem transition ' + this.props.placeIcon
-    let label
-    let icon
 
-    if (this.props.showLabel){
-      label = <p className="label">{this.props.labelText}</p>
-    }
-
-    if (this.props.showIcon){
-      icon = <img className="icon" src={this.props.imgSrc}/>
-    }
-
-    return (<div className={classes}>{label}{icon}</div>)
+  if (showIcon) {
+    icon = <img className="icon" src={imgSrc}/>
   }
+
+  if (linkUrl) {
+    item =
+        <a className={classes} href={linkUrl} target={linkTarget}>{label}{icon}</a>
+  } else {
+    item = <div className={classes}>{label}{icon}</div>
+  }
+
+  return item
 }
 
 StandardListItem.propTypes = {
-  showIcon : PropTypes.bool,
-  showLabel : PropTypes.bool,
-  imgSrc : PropTypes.string,
-  labelText : PropTypes.node,
-  placeIcon : PropTypes.string
+  showIcon   : PropTypes.bool,
+  showLabel  : PropTypes.bool,
+  imgSrc     : PropTypes.string,
+  labelText  : PropTypes.node,
+  linkUrl    : PropTypes.string,
+  linkTarget : PropTypes.string,
+  placeIcon  : PropTypes.string
 }
 
 StandardListItem.defaultProps = {
-  showIcon: true,
-  showLabel: true,
-  placeIcon: 'top'
+  showIcon    : true,
+  showLabel   : true,
+  linkTarget  : '_self',
+  placeIcon   : 'top'
 }
 
 export default StandardListItem
