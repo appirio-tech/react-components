@@ -1,7 +1,7 @@
 require('./Navbar.scss')
 
 import MenuBar from '../MenuBar/MenuBar'
-import React, { Component } from 'react'
+import React from 'react'
 import SearchBar from '../SearchBar/SearchBar'
 import QuickLinks from '../QuickLinks/QuickLinks'
 import UserDropdownMenu from '../UserDropdownMenu/UserDropdownMenu'
