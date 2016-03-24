@@ -5,7 +5,7 @@ import QuickLinks from './QuickLinks'
 
 const QuickLinksExample = () => (
 	<div className="example-wrap">
-		<QuickLinks />
+		<QuickLinks domain="topcoder-dev.com" />
 	</div>
 )
 
