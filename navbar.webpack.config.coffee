@@ -12,7 +12,7 @@ config = webpackConfig
 
 # exports javascript as library
 config.output.filename = '[name].js';
-config.output.publicPath = 'http://components.topcoder-dev.com/'
+config.output.publicPath = 'https://s3.amazonaws.com/components.topcoder-dev.com/'
 config.output.library = '[name]';
 config.output.libraryTarget = 'var'
 
