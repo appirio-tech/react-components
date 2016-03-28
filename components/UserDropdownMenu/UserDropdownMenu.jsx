@@ -20,7 +20,12 @@ const userDropdownLists = [
 
 const UserDropdownMenu = ({username}) => {
 
-  const publicDOM = <div><button>Log in</button><button>Join</button></div>
+  const publicDOM = (
+    <div className="UserDropdownMenu non-logged-in">
+      <button className="login-button tc-btn tc-btn-s tc-btn-ghost">Log in</button>
+      <button className="join-button tc-btn tc-btn-s">Join</button>
+    </div>
+  )
   
   const loggedInDOM = (
     <div className="UserDropdownMenu">

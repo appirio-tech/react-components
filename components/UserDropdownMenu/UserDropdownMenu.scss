@@ -1,4 +1,5 @@
 @import "topcoder/tc-includes";
+@import "topcoder/tc-buttons";
 
 $user-dropdown-bg: #FAFAFB;
 $placeholder-bg: #B47DD6;
@@ -9,6 +10,16 @@ $username-color: #737380;
   background-color: $user-dropdown-bg;
   display: inline-block;
   position: relative;
+
+  &.non-logged-in {
+    .login-button {
+
+    }
+
+    .join-button {
+      margin-left: 20px;
+    }
+  }
 
   .dropdown-menu-header {
     cursor: pointer;
