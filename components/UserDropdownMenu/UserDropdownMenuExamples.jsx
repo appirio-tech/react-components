@@ -5,9 +5,9 @@ const UserDropdownMenuExamples = () => {
   return (
     <div>
       <p>Logged In state</p>
-      <UserDropdownMenu username="vic-tor" />
+      <UserDropdownMenu username="vic-tor" domain="topcoder-dev.com" />
       <p>Logged Out state</p>
-      <UserDropdownMenu />
+      <UserDropdownMenu domain="topcoder-dev.com" />
     </div>
   )
 }

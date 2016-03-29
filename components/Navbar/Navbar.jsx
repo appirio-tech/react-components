@@ -24,7 +24,7 @@ const Navbar = ({username, domain}) => {
       <div className="collapse-group">
         <div className="icon-placeholder"></div>
         <div className="quick-links-wrap"><QuickLinks domain={domain} /></div>
-        <UserDropdownMenu username={username} />
+        <UserDropdownMenu username={username} domain={domain} />
       </div>
     </div>
   )
