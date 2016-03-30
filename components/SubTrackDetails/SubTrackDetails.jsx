@@ -16,4 +16,10 @@ var SubTrackDetails = (props) => {
     )
 };
 
+SubTrackDetails.propTypes = {
+  name: React.PropTypes.string,
+  description: React.PropTypes.string,
+  tracks: React.PropTypes.array
+};
+
 export default SubTrackDetails
