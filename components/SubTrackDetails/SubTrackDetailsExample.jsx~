@@ -1,0 +1,8 @@
+import Navbar from './SubTrackDetails'
+import React from 'react'
+
+const SubTrackDetailsExample = () => (
+	<SubTrackDetails />
+)
+
+module.exports = SubTrackDetailsExample
