@@ -29,7 +29,7 @@ class Navbar extends Component {
     this.props.searchSuggestionsFunc.apply(searchBar, [searchTerm])
     .then(this.updateSearchSuggestions)
     .then(data => {
-      callback.apply(searchBar, [searchBar])
+      callback.apply(searchBar, [searchBar, data])
     })
   }
 

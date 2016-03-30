@@ -6,15 +6,15 @@ import _ from 'lodash'
 const NavbarExample = () => {
 
   const suggest = (searchTerm) => {
-    return fetch("https://internal-api.topcoder-dev.com/v3/tags/_suggest/?q=" + searchTerm)
-    .then(function(response) {
+    return fetch('https://internal-api.topcoder-dev.com/v3/tags/_suggest/?q=' + searchTerm)
+    .then(response => {
       if (response.status >= 200 && response.status < 400) {
         return Promise.resolve(response)
       } else {
         return Promise.reject(new Error(response.statusText))
       }
     })
-    .then(function(response) {
+    .then(response => {
       return response.json()
     })
     .then(data => {
