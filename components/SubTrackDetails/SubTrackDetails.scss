@@ -2,51 +2,50 @@
 
 
 .SubTrackDetails{
-    
-    .heading {
-         height:20px;
+  .heading {
+    height:20px;
         
-        .title {
-            font-size: 15px;
-            line-height: 18px;
-            margin-left: 11px;
-            color: #FFFFFF;
-            float: left;
-            font-weight: bold;
-            font-family: "Roboto-Bold", Arial, Helvetica, sans-serif;
-	     }
+    .title {
+      font-size: 15px;
+      line-height: 18px;
+      margin-left: 11px;
+      color: $white;
+      float: left;
+      font-weight: bold;
+      font-family: "Roboto", Arial, Helvetica, sans-serif;
+	}
          
-         .develop {
-            background-color: #21B2F1
-          }
-    
-          .design {
-            background-color: #60C700
-          }
-    
-          .dataScience {
-            background-color: #FB7D22
-          }
+    .develop {
+      background-color: #21B2F1
     }
+    
+    .design {
+      background-color: #60C700
+    }
+    
+    .dataScience {
+      background-color: #FB7D22
+    }
+  }
         
-    p {
-        width: 290px;
-        font-size: 13px;
-        line-height: 18px;
-        margin-top: 7px;
-        font-family: "Roboto-Regular", Arial, Helvetica, sans-serif;
-        color: #DCDCE0;
-    }
+  p {
+    width: 290px;
+    font-size: 13px;
+    line-height: 18px;
+    margin-top: 7px;
+    font-family: "Roboto-Regular", Arial, Helvetica, sans-serif;
+    color: #DCDCE0;
+  }
     
-    .verticalLine {
-        width: 4px; /* Use only border style */
-        height: 19px;
-        display: block;
-        margin-right: 3px;
-        float: left; 
-    }
+  .verticalLine {
+    width: 4px; /* Use only border style */
+    height: 19px;
+    display: block;
+    margin-right: 3px;
+    float: left; 
+  }
     
-    .hidden { 
-        display:none; 
-    }
+  .hidden { 
+    display:none; 
+  }
 }

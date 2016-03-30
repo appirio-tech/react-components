@@ -1,7 +1,0 @@
-@import "topcoder/tc-includes";
-
-
-.SubTrackDetails{
-	.title {
-	}
-}
