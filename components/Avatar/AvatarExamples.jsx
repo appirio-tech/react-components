@@ -1,9 +1,7 @@
-'use strict'
+import React from 'react'
+import Avatar from './Avatar.jsx'
 
-Avatar = require './Avatar.cjsx'
-React  = require 'react'
-
-AvatarExamples = ->
+const AvatarExamples = () => (
   <div className="AvatarExamples flex column middle center">
     <h1>Default</h1>
 
@@ -13,5 +11,6 @@ AvatarExamples = ->
 
     <Avatar avatarUrl="http://www.topcoder.com/i/m/cardiboy_big.jpg" />
   </div>
+)
 
-module.exports = AvatarExamples
+export default AvatarExamples
