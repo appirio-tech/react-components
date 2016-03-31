@@ -1,0 +1,92 @@
+@import 'topcoder/tc-includes';
+
+$gold: #FFD900;
+$silver: #A9BCD4;
+$bronze: #BD731E;
+$gray-30:  #C3C3C8;
+$gray: #47474F;
+$purple: #B47DD6;
+$accent: #59A7FF;
+
+.PrizeItem {
+  display:inline-block;
+  height: 20px;
+  margin-right: 15px;
+    
+  span {
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    line-height: 15px;
+    color: $white;
+    font-weight: 500;
+  }
+  .PrizeCircle{
+    display: inline;
+    padding: 1px 4px 1px 4px;
+    min-width: 15px;
+    max-height: 15px;
+    background: $gray-30;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 11px;
+    line-height: 13px;
+    font-family: "Roboto-Black", Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color:  $gray;
+  }
+ 
+}
+
+.Prize {
+  .PrizeItem:nth-child(1) {
+    .PrizeCircle{
+      background: $gold;
+    }
+  }
+  .PrizeItem:nth-child(2) {
+    .PrizeCircle{
+        background: $silver;
+    }
+  }
+  
+  .PrizeItem:nth-child(3) {
+    .PrizeCircle{
+        background: $bronze;
+    }
+  }
+}
+
+.Bonus {
+  .PrizeItem:nth-child(1) {
+    .PrizeCircle{
+      background: $purple;
+    }
+  }
+  .PrizeItem:nth-child(2) {
+    .PrizeCircle{
+        background: $purple;
+    }
+  }
+  
+  .PrizeItem:nth-child(3) {
+    .PrizeCircle{
+        background: $accent;
+    }
+  }
+}
+
+
+.PrizeSection {
+  margin-top: 10px;
+  .title {
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 18px;
+    color: $white;
+  }
+  .items {
+    margin-top: 10px;
+  }
+}
+
