@@ -1,0 +1,55 @@
+@import "topcoder/tc-includes";
+
+$develop-bar-color: #21B2F1;
+$design-bar-color: #60C700;
+$dataScience-bar-color: #FB7D22;
+$track-desc-text-color: #DCDCE0;
+
+.SubTrackDetails{
+  .heading {
+    height:20px;
+        
+    .title {
+      font-size: 15px;
+      line-height: 18px;
+      margin-left: 11px;
+      color: $white;
+      float: left;
+      font-weight: bold;
+      font-family: "Roboto", Arial, Helvetica, sans-serif;
+	}
+         
+    .develop {
+      background-color: $develop-bar-color;
+    }
+    
+    .design {
+      background-color: $design-bar-color
+    }
+    
+    .dataScience {
+      background-color: $dataScience-bar-color
+    }
+  }
+        
+  p {
+    width: 290px;
+    font-size: 13px;
+    line-height: 18px;
+    margin-top: 7px;
+    font-family: "Roboto-Regular", Arial, Helvetica, sans-serif;
+    color: $track-desc-text-color;
+  }
+    
+  .verticalLine {
+    width: 4px; /* Use only border style */
+    height: 19px;
+    display: block;
+    margin-right: 3px;
+    float: left; 
+  }
+    
+  .hidden { 
+    display:none; 
+  }
+}
