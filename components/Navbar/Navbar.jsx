@@ -5,6 +5,8 @@ import React, {PropTypes, Component} from 'react'
 import SearchBar from '../SearchBar/SearchBar'
 import QuickLinks from '../QuickLinks/QuickLinks'
 import UserDropdownMenu from '../UserDropdownMenu/UserDropdownMenu'
+import TopcoderLogo from '../Icons/TopcoderLogo'
+import TopcoderMobileLogo from '../Icons/TopcoderMobileLogo'
 
 const primaryNavigationItems = [
   {img: require('./nav-community.svg'), text: 'Community', link: '/community'},
@@ -43,7 +45,12 @@ class Navbar extends Component {
     const domain = this.props.domain
     return (
       <div className="Navbar flex middle space-between">
-        <div className="topcoder-logo"></div>
+        <div className="topcoder-logo non-mobile">
+          <TopcoderLogo width={155}/>
+        </div>
+        <div className="topcoder-logo mobile">
+          <TopcoderMobileLogo width={40} />
+        </div>
         <div className="search-bar-wrap">
           <div className="icon-placeholder"></div>
           <SearchBar recentTerms={this.state.recentTerms} suggestions={this.state.searchSuggestions} onTermChange={this.handleTermChange} />
