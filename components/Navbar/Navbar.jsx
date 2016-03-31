@@ -53,6 +53,7 @@ class Navbar extends Component {
 
   render() {
     const username = this.props.username
+    const userImage = this.props.userImage
     const domain = this.props.domain
     const mobileMenuUrl = this.props.mobileMenuUrl
     const mobileSearchUrl = this.props.mobileSearchUrl
@@ -72,7 +73,7 @@ class Navbar extends Component {
         <div className="menu-wrap" onClick={this.handleMobileClick}>
           <div className="mobile-wrap"><a href={mobileMenuUrl}><HamburgerIcon /></a></div>
           <div className="quick-links-wrap"><QuickLinks domain={domain} /></div>
-          <UserDropdownMenu username={username} domain={domain} />
+          <UserDropdownMenu username={username} userImage={userImage} domain={domain} />
         </div>
       </div>
     )

@@ -1,12 +1,12 @@
 require('./UserDropdownMenu.scss')
 
 import React from 'react'
+import Avatar from '../Avatar/Avatar.cjsx'
 import Dropdown from '../Dropdown/Dropdown'
 
 
-const UserDropdownMenu = ({username, domain}) => {
+const UserDropdownMenu = ({username, userImage, domain}) => {
 
-  console.log(domain)
   const userDropdownLists = [
     [
       { label: 'My Profile', link: '/profile/' + username, id: 0 },
@@ -33,7 +33,7 @@ const UserDropdownMenu = ({username, domain}) => {
     <div className="UserDropdownMenu">
       <Dropdown pointerShadow>
         <div className="dropdown-menu-header">
-          <span className="user-image"></span>
+          <span className="user-image"><Avatar avatarUrl={userImage} /></span>
           <span className="username">{ username }</span>
           <img className="dropdown-arrow" src={ require('./arrow-small-down.svg') } />
         </div>

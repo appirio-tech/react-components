@@ -27,7 +27,7 @@ const NavbarExample = () => {
   return (
     <div>
       <p>Logged In Example</p>
-      <Navbar username="vic-tor" domain="topcoder-dev.com" searchSuggestionsFunc={suggest} />
+      <Navbar username="vic-tor" userImage="https://topcoder-prod-media.s3.amazonaws.com/member/profile/vic-tor-1446848838388.jpeg" domain="topcoder-dev.com" searchSuggestionsFunc={suggest} />
       <p>Non Logged In Example</p>
       <Navbar domain="topcoder-dev.com" searchSuggestionsFunc={suggest} />
     </div>
