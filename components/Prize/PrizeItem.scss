@@ -1,0 +1,84 @@
+@import 'topcoder/tc-includes';
+
+.PrizeItem {
+  display:inline-block;
+  height: 20px;
+  margin-right: 15px;
+    
+  span {
+    font-family: "Roboto-Medium", Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    line-height: 15px;
+    color: $white;
+    font-weight: 500;
+  }
+  .PrizeCircle{
+    display: inline;
+    padding: 1px 4px 1px 4px;
+    min-width: 15px;
+    max-height: 15px;
+    background: #C3C3C8;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 11px;
+    line-height: 13px;
+    font-family: "Roboto-Black", Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color:  #47474F;
+  }
+ 
+}
+
+.Prize {
+  .PrizeItem:nth-child(1) {
+    .PrizeCircle{
+      background: #FFD900;
+    }
+  }
+  .PrizeItem:nth-child(2) {
+    .PrizeCircle{
+        background: #A9BCD4;
+    }
+  }
+  
+  .PrizeItem:nth-child(3) {
+    .PrizeCircle{
+        background: #BD731E;
+    }
+  }
+}
+
+.Bonus {
+  .PrizeItem:nth-child(1) {
+    .PrizeCircle{
+      background: #B47DD6;
+    }
+  }
+  .PrizeItem:nth-child(2) {
+    .PrizeCircle{
+        background: #B47DD6;
+    }
+  }
+  
+  .PrizeItem:nth-child(3) {
+    .PrizeCircle{
+        background: #59A7FF;
+    }
+  }
+}
+
+
+.PrizeSection {
+  margin-top: 10px;
+  .title {
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 18px;
+    color: $white;
+  }
+  .items {
+    margin-top: 10px;
+  }
+}
+
