@@ -25,6 +25,8 @@ import SearchSuggestionsExamples     from '../SearchSuggestions/SearchSuggestion
 import SearchBarExample              from '../SearchBar/SearchBarExamples.jsx'
 import NavbarExample                 from '../Navbar/NavbarExample.jsx'
 import TCFooterExamples              from '../TCFooter/TCFooterExamples.jsx'
+import CarouselExamples              from '../Carousel/CarouselExamples.jsx'
+import SubNavExamples                from '../SubNav/SubNavExamples.jsx'
 
 const Component = () => (
   <Provider store={store}>
