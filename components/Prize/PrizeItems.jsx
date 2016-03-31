@@ -1,13 +1,19 @@
 require('./PrizeItem.scss')
 
 import React from 'react'
+import classNames from 'classnames'
 import PrizeItem from './PrizeItem'
 
 const PrizeItems = ({type,title,items}) => {
+  const itemsClass = classNames({
+    items : true,
+    Bonus : type === 'bonus',
+    Prize : type === 'prize'
+  })
   return (
-    <div className="PrizeSection">
+    <div className="PrizeItems">
         <div className="title">{title}</div>
-        <div className={type === 'bonus' ? 'items Bonus' : 'items Prize'}>
+        <div className={itemsClass}>
           {items.map((item,index) => {
             return <PrizeItem title={item.title} subText={item.subText} key={index}/>
           })}
