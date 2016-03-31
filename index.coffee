@@ -1,4 +1,4 @@
-Router   = require './components/Router/Router.cjsx'
+Router   = require './components/Router/Router'
 
 module.exports =
   default: require './components/FileUploader/FileUploaderContainer.cjsx'
