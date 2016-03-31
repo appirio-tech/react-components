@@ -5,7 +5,7 @@ const TopcoderLogo = ({ width, height }) => {
     <svg width={ width || '135px' } height={ height || '21px' } viewBox="0 0 135 21" version="1.1" xmlns="http://www.w3.org/2000/svg">
       <title>topcoder-logo</title>
       <defs></defs>
-      <g id="Profile-Web" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="Profile-Web" stroke="none" strokeWidth="1" fill="none" fill-rule="evenodd">
         <g id="Profile-v2-Edit-Profile" transform="translate(-20.000000, -14.000000)">
             <g id="logo_topcoder" transform="translate(20.200500, 14.944845)">
                 <g id="Group-5" transform="translate(54.134759, 1.587302)" fill="#57585A">

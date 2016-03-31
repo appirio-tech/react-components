@@ -7,8 +7,8 @@ const HamburgerIcon = ({ width, height, stroke }) => {
       <title>ico-hamburger</title>
       <desc>Created with Sketch.</desc>
       <defs></defs>
-      <g id="Scaling" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
-        <g id="Components---Mobile" transform="translate(-1379.000000, -434.000000)" stroke={ s } stroke-width="2">
+      <g id="Scaling" stroke="none" strokeWidth="1" fill="none" fill-rule="evenodd" strokeLinecap="round" strokeLinejoin="round">
+        <g id="Components---Mobile" transform="translate(-1379.000000, -434.000000)" stroke={ s } strokeWidth="2">
             <g id="ico-mobile-menu-default" transform="translate(1380.000000, 434.000000)">
                 <path d="M0,8 L20,8" id="Stroke-5456"></path>
                 <path d="M0,1 L20,1" id="Stroke-5460"></path>
