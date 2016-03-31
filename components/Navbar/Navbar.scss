@@ -26,12 +26,14 @@ $super-wide: 1376px;
     height: 24px;
     margin-right: 40px;
     flex: 0 0 auto;
+    display: flex;
+    align-items: center;
 
     @media screen and (min-width: $super-wide) {
       width: 155px;
 
       &.non-mobile {
-        display: block;
+        display: flex;
       }
       &.mobile {
         display: none;
@@ -46,7 +48,7 @@ $super-wide: 1376px;
         display: none;
       }
       &.mobile {
-        display: block;
+        display: flex;
       }
     }
   }
@@ -62,23 +64,30 @@ $super-wide: 1376px;
     @media screen and (max-width: $mobile) {
       flex: 0 0 60px;
       order: 2;
-      background-color: $accent-gray;
       width: 60px;
       height: 40px;
       display: flex;
-      margin-right: 10px;
+      margin-right: 0px;
+      justify-content: center;
+      align-items: center;
     }
 
-    .icon-placeholder {
+    &:hover {
+      background-color: $accent-gray;
+
+      .mobile-wrap {
+        svg > g > g {
+          stroke: $white;
+        }
+      }
+    }
+
+    .mobile-wrap {
       display: none;
 
       @media screen and (max-width: $mobile) {
         display: block;
-        height: 25px;
-        width: 25px;
-        background-color: $placeholder-bg;
         margin: auto;
-        cursor: pointer;
       }
     }
 
@@ -127,7 +136,7 @@ $super-wide: 1376px;
       &:hover {
         background-color: $accent-gray;
 
-        .mobile-menu {
+        .mobile-wrap {
           svg > g > g {
             stroke: $white;
           }
@@ -135,7 +144,8 @@ $super-wide: 1376px;
       }
     }
 
-    .mobile-menu {
+    .mobile-wrap {
+      display: none;
 
       @media screen and (max-width: $mobile) {
         display: block;

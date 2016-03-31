@@ -8,6 +8,7 @@ import UserDropdownMenu from '../UserDropdownMenu/UserDropdownMenu'
 import TopcoderLogo from '../Icons/TopcoderLogo'
 import TopcoderMobileLogo from '../Icons/TopcoderMobileLogo'
 import HamburgerIcon from '../Icons/HamburgerIcon'
+import MagnifyGlassIcon from '../Icons/MagnifyGlassIcon'
 
 const primaryNavigationItems = [
   {img: require('./nav-community.svg'), text: 'Community', link: '/community'},
@@ -24,6 +25,7 @@ class Navbar extends Component {
     super(props)
     this.updateSearchSuggestions = this.updateSearchSuggestions.bind(this)
     this.handleTermChange = this.handleTermChange.bind(this)
+    this.handleMobileClick = this.handleMobileClick.bind(this)
     this.state = {searchSuggestions: [], recentTerms: []}
   }
 
@@ -41,10 +43,19 @@ class Navbar extends Component {
     return data
   }
 
+  handleMobileClick(se) {
+    const mobileMenuLink = se.target.querySelector('.mobile-wrap > a')
+    console.log(mobileMenuLink)
+    if (mobileMenuLink) {
+      mobileMenuLink.click()
+    }
+  }
+
   render() {
     const username = this.props.username
     const domain = this.props.domain
     const mobileMenuUrl = this.props.mobileMenuUrl
+    const mobileSearchUrl = this.props.mobileSearchUrl
     return (
       <div className="Navbar flex middle space-between">
         <div className="topcoder-logo non-mobile">
@@ -53,13 +64,13 @@ class Navbar extends Component {
         <div className="topcoder-logo mobile">
           <TopcoderMobileLogo width={40} />
         </div>
-        <div className="search-bar-wrap">
-          <div className="icon-placeholder"></div>
+        <div className="search-bar-wrap" onClick={this.handleMobileClick}>
+          <div className="mobile-wrap"><a href={mobileSearchUrl}><MagnifyGlassIcon width={25} height={25} /></a></div>
           <SearchBar recentTerms={this.state.recentTerms} suggestions={this.state.searchSuggestions} onTermChange={this.handleTermChange} />
         </div>
         <MenuBar items={primaryNavigationItems} orientation="horizontal" />
-        <div className="menu-wrap">
-          <div className="mobile-menu"><a href={mobileMenuUrl}><HamburgerIcon /></a></div>
+        <div className="menu-wrap" onClick={this.handleMobileClick}>
+          <div className="mobile-wrap"><a href={mobileMenuUrl}><HamburgerIcon /></a></div>
           <div className="quick-links-wrap"><QuickLinks domain={domain} /></div>
           <UserDropdownMenu username={username} domain={domain} />
         </div>
@@ -72,11 +83,13 @@ Navbar.propTypes = {
   searchSuggestionsFunc : PropTypes.func.isRequired,
   username              : PropTypes.string,
   domain                : PropTypes.string.isRequired,
-  mobileMenuUrl         : PropTypes.string
+  mobileMenuUrl         : PropTypes.string,
+  mobileSearchUrl       : PropTypes.string
 }
 
 Navbar.defaultProps = {
-  mobileMenuUrl         : '/menu'
+  mobileMenuUrl         : '/menu',
+  mobileSearchUrl       : '/search'
 }
 
 export default Navbar
