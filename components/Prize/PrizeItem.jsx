@@ -2,10 +2,10 @@ require('./PrizeItem.scss')
 
 import React from 'react'
 
-const PrizeItem = (props) => {
+const PrizeItem = ({title,subText}) => {
   return (
     <div className="PrizeItem">
-        <div className="PrizeCircle">{props.title}</div> <span>{props.subText}</span>
+        <div className="PrizeCircle">{title}</div> <span>{subText}</span>
     </div>
   )
 }

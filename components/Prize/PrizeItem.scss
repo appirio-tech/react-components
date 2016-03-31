@@ -1,5 +1,13 @@
 @import 'topcoder/tc-includes';
 
+$gold: #FFD900;
+$silver: #A9BCD4;
+$bronze: #BD731E;
+$gray-30:  #C3C3C8;
+$gray: #47474F;
+$purple: #B47DD6;
+$accent: #59A7FF;
+
 .PrizeItem {
   display:inline-block;
   height: 20px;
@@ -17,14 +25,14 @@
     padding: 1px 4px 1px 4px;
     min-width: 15px;
     max-height: 15px;
-    background: #C3C3C8;
+    background: $gray-30;
     border-radius: 8px;
     text-align: center;
     font-size: 11px;
     line-height: 13px;
     font-family: "Roboto-Black", Arial, Helvetica, sans-serif;
     font-weight: bold;
-    color:  #47474F;
+    color:  $gray;
   }
  
 }
@@ -32,18 +40,18 @@
 .Prize {
   .PrizeItem:nth-child(1) {
     .PrizeCircle{
-      background: #FFD900;
+      background: $gold;
     }
   }
   .PrizeItem:nth-child(2) {
     .PrizeCircle{
-        background: #A9BCD4;
+        background: $silver;
     }
   }
   
   .PrizeItem:nth-child(3) {
     .PrizeCircle{
-        background: #BD731E;
+        background: $bronze;
     }
   }
 }
@@ -51,18 +59,18 @@
 .Bonus {
   .PrizeItem:nth-child(1) {
     .PrizeCircle{
-      background: #B47DD6;
+      background: $purple;
     }
   }
   .PrizeItem:nth-child(2) {
     .PrizeCircle{
-        background: #B47DD6;
+        background: $purple;
     }
   }
   
   .PrizeItem:nth-child(3) {
     .PrizeCircle{
-        background: #59A7FF;
+        background: $accent;
     }
   }
 }
