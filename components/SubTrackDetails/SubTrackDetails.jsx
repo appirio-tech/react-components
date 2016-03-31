@@ -5,15 +5,15 @@ import classNames from 'classnames'
 
 const SubTrackDetails = ({name,code,description,tracks}) => {
   const developClass = classNames(
-    {'verticalLine develop': true},
+    'verticalLine','develop',
     {hidden: tracks.indexOf('develop') === -1 }
   )
   const designClass = classNames(
-    {'verticalLine design': true},
+    'verticalLine','design',
     {hidden: tracks.indexOf('design') === -1}
   )
   const dataScienceClass = classNames(
-    {'verticalLine dataScience': true},
+    'verticalLine','dataScience',
     {hidden: tracks.indexOf('data science') === -1}
   )
     
