@@ -7,6 +7,7 @@ import QuickLinks from '../QuickLinks/QuickLinks'
 import UserDropdownMenu from '../UserDropdownMenu/UserDropdownMenu'
 import TopcoderLogo from '../Icons/TopcoderLogo'
 import TopcoderMobileLogo from '../Icons/TopcoderMobileLogo'
+import HamburgerIcon from '../Icons/HamburgerIcon'
 
 const primaryNavigationItems = [
   {img: require('./nav-community.svg'), text: 'Community', link: '/community'},
@@ -14,7 +15,7 @@ const primaryNavigationItems = [
   {img: require('./nav-learn.svg'), text: 'Learn', link: '/learn'}
 ]
 
-// properties: username, domain, searchSuggestionsFunc
+// properties: username, domain, mobileMenuUrl, searchSuggestionsFunc
 // searchSuggestionsFunc should return a Promise object
 
 class Navbar extends Component {
@@ -43,6 +44,7 @@ class Navbar extends Component {
   render() {
     const username = this.props.username
     const domain = this.props.domain
+    const mobileMenuUrl = this.props.mobileMenuUrl
     return (
       <div className="Navbar flex middle space-between">
         <div className="topcoder-logo non-mobile">
@@ -56,8 +58,8 @@ class Navbar extends Component {
           <SearchBar recentTerms={this.state.recentTerms} suggestions={this.state.searchSuggestions} onTermChange={this.handleTermChange} />
         </div>
         <MenuBar items={primaryNavigationItems} orientation="horizontal" />
-        <div className="collapse-group">
-          <div className="icon-placeholder"></div>
+        <div className="menu-wrap">
+          <div className="mobile-menu"><a href={mobileMenuUrl}><HamburgerIcon /></a></div>
           <div className="quick-links-wrap"><QuickLinks domain={domain} /></div>
           <UserDropdownMenu username={username} domain={domain} />
         </div>
@@ -69,7 +71,12 @@ class Navbar extends Component {
 Navbar.propTypes = {
   searchSuggestionsFunc : PropTypes.func.isRequired,
   username              : PropTypes.string,
-  domain                : PropTypes.string.isRequired
+  domain                : PropTypes.string.isRequired,
+  mobileMenuUrl         : PropTypes.string
+}
+
+Navbar.defaultProps = {
+  mobileMenuUrl         : '/menu'
 }
 
 export default Navbar
