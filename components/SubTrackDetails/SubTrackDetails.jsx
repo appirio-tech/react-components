@@ -2,16 +2,16 @@ require('./SubTrackDetails.scss')
 
 import React from 'react'
 
-const SubTrackDetails = (props) => {
+const SubTrackDetails = ({name,code,description,tracks}) => {
   return (
     <div className="SubTrackDetails">
     <div className="heading">
-        <div className={props.tracks.indexOf('develop') === -1 ? 'hidden' : 'verticalLine develop' }></div>
-        <div className={props.tracks.indexOf('design') === -1 ? 'hidden' : 'verticalLine design' }></div> 
-        <div className={props.tracks.indexOf('data science') === -1 ? 'hidden' : 'verticalLine dataScience' }></div> 
-        <div className="title">{props.name} ({props.code})</div>
+        <div className={tracks.indexOf('develop') === -1 ? 'hidden' : 'verticalLine develop' }></div>
+        <div className={tracks.indexOf('design') === -1 ? 'hidden' : 'verticalLine design' }></div> 
+        <div className={tracks.indexOf('data science') === -1 ? 'hidden' : 'verticalLine dataScience' }></div> 
+        <div className="title">{name} ({code})</div>
         </div>
-    <p className={props.description ? '' : 'hidden' }>{props.description}</p>
+    <p className={description ? '' : 'hidden' }>{description}</p>
     </div>
   )
 }

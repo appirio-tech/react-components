@@ -73,7 +73,7 @@ const Component = () => (
 
         <Route path="/TCFooterExamples" component={TCFooterExamples} />
 
-	<Route path="/SubTrackDetailsExample" component={SubTrackDetailsExample} />
+        <Route path="/SubTrackDetailsExample" component={SubTrackDetailsExample} />
       </Route>
     </Router>
   </Provider>
