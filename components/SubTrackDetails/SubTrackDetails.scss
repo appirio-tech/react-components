@@ -1,5 +1,9 @@
 @import "topcoder/tc-includes";
 
+$develop-bar-color: #21B2F1;
+$design-bar-color: #60C700;
+$dataScience-bar-color: #FB7D22;
+$track-desc-text-color: #DCDCE0;
 
 .SubTrackDetails{
   .heading {
@@ -16,15 +20,15 @@
 	}
          
     .develop {
-      background-color: #21B2F1
+      background-color: $develop-bar-color;
     }
     
     .design {
-      background-color: #60C700
+      background-color: $design-bar-color
     }
     
     .dataScience {
-      background-color: #FB7D22
+      background-color: $dataScience-bar-color
     }
   }
         
@@ -34,7 +38,7 @@
     line-height: 18px;
     margin-top: 7px;
     font-family: "Roboto-Regular", Arial, Helvetica, sans-serif;
-    color: #DCDCE0;
+    color: $track-desc-text-color;
   }
     
   .verticalLine {
