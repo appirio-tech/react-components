@@ -1,7 +1,7 @@
 require('./UserDropdownMenu.scss')
 
 import React from 'react'
-import Avatar from '../Avatar/Avatar.cjsx'
+import Avatar from '../Avatar/Avatar'
 import Dropdown from '../Dropdown/Dropdown'
 
 
