@@ -25,6 +25,7 @@ import SearchSuggestionsExamples     from '../SearchSuggestions/SearchSuggestion
 import SearchBarExample              from '../SearchBar/SearchBarExamples.jsx'
 import NavbarExample                 from '../Navbar/NavbarExample.jsx'
 import TCFooterExamples              from '../TCFooter/TCFooterExamples.jsx'
+import TaggedValueExamples           from '../TaggedValue/TaggedValueExamples.jsx'
 
 const Component = () => (
   <Provider store={store}>
@@ -71,6 +72,8 @@ const Component = () => (
         <Route path="/NavbarExample" component={NavbarExample} />
 
         <Route path="/TCFooterExamples" component={TCFooterExamples} />
+        
+        <Route path="/TaggedValueExamples" component={TaggedValueExamples} />
       </Route>
     </Router>
   </Provider>

@@ -1,0 +1,49 @@
+@import 'topcoder/tc-includes';
+
+$gray-30:  #C3C3C8;
+$gray: #47474F;
+$purple: #B47DD6;
+$accent: #59A7FF;
+
+.TaggedValue {
+  display:inline-block;
+  height: 20px;
+  .tagged-value-bg {
+    display: inline;
+    padding: 1px 4px 1px 4px;
+    min-width: 15px;
+    max-height: 15px;
+    background: $accent;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 11px;
+    line-height: 13px;
+    font-family: "Roboto-Black", Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color:  $gray;
+    padding: 1px 7px 2px 7px;
+  }
+  span {
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    line-height: 15px;
+    color: $white;
+    font-weight: 500;
+    padding-left: 6px;
+    padding-right: 10px;
+  }
+}
+.count-one {
+  .tagged-value-bg {
+    background: $purple;
+  }
+}
+.TaggedValueList {
+    .items{
+        white-space: normal;
+    }
+    .items-scroll {
+        overflow-x: scroll;
+        white-space: nowrap;
+    }
+}
