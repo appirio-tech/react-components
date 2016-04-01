@@ -28,7 +28,15 @@ To contribute to the repository, please create a feature branch off of the dev b
 
 ***Checkout the code and comments in `/components/ExampleComponent` for an example functional React component, `.scss` file, and tests.***
 
+React
+  - Most components should be stateless and use the [functional component](https://facebook.github.io/react/blog/2015/10/07/react-v0.14.html#stateless-functional-components) pattern
+  - If you need a stateful component, use [ES6 classes](http://facebook.github.io/react/docs/reusable-components.html#es6-classes)
+  - Always use [PropTypes](http://facebook.github.io/react/docs/reusable-components.html#prop-validation) for all props
+  - Use `classnames` for dynamic classes. See `ExampleComponent` for an example.
+
 JavaScript
+  - Make sure your variable names are easy to understand and descriptive. No acronyms, except for common ones like `i` or `err`.
+  - Use `lodash` and functional JavaScript if it makes the code clearer.
   - Please use ES2015 syntax whenever possible
   - Specific rules are enforced via `.eslintrc.json`
   - Run `npm run lint` to check your code against the linter
@@ -37,6 +45,7 @@ SCSS Files
   - This repository uses flexbox for arranging content
   - The use of any extra CSS libraries should be discussed with the team
   - Use SCSS syntax, but do not overly nest
+  - Use 2 spaces for indentation
   - Use variables, mixins, and classes as much as possible from our [style guide](https://github.com/appirio-tech/styles/tree/master/styles/topcoder)
   - To include variables from the style guide mentioned above, place `@import 'topcoder/tc-includes;'` at the top of your `.scss` file. Locally, you can look in `./node_modules/appirio-styles/styles/topcoder/_tc-colors.scss` to find many colors already defined (e.g. `#A3A3AE` => `$accent-gray`)
   - When adding media queries, nest them inside the element, rather than creating a new section
