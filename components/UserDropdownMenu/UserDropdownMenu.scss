@@ -23,11 +23,13 @@ $username-color: #737380;
 
   .dropdown-menu-header {
     cursor: pointer;
+    display: flex;
+    align-items: center;
     
     .user-image {
       display: inline-block;
-      width: 30px;
-      height: 30px;
+      width: 35px;
+      height: 35px;
       margin-right: 10px;
       border-radius: 50%;
       vertical-align: middle;
@@ -38,8 +40,11 @@ $username-color: #737380;
       font-size: 14px;
       line-height: 16px;
       color: $username-color;
+      @include ellipsis;
+      margin: 0px;
       margin-right: 10px;
       display: inline-block;
+      overflow: hidden;
 
       @media screen and (max-width: 768px) {
         display: none;
@@ -48,7 +53,7 @@ $username-color: #737380;
 
     .dropdown-arrow {
       position: relative;
-      top: -2px;
+      top: 2px;
       display: inline-block;
     }
   }
