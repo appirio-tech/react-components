@@ -5,7 +5,7 @@ import React from 'react'
 const PrizeItem = ({title,subText}) => {
   return (
     <div className="PrizeItem">
-        <div className="PrizeCircle">{title}</div> <span>{subText}</span>
+        <div className="prize-circle">{title}</div> <span>{subText}</span>
     </div>
   )
 }

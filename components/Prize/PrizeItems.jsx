@@ -7,8 +7,8 @@ import PrizeItem from './PrizeItem'
 const PrizeItems = ({type,title,items}) => {
   const itemsClass = classNames({
     items : true,
-    Bonus : type === 'bonus',
-    Prize : type === 'prize'
+    bonus : type === 'bonus',
+    prize : type === 'prize'
   })
   return (
     <div className="PrizeItems">
