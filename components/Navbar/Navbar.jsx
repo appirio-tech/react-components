@@ -16,7 +16,7 @@ const primaryNavigationItems = [
   {img: require('./nav-learn.svg'), text: 'Learn', link: '/learn'}
 ]
 
-// properties: username, domain, mobileMenuUrl, searchSuggestionsFunc
+// properties: username, userImage, domain, mobileMenuUrl, mobileSearchUrl, searchSuggestionsFunc
 // searchSuggestionsFunc should return a Promise object
 
 class Navbar extends Component {

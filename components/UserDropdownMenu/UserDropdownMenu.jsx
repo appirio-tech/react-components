@@ -1,11 +1,11 @@
 require('./UserDropdownMenu.scss')
 
-import React from 'react'
+import React, {PropTypes} from 'react'
 import Avatar from '../Avatar/Avatar'
 import Dropdown from '../Dropdown/Dropdown'
 
 
-const UserDropdownMenu = ({username, userImage, domain}) => {
+const UserDropdownMenu = ({username, userImage, domain, loginUrl, registerUrl}) => {
 
   const userDropdownLists = [
     [
@@ -24,8 +24,8 @@ const UserDropdownMenu = ({username, userImage, domain}) => {
 
   const publicDOM = (
     <div className="UserDropdownMenu non-logged-in">
-      <button className="login-button tc-btn tc-btn-s tc-btn-ghost">Log in</button>
-      <button className="join-button tc-btn tc-btn-s">Join</button>
+      <a className="login-button tc-btn tc-btn-s tc-btn-ghost" href={loginUrl} >Log in</a>
+      <a className="join-button tc-btn tc-btn-s" href={registerUrl} >Join</a>
     </div>
   )
   
@@ -57,6 +57,19 @@ const UserDropdownMenu = ({username, userImage, domain}) => {
   )
 
   return username ? loggedInDOM : publicDOM
+}
+
+UserDropdownMenu.propTypes = {
+  username      : PropTypes.string,
+  userImage     : PropTypes.string,
+  domain        : PropTypes.string.isRequired,
+  loginUrl      : PropTypes.string,
+  registerUrl   : PropTypes.string
+}
+
+UserDropdownMenu.defaultProps = {
+  loginUrl      : '/login',
+  registerUrl   : '/register'
 }
 
 export default UserDropdownMenu
