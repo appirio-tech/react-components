@@ -1,5 +1,3 @@
-Router   = require './components/Router/Router'
-
 module.exports =
   default: require './components/FileUploader/FileUploaderContainer.cjsx'
   NavBar: require './components/Navbar/Navbar.jsx'
