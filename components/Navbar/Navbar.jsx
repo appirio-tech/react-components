@@ -54,6 +54,7 @@ class Navbar extends Component {
   render() {
     const username = this.props.username
     const userImage = this.props.userImage
+    console.log(userImage)
     const domain = this.props.domain
     const mobileMenuUrl = this.props.mobileMenuUrl
     const mobileSearchUrl = this.props.mobileSearchUrl
@@ -83,6 +84,7 @@ class Navbar extends Component {
 Navbar.propTypes = {
   searchSuggestionsFunc : PropTypes.func.isRequired,
   username              : PropTypes.string,
+  userImage             : PropTypes.string,
   domain                : PropTypes.string.isRequired,
   mobileMenuUrl         : PropTypes.string,
   mobileSearchUrl       : PropTypes.string
