@@ -13,10 +13,11 @@ $username-color: #737380;
 
   &.non-logged-in {
     .login-button {
-
+      display: inline-block;
     }
 
     .join-button {
+      display: inline-block;
       margin-left: 20px;
     }
   }
