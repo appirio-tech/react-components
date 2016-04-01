@@ -127,6 +127,8 @@ $super-wide: 1376px;
   .menu-wrap {
     flex: 0 0 auto;
     position: relative;
+    display: flex;
+    align-items: center;
 
     @media screen and (max-width :$mobile) {
       width: 40px;

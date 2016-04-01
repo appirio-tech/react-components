@@ -54,7 +54,6 @@ class Navbar extends Component {
   render() {
     const username = this.props.username
     const userImage = this.props.userImage
-    console.log(userImage)
     const domain = this.props.domain
     const mobileMenuUrl = this.props.mobileMenuUrl
     const mobileSearchUrl = this.props.mobileSearchUrl
