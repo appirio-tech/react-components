@@ -65,4 +65,9 @@ const ProgressBar = ({completionPercentage,checkPoints}) => {
   )
 }
 
+ProgressBar.propTypes = {
+  completionPercentage :  React.PropTypes.string,
+  checkPoints :  React.PropTypes.array
+}
+
 export default ProgressBar
