@@ -4,37 +4,35 @@ import React from 'react'
 import classNames from 'classnames'
 
 const ProgressBar = ({completionPercentage,checkPoints}) => {
-  const completionLength = {
-    width : completionPercentage
-  }
   function getCheckPointPositionStyle(percentage){
-      const style = {
-        left:percentage + '%'
-      };
-      return style;
+    const style = {
+      left:percentage + '%'
+    }
+    return style
   }
+  
   function getCheckPointPositionScaledStyle(percentage){
-      percentage = Number.parseInt(percentage)*0.8
-      const style = {
-        left:percentage + '%'
-      };
-      return style;
+    percentage = Number.parseInt(percentage)*0.8
+    const style = {
+      left:percentage + '%'
+    }
+    return style
   }
   
   function getLengthScaledStyle(percentage){
-      const style = {
-        width:percentage + '%'
-      };
-      return style;
+    const style = {
+      width:percentage + '%'
+    }
+    return style
   }
   
   function checkPointStyle(checkPointPercentage){
-      checkPointPercentage = Number.parseInt(checkPointPercentage);
-      completionPercentage = Number.parseInt(completionPercentage);
-      const checkPointClass = classNames(
-          'circle',{ completed : ( checkPointPercentage <= completionPercentage)}
-      )
-      return checkPointClass;
+    checkPointPercentage = Number.parseInt(checkPointPercentage)
+    completionPercentage = Number.parseInt(completionPercentage)
+    const checkPointClass = classNames(
+      'circle',{ completed : ( checkPointPercentage <= completionPercentage)}
+    )
+    return checkPointClass
   }
   
   return (
