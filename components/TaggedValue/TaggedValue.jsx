@@ -15,7 +15,7 @@ const TaggedValue = ({title,subText,style,count}) => {
   return (
     <div className={taggedValueClass}>
       <div className="tagged-value-bg">{title}</div>
-      <span>{subText}</span>
+      <span className="subText">{subText}</span>
     </div>
   )
 }

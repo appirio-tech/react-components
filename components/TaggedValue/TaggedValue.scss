@@ -10,7 +10,7 @@ $accent: #59A7FF;
   height: 20px;
   .tagged-value-bg {
     display: inline;
-    padding: 1px 4px 1px 4px;
+    padding: 4px 4px 1px 4px;
     min-width: 15px;
     max-height: 15px;
     background: $accent;
@@ -23,7 +23,7 @@ $accent: #59A7FF;
     color:  $gray;
     padding: 1px 7px 2px 7px;
   }
-  span {
+  .subText {
     font-family: "Roboto", Arial, Helvetica, sans-serif;
     font-size: 13px;
     line-height: 15px;
