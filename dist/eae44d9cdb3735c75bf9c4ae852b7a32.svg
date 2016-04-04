@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="-287 379 37 36"
+	 style="enable-background:new -287 379 37 36;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;}
+	.st1{fill:none;stroke:#FF0066;stroke-width:3;stroke-linejoin:round;}
+	.st2{fill:#FF0066;}
+</style>
+<title>icon-alert-red</title>
+<desc>Created with Sketch.</desc>
+<g id="Page-1_1_" sketch:type="MSPage">
+	<g id="icon-alert-red" sketch:type="MSArtboardGroup">
+		<g id="Page-1" transform="translate(2.000000, 2.000000)" sketch:type="MSLayerGroup">
+			<path id="Fill-1" sketch:type="MSShapeGroup" class="st0" d="M-286.7,408.4l16.1-29.1l16.1,29.1H-286.7z"/>
+			<g id="Group-6" sketch:type="MSShapeGroup">
+				<path id="Stroke-2" class="st1" d="M-286.7,408.4l16.1-29.1l16.1,29.1H-286.7L-286.7,408.4z"/>
+				<path id="Fill-4" class="st2" d="M-270.8,399.9l-0.3-9h1.8l-0.3,9H-270.8z M-271.3,402.6c0-0.7,0.5-1.2,1.1-1.2
+					c0.7,0,1.1,0.5,1.1,1.2c0,0.7-0.4,1.2-1.1,1.2C-270.8,403.8-271.3,403.3-271.3,402.6L-271.3,402.6z"/>
+			</g>
+		</g>
+	</g>
+</g>
+</svg>

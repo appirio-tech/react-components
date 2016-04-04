@@ -78,9 +78,9 @@ const Component = () => (
         <Route path="/TaggedValueExamples" component={TaggedValueExamples} />
 
         <Route path="/SubTrackDetailsExample" component={SubTrackDetailsExample} />
-
-	    <Route path="/PrizeExamples" component={PrizeExamples}/>
-
+        
+        <Route path="/PrizeExamples" component={PrizeExamples}/>
+        
       </Route>
     </Router>
   </Provider>
