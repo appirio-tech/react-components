@@ -24,7 +24,7 @@
     "lint": "eslint --format table --ext .js,.jsx .",
     "test": "cross-env NODE_ENV=test mocha --reporter progress --compilers js:babel-core/register --require ignore-styles --recursive \"./components/**/*.spec.js\"",
     "test:watch": "npm run test -- --watch",
-    "build-navbar": "webpack --build --tc --config navbar.webpack.config.coffee; cp index.html dist/"
+    "build-navbar": "webpack --build --tc --config navbar.webpack.config.coffee;"
   },
   "dependencies": {
     "appirio-styles": "0.0.26",
