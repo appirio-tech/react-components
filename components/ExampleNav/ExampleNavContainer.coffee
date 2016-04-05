@@ -27,6 +27,7 @@ navs =
     'LoaderExamples',
     'PanelExamples',
     'StandardListItemExamples'
+    'TooltipExamples'
   ]
   ManageSteps: [
     'ManageStepsExamples'

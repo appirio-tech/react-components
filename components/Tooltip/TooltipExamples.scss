@@ -1,0 +1,48 @@
+.tooltip-examples-container {
+  .hastooltip {
+    position: relative;
+    width: 150px;
+    background-color: #999;
+    height: 150px;
+    margin: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    padding: 15px;
+
+    &#tooltip-1 {
+      float: left;
+    }
+
+    &#tooltip-2 {
+      float: right;
+      width: 50%;
+      background-color: #C00;
+    }
+
+    &#tooltip-3 {
+      clear: both;
+      margin-left: 25%;
+      background-color: #CC0;
+
+    }
+
+    &#tooltip-4 {
+      margin-left: 50%;
+      background-color: #0C0;
+    }
+
+    &#tooltip-5 {
+      margin-left: 75%;
+      background-color: #00C;
+    }
+
+    &#tooltip-6 {
+      margin-left: calc(100% - 200px);
+      padding: 0;
+      height: 200px;
+      width: 200px;
+    }
+  }
+}
