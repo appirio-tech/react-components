@@ -1,6 +1,7 @@
 require('./Tooltip.scss')
 
 import React, { Component, PropTypes } from 'react'
+import classNames from 'classnames'
 import ReactDOM from 'react-dom'
 
 class Tooltip extends Component {
@@ -124,7 +125,6 @@ class Tooltip extends Component {
   }
 
   render() {
-    const tooltipTheme = this.props.theme
     const body = (
       <div className="tooltip-body">
           {React.Children.map(this.props.children, (child) => {
@@ -132,10 +132,9 @@ class Tooltip extends Component {
           })}
       </div>
     )
-    let ttClasses = 'Tooltip tooltip-hide' + ' ' + tooltipTheme
-    if (typeof this.props.className !== 'undefined') {
-      ttClasses += ' ' + this.props.className
-    }
+    const ttClasses = classNames(
+      'Tooltip', 'tooltip-hide', this.props.theme, this.props.className
+    )
     return (
       <div className={ttClasses}>
         <div className="tooltip-container">
