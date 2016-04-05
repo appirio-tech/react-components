@@ -1,0 +1,90 @@
+@import 'topcoder/tc-includes';
+
+$accent: #59A7FF;
+$gray: #47474F;
+$gray-30:  #C3C3C8;
+$light-gray: #DCDCE0;
+
+.ProgressBar {
+  .progress-box {
+    position: absolute;
+    width: 400px;
+    margin: auto;
+        
+    .checkpoint-line {
+      display: block;
+      margin-bottom: 5px;
+      height: 20px;
+            
+      .checkpoint-text {
+        position: absolute;
+        float: left;
+        font-family: "Roboto", Arial, Helvetica, sans-serif;
+        font-weight: 500;
+        font-size: 13px;
+        line-height: 15px;
+        color: $white
+      }
+    }
+    .progress-ui {
+      width: 80%;
+      position: relative;
+      height: 8px;
+      
+      .progress-line {
+        top:0px;
+        position: absolute;
+        height: 4px;
+        width: 100%;
+        background-color: $light-gray;
+        display: inline-block;
+       }
+    
+       .completion-line {
+         top:0px;
+         left:0px;
+         position: absolute;
+         height: 4px;
+         background-color: $accent;
+         display: inline-block;
+         border-right: 4px solid $gray;
+       }
+
+       .progress-circles  {
+         width: 100%;
+         top:-5px;
+         display: block;
+         position: absolute;
+
+        .circle {
+           position: absolute;
+           float: left;
+           background: $light-gray;
+           border: 3px solid $gray;
+           width: 13px;
+           height: 13px;
+           border-radius: 50%;
+        }
+        .completed {
+           background: $accent;
+        }
+      }
+    }
+        
+    .time-line {
+      display: block;
+      margin-bottom: 5px;
+      height: 20px;
+      width: 100%;
+      
+      .time-line-text {
+         position: absolute;
+         float: left;
+         font-family: "Roboto", Arial, Helvetica, sans-serif;
+         font-size: 11px;
+         line-height: 15px;
+         color: $gray-30;
+      }    
+    }
+  }
+}
