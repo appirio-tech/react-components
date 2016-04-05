@@ -6,7 +6,7 @@ const suggestions = []
 
 const handleTermChange = (searchBar, oldTerm, searchTerm, callback) => {
   suggestions.splice(0, suggestions.length)
-  setTimeout(function() {
+  setTimeout(() => {
     if (searchTerm && 'java'.indexOf(searchTerm.toLowerCase()) !== -1) {
       suggestions.push('Java')
       suggestions.push('JavaScript')
