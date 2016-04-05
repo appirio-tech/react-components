@@ -1,0 +1,27 @@
+$gray: #47474F;
+$blue : #59A7FF;
+$purple: #B47DD6;
+
+.sample1 {
+    .tagged-value-bg {
+        background-color: $purple;
+        color: white;
+    }
+    .subText {
+        color: white;
+    }
+}
+
+.sample2 {
+    .tagged-value-bg {
+         color: $gray;
+    }
+    .subText{
+        color: lightblue;
+    }
+}
+.divStyle {
+   background-color:#47474F;
+   padding:20px;
+   width:320px
+}
