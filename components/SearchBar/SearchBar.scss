@@ -136,6 +136,14 @@ $active-icon-wrap-bg: #888894;
     }
   }
 
+  .loading {
+    position: absolute;
+    top: 25px;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+
   .SearchSuggestions {
     display: none;
     position: absolute;
