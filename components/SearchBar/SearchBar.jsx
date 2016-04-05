@@ -2,6 +2,7 @@ require('./SearchBar.scss')
 
 import React, {Component, PropTypes} from 'react'
 import SearchSuggestions from '../SearchSuggestions/SearchSuggestions'
+import Loader from '../Loader/Loader'
 
 //states: empty, filled, focused
 
@@ -83,7 +84,9 @@ class SearchBar extends Component {
     } else if(searchState === 'filled') {
       classString += ' state-filled'
     }
-    const results = <SearchSuggestions recentSearch={ recentList } popularSearch={ popularForDisplay } />
+    const results = this.state.loading === true
+      ? <div className="loading"><Loader /></div>
+      : <SearchSuggestions recentSearch={ recentList } popularSearch={ popularForDisplay } />
     return (
       <div className={ classString }>
         <input className="search-bar__text" onFocus={ this.onFocus } onBlur={ this.onBlur } onChange={ this.onChange } ref="searchValue" />

@@ -3,6 +3,7 @@ require('./SearchSuggestions.scss')
 import React, { Component } from 'react'
 import StandardListItem from '../StandardListItem/StandardListItem'
 import Panel from '../Panel/Panel'
+import classNames from 'classnames'
 
 class SearchSuggestions extends Component {
   constructor(props) {
@@ -64,9 +65,13 @@ class SearchSuggestions extends Component {
 				</Panel>
 			</div>
 		)
+    const ssClasses = classNames(
+      'SearchSuggestions',
+      { 'empty-state' : recentList && !popularList }
+    )
 
     return (
-			<div className={ ((recentList && !popularList) ? 'empty-state' : null) + ' SearchSuggestions'}>
+			<div className={ ssClasses }>
 				{ popularSearch }
 				{ recentSearches }
 			</div>
