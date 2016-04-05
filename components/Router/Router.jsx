@@ -27,6 +27,7 @@ import NavbarExample                 from '../Navbar/NavbarExample.jsx'
 import TCFooterExamples              from '../TCFooter/TCFooterExamples.jsx'
 import SubTrackDetailsExample        from '../SubTrackDetails/SubTrackDetailsExample.jsx'
 import PrizeExamples                 from '../Prize/PrizeExamples.jsx'
+import TooltipExamples               from '../Tooltip/TooltipExamples.jsx'
 
 const Component = () => (
   <Provider store={store}>
@@ -75,6 +76,8 @@ const Component = () => (
         <Route path="/TCFooterExamples" component={TCFooterExamples} />
 
         <Route path="/SubTrackDetailsExample" component={SubTrackDetailsExample} />
+
+        <Route path="/TooltipExamples" component={TooltipExamples} />
 
 	<Route path="/PrizeExamples" component={PrizeExamples}/>
       </Route>

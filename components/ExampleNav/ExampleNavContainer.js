@@ -24,7 +24,8 @@ const navs = {
     'ImageViewerExamples',
     'LoaderExamples',
     'PanelExamples',
-    'StandardListItemExamples'
+    'StandardListItemExamples',
+    'TooltipExamples'
   ],
   ManageSteps: [
     'ManageStepsExamples',
