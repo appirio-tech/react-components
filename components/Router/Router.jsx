@@ -27,11 +27,8 @@ import NavbarExample                 from '../Navbar/NavbarExample.jsx'
 import TCFooterExamples              from '../TCFooter/TCFooterExamples.jsx'
 import SubTrackDetailsExample        from '../SubTrackDetails/SubTrackDetailsExample.jsx'
 import PrizeExamples                 from '../Prize/PrizeExamples.jsx'
-<<<<<<< HEAD
 import TooltipExamples               from '../Tooltip/TooltipExamples.jsx'
-=======
 import ProgressBarExample            from '../ProgressBar/ProgressBarExample.jsx'
->>>>>>> e0911466826b4ddeb7983645e99390e6da1abc15
 
 const Component = () => (
   <Provider store={store}>
