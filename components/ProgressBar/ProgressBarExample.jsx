@@ -1,7 +1,7 @@
-require('./ProgressBarExample.scss')
-
 import React from 'react'
 import ProgressBar from './ProgressBar'
+
+require('./ProgressBarExample.scss')
 
 const progressBarData = {
   completionPercentage : '56',

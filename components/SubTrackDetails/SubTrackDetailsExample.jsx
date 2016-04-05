@@ -22,7 +22,7 @@ const challengeDetails3 = {
   name : 'First To Finish',
   code : 'F2F',
   description : 'Specific challenge type where the first to submit a passable solution is the winner.',
-  tracks : ['develop','data science']
+  tracks : ['develop', 'data science']
 }
 
 const challengeDetails4 = {

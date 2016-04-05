@@ -1,9 +1,9 @@
-require('./TaggedValue.scss')
-
 import React from 'react'
 import classNames from 'classnames'
 
-const TaggedValue = ({title,subText,style,count}) => {  
+require('./TaggedValue.scss')
+
+const TaggedValue = ({title, subText, style, count}) => {
   const taggedValueClass = classNames(
     'TaggedValue',
     { [`${style}`]: style,
