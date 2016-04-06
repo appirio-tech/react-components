@@ -55,7 +55,6 @@ class SearchBar extends Component {
     let popularForDisplay = []
 
     if(searchValue) {
-      console.log(popularList)
       for(let i = 0; i < popularList.length; i++) {
         const idx = popularList[i].toLowerCase().indexOf(searchValue.toLowerCase())
         // show typeahead hint only if the search term matched at 0 index

@@ -45,7 +45,6 @@ class Navbar extends Component {
 
   handleMobileClick(se) {
     const mobileMenuLink = se.target.querySelector('.mobile-wrap > a')
-    console.log(mobileMenuLink)
     if (mobileMenuLink) {
       mobileMenuLink.click()
     }
