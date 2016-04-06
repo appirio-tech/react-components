@@ -68,20 +68,4 @@ $tc-gray-80: #47474f;
       }
     }
   }
-  //custom theme
-  &.blue-round {
-    .tooltip-container {
-      background-color: #0000CC;
-      border: 3px solid #000;
-      -webkit-border-radius: 50%;
-      -moz-border-radius: 50%;
-      border-radius: 50%;
-      .tooltip-pointer {
-        background-color: #0000CC;
-      }
-      .tooltip-body {
-        color: #FFF;
-      }
-    }
-  }
 }
