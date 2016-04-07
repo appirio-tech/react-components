@@ -3,11 +3,13 @@ node_js:
 - 5.5.0
 install:
 - npm install
+before_script:
+  chmod +x setenv.sh && ./setenv.sh
 script:
 - npm run lint && npm run build-navbar
 sudo: false
 before_deploy:
-- chmod +x setenv.sh && ./setenv.sh && npm-prepublish --verbose
+- npm-prepublish --verbose
 deploy:
 - provider: npm
   email: "$NPM_EMAIL"
