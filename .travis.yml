@@ -4,10 +4,10 @@ node_js:
 install:
 - npm install
 script:
-- npm run lint
+- npm run lint && npm run build-navbar
 sudo: false
 before_deploy:
-- chmod +x setenv.sh; ./setenv.sh; npm-prepublish --verbose
+- chmod +x setenv.sh && ./setenv.sh && npm-prepublish --verbose
 deploy:
 - provider: npm
   email: "$NPM_EMAIL"
