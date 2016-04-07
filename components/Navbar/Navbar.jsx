@@ -56,13 +56,14 @@ class Navbar extends Component {
     const domain = this.props.domain
     const mobileMenuUrl = this.props.mobileMenuUrl
     const mobileSearchUrl = this.props.mobileSearchUrl
+    const homePageUrl = '//' + domain
     return (
       <div className="Navbar flex middle space-between">
         <div className="topcoder-logo non-mobile">
-          <TopcoderLogo width={155}/>
+          <a href={homePageUrl}><TopcoderLogo width={155}/></a>
         </div>
         <div className="topcoder-logo mobile">
-          <TopcoderMobileLogo width={40} />
+          <a href={homePageUrl}><TopcoderMobileLogo width={40} /></a>
         </div>
         <div className="search-bar-wrap" onClick={this.handleMobileClick}>
           <div className="mobile-wrap"><a href={mobileSearchUrl}><MagnifyGlassIcon width={25} height={25} /></a></div>
