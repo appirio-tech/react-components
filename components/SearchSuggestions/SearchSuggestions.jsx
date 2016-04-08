@@ -1,10 +1,11 @@
 require('./SearchSuggestions.scss')
 
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import StandardListItem from '../StandardListItem/StandardListItem'
 import Panel from '../Panel/Panel'
 import classNames from 'classnames'
 
+// properties: onSuggestionSelect, recentSearch, popularList
 class SearchSuggestions extends Component {
   constructor(props) {
     super(props)
@@ -12,9 +13,36 @@ class SearchSuggestions extends Component {
     this.state = { iSEmpty: true }
   }
 
+  handleClick(term, evt) {
+    evt.stopPropagation()
+    this.props.onSuggestionSelect.apply(this, [term])
+  }
+
   render() {
     const recentList = this.props.recentSearch
     const popularList = this.props.popularSearch
+
+    const suggestionItem = (term, i) => {
+      let labelDOM = term
+      if (this.props.searchTerm.length > 0) {
+        const idx = term.toLowerCase().indexOf(searchTerm.toLowerCase())
+        if (idx !== -1) {
+          labelDOM = (
+            <span>
+              { term.substring(0, idx) }
+              <strong>{ searchTerm }</strong>
+              { term.substring(idx + searchTerm.length) }
+            </span>
+          )
+        }
+      }
+   
+      return (
+        <li key={ i } onClick={ this.handleClick.bind(this, term) }>
+          <StandardListItem labelText={ labelDOM } showIcon={ false } />
+        </li>
+      )
+    }
 
     const recentSearches = !recentList ? '' : (
 			<div className="recent-search-suggestions">
@@ -29,11 +57,7 @@ class SearchSuggestions extends Component {
 					</div>
 					<div className="panel-body">
 						<ul className="search-suggestion-result-list">
-							{
-								!recentList ? '' : recentList.map((search, i) => {
-  return <li key={ i }><StandardListItem labelText={ search } showIcon={ false } /></li>
-								}) 
-							}
+							{	recentList.map(suggestionItem) }
 						</ul>
 							{
 								popularList ? '' :  (
@@ -55,11 +79,7 @@ class SearchSuggestions extends Component {
 					</div>
 					<div className="panel-body">
 						<ul className="search-suggestion-result-list">
-							{
-								popularList.map((search, i) => {
-  return <li key={ i }><StandardListItem labelText={ search } showIcon={ false } /></li>
-								}) 
-							}
+							{ popularList.map(suggestionItem) }
 						</ul>
 					</div>
 				</Panel>
@@ -77,6 +97,19 @@ class SearchSuggestions extends Component {
 			</div>
 		)
   }
+}
+
+SearchSuggestions.propTypes = {
+  onSuggestionSelect    : PropTypes.func.isRequired,
+  recentSearch          : PropTypes.array,
+  popularList           : PropTypes.array,
+  searchTerm            : PropTypes.string
+}
+
+SearchSuggestions.defaultProps = {
+  recentSearch          : [],
+  popularList           : [],
+  searchTerm            : ''
 }
 
 export default SearchSuggestions

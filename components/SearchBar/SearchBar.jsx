@@ -1,8 +1,10 @@
 require('./SearchBar.scss')
 
 import React, {Component, PropTypes} from 'react'
+import ReactDOM from 'react-dom'
 import SearchSuggestions from '../SearchSuggestions/SearchSuggestions'
 import Loader from '../Loader/Loader'
+import classNames from 'classnames'
 
 //states: empty, filled, focused
 
@@ -11,21 +13,46 @@ class SearchBar extends Component {
     super(props)
     this.state = { searchState: 'empty' }
     this.onFocus = this.onFocus.bind(this)
-    this.onBlur = this.onBlur.bind(this)
     this.onChange = this.onChange.bind(this)
+    this.onKeyUp = this.onKeyUp.bind(this)
     this.clearSearch = this.clearSearch.bind(this)
+    this.search = this.search.bind(this)
+    this.handleSuggestionSelect = this.handleSuggestionSelect.bind(this)
+    this.handleOutsideClick = this.handleOutsideClick.bind(this)
+  }
+
+  componentDidMount() {
+    window.addEventListener('click', this.handleOutsideClick)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('click', this.handleOutsideClick)
+  }
+
+  handleOutsideClick(evt) {
+    let t = evt.target
+    let i = 0
+    const searchBarNode = ReactDOM.findDOMNode(this)
+    let clickedInside = false
+    while(t !== null && i < 10) {
+      i++
+      if (t === searchBarNode) {
+        clickedInside = true
+        break
+      }
+      t = t.parentNode
+    }
+    if (!clickedInside) {
+      if(this.state.searchValue) {
+        this.setState({ searchState: 'filled' })
+      } else {
+        this.setState({ searchState: 'empty' })
+      }
+    }
   }
 
   onFocus() {
     this.setState({ searchState: 'focused' })
-  }
-
-  onBlur() {
-    if(this.state.searchValue) {
-      this.setState({ searchState: 'filled' })
-    } else {
-      this.setState({ searchState: 'empty' })
-    }
   }
 
   onChange() {
@@ -43,6 +70,25 @@ class SearchBar extends Component {
     this.setState({ searchState: 'empty' })
   }
 
+  onKeyUp(evt) {
+    // if return is pressed
+    if (evt.keyCode === 13) {
+      this.setState({ searchState: 'filled' }, function() {
+        this.search()
+      })
+    }
+  }
+
+  handleSuggestionSelect(selectedTerm) {
+    this.setState({ searchValue: selectedTerm, searchState: 'filled' }, function() {
+      this.search()
+    })
+  }
+
+  search() {
+    this.props.onSearch.apply(this, [this.state.searchValue])
+  }
+
   render() {
     const recentList = this.props.recentTerms
     const popularList = this.props.suggestions
@@ -50,9 +96,7 @@ class SearchBar extends Component {
     const searchState = this.state.searchState
     const searchValue = this.state.searchValue
 
-    let classString = 'SearchBar'
     let typeaheadText = ''
-    let popularForDisplay = []
 
     if(searchValue) {
       for(let i = 0; i < popularList.length; i++) {
@@ -61,40 +105,31 @@ class SearchBar extends Component {
         if(!typeaheadText && idx === 0) {
           typeaheadText = searchValue + popularList[i].substring(searchValue.length)
         }
-        popularForDisplay.push(
-          <span>
-            { popularList[i].substring(0, idx) }
-            <strong>{ searchValue }</strong>
-            { popularList[i].substring(idx + searchValue.length) }
-          </span>
-        )
       }
-
     } else {
-      popularForDisplay = ''
       typeaheadText = ''
     }
 
-    if(searchState === 'empty') {
-      classString += ' state-empty'
-      typeaheadText = ''
-    } else if(searchState === 'focused') {
-      classString += ' state-focused'
-    } else if(searchState === 'filled') {
-      classString += ' state-filled'
-    }
+    const sbClasses = classNames('SearchBar', {
+      'state-empty' : searchState === 'empty',
+      'state-focused': searchState === 'focused',
+      'state-filled' : searchState === 'filled'
+    })
+
     const results = this.state.loading === true
       ? <div className="loading"><Loader /></div>
-      : <SearchSuggestions recentSearch={ recentList } popularSearch={ popularForDisplay } />
+      : <SearchSuggestions recentSearch={ recentList } popularSearch={ popularList } onSuggestionSelect={ this.handleSuggestionSelect } />
     return (
-      <div className={ classString }>
-        <input className="search-bar__text" onFocus={ this.onFocus } onBlur={ this.onBlur } onChange={ this.onChange } ref="searchValue" />
+      <div className={ sbClasses }>
+        <input className="search-bar__text" onFocus={ this.onFocus } onChange={ this.onChange } onKeyUp={ this.onKeyUp } ref="searchValue" value={this.state.searchValue} />
         <span className="search-typeahead-text">{ typeaheadText }</span>
         <img className="search-bar__clear" src={ require('./x-mark.svg') } onClick={ this.clearSearch }/>
-        <div className="search-icon-wrap">
+        <div className="search-icon-wrap" onClick={ this.search }>
           <img className="search-bar__icon" src={ require('./ico-mobile-search-selected.svg') } />
         </div>
-        {results}
+        <div className="suggestions-panel">
+          {results}
+        </div>
       </div>
     )
 
@@ -103,6 +138,7 @@ class SearchBar extends Component {
 
 
 SearchBar.propTypes = {
+  onSearch     : PropTypes.func.isRequired,
   onTermChange : PropTypes.func.isRequired,
   recentTerms  : PropTypes.array
 }

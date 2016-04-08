@@ -26,6 +26,7 @@ class Navbar extends Component {
     this.updateSearchSuggestions = this.updateSearchSuggestions.bind(this)
     this.handleTermChange = this.handleTermChange.bind(this)
     this.handleMobileClick = this.handleMobileClick.bind(this)
+    this.handleSearch = this.handleSearch.bind(this)
     this.state = {searchSuggestions: [], recentTerms: []}
   }
 
@@ -36,6 +37,10 @@ class Navbar extends Component {
     .then(data => {
       callback.apply(searchBar, [searchBar, data])
     })
+  }
+
+  handleSearch(searchTerm) {
+    this.props.onSearch.apply(this, [searchTerm])
   }
 
   updateSearchSuggestions(data) {
@@ -67,7 +72,7 @@ class Navbar extends Component {
         </div>
         <div className="search-bar-wrap" onClick={this.handleMobileClick}>
           <div className="mobile-wrap"><a href={mobileSearchUrl}><MagnifyGlassIcon width={25} height={25} /></a></div>
-          <SearchBar recentTerms={this.state.recentTerms} suggestions={this.state.searchSuggestions} onTermChange={this.handleTermChange} />
+          <SearchBar recentTerms={ this.state.recentTerms } suggestions={ this.state.searchSuggestions } onTermChange={ this.handleTermChange } onSearch={ this.handleSearch } />
         </div>
         <MenuBar items={primaryNavigationItems} orientation="horizontal" />
         <div className="menu-wrap" onClick={this.handleMobileClick}>
@@ -82,6 +87,7 @@ class Navbar extends Component {
 
 Navbar.propTypes = {
   searchSuggestionsFunc : PropTypes.func.isRequired,
+  onSearch              : PropTypes.func.isRequired,
   username              : PropTypes.string,
   userImage             : PropTypes.string,
   domain                : PropTypes.string.isRequired,

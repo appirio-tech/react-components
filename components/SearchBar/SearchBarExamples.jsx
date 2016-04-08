@@ -22,8 +22,12 @@ const handleTermChange = (searchBar, oldTerm, searchTerm, callback) => {
   }, 3000)
 }
 
+const search = (term) => {
+  console.log('Searched for term: ' + term)
+}
+
 const SearchBarExamples = () => (
-  <SearchBar recentTerms={recentTerms} suggestions={suggestions} onTermChange={handleTermChange} />
+  <SearchBar recentTerms={recentTerms} suggestions={suggestions} onTermChange={handleTermChange} onSearch={ search } />
 )
 
 module.exports = SearchBarExamples

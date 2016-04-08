@@ -54,7 +54,7 @@ $active-icon-wrap-bg: #888894;
       background-color: $active-icon-wrap-bg;
     }
 
-    .SearchSuggestions {
+    .suggestions-panel {
       display: block;
     }
   }
@@ -70,7 +70,7 @@ $active-icon-wrap-bg: #888894;
       background-color: $active-icon-wrap-bg;
     }
 
-    .SearchSuggestions {
+    .suggestions-panel {
       display: none;
     }
   }
@@ -136,22 +136,20 @@ $active-icon-wrap-bg: #888894;
     }
   }
 
-  .loading {
-    position: absolute;
-    top: 25px;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    background: none;
-  }
-
-  .SearchSuggestions {
+  .suggestions-panel {
     display: none;
     position: absolute;
     top: 43px;
     left: 0;
     width: 100%;
     z-index: 1000;
+  }
+
+  .loading {
+    background: none;
+  }
+
+  .SearchSuggestions {
 
     strong {
       font-weight: 600;
