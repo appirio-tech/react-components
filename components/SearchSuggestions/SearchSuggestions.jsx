@@ -11,9 +11,11 @@ class SearchSuggestions extends Component {
     super(props)
 
     this.state = { iSEmpty: true }
+    this.handleClick = this.handleClick.bind(this)
   }
 
-  handleClick(term, evt) {
+  handleClick(evt) {
+    const term = evt.currentTarget.getAttribute('data-term')
     evt.stopPropagation()
     this.props.onSuggestionSelect.apply(this, [term])
   }
@@ -24,7 +26,8 @@ class SearchSuggestions extends Component {
 
     const suggestionItem = (term, i) => {
       let labelDOM = term
-      if (this.props.searchTerm.length > 0) {
+      const searchTerm = this.props.searchTerm
+      if (searchTerm.length > 0) {
         const idx = term.toLowerCase().indexOf(searchTerm.toLowerCase())
         if (idx !== -1) {
           labelDOM = (
@@ -38,7 +41,7 @@ class SearchSuggestions extends Component {
       }
    
       return (
-        <li key={ i } onClick={ this.handleClick.bind(this, term) }>
+        <li key={ i } data-term={term} onClick={ this.handleClick }>
           <StandardListItem labelText={ labelDOM } showIcon={ false } />
         </li>
       )
