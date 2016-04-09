@@ -1,8 +1,8 @@
-require('./PrizeItem.scss')
-
 import React from 'react'
 
-const PrizeItem = ({title,subText}) => {
+require('./PrizeItem.scss')
+
+const PrizeItem = ({title, subText}) => {
   return (
     <div className="PrizeItem">
         <div className="prize-circle">{title}</div> <span>{subText}</span>

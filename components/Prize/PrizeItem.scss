@@ -12,7 +12,7 @@ $accent: #59A7FF;
   display:inline-block;
   height: 20px;
   margin-right: 15px;
-    
+
   span {
     font-family: "Roboto", Arial, Helvetica, sans-serif;
     font-size: 13px;
@@ -34,7 +34,7 @@ $accent: #59A7FF;
     font-weight: bold;
     color:  $gray;
   }
- 
+
 }
 
 .prize {
@@ -48,7 +48,7 @@ $accent: #59A7FF;
         background: $silver;
     }
   }
-  
+
   .PrizeItem:nth-child(3) {
     .prize-circle{
         background: $bronze;
@@ -67,7 +67,7 @@ $accent: #59A7FF;
         background: $purple;
     }
   }
-  
+
   .PrizeItem:nth-child(3) {
     .prize-circle {
         background: $accent;

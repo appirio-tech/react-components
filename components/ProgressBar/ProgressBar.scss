@@ -10,12 +10,12 @@ $light-gray: #DCDCE0;
     position: absolute;
     width: 400px;
     margin: auto;
-        
+
     .checkpoint-line {
       display: block;
       margin-bottom: 5px;
       height: 20px;
-            
+
       .checkpoint-text {
         position: absolute;
         float: left;
@@ -30,7 +30,7 @@ $light-gray: #DCDCE0;
       width: 80%;
       position: relative;
       height: 8px;
-      
+
       .progress-line {
         top:0px;
         position: absolute;
@@ -39,7 +39,7 @@ $light-gray: #DCDCE0;
         background-color: $light-gray;
         display: inline-block;
        }
-    
+
        .completion-line {
          top:0px;
          left:0px;
@@ -70,13 +70,13 @@ $light-gray: #DCDCE0;
         }
       }
     }
-        
+
     .time-line {
       display: block;
       margin-bottom: 5px;
       height: 20px;
       width: 100%;
-      
+
       .time-line-text {
          position: absolute;
          float: left;
@@ -84,7 +84,7 @@ $light-gray: #DCDCE0;
          font-size: 11px;
          line-height: 15px;
          color: $gray-30;
-      }    
+      }
     }
   }
 }

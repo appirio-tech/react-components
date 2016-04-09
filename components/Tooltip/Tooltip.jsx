@@ -19,8 +19,8 @@ class Tooltip extends Component {
     const pointerGap = this.props.pointerGap
     const tooltipPadding = this.props.tooltipPadding
     const tooltipDelay = this.props.tooltipDelay
-    const tooltip = ReactDOM.findDOMNode(this)
-    const ttContainer = tooltip.querySelector('.tooltip-container')
+    const tooltip = ReactDOM.findDOMNode(this).querySelector('.tooltip-container')
+    const ttContainer = tooltip.querySelector('.tooltip-content-container')
     const tooltipPointer = ttContainer.querySelector('.tooltip-pointer')
     const targetRect = evt.currentTarget.getBoundingClientRect()
     const targetRectCenterX = (targetRect.width / 2) + targetRect.left + window.scrollX
@@ -84,7 +84,7 @@ class Tooltip extends Component {
   }
 
   hideTooltip() {
-    const tooltip = ReactDOM.findDOMNode(this)
+    const tooltip = ReactDOM.findDOMNode(this).querySelector('.tooltip-container')
     if (!tooltip.classList.contains('tooltip-hide')) {
       tooltip.classList.add('tooltip-hide')
       tooltip.style.transition = 'opacity 0s linear'
@@ -103,8 +103,7 @@ class Tooltip extends Component {
   }
 
   componentDidMount() {
-    const targetId = this.props.tooltipId
-    const target = document.getElementById(targetId)
+    const target = ReactDOM.findDOMNode(this).querySelector('.tooltip-target')
     if (this.props.popMethod === 'hover') {
       target.addEventListener('mouseenter', this.showTooltip)
       target.addEventListener('mouseleave', this.hideTooltip)
@@ -115,8 +114,7 @@ class Tooltip extends Component {
   }
 
   componentWillUnmount() {
-    const targetId = this.props.tooltipId
-    const target = document.getElementById(targetId)
+    const target = ReactDOM.findDOMNode(this).querySelector('.tooltip-target')
     target.removeEventListener('mouseenter', this.showTooltip)
     target.removeEventListener('mouseleave', this.hideTooltip)
 
@@ -125,22 +123,32 @@ class Tooltip extends Component {
   }
 
   render() {
+
     const body = (
       <div className="tooltip-body">
           {React.Children.map(this.props.children, (child) => {
-            return child.props.children
+            if(child.props.className === 'tooltip-body')
+              return child.props.children
           })}
       </div>
     )
     const ttClasses = classNames(
-      'Tooltip', 'tooltip-hide', this.props.theme, this.props.className
+      'Tooltip', this.props.theme, this.props.className
     )
     return (
       <div className={ttClasses}>
-        <div className="tooltip-container">
-          <div className="tooltip-pointer">
+        {
+          React.Children.map(this.props.children, (child) => {
+            if(child.props.className === 'tooltip-target')
+              return child
+          })
+        }
+        <div className="tooltip-container tooltip-hide">
+          <div className="tooltip-content-container">
+            <div className="tooltip-pointer">
+            </div>
+            {body}
           </div>
-          {body}
         </div>
       </div>
     )
@@ -148,8 +156,7 @@ class Tooltip extends Component {
 }
 
 Tooltip.propTypes = {
-  children       : PropTypes.object.isRequired,
-  tooltipId      : PropTypes.string.isRequired,
+  children       : PropTypes.array.isRequired,
   pointerWidth   : PropTypes.number,
   tooltipMargin  : PropTypes.number,
   pointerGap     : PropTypes.number,

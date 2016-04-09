@@ -1,28 +1,28 @@
-require('./SubTrackDetails.scss')
-
 import React from 'react'
 import classNames from 'classnames'
 
-const SubTrackDetails = ({name,code,description,tracks}) => {
+require('./SubTrackDetails.scss')
+
+const SubTrackDetails = ({name, code, description, tracks}) => {
   const developClass = classNames(
-    'verticalLine','develop',
+    'verticalLine', 'develop',
     {hidden: tracks.indexOf('develop') === -1 }
   )
   const designClass = classNames(
-    'verticalLine','design',
+    'verticalLine', 'design',
     {hidden: tracks.indexOf('design') === -1}
   )
   const dataScienceClass = classNames(
-    'verticalLine','dataScience',
+    'verticalLine', 'dataScience',
     {hidden: tracks.indexOf('data science') === -1}
   )
-    
+
   return (
     <div className="SubTrackDetails">
     <div className="heading">
         <div className={developClass}></div>
-        <div className={designClass}></div> 
-        <div className={dataScienceClass}></div> 
+        <div className={designClass}></div>
+        <div className={dataScienceClass}></div>
         <div className="title">{name} ({code})</div>
         </div>
     <p className={description ? '' : 'hidden' }>{description}</p>

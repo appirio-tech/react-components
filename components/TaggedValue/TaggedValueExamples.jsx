@@ -1,8 +1,8 @@
-require('./TaggedValueExamples.scss')
-
 import React from 'react'
 import TaggedValue from './TaggedValue'
 import TaggedValueList from './TaggedValueList'
+
+require('./TaggedValueExamples.scss')
 
 const taggedValueData1 = {
   title : 'title1',
@@ -18,7 +18,12 @@ const taggedValueData2 = {
 }
 
 const taggedValueItems1 = {
-  items : [taggedValueData1,taggedValueData2,taggedValueData1,taggedValueData2]
+  items : [
+    taggedValueData1,
+    taggedValueData2,
+    taggedValueData1,
+    taggedValueData2
+  ]
 }
 
 const TaggedValueExamples = () => (

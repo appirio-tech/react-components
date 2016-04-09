@@ -8,7 +8,7 @@ $track-desc-text-color: #DCDCE0;
 .SubTrackDetails{
   .heading {
     height:20px;
-        
+
     .title {
       font-size: 15px;
       line-height: 18px;
@@ -18,20 +18,20 @@ $track-desc-text-color: #DCDCE0;
       font-weight: bold;
       font-family: "Roboto", Arial, Helvetica, sans-serif;
 	}
-         
+
     .develop {
       background-color: $develop-bar-color;
     }
-    
+
     .design {
       background-color: $design-bar-color
     }
-    
+
     .dataScience {
       background-color: $dataScience-bar-color
     }
   }
-        
+
   p {
     width: 290px;
     font-size: 13px;
@@ -40,16 +40,16 @@ $track-desc-text-color: #DCDCE0;
     font-family: "Roboto", Arial, Helvetica, sans-serif;
     color: $track-desc-text-color;
   }
-    
+
   .verticalLine {
     width: 4px; /* Use only border style */
     height: 19px;
     display: block;
     margin-right: 3px;
-    float: left; 
+    float: left;
   }
-    
-  .hidden { 
-    display:none; 
+
+  .hidden {
+    display:none;
   }
 }

@@ -1,16 +1,16 @@
-require('./ProgressBar.scss')
-
 import React from 'react'
 import classNames from 'classnames'
 
-const ProgressBar = ({completionPercentage,checkPoints}) => {
+require('./ProgressBar.scss')
+
+const ProgressBar = ({completionPercentage, checkPoints}) => {
   function getCheckPointPositionStyle(percentage){
     const style = {
       left:percentage + '%'
     }
     return style
   }
-  
+
   function getCheckPointPositionScaledStyle(percentage){
     percentage = Number.parseInt(percentage)*0.8
     const style = {
@@ -18,28 +18,29 @@ const ProgressBar = ({completionPercentage,checkPoints}) => {
     }
     return style
   }
-  
+
   function getLengthScaledStyle(percentage){
     const style = {
       width:percentage + '%'
     }
     return style
   }
-  
+
   function checkPointStyle(checkPointPercentage){
     checkPointPercentage = Number.parseInt(checkPointPercentage)
     completionPercentage = Number.parseInt(completionPercentage)
     const checkPointClass = classNames(
-      'circle',{ completed : ( checkPointPercentage <= completionPercentage)}
+      'circle',
+      { completed : ( checkPointPercentage <= completionPercentage)}
     )
     return checkPointClass
   }
-  
+
   return (
     <div className="ProgressBar">
       <div className="progress-box">
         <div className="checkpoint-line">
-          {checkPoints.map((checkPoint,index) => {
+          {checkPoints.map((checkPoint, index) => {
             return <div className="checkpoint-text" style={getCheckPointPositionScaledStyle(checkPoint.completionPercentage)} key={index}>{checkPoint.name}</div>
           })}
         </div>
@@ -50,13 +51,13 @@ const ProgressBar = ({completionPercentage,checkPoints}) => {
           </div>
           <div className="progress-circles">
             <div className="circle"/>
-            {checkPoints.map((checkPoint,index) => {    
+            {checkPoints.map((checkPoint, index) => {
               return <div className={checkPointStyle(checkPoint.completionPercentage)} style={getCheckPointPositionStyle(checkPoint.completionPercentage)} key={index}/>
             })}
           </div>
         </div>
         <div className="time-line">
-          {checkPoints.map((checkPoint,index) => {
+          {checkPoints.map((checkPoint, index) => {
             return  <div className="time-line-text" style={getCheckPointPositionScaledStyle(checkPoint.completionPercentage)} key={index}>{checkPoint.timeline}</div>
           })}
         </div>
