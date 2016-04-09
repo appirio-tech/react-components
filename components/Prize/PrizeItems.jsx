@@ -1,6 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
-import TaggedValue from '../TaggedValue/TaggedValue'
+import TaggedValueList from '../TaggedValue/TaggedValueList'
 
 require('./PrizeItem.scss')
 
@@ -14,9 +14,7 @@ const PrizeItems = ({type, title, items}) => {
     <div className="PrizeItems">
         <div className="title">{title}</div>
         <div className={itemsClass}>
-          {items.map((item, index) => {
-            return <TaggedValue title={item.title} subText={item.subText} count={item.count} style="PrizeItem" key={index}/>
-          })}
+          <TaggedValueList items={items} layout="wrap"/>   
         </div>
     </div>
   )
