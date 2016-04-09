@@ -35,12 +35,14 @@ const progressBarData2 = {
     {
       name : 'Checkpoint1',
       timeline : 'Mar 23, 12:45',
-      completionPercentage : '0'
+      completionPercentage : '0',
+      hideCircle: true
     },
     {
       name : 'Review',
       timeline : '',
-      completionPercentage : '100'
+      completionPercentage : '100',
+      hideCircle: true
     }
   ]
 }
