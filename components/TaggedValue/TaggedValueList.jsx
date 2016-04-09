@@ -2,7 +2,7 @@ import React from 'react'
 import TaggedValue from './TaggedValue'
 import classNames from 'classnames'
 
-require('./TaggedValue.scss')
+require('./TaggedValueList.scss')
 
 const TaggedValueList = ({items, layout}) => {
   const itemClass = classNames(
@@ -22,7 +22,7 @@ const TaggedValueList = ({items, layout}) => {
 
 TaggedValueList.propTypes = {
   items :  React.PropTypes.array,
-  layout : React.PropTypes.string
+  layout : React.PropTypes.oneOf(['scroll', 'wrap'])
 }
 
 export default TaggedValueList

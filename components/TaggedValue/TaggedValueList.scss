@@ -1,0 +1,9 @@
+.TaggedValueList {
+    .items{
+        white-space: normal;
+    }
+    .items-scroll {
+        overflow-x: scroll;
+        white-space: nowrap;
+    }
+}
