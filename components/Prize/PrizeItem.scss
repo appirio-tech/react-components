@@ -8,19 +8,19 @@ $gray: #47474F;
 $purple: #B47DD6;
 $accent: #59A7FF;
 
-.PrizeItem {
+.TaggedValue {
   display:inline-block;
   height: 20px;
   margin-right: 15px;
 
-  span {
+  .subText {
     font-family: "Roboto", Arial, Helvetica, sans-serif;
     font-size: 13px;
     line-height: 15px;
     color: $white;
     font-weight: 500;
   }
-  .prize-circle{
+  .tagged-value-bg{
     display: inline;
     padding: 1px 4px 1px 4px;
     min-width: 15px;
@@ -38,38 +38,38 @@ $accent: #59A7FF;
 }
 
 .prize {
-  .PrizeItem:nth-child(1) {
-    .prize-circle{
+  .TaggedValue:nth-child(1) {
+    .tagged-value-bg {
       background: $gold;
     }
   }
-  .PrizeItem:nth-child(2) {
-    .prize-circle{
+  .TaggedValue:nth-child(2) {
+    .tagged-value-bg {
         background: $silver;
     }
   }
 
-  .PrizeItem:nth-child(3) {
-    .prize-circle{
+  .TaggedValue:nth-child(3) {
+    .tagged-value-bg {
         background: $bronze;
     }
   }
 }
 
 .bonus {
-  .PrizeItem:nth-child(1) {
-    .prize-circle {
+  .TaggedValue:nth-child(1) {
+    .tagged-value-bg {
       background: $purple;
     }
   }
-  .PrizeItem:nth-child(2) {
-    .prize-circle {
+  .TaggedValue:nth-child(2) {
+    .tagged-value-bg {
         background: $purple;
     }
   }
 
-  .PrizeItem:nth-child(3) {
-    .prize-circle {
+  .TaggedValue:nth-child(3) {
+    .tagged-value-bg {
         background: $accent;
     }
   }
