@@ -23,29 +23,22 @@ class Navbar extends Component {
 
   constructor(props) {
     super(props)
-    this.updateSearchSuggestions = this.updateSearchSuggestions.bind(this)
     this.handleTermChange = this.handleTermChange.bind(this)
     this.handleMobileClick = this.handleMobileClick.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
-    this.state = {searchSuggestions: [], recentTerms: []}
+    this.state = { recentTerms: [] }
   }
 
-  handleTermChange(searchBar, oldTerm, searchTerm, callback) {
+  handleTermChange(oldTerm, searchTerm, reqNo, callback) {
     // TODO should we check for the return value of the search suggestion function to be promise?
-    this.props.searchSuggestionsFunc.apply(searchBar, [searchTerm])
-    .then(this.updateSearchSuggestions)
+    this.props.searchSuggestionsFunc.apply(this, [searchTerm])
     .then(data => {
-      callback.apply(searchBar, [searchBar, data])
+      callback.apply(null, [reqNo, data])
     })
   }
 
   handleSearch(searchTerm) {
     this.props.onSearch.apply(this, [searchTerm])
-  }
-
-  updateSearchSuggestions(data) {
-    this.setState({searchSuggestions: data})
-    return data
   }
 
   handleMobileClick(se) {
@@ -72,7 +65,7 @@ class Navbar extends Component {
         </div>
         <div className="search-bar-wrap" onClick={this.handleMobileClick}>
           <div className="mobile-wrap"><a href={mobileSearchUrl}><MagnifyGlassIcon width={25} height={25} /></a></div>
-          <SearchBar recentTerms={ this.state.recentTerms } suggestions={ this.state.searchSuggestions } onTermChange={ this.handleTermChange } onSearch={ this.handleSearch } />
+          <SearchBar recentTerms={ this.state.recentTerms } onTermChange={ this.handleTermChange } onSearch={ this.handleSearch } />
         </div>
         <MenuBar items={primaryNavigationItems} orientation="horizontal" />
         <div className="menu-wrap" onClick={this.handleMobileClick}>

@@ -11,7 +11,7 @@ import classNames from 'classnames'
 class SearchBar extends Component {
   constructor(props) {
     super(props)
-    this.state = { searchState: 'empty' }
+    this.state = { searchState: 'empty', suggestions: [] }
     this.onFocus = this.onFocus.bind(this)
     this.onChange = this.onChange.bind(this)
     this.onKeyUp = this.onKeyUp.bind(this)
@@ -19,6 +19,7 @@ class SearchBar extends Component {
     this.search = this.search.bind(this)
     this.handleSuggestionSelect = this.handleSuggestionSelect.bind(this)
     this.handleOutsideClick = this.handleOutsideClick.bind(this)
+    this.handleSuggestionsUpdate = this.handleSuggestionsUpdate.bind(this)
   }
 
   componentDidMount() {
@@ -55,13 +56,33 @@ class SearchBar extends Component {
     this.setState({ searchState: 'focused' })
   }
 
+  handleSuggestionsUpdate(requestNo, data) {
+    if (requestNo === this.state.maxRequestNo) {
+      this.setState({loading: false, suggestions: data})
+    }
+  }
+
   onChange() {
     const oldTerm = this.state.searchValue
-    this.setState({ searchValue: this.refs.searchValue.value, loading: true }, function() {
-      this.props.onTermChange.apply(this, [this, oldTerm, this.state.searchValue, function(searchBar) {
-        searchBar.setState({loading: false})
-      }])
-    })
+    this.setState(
+      function(prevState, curProps) {
+        const rc = prevState.requestNo ? prevState.requestNo + 1 : 1
+        return {
+          searchValue: this.refs.searchValue.value,
+          requestNo: rc,
+          maxRequestNo: rc,
+          loading: true
+        }
+      },
+      function() {
+        this.props.onTermChange.apply(null, [
+          oldTerm,
+          this.state.searchValue,
+          this.state.requestNo,
+          this.handleSuggestionsUpdate
+        ])
+      }
+    )
   }
 
   clearSearch() {
@@ -71,8 +92,9 @@ class SearchBar extends Component {
   }
 
   onKeyUp(evt) {
+    const eventKey = evt.keyCode
     // if return is pressed
-    if (evt.keyCode === 13) {
+    if (eventKey === 13) {
       this.setState({ searchState: 'filled' }, function() {
         this.search()
       })
@@ -91,7 +113,7 @@ class SearchBar extends Component {
 
   render() {
     const recentList = this.props.recentTerms
-    const popularList = this.props.suggestions
+    const popularList = this.state.suggestions
 
     const searchState = this.state.searchState
     const searchValue = this.state.searchValue
