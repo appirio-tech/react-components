@@ -50,9 +50,10 @@ const ProgressBar = ({completionPercentage, checkPoints}) => {
           <div className="completion-line" style={getLengthScaledStyle(completionPercentage)}>
           </div>
           <div className="progress-circles">
-            <div className="circle"/>
             {checkPoints.map((checkPoint, index) => {
-              return <div className={checkPointStyle(checkPoint.completionPercentage)} style={getCheckPointPositionStyle(checkPoint.completionPercentage)} key={index}/>
+              if(!checkPoint.hideCircle) {
+                return <div className={checkPointStyle(checkPoint.completionPercentage)} style={getCheckPointPositionStyle(checkPoint.completionPercentage)} key={index}/>
+              }
             })}
           </div>
         </div>

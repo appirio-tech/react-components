@@ -29,10 +29,32 @@ const progressBarData = {
   ]
 }
 
+const progressBarData2 = {
+  completionPercentage : '56',
+  checkPoints : [
+    {
+      name : 'Checkpoint1',
+      timeline : 'Mar 23, 12:45',
+      completionPercentage : '0',
+      hideCircle: true
+    },
+    {
+      name : 'Review',
+      timeline : '',
+      completionPercentage : '100',
+      hideCircle: true
+    }
+  ]
+}
+
 const ProgressBarExample = () => (
   <div>
     <div className="divStyle">
       <ProgressBar completionPercentage={progressBarData.completionPercentage} checkPoints={progressBarData.checkPoints}/>
+    </div>
+    <br/>
+    <div className="divStyle">
+      <ProgressBar completionPercentage={progressBarData2.completionPercentage} checkPoints={progressBarData2.checkPoints}/>
     </div>
   </div>
 )
