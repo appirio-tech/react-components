@@ -3,6 +3,8 @@ import PrizeItems from './PrizeItems'
 
 require('./PrizeExamples.scss')
 
+
+
 const prizeItems = {
   type : 'prize',
   title : 'Prizes',
@@ -48,7 +50,8 @@ const bonusItems = {
     },
     {
       title : 'Checkin',
-      subText : '$50 x 5'
+      subText : '$50',
+      count: '6'
     }
   ]
 }
