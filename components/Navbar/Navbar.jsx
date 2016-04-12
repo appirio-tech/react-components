@@ -35,6 +35,9 @@ class Navbar extends Component {
     .then(data => {
       callback.apply(null, [reqNo, data])
     })
+    .catch(error => {
+      callback.apply(null, [reqNo, []])
+    })
   }
 
   handleSearch(searchTerm) {
