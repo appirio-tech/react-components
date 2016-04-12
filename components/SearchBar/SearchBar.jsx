@@ -65,7 +65,7 @@ class SearchBar extends Component {
   onChange() {
     const oldTerm = this.state.searchValue
     this.setState(
-      function(prevState, curProps) {
+      function(prevState) {
         const rc = prevState.requestNo ? prevState.requestNo + 1 : 1
         return {
           searchValue: this.refs.searchValue.value,
