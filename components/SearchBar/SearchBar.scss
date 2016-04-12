@@ -145,16 +145,14 @@ $active-icon-wrap-bg: #888894;
     left: 0;
     width: 100%;
     z-index: 1000;
-  }
 
-  .loading {
-    background: none;
-  }
+    .loading-suggestions {
+    }
 
-  .SearchSuggestions {
-
-    strong {
-      font-weight: 600;
+    .SearchSuggestions {
+      strong {
+        font-weight: 600;
+      }
     }
   }
 }

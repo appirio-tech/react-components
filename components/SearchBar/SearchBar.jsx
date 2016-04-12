@@ -139,7 +139,7 @@ class SearchBar extends Component {
     })
 
     const results = this.state.loading === true
-      ? <div className="loading"><Loader /></div>
+      ? <div className="loading-suggestions"><Loader /></div>
       : <SearchSuggestions recentSearch={ recentList } popularSearch={ popularList } onSuggestionSelect={ this.handleSuggestionSelect } />
     return (
       <div className={ sbClasses }>

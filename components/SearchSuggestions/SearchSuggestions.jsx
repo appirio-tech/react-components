@@ -63,7 +63,7 @@ class SearchSuggestions extends Component {
 							{	recentList.map(suggestionItem) }
 						</ul>
 							{
-								popularList ? '' :  (
+								popularList.length !== 0 ? '' :  (
 									<a href="javascript:;" className="footer-link transition">
 										Learn more about the new Search here
 									</a>
@@ -105,13 +105,13 @@ class SearchSuggestions extends Component {
 SearchSuggestions.propTypes = {
   onSuggestionSelect    : PropTypes.func.isRequired,
   recentSearch          : PropTypes.array,
-  popularList           : PropTypes.array,
+  popularSearch           : PropTypes.array,
   searchTerm            : PropTypes.string
 }
 
 SearchSuggestions.defaultProps = {
   recentSearch          : [],
-  popularList           : [],
+  popularSearch           : [],
   searchTerm            : ''
 }
 
