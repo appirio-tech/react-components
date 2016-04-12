@@ -36,7 +36,7 @@ class Navbar extends Component {
       callback.apply(null, [reqNo, data])
     })
     .catch(error => {
-      callback.apply(null, [reqNo, []])
+      callback.apply(null, [reqNo, [], error])
     })
   }
 
