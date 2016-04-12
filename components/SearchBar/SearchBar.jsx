@@ -99,10 +99,12 @@ class SearchBar extends Component {
         this.search()
       })
     } else if (eventKey === 39) { // right arrow key is pressed
-      const suggestion = this.state.suggestions[0]
-      this.refs.searchValue.value = suggestion
-      // trigger the change event handler
-      this.onChange()
+      const suggestion = this.state.suggestions.length > 0 ? this.state.suggestions[0] : null
+      if (suggestion) {
+        this.refs.searchValue.value = suggestion
+        // trigger the change event handler
+        this.onChange()
+      }
     }
   }
 
