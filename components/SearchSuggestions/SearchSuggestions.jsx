@@ -23,15 +23,18 @@ class SearchSuggestions extends Component {
   render() {
     const recentList = this.props.recentSearch
     const popularList = this.props.popularSearch
-
     const suggestionItem = (term, i) => {
       let labelDOM = term
       const searchTerm = this.props.searchTerm
+      let exactMatch = false
       if (searchTerm.length > 0) {
         const idx = term.toLowerCase().indexOf(searchTerm.toLowerCase())
         if (idx !== -1) {
+          // check if exact match
+          exactMatch = idx === 0 && term.length === searchTerm.length
+          // prepare DOM for the content to be rendered under StandardListItem
           labelDOM = (
-            <span>
+            <span className={ itemClasses }>
               { term.substring(0, idx) }
               <strong>{ searchTerm }</strong>
               { term.substring(idx + searchTerm.length) }
@@ -39,9 +42,13 @@ class SearchSuggestions extends Component {
           )
         }
       }
-   
+      // prepares css class for li
+      const itemClasses = classNames(
+        { selected : exactMatch }
+      )
+      // prepares and returns the DOM for each popular/recent search item
       return (
-        <li key={ i } data-term={term} onClick={ this.handleClick }>
+        <li key={ i } data-term={term} onClick={ this.handleClick } className={ itemClasses }>
           <StandardListItem labelText={ labelDOM } showIcon={ false } />
         </li>
       )
@@ -105,13 +112,13 @@ class SearchSuggestions extends Component {
 SearchSuggestions.propTypes = {
   onSuggestionSelect    : PropTypes.func.isRequired,
   recentSearch          : PropTypes.array,
-  popularSearch           : PropTypes.array,
+  popularSearch         : PropTypes.array,
   searchTerm            : PropTypes.string
 }
 
 SearchSuggestions.defaultProps = {
   recentSearch          : [],
-  popularSearch           : [],
+  popularSearch         : [],
   searchTerm            : ''
 }
 

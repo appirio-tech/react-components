@@ -68,6 +68,10 @@
 		padding: 0;
 		padding-bottom: 5px;
 
+		li.selected {
+			background-color: $gray-light;
+		}
+
 		.StandardListItem {
 			align-items: initial;
 			text-align: left;

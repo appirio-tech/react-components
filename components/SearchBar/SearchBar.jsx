@@ -58,7 +58,7 @@ class SearchBar extends Component {
 
   handleSuggestionsUpdate(requestNo, data) {
     if (requestNo === this.state.maxRequestNo) {
-      this.setState({loading: false, suggestions: data})
+      this.setState({loading: false, suggestions: data, selectedSuggestionIdx: null})
     }
   }
 
@@ -71,7 +71,8 @@ class SearchBar extends Component {
           searchValue: this.refs.searchValue.value,
           requestNo: rc,
           maxRequestNo: rc,
-          loading: true
+          loading: true,
+          searchState: 'focused'
         }
       },
       function() {
@@ -93,11 +94,45 @@ class SearchBar extends Component {
 
   onKeyUp(evt) {
     const eventKey = evt.keyCode
+    evt.stopPropagation()
+    evt.preventDefault()
     // if return is pressed
     if (eventKey === 13) {
       this.setState({ searchState: 'filled' }, function() {
         this.search()
       })
+    } else if (eventKey === 39) { // right arrow key is pressed
+      const suggestion = this.state.suggestions.length > 0 ? this.state.suggestions[0] : null
+      if (suggestion) {
+        this.refs.searchValue.value = suggestion
+        // trigger the change event handler
+        this.onChange()
+      }
+    } else if (eventKey === 38) { // up arrow key
+      const currSelectedIdx = this.state.selectedSuggestionIdx
+      if (currSelectedIdx) { // index is none of (undefined, null, 0)
+        const suggestionIdx = currSelectedIdx - 1
+        const suggestion = this.state.suggestions[suggestionIdx]
+        this.refs.searchValue.value = suggestion
+        this.setState({
+          selectedSuggestionIdx : suggestionIdx,
+          searchValue: suggestion
+        })
+      }
+    } else if (eventKey === 40) { // down arrow key
+      const currSelectedIdx = this.state.selectedSuggestionIdx
+       // index is none of (undefined, null, 0)
+      if (typeof currSelectedIdx === 'undefined'
+        || currSelectedIdx === null
+        || this.state.suggestions.length > currSelectedIdx + 1) {
+        const suggestionIdx = typeof currSelectedIdx === 'number' ? currSelectedIdx + 1 : 0
+        const suggestion = this.state.suggestions[suggestionIdx]
+        this.refs.searchValue.value = suggestion
+        this.setState({
+          selectedSuggestionIdx: suggestionIdx,
+          searchValue: suggestion
+        })
+      }
     }
   }
 
@@ -140,7 +175,7 @@ class SearchBar extends Component {
 
     const results = this.state.loading === true
       ? <div className="loading-suggestions"><Loader /></div>
-      : <SearchSuggestions recentSearch={ recentList } popularSearch={ popularList } onSuggestionSelect={ this.handleSuggestionSelect } />
+      : <SearchSuggestions recentSearch={ recentList } searchTerm={ this.state.searchValue } popularSearch={ popularList } onSuggestionSelect={ this.handleSuggestionSelect } />
     return (
       <div className={ sbClasses }>
         <input className="search-bar__text" onFocus={ this.onFocus } onChange={ this.onChange } onKeyUp={ this.onKeyUp } ref="searchValue" value={this.state.searchValue} />
