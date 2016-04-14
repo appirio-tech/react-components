@@ -44,7 +44,7 @@ class SearchSuggestions extends Component {
       }
       // prepares css class for li
       const itemClasses = classNames(
-        { 'selected' : exactMatch }
+        { selected : exactMatch }
       )
       // prepares and returns the DOM for each popular/recent search item
       return (
