@@ -11,9 +11,9 @@ import HamburgerIcon from '../Icons/HamburgerIcon'
 import MagnifyGlassIcon from '../Icons/MagnifyGlassIcon'
 
 const primaryNavigationItems = [
-  {img: require('./nav-community.svg'), text: 'Community', link: '/community'},
-  {img: require('./nav-compete.svg'), text: 'Compete', link: '/compete', selected: true},
-  {img: require('./nav-learn.svg'), text: 'Learn', link: '/learn'}
+  {img: require('./nav-community.svg'), text: 'Community', link: '/community', regex: "/community?\?"},
+  {img: require('./nav-compete.svg'), text: 'Compete', link: '/compete', regex: "/compete?\?"},
+  {img: require('./nav-learn.svg'), text: 'Learn', link: '/learn', regex: "/learn?\?"}
 ]
 
 // properties: username, userImage, domain, mobileMenuUrl, mobileSearchUrl, searchSuggestionsFunc

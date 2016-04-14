@@ -30,7 +30,7 @@ export default class MenuBar extends Component {
       const itemClass = classNames({
         [orientation]: true,
         mobile: this.state.mobile,
-        selected: window.location.href.indexOf(item.link) !== -1
+        selected: item.selected || (item.regex && window.location.href.match(item.regex) !== null)
       })
 
       const linkTarget = item.target || '_self'
