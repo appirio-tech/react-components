@@ -10,14 +10,14 @@
   justify-content: center;
   align-items    : center;
 
-  .container {
+  .Loader__container {
     padding         : 25px;
     // background-color: $primary-color;
     opacity         : .98;
     border-radius   : 10px;
   }
 
-  .loader {
+  .Loader__loader {
     width: 50px;
     height: 50px;
     border-top       : 10px solid $grey-light;
@@ -30,8 +30,8 @@
     -webkit-animation: load8 .8s infinite linear;
     animation        : load8 .8s infinite linear;
   }
-  .loader,
-  .loader:after {
+  .Loader__loader,
+  .Loader__loader:after {
     border-radius: 50%;
   }
 

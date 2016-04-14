@@ -6,8 +6,8 @@ React = require 'react'
 
 Loader = ->
   <div className="Loader">
-    <div className="container">
-      <div className="loader"/>
+    <div className="Loader__container">
+      <div className="Loader__loader"/>
     </div>
   </div>
 
