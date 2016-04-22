@@ -11,11 +11,11 @@ import classNames from 'classnames'
 class SearchBar extends Component {
   constructor(props) {
     super(props)
-    const searchValue = this.getQueryStringValue(props.searchTermKey)
+    const initialTerm = this.getQueryStringValue(props.searchTermKey)
     this.state = {
       searchState: searchValue.length > 0 ? 'filled' : 'empty',
       suggestions: [],
-      searchValue: searchValue
+      searchValue: initialTerm
     }
     this.onFocus = this.onFocus.bind(this)
     this.onChange = this.onChange.bind(this)
@@ -28,7 +28,7 @@ class SearchBar extends Component {
   }
 
   getQueryStringValue (key) {  
-    return unescape(window.location.href.replace(new RegExp("^(?:.*[&\\?]" + escape(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));  
+    return unescape(window.location.href.replace(new RegExp('^(?:.*[&\\?]' + escape(key).replace(/[\.\+\*]/g, '\\$&') + '(?:\\=([^&]*))?)?.*$', 'i'), '$1'))
   } 
 
   componentDidMount() {
@@ -81,7 +81,7 @@ class SearchBar extends Component {
           searchValue: this.refs.searchValue.value,
           requestNo: rc,
           maxRequestNo: rc,
-          loading: newTerm.length > 0 ? true : false,
+          loading: newTerm.length > 0,
           searchState: 'focused'
         }
       },
