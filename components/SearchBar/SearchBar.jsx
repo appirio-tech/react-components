@@ -64,6 +64,7 @@ class SearchBar extends Component {
 
   onChange() {
     const oldTerm = this.state.searchValue
+    const newTerm = this.refs.searchValue.value ? this.refs.searchValue.value.trim() : ''
     this.setState(
       function(prevState) {
         const rc = prevState.requestNo ? prevState.requestNo + 1 : 1
@@ -71,17 +72,19 @@ class SearchBar extends Component {
           searchValue: this.refs.searchValue.value,
           requestNo: rc,
           maxRequestNo: rc,
-          loading: true,
+          loading: newTerm.length > 0 ? true : false,
           searchState: 'focused'
         }
       },
       function() {
-        this.props.onTermChange.apply(null, [
-          oldTerm,
-          this.state.searchValue,
-          this.state.requestNo,
-          this.handleSuggestionsUpdate
-        ])
+        if (newTerm.length > 0) {
+          this.props.onTermChange.apply(null, [
+            oldTerm,
+            newTerm,
+            this.state.requestNo,
+            this.handleSuggestionsUpdate
+          ])
+        }
       }
     )
   }
@@ -143,7 +146,10 @@ class SearchBar extends Component {
   }
 
   search() {
-    this.props.onSearch.apply(this, [this.state.searchValue])
+    const searchTerm = this.state.searchValue ? this.state.searchValue.trim() : ''
+    if(searchTerm.length > 0) {
+      this.props.onSearch.apply(this, [searchTerm])
+    }
   }
 
   render() {
