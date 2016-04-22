@@ -13,7 +13,7 @@ class SearchBar extends Component {
     super(props)
     const initialTerm = this.getQueryStringValue(props.searchTermKey)
     this.state = {
-      searchState: searchValue.length > 0 ? 'filled' : 'empty',
+      searchState: initialTerm.length > 0 ? 'filled' : 'empty',
       suggestions: [],
       searchValue: initialTerm
     }
