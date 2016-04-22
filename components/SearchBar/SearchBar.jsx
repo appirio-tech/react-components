@@ -11,7 +11,12 @@ import classNames from 'classnames'
 class SearchBar extends Component {
   constructor(props) {
     super(props)
-    this.state = { searchState: 'empty', suggestions: [] }
+    const searchValue = this.getQueryStringValue(props.searchTermKey)
+    this.state = {
+      searchState: searchValue.length > 0 ? 'filled' : 'empty',
+      suggestions: [],
+      searchValue: searchValue
+    }
     this.onFocus = this.onFocus.bind(this)
     this.onChange = this.onChange.bind(this)
     this.onKeyUp = this.onKeyUp.bind(this)
@@ -21,6 +26,10 @@ class SearchBar extends Component {
     this.handleOutsideClick = this.handleOutsideClick.bind(this)
     this.handleSuggestionsUpdate = this.handleSuggestionsUpdate.bind(this)
   }
+
+  getQueryStringValue (key) {  
+    return unescape(window.location.href.replace(new RegExp("^(?:.*[&\\?]" + escape(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));  
+  } 
 
   componentDidMount() {
     window.addEventListener('click', this.handleOutsideClick)
@@ -203,11 +212,13 @@ class SearchBar extends Component {
 SearchBar.propTypes = {
   onSearch     : PropTypes.func.isRequired,
   onTermChange : PropTypes.func.isRequired,
-  recentTerms  : PropTypes.array
+  recentTerms  : PropTypes.array,
+  searchTermKey: PropTypes.string
 }
 
 SearchBar.defaultProps = {
-  recentTerms: []
+  recentTerms   : [],
+  searchTermKey : 'q'
 }
 
 export default SearchBar
