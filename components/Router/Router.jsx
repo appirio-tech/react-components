@@ -25,6 +25,8 @@ import SearchSuggestionsExamples     from '../SearchSuggestions/SearchSuggestion
 import SearchBarExample              from '../SearchBar/SearchBarExamples.jsx'
 import NavbarExample                 from '../Navbar/NavbarExample.jsx'
 import TCFooterExamples              from '../TCFooter/TCFooterExamples.jsx'
+import CarouselExamples              from '../Carousel/CarouselExamples.jsx'
+import SubNavExamples                from '../SubNav/SubNavExamples.jsx'
 import TaggedValueExamples           from '../TaggedValue/TaggedValueExamples.jsx'
 import SubTrackDetailsExample        from '../SubTrackDetails/SubTrackDetailsExample.jsx'
 import PrizeExamples                 from '../Prize/PrizeExamples.jsx'
@@ -79,11 +81,15 @@ const Component = () => (
         
         <Route path="/TaggedValueExamples" component={TaggedValueExamples} />
 
+        <Route path="/CarouselExamples" component={CarouselExamples} />
+
+        <Route path="/SubNavExamples" component={SubNavExamples} />
+
         <Route path="/SubTrackDetailsExample" component={SubTrackDetailsExample} />
 
-        <Route path="/TooltipExamples" component={TooltipExamples} />
-
         <Route path="/PrizeExamples" component={PrizeExamples}/>
+
+        <Route path="/TooltipExamples" component={TooltipExamples} />
         
         <Route path="/ProgressBarExample" component={ProgressBarExample}/>
       </Route>

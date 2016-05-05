@@ -1,62 +1,75 @@
 require('./UserDropdownMenu.scss')
 
-import React, { Component } from 'react'
+import React, {PropTypes} from 'react'
+import Avatar from '../Avatar/Avatar'
 import Dropdown from '../Dropdown/Dropdown'
 
-const userDropdownLists = [
-  [
-    { label: 'My Profile', link: 'javascript:;', id: 0 },
-    { label: 'Dashboard', link: 'javascript:;', id: 1 },
-    { label: 'Settings', link: 'javascript:;', id: 2 },
-    { label: 'Payments', link: 'javascript:;', id: 3 }
-  ],
-  [
-    { label: 'Help', link: 'javascript:;', id: 0 }
-  ],
-  [
-    { label: 'Log out', link: 'javascript:;', id: 0 }
+
+const UserDropdownMenu = ({username, userImage, domain, loginUrl, registerUrl}) => {
+
+  const userDropdownLists = [
+    [
+      { label: 'My Profile', link: '/profile/' + username, id: 0 },
+      { label: 'Dashboard', link: '/my-dashbaord', id: 1 },
+      { label: 'Settings', link: '/settings/profile', id: 2 },
+      { label: 'Payments', link: '//community.' + domain  + '/PactsMemberServlet?module=PaymentHistory&full_list=false', id: 3 }
+    ],
+    [
+      { label: 'Help', link: '//help.' + domain, id: 0 }
+    ],
+    [
+      { label: 'Log out', link: '/logout', id: 0 }
+    ]
   ]
-]
 
-class UserDropdownMenu extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = { isLoggedIn: true }
-  }
-
-  render() {
-    const publicDOM = <div><button>Log in</button><button>Join</button></div>
-    
-    const loggedInDOM = (
-      <div className="UserDropdownMenu">
-        <Dropdown pointerShadow>
-          <div className="dropdown-menu-header">
-            <span className="user-image"></span>
-            <span className="username">{ this.props.username }</span>
-            <img className="dropdown-arrow" src={ require('./arrow-small-down.svg') } />
-          </div>
+  const publicDOM = (
+    <div className="UserDropdownMenu non-logged-in">
+      <a className="login-button tc-btn tc-btn-s tc-btn-ghost" href={loginUrl} >Log in</a>
+      <a className="join-button tc-btn tc-btn-s" href={registerUrl} >Join</a>
+    </div>
+  )
   
-          <div className="dropdown-menu-list">
-            {
-              userDropdownLists.map((list, i) => {
-                return ( <ul key={ i }>
-                  {
-                    list.map((link, j) => {
-                      return <li className="user-menu-item transition" key={ j }><a href={ link.link }>{ link.label }</a></li>
-                    })
-                  }
-                </ul> )
-              })
-            }
+  const loggedInDOM = (
+    <div className="UserDropdownMenu">
+      <Dropdown pointerShadow>
+        <div className="dropdown-menu-header">
+          <span className="user-image"><Avatar avatarUrl={userImage} /></span>
+          <span className="username">{ username }</span>
+          <img className="dropdown-arrow" src={ require('./arrow-small-down.svg') } />
+        </div>
 
-          </div>
-        </Dropdown>
-      </div>
-    )
+        <div className="dropdown-menu-list">
+          {
+            userDropdownLists.map((list, i) => {
+              return ( <ul key={ i }>
+                {
+                  list.map((link, j) => {
+                    return <li className="user-menu-item transition" key={ j }><a href={ link.link }>{ link.label }</a></li>
+                  })
+                }
+              </ul> )
+            })
+          }
 
-    return this.state.isLoggedIn ? loggedInDOM : publicDOM
-  }
+        </div>
+      </Dropdown>
+    </div>
+  )
+
+  return username ? loggedInDOM : publicDOM
+}
+
+UserDropdownMenu.propTypes = {
+  username      : PropTypes.string,
+  userImage     : PropTypes.string,
+  domain        : PropTypes.string.isRequired,
+  loginUrl      : PropTypes.string,
+  registerUrl   : PropTypes.string
+}
+
+UserDropdownMenu.defaultProps = {
+  loginUrl      : '/login',
+  registerUrl   : '/register'
 }
 
 export default UserDropdownMenu

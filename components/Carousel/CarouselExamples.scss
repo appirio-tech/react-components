@@ -1,0 +1,17 @@
+@import 'topcoder/tc-includes';
+
+.Carousel {
+  .StandardListItem {
+    padding: 0px;
+  }
+}
+
+.CarouselExamples {
+  > p {
+    border: 1px solid $accent-gray;
+    margin: 20px 0px;
+  }
+  .limited-width {
+    width: 200px;
+  }
+}

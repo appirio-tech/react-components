@@ -51,10 +51,11 @@ $active-icon-wrap-bg: #888894;
     }
 
     .search-icon-wrap {
+      cursor: pointer;
       background-color: $active-icon-wrap-bg;
     }
 
-    .SearchSuggestions {
+    .suggestions-panel {
       display: block;
     }
   }
@@ -67,10 +68,11 @@ $active-icon-wrap-bg: #888894;
     }
 
     .search-icon-wrap {
+      cursor: pointer;
       background-color: $active-icon-wrap-bg;
     }
 
-    .SearchSuggestions {
+    .suggestions-panel {
       display: none;
     }
   }
@@ -90,6 +92,16 @@ $active-icon-wrap-bg: #888894;
     transform: translateY(-50%);
     background-color: transparent;
     z-index: 20;
+    padding-left: 0px;
+  }
+
+  .search-bar__text {
+
+    &:hover,
+    &:focus {
+      border: none;
+      box-shadow: none;
+    }
   }
 
   .search-typeahead-text {
@@ -126,15 +138,21 @@ $active-icon-wrap-bg: #888894;
     }
   }
 
-  .SearchSuggestions {
+  .suggestions-panel {
     display: none;
     position: absolute;
     top: 43px;
     left: 0;
     width: 100%;
+    z-index: 1000;
 
-    strong {
-      font-weight: 600;
+    .loading-suggestions {
+    }
+
+    .SearchSuggestions {
+      strong {
+        font-weight: 600;
+      }
     }
   }
 }
