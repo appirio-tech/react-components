@@ -7,9 +7,14 @@ import ReactDOM from 'react-dom'
 class Tooltip extends Component {
   constructor(props) {
     super(props)
+    this.tooltipHideTimeout = props.tooltipHideTimeout || 250
     this.state = { isActive: false }
     this.showTooltip = this.showTooltip.bind(this)
     this.hideTooltip = this.hideTooltip.bind(this)
+    this.onMouseEnterTarget = this.onMouseEnterTarget.bind(this)
+    this.onMouseLeaveTarget = this.onMouseLeaveTarget.bind(this)
+    this.onMouseEnterTooltip = this.onMouseEnterTooltip.bind(this)
+    this.onMouseLeaveTooltip = this.onMouseLeaveTooltip.bind(this)
     this.onClick = this.onClick.bind(this)
   }
 
@@ -102,11 +107,38 @@ class Tooltip extends Component {
     this.setState({ isActive: !this.state.isActive })
   }
 
+  onMouseEnterTarget(evt) {
+    clearTimeout(this.state.hideTooltipTimeout)
+    this.showTooltip(evt)
+  }
+
+  onMouseLeaveTarget() {
+    this.startHideTooltipTimeout()
+  }
+
+  onMouseEnterTooltip() {
+    clearTimeout(this.state.hideTooltipTimeout)
+  }
+
+  onMouseLeaveTooltip() {
+    this.startHideTooltipTimeout()
+  }
+
+  startHideTooltipTimeout() {
+    const timeout = setTimeout(() => {
+      this.hideTooltip()
+    }, this.tooltipHideTimeout)
+    this.setState({hideTooltipTimeout: timeout})
+  }
+
   componentDidMount() {
     const target = ReactDOM.findDOMNode(this).querySelector('.tooltip-target')
     if (this.props.popMethod === 'hover') {
-      target.addEventListener('mouseenter', this.showTooltip)
-      target.addEventListener('mouseleave', this.hideTooltip)
+      target.addEventListener('mouseenter', this.onMouseEnterTarget)
+      target.addEventListener('mouseleave', this.onMouseLeaveTarget)
+      const tooltip = ReactDOM.findDOMNode(this).querySelector('.tooltip-container')
+      tooltip.addEventListener('mouseenter', this.onMouseEnterTooltip)
+      tooltip.addEventListener('mouseleave', this.onMouseLeaveTooltip)
     } else if (this.props.popMethod === 'click') {
       target.classList.add('click-pointer')
       target.addEventListener('click', this.onClick)
@@ -115,11 +147,14 @@ class Tooltip extends Component {
 
   componentWillUnmount() {
     const target = ReactDOM.findDOMNode(this).querySelector('.tooltip-target')
-    target.removeEventListener('mouseenter', this.showTooltip)
-    target.removeEventListener('mouseleave', this.hideTooltip)
+    target.removeEventListener('mouseenter', this.onMouseEnterTarget)
+    target.removeEventListener('mouseleave', this.onMouseLeaveTarget)
 
     target.removeEventListener('click', this.onClick)
 
+    const tooltip = ReactDOM.findDOMNode(this).querySelector('.tooltip-container')
+    tooltip.removeEventListener('mouseenter', this.onMouseEnterTooltip)
+    tooltip.removeEventListener('mouseleave', this.onMouseLeaveTooltip)
   }
 
   render() {
