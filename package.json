@@ -1,7 +1,7 @@
 {
   "name": "appirio-tech-react-components",
   "version": "0.0.0",
-  "main": "./index.coffee",
+  "main": "./exports.coffee",
   "devDependencies": {
     "appirio-tech-webpack-config": "0.x.x",
     "eslint": "^2.3.0",
