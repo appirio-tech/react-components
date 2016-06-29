@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "main": "./exports.coffee",
   "devDependencies": {
-    "appirio-tech-webpack-config": "0.x.x",
+    "appirio-tech-webpack-config": "appirio-tech/webpack-config.git#feature/connectv2",
     "eslint": "^2.3.0",
     "eslint-plugin-react": "^4.2.0",
     "babel-core": "^6.6.5",
