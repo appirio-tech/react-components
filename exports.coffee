@@ -8,7 +8,6 @@ MenuBar             = require './components/MenuBar/MenuBar'
 ImageViewer         = require './components/ImageViewer/ImageViewer'
 FileUploader        = require './components/FileUploader/FileUploader'
 Loader              = require './components/Loader/Loader'
-Icons               = require './components/Icons/Icons'
 StandardListItem    = require './components/StandardListItem/StandardListItem'
 TaggedValue         = require './components/TaggedValue/TaggedValue'
 QuickLinks          = require './components/QuickLinks/QuickLinks'
@@ -31,7 +30,6 @@ module.exports =
   ImageViewer       : ImageViewer.default
   FileUploader      : FileUploader.default
   Loader            : Loader.default
-  Icons             : Icons.default
   StandardListItem  : StandardListItem.default
   TaggedValue       : TaggedValue.default
   QuickLinks        : QuickLinks.default
