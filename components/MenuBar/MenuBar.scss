@@ -1,4 +1,4 @@
-@import 'topcoder/tc-includes';
+@import '~tc-ui/src/styles/tc-includes';
 
 $menu-bar-item-text-color: #737380;
 
@@ -33,10 +33,10 @@ $menu-bar-item-text-color: #737380;
     display: flex;
 
     &.selected {
-      border-bottom: 2px solid $primary-light;
+      border-bottom: 2px solid $tc-light-blue;
 
       a {
-        color: $black;
+        color: $tc-black;
       }
     }
 

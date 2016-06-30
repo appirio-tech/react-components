@@ -1,7 +1,7 @@
-@import "work/work-styles";
+@import '~tc-ui/src/styles/tc-includes';
 
 body {
-  background-color: $grey-lighter;
+  background-color: $tc-gray-neutral-light;
   padding: 15px;
 
   .invisible {
@@ -13,6 +13,6 @@ body {
     margin        : 80px 0 40px 0;
     text-align    : center;
     padding-bottom: 10px;
-    border-bottom : 1px solid $grey-light;
+    border-bottom : 1px solid $tc-gray-neutral-dark;
   }
 }

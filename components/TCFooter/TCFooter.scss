@@ -1,8 +1,8 @@
-@import 'topcoder/tc-includes';
+@import '~tc-ui/src/styles/tc-includes';
 
 .TCFooter {
   width: 100%;
-  background-color: $gray-darkest;
+  background-color: $tc-gray-90;
   padding: 1px 20px 30px 20px;
   font-family: 'Roboto', Arial;
 }
@@ -51,8 +51,8 @@
     .MenuBar {
       width: 100%;
       li {
-        background-color: $white;
-        border-bottom: 1px solid $gray-light;
+        background-color: white;
+        border-bottom: 1px solid $tc-gray-neutral-dark;
       }
     }
   }

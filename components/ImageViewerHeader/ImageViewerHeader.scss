@@ -1,4 +1,4 @@
-@import "work/work-includes";
+@import '~tc-ui/src/styles/tc-includes';
 
 .ImageViewerHeader {
 
@@ -30,7 +30,7 @@
           }
 
           .title {
-            color: $gray;
+            color: $tc-gray-20;
           }
         }
       }

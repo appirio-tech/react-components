@@ -1,4 +1,4 @@
-@import "work/work-includes";
+@import '~tc-ui/src/styles/tc-includes';
 
 .Loader {
   position       : absolute;
@@ -20,10 +20,10 @@
   .Loader__loader {
     width: 50px;
     height: 50px;
-    border-top       : 10px solid $grey-light;
-    border-right     : 10px solid $grey-light;
-    border-bottom    : 10px solid $grey-light;
-    border-left      : 10px solid $grey-lighter ;
+    border-top       : 10px solid $tc-gray-neutral-dark;
+    border-right     : 10px solid $tc-gray-neutral-dark;
+    border-bottom    : 10px solid $tc-gray-neutral-dark;
+    border-left      : 10px solid $tc-gray-neutral-light;
     -webkit-transform: translateZ(0);
     -ms-transform    : translateZ(0);
     transform        : translateZ(0);

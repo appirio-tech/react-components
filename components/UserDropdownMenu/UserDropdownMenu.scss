@@ -1,13 +1,7 @@
-@import "topcoder/tc-includes";
-@import "topcoder/tc-buttons";
-
-$user-dropdown-bg: #FAFAFB;
-$placeholder-bg: #B47DD6;
-$username-color: #737380;
+@import '~tc-ui/src/styles/tc-includes';
 
 .UserDropdownMenu {
   padding: 15px 20px;
-  background-color: $user-dropdown-bg;
   display: inline-block;
   position: relative;
 
@@ -40,7 +34,6 @@ $username-color: #737380;
       font-family: "Roboto", Arial, Helvetica, sans-serif;
       font-size: 14px;
       line-height: 16px;
-      color: $username-color;
       @include ellipsis;
       margin: 0px;
       margin-right: 10px;
@@ -72,7 +65,7 @@ $username-color: #737380;
       }
 
       .user-menu-item:hover {
-        background-color: $gray-light;
+        background-color: $tc-gray-neutral-dark;
       }
     }
 
@@ -82,7 +75,7 @@ $username-color: #737380;
 
     ul:not(:last-child) {
       li:last-child a {
-        border-bottom: 1px solid $gray-light;
+        border-bottom: 1px solid $tc-gray-neutral-dark;
         display: block;
       }
     }

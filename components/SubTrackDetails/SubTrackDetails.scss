@@ -1,8 +1,5 @@
-@import "topcoder/tc-includes";
+@import '~tc-ui/src/styles/tc-includes';
 
-$develop-bar-color: #21B2F1;
-$design-bar-color: #60C700;
-$dataScience-bar-color: #FB7D22;
 $track-desc-text-color: #DCDCE0;
 
 .SubTrackDetails{
@@ -13,22 +10,22 @@ $track-desc-text-color: #DCDCE0;
       font-size: 15px;
       line-height: 18px;
       margin-left: 11px;
-      color: $white;
+      color: white;
       float: left;
       font-weight: bold;
       font-family: "Roboto", Arial, Helvetica, sans-serif;
 	}
 
     .develop {
-      background-color: $develop-bar-color;
+      @include tc-track-colors;
     }
 
     .design {
-      background-color: $design-bar-color
+      @include tc-track-colors;
     }
 
-    .dataScience {
-      background-color: $dataScience-bar-color
+    .data {
+      @include tc-track-colors;
     }
   }
 
@@ -38,7 +35,7 @@ $track-desc-text-color: #DCDCE0;
     line-height: 18px;
     margin-top: 7px;
     font-family: "Roboto", Arial, Helvetica, sans-serif;
-    color: $track-desc-text-color;
+    color: $tc-gray-20;
   }
 
   .verticalLine {

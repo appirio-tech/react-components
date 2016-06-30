@@ -1,9 +1,4 @@
-@import 'topcoder/tc-includes';
-
-$accent: #59A7FF;
-$gray: #47474F;
-$gray-30:  #C3C3C8;
-$light-gray: #DCDCE0;
+@import '~tc-ui/src/styles/tc-includes';
 
 .ProgressBar {
   .progress-box {
@@ -23,7 +18,7 @@ $light-gray: #DCDCE0;
         font-weight: 500;
         font-size: 13px;
         line-height: 15px;
-        color: $white
+        color: white;
       }
     }
     .progress-ui {
@@ -36,7 +31,7 @@ $light-gray: #DCDCE0;
         position: absolute;
         height: 4px;
         width: 100%;
-        background-color: $light-gray;
+        background-color: $tc-gray-20;
         display: inline-block;
        }
 
@@ -45,9 +40,9 @@ $light-gray: #DCDCE0;
          left:0px;
          position: absolute;
          height: 4px;
-         background-color: $accent;
+         background-color: $tc-dark-blue-70;
          display: inline-block;
-         border-right: 4px solid $gray;
+         border-right: 4px solid $tc-gray-80;
        }
 
        .progress-circles  {
@@ -59,14 +54,14 @@ $light-gray: #DCDCE0;
         .circle {
            position: absolute;
            float: left;
-           background: $light-gray;
-           border: 3px solid $gray;
+           background: $tc-gray-20;
+           border: 3px solid $tc-gray-80;
            width: 13px;
            height: 13px;
            border-radius: 50%;
         }
         .completed {
-           background: $accent;
+           background: $tc-dark-blue;
         }
       }
     }
@@ -83,7 +78,7 @@ $light-gray: #DCDCE0;
          font-family: "Roboto", Arial, Helvetica, sans-serif;
          font-size: 11px;
          line-height: 15px;
-         color: $gray-30;
+         color: $tc-gray-30;
       }
     }
   }

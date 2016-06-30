@@ -13,7 +13,7 @@ const SubTrackDetails = ({name, code, description, tracks}) => {
     {hidden: tracks.indexOf('design') === -1}
   )
   const dataScienceClass = classNames(
-    'verticalLine', 'dataScience',
+    'verticalLine', 'data',
     {hidden: tracks.indexOf('data science') === -1}
   )
 

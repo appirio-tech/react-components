@@ -1,10 +1,10 @@
-@import "work/work-includes";
+@import '~tc-ui/src/styles/tc-includes';
 
 .UploadedFile {
   width: 203px;
 
   main {
-    background-color: $grey-lighter;
+    background-color: $tc-gray-neutral-light;
     height          : 135px;
     position        : relative;
 
@@ -29,7 +29,8 @@
     margin-top: 5px;
 
     p {
-      @include ellipsis(180px);
+      @include ellipsis;
+      max-width: 180px;
 
       font-weight: 400;
     }
@@ -63,11 +64,11 @@
     width       : 100%;
     height      : 82px;
     border-width: 0;
-    color       : $text-color-lighter;
+    color       : $tc-gray-50;
 
     &:focus {
       border-width: 1px;
-      color: $text-color;
+      color: $tc-gray-80;
     }
   }
 }

@@ -1,4 +1,4 @@
-@import "topcoder/tc-includes";
+@import '~tc-ui/src/styles/tc-includes';
 
 .Dropdown {
   margin-top: 30px;
@@ -18,10 +18,15 @@
     background-color: #fff;
     padding: 11px 20px;
     border-radius: 5px;
+    box-sizing: border-box;
+
+    li {
+      list-style: none;
+    }
 
     li a {
       color: #394146;
-      font-size: "Roboto", Arial, Helvetica, sans-serif;
+      font-family: "Roboto", Arial, Helvetica, sans-serif;
       font-size: 12px;
       line-height: 26px;
     }

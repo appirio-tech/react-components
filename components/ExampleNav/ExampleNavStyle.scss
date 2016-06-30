@@ -1,4 +1,4 @@
-@import "work/work-includes";
+@import '~tc-ui/src/styles/tc-includes';
 
 .ExampleNav {
   position: fixed;
@@ -16,6 +16,6 @@
   }
 
   .back {
-    color: $grey-dark;
+    color: $tc-gray-30;
   }
 }

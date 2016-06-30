@@ -1,4 +1,4 @@
-@import "work/work-includes";
+
 
 .ManageSteps {
   h5 {
@@ -6,7 +6,7 @@
   }
 
   .StepRow {
-    @include justify-content(center);
+    justify-content: center;
   }
 
   hr {

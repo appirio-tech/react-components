@@ -1,10 +1,10 @@
-@import "topcoder/tc-styles";
+@import '~tc-ui/src/styles/tc-includes';
 
 .search-results {
   .exact-match,
   .members,
   .challenges {
-    border-bottom: 1px solid $accent-gray;
+    border-bottom: 1px solid $tc-gray-40;
     margin: 10px 0px;
     padding: 0px 10px 10px 10px;
 
