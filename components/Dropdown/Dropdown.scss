@@ -1,4 +1,4 @@
-@import '~tc-ui/src/styles/tc-includes';
+@import '~tc-ui/src/styles/tc-styles';
 
 .Dropdown {
   margin-top: 30px;
@@ -18,7 +18,6 @@
     background-color: #fff;
     padding: 11px 20px;
     border-radius: 5px;
-    box-sizing: border-box;
 
     li {
       list-style: none;
