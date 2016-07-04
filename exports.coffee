@@ -21,6 +21,7 @@ StepRow             = require './components/StepRow/StepRow'
 SubNav              = require './components/SubNav/SubNav'
 # Icons
 TopcoderLogo        = require './components/Icons/TopcoderLogo'
+ConnectLogo         = require './components/Icons/ConnectLogo'
 TopcoderMobileLogo  = require './components/Icons/TopcoderMobileLogo'
 MagnifyGlassIcon    = require './components/Icons/MagnifyGlassIcon'
 LeftArrowIcon       = require './components/Icons/LeftArrowIcon'
@@ -55,4 +56,5 @@ module.exports =
   LeftArrowIcon     : LeftArrowIcon.default,
   RightArrowIcon    : RightArrowIcon.default,
   PlaceholderIcon   : PlaceholderIcon.default,
-  HamburgerIcon     : HamburgerIcon.default
+  HamburgerIcon     : HamburgerIcon.default,
+  ConnectLogo       : ConnectLogo.default
