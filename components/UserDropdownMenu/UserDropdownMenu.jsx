@@ -24,8 +24,8 @@ const UserDropdownMenu = ({username, userImage, domain, loginUrl, registerUrl}) 
 
   const publicDOM = (
     <div className="UserDropdownMenu non-logged-in">
-      <a className="login-button tc-btn tc-btn-s tc-btn-ghost" href={loginUrl} >Log in</a>
-      <a className="join-button tc-btn tc-btn-s" href={registerUrl} >Join</a>
+      <a className="login-button tc-btn tc-btn-primary tc-btn-sm" href={loginUrl} >Log in</a>
+      <a className="join-button tc-btn tc-btn-secondary tc-btn-sm" href={registerUrl} >Join</a>
     </div>
   )
   
