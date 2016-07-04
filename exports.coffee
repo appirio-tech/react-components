@@ -48,4 +48,11 @@ module.exports =
   Dropdown          : Dropdown.default
   ManageSteps       : ManageSteps.default
   StepRow           : StepRow.default
-  SubNav            : SubNav.default
+  SubNav            : SubNav.default,
+  TopcoderLogo      : TopcoderLogo.default,
+  TopcoderMobileLogo: TopcoderMobileLogo.default,
+  MagnifyGlassIcon  : MagnifyGlassIcon.default,
+  LeftArrowIcon     : LeftArrowIcon.default,
+  RightArrowIcon    : RightArrowIcon.default,
+  PlaceholderIcon   : PlaceholderIcon.default,
+  HamburgerIcon     : HamburgerIcon.default
