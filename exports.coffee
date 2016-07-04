@@ -19,6 +19,14 @@ Dropdown            = require './components/Dropdown/Dropdown'
 ManageSteps         = require './components/ManageSteps/ManageSteps'
 StepRow             = require './components/StepRow/StepRow'
 SubNav              = require './components/SubNav/SubNav'
+# Icons
+TopcoderLogo        = require './components/TopcoderLogo/TopcoderLogo'
+TopcoderMobileLogo  = require './components/TopcoderMobileLogo/TopcoderMobileLogo'
+MagnifyGlassIcon    = require './components/MagnifyGlassIcon/MagnifyGlassIcon'
+LeftArrowIcon       = require './components/LeftArrowIcon/LeftArrowIcon'
+RightArrowIcon      = require './components/RightArrowIcon/RightArrowIcon'
+HamburgerIcon       = require './components/HamburgerIcon/HamburgerIcon'
+PlaceholderIcon     = require './components/PlaceholderIcon/PlaceholderIcon'
 
 module.exports =
   NavBar            : NavBar.default
