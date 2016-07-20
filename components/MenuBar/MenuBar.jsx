@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 import classNames from 'classnames'
+import {Link} from 'react-router'
 
 require('./MenuBar.scss')
 
@@ -19,7 +20,7 @@ export default class MenuBar extends Component {
   }
 
   render() {
-    const { orientation, items } = this.props
+    const { orientation, items, forReactRouter } = this.props
 
     const mbClasses = classNames({
       MenuBar: true,
@@ -36,9 +37,12 @@ export default class MenuBar extends Component {
       const linkTarget = item.target || '_self'
       const linkContent = this.state.mobile ? <img src={item.img} /> : item.text
 
+      const linkDom = forReactRouter
+      ? <Link to={ item.link }>{ linkContent }</Link>
+      : <a href={item.link} target={linkTarget}>{linkContent}</a>
       return (
         <li key={item.text} className={itemClass}>
-          <a href={item.link} target={linkTarget}>{linkContent}</a>
+          { linkDom }
         </li>
       )
     }

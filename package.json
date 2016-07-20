@@ -13,8 +13,7 @@
     "history": "^1.17.0",
     "ignore-styles": "^1.2.0",
     "mocha": "^2.4.5",
-    "npm-prepublish": "^1.2.1",
-    "react-router": "^1.0.3"
+    "npm-prepublish": "^1.2.1"
   },
   "scripts": {
     "example": "webpack-dev-server -d --progress --inline --colors",
@@ -38,6 +37,7 @@
     "react-dropzone": "^3.3.2",
     "react-redux": "^4.2.1",
     "react-select": "^0.9.1",
+    "react-router": "^2.4.6",
     "tc-ui": "https://github.com/appirio-tech/tc-ui.git#feature/connectv2",
     "isomorphic-fetch": "^2.2.1"
   }
