@@ -19,6 +19,7 @@ Dropdown            = require './components/Dropdown/Dropdown'
 ManageSteps         = require './components/ManageSteps/ManageSteps'
 StepRow             = require './components/StepRow/StepRow'
 SubNav              = require './components/SubNav/SubNav'
+SwitchButton        = require './components/SwitchButton/SwitchButton'   
 # Icons
 TopcoderLogo        = require './components/Icons/TopcoderLogo'
 ConnectLogo         = require './components/Icons/ConnectLogo'
@@ -57,4 +58,5 @@ module.exports =
   RightArrowIcon    : RightArrowIcon.default,
   PlaceholderIcon   : PlaceholderIcon.default,
   HamburgerIcon     : HamburgerIcon.default,
-  ConnectLogo       : ConnectLogo.default
+  ConnectLogo       : ConnectLogo.default,
+  SwitchButton      : SwitchButton.default
