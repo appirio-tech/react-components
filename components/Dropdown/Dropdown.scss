@@ -1,13 +1,18 @@
 @import 'tc-styles';
 
+
+.dropdown-wrap {
+  cursor: pointer;
+}
+
 .Dropdown {
-  margin-top: 30px;
   background-color: #fff;
   box-shadow: 0px 2px 7px 1px rgba(0, 0, 0, 0.17);
   border-radius: 5px;
   display: inline-block;
   position: absolute;
   left: 0;
+  top: 30px;
   width: 100%;
 
   ul {
@@ -30,6 +35,41 @@
       line-height: 26px;
     }
   }
+}
+
+.default {
+  border: 1px solid $tc-gray-20;
+  display: flex;
+  align-items: center;
+  padding: calc(2 * #{$base_unit});
+  position: relative;
+
+  .Dropdown {
+    ul.dropdown-menu-list {
+      padding: 10px 0px;
+      li {
+        padding: 0 20px;
+        @include ellipsis;
+      }
+
+      li:hover {
+        background-color: $tc-gray-neutral-dark;
+      }
+    }
+  }
+}
+
+.default::after {
+  content: " ";
+  width: 10px;
+  height: 10px;
+  display: block;
+  right: 10px;
+  top: 50%;
+  position: absolute;
+  transform: rotate(45deg) translateY(-50%);
+  border-bottom: 2px solid $tc-gray-20;
+  border-right: 2px solid $tc-gray-20;
 }
 
 .Dropdown.hide {
