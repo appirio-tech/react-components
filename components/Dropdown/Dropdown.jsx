@@ -65,16 +65,14 @@ class Dropdown extends Component {
     const pointerShadow = this.props.pointerShadow
     const noPointer = this.props.noPointer
     const pointerLeft = this.props.pointerLeft
-    const ddClasses = classNames('dropdown-wrap',
-    {
+    const ddClasses = classNames('dropdown-wrap', {
       [`${ this.props.theme }`] : true
     })
-    const ndClasses = classNames('Dropdown',
-    {
+    const ndClasses = classNames('Dropdown', {
       'pointer-shadow' : pointerShadow,
       'pointer-hide'   : noPointer,
       'pointer-left'   : pointerLeft,
-      'hide'           : this.state.isHidden
+      hide           : this.state.isHidden
     })
 
     return (
