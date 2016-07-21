@@ -5,6 +5,8 @@ UserDropdown        = require './components/UserDropdownMenu/UserDropdownMenu'
 TCFooter            = require './components/TCFooter/TCFooter'
 ProgressBar         = require './components/ProgressBar/ProgressBar'
 MenuBar             = require './components/MenuBar/MenuBar'
+LinkMenuBar         = require './components/LinkMenuBar/MenuBar'
+NavLink             = require './components/NavLink/NavLink'
 ImageViewer         = require './components/ImageViewer/ImageViewer'
 FileUploader        = require './components/FileUploader/FileUploader'
 Loader              = require './components/Loader/Loader'
@@ -31,11 +33,13 @@ PlaceholderIcon     = require './components/Icons/PlaceholderIcon'
 
 module.exports =
   NavBar            : NavBar.default
+  NavLink           : NavLink.default
   Panel             : Panel.default
   SearchBar         : SearchBar.default
   UserDropdown      : UserDropdown.default
   ProgressBar       : ProgressBar.default
   MenuBar           : MenuBar.default
+  LinkMenuBar       : LinkMenuBar.default
   ImageViewer       : ImageViewer.default
   FileUploader      : FileUploader.default
   Loader            : Loader.default

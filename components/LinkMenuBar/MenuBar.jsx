@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react'
-
+import NavLink from '../NavLink/NavLink'
 import classNames from 'classnames'
 
 require('./MenuBar.scss')
@@ -30,17 +30,13 @@ export default class MenuBar extends Component {
     const menuItem = item => {
       const itemClass = classNames({
         [orientation]: true,
-        mobile: this.state.mobile,
-        selected: item.selected || (item.regex && window.location.href.match(item.regex) !== null)
+        mobile: this.state.mobile
       })
 
-      const linkTarget = item.target || '_self'
+      const linkTarget = item.target || null
       const linkContent = this.state.mobile ? <img src={item.img} /> : item.text
-
       return (
-        <li key={item.text} className={itemClass}>
-          <a href={item.link} target={linkTarget}>{linkContent}</a>
-        </li>
+        <NavLink key={item.text} to={item.link} target={linkTarget} content={linkContent} classes={itemClass} />
       )
     }
 
