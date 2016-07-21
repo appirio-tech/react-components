@@ -1,7 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 
 import classNames from 'classnames'
-import {Link} from 'react-router'
 import NavLink from '../NavLink/NavLink'
 
 require('./MenuBar.scss')
@@ -52,7 +51,7 @@ export default class MenuBar extends Component {
         selected: item.selected || (item.regex && window.location.href.match(item.regex) !== null)
       })
 
-      var linkTarget = item.target || '_self'
+      const linkTarget = item.target || '_self'
       const linkContent = this.state.mobile ? <img src={item.img} /> : item.text
 
       return forReactRouter ?

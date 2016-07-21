@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react'
-import {withRouter, Link} from "react-router"
+import {withRouter, Link} from 'react-router'
 
 class NavLink extends Component {
   constructor(props) {
@@ -7,14 +7,13 @@ class NavLink extends Component {
   }
 
   render() {
-    var { to, content, classes, target } = this.props,
-      isActive = this.props.router.isActive(this.props.to, true)
+    const { to, content, target } = this.props
+    let classes = this.props.classes
+    const isActive = this.props.router.isActive(this.props.to, true)
     if (isActive) {
       classes += ' selected'
     }
-    let attrs = {
-      to: to
-    }
+    const attrs = { to }
     if (target || target !== '_self') {
       attrs.target = target
     }
