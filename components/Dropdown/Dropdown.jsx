@@ -1,6 +1,7 @@
 require('./Dropdown.scss')
 
 import React, { Component, PropTypes } from 'react'
+import classNames from 'classnames'
 
 class Dropdown extends Component {
   constructor(props) {
@@ -64,26 +65,18 @@ class Dropdown extends Component {
     const pointerShadow = this.props.pointerShadow
     const noPointer = this.props.noPointer
     const pointerLeft = this.props.pointerLeft
-    let ndClasses = 'Dropdown'
-
-    if (pointerShadow) {
-      ndClasses += ' pointer-shadow'
-    }
-
-    if (noPointer) {
-      ndClasses += ' pointer-hide'
-    }
-
-    if (pointerLeft) {
-      ndClasses += ' pointer-left'
-    }
-
-    if (this.state.isHidden) {
-      ndClasses += ' hide'
-    }
+    const ddClasses = classNames('dropdown-wrap', {
+      [`${ this.props.theme }`] : true
+    })
+    const ndClasses = classNames('Dropdown', {
+      'pointer-shadow' : pointerShadow,
+      'pointer-hide'   : noPointer,
+      'pointer-left'   : pointerLeft,
+      hide           : this.state.isHidden
+    })
 
     return (
-      <div className="dropdown-wrap" onClick={ this.onClick } ref="Dropdown">
+      <div className={ ddClasses } onClick={ this.onClick } ref="Dropdown">
         {
           this.props.children.map((child) => {
             if(child.props.className === 'dropdown-menu-header')

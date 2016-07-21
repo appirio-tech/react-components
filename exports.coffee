@@ -5,7 +5,6 @@ UserDropdown        = require './components/UserDropdownMenu/UserDropdownMenu'
 TCFooter            = require './components/TCFooter/TCFooter'
 ProgressBar         = require './components/ProgressBar/ProgressBar'
 MenuBar             = require './components/MenuBar/MenuBar'
-LinkMenuBar         = require './components/LinkMenuBar/MenuBar'
 NavLink             = require './components/NavLink/NavLink'
 ImageViewer         = require './components/ImageViewer/ImageViewer'
 FileUploader        = require './components/FileUploader/FileUploader'
@@ -21,6 +20,7 @@ Dropdown            = require './components/Dropdown/Dropdown'
 ManageSteps         = require './components/ManageSteps/ManageSteps'
 StepRow             = require './components/StepRow/StepRow'
 SubNav              = require './components/SubNav/SubNav'
+SwitchButton        = require './components/SwitchButton/SwitchButton'
 # Icons
 TopcoderLogo        = require './components/Icons/TopcoderLogo'
 ConnectLogo         = require './components/Icons/ConnectLogo'
@@ -39,7 +39,6 @@ module.exports =
   UserDropdown      : UserDropdown.default
   ProgressBar       : ProgressBar.default
   MenuBar           : MenuBar.default
-  LinkMenuBar       : LinkMenuBar.default
   ImageViewer       : ImageViewer.default
   FileUploader      : FileUploader.default
   Loader            : Loader.default
@@ -61,4 +60,5 @@ module.exports =
   RightArrowIcon    : RightArrowIcon.default,
   PlaceholderIcon   : PlaceholderIcon.default,
   HamburgerIcon     : HamburgerIcon.default,
-  ConnectLogo       : ConnectLogo.default
+  ConnectLogo       : ConnectLogo.default,
+  SwitchButton      : SwitchButton.default

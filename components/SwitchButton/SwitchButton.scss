@@ -1,0 +1,36 @@
+@import 'tc-styles';
+
+.SwitchButton {
+
+  .rsbc-switch-button>label:first-child {
+    min-width: 100px;
+  }
+
+  .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"]+label {
+    background-color: $tc-gray-50;
+  }
+
+  .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"]+label:before {
+    background-color: $tc-gray-50;
+  }
+
+  .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"]+label:after {
+    background-color: $tc-gray-10;
+  }
+
+  .rsbc-switch-button.rsbc-switch-button-flat-round:hover input[type="checkbox"]+label,
+  .rsbc-switch-button.rsbc-switch-button-flat-round:hover input[type="checkbox"]+label:before {
+    background-color: $tc-gray-40;
+  }
+
+  .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"]:checked+label {
+    background-color: $tc-dark-blue-90;
+  }
+  .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"]:checked+label:before {
+    background-color: $tc-dark-blue-90;
+  }
+
+  .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"]:checked+label:after {
+    background-color: $tc-gray-10;
+  }
+}
