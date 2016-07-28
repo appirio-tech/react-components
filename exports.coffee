@@ -31,6 +31,10 @@ RightArrowIcon      = require './components/Icons/RightArrowIcon'
 HamburgerIcon       = require './components/Icons/HamburgerIcon'
 PlaceholderIcon     = require './components/Icons/PlaceholderIcon'
 
+# Forms
+InputFormField      = require './components/Forms/Input'
+TextareaFormField   = require './components/Forms/Textarea'
+
 module.exports =
   NavBar            : NavBar.default
   NavLink           : NavLink.default
@@ -62,3 +66,5 @@ module.exports =
   HamburgerIcon     : HamburgerIcon.default,
   ConnectLogo       : ConnectLogo.default,
   SwitchButton      : SwitchButton.default
+  InputFormField    : InputFormField.default
+  TextareaFormField    : TextareaFormField.default
