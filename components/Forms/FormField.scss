@@ -18,7 +18,7 @@ label{
     width:600px;
     margin: 10px auto;
     text-transform: none;
-    @include tc-label;
+    @include tc-label-md;
     color: $tc-gray-70;
     font-size: 13px;
 }
