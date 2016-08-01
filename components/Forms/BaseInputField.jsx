@@ -1,30 +1,12 @@
 'use strict'
 
-import React, { Component, PropTypes } from 'react'
-import classNames from 'classnames'
+import { Component, PropTypes } from 'react'
 import _ from 'lodash'
-
-// Defining css classes for each input
-const TEXTAREA_CLASS = 'tc-textarea'
 
 /**
  * Base Input field implementation
  */
 class BaseInputField extends Component {
-
-  onChange(event) {
-    const { onFieldChange, validateField, name, validations} = this.props
-    const newValue = event.target.value
-    // validate
-    const results = validateField(newValue, validations)
-    this.setState({
-      value: newValue,
-      dirty: true,
-      valid: !results.hasError,
-      errorMessage: results.errorMessage
-    })
-    onFieldChange(name, newValue, !results.hasError)
-  }
 
   componentWillMount() {
     this.setState({
@@ -32,6 +14,26 @@ class BaseInputField extends Component {
       valid: true, // TODO perform validation on component load
       value: this.props.value
     })
+    this.onChange = this.onChange.bind(this)
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return !_.isEqual(nextState, this.state)
+  }
+
+  onChange(event) {
+    const { onFieldChange, validateField, name, validations} = this.props
+    const newValue = event.target.value
+    // validate
+    const results = validateField(newValue, validations)
+    // TODO - compare against this.props.value to see if value has infact changed
+    this.setState({
+      value: newValue,
+      dirty: this.state.value !== newValue, //
+      valid: !results.hasError,
+      errorMessage: results.errorMessage
+    })
+    onFieldChange(name, newValue, !results.hasError)
   }
 }
 
@@ -47,8 +49,8 @@ BaseInputField.propTypes = {
 }
 BaseInputField.defaultProps = {
   value: '',
-  onFieldChange: ()=>{},
-  validateField: ()=>{}
+  onFieldChange: () => {},
+  validateField: () => {}
 }
 
 

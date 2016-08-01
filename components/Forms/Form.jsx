@@ -1,7 +1,24 @@
 'use strict'
 
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import _ from 'lodash'
+
+
+function setValue(path, val, obj) {
+  const fields = path.split('.')
+  let result = obj
+  for (let i = 0, n = fields.length; i < n && result !== undefined; i++) {
+    const field = fields[i]
+    if (i === n - 1) {
+      result[field] = val
+    } else {
+      if (typeof result[field] === 'undefined' || !_.isObject(result[field])) {
+        result[field] = {}
+      }
+      result = result[field]
+    }
+  }
+}
 
 class Form extends React.Component {
 
@@ -12,16 +29,16 @@ class Form extends React.Component {
   componentWillMount() {
     const formValue = _.assign({}, this.props.initialValue || {})
     this.setState({
-      valid: true,
+      fieldValidity: {}, // TODO perform initial validations
+      dirty: false,
+      valid: false,
       formValue
     })
   }
 
   onSubmit(event) {
     event.preventDefault()
-    // let formValue = _.mapValues(this.state.fields, (f) => f.value)
-    // extract field values and return them
-    this.props.onSubmit(this.state)
+    this.props.onSubmit(this.state.formValue)
   }
 
   /**
@@ -48,36 +65,47 @@ class Form extends React.Component {
    */
   handleFieldChange(fieldName, fieldValue, isValid) {
     // validate
-    let newState = _.assign({}, this.state)
-    newState.formValue[fieldName] = fieldValue
-    newState.valid = newState.valid && isValid
+    const newState = _.assign({}, this.state)
+    // setting the form value
+    setValue(fieldName, fieldValue, newState.formValue)
+    // update field validity
+    newState.fieldValidity[fieldName] = isValid
+    _.merge(newState, {
+      valid: _.every(newState.fieldValidity),
+      dirty: true
+    })
     this.setState(newState)
   }
 
   recursiveCloneChildren(children) {
     return React.Children.map(children, child => {
-      var childProps = {}
+      let childProps = {}
       // string has no props
       if (child.props) {
         // restrict applying additional properties to "registered field types"
         const childType = this.getChildType(child)
+
         switch(childType) {
-          case 'InputField':
-            // provide additional properties
-            childProps = {
-              value: _.get(this.state.formValue, child.props.name),
-              validateField: this.validateField.bind(this),
-              onFieldChange: this.handleFieldChange.bind(this)
-            }
-            break
-          case 'SubmitButton':
-            childProps = {
-              disabled: !this.state.valid,
-              onClick: this.onSubmit.bind(this)
-            }
-            break
-          default:
-            childProps = {}
+        case 'InputField':
+          // provide additional properties
+          const value = _.isEmpty(child.props.value)
+            ? _.get(this.state.formValue, child.props.name, '')
+            : child.props.value
+          childProps = {
+            value: value,
+            validateField: this.validateField.bind(this),
+            onFieldChange: this.handleFieldChange.bind(this)
+          }
+          break
+        case 'SubmitButton':
+          // (isDirty && !isValid) || !isDirty
+          childProps = {
+            disabled: (!this.state.valid && this.state.dirty) || !this.state.dirty,
+            onClick: this.onSubmit.bind(this)
+          }
+          break
+        default:
+          childProps = {}
         }
         childProps.children = this.recursiveCloneChildren(child.props.children)
         if (_.isEmpty(childProps)) {
@@ -99,9 +127,10 @@ class Form extends React.Component {
    */
   getChildType(elem) {
     if (typeof elem.type === 'function') {
-      if (elem.type.displayName.indexOf('Field') > -1)
+      const displayName = _.get(elem, 'type.displayName', '')
+      if (displayName.indexOf('Field') > -1)
         return 'InputField'
-      else if (elem.type.displayName.indexOf('SubmitButton') > -1)
+      else if (displayName.indexOf('SubmitButton') > -1)
         return 'SubmitButton'
     }
     return 'UI'
@@ -111,6 +140,6 @@ class Form extends React.Component {
 Form.propTypes = {
   initalValue: PropTypes.object,
   onSubmit: PropTypes.func.isRequired,
-  onChange: PropTypes.func,
+  onChange: PropTypes.func
 }
 export default Form

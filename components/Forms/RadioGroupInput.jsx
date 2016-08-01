@@ -1,12 +1,11 @@
 'use strict'
 
-import React, { PropTypes } from 'react'
-import classNames from 'classnames'
+import React, { Component, PropTypes } from 'react'
 import _ from 'lodash'
 import BaseInputField from './BaseInputField'
 
-const RadioButton = React.createClass({
-  render: function() {
+class RadioButton extends Component {
+  render() {
     const { name, index, label, selectedValue, value, onChange } = this.props
     const id = [name, 'option', index].join('-')
     return (
@@ -20,7 +19,7 @@ const RadioButton = React.createClass({
       </div>
     )
   }
-})
+}
 
 class RadioGroupInput extends BaseInputField {
   render() {
@@ -50,12 +49,8 @@ class RadioGroupInput extends BaseInputField {
   }
 }
 RadioGroupInput.displayName = 'RadioGroupInputField'
-RadioGroupInput.propTypes = _.assign(
-  {},
-  RadioGroupInput.propTypes,
-  {
-    options: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired
-  }
-)
+RadioGroupInput.propTypes = _.assign({}, RadioGroupInput.propTypes, {
+  options: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired
+})
 
 export default RadioGroupInput

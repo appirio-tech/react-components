@@ -1,7 +1,7 @@
 import React from 'react'
 
-const SubmitButton = React.createClass({
-  render: function() {
+const SubmitButton extends React.Component {
+  render() {
     return <button {...this.props} />
   }
 })

@@ -38,6 +38,8 @@ TextareaFormField   = require './components/ReduxForms/Textarea'
 # Forms
 Form                = require './components/Forms/Form'
 FormFields          = require './components/Forms/Fields'
+Validations         = require './components/Forms/Validations'
+BaseInputField      = require './components/Forms/BaseInputField'
 
 module.exports =
   NavBar            : NavBar.default
@@ -72,11 +74,15 @@ module.exports =
   SwitchButton      : SwitchButton.default
 # Redux Forms
   InputFormField    : InputFormField.default
-  TextareaFormField    : TextareaFormField.default
+  TextareaFormField : TextareaFormField.default
 
 # Forms
   Form              : Form.default
+  Validations       : Validations
   TextInput         : FormFields.default.TextInput
   TextareaInput     : FormFields.default.TextareaInput
   RadioGroupInput   : FormFields.default.RadioGroupInput
   SubmitButton      : FormFields.default.SubmitButton
+  SliderRadioGroupInput : FormFields.default.SliderRadioGroupInput
+  TiledCheckboxInput: FormFields.default.TiledCheckboxInput
+  BaseInputField    : BaseInputField.default

@@ -1,8 +1,7 @@
 'use strict'
 
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
 import classNames from 'classnames'
-import _ from 'lodash'
 import BaseInputField from './BaseInputField'
 
 // Defining css classes for each input
@@ -12,6 +11,10 @@ const TEXTAREA_CLASS = 'tc-textarea'
  * Textarea input class
  */
 class TextareaInput extends BaseInputField {
+
+  constructor(props) {
+    super(props)
+  }
 
   render() {
     const { label, name, disabled, wrapperClass} = this.props
@@ -27,7 +30,7 @@ class TextareaInput extends BaseInputField {
           name={name}
           className={classes}
           disabled={disabled}
-          onChange={this.onChange.bind(this)}
+          onChange={this.onChange}
           value={value}
         />
       { hasError ? (<p className="error-message">{errorMessage}</p>) : null}
@@ -36,21 +39,5 @@ class TextareaInput extends BaseInputField {
   }
 }
 TextareaInput.displayName = 'TextareaInputField'
-// TextareaInput.propTypes = {
-//   name: PropTypes.string.isRequired,
-//   placeholder: PropTypes.string,
-//   onFieldChange: PropTypes.func.isRequired,
-//   validateField: PropTypes.func.isRequired,
-//   value: PropTypes.oneOfType([
-//     PropTypes.string,
-//     PropTypes.number
-//   ]).isRequired
-// }
-// TextInput.defaultProps = {
-//   value: '',
-//   onFieldChange: ()=>{},
-//   validateField: ()=>{}
-// }
-
 
 export default TextareaInput

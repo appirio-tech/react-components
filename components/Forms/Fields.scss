@@ -12,8 +12,21 @@ input::-moz-focus-outer {
         box-sizing: border-box;
     }
 }
-
-xlabel{
+.row {
+  margin-bottom: 20px;
+  &.center{
+    display: table;
+    margin: 0 auto;
+    label{
+      display: inline;
+    }
+    input{
+      display: inline;
+      width: 100px;
+    }
+  }
+}
+label{
     display:block;
     width:600px;
     margin: 10px auto;
