@@ -7,7 +7,7 @@ import RadioGroupInput from './RadioGroupInput'
 import SliderRadioGroupInput from './SliderRadioGroupInput'
 import TiledCheckboxInput from './TiledCheckboxInput'
 
-require('./Fields.scss')
+require('./FormFields.scss')
 
 export default {
   SubmitButton,
