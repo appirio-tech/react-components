@@ -15,17 +15,18 @@ class TextareaFormFieldClass extends Component {
 
   render() {
     const {
-      id, label, placeholder,
-      formModel, formModelName, fieldModelName,
-      errorMessages, validators,
+      id, label,
+      formModel, fieldModelName,
+      errorMessages, validators
     } = this.props
     const hasError = _.has(formModel.fields, id)
       && formModel.fields[id].dirty
       && !formModel.fields[id].valid
 
     const inputClasses = classNames('tc-textarea', {
-      'error': hasError
+      error: hasError
     })
+    const renderErrorComponent = (props) => <p className="error-message">{props.children}</p>
     return (
       <div>
         <Field model={fieldModelName} validators={validators}>
@@ -40,7 +41,7 @@ class TextareaFormFieldClass extends Component {
           model={fieldModelName}
           show={hasError}
           messages={errorMessages}
-          component={(props) => <p className="error-message">{props.children}</p>}
+          component={ renderErrorComponent }
         />
       </div>
     )

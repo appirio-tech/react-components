@@ -14,8 +14,8 @@ class InputFormFieldClass extends Component {
   render() {
     const {
       id, label, placeholder,
-      formModel, formModelName, fieldModelName,
-      errorMessages, validators,
+      formModel, fieldModelName,
+      errorMessages, validators
     } = this.props
     const inputType = this.props.inputType || 'text'
     const hasError = _.has(formModel.fields, id)
@@ -24,13 +24,15 @@ class InputFormFieldClass extends Component {
 
     // const hasError = true
     const inputClasses = classNames('tc-file-field__inputs', {
-      'error': hasError
+      error: hasError
     })
 
     // // const hasError = true
     // const inputClasses = classNames('tc-textarea', {
     //   'error': hasError
     // })
+
+    const renderErrorComponent = (props) => <p className="error-message">{props.children}</p>
     return (
       <div>
         <Field model={fieldModelName} validators={validators}>
@@ -47,7 +49,7 @@ class InputFormFieldClass extends Component {
           model={fieldModelName}
           show={hasError}
           messages={errorMessages}
-          component={(props) => <p className="error-message">{props.children}</p>}
+          component={ renderErrorComponent }
         />
       </div>
     )

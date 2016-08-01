@@ -6,8 +6,13 @@ import _ from 'lodash'
 import BaseInputField from './BaseInputField'
 
 class SliderRadioGroupInput extends BaseInputField {
+  constructor(props) {
+    super(props)
+    this.onSlide = this.onSlide.bind(this)
+  }
+
   componentWillMount() {
-    let idx = Math.max(this.getIndexFromValue(this.props.value), 0)
+    const idx = Math.max(this.getIndexFromValue(this.props.value), 0)
     this.setState({
       dirty: false,
       valid: true,
@@ -34,7 +39,7 @@ class SliderRadioGroupInput extends BaseInputField {
   }
 
   render() {
-    const { label, name, disabled, wrapperClass, options, min, max, step} = this.props
+    const { options, min, max, step} = this.props
     const { value } = this.state
     const valueIdx = this.getIndexFromValue(value)
     // creating a function to render each type title + desc
@@ -44,8 +49,9 @@ class SliderRadioGroupInput extends BaseInputField {
         active: value === item.value
       })
       const idx = this.getIndexFromValue(item.value)
+      const handleClick = this.onChange.bind(this, idx)
       return (
-        <div className={itemClassnames} key={index} onClick={this.onChange.bind(this, idx)} >
+        <div className={itemClassnames} key={index} onClick={ handleClick } >
           <h3>{item.title}</h3>
           {item.desc}
         </div>
@@ -57,13 +63,14 @@ class SliderRadioGroupInput extends BaseInputField {
       // handle active class
       const itemClassnames = classNames({active: value === item.value})
       const idx = this.getIndexFromValue(item.value)
+      const handleClick = this.onChange.bind(this, idx)
       return (
         <span
-          onClick={this.onChange.bind(this, idx)}
+          onClick={ handleClick }
           className={itemClassnames}
           key={index}
-          dangerouslySetInnerHTML={{__html: item.info}}>
-        </span>
+          dangerouslySetInnerHTML={{__html: item.info}}
+        />
       )
     }
     return (
@@ -86,7 +93,7 @@ class SliderRadioGroupInput extends BaseInputField {
             max={max}
             step={step}
             value={valueIdx}
-            onChange={this.onSlide.bind(this)}
+            onChange={ this.onSlide }
           />
           <p></p>
         </div>

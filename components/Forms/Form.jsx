@@ -86,24 +86,26 @@ class Form extends React.Component {
         const childType = this.getChildType(child)
 
         switch(childType) {
-        case 'InputField':
+        case 'InputField': {
           // provide additional properties
           const value = _.isEmpty(child.props.value)
             ? _.get(this.state.formValue, child.props.name, '')
             : child.props.value
           childProps = {
-            value: value,
+            value,
             validateField: this.validateField.bind(this),
             onFieldChange: this.handleFieldChange.bind(this)
           }
           break
-        case 'SubmitButton':
+        }
+        case 'SubmitButton': {
           // (isDirty && !isValid) || !isDirty
           childProps = {
             disabled: (!this.state.valid && this.state.dirty) || !this.state.dirty,
             onClick: this.onSubmit.bind(this)
           }
           break
+        }
         default:
           childProps = {}
         }

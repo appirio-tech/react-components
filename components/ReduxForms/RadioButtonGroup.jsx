@@ -1,24 +1,23 @@
 import React, { Component, PropTypes } from 'react'
-import classNames from 'classnames'
-import _ from 'lodash'
 
-import React from 'react'
-import {WithFormValue} from 'react-forms'
+import { WithFormValue as withFormValue } from 'react-forms'
 
-class Field extends React.Component {
+// class Field extends React.Component {
 
-  render() {
-    let {formValue} = this.props
-    return (
-      <div>
-        <label>{formValue.schema.label}</label>
-        <input value={formValue.value} onChange={this.onChange} />
-      </div>
-    )
-  }
+//   render() {
+//     const {formValue} = this.props
+//     return (
+//       <div>
+//         <label>{formValue.schema.label}</label>
+//         <input value={formValue.value} onChange={this.onChange} />
+//       </div>
+//     )
+//   }
 
-  onChange = (e) => this.props.formValue.update(e.target.value)
-}
+//   onChange(e) {
+//     this.props.formValue.update(e.target.value)
+//   }
+// }
 
 class RadioButtonGroup extends Component {
 
@@ -34,23 +33,28 @@ class RadioButtonGroup extends Component {
             type="radio"
             name={modelName}
             id={id}
-            value={formValue.value} onChange={this.onChange} />
+            value={formValue.value} onChange={this.onChange}
+          />
           <label htmlFor={id}>{item.label}</label>
         </div>
       )
     }
     return (
-      { typeOptions.map(typeFunc) }
+      <div>
+        { options.map(typeFunc) }
+      </div>
     )
   }
 
-  onChange = (e) => this.props.formValue.update(e.target.value)
+  onChange(e) {
+    this.props.formValue.update(e.target.value)
+  }
 }
 
 RadioButtonGroup.propTypes = {
   options: PropTypes.arrayOf(PropTypes.object).isRequired,
-  modelName: PropTypes.string.isRequired
+  modelName: PropTypes.string.isRequired,
   formValue: PropTypes.string.isRequired
 }
 
-export default WithFormValue(RadioButtonGroup)
+export default withFormValue(RadioButtonGroup)

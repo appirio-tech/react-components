@@ -22,8 +22,12 @@ class RadioButton extends Component {
 }
 
 class RadioGroupInput extends BaseInputField {
+  constructor(props) {
+    super(props)
+    this.onChange = this.onChange.bind(this)
+  }
   render() {
-    const { label, name, disabled, wrapperClass} = this.props
+    const { label, name, wrapperClass} = this.props
     const { value, valid, dirty, errorMessage } = this.state
     const hasError = dirty && !valid
     const renderOption = (opt, idx) => {
@@ -35,7 +39,7 @@ class RadioGroupInput extends BaseInputField {
           label={opt.label}
           value={opt.value}
           selectedValue={value}
-          onChange={this.onChange.bind(this)}
+          onChange={ this.onChange }
         />
       )
     }

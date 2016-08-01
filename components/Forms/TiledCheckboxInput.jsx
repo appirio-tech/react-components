@@ -36,8 +36,9 @@ class TiledCheckboxInput extends BaseInputField {
       const itemClassnames = classNames(opt.value, {
         active: _.indexOf(value, opt.value) > -1
       })
+      const handleClick = this.onChange.bind(this, opt.value)
       return (
-        <a onClick={this.onChange.bind(this, opt.value)} className={itemClassnames} key={idx} >
+        <a onClick={ handleClick } className={itemClassnames} key={idx} >
           <span className="icon"></span>
           <span className="title">{opt.title}</span>
           <small>{opt.desc}</small>
