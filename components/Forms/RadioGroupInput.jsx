@@ -2,6 +2,7 @@
 
 import React, { Component, PropTypes } from 'react'
 import _ from 'lodash'
+import classNames from 'classnames'
 import BaseInputField from './BaseInputField'
 
 class RadioButton extends Component {
@@ -43,10 +44,11 @@ class RadioGroupInput extends BaseInputField {
         />
       )
     }
+    const wrapperClasses = classNames(wrapperClass, 'radio-group-input')
     return (
-      <div className={wrapperClass}>
-        <label className="tc-label">{label}</label>
-        {this.props.options.map(renderOption)}
+      <div className={ wrapperClasses }>
+        <label className="radio-group-label">{label}</label>
+        <div className="radio-group-options">{this.props.options.map(renderOption)}</div>
       { hasError ? (<p className="error-message">{errorMessage}</p>) : null}
       </div>
     )

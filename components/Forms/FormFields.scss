@@ -110,3 +110,54 @@ textarea{
     }
   }
 }
+
+.radio-group-input {
+  .radio-group-label {
+    @include tc-label-md;
+    margin-right: 20px;
+  }
+  .radio-group-options {
+    display: flex;
+    flex-direction: row;
+    .radio {
+      margin: 0;
+      input[type="radio"] {
+        opacity: 0;
+        display: none;
+      }
+      label {
+        display: inline-block;
+        line-height: 19px;
+        padding-left: 26px;
+        position: relative;
+        @include tc-label-md;
+        font-size:14px;
+        color: $tc-black;
+        margin-right: 30px;
+        &:before {
+          border: 1px solid $tc-gray-20;
+          border-radius: 50%;
+          background-color: #fff;
+          content: "";
+          display: inline-block;
+          height: 19px;
+          left: 0;
+          position: absolute;
+          top: 0;
+          width: 19px;
+        }
+      }
+      input[type="radio"]:checked + label:after {
+        background: $tc-dark-blue-90;
+        border-radius: 50%;
+        content: "";
+        display: inline-block;
+        left: 4px;
+        position: absolute;
+        top: 4px;
+        height: 11px;
+        width: 11px;
+      }
+    }
+  }
+}
