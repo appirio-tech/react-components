@@ -5,5 +5,6 @@ class SubmitButton extends React.Component {
     return <button {...this.props} />
   }
 }
+SubmitButton.displayName = 'SubmitButton'
 
 export default SubmitButton
