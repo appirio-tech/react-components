@@ -3,6 +3,7 @@
 
 .dropdown-wrap {
   cursor: pointer;
+  position: relative;
 }
 
 .Dropdown {
@@ -67,7 +68,7 @@
   right: 10px;
   top: 50%;
   position: absolute;
-  transform: rotate(45deg) translateY(-50%);
+  transform: translateY(-50%) rotate(45deg);
   border-bottom: 2px solid $tc-gray-20;
   border-right: 2px solid $tc-gray-20;
 }

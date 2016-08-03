@@ -17,6 +17,7 @@ Avatar              = require './components/Avatar/Avatar'
 Carousel            = require './components/Carousel/Carousel'
 Checkbox            = require './components/Checkbox/Checkbox'
 Dropdown            = require './components/Dropdown/Dropdown'
+SelectDropdown      = require './components/SelectDropdown/SelectDropdown'
 ManageSteps         = require './components/ManageSteps/ManageSteps'
 StepRow             = require './components/StepRow/StepRow'
 SubNav              = require './components/SubNav/SubNav'
@@ -60,6 +61,7 @@ module.exports =
   Carousel          : Carousel.default
   Checkbox          : Checkbox.default
   Dropdown          : Dropdown.default
+  SelectDropdown    : SelectDropdown.default
   ManageSteps       : ManageSteps.default
   StepRow           : StepRow.default
   SubNav            : SubNav.default,
