@@ -42,6 +42,9 @@ FormFields          = require './components/Forms/Fields'
 Validations         = require './components/Forms/Validations'
 BaseInputField      = require './components/Forms/BaseInputField'
 
+#RichDataTable
+RichDataTableHeader = require './components/RichDataTable/RichDataTableHeader'
+
 module.exports =
   NavBar            : NavBar.default
   NavLink           : NavLink.default
@@ -88,3 +91,6 @@ module.exports =
   SliderRadioGroupInput : FormFields.default.SliderRadioGroupInput
   TiledCheckboxInput: FormFields.default.TiledCheckboxInput
   BaseInputField    : BaseInputField.default
+
+# RichDataTable
+  RichDataTableHeader : RichDataTableHeader.default

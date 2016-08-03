@@ -30,6 +30,9 @@ const navs = {
   ManageSteps: [
     'ManageStepsExamples',
     'StepRowExamples'
+  ],
+  RichDataTable: [
+    'RichDataTableExample'
   ]
 }
 

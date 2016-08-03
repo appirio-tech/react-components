@@ -32,6 +32,7 @@ import SubTrackDetailsExample        from '../SubTrackDetails/SubTrackDetailsExa
 import PrizeExamples                 from '../Prize/PrizeExamples.jsx'
 import TooltipExamples               from '../Tooltip/TooltipExamples.jsx'
 import ProgressBarExample            from '../ProgressBar/ProgressBarExample.jsx'
+import RichDataTableExample          from '../RichDataTable/RichDataTableExample.jsx'
 
 const Component = () => (
   <Provider store={store}>
@@ -92,6 +93,8 @@ const Component = () => (
         <Route path="/TooltipExamples" component={TooltipExamples} />
         
         <Route path="/ProgressBarExample" component={ProgressBarExample}/>
+        
+        <Route path="/RichDataTableExample" component={RichDataTableExample}/>
       </Route>
     </Router>
   </Provider>
