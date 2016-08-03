@@ -32,11 +32,8 @@ class SelectDropdown extends Component {
         </li>
       )
     }
-    const ddClasses = {}
-    if (className) ddClasses[className] = true
-    ddClasses['SelectDropdown'] = true
     return (
-      <Dropdown theme={ theme } className={ classNames(ddClasses) } noPointer>
+      <Dropdown theme={ theme } className="SelectDropdown" noPointer>
         <div className="dropdown-menu-header"><span className="tc-link">{ selectedValue }</span></div>
         <ul className="dropdown-menu-list">
           { options.map(renderOption) }
