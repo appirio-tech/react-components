@@ -1,7 +1,6 @@
 require('./RichDataTableHeader.scss')
 
 import React from 'react'
-import _ from 'lodash'
 import classNames from 'classnames'
 import SelectDropdown from '../SelectDropdown/SelectDropdown'
 
@@ -12,8 +11,7 @@ const RichDataTableHeader = ({ columns, sortColumns, onSort}) => {
     }
   }
   const renderColumn = (column, idx) => {
-    let sortFilter = null;
-    let sort = null;
+    let sortFilter = null
     if (sortColumns && sortColumns[column.key]) {
       const sortOptions = sortColumns[column.key]
       const handleSortClick = (option) => {

@@ -2,7 +2,6 @@ require('./SelectDropdown.scss')
 
 import _ from 'lodash'
 import React, { Component, PropTypes } from 'react'
-import classNames from 'classnames'
 import Dropdown from '../Dropdown/Dropdown'
 
 class SelectDropdown extends Component {
@@ -20,7 +19,7 @@ class SelectDropdown extends Component {
   }
 
   render() {
-    const { options, theme, className } = this.props
+    const { options, theme } = this.props
     const { selectedOption } = this.state
     let selectedValue = selectedOption ? selectedOption.value : options[0].value
 
