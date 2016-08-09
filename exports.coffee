@@ -31,6 +31,7 @@ LeftArrowIcon       = require './components/Icons/LeftArrowIcon'
 RightArrowIcon      = require './components/Icons/RightArrowIcon'
 HamburgerIcon       = require './components/Icons/HamburgerIcon'
 PlaceholderIcon     = require './components/Icons/PlaceholderIcon'
+XMarkIcon           = require './components/Icons/XMarkIcon'
 
 # Redux Forms
 InputFormField      = require './components/ReduxForms/Input'
@@ -76,6 +77,7 @@ module.exports =
   PlaceholderIcon   : PlaceholderIcon.default,
   HamburgerIcon     : HamburgerIcon.default,
   ConnectLogo       : ConnectLogo.default,
+  XMarkIcon         : XMarkIcon.default,
   SwitchButton      : SwitchButton.default
 # Redux Forms
   InputFormField    : InputFormField.default
