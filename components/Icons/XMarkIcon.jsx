@@ -3,7 +3,7 @@ import React from 'react'
 const XMarkIcon = ({ width, height, fill }) => {
   const f = (fill || '#C3C3C8')
   return (
-    <svg width={ height || '14px'} height={ height || '14px'} viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <svg width={ width || '14px'} height={ height || '14px'} viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg">
       <title>x-mark</title>
       <desc>X Mark</desc>
       <defs></defs>
