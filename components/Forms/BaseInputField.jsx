@@ -8,13 +8,26 @@ import _ from 'lodash'
  */
 class BaseInputField extends Component {
 
+  constructor(props) {
+    super(props)
+    this.onChange = this.onChange.bind(this)
+    this.init = this.init.bind(this)
+  }
+
   componentWillMount() {
+    this.init(this.props)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.init(nextProps)
+  }
+
+  init(props) {
     this.setState({
       dirty: false,
       valid: true, // TODO perform validation on component load
-      value: this.props.value
+      value: props.value
     })
-    this.onChange = this.onChange.bind(this)
   }
 
   shouldComponentUpdate(nextProps, nextState) {

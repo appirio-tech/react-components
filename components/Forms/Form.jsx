@@ -24,10 +24,22 @@ class Form extends React.Component {
 
   constructor(props) {
     super(props)
+
+    this.init = this.init.bind(this)
   }
 
   componentWillMount() {
-    const formValue = _.assign({}, this.props.initialValue || {})
+    this.init(this.props)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.resetOnRender) {
+      this.init(nextProps)
+    }
+  }
+
+  init(props) {
+    const formValue = _.assign({}, props.initialValue || {})
     this.setState({
       fieldValidity: {}, // TODO perform initial validations
       dirty: false,
@@ -77,7 +89,7 @@ class Form extends React.Component {
     this.setState(newState)
   }
 
-  recursiveCloneChildren(children) {
+  recursiveCloneChildren(children, disableOnPristine) {
     return React.Children.map(children, child => {
       let childProps = {}
       // string has no props
@@ -92,7 +104,7 @@ class Form extends React.Component {
             ? _.get(this.state.formValue, child.props.name, '')
             : child.props.value
           childProps = {
-            value,
+            value: value ? value : '',
             validateField: this.validateField.bind(this),
             onFieldChange: this.handleFieldChange.bind(this)
           }
@@ -100,8 +112,9 @@ class Form extends React.Component {
         }
         case 'SubmitButton': {
           // (isDirty && !isValid) || !isDirty
+          const disableForNonDirty = !this.state.dirty && disableOnPristine
           childProps = {
-            disabled: (!this.state.valid && this.state.dirty) || !this.state.dirty,
+            disabled: (!this.state.valid && this.state.dirty) || disableForNonDirty,
             onClick: this.onSubmit.bind(this)
           }
           break
@@ -109,7 +122,7 @@ class Form extends React.Component {
         default:
           childProps = {}
         }
-        childProps.children = this.recursiveCloneChildren(child.props.children)
+        childProps.children = this.recursiveCloneChildren(child.props.children, disableOnPristine)
         if (_.isEmpty(childProps)) {
           return child
         } else {
@@ -120,7 +133,8 @@ class Form extends React.Component {
     })
   }
   render() {
-    return (<form>{this.recursiveCloneChildren(this.props.children)}</form>)
+    const { disableOnPristine } = this.props
+    return (<form>{this.recursiveCloneChildren(this.props.children, disableOnPristine)}</form>)
   }
 
   /**
@@ -139,9 +153,16 @@ class Form extends React.Component {
   }
 }
 
+Form.defaultProps = {
+  resetOnRender : false,
+  disableOnPristine: true
+}
+
 Form.propTypes = {
   initalValue: PropTypes.object,
   onSubmit: PropTypes.func.isRequired,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  resetOnRender: PropTypes.bool,
+  disableOnPristine: PropTypes.bool
 }
 export default Form
