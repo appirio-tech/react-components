@@ -17,7 +17,7 @@ class TextareaInput extends BaseInputField {
   }
 
   render() {
-    const { label, name, disabled, wrapperClass} = this.props
+    const { label, name, disabled, placeholder, wrapperClass} = this.props
     const { dirty, valid, errorMessage, value } = this.state
     const hasError = dirty && !valid
 
@@ -28,6 +28,7 @@ class TextareaInput extends BaseInputField {
         <textarea
           id={name}
           name={name}
+          placeholder={placeholder}
           className={classes}
           disabled={disabled}
           onChange={this.onChange}
