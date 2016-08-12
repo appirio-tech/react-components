@@ -1,11 +1,12 @@
 require('./UserDropdownMenu.scss')
 
 import React, {PropTypes} from 'react'
+import { Link } from 'react-router'
 import Avatar from '../Avatar/Avatar'
 import Dropdown from '../Dropdown/Dropdown'
 
 
-const UserDropdownMenu = ({username, userImage, domain, loginUrl, registerUrl}) => {
+const UserDropdownMenu = ({username, userImage, domain, loginUrl, registerUrl, menuItems, forReactRouter}) => {
 
   const userDropdownLists = [
     [
@@ -29,6 +30,12 @@ const UserDropdownMenu = ({username, userImage, domain, loginUrl, registerUrl}) 
     </div>
   )
   
+  const menuList = menuItems ? menuItems : userDropdownLists
+  const rendreLink = (link) => {
+    return forReactRouter && !link.absolute
+    ? <Link to={ link.link }>{ link.label }</Link>
+    : <a href={ link.link }>{ link.label }</a>
+  }
   const loggedInDOM = (
     <div className="UserDropdownMenu">
       <Dropdown pointerShadow>
@@ -40,11 +47,13 @@ const UserDropdownMenu = ({username, userImage, domain, loginUrl, registerUrl}) 
 
         <div className="dropdown-menu-list">
           {
-            userDropdownLists.map((list, i) => {
+            menuList.map((list, i) => {
               return ( <ul key={ i }>
                 {
                   list.map((link, j) => {
-                    return <li className="user-menu-item transition" key={ j }><a href={ link.link }>{ link.label }</a></li>
+                    return (<li className="user-menu-item transition" key={ j }>
+                      { rendreLink(link) }
+                    </li>)
                   })
                 }
               </ul> )
