@@ -78,7 +78,7 @@ class Dropdown extends Component {
       <div className={ ddClasses } onClick={ this.onClick } ref="Dropdown">
         {
           this.props.children.map((child) => {
-            if(child.props.className === 'dropdown-menu-header')
+            if (child.props.className.indexOf('dropdown-menu-header') > -1)
               return child
           })
         }
@@ -86,7 +86,7 @@ class Dropdown extends Component {
         <div className = {ndClasses}>
           {
             this.props.children.map((child) => {
-              if(child.props.className === 'dropdown-menu-list')
+              if (child.props.className.indexOf('dropdown-menu-list') > -1)
                 return child
             })
           }
