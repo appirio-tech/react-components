@@ -27,9 +27,9 @@ class SearchBar extends Component {
     this.handleSuggestionsUpdate = this.handleSuggestionsUpdate.bind(this)
   }
 
-  getQueryStringValue (key) {  
+  getQueryStringValue (key) {
     return unescape(window.location.href.replace(new RegExp('^(?:.*[&\\?]' + escape(key).replace(/[\.\+\*]/g, '\\$&') + '(?:\\=([^&]*))?)?.*$', 'i'), '$1'))
-  } 
+  }
 
   componentDidMount() {
     window.addEventListener('click', this.handleOutsideClick)
@@ -102,6 +102,7 @@ class SearchBar extends Component {
     this.refs.searchValue.value = null
     this.setState({ searchValue: this.refs.searchValue.value })
     this.setState({ searchState: 'empty' })
+    this.props.onClearSearch()
   }
 
   onKeyUp(evt) {
@@ -211,6 +212,7 @@ class SearchBar extends Component {
 
 SearchBar.propTypes = {
   onSearch     : PropTypes.func.isRequired,
+  onClearSearch : PropTypes.func,
   onTermChange : PropTypes.func.isRequired,
   recentTerms  : PropTypes.array,
   searchTermKey: PropTypes.string
@@ -218,7 +220,8 @@ SearchBar.propTypes = {
 
 SearchBar.defaultProps = {
   recentTerms   : [],
-  searchTermKey : 'q'
+  searchTermKey : 'q',
+  onClearSearch : () => {}
 }
 
 export default SearchBar
