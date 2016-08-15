@@ -44,6 +44,7 @@
     "react-select": "^0.9.1",
     "react-switch-button": "^1.1.2",
     "redux-thunk": "^2.1.0",
-    "tc-ui": "https://github.com/appirio-tech/tc-ui.git#feature/connectv2"
+    "tc-ui": "https://github.com/appirio-tech/tc-ui.git#feature/connectv2",
+    "uncontrollable": "^4.0.1"
   }
 }
