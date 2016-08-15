@@ -4,22 +4,26 @@ import cn from 'classnames'
 require('./Tabs.scss')
 
 
-const Tabs = ({activeKey, children, onSelect}) => (
-  <div>
-  <div className="tabs">
-    <ul>
-      {children.map(({props: {title, eventKey}}) =>
-        <li key={eventKey} onClick={(e) => onSelect(eventKey, e)} className={cn({active: activeKey === eventKey})}>
-          <a >{title}</a>
-        </li>
-      )}
-    </ul>
-  </div>
-    <div className="tab-content">
-      {children.filter(({props: {eventKey}}) => eventKey === activeKey)[0]}
+const Tabs = ({activeKey, children, onSelect}) => {
+  const renderTabPill = ({props: {title, eventKey}}) => (
+    <li key={eventKey} className={cn({active: activeKey === eventKey})}>
+      <a onClick={function(e) { onSelect(eventKey, e)} }>{title}</a>
+    </li>
+  )
+  const activeChild = ({props: {eventKey}}) => eventKey === activeKey
+  return (
+    <div>
+      <div className="tabs">
+        <ul>
+          {children.map(renderTabPill)}
+        </ul>
+      </div>
+      <div className="tab-content">
+        {children.filter(activeChild)[0]}
+      </div>
     </div>
-  </div>
-)
+  )
+}
 
 Tabs.propTypes = {
   /**
