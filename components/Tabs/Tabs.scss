@@ -4,14 +4,14 @@
 @import "~tc-ui/src/styles/typography";
 
 .tabs {
-    width: 240px;
+    width: 300px;
     list-style-type: none;
     margin: 0 auto 50px auto;
     ul{
         text-align: center;
         display: -webkit-flex;
         display: flex;
-        width:240px;
+        width:300px;
     }
     li {
         // -webkit-flex: initial;

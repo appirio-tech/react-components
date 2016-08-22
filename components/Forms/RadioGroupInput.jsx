@@ -4,23 +4,7 @@ import React, { Component, PropTypes } from 'react'
 import _ from 'lodash'
 import classNames from 'classnames'
 import BaseInputField from './BaseInputField'
-
-class RadioButton extends Component {
-  render() {
-    const { name, index, label, selectedValue, value, onChange } = this.props
-    const id = [name, 'option', index].join('-')
-    return (
-      <div className="radio">
-        <input type="radio"
-          name={name} id={id} value={value}
-          checked={value === selectedValue}
-          onChange={onChange}
-        />
-        <label htmlFor={id}>{label}</label>
-      </div>
-    )
-  }
-}
+import RadioButton from './RadioButton'
 
 class RadioGroupInput extends BaseInputField {
   constructor(props) {

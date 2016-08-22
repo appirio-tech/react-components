@@ -33,9 +33,14 @@ RightArrowIcon      = require './components/Icons/RightArrowIcon'
 HamburgerIcon       = require './components/Icons/HamburgerIcon'
 PlaceholderIcon     = require './components/Icons/PlaceholderIcon'
 XMarkIcon           = require './components/Icons/XMarkIcon'
+CloseIcon           = require './components/Icons/CloseIcon'
+TrashIcon           = require './components/Icons/TrashIcon'
+EditIcon            = require './components/Icons/EditIcon'
+SaveIcon            = require './components/Icons/SaveIcon'
+
 Tabs                = require './components/Tabs/Tabs'
 Tab                 = require './components/Tabs/Tab'
-
+FilePicker          = require './components/FilePicker/FilePicker'
 # Redux Forms
 InputFormField      = require './components/ReduxForms/Input'
 TextareaFormField   = require './components/ReduxForms/Textarea'
@@ -83,9 +88,15 @@ module.exports =
   ConnectLogo       : ConnectLogo.default,
   XMarkIcon         : XMarkIcon.default,
   SwitchButton      : SwitchButton.default
+  CloseIcon         : CloseIcon.default
+  EditIcon          : EditIcon.default
+  TrashIcon         : TrashIcon.default
+  SaveIcon          : SaveIcon.default
+
   Tabs              : Tabs.default
   Tab               : Tab.default
-  
+  FilePicker        : FilePicker.default
+
 # Redux Forms
   InputFormField    : InputFormField.default
   TextareaFormField : TextareaFormField.default
@@ -96,6 +107,7 @@ module.exports =
   TextInput         : FormFields.default.TextInput
   TextareaInput     : FormFields.default.TextareaInput
   RadioGroupInput   : FormFields.default.RadioGroupInput
+  RadioButton       : FormFields.default.RadioButton
   SubmitButton      : FormFields.default.SubmitButton
   SliderRadioGroupInput : FormFields.default.SliderRadioGroupInput
   TiledCheckboxInput: FormFields.default.TiledCheckboxInput

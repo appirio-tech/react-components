@@ -6,8 +6,8 @@ require('./Tabs.scss')
 
 const Tabs = ({activeKey, children, onSelect}) => {
   const renderTabPill = ({props: {title, eventKey}}) => (
-    <li key={eventKey} className={cn({active: activeKey === eventKey})}>
-      <a onClick={function(e) { onSelect(eventKey, e)} }>{title}</a>
+    <li key={eventKey} onClick={function(e) { onSelect(eventKey, e)} } className={cn({active: activeKey === eventKey})}>
+      <a>{title}</a>
     </li>
   )
   const activeChild = ({props: {eventKey}}) => eventKey === activeKey
