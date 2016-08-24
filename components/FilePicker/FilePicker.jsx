@@ -16,19 +16,18 @@ class FilePicker extends React.Component {
     const filepickerElement = this.refs.filepicker
     filepicker.setKey(this.props.apiKey)
     filepicker.constructWidget(filepickerElement)
-    filepickerElement.addEventListener('change', this.onChange, false);
+    filepickerElement.addEventListener('change', this.onChange, false)
   }
 
   componentWillUnmount() {
-    this.refs.filepicker.removeEventListener('change', this.onChange, false);
+    this.refs.filepicker.removeEventListener('change', this.onChange, false)
   }
 
   render() {
-    const { apiKey, onSuccess, mode, options } = this.props
-    const element = this.refs.target
+    const { mode, options } = this.props
 
     // add data-fp- prefix to all keys
-    const opts = _.mapKeys(options, (v,k) => {
+    const opts = _.mapKeys(options, (v, k) => {
       const hyphenated = k.replace(/([a-zA-Z])(?=[A-Z])/g, '$1-').toLowerCase()
       return `data-fp-${hyphenated}`
     })

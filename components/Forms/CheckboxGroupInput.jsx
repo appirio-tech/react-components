@@ -4,9 +4,21 @@ import React, { PropTypes } from 'react'
 import _ from 'lodash'
 import classNames from 'classnames'
 import BaseInputField from './BaseInputField'
-import RadioButton from './RadioButton'
 
-class RadioGroupInput extends BaseInputField {
+const CheckboxInput = ({index, name, label, value, selectedValue}) => {
+  const id = [name, 'option', index].join('-')
+  return (
+    <div>
+      <div className="tc-checkbox">
+        <input id={id} type="checkbox" value={value}  checked={value === selectedValue} />
+        <label htmlFor={id}/>
+      </div>
+      <label className="tc-checkbox-label" htmlFor={id}>{label}</label>
+    </div>
+  )
+}
+
+class CheckboxGroupInput extends BaseInputField {
   constructor(props) {
     super(props)
     this.onChange = this.onChange.bind(this)
@@ -17,7 +29,7 @@ class RadioGroupInput extends BaseInputField {
     const hasError = dirty && !valid
     const renderOption = (opt, idx) => {
       return (
-        <RadioButton
+        <CheckboxInput
           key={idx}
           index={idx}
           name={name}
@@ -28,19 +40,19 @@ class RadioGroupInput extends BaseInputField {
         />
       )
     }
-    const wrapperClasses = classNames(wrapperClass, 'radio-group-input')
+    const wrapperClasses = classNames(wrapperClass, 'checkbox-group-input')
     return (
       <div className={ wrapperClasses }>
-        <label className="radio-group-label">{label}</label>
-        <div className="radio-group-options">{this.props.options.map(renderOption)}</div>
+        <label className="checkbox-group-label">{label}</label>
+        <div className="checkbox-group-options">{this.props.options.map(renderOption)}</div>
       { hasError ? (<p className="error-message">{errorMessage}</p>) : null}
       </div>
     )
   }
 }
-RadioGroupInput.displayName = 'RadioGroupInputField'
-RadioGroupInput.propTypes = _.assign({}, RadioGroupInput.propTypes, {
+CheckboxGroupInput.displayName = 'CheckboxGroupInputField'
+CheckboxGroupInput.propTypes = _.assign({}, CheckboxGroupInput.propTypes, {
   options: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired
 })
 
-export default RadioGroupInput
+export default CheckboxGroupInput

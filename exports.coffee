@@ -46,6 +46,8 @@ InputFormField      = require './components/ReduxForms/Input'
 TextareaFormField   = require './components/ReduxForms/Textarea'
 
 # Forms
+FormsyForm          = require './components/Formsy'
+
 Form                = require './components/Forms/Form'
 FormFields          = require './components/Forms/Fields'
 Validations         = require './components/Forms/Validations'
@@ -97,6 +99,11 @@ module.exports =
   Tab               : Tab.default
   FilePicker        : FilePicker.default
 
+
+# Formsy
+  Formsy            : FormsyForm.default.Formsy
+  TCFormFields      : FormsyForm.default.Fields
+
 # Redux Forms
   InputFormField    : InputFormField.default
   TextareaFormField : TextareaFormField.default
@@ -108,6 +115,8 @@ module.exports =
   TextareaInput     : FormFields.default.TextareaInput
   RadioGroupInput   : FormFields.default.RadioGroupInput
   RadioButton       : FormFields.default.RadioButton
+  CheckboxInput     : FormFields.default.CheckboxInput
+  CheckboxGroupInput: FormFields.default.CheckboxGroupInput
   SubmitButton      : FormFields.default.SubmitButton
   SliderRadioGroupInput : FormFields.default.SliderRadioGroupInput
   TiledCheckboxInput: FormFields.default.TiledCheckboxInput

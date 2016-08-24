@@ -1,6 +1,6 @@
 'use strict'
 
-import React, { Component, PropTypes } from 'react'
+import { Component, PropTypes } from 'react'
 import _ from 'lodash'
 
 /**
@@ -62,8 +62,8 @@ BaseInputField.propTypes = {
 }
 BaseInputField.defaultProps = {
   value: '',
-  onFieldChange: () => {},
-  validateField: () => {}
+  // onFieldChange: () => {},
+  validateField: () => { return { hasError: false, errorMessage: null }}
 }
 
 

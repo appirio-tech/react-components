@@ -5,6 +5,8 @@ import TextInput from './TextInput'
 import TextareaInput from './TextareaInput'
 import RadioGroupInput from './RadioGroupInput'
 import RadioButton from './RadioButton'
+import CheckboxInput from './CheckboxInput'
+import CheckboxGroupInput from './CheckboxGroupInput'
 import SliderRadioGroupInput from './SliderRadioGroupInput'
 import TiledCheckboxInput from './TiledCheckboxInput'
 
@@ -16,6 +18,8 @@ export default {
   TextareaInput,
   RadioGroupInput,
   RadioButton,
+  CheckboxInput,
+  CheckboxGroupInput,
   SliderRadioGroupInput,
   TiledCheckboxInput
 }

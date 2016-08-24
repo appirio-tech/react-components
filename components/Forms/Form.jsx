@@ -24,7 +24,6 @@ class Form extends React.Component {
 
   constructor(props) {
     super(props)
-
     this.init = this.init.bind(this)
   }
 
@@ -46,6 +45,12 @@ class Form extends React.Component {
       valid: false,
       formValue
     })
+  }
+
+
+  updateData(data) {
+    // TODO should re-perform validations
+    this.setState(_.assign({}, this.state, { dirty: true, formValue: data}))
   }
 
   onSubmit(event) {
@@ -87,6 +92,9 @@ class Form extends React.Component {
       dirty: true
     })
     this.setState(newState)
+    // call onChange callback if provided
+    if (this.props.onChange)
+      this.props.onChange(fieldName, fieldValue, newState)
   }
 
   recursiveCloneChildren(children, disableOnPristine) {
@@ -132,6 +140,7 @@ class Form extends React.Component {
       return child
     })
   }
+
   render() {
     const { disableOnPristine } = this.props
     return (<form>{this.recursiveCloneChildren(this.props.children, disableOnPristine)}</form>)
