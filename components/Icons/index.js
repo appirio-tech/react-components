@@ -52,6 +52,5 @@ export default {
   CloseIcon            : CloseIcon,
   TrashIcon            : TrashIcon,
   EditIcon             : EditIcon,
-  SaveIcon             : SaveIcon,
-
+  SaveIcon             : SaveIcon
 }
