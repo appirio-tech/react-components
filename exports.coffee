@@ -23,19 +23,8 @@ ManageSteps         = require './components/ManageSteps/ManageSteps'
 StepRow             = require './components/StepRow/StepRow'
 SubNav              = require './components/SubNav/SubNav'
 SwitchButton        = require './components/SwitchButton/SwitchButton'
-# Icons
-TopcoderLogo            = require './components/Icons/TopcoderLogo'
-ConnectLogo             = require './components/Icons/ConnectLogo'
-TopcoderMobileLogo      = require './components/Icons/TopcoderMobileLogo'
-IconUIZoom              = require './components/Icons/IconUIZoom'
-IconArrowMinimalLeft    = require './components/Icons/IconArrowMinimalLeft'
-IconArrowMinimalRight   = require './components/Icons/IconArrowMinimalRight'
-IconTcMenuBold          = require './components/Icons/IconTcMenuBold'
-XMarkIcon           = require './components/Icons/XMarkIcon'
-CloseIcon           = require './components/Icons/CloseIcon'
-TrashIcon           = require './components/Icons/TrashIcon'
-EditIcon            = require './components/Icons/EditIcon'
-SaveIcon            = require './components/Icons/SaveIcon'
+
+Icons               = require './components/Icons'
 
 Tabs                = require './components/Tabs/Tabs'
 Tab                 = require './components/Tabs/Tab'
@@ -78,20 +67,9 @@ module.exports =
   SelectDropdown    : SelectDropdown.default
   ManageSteps       : ManageSteps.default
   StepRow           : StepRow.default
-  SubNav            : SubNav.default,
-  TopcoderLogo      : TopcoderLogo.default,
-  TopcoderMobileLogo    : TopcoderMobileLogo.default,
-  IconUIZoom            : IconUIZoom.default,
-  IconArrowMinimalLeft  : IconArrowMinimalLeft.default,
-  IconArrowMinimalRight : IconArrowMinimalRight.default,
-  IconTcMenuBold        : IconTcMenuBold.default,
-  ConnectLogo           : ConnectLogo.default,
-  XMarkIcon             : XMarkIcon.default,
+  SubNav            : SubNav.default
   SwitchButton          : SwitchButton.default
-  CloseIcon             : CloseIcon.default
-  EditIcon              : EditIcon.default
-  TrashIcon             : TrashIcon.default
-  SaveIcon              : SaveIcon.default
+  Icons             : Icons.default
 
   Tabs              : Tabs.default
   Tab               : Tab.default
