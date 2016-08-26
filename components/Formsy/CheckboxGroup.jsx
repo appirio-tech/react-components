@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { HOC as hoc } from 'formsy-react'
 import cn from 'classnames'
 
@@ -6,6 +7,7 @@ class CheckboxGroup extends Component {
 
   constructor(props) {
     super(props)
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
     this.changeValue = this.changeValue.bind(this)
   }
 
