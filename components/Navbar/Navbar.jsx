@@ -6,8 +6,8 @@ import SearchBar from '../SearchBar/SearchBar'
 import QuickLinks from '../QuickLinks/QuickLinks'
 import UserDropdownMenu from '../UserDropdownMenu/UserDropdownMenu'
 
-import TopcoderLogo from '/Icons/TopcoderLogo'
-import TopcoderMobileLogo from '/Icons/TopcoderMobileLogo'
+import TopcoderLogo from '../Icons/TopcoderLogo'
+import TopcoderMobileLogo from '../Icons/TopcoderMobileLogo'
 
 import IconTcMenuBold from '../Icons/IconTcMenuBold'
 import IconUIZoom from '../Icons/IconUIZoom'
