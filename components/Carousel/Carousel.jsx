@@ -4,8 +4,8 @@ import classNames from 'classnames'
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
-import LeftArrowIcon from '../Icons/LeftArrowIcon'
-import RightArrowIcon from '../Icons/RightArrowIcon'
+import IconArrowMinimalLeft from '../Icons/IconArrowMinimalLeft'
+import IconArrowMinimalRight from '../Icons/IconArrowMinimalRight'
 
 export default class Carousel extends Component {
   componentWillMount() {
@@ -107,13 +107,13 @@ export default class Carousel extends Component {
     return (
       <div className="Carousel">
         <div className="page-down" onClick={this.handlePageDown}>
-          <LeftArrowIcon fill="#FFFFFF" />
+          <IconArrowMinimalLeft fill="#FFFFFF" />
         </div>
         <div className="visible-area">
           { this.props.children.map(carouselItem) }
         </div>
         <div className="page-up" onClick={this.handlePageUp}>
-          <RightArrowIcon fill="#FFFFFF" />
+          <IconArrowMinimalRight fill="#FFFFFF" />
         </div>
       </div>
     )
