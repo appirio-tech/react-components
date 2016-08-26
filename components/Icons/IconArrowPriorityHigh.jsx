@@ -15,7 +15,6 @@ const IconArrowPriorityHigh = (props) => {
 
 IconArrowPriorityHigh.propTypes = {
   fill   : React.PropTypes.string,
-  stroke : React.PropTypes.string,
   height : React.PropTypes.number,
   width  : React.PropTypes.number
 }
