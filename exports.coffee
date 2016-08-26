@@ -24,14 +24,13 @@ StepRow             = require './components/StepRow/StepRow'
 SubNav              = require './components/SubNav/SubNav'
 SwitchButton        = require './components/SwitchButton/SwitchButton'
 # Icons
-TopcoderLogo        = require './components/Icons/TopcoderLogo'
-ConnectLogo         = require './components/Icons/ConnectLogo'
-TopcoderMobileLogo  = require './components/Icons/TopcoderMobileLogo'
-MagnifyGlassIcon    = require './components/Icons/MagnifyGlassIcon'
-LeftArrowIcon       = require './components/Icons/LeftArrowIcon'
-RightArrowIcon      = require './components/Icons/RightArrowIcon'
-HamburgerIcon       = require './components/Icons/HamburgerIcon'
-PlaceholderIcon     = require './components/Icons/PlaceholderIcon'
+TopcoderLogo            = require './components/Icons/TopcoderLogo'
+ConnectLogo             = require './components/Icons/ConnectLogo'
+TopcoderMobileLogo      = require './components/Icons/TopcoderMobileLogo'
+IconUIZoom              = require './components/Icons/IconUIZoom'
+IconArrowMinimalLeft    = require './components/Icons/IconArrowMinimalLeft'
+IconArrowMinimalRight   = require './components/Icons/IconArrowMinimalRight'
+IconTcMenuBold          = require './components/Icons/IconTcMenuBold'
 XMarkIcon           = require './components/Icons/XMarkIcon'
 CloseIcon           = require './components/Icons/CloseIcon'
 TrashIcon           = require './components/Icons/TrashIcon'
@@ -81,19 +80,18 @@ module.exports =
   StepRow           : StepRow.default
   SubNav            : SubNav.default,
   TopcoderLogo      : TopcoderLogo.default,
-  TopcoderMobileLogo: TopcoderMobileLogo.default,
-  MagnifyGlassIcon  : MagnifyGlassIcon.default,
-  LeftArrowIcon     : LeftArrowIcon.default,
-  RightArrowIcon    : RightArrowIcon.default,
-  PlaceholderIcon   : PlaceholderIcon.default,
-  HamburgerIcon     : HamburgerIcon.default,
-  ConnectLogo       : ConnectLogo.default,
-  XMarkIcon         : XMarkIcon.default,
-  SwitchButton      : SwitchButton.default
-  CloseIcon         : CloseIcon.default
-  EditIcon          : EditIcon.default
-  TrashIcon         : TrashIcon.default
-  SaveIcon          : SaveIcon.default
+  TopcoderMobileLogo    : TopcoderMobileLogo.default,
+  IconUIZoom            : IconUIZoom.default,
+  IconArrowMinimalLeft  : IconArrowMinimalLeft.default,
+  IconArrowMinimalRight : IconArrowMinimalRight.default,
+  IconTcMenuBold        : IconTcMenuBold.default,
+  ConnectLogo           : ConnectLogo.default,
+  XMarkIcon             : XMarkIcon.default,
+  SwitchButton          : SwitchButton.default
+  CloseIcon             : CloseIcon.default
+  EditIcon              : EditIcon.default
+  TrashIcon             : TrashIcon.default
+  SaveIcon              : SaveIcon.default
 
   Tabs              : Tabs.default
   Tab               : Tab.default
