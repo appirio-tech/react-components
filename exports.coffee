@@ -41,9 +41,6 @@ SaveIcon            = require './components/Icons/SaveIcon'
 Tabs                = require './components/Tabs/Tabs'
 Tab                 = require './components/Tabs/Tab'
 FilePicker          = require './components/FilePicker/FilePicker'
-# Redux Forms
-InputFormField      = require './components/ReduxForms/Input'
-TextareaFormField   = require './components/ReduxForms/Textarea'
 
 # Forms
 FormsyForm          = require './components/Formsy'
@@ -103,10 +100,6 @@ module.exports =
 # Formsy
   Formsy            : FormsyForm.default.Formsy
   TCFormFields      : FormsyForm.default.Fields
-
-# Redux Forms
-  InputFormField    : InputFormField.default
-  TextareaFormField : TextareaFormField.default
 
 # Forms
   Form              : Form.default
