@@ -1,14 +1,16 @@
 require('./Navbar.scss')
 
-import MenuBar from '../MenuBar/MenuBar'
 import React, {PropTypes, Component} from 'react'
+import MenuBar from '../MenuBar/MenuBar'
 import SearchBar from '../SearchBar/SearchBar'
 import QuickLinks from '../QuickLinks/QuickLinks'
 import UserDropdownMenu from '../UserDropdownMenu/UserDropdownMenu'
-import TopcoderLogo from '../Icons/TopcoderLogo'
-import TopcoderMobileLogo from '../Icons/TopcoderMobileLogo'
-import HamburgerIcon from '../Icons/HamburgerIcon'
-import MagnifyGlassIcon from '../Icons/MagnifyGlassIcon'
+
+import TopcoderLogo from '/Icons/TopcoderLogo'
+import TopcoderMobileLogo from '/Icons/TopcoderMobileLogo'
+
+import IconTcMenuBold from '../Icons/IconTcMenuBold'
+import IconUIZoom from '../Icons/IconUIZoom'
 
 const primaryNavigationItems = [
   {img: require('./nav-community.svg'), text: 'Community', link: '/community', regex: '/community?\?'},
@@ -61,19 +63,40 @@ class Navbar extends Component {
     return (
       <div className="Navbar flex middle space-between">
         <div className="topcoder-logo non-mobile">
-          <a href={homePageUrl}><TopcoderLogo width={155}/></a>
+          <a href={homePageUrl}>
+            <TopcoderLogo width={155}/>
+          </a>
         </div>
+        
         <div className="topcoder-logo mobile">
-          <a href={homePageUrl}><TopcoderMobileLogo width={40} /></a>
+          <a href={homePageUrl}>
+            <TopcoderMobileLogo width={40} />
+          </a>
         </div>
+        
         <div className="search-bar-wrap" onClick={this.handleMobileClick}>
-          <div className="mobile-wrap"><a href={mobileSearchUrl}><MagnifyGlassIcon width={25} height={25} /></a></div>
+          <div className="mobile-wrap">
+            <a href={mobileSearchUrl}>
+              <IconUIZoom width={25} height={25} />
+            </a>
+          </div>
+          
           <SearchBar recentTerms={ this.state.recentTerms } onTermChange={ this.handleTermChange } onSearch={ this.handleSearch } />
         </div>
+        
         <MenuBar items={primaryNavigationItems} orientation="horizontal" />
+        
         <div className="menu-wrap" onClick={this.handleMobileClick}>
-          <div className="mobile-wrap"><a href={mobileMenuUrl}><HamburgerIcon /></a></div>
-          <div className="quick-links-wrap"><QuickLinks domain={domain} /></div>
+          <div className="mobile-wrap">
+            <a href={mobileMenuUrl}>
+              <IconTcMenuBold />
+            </a>
+          </div>
+          
+          <div className="quick-links-wrap">
+            <QuickLinks domain={domain} />
+          </div>
+          
           <UserDropdownMenu username={username} userImage={userImage} domain={domain} />
         </div>
       </div>

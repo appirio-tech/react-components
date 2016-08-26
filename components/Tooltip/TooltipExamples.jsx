@@ -51,6 +51,26 @@ const TooltipExamples = () => (
         <p>More text.</p>
       </div>
     </Tooltip>
+
+    <Tooltip tooltipHideTimeout={250}>
+      <div className="tooltip-target" id="tooltip-7">
+        Tooltip Containing Link #1.
+        This tooltip will stick around for 250ms after being hovered out of.
+      </div>
+      <div className="tooltip-body">
+        <a href="https://www.example.com">http://www.example.com</a>
+      </div>
+    </Tooltip>
+
+    <Tooltip tooltipHideTimeout={1000}>
+      <div className="tooltip-target" id="tooltip-8">
+        Tooltip Containing Link #2.
+        This tooltip will stick around for 1000ms after being hovered out of.
+      </div>
+      <div className="tooltip-body">
+        <a href="https://www.example.com">http://www.example.com</a>
+      </div>
+    </Tooltip>
   </div>
 )
 
