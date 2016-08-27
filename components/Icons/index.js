@@ -69,11 +69,11 @@ import IconSocialFacebook      from './social-media/IconSocialFacebook'
 import IconSocialGithub        from './social-media/IconSocialGithub'
 import IconSocialGooglePlus    from './social-media/IconSocialGooglePlus'
 import IconSocialLinkedin      from './social-media/IconSocialLinkedin'
-import IconSocialPayPal        from './social-media/IconSocialPayPal'
+import IconSocialPayPal        from './social-media/IconSocialPaypal'
 import IconSocialSlack         from './social-media/IconSocialSlack'
 import IconSocialTrello        from './social-media/IconSocialTrello'
 import IconSocialTwitter       from './social-media/IconSocialTwitter'
-import IconSocialYouTube       from './social-media/IconSocialYouTube'
+import IconSocialYouTube       from './social-media/IconSocialYoutube'
 
 export default {
   TopcoderLogo,
