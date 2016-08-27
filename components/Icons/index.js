@@ -9,7 +9,7 @@ import TrashIcon               from './TrashIcon'
 import EditIcon                from './EditIcon'
 import SaveIcon                from './SaveIcon'
 
-import IconArrowLogout         from './IconArrowLogout'
+import IconArrowLogOut         from './IconArrowLogOut'
 import IconArrowMinimalDown    from './IconArrowMinimalDown'
 import IconArrowMinimalUp      from './IconArrowMinimalUp'
 import IconArrowPriorityHigh   from './IconArrowPriorityHigh'
@@ -79,7 +79,7 @@ export default {
   TopcoderLogo,
   TopcoderMobileLogo,
   ConnectLogo,
-  IconArrowLogout,
+  IconArrowLogOut,
   IconArrowMinimalLeft,
   IconArrowMinimalRight,
   IconArrowMinimalDown,
