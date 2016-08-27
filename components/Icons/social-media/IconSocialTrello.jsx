@@ -1,6 +1,6 @@
 import React from 'react'
 
-const IconSocialTwitter = (props) => {
+const IconSocialTrello = (props) => {
   const height = props.height || '48'
   const width = props.width || '48'
 
@@ -11,9 +11,9 @@ const IconSocialTwitter = (props) => {
   )
 }
 
-IconSocialTwitter.propTypes = {
+IconSocialTrello.propTypes = {
   height: React.PropTypes.number,
   width: React.PropTypes.number
 }
 
-export default IconSocialTwitter
+export default IconSocialTrello
