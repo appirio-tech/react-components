@@ -135,7 +135,7 @@ export default {
   IconUsersDelete,
   IconUsersMultiple,
   IconUsersSingle,
-  IconSocialDribble,
+  IconSocialDribbble,
   IconSocialDropbox,
   IconSocialFacebook,
   IconSocialGithub,
