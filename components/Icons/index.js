@@ -63,6 +63,7 @@ import IconUsersAdd            from './IconUsersAdd'
 import IconUsersDelete         from './IconUsersDelete'
 import IconUsersMultiple       from './IconUsersMultiple'
 import IconUsersSingle         from './IconUsersSingle'
+import IconLeave               from './IconLeave'
 import IconSocialDribbble       from './social-media/IconSocialDribbble'
 import IconSocialDropbox       from './social-media/IconSocialDropbox'
 import IconSocialFacebook      from './social-media/IconSocialFacebook'
@@ -135,6 +136,7 @@ export default {
   IconUsersDelete,
   IconUsersMultiple,
   IconUsersSingle,
+  IconLeave,
   IconSocialDribbble,
   IconSocialDropbox,
   IconSocialFacebook,

@@ -1,3 +1,5 @@
+import React from 'react'
+
 const IconLeave = ({ width = '16px', height = '16px' }) => {
   return (
     <svg width={width} height={height} viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg">
