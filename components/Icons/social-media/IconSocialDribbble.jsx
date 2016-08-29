@@ -1,6 +1,6 @@
 import React from 'react'
 
-const IconSocialDribble = (props) => {
+const IconSocialDribbble = (props) => {
   const height = props.height || '48'
   const width = props.width || '48'
 
@@ -12,9 +12,9 @@ const IconSocialDribble = (props) => {
   )
 }
 
-IconSocialDribble.propTypes = {
+IconSocialDribbble.propTypes = {
   height: React.PropTypes.number,
   width: React.PropTypes.number
 }
 
-export default IconSocialDribble
+export default IconSocialDribbble

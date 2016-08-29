@@ -82,7 +82,7 @@
     font-size: 17px;
     color: $tc-gray-90;
     line-height: 20px;
-    width: 90%;
+    width: calc(100% - 15px - 46px);
     position: absolute;
     left: 15px;
     top: 50%;
@@ -90,6 +90,7 @@
     background-color: transparent;
     z-index: 20;
     padding-left: 0px;
+    height: 38px;
   }
 
   .search-bar__text {
