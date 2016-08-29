@@ -31,7 +31,7 @@ class FilePicker extends React.Component {
       const hyphenated = k.replace(/([a-zA-Z])(?=[A-Z])/g, '$1-').toLowerCase()
       return `data-fp-${hyphenated}`
     })
-    return <input type={mode} ref="filepicker" onchange={this.onChange} {...opts} />
+    return <input type={mode} ref="filepicker" onChange={this.onChange} {...opts} />
   }
 }
 

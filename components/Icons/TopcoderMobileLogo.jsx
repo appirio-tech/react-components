@@ -5,7 +5,7 @@ const TopcoderMobileLogo = ({ width, height }) => {
     <svg width={ width || '51px' } height={ height || '18px' } viewBox="0 0 51 18" version="1.1" xmlns="http://www.w3.org/2000/svg">
       <title>topcoder-mobile-logo</title>
       <defs></defs>
-      <g id="Profile-Web" stroke="none" strokeWidth="1" fill="none" fill-rule="evenodd">
+      <g id="Profile-Web" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
         <g id="logo_mobile">
           <g id="Group-2">
             <path d="M12.8136833,5.61637758 C6.89609209,4.55593336 1.32017577,4.64724334 0.200330164,7.61565442 C-0.589244749,9.70823082 1.02626095,12.8654732 3.79956126,15.9812877 C4.61743753,16.9000576 5.56372551,17.1929822 6.45276731,17.1867163 C7.27483548,13.101403 10.5540358,8.73580987 12.8136833,5.61637758 Z" id="Fill-1" fill="#2AA7DF"></path>
