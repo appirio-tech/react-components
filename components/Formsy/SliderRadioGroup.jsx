@@ -1,7 +1,6 @@
 'use strict'
 
 import React, { Component, PropTypes } from 'react'
-import PureRenderMixin from 'react-addons-pure-render-mixin'
 import cn from 'classnames'
 import _ from 'lodash'
 import { HOC as hoc } from 'formsy-react'
@@ -9,7 +8,6 @@ import { HOC as hoc } from 'formsy-react'
 class SliderRadioGroup extends Component {
   constructor(props) {
     super(props)
-    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
     this.onSlide = this.onSlide.bind(this)
   }
 
