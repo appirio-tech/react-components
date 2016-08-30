@@ -87,7 +87,7 @@ class SliderRadioGroup extends Component {
         <div className="range-slider">
           <input
             type="range"
-            classNames="range-slider__range"
+            className="range-slider__range"
             min={min}
             max={max}
             step={step}

@@ -1,14 +1,12 @@
 'use strict'
 import React, { PropTypes, Component } from 'react'
 import classNames from 'classnames'
-import PureRenderMixin from 'react-addons-pure-render-mixin'
 import _ from 'lodash'
 import { HOC as hoc } from 'formsy-react'
 
 class TiledCheckbox extends Component {
   constructor(props) {
     super(props)
-    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
   }
 
   onChange(value, event) {
