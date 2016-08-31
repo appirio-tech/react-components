@@ -7,6 +7,7 @@ import Checkbox from './Checkbox'
 import RadioGroup from './RadioGroup'
 import CheckboxGroup from './CheckboxGroup'
 import SliderRadioGroup from './SliderRadioGroup'
+import TiledRadioGroup from './TiledRadioGroup'
 
 require('./FormFields.scss')
 
@@ -18,6 +19,7 @@ export default {
     RadioGroup,
     Checkbox,
     CheckboxGroup,
-    SliderRadioGroup
+    SliderRadioGroup,
+    TiledRadioGroup
   }
 }

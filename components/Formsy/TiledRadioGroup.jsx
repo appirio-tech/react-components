@@ -1,19 +1,17 @@
 'use strict'
 import React, { PropTypes, Component } from 'react'
 import classNames from 'classnames'
-import _ from 'lodash'
 import { HOC as hoc } from 'formsy-react'
 
-class TiledCheckbox extends Component {
+class TiledRadioGroup extends Component {
   constructor(props) {
     super(props)
     this.onChange = this.onChange.bind(this)
   }
 
   onChange(value) {
-    const newValue = _.xor(this.props.getValue(), [value])
-    this.props.setValue(newValue)
-    this.props.onChange(this.props.name, newValue)
+    this.props.setValue(value)
+    this.props.onChange(this.props.name, value)
   }
 
   render() {
@@ -24,14 +22,13 @@ class TiledCheckbox extends Component {
     const curValue = this.props.getValue()
 
     const renderOption = (opt, idx) => {
-      // adding classes eg. "phone active"
       const itemClassnames = classNames('tiled-group-item', {
-        active: _.indexOf(curValue, opt.value) > -1
+        active: curValue === opt.value
       })
       const handleClick = () => this.onChange(opt.value)
       return (
-        <a onClick={ !disabled && handleClick } className={itemClassnames} key={idx} >
-          <span className="icon"></span>
+        <a onClick={ !disabled && handleClick } data-value={opt.value} className={itemClassnames} key={idx} >
+          <span className="icon">{opt.icon}</span>
           <span className="title">{opt.title}</span>
           <small>{opt.desc}</small>
         </a>
@@ -39,19 +36,26 @@ class TiledCheckbox extends Component {
     }
 
     return (
-      <div className={`tiled-group-row ${wrapperClass}`}>
+      <div className={`${wrapperClass} tiled-group-row`}>
         {options.map(renderOption)}
       { hasError ? (<p className="error-message">{errorMessage}</p>) : null}
       </div>
     )
   }
 }
-TiledCheckbox.propTypes = {
-  options: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired
+TiledRadioGroup.propTypes = {
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      value: PropTypes.string.isRequired,
+      desc: PropTypes.string,
+      icon: PropTypes.node
+    }).isRequired
+  ).isRequired
 }
 
-TiledCheckbox.defaultProps = {
+TiledRadioGroup.defaultProps = {
   onChange: () => {}
 }
 
-export default hoc(TiledCheckbox)
+export default hoc(TiledRadioGroup)
