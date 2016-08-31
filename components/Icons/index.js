@@ -76,6 +76,8 @@ import IconSocialTrello        from './social-media/IconSocialTrello'
 import IconSocialTwitter       from './social-media/IconSocialTwitter'
 import IconSocialYouTube       from './social-media/IconSocialYoutube'
 
+require('./icons.scss')
+
 export default {
   TopcoderLogo,
   TopcoderMobileLogo,
