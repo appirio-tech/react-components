@@ -19,7 +19,9 @@ class Dropdown extends Component {
     let isDropdown = false
 
     do {
-      if(currNode.className.indexOf('dropdown-wrap') > -1) {
+      if(currNode.className
+        && currNode.className.indexOf
+        && currNode.className.indexOf('dropdown-wrap') > -1) {
         isDropdown = true
         break
       }
