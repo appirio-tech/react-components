@@ -1,14 +1,14 @@
 import React from 'react'
+import { default as ReactAvatar } from 'react-avatar'
 
 require('./Avatar.scss')
 
-const Avatar = ({ avatarUrl }) => {
-
-  const src = avatarUrl || require('./place-holder.svg')
-
+const Avatar = ({ avatarUrl, userName, size }) => {
+  const s = size || 35
+  const src = !avatarUrl && !userName ? require('./place-holder.svg') : avatarUrl
   return (
     <div className="Avatar">
-      <img src={src}/>
+      <ReactAvatar src={ avatarUrl } name={ userName } size={ s }/>
     </div>
   )
 }
