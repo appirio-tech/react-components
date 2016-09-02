@@ -8,7 +8,7 @@ const Avatar = ({ avatarUrl, userName, size }) => {
   const src = !avatarUrl && !userName ? require('./place-holder.svg') : avatarUrl
   return (
     <div className="Avatar">
-      <ReactAvatar src={ avatarUrl } name={ userName } size={ s }/>
+      <ReactAvatar src={ src } name={ userName } size={ s }/>
     </div>
   )
 }
