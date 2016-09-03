@@ -26,9 +26,10 @@ class TiledRadioGroup extends Component {
         active: curValue === opt.value
       })
       const handleClick = () => this.onChange(opt.value)
+      const Icon = opt.icon
       return (
         <a onClick={ !disabled && handleClick } data-value={opt.value} className={itemClassnames} key={idx} >
-          <span className="icon">{opt.icon}</span>
+          <span className="icon">{ opt.icon && <Icon {...opt.iconOptions} />}</span>
           <span className="title">{opt.title}</span>
           <small>{opt.desc}</small>
         </a>
@@ -48,8 +49,8 @@ TiledRadioGroup.propTypes = {
     PropTypes.shape({
       title: PropTypes.string.isRequired,
       value: PropTypes.string.isRequired,
-      desc: PropTypes.string,
-      icon: PropTypes.node
+      desc: PropTypes.string
+      // icon: PropTypes.
     }).isRequired
   ).isRequired
 }

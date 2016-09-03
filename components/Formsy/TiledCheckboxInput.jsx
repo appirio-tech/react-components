@@ -28,10 +28,11 @@ class TiledCheckbox extends Component {
       const itemClassnames = classNames('tiled-group-item', {
         active: _.indexOf(curValue, opt.value) > -1
       })
+      const Icon = opt.icon
       const handleClick = () => this.onChange(opt.value)
       return (
         <a onClick={ !disabled && handleClick } className={itemClassnames} key={idx} >
-          <span className="icon"></span>
+          <span className="icon">{ opt.icon && <Icon {...opt.iconOptions} />}</span>
           <span className="title">{opt.title}</span>
           <small>{opt.desc}</small>
         </a>
