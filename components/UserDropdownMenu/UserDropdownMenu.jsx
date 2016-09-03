@@ -6,11 +6,11 @@ import Avatar from '../Avatar/Avatar'
 import Dropdown from '../Dropdown/Dropdown'
 
 
-const UserDropdownMenu = ({username, userImage, domain, loginUrl, registerUrl, menuItems, forReactRouter}) => {
+const UserDropdownMenu = ({ userHandle, userImage, userName, domain, loginUrl, registerUrl, menuItems, forReactRouter}) => {
 
   const userDropdownLists = [
     [
-      { label: 'My Profile', link: '/profile/' + username, id: 0 },
+      { label: 'My Profile', link: '/profile/' + userHandle, id: 0 },
       { label: 'Dashboard', link: '/my-dashbaord', id: 1 },
       { label: 'Settings', link: '/settings/profile', id: 2 },
       { label: 'Payments', link: '//community.' + domain  + '/PactsMemberServlet?module=PaymentHistory&full_list=false', id: 3 }
@@ -40,8 +40,8 @@ const UserDropdownMenu = ({username, userImage, domain, loginUrl, registerUrl, m
     <div className="UserDropdownMenu">
       <Dropdown pointerShadow>
         <div className="dropdown-menu-header">
-          <span className="user-image"><Avatar avatarUrl={userImage} /></span>
-          <span className="username">{ username }</span>
+          <span className="user-image"><Avatar avatarUrl={ userImage } userName={ userName ? userName : userHandle } /></span>
+          <span className="username">{ userHandle }</span>
           <img className="dropdown-arrow" src={ require('./arrow-small-down.svg') } />
         </div>
 
@@ -65,11 +65,11 @@ const UserDropdownMenu = ({username, userImage, domain, loginUrl, registerUrl, m
     </div>
   )
 
-  return username ? loggedInDOM : publicDOM
+  return userHandle ? loggedInDOM : publicDOM
 }
 
 UserDropdownMenu.propTypes = {
-  username      : PropTypes.string,
+  userHandle    : PropTypes.string,
   userImage     : PropTypes.string,
   domain        : PropTypes.string.isRequired,
   loginUrl      : PropTypes.string,
