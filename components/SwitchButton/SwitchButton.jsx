@@ -1,18 +1,15 @@
 import React from 'react'
-import classNames from 'classnames'
-import ReactSwitchButton from 'react-switch-button'
-
 require('./SwitchButton.scss')
-require('react-switch-button/dist/react-switch-button.min.css')
-  
-const SwitchButton = (props) => {
-  const switchButtonClass = classNames(
-    'SwitchButton'
-  )
+const SwitchButton = ({label, ...props}) => {
   return (
-    <div className={switchButtonClass}>
-      <ReactSwitchButton {...props} />
+    <div className="SwitchButton clearfix">
+      <span className="label">{label}</span>
+      <label>
+        <input type="checkbox" {...props} />
+        <i/>
+      </label>
     </div>
   )
-} 
+}
+
 export default SwitchButton

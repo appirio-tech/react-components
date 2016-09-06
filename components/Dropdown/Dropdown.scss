@@ -8,7 +8,7 @@
 
 .Dropdown {
   background-color: #fff;
-  box-shadow: 0px 2px 7px 1px rgba(0, 0, 0, 0.17);
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.17);
   border-radius: 5px;
   display: inline-block;
   position: absolute;
@@ -83,22 +83,67 @@
 }
 
 .Dropdown:before {
-  content: " ";
-  width: 15px;
-  height: 15px;
-  display: block;
-  transform: rotate(45deg);
-  background-color: #fff;
+  width: 14px;
+  height: 7px;
   position: absolute;
-  right: 15px;
-  top: -6px;
-  border-radius: 5px;
+  display: block;
+  content: '';
+  right: 24px;
+  top: -7px;
+  background: url("./arrow-dropdown.png") left top no-repeat;
+  background-size: 14px 7px;
+  z-index:999;
 }
 
 .Dropdown.pointer-hide:before {
   display: none;
 }
 
-.Dropdown.pointer-shadow:before {
-  box-shadow: 0px 2px 7px 1px rgba(0, 0, 0, 0.17);
+.new-theme {
+  text-align: left;
+  height: 30px;
+  color: $tc-black;
+  background: $tc-gray-neutral-light;
+  border: 1px solid $tc-gray-20;
+  @include roboto;
+  font-size: 13px;
+  line-height: 20px;
+  width: 100%;
+  border-radius: 2px;
+  position: relative;
+  .dropdown-menu-header {
+    width: 100%;
+    border: 0;
+    height: 28px;
+    line-height: 28px;
+    margin: 0;
+    padding: 0 0 0 10px;
+    color: $tc-gray-50;
+    font-size: 13px;
+  }
+  &:after{
+    display: block;
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 14px;
+    right: 11px;
+    top: 50%;
+    margin-top: -7px;
+    background: url("./icon-select.png") left top no-repeat;
+    background-size: 10px 14px;
+    z-index:2;
+  }
+  .Dropdown {
+    ul.dropdown-menu-list {
+      padding: 10px 0px;
+      li {
+        padding: 0 20px;
+        @include ellipsis;
+      }
+      li:hover {
+        background-color: $tc-gray-neutral-dark;
+      }
+    }
+  }
 }

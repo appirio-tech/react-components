@@ -12,10 +12,6 @@
       display: flex;
       justify-content: center;
       margin: 0px 15px;
-
-      a {
-        padding-bottom: 6px;
-      }
     }
   }
 
@@ -31,7 +27,7 @@
     display: flex;
 
     &.selected {
-      border-bottom: 2px solid $tc-dark-blue-70;
+      border-bottom: 2px solid $tc-orange-70;
 
       a {
         color: $tc-black;
@@ -43,10 +39,14 @@
     }
 
     a {
-      text-transform: uppercase;
-      font-size: 12px;
-      line-height: 14px;
+      display: inline-block;
+      @include roboto-medium;
+      font-size: $tc-label-lg;
       color: $tc-gray-50;
+      line-height: 32px;
+      &:hover{
+        color: $tc-black;
+      }
     }
   }
 

@@ -6,13 +6,11 @@
   position: relative;
 
   &.non-logged-in {
-    .login-button {
-      display: inline-block;
+    .tc-btn-primary {
+      margin-left: 7px;
     }
-
-    .join-button {
-      display: inline-block;
-      margin-left: 20px;
+    .tc-btn {
+      color: white;
     }
   }
 
@@ -20,7 +18,7 @@
     cursor: pointer;
     display: flex;
     align-items: center;
-    
+
     .user-image {
       display: inline-block;
       width: 35px;

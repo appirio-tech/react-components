@@ -4,6 +4,7 @@ import React, { PropTypes } from 'react'
 import classNames from 'classnames'
 import _ from 'lodash'
 import BaseInputField from './BaseInputField'
+import './FormFields.scss'
 
 class TiledCheckboxInput extends BaseInputField {
 
