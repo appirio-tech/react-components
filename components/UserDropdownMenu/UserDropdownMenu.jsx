@@ -6,7 +6,7 @@ import Avatar from '../Avatar/Avatar'
 import Dropdown from '../Dropdown/Dropdown'
 
 
-const UserDropdownMenu = ({ userHandle, userImage, domain, loginUrl, registerUrl, menuItems, forReactRouter}) => {
+const UserDropdownMenu = ({ userName, userHandle, userImage, domain, loginUrl, registerUrl, menuItems, forReactRouter}) => {
 
   const userDropdownLists = [
     [
@@ -40,7 +40,7 @@ const UserDropdownMenu = ({ userHandle, userImage, domain, loginUrl, registerUrl
     <div className="UserDropdownMenu">
       <Dropdown pointerShadow>
         <div className="dropdown-menu-header">
-          <span className="user-image"><Avatar avatarUrl={ userImage } userName={ userHandle } /></span>
+          <span className="user-image"><Avatar avatarUrl={ userImage } userName={ userName } /></span>
           <span className="username">{ userHandle }</span>
           <img className="dropdown-arrow" src={ require('./arrow-small-down.svg') } />
         </div>
