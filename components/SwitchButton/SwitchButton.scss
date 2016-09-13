@@ -2,16 +2,15 @@
 
 .SwitchButton {
   position: relative;
+  display: flex;
   .label{
     width: 92px;
     line-height: 30px;
     font-size: 12px;
     @include roboto;
     color: $tc-gray-60;
-    float: left;
   }
   label{
-    float: left;
     margin: 0;
     padding: 0;
     display: block;
@@ -43,7 +42,6 @@
     margin: 0;
     padding: 0;
     background: $tc-gray-40;
-    float: left;
     &:before {
       content: "";
       position: absolute;
