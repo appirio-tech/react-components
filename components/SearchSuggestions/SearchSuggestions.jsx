@@ -102,7 +102,7 @@ class SearchSuggestions extends Component {
 
     const hide = this.props.hideSuggestionsWhenEmpty &&
         (!recentList || !recentList.length) &&
-        (!popularList || !popularList.length);
+        (!popularList || !popularList.length)
 
     return hide ? (<div></div>) : (
 			<div className={ ssClasses }>
