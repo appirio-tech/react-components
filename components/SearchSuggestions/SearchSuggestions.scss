@@ -6,7 +6,7 @@
 	border: 1px solid $tc-gray-30;
 	box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.3);
 	border-radius: 2px;
-	min-height: 303px;
+	// min-height: 303px;
 	position: relative;
 
 	.panel-header {
@@ -66,7 +66,7 @@
 	.panel-body {
 		border: none;
 		padding: 0;
-		padding-bottom: 5px;
+		// padding-bottom: 5px;
 
 		li.selected {
 			background-color: $tc-gray-neutral-dark;
