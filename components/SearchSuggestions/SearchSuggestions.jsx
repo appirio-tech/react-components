@@ -83,7 +83,7 @@ class SearchSuggestions extends Component {
 
     const popularSearch = !popularList ? '' :(
 			<div className="popular-search-suggestions">
-				<Panel>
+				<Panel showHeader={this.props.showPopularSearchHeader}>
 					<div className="panel-header">
 						<div className="label">Popular</div>
 					</div>
@@ -100,7 +100,11 @@ class SearchSuggestions extends Component {
       { 'empty-state' : recentList && !popularList }
     )
 
-    return (
+    const hide = this.props.hideSuggestionsWhenEmpty &&
+        (!recentList || !recentList.length) &&
+        (!popularList || !popularList.length)
+
+    return hide ? (<div></div>) : (
 			<div className={ ssClasses }>
 				{ popularSearch }
 				{ recentSearches }
@@ -110,16 +114,20 @@ class SearchSuggestions extends Component {
 }
 
 SearchSuggestions.propTypes = {
+  hideWhenEmpty         : PropTypes.bool,
   onSuggestionSelect    : PropTypes.func.isRequired,
   recentSearch          : PropTypes.array,
   popularSearch         : PropTypes.array,
-  searchTerm            : PropTypes.string
+  searchTerm            : PropTypes.string,
+  showPopularSearchHeader: PropTypes.bool
 }
 
 SearchSuggestions.defaultProps = {
+  hideWhenEmpty         : true,
   recentSearch          : [],
   popularSearch         : [],
-  searchTerm            : ''
+  searchTerm            : '',
+  showPopularSearchHeader: true
 }
 
 export default SearchSuggestions
