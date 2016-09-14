@@ -27,9 +27,9 @@ class SearchBar extends Component {
     this.handleSuggestionsUpdate = this.handleSuggestionsUpdate.bind(this)
   }
 
-  getQueryStringValue (key) {
+  getQueryStringValue (key) {  
     return unescape(window.location.href.replace(new RegExp('^(?:.*[&\\?]' + escape(key).replace(/[\.\+\*]/g, '\\$&') + '(?:\\=([^&]*))?)?.*$', 'i'), '$1'))
-  }
+  } 
 
   componentDidMount() {
     window.addEventListener('click', this.handleOutsideClick)
@@ -67,7 +67,6 @@ class SearchBar extends Component {
 
   handleSuggestionsUpdate(requestNo, data) {
     if (requestNo === this.state.maxRequestNo) {
-      console.log('SUGGESTIONS', data)
       this.setState({loading: false, suggestions: data, selectedSuggestionIdx: null})
     }
   }
@@ -103,8 +102,6 @@ class SearchBar extends Component {
     this.refs.searchValue.value = null
     this.setState({ searchValue: this.refs.searchValue.value })
     this.setState({ searchState: 'empty' })
-    this.setState({ suggestions: false })
-    this.props.onClearSearch()
   }
 
   onKeyUp(evt) {
@@ -193,14 +190,14 @@ class SearchBar extends Component {
 
     const results = this.state.loading === true
       ? <div className="loading-suggestions"><Loader /></div>
-      : <SearchSuggestions hideSuggestionsWhenEmpty={ this.props.hideSuggestionsWhenEmpty } recentSearch={ recentList } searchTerm={ this.state.searchValue } popularSearch={ popularList } showPopularSearchHeader={ this.props.showPopularSearchHeader } onSuggestionSelect={ this.handleSuggestionSelect } />
+      : <SearchSuggestions recentSearch={ recentList } searchTerm={ this.state.searchValue } popularSearch={ popularList } onSuggestionSelect={ this.handleSuggestionSelect } />
     return (
       <div className={ sbClasses }>
-        <span className="search-typeahead-text">{ typeaheadText }</span>
         <input className="search-bar__text" onFocus={ this.onFocus } onChange={ this.onChange } onKeyUp={ this.onKeyUp } ref="searchValue" value={this.state.searchValue} />
+        <span className="search-typeahead-text">{ typeaheadText }</span>
         <img className="search-bar__clear" src={ require('./x-mark.svg') } onClick={ this.clearSearch }/>
         <div className="search-icon-wrap" onClick={ this.search }>
-          <img className="search-bar__icon" src={ require('./icon-search.png') } />
+          <img className="search-bar__icon" src={ require('./ico-mobile-search-selected.svg') } />
         </div>
         <div className="suggestions-panel">
           {results}
@@ -211,22 +208,17 @@ class SearchBar extends Component {
   }
 }
 
+
 SearchBar.propTypes = {
-  hideSuggestionsWhenEmpty: PropTypes.func.bool,
   onSearch     : PropTypes.func.isRequired,
-  onClearSearch : PropTypes.func,
   onTermChange : PropTypes.func.isRequired,
   recentTerms  : PropTypes.array,
-  searchTermKey: PropTypes.string,
-  showPopularSearchHeader: PropTypes.bool
+  searchTermKey: PropTypes.string
 }
 
 SearchBar.defaultProps = {
-  hideSuggestionsWhenEmpty: false,
   recentTerms   : [],
-  searchTermKey : 'q',
-  onClearSearch : () => {},
-  showPopularSearchHeader: true
+  searchTermKey : 'q'
 }
 
 export default SearchBar

@@ -1,16 +1,16 @@
-@import 'tc-includes';
+@import 'topcoder/tc-includes';
 
 .SearchSuggestions {
 	margin-bottom: 30px;
-	background-color: white;
-	border: 1px solid $tc-gray-30;
+	background-color: $white;
+	border: 1px solid $gray-dark;
 	box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.3);
 	border-radius: 2px;
-	// min-height: 303px;
+	min-height: 303px;
 	position: relative;
 
 	.panel-header {
-		background-color: $tc-gray-neutral-light;
+		background-color: $gray-lighter;
 		position: relative;
 		height: 36px;
 		padding-left: 14px;
@@ -18,7 +18,7 @@
 		.label {
 			font-size: 12px;
 			line-height: 14px;
-			color: $tc-gray-30;
+			color: $gray-darker;
 			position: relative;
 		}
 
@@ -37,7 +37,7 @@
 				a, a:visited {
 					font-size: 12px;
 					line-height: 14px;
-					color: $tc-gray-30;
+					color: $gray-darker;
 					background-color: transparent;
 					border: 0px;
 					outline: 0px;
@@ -55,7 +55,7 @@
 
 			.recent-search-panel-action {
 				a, a:hover, a:active {
-					color: $tc-dark-blue;
+					color: $dark-blue;
 					border: 0px;
 					outline: 0px;
 				}
@@ -66,10 +66,10 @@
 	.panel-body {
 		border: none;
 		padding: 0;
-		// padding-bottom: 5px;
+		padding-bottom: 5px;
 
 		li.selected {
-			background-color: $tc-gray-neutral-dark;
+			background-color: $gray-light;
 		}
 
 		.StandardListItem {
@@ -80,7 +80,7 @@
 			max-height: 36px;
 
 			.label {
-				color: $tc-gray-90;
+				color: $accent-gray-dark;
 				font-size: 16px;
 				line-height: 30px;
 				white-space: nowrap;
@@ -92,7 +92,7 @@
 		}
 
 		.StandardListItem:hover {
-			background-color: $tc-gray-neutral-dark;
+			background-color: $gray-light;
 
 		}
 
@@ -101,8 +101,8 @@
 			display:block;
 			height: 40px;
 			padding: 14px 15px;
-			background-color: $tc-dark-blue-10;
-			color: $tc-gray-90;
+			background-color: $primary-lighter;
+			color: $accent-gray-dark;
 			font-size: 12px;
 			line-height: 14px;
 			position: absolute;
@@ -111,12 +111,12 @@
 			outline: 0px none;
 			white-space: nowrap;
 			text-overflow: ellipsis;
-			overflow: hidden;
+			overflow-x: hidden;
 		}
 
 		.footer-link:hover, .footer-link:active {
-			background-color: $tc-dark-blue-30;
-			color: $tc-black;
+			background-color: $primary-light;
+			color: $black;
 			border: 0px none;
 			outline: 0px none;
 		}
