@@ -1,4 +1,4 @@
-@import 'tc-includes';
+@import 'topcoder/tc-includes';
 
 $panel-header-text-color: #737380;
 $panel-header-bg-color: #DFDFE1;
@@ -15,12 +15,9 @@ $panel-header-bg-color: #DFDFE1;
   }
 
   .panel-body {
-    border-left : 1px solid $tc-gray-40;
-    border-right : 1px solid $tc-gray-40;
-    border-bottom : 1px solid $tc-gray-40;
+    border-left : 1px solid $accent-gray;
+    border-right : 1px solid $accent-gray;
+    border-bottom : 1px solid $accent-gray;
     padding: 10px;
-    overflow-x: visible;
-    overflow-y: scroll;
-    max-height: 252px;
   }
 }
