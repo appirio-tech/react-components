@@ -212,7 +212,7 @@ class SearchBar extends Component {
 }
 
 SearchBar.propTypes = {
-  hideSuggestionsWhenEmpty: PropTypes.func.bool,
+  hideSuggestionsWhenEmpty: PropTypes.bool,
   onSearch     : PropTypes.func.isRequired,
   onClearSearch : PropTypes.func,
   onTermChange : PropTypes.func.isRequired,
