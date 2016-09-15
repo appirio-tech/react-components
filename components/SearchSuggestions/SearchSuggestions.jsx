@@ -56,7 +56,7 @@ class SearchSuggestions extends Component {
 
     const recentSearches = !recentList ? '' : (
 			<div className="recent-search-suggestions">
-				<Panel>
+				<Panel showHeader={this.props.showPopularSearchHeader}>
 					<div className="panel-header">
 						<div className="label">Recent Search</div>
 						<div className="recent-search-panel-actions transition">
