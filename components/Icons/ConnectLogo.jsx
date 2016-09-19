@@ -5,7 +5,7 @@ const ConnectLogo = ({ width, height }) => {
     <svg width={ width || '60px' } height={ height || '36px' } viewBox="0 0 60 36" version="1.1" xmlns="http://www.w3.org/2000/svg">
       <title>connect-logo</title>
       <defs></defs>
-      <g id="Page-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g id="Page-2" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
         <g id="Project-Nav---v2" transform="translate(-20.000000, -11.000000)">
             <g id="logo-connect-web" transform="translate(20.000000, 11.000000)">
                 <g id="product-brand" transform="translate(6.000000, 0.000000)">
