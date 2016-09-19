@@ -15,6 +15,7 @@
   left: 0;
   top: 30px;
   width: 100%;
+  z-index: 2;
 
   ul {
     height: 100%;
@@ -33,6 +34,7 @@
       color: #394146;
       font-family: "Roboto", Arial, Helvetica, sans-serif;
       font-size: 12px;
+      display: block;
       line-height: 26px;
     }
   }

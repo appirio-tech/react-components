@@ -200,7 +200,7 @@ class SearchBar extends Component {
         <input className="search-bar__text" onFocus={ this.onFocus } onChange={ this.onChange } onKeyUp={ this.onKeyUp } ref="searchValue" value={this.state.searchValue} />
         <img className="search-bar__clear" src={ require('./x-mark.svg') } onClick={ this.clearSearch }/>
         <div className="search-icon-wrap" onClick={ this.search }>
-          <img className="search-bar__icon" src={ require('./icon-search.png') } />
+          <span className="search-txt">Search</span>
         </div>
         <div className="suggestions-panel">
           {results}
