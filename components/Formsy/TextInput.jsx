@@ -16,7 +16,7 @@ class TextInput extends Component {
   }
 
   render() {
-    const { label, name, type, placeholder, wrapperClass } = this.props
+    const { label, name, type, placeholder, wrapperClass, maxLength } = this.props
     const hasError = !this.props.isPristine() && !this.props.isValid()
     const classes = classNames('tc-file-field__inputs', {error: hasError})
     const disabled = this.props.isFormDisabled() || this.props.disabled
@@ -33,6 +33,7 @@ class TextInput extends Component {
           value={this.props.getValue()}
           disabled={disabled}
           onChange={this.changeValue}
+          maxLength={maxLength}
         />
       { hasError ? (<p className="error-message">{errorMessage}</p>) : null}
       </div>
