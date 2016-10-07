@@ -38,7 +38,8 @@ class Dropdown extends Component {
   }
 
   onClick(evt) {
-    const dropdownClicked = new Event('dropdownClicked')
+    const dropdownClicked = document.createEvent('Event')
+    dropdownClicked.initEvent('dropdownClicked', true, false)
 
     document.dispatchEvent(dropdownClicked)
 
