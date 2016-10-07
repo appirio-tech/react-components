@@ -1,6 +1,7 @@
 require('./UserDropdownMenu.scss')
 
 import React, {PropTypes} from 'react'
+import classNames from 'classnames'
 import { Link } from 'react-router'
 import Avatar from '../Avatar/Avatar'
 import Dropdown from '../Dropdown/Dropdown'
@@ -23,10 +24,17 @@ const UserDropdownMenu = ({ userName, userHandle, userImage, domain, loginUrl, r
     ]
   ]
 
+  const loginButtonClasses= classNames('tc-btn', 'tc-btn-sm', {
+    // if register url is not present, we are not showing register button
+    // and if register button is not there, we assume it is present somewhere on the page itself
+    // and Login button should be secondary in that case
+    'tc-btn-secondary' : !registerUrl,
+    'tc-btn-primary': registerUrl
+  })
   const publicDOM = (
     <div className="UserDropdownMenu non-logged-in">
-      <a className="tc-btn tc-btn-sm tc-btn-secondary" href={registerUrl} >Register</a>
-      <a className="tc-btn tc-btn-sm tc-btn-primary" href={loginUrl} >Log in</a>
+      { registerUrl && <a className="tc-btn tc-btn-sm tc-btn-secondary" href={registerUrl} >Register</a> }
+      { loginUrl && <a className={ loginButtonClasses } href={loginUrl} >Log in</a> }
     </div>
   )
 
