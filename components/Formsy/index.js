@@ -12,7 +12,7 @@ import TiledRadioGroup from './TiledRadioGroup'
 require('./FormFields.scss')
 
 // validations
-Formsy.addValidationRule('isRequired', function (values, value, array) {
+Formsy.addValidationRule('isRequired', (values, value, array) => { // eslint-disable-line no-unused-vars
   return value && value.trim().length > 0
 })
 
