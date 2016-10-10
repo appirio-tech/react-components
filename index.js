@@ -20,7 +20,7 @@ NavLink = require('./components/NavLink/NavLink');
 //
 //FileUploader = require('./components/FileUploader/FileUploader');
 //
-//Loader = require('./components/Loader/Loader');
+Loader = require('./components/Loader/Loader');
 
 StandardListItem = require('./components/StandardListItem/StandardListItem');
 
@@ -80,7 +80,7 @@ module.exports = {
   MenuBar: MenuBar["default"],
 //  ImageViewer: ImageViewer["default"],
 //  FileUploader: FileUploader["default"],
-//  Loader: Loader["default"],
+  Loader: Loader["default"],
   StandardListItem: StandardListItem["default"],
   TaggedValue: TaggedValue["default"],
   QuickLinks: QuickLinks["default"],
