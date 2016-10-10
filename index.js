@@ -42,9 +42,9 @@ DropdownItem = require('./components/Dropdown/DropdownItem');
 
 SelectDropdown = require('./components/SelectDropdown/SelectDropdown');
 
-ManageSteps = require('./components/ManageSteps/ManageSteps');
+//ManageSteps = require('./components/ManageSteps/ManageSteps');
 
-StepRow = require('./components/StepRow/StepRow');
+//StepRow = require('./components/StepRow/StepRow');
 
 SubNav = require('./components/SubNav/SubNav');
 
@@ -91,8 +91,8 @@ module.exports = {
   Dropdown: Dropdown["default"],
   DropdownItem: DropdownItem["default"],
   SelectDropdown: SelectDropdown["default"],
-  ManageSteps: ManageSteps["default"],
-  StepRow: StepRow["default"],
+//  ManageSteps: ManageSteps["default"],
+//  StepRow: StepRow["default"],
   SubNav: SubNav["default"],
   SwitchButton: SwitchButton["default"],
   Icons: Icons["default"],
