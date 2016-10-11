@@ -1,7 +1,7 @@
 import React from 'react'
 
 const IconUsersDelete = (props) => {
-  const fill = props.fill || '#62AADC'
+  const fill = props.fill || '#262628'
   const height = props.height || '16'
   const width = props.width || '16'
 
