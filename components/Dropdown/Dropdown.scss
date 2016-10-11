@@ -13,7 +13,7 @@
   display: inline-block;
   position: absolute;
   left: 0;
-  top: 30px;
+  top: 20px;
   width: 100%;
   z-index: 2;
 
@@ -85,15 +85,17 @@
 }
 
 .Dropdown:before {
-  width: 14px;
-  height: 7px;
-  position: absolute;
-  display: block;
   content: '';
+  display: block;
+  position: absolute;
+  top: 12px;
   right: 24px;
-  top: -7px;
-  background: url("./arrow-dropdown.png") left top no-repeat;
-  background-size: 14px 7px;
+  width: 12px;
+  height: 12px;
+  background: #FFFFFF;
+  border-right: 1px solid $tc-gray-20;;
+  border-bottom: 1px solid $tc-gray-20;;
+  transform: rotate(-135deg);
   z-index:999;
 }
 
