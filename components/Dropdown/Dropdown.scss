@@ -13,7 +13,7 @@
   display: inline-block;
   position: absolute;
   left: 0;
-  top: 20px;
+  top: 5px;
   width: 100%;
   z-index: 2;
 
@@ -84,19 +84,23 @@
   left: 15px;
 }
 
-.Dropdown:before {
-  content: '';
-  display: block;
-  position: absolute;
-  top: 12px;
-  right: 24px;
-  width: 12px;
-  height: 12px;
-  background: #FFFFFF;
-  border-right: 1px solid $tc-gray-20;;
-  border-bottom: 1px solid $tc-gray-20;;
-  transform: rotate(-135deg);
-  z-index:999;
+.UserDropdownMenu .Dropdown.pointer-shadow {
+  margin-top: 35px;
+
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: -6px;
+    right: 24px;
+    width: 12px;
+    height: 12px;
+    background: #FFFFFF;
+    border-right: 1px solid $tc-gray-20;;
+    border-bottom: 1px solid $tc-gray-20;;
+    transform: rotate(-135deg);
+    z-index:999;
+  }
 }
 
 .Dropdown.pointer-hide:before {
@@ -115,6 +119,7 @@
   width: 100%;
   border-radius: 2px;
   position: relative;
+
   .dropdown-menu-header {
     width: 100%;
     border: 0;
