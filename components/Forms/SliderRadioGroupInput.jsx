@@ -106,6 +106,7 @@ class SliderRadioGroupInput extends BaseInputField {
     )
   }
 }
+
 SliderRadioGroupInput.displayName = 'SliderRadioGroupInputField'
 SliderRadioGroupInput.propTypes = _.assign({}, SliderRadioGroupInput.propTypes, {
   options: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
