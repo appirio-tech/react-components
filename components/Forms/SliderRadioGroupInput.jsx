@@ -81,10 +81,7 @@ class SliderRadioGroupInput extends BaseInputField {
        * onChange={this.noOp}
        */
       <div>
-        <div className="type-selector">
-          {options.map(itemFunc)}
-        </div>
-
+      
         <div className="range-slider">
           <input
             type="range"
@@ -95,7 +92,10 @@ class SliderRadioGroupInput extends BaseInputField {
             value={valueIdx}
             onChange={ this.onSlide }
           />
-          <p></p>
+        </div>
+
+        <div className="type-selector">
+          {options.map(itemFunc)}
         </div>
 
         <div className="info-selector">
@@ -106,6 +106,7 @@ class SliderRadioGroupInput extends BaseInputField {
     )
   }
 }
+
 SliderRadioGroupInput.displayName = 'SliderRadioGroupInputField'
 SliderRadioGroupInput.propTypes = _.assign({}, SliderRadioGroupInput.propTypes, {
   options: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
