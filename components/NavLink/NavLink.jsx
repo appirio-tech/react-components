@@ -16,6 +16,9 @@ class NavLink extends Component {
     const attrs = { to }
     if (target || target !== '_self') {
       attrs.target = target
+      if (attrs.target === '_blank') {
+        attrs.rel = 'noopener noreferrer'
+      }
     }
     return (
       <li className={classes}>

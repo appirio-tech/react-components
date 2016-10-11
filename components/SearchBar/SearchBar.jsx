@@ -100,7 +100,7 @@ class SearchBar extends Component {
   }
 
   clearSearch() {
-    this.refs.searchValue.value = null
+    this.refs.searchValue.value = ''
     this.setState({ searchValue: this.refs.searchValue.value })
     this.setState({ searchState: 'empty' })
     this.setState({ suggestions: false })
