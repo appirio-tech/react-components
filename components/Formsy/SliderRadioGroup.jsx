@@ -78,9 +78,6 @@ class SliderRadioGroup extends Component {
        * onChange={this.noOp}
        */
       <div>
-        <div className="type-selector">
-          {options.map(itemFunc)}
-        </div>
 
         <div className="range-slider">
           <input
@@ -92,7 +89,10 @@ class SliderRadioGroup extends Component {
             value={valueIdx}
             onChange={ this.onSlide }
           />
-          <p></p>
+        </div>
+
+        <div className="type-selector">
+          {options.map(itemFunc)}
         </div>
 
         <div className="info-selector">
