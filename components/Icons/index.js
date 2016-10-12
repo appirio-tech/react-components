@@ -83,6 +83,7 @@ export default {
   TopcoderLogo,
   TopcoderMobileLogo,
   ConnectLogo,
+  ConnectLogoBeta,
   IconArrowLogOut,
   IconArrowMinimalLeft,
   IconArrowMinimalRight,
