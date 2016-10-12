@@ -2,7 +2,7 @@ import React from 'react'
 
 const ConnectLogoBeta = ({ width, height }) => {
   return (
-    <svg width={ width || '104' } height={ height || '36px' } viewBox="0 0 60 36" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <svg width={ width || '104' } height={ height || '36px' } viewBox="0 0 104 36" version="1.1" xmlns="http://www.w3.org/2000/svg">
       <title>connect-logo-beta</title>
       <g id="Specification" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="Navigation---1366px" transform="translate(-70.000000, -840.000000)">
