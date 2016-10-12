@@ -1,6 +1,6 @@
 import TopcoderLogo            from './TopcoderLogo'
-import TopcoderLogoBeta        from './TopcoderLogoBeta'
 import ConnectLogo             from './ConnectLogo'
+import ConnectLogoBeta         from './ConnectLogoBeta'
 import TopcoderMobileLogo      from './TopcoderMobileLogo'
 import IconArrowMinimalLeft    from './IconArrowMinimalLeft'
 import IconArrowMinimalRight   from './IconArrowMinimalRight'
