@@ -41,6 +41,8 @@ BaseInputField      = require './components/Forms/BaseInputField'
 #RichDataTable
 RichDataTableHeader = require './components/RichDataTable/RichDataTableHeader'
 
+FullHeightContainer = require './components/FullHeightContainer/FullHeightContainer'
+
 module.exports =
   NavBar            : NavBar.default
   NavLink           : NavLink.default
@@ -93,3 +95,5 @@ module.exports =
 
 # RichDataTable
   RichDataTableHeader : RichDataTableHeader.default
+  
+  FullHeightContainer : FullHeightContainer.default
