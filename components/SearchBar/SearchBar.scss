@@ -43,12 +43,12 @@
     content: "";
   }
 
-
   &.state-filled,
   &.state-focused {
     border-color: $tc-gray-40;
     padding-right: 88px;
     background-color: white;
+
     .search-txt {
       display: block;
     }
@@ -56,7 +56,7 @@
     .search-icon-wrap {
       width: 88px;
       background-color: $tc-dark-blue-90;
-      z-index:20;
+      z-index: 20;
       cursor: pointer;
     }
   }
@@ -94,6 +94,7 @@
   }
 
   .search-bar__text {
+    padding-right: 130px;
 
     &:hover,
     &:focus {
