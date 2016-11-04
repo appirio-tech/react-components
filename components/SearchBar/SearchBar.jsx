@@ -171,9 +171,11 @@ class SearchBar extends Component {
   }
 
   handleClick() {
-    this.setState({  searchState: 'filled', finalTerm: this.state.searchValue }, () => {
-      this.search()
-    })
+    if(this.state.searchValue.length > 0) {
+      this.setState({  searchState: 'filled', finalTerm: this.state.searchValue }, () => {
+        this.search()
+      })
+    }
   }
 
   render() {
