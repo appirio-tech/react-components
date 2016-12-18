@@ -24,7 +24,7 @@ class ChallengeCardExamples extends React.Component {
 
   render() {
     return (
-      <div className="ChallengeCardExamples flex column middle center light-bg">
+      <div className="ChallengeCardExamples">
         <ChallengeCard challenge={this.state.challenge} />
       </div>
     )

@@ -1,6 +1,4 @@
 import React from 'react'
-import MenuBar from '../MenuBar/MenuBar'
-import Panel from '../Panel/Panel'
 import moment from 'moment'
 
 function ChallengeCard ({challenge}) {
