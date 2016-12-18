@@ -10,6 +10,7 @@ const navs = {
     'SearchBarExample',
     'NavbarExample',
     'TCFooterExamples',
+    'ChallengeCardExamples',
     'MenuBarExamples'
   ],
   FileUploader: [
