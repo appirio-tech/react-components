@@ -40,7 +40,7 @@
   }
 }
 
-.default {
+.dropdown-wrap.default {
   border: 1px solid $tc-gray-20;
   display: flex;
   align-items: center;
@@ -62,7 +62,7 @@
   }
 }
 
-.default::after {
+.dropdown-wrap.default::after {
   content: " ";
   width: 10px;
   height: 10px;
