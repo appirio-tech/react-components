@@ -51,7 +51,7 @@ class Tooltip extends Component {
     } else {
       tooltip.style.left = document.body.clientWidth - tooltip.clientWidth - tooltipMargin + 'px'
     }
-    let tooltipRect = tooltip.getBoundingClientRect()
+    const tooltipRect = tooltip.getBoundingClientRect()
     let tooltipPointerLeft = 0
     if (targetRectCenterX + tooltipMargin + (pointerWidth/2) >= document.body.clientWidth) {
       tooltipPointerLeft = tooltip.clientWidth - (pointerWidth * Math.sqrt(2)) - ttBorderRadius + 'px'
