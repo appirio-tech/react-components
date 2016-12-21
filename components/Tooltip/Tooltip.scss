@@ -1,8 +1,10 @@
 @import 'tc-includes';
 
 .Tooltip {
+  position: relative;
   .tooltip-target {
     cursor: default;
+    display: block;
 
     &.click-pointer {
       cursor: pointer;
@@ -16,8 +18,6 @@
     opacity: 1;
     transition: opacity 0s linear;
     z-index: 1000;
-    left: -9999px;
-    top: -9999px;
 
     &.tooltip-hide {
       visibility: hidden;
@@ -46,12 +46,12 @@
       }
 
       .tooltip-body {
-        position: relative;
+        // position: relative;
         color: #fff;
         font-size: 14px;
         padding: 0;
         margin: 0;
-        z-index:2;
+        // z-index:2;
       }
     }
   }

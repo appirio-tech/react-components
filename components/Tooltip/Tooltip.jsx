@@ -16,6 +16,8 @@ class Tooltip extends Component {
     this.onMouseEnterTooltip = this.onMouseEnterTooltip.bind(this)
     this.onMouseLeaveTooltip = this.onMouseLeaveTooltip.bind(this)
     this.onClick = this.onClick.bind(this)
+    this.onClickOutside = this.onClickOutside.bind(this)
+    this.handleRenderedOtherTooltip = this.handleRenderedOtherTooltip.bind(this)
   }
 
   showTooltip(evt) {
@@ -28,6 +30,7 @@ class Tooltip extends Component {
     const ttContainer = tooltip.querySelector('.tooltip-content-container')
     const tooltipPointer = ttContainer.querySelector('.tooltip-pointer')
     const targetRect = evt.currentTarget.getBoundingClientRect()
+    const targetRectStyle = window.getComputedStyle(evt.currentTarget)
     const targetRectCenterX = (targetRect.width / 2) + targetRect.left + window.scrollX
     const targetRectCenterY = (targetRect.height / 2) + targetRect.top + window.scrollY
     ttContainer.style.padding = tooltipPadding + 'px'
@@ -42,7 +45,7 @@ class Tooltip extends Component {
         tooltip.style.left = tooltipMargin + 'px'
         //else, center tooltip to target
       } else {
-        tooltip.style.left = targetRectCenterX - (tooltip.clientWidth / 2) + 'px'
+        tooltip.style.left = parseInt(targetRectStyle.marginLeft) + targetRect.width / 2 - (tooltip.clientWidth / 2) + 'px'
       }
     //else, push tooltip to right edge of screen plus margin
     } else {
@@ -63,23 +66,25 @@ class Tooltip extends Component {
       //and screen has not been scrolled down past the top of the tooltip,
       //and there is enough space to put tooltip to the right of target on screen
       if (targetRectCenterX < (tooltip.clientWidth / 2) + tooltipMargin && window.scrollY < (targetRectCenterY - (tooltip.clientHeight / 2)) && targetRect.right + tooltip.clientWidth + tooltipMargin + (pointerWidth/2) + pointerGap < document.body.clientWidth) {
-        tooltip.style.left = targetRect.right + pointerGap + (pointerWidth/2) + 'px'
-        tooltip.style.top = Math.max((targetRectCenterY - (tooltip.clientHeight/2)), tooltipMargin) + 'px'
-        tooltipRect = tooltip.getBoundingClientRect()
-        tooltipPointer.style.bottom = 'auto'
-        tooltipPointer.style.top = Math.max((((pointerWidth * Math.sqrt(2))/2) - (pointerWidth/2)), (targetRectCenterY - tooltipRect.top - window.scrollY - (pointerWidth/2))) + 'px'
+        tooltip.style.left = parseInt(targetRectStyle.marginLeft) + targetRect.width + pointerGap + (pointerWidth/2) + 'px'
+        tooltip.style.top = targetRect.height / 2 - (tooltip.clientHeight/2) + 'px'
+        tooltipPointer.style.top = pointerGap + pointerWidth /2 + 'px'
         tooltipPointerLeft = - (pointerWidth/2) + 'px'
       } else {
-        tooltip.style.top = targetRect.bottom + pointerGap + (pointerWidth/2) + window.scrollY + 'px'
-        tooltipPointer.style.top = 'auto'
-        tooltipPointer.style.bottom = tooltip.clientHeight - (pointerWidth/2) + 'px'
+        tooltip.style.top = targetRect.height + pointerGap + (pointerWidth/2) + 'px'
+        tooltipPointer.style.top = - pointerGap + 'px'
       }
     } else {
-      tooltip.style.top = targetRect.top - tooltip.clientHeight + window.scrollY - pointerGap - (pointerWidth/2) + 'px'
+      tooltip.style.top =  - tooltip.clientHeight - pointerGap - (pointerWidth / Math.sqrt(2)) + 'px'
       tooltipPointer.style.bottom = - (pointerWidth/2) + 'px'
       tooltipPointer.style.top = 'auto'
     }
     tooltipPointer.style.left = tooltipPointerLeft
+
+    // firing event so that other tooltip components can hide themselves
+    const RenderedOtherTooltip = document.createEvent('Event')
+    RenderedOtherTooltip.initEvent('RenderedOtherTooltip', true, false)
+    document.dispatchEvent(RenderedOtherTooltip)
 
     if (tooltip.classList.contains('tooltip-hide')) {
       tooltip.classList.remove('tooltip-hide')
@@ -124,11 +129,45 @@ class Tooltip extends Component {
     this.startHideTooltipTimeout()
   }
 
+  onClickOutside(evt) {
+    let currNode = evt.target
+    let isTooltip = false
+    let isCloseButton = false
+
+    do {
+      if(currNode.className
+        && currNode.className.indexOf) {
+        if (currNode.className.indexOf('btn-close') > -1) {
+          isCloseButton = true
+        }
+        if (currNode.className.indexOf('Tooltip') > -1) {
+          isTooltip = true
+          break
+        }
+      }
+
+      currNode = currNode.parentNode
+
+      if(!currNode)
+        break
+    } while(currNode.tagName)
+
+    if(!isTooltip || isCloseButton) {
+      this.hideTooltip()
+      this.setState({ isActive: false })
+    }
+  }
+
   startHideTooltipTimeout() {
     const timeout = setTimeout(() => {
       this.hideTooltip()
     }, this.tooltipHideTimeout)
     this.setState({hideTooltipTimeout: timeout})
+  }
+
+  handleRenderedOtherTooltip() {
+    this.hideTooltip()
+    this.setState({ isActive: false })
   }
 
   componentDidMount() {
@@ -143,6 +182,8 @@ class Tooltip extends Component {
       target.classList.add('click-pointer')
       target.addEventListener('click', this.onClick)
     }
+    document.addEventListener('click', this.onClickOutside)
+    document.addEventListener('RenderedOtherTooltip', this.handleRenderedOtherTooltip)
   }
 
   componentWillUnmount() {
@@ -155,6 +196,8 @@ class Tooltip extends Component {
     const tooltip = ReactDOM.findDOMNode(this).querySelector('.tooltip-container')
     tooltip.removeEventListener('mouseenter', this.onMouseEnterTooltip)
     tooltip.removeEventListener('mouseleave', this.onMouseLeaveTooltip)
+    document.removeEventListener('click', this.onClickOutside)
+    document.removeEventListener('RenderedOtherTooltip', this.handleRenderedOtherTooltip)
   }
 
   render() {
