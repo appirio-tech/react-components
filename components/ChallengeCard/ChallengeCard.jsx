@@ -4,6 +4,10 @@ import ChallengeStatus from '../ChallengeStatus/ChallengeStatus'
 import './ChallengeCard.scss'
 import moment from 'moment'
 
+import Tooltip from './Tooltips/Tooltip';
+import PrizesTooltip from './Tooltips/PrizesTooltip';
+import TrackAbbreviationTooltip from './Tooltips/TrackAbbreviationTooltip';
+
 // Constants
 const VISIBLE_TECHNOLOGIES = 3
 const CHALLENGE_URL = 'https://www.topcoder.com/challenge-details/'
@@ -18,7 +22,7 @@ const numberWithCommas = (n) => {
   return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 }
 
-function ChallengeCard ({challenge}) {
+function ChallengeCard ({challenge, sampleWinnerProfile}) {
   challenge.technologyList = challenge.technologies
   if (challenge.technologyList.length > VISIBLE_TECHNOLOGIES) {
     const lastItem = '+' + (challenge.technologyList.length - VISIBLE_TECHNOLOGIES)
@@ -31,13 +35,14 @@ function ChallengeCard ({challenge}) {
   const renderTechnologies = challenge.technologyList.map((c) => {
     return (<a href="#" key={c} className="technology">{c}</a>)
   })
-
   return (
     <div className="challengeCard">
       <div className="left-panel">
-        <div className="challenge-track">
-          <TrackIcon track={challenge.track} subTrack={challenge.subTrack} tcoEligible={challenge.eventName} />
-        </div>
+        <TrackAbbreviationTooltip track={challenge.track} subTrack={challenge.subTrack}>
+          <div className="challenge-track">
+            <TrackIcon track={challenge.track} subTrack={challenge.subTrack} tcoEligible={challenge.eventName} />
+          </div>
+        </TrackAbbreviationTooltip>
         <div className="challenge-details">
           <a className="challenge-title" href={`${CHALLENGE_URL}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}`}>
             {challenge.challengeName}
@@ -49,11 +54,13 @@ function ChallengeCard ({challenge}) {
         </div>
       </div>
       <div className="right-panel">
-        <div className="prizes">
-          <div><span className="dollar">$</span>{numberWithCommas(challenge.totalPrize)}</div>
-          <div className="label">1 prize</div>
-        </div>
-        <ChallengeStatus challenge={challenge} />
+        <PrizesTooltip challenge={challenge.details}>
+          <div className="prizes">
+            <div><span className="dollar">$</span>{numberWithCommas(challenge.totalPrize)}</div>
+            <div className="label">1 prize</div>
+          </div>
+        </PrizesTooltip>
+        <ChallengeStatus challenge={challenge} sampleWinnerProfile={sampleWinnerProfile} />
       </div>
     </div>
   )

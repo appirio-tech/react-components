@@ -1,0 +1,44 @@
+.user-avatar-tooltip {
+  max-width: 640px;
+  .achievements {
+    border-top: 1px solid gray;
+    margin-top: 12px;
+    padding-top: 12px;
+    h3 {
+      color: white;
+      text-transform: none;
+      font-weight: bold;
+    }
+    .rating {
+      background: limegreen;
+      border-radius: 6px;
+      display: inline-block;
+      font-weight: bold;
+      padding: 6px 3px;
+      margin: 6px;
+      span {
+        margin: 0 3px;
+      }
+    }
+  }
+  .avatar {
+    border-radius: 48px;
+    float: left;
+    margin-right: 12px;
+    width: 48px;
+  }
+  .handle {
+    display: inline-block;
+    font-size: 16pt;
+    font-weight: bold;
+  }
+  .info {
+    .country {
+      text-transform: uppercase;
+    }
+    .joined {
+      color: gray;
+      white-space: nowrap;
+    }
+  }
+}
