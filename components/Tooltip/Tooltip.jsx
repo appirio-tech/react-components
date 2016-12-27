@@ -36,6 +36,7 @@ class Tooltip extends Component {
     ttContainer.style.padding = tooltipPadding + 'px'
     tooltipPointer.style.width = pointerWidth + 'px'
     tooltipPointer.style.height = pointerWidth + 'px'
+    tooltipPointer.classList.remove('upward-pointer', 'downward-pointer', 'leftward-pointer')
     const ttBorderRadius = getComputedStyle(ttContainer).getPropertyValue('border-top-left-radius').replace(/[^-\d\.]/g, '')
     //if right side of tooltip will fit above/below target on screen when centered to target
     if (targetRectCenterX + (tooltip.clientWidth / 2) + tooltipMargin < document.body.clientWidth) {
@@ -68,16 +69,19 @@ class Tooltip extends Component {
       if (targetRectCenterX < (tooltip.clientWidth / 2) + tooltipMargin && window.scrollY < (targetRectCenterY - (tooltip.clientHeight / 2)) && targetRect.right + tooltip.clientWidth + tooltipMargin + (pointerWidth/2) + pointerGap < document.body.clientWidth) {
         tooltip.style.left = parseInt(targetRectStyle.marginLeft) + targetRect.width + pointerGap + (pointerWidth/2) + 'px'
         tooltip.style.top = targetRect.height / 2 - (tooltip.clientHeight/2) + 'px'
-        tooltipPointer.style.top = pointerGap + pointerWidth /2 + 'px'
+        tooltipPointer.style.top = tooltipRect.height/2 - (pointerWidth / Math.sqrt(2)) + 'px'
         tooltipPointerLeft = - (pointerWidth/2) + 'px'
+        tooltipPointer.classList.add('leftward-pointer')
       } else {
         tooltip.style.top = targetRect.height + pointerGap + (pointerWidth/2) + 'px'
+        tooltipPointer.classList.add('upward-pointer')
         tooltipPointer.style.top = - pointerGap + 'px'
       }
     } else {
       tooltip.style.top =  - tooltip.clientHeight - pointerGap - (pointerWidth / Math.sqrt(2)) + 'px'
       tooltipPointer.style.bottom = - (pointerWidth/2) + 'px'
       tooltipPointer.style.top = 'auto'
+      tooltipPointer.classList.add('downward-pointer')
     }
     tooltipPointer.style.left = tooltipPointerLeft
 

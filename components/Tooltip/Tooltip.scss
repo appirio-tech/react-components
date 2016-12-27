@@ -25,10 +25,8 @@
     }
 
     .tooltip-content-container {
-      background-color: $tc-gray-80;
-      color: #fff;
       width: 100%;
-      height: 100%;
+      overflow: hidden;
       padding: 15px;
       -webkit-border-radius: 5px;
       -moz-border-radius: 5px;
@@ -38,32 +36,58 @@
         position: absolute;
         height: 10px;
         width: 10px;
-        background-color: $tc-gray-80;
         transform: rotate(45deg);
         bottom: -5px;
         left: calc(50% - 5px);
-        z-index:-1;
       }
 
       .tooltip-body {
-        // position: relative;
-        color: #fff;
         font-size: 14px;
         padding: 0;
         margin: 0;
-        // z-index:2;
       }
     }
   }
   //tooltip theme styling
   &.default {
     .tooltip-content-container {
+      background-color: $tc-gray-80;
+      color: #fff;
       //additional theme styling goes here
       .tooltip-pointer {
-
+        background-color: $tc-gray-80;
       }
       .tooltip-body {
+        color: #fff;
+      }
+    }
+  }
+  //tooltip light theme
+  &.light {
+    .tooltip-content-container {
+      background-color: $tc-white;
+      border: 1px solid $tc-gray-neutral-dark;
+      color: $tc-gray-80;
+      //additional theme styling goes here
+      .tooltip-pointer {
+        background-color: $tc-white;
+        border-style: solid;
+        border-color: $tc-gray-neutral-dark;
 
+        &.downward-pointer {
+          border-width: 0px 1px 1px 0px;
+        }
+
+        &.upward-pointer {
+          border-width: 1px 0px 0px 1px;
+        }
+
+        &.leftward-pointer {
+          border-width: 0px 0px 1px 1px;
+        }
+      }
+      .tooltip-body {
+        color: $tc-gray-80;
       }
     }
   }

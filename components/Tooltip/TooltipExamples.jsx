@@ -5,7 +5,7 @@ require('./TooltipExamples.scss')
 
 const TooltipExamples = () => (
   <div className="tooltip-examples-container">
-    <Tooltip>
+    <Tooltip theme="light">
       <div className="tooltip-target" id="tooltip-1">Default Mouseover Tooltip Example</div>
       <div className="tooltip-body">
         <p>This is a tooltip using the default theme.</p>
