@@ -67,6 +67,7 @@
     .tooltip-content-container {
       background-color: $tc-white;
       border: 1px solid $tc-gray-neutral-dark;
+      box-shadow: 0px 2px 7px 1px rgba(0, 0, 0, 0.17);
       color: $tc-gray-80;
       //additional theme styling goes here
       .tooltip-pointer {
