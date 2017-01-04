@@ -1,0 +1,53 @@
+.FiltersPanel {
+  background: white;
+  padding: 12px;
+  &.hidden {
+    display: none;
+  }
+  #buttons {
+    border-left: 1px solid gray;
+    float: right;
+    padding-left: 12px;
+    button {
+      display: block;
+      text-transform: none;
+      width: 128px;
+      &.blue {
+        background: blue;
+        color: white;
+      }
+      &.white {
+        color: gray;
+      }
+    }
+  }
+  #filters {
+    display: inline-block;
+    .filter {
+      label {
+        display: inline-block;
+        height: 28px;
+        line-height: 0;
+        vertical-align: middle;        
+        width: 100px;
+      }
+      .Select {
+        display: inline-block;
+        width: 480px;
+        &#keywordsFilter {
+          width: 960px;
+        }
+      }
+      &#keywords .Select {
+        width: 960px;
+      }
+      &#track {
+        display: inline-block;
+        margin-right: 24px;
+      }
+      &#dates {
+        display: inline-block;
+      }
+    }
+  }
+}

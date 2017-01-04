@@ -1,0 +1,16 @@
+.ChallengeSearchBar {
+  display: inline-block;
+  margin: 0 12px;
+  input {
+    display: inline-block;
+    width: 480px;
+  }
+  #SearchButton {
+    background: lightgray;
+    cursor: pointer;
+    padding: 12px;
+    svg path {
+      stroke: white;
+    }
+  }
+}

@@ -10,6 +10,7 @@ const navs = {
     'SearchBarExample',
     'NavbarExample',
     'TCFooterExamples',
+    'ChallengeCardExamples',
     'MenuBarExamples'
   ],
   FileUploader: [
@@ -19,6 +20,7 @@ const navs = {
     'UploadedFilesExamples'
   ],
   Misc: [
+    'ChallengeFiltersExample',
     'CheckboxExamples',
     'ImageViewerHeaderExamples',
     'ImageViewerExamples',
@@ -30,7 +32,7 @@ const navs = {
   ManageSteps: [
     'ManageStepsExamples',
     'StepRowExamples'
-  ]
+  ],
 }
 
 class ExampleNavContainer extends Component {
