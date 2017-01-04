@@ -1,0 +1,52 @@
+@import '../../tc-colors';
+
+.trackIcon {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin-right: 20px;
+
+  .main-icon {
+    text-align: center;
+    font-size: 13px;
+    color: $tc-gray-neutral-light;
+    padding: 7px 0;
+    border-radius: 2px;
+
+    &.design, &.generic {
+      background: $tc-light_blue;
+    }
+
+    &.develop {
+      background: $tc-green;
+    }
+
+    &.data_science {
+      background: $tc-orange;
+    }
+  }
+
+  .tco-icon {
+    text-align: center;
+    font-size: 10px;
+    font-family: 'Roboto-Bold', sans-serif;
+    border-radius: 3px;
+    line-height: 19px;
+    margin-top: 1px;
+
+    &.design, &.generic {
+      color: $tc-light_blue;
+      background: $tc-light_blue-10;
+    }
+
+    &.develop {
+      color: $tc-green;
+      background: $tc-green-10;
+    }
+
+    &.data_science {
+      color: $tc-orange;
+      background: $tc-orange-10;
+    }
+  }
+}

@@ -1,0 +1,33 @@
+@import '../../tc-colors';
+
+.challenge-progress-bar {
+    display: block;
+    height: 3px;
+    background: #EBEBEB;
+    border-radius: 16px;
+    position: relative;
+    margin: 2px 0;
+
+    .fill {
+      display: inline-block;
+      height: 100%;
+      border-radius: 16px;
+      border: 3px solid #fff;
+      position: absolute;
+      box-sizing: content-box;
+      left: -3px;
+      top: -3px;
+
+      &.green {
+        background: $tc-green;
+      }
+
+      &.gray {
+        background: $tc-gray-20;
+      }
+
+      &.red {
+        background: $tc-red-70;
+      }
+    }
+}
