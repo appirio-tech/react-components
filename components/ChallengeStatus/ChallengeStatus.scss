@@ -1,0 +1,65 @@
+@import '../../tc-colors';
+
+.challenge-status {
+  display: inline-block;
+  text-align: right;
+
+  .challenge-progress {
+    min-width: 320px;
+
+    &.with-register-button {
+      padding-right: 108px;
+    }
+
+    .current-phase {
+      float: left;
+      font-size: 13px;
+      color: $tc-black;
+      line-height: 20px;
+    }
+
+    .time-left {
+      text-align: left;
+      color: $tc-gray-80;
+      font-size: 12px;
+    }
+  }
+
+  .challenge-stats {
+    display: inline-block;
+    min-width: 132px;
+    line-height: 16px;
+    font-size: 13px;
+    color: $tc-black;
+    & > span {
+      margin-left: 20px;
+    }
+  }
+
+  .register-button {
+    display: block;
+    position: absolute;
+    height: 100%;
+    background: $tc-gray-neutral-light;
+    top: 0;
+    right: 0;
+    width: 108px;
+    padding: 25px 0 0 20px;
+    text-align: left;
+    font-size: 13px;
+    color: $tc-gray-80;
+    line-height: 20px;
+
+    span {
+      display: inline-block;
+      font-size: 12px;
+      line-height: 15px;
+      font-family: 'Roboto-Regular', sans-serif;
+    }
+
+    &:hover {
+      background: $tc-dark-blue-30;
+      color: $tc-gray-80;
+    }
+  }
+}

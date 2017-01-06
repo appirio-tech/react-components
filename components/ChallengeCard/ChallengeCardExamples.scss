@@ -1,0 +1,20 @@
+@import '../../tc-colors';
+
+.ChallengeCardExamples {
+  background: $tc-gray-neutral-light;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+
+  .title {
+    font-size: 14px;
+    color: $tc-gray-80;
+    font-weight: 600;
+    padding: 15px 20px;
+    font-family: 'Roboto-Medium', sans-serif;
+  }
+
+  &.example-lg {
+    width: 860px;
+    margin: 10px auto;
+  }
+}

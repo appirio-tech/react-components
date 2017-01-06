@@ -1,0 +1,55 @@
+@import '../../tc-colors';
+
+.leaderboard-avatar {
+  position: relative;
+  text-align: center;
+  font-size: 12px;
+  color: $tc-white;
+  line-height: 30px;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  margin-right: 17px;
+  vertical-align: text-bottom;
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+  }
+
+  &.dark-gray {
+    background: $tc-gray-60;
+  }
+
+  &.light-gray {
+    background: $tc-gray-10;
+    color: $tc-black;
+  }
+
+  .placement {
+    position: absolute;
+    display: block;
+    width: 17px;
+    height: 17px;
+    right: -7px;
+    bottom: -7px;
+    text-align: center;
+    line-height: 15px;
+    border-radius: 50px;
+    border: 2px solid $tc-white;
+
+    &.placement-1 {
+      background: $tc-gold;
+    }
+
+    &.placement-2 {
+      background: $tc-silver;
+    }
+
+    &.placement-3 {
+      background: $tc-bronze;
+    }
+  }
+}
