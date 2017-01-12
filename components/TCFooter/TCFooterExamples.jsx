@@ -1,8 +1,5 @@
 'use strict'
-
-
-import TCFooter from './TCFooter'
-import React from 'react'
+import TCFooter from './TCFooter';
 
 const TCFooterExamples = () => (
   <div className="TCFooterExamples flex column middle center light-bg">

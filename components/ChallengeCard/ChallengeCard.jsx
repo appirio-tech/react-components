@@ -3,6 +3,7 @@ import TrackIcon from '../TrackIcon/TrackIcon'
 import ChallengeStatus from '../ChallengeStatus/ChallengeStatus'
 import './ChallengeCard.scss'
 import moment from 'moment'
+import PrizesTooltip from '../PrizesTooltip'
 
 // Constants
 const VISIBLE_TECHNOLOGIES = 3
@@ -18,7 +19,7 @@ const numberWithCommas = (n) => {
   return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 }
 
-function ChallengeCard ({challenge}) {
+function ChallengeCard ({challenge, userProfile}) {
   challenge.technologyList = challenge.technologies
   if (challenge.technologyList.length > VISIBLE_TECHNOLOGIES) {
     const lastItem = '+' + (challenge.technologyList.length - VISIBLE_TECHNOLOGIES)
@@ -49,11 +50,8 @@ function ChallengeCard ({challenge}) {
         </div>
       </div>
       <div className="right-panel">
-        <div className="prizes">
-          <div><span className="dollar">$</span>{numberWithCommas(challenge.totalPrize)}</div>
-          <div className="label">1 prize</div>
-        </div>
-        <ChallengeStatus challenge={challenge} />
+        <PrizesTooltip challenge={challenge}></PrizesTooltip>
+        <ChallengeStatus challenge={challenge} userProfile={userProfile}/>
       </div>
     </div>
   )

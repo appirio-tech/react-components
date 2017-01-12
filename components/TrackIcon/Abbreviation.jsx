@@ -22,12 +22,12 @@ const Abbreviation = {
     CONTENT_CREATION: 'CC',
     REPORTING: 'Rp',
     DEVELOP_MARATHON_MATCH: 'MM',
-    FIRST_2_FINISH: 'F2F',
+    FIRST2FINISH: 'F2F',
     CODE: 'Cd'
   },
   DESIGN: {
     BANNERS_OR_ICONS: 'BI',
-    WEB_DESIGNS: 'Wb',
+    WEB_DESIGN: 'Wb',
     WIREFRAMES: 'Wf',
     LOGO_DESIGN: 'Lg',
     PRINT_OR_PRESENTATION: 'PP',

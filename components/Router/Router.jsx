@@ -32,7 +32,7 @@ import SubNavExamples                from '../SubNav/SubNavExamples.jsx'
 import TaggedValueExamples           from '../TaggedValue/TaggedValueExamples.jsx'
 import SubTrackDetailsExample        from '../SubTrackDetails/SubTrackDetailsExample.jsx'
 import PrizeExamples                 from '../Prize/PrizeExamples.jsx'
-import TooltipExamples               from '../Tooltip/TooltipExamples.jsx'
+import TooltipExamples               from '../TcTooltip/TooltipExamples.jsx'
 import ProgressBarExample            from '../ProgressBar/ProgressBarExample.jsx'
 
 const Component = () => (

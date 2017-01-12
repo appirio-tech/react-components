@@ -6,27 +6,34 @@ import SubmissionsIcon from '../Icons/SubmissionsIcon'
 import ForumIcon from '../Icons/ForumIcon'
 import moment from 'moment'
 import './ChallengeStatus.scss'
+import TcTooltip from '../TcTooltip'
+import ProgressBarTooltip from '../ProgressBarTooltip'
+
 
 // Constants
 
 // Mock winners array
 let MOCK_WINNERS = [
   {
-    handle: 'tc1',
-    position: 1
+    handle: 'sky_',
+    position: 1,
+    wins: 257
   },
   {
-    handle: 'tc2',
+    handle: 'iRabbit',
     position: 2,
-    photoURL: 'https://acrobatusers.com/assets/images/template/author_generic.jpg'
+    photoURL: 'https://acrobatusers.com/assets/images/template/author_generic.jpg',
+    wins: 257
   },
   {
-    handle: 'tc3',
-    position: 3
+    handle: 'AleaActaEst',
+    position: 3,
+    wins: 257
   },
   {
-    handle: 'tc4',
-    position: 4
+    handle: 'ShindouHikaru',
+    position: 4,
+    wins: 257
   }
 ]
 const MAX_VISIBLE_WINNERS = 3
@@ -45,7 +52,9 @@ const getTimeToGo = (start, end) => {
   return (Math.round(percentageComplete * 100) / 100)
 }
 
-function ChallengeStatus ({challenge}) {
+function ChallengeStatus ({challenge, userProfile}) {
+  const tooltipSubHtml = (num) => `<p class="total-sub">${num} total submissions</p>`
+  const tooltipRegHtml = (num) => `<p class="total-reg">${num} total registrants</p>`
 
   challenge.registered = Math.random() > .5
 
@@ -55,8 +64,16 @@ function ChallengeStatus ({challenge}) {
   MOCK_WINNERS = MOCK_WINNERS.slice(0, MAX_VISIBLE_WINNERS)
   MOCK_WINNERS.push(lastItem)
 
-  const renderLeaderboard = MOCK_WINNERS.map((winner) => {
-    return (<LeaderboardAvatar key={winner.handle} member={winner}/>)
+  const renderLeaderboard = MOCK_WINNERS.map((winner, index) => {
+    let userPro = {}
+    if(userProfile[index]) {
+      userPro = userProfile[index]
+    }
+    return (<LeaderboardAvatar
+              key={winner.handle} member={winner}
+              isLast={index === MOCK_WINNERS.length-1}
+              userPro={userPro}
+              track={challenge.track}/>)
   })
 
   const renderRegisterButton = () => {
@@ -73,18 +90,25 @@ function ChallengeStatus ({challenge}) {
   const activeChallenge = () => {
     return (
       <div className={challenge.registered || challenge.registrationOpen !== 'Yes' ? 'challenge-progress' : 'challenge-progress with-register-button'}>
-        <span className="current-phase">{challenge.currentPhaseName ? challenge.currentPhaseName : STALLED_MSG}</span>
+        <span className="current-phase">
+          <ProgressBarTooltip challenge={challenge}></ProgressBarTooltip>
+        </span>
         <span className="challenge-stats">
           <span>
-            <a href={`${CHALLENGE_URL}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}#viewRegistrant`}>
-              <RegistrantsIcon/> {challenge.numRegistrants}
-            </a>
+            <TcTooltip tooltipContent={tooltipRegHtml(challenge.numRegistrants)} cName="registrants-tooltip">
+              <a href={`${CHALLENGE_URL}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}#viewRegistrant`}>
+                <RegistrantsIcon/> {challenge.numRegistrants}
+              </a>
+            </TcTooltip>
           </span>
           <span>
-            <a href={`${CHALLENGE_URL}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}#viewRegistrant`}>
-              <SubmissionsIcon/> {challenge.numSubmissions}
-            </a>
+            <TcTooltip tooltipContent={tooltipSubHtml(challenge.numSubmissions)} cName="submissions-tooltip">
+              <a href={`${CHALLENGE_URL}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}#viewRegistrant`}>
+                <SubmissionsIcon/> {challenge.numSubmissions}
+              </a>
+            </TcTooltip>
           </span>
+
           {
             challenge.registered === 'Active' ?
             <span>
@@ -115,14 +139,18 @@ function ChallengeStatus ({challenge}) {
         {renderLeaderboard}
         <span className="challenge-stats">
           <span>
-            <a href={`${CHALLENGE_URL}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}#viewRegistrant`}>
-              <RegistrantsIcon/> {challenge.numRegistrants}
-            </a>
+            <TcTooltip tooltipContent={tooltipSubHtml(challenge.numRegistrants)} cName="submissions-tooltip">
+              <a href={`${CHALLENGE_URL}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}#viewRegistrant`}>
+                <RegistrantsIcon/> {challenge.numRegistrants}
+              </a>
+            </TcTooltip>
           </span>
           <span>
-            <a href={`${CHALLENGE_URL}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}#viewRegistrant`}>
-              <SubmissionsIcon/> {challenge.numSubmissions}
-            </a>
+            <TcTooltip tooltipContent={tooltipSubHtml(challenge.numSubmissions)} cName="submissions-tooltip">
+              <a href={`${CHALLENGE_URL}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}#viewRegistrant`}>
+                <SubmissionsIcon/> {challenge.numSubmissions}
+              </a>
+            </TcTooltip>
           </span>
           <span className={ challenge.registered ? '' : 'hidden'}>
             <a href={`${FORUM_URL}${challenge.forumId}`}><ForumIcon/></a>

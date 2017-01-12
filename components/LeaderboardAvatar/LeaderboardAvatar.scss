@@ -53,3 +53,104 @@
     }
   }
 }
+.avatar-tooltip-content {
+  max-width: 380px;
+  position: relative;
+  .member-profile {
+    padding-left: 65px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #5D5D66;
+  }
+  .member-pic {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    .member-abv {
+      position: relative;
+      text-align: center;
+      font-size: 12px;
+      color: #FFFFFF;
+      line-height: 50px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: inline-block;
+      vertical-align: text-bottom;
+      background: #747480;
+    }
+
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+  }
+  .member-handle {
+    font-size: 20px;
+    color: #FCB816;
+    line-height: 30px;
+    text-transform: none;
+  }
+  .use-info {
+    .wins {
+      font-weight: 300;
+      font-size: 13px;
+      color: #FFFFFF;
+      letter-spacing: 0;
+      line-height: 20px;
+      text-shadow: none;
+    }
+    .country {
+      @extend .wins;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    .joined {
+      @extend .wins;
+      color: rgba(158, 158, 158, 0.53)
+    }
+    .separater {
+      font-size: 13px;
+      color: rgba(158, 158, 158, 0.53)
+    }
+  }
+
+  .skills {
+    font-size: 13px;
+    font-weight: 300;
+    color: #DCDCE0;
+    letter-spacing: 0;
+    line-height: 18px;
+    padding: 10px 0;
+    display: flex;
+    p {
+      padding-right: 5px;
+    }
+    ul {
+      display: flex;
+    }
+    li {
+      padding-right: 5px;
+    }
+  }
+
+  .tracks-rating {
+    font-weight: 500;
+    font-size: 14px;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    text-shadow: none;
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    li {
+      margin-right: 5px;
+      background: #60C700;
+      border-radius: 131px;
+      padding: 5px 10px;
+      margin-bottom: 5px;
+    }
+  }
+}

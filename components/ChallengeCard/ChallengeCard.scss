@@ -75,13 +75,19 @@
   }
 
   // Challenge prizes
+  .prizes-container {
+    margin-right: 40px;
+    display: inline-block;
+    .tooltip-link {
+      display: block;
+    }
+  }
   .prizes {
     display: inline-block;
     font-size: 13px;
     font-family: 'Roboto-Bold', sans-serif;
     color: $prize-color;
     line-height: 20px;
-    margin-right: 40px;
 
     .dollar {
       display: inline-block;
