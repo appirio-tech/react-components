@@ -1,0 +1,18 @@
+// This is the partial where we load all the Roboto fonts for Webpack
+@import 'fonts';
+@import 'tc-colors';
+
+// Important global variables
+
+$base-unit: 5px;
+$corner-radius: 2px;
+
+
+// Make the fonts render properly; under Chrome & Firefox Roboto render really
+// bad, so we have to force geometricPrecision.
+
+html, body {
+	text-rendering: geometricPrecision;
+
+	box-sizing: border-box;
+}
