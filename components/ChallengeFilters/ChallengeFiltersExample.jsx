@@ -18,7 +18,7 @@ import './ChallengeFiltersExample.scss';
 import ChallengeCard from '../ChallengeCard/ChallengeCard'
 import '../ChallengeCard/ChallengeCard.scss'
 
-const V2_API = 'http://api.topcoder-dev.com/v2';
+const V2_API = 'https://api.topcoder-dev.com/v2';
 
 /**
  * Helper function for generation of VALID_KEYWORDS and VALID_TRACKS arrays.
