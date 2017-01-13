@@ -1,0 +1,22 @@
+.FiltersSwitch {
+  border: 1px solid gray;
+  cursor: pointer;
+  display: inline-block;
+  padding: 12px;
+
+  #icon {
+    margin-right: 6px;
+  }
+
+  &.active {
+    background: lightgray;
+  }
+
+  .filtersCount {
+    background: blue;
+    border-radius: 24px;
+    color: white;
+    margin-left: 6px;
+    padding: 6px 12px;
+  }
+}

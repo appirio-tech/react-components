@@ -36,6 +36,8 @@
     "lodash": "^4.0.0",
     "moment": "^2.11.2",
     "react": "^0.14.7",
+    "react-addons-shallow-compare": "^0.14.8",
+    "react-dates": "^4.3.0",
     "react-datetime": "^2.0.2",
     "react-dom": "^0.14.7",
     "react-dropzone": "^3.3.2",

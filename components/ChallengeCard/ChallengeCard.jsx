@@ -25,6 +25,8 @@ function ChallengeCard ({challenge}) {
     challenge.technologyList = challenge.technologyList.slice(0, VISIBLE_TECHNOLOGIES)
     challenge.technologyList.push(lastItem)
   }
+  challenge.prize = challenge.prize || []
+  challenge.totalPrize = challenge.prize.reduce((x, y) => y + x, 0)
 
   const renderTechnologies = challenge.technologyList.map((c) => {
     return (<a href="#" key={c} className="technology">{c}</a>)
