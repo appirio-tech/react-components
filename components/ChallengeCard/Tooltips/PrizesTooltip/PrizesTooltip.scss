@@ -1,0 +1,51 @@
+.prizes-tooltip {
+  max-width: 480px;
+  .bonuses {
+    border-top: 1px solid darkgray;
+    clear: both;
+    margin-top: 6px;
+    padding: 12px 0;
+    .bonus {
+      .bonus-name {
+        background: darkgreen;
+        border-radius: 3px;
+        margin-right: 6px;
+        padding: 3px;
+      }
+      margin-right: 12px;
+    }
+  }
+  h1 {
+    border: none;
+    color: white;
+    font-weight: bold;
+    margin: 0 0 6px;
+    padding: 0;
+    text-align: left;
+    text-transform: none;
+  } 
+  .prize {
+    float: left;
+    margin: 0 12px 6px 0;
+    .medal {
+      background: lightgray;
+      color: #3a3c47;
+      display: inline-block;
+      height: 24px;
+      margin-right: 6px;
+      padding-left: 8px;
+      padding-top: 4px;
+      border-radius: 24px;
+      width: 24px;
+      &.place-1 {
+        background: gold;
+      }
+      &.place-2 {
+        background: silver;
+      }
+      &.place-3 {
+        background: saddlebrown;
+      }
+    }
+  }
+}
