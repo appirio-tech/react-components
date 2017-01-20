@@ -20,6 +20,7 @@ const DESCRIPTION = {
   WEB_DESIGN: 'Specific challenge type where the first to submit a passable solution is the winner',
   WIDGET_OR_MOBILE_SCREEN_DESIGN: 'Specific challenge type focused on design of a mobile widget or screen',
   WIREFRAMES: 'Specific challenge type focused on creation of a wireframes',
+  SRM: 'Specific challenge type focused on algorithm',
 };
 
 const HEADER = {
@@ -31,12 +32,13 @@ const HEADER = {
   UI_PROTOTYPE_COMPETITION: 'UI Prototype (Pr)',
   WEB_DESIGN: 'Web Design (Wd)',
   WIDGET_OR_MOBILE_SCREEN_DESIGN: 'Widget or Mobile Screen Design (Wg)',
-  WIREFRAMES: 'Wireframes (Wf)',
+  SRM: 'Single Round Match (SRM)',
 };
 
 const TRACK_COLOR_CLASS = {
   DESIGN: 'blue',
   DEVELOP: 'green',
+  DATA_SCIENCE: 'orange',
 };
 
 /**

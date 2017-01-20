@@ -15,10 +15,12 @@ import React from 'react';
 
 import { ChallengeFilters, DATA_SCIENCE_TRACK, DESIGN_TRACK, DEVELOP_TRACK } from './ChallengeFilters.jsx';
 import './ChallengeFiltersExample.scss';
-import ChallengeCard from '../ChallengeCard/ChallengeCard'
-import '../ChallengeCard/ChallengeCard.scss'
+import ChallengeCard from '../ChallengeCard/ChallengeCard';
+import SRMCard from '../SRMCard/SRMCard';
+import ChallengesSidebar from '../ChallengesSidebar/ChallengesSidebar';
+import '../ChallengeCard/ChallengeCard.scss';
 
-const V2_API = 'https://api.topcoder-dev.com/v2';
+const V2_API = 'https://api.topcoder.com/v2';
 
 /**
  * Helper function for generation of VALID_KEYWORDS and VALID_TRACKS arrays.
@@ -47,6 +49,34 @@ const VALID_TRACKS = [
   'Widget or Mobile Screen Design'
 ].map(keywordsMapper);
 
+// A mock list of challenges side bar
+const ChallengesSidebarMock = {
+  all: {name: 'All Challenges', value: 3},
+  myChallenges: {name: 'My Challenges', value: 3},
+  others: [
+    {name: 'Open for registration', value: 16},
+    {name: 'Ongoing challenges', value: 34},
+    {name: 'Past challenges', value: 580},
+  ],
+  myFilters: [
+    {name: 'iOS Design Challenges', value: 6},
+    {name: 'TCO Wireframing', value: 0},
+    {name: 'My Winnings', value: 56},
+  ]
+}
+// A mock list of SRMs side bar
+const SRMsSidebarMock = {
+  all: {name: 'All SRMs', value: 853},
+  myChallenges: {name: 'My Challenges', value: 3},
+  others: [
+    {name: 'Upcoming SRM', value: 16},
+    {name: 'Past SRM', value: 34},
+  ],
+  myFilters: [
+    {name: 'TCO Finals', value: 23},
+  ]
+}
+
 // The demo component itself.
 class ChallengeFiltersExample extends React.Component {
 
@@ -55,6 +85,7 @@ class ChallengeFiltersExample extends React.Component {
     this.state = {
       challenges: [],
       filter: () => true,
+      currentCardType: 'Challenges',
     };
 
     // When the component is created, this fetches and displays all challenges.
@@ -65,6 +96,8 @@ class ChallengeFiltersExample extends React.Component {
         challenges: this.state.challenges.concat(res.data),
       });
     });
+
+    this.setCardType.bind(this)
   };
 
   /**
@@ -104,7 +137,7 @@ class ChallengeFiltersExample extends React.Component {
       fetch(url).then(res => res.json()).then(res => {
         const d = res.data.filter(combiFilter);
         if (d.length) this.setState({ challenges: this.state.challenges.concat(d) });
-      });      
+      });
     }
 
     // Before the search, clears the list of challenges displayed by this component.
@@ -122,11 +155,20 @@ class ChallengeFiltersExample extends React.Component {
     }
   };
 
+  // set current card type
+  setCardType(cardType) {
+    this.setState({
+      currentCardType: cardType
+    })
+  }
+
+
   // ReactJS render method.
   render() {
     var cardify = challenge => {
       return (
-        <ChallengeCard key={challenge.challengeId} challenge={challenge} />
+          <ChallengeCard key={challenge.challengeId} challenge={challenge} />
+
       )
     }
     const challenges = this.state.challenges.filter(this.state.filter).map(item => {
@@ -136,8 +178,11 @@ class ChallengeFiltersExample extends React.Component {
     });
 
     var length = challenges.length;
-
-
+    const filterChallenges = challenges.map(function(challenge) {
+      return (
+        <ChallengeCard key={challenge.challengeId} challenge={challenge} />
+      )
+    })
     return (
       <div>
         <ChallengeFilters
@@ -145,12 +190,46 @@ class ChallengeFiltersExample extends React.Component {
           onSearch={(query, searchString, tracks, filter) => this.onSearch(searchString, tracks, filter)}
           validKeywords={VALID_KEYWORDS}
           validTracks={VALID_TRACKS}
+          setCardType={(cardType) => this.setCardType(cardType)}
+          isCardTypeSet={this.state.currentCardType}
         />
-        {challenges.map(function(challenge) {
-          return (
-            <ChallengeCard key={challenge.challengeId} challenge={challenge} />
-          )
-        })}
+
+        <div className={"tc-content-wrapper srm " + (this.state.currentCardType === 'SRMs' ? '': 'hidden') }>
+          <div className="challenges-container SRMs-container">
+            {/* happening now */}
+            <div className="SRMCardExamples example-lg">
+              <SRMCard category={'now'}></SRMCard>
+            </div>
+            {/* upcoming SRMs */}
+            <div className="SRMCardExamples example-lg">
+              <div className="title">Upcoming SRMs</div>
+              <SRMCard category={'upcoming'}></SRMCard>
+              <SRMCard category={'upcoming'}></SRMCard>
+            </div>
+            {/* past SRMs */}
+            <div className="SRMCardExamples example-lg">
+              <div className="title">Past SRMs</div>
+              <SRMCard category={'past'}></SRMCard>
+            </div>
+          </div>
+
+          <div className="sidebar-container srm">
+            <ChallengesSidebar SidebarMock={SRMsSidebarMock}></ChallengesSidebar>
+          </div>
+        </div>
+
+        <div className={"tc-content-wrapper " + (this.state.currentCardType === 'Challenges' ? '': 'hidden') }>
+          <div className="challenge-cards-container">
+            <div className="ChallengeCardExamples example-lg">
+              <div className="title">Active Develop Challenges</div>
+              {filterChallenges}
+            </div>
+          </div>
+
+          <div className="sidebar-container">
+            <ChallengesSidebar SidebarMock={ChallengesSidebarMock}></ChallengesSidebar>
+          </div>
+        </div>
       </div>
     );
   };

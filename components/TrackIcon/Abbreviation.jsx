@@ -22,29 +22,29 @@ const Abbreviation = {
     CONTENT_CREATION: 'CC',
     REPORTING: 'Rp',
     DEVELOP_MARATHON_MATCH: 'MM',
-    FIRST_2_FINISH: 'F2F',
-    CODE: 'Cd'
+    FIRST2FINISH: 'F2F',
+    CODE: 'Cd',
   },
   DESIGN: {
-    BANNERS_OR_ICONS: 'BI',
-    WEB_DESIGNS: 'Wb',
+    'BANNERS/ICONS': 'BI',
+    WEB_DESIGN: 'Wb',
     WIREFRAMES: 'Wf',
     LOGO_DESIGN: 'Lg',
     PRINT_OR_PRESENTATION: 'PP',
     WIDGET_OR_MOBILE_SCREEN_DESIGN: 'Wg',
     FRONT_END_FLASH: 'FL',
-    APPLICATION_FRONT_END_DESIGN: 'FE',
+    'APPLICATION_FRONT-END_DESIGN': 'FE',
     STUDIO_OTHER: 'O',
     IDEA_GENERATION: 'IG',
-    DESIGN_FIRST_2_FINISH: 'F2F'
+    DESIGN_FIRST2FINISH: 'DF2F',
   },
   DATA_SCIENCE: {
     SRM: 'SRM',
-    MARATHON_MATCH: 'MM'
+    MARATHON_MATCH: 'MM',
   },
   GENERIC: {
-    GENERIC_SCORECARDS: 'G'
+    GENERIC_SCORECARDS: 'G',
   }
 }
 
-export default Abbreviation
+export default Abbreviation;

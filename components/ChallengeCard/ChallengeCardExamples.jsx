@@ -8,6 +8,22 @@ import _ from 'lodash';
 const BASE_URL = 'https://api.topcoder.com/v2';
 const CHALLENGES_API = `${BASE_URL}/challenges/`;
 
+// A mock list of challenges side bar
+const ChallengesSidebarMock = {
+  all: {name: 'All Challenges', value: 3},
+  myChallenges: {name: 'My Challenges', value: 3},
+  others: [
+    {name: 'Open for registration', value: 16},
+    {name: 'Ongoing challenges', value: 34},
+    {name: 'Past challenges', value: 580},
+  ],
+  myFilters: [
+    {name: 'iOS Design Challenges', value: 6},
+    {name: 'TCO Wireframing', value: 0},
+    {name: 'My Winnings', value: 56},
+  ]
+}
+
 class ChallengeCardExamples extends React.Component {
   constructor() {
     super()
@@ -116,23 +132,25 @@ class ChallengeCardExamples extends React.Component {
     })
 
     return (
-      <div>
-        <div className="ChallengeCardExamples example-lg">
-          <div className="title">Active Develop Challenges</div>
-          {ActiveDevelopChallengeCards}
-        </div>
-        <div className="ChallengeCardExamples example-lg">
-          <div className="title">Past Develop Challenges</div>
-          {PastDevelopChallengeCards}
-        </div>
-        <div className="ChallengeCardExamples example-lg">
-          <div className="title">Past Design Challenges</div>
-          {ActiveDesignChallengeCards}
-        </div>
-        <div className="ChallengeCardExamples example-lg">
-          <div className="title">Past Design Challenges</div>
-          {PastDesignChallengeCards}
-          <br/><br/><br/>
+      <div className="tc-content-wrapper">
+        <div className="challenge-cards-container">
+          <div className="ChallengeCardExamples example-lg">
+            <div className="title">Active Develop Challenges</div>
+            {ActiveDevelopChallengeCards}
+          </div>
+          <div className="ChallengeCardExamples example-lg">
+            <div className="title">Past Develop Challenges</div>
+            {PastDevelopChallengeCards}
+          </div>
+          <div className="ChallengeCardExamples example-lg">
+            <div className="title">Past Design Challenges</div>
+            {ActiveDesignChallengeCards}
+          </div>
+          <div className="ChallengeCardExamples example-lg">
+            <div className="title">Past Design Challenges</div>
+            {PastDesignChallengeCards}
+            <br/><br/><br/>
+          </div>
         </div>
       </div>
     )

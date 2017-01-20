@@ -1,14 +1,14 @@
-import React from 'react'
-import LeaderboardAvatar from '../LeaderboardAvatar/LeaderboardAvatar'
-import ChallengeProgressBar from '../ChallengeProgressBar/ChallengeProgressBar'
+import React from 'react';
+import LeaderboardAvatar from '../LeaderboardAvatar/LeaderboardAvatar';
+import ChallengeProgressBar from '../ChallengeProgressBar/ChallengeProgressBar';
 import ProgressBarTooltip from '../ChallengeCard/Tooltips/ProgressBarTooltip';
-import RegistrantsIcon from '../Icons/RegistrantsIcon'
-import SubmissionsIcon from '../Icons/SubmissionsIcon'
+import RegistrantsIcon from '../Icons/RegistrantsIcon';
+import SubmissionsIcon from '../Icons/SubmissionsIcon';
 import Tooltip from '../ChallengeCard/Tooltips/Tooltip';
 import UserAvatarTooltip from '../ChallengeCard/Tooltips/UserAvatarTooltip';
-import ForumIcon from '../Icons/ForumIcon'
-import moment from 'moment'
-import './ChallengeStatus.scss'
+import ForumIcon from '../Icons/ForumIcon';
+import moment from 'moment';
+import './ChallengeStatus.scss';
 
 // Constants
 
@@ -60,18 +60,21 @@ function ChallengeStatus ({challenge, sampleWinnerProfile}) {
 
   const renderLeaderboard = MOCK_WINNERS.map((winner) => {
     return (
-      <UserAvatarTooltip key={winner.handle} user={sampleWinnerProfile}>
-        <LeaderboardAvatar member={winner}/>
-      </UserAvatarTooltip>
+      <div className="avatar-container" key={winner.handle}>
+        <UserAvatarTooltip user={sampleWinnerProfile}>
+          <LeaderboardAvatar member={winner}/>
+        </UserAvatarTooltip>
+      </div>
     )
   })
 
   const renderRegisterButton = () => {
+    const lng = getTimeLeft(challenge.registrationEndDate).length
     return (
       challenge.registrationOpen === 'Yes' && !challenge.registered ?
       <a href="#" className="register-button">
-        {getTimeLeft(challenge.registrationEndDate)}
-        <span>to register</span>
+        {getTimeLeft(challenge.registrationEndDate).substring(0, lng-6)}
+        <span className="to-register">to register</span>
       </a>
       : <span></span>
     )
@@ -99,23 +102,24 @@ function ChallengeStatus ({challenge, sampleWinnerProfile}) {
         <span className="current-phase">{challenge.currentPhaseName ? challenge.currentPhaseName : STALLED_MSG}</span>
         <span className="challenge-stats">
           <span>
-            <Tooltip content={numRegistrantsTipText(challenge.numRegistrants)}>
-              <a href={`${CHALLENGE_URL}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}#viewRegistrant`}>
-                <RegistrantsIcon/> {challenge.numRegistrants}
+            <Tooltip content={numRegistrantsTipText(challenge.numRegistrants)} className="num-reg-tooltip">
+              <a className="num-reg" href={`${CHALLENGE_URL}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}#viewRegistrant`}>
+                <RegistrantsIcon/> <span className="number">{challenge.numRegistrants}</span>
               </a>
             </Tooltip>
           </span>
           <span>
             <Tooltip content={numSubmissionsTipText(challenge.numSubmissions)}>
-              <a href={`${CHALLENGE_URL}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}#viewRegistrant`}>
-                <SubmissionsIcon/> {challenge.numSubmissions}
+              <a className="num-sub" href={`${CHALLENGE_URL}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}#viewRegistrant`}>
+                <SubmissionsIcon/> <span className="number">{challenge.numSubmissions}</span>
               </a>
             </Tooltip>
           </span>
+
           {
             challenge.registered === 'Active' ?
-            <span>
-              <a href={`${FORUM_URL}${challenge.forumId}`}><ForumIcon/></a>
+            <span className={ challenge.registered ? '' : 'hidden'}>
+              <a className="link-forum" href={`${FORUM_URL}${challenge.forumId}`}><ForumIcon/></a>
             </span>
             : renderRegisterButton()
           }
@@ -145,31 +149,33 @@ function ChallengeStatus ({challenge, sampleWinnerProfile}) {
         <span className="challenge-stats">
           <span>
             <Tooltip content={numRegistrantsTipText(challenge.numRegistrants)}>
-              <a href={`${CHALLENGE_URL}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}#viewRegistrant`}>
-                <RegistrantsIcon/> {challenge.numRegistrants}
+              <a className="num-reg" href={`${CHALLENGE_URL}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}#viewRegistrant`}>
+                <RegistrantsIcon/> <span className="number">{challenge.numRegistrants}</span>
               </a>
             </Tooltip>
           </span>
           <span>
             <Tooltip content={numSubmissionsTipText(challenge.numSubmissions)}>
-              <a href={`${CHALLENGE_URL}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}#viewRegistrant`}>
-                <SubmissionsIcon/> {challenge.numSubmissions}
+              <a className="num-sub" href={`${CHALLENGE_URL}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}#viewRegistrant`}>
+                <SubmissionsIcon/> <span className="number">{challenge.numSubmissions}</span>
               </a>
             </Tooltip>
           </span>
           <span className={ challenge.registered ? '' : 'hidden'}>
-            <a href={`${FORUM_URL}${challenge.forumId}`}><ForumIcon/></a>
+            <a className="link-forum" href={`${FORUM_URL}${challenge.forumId}`}><ForumIcon/></a>
           </span>
         </span>
       </div>
     )
   }
 
+  const status = challenge.status === 'Completed' ? "completed" : "";
+
   return (
-    <div className="challenge-status">
+    <div className={"challenge-status "+status}>
       {challenge.status === 'Completed' ? completedChallenge() : activeChallenge()}
     </div>
   )
 }
 
-export default ChallengeStatus
+export default ChallengeStatus;
