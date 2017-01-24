@@ -17,7 +17,7 @@ import filtersIcon from './ui-filters.svg';
 
 function FiltersSwitch(props) {
 
-  let className = 'FiltersSwitch';
+  let className = 'FiltersSwitch tc-outline-btn';
   if (props.active) className += ' active';
 
   let filtersCount;

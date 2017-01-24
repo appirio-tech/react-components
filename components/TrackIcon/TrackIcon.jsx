@@ -1,6 +1,6 @@
-import React from 'react'
-import Abbreviation from './Abbreviation'
-import './TrackIcon.scss'
+import React from 'react';
+import Abbreviation from './Abbreviation';
+import './TrackIcon.scss';
 
 function TrackIcon ({track, subTrack, tcoEligible}) {
   return (
@@ -11,4 +11,4 @@ function TrackIcon ({track, subTrack, tcoEligible}) {
   )
 }
 
-export default TrackIcon
+export default TrackIcon;

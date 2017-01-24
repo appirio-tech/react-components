@@ -11,7 +11,7 @@
  */
 
 import React, { PropTypes as PT } from 'react';
-import TooltipLib from './tooltip';
+import TooltipLib from './tooltip-lib';
 import './Tooltip.scss';
 
 class Tooltip extends React.Component {
@@ -24,12 +24,13 @@ class Tooltip extends React.Component {
     });
   }
 
+
   hideTooltip() {
     this.tooltip.hide();
   }
 
   showTooltip() {
-    this.tooltip.position(this.wrapper).show();
+    window.innerWidth < 768 ? this.tooltip.hide() : this.tooltip.position(this.wrapper).show();
   }
 
   render() {
@@ -39,7 +40,7 @@ class Tooltip extends React.Component {
         onMouseLeave={() => this.hideTooltip()}
         ref={(node) => { this.wrapper = node; }}
       >
-        <span className="hidden">
+        <span className="hidden ">
           <span
             ref={(node) => {
               if (node) this.tooltip.content(node.cloneNode(true));

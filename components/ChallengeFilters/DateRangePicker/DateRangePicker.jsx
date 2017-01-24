@@ -30,6 +30,8 @@ class DateRangePicker extends React.Component {
         onFocusChange={focusedInput => { this.setState({ focusedInput }); }}
         startDate={this.props.startDate}
         endDate={this.props.endDate}
+        anchorDirection={'right'}
+        displayFormat={'MMM DD, YYYY'}
       />
     );
   };
