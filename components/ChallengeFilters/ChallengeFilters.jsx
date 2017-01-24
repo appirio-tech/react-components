@@ -41,8 +41,6 @@ import ChallengeSearchBar from './ChallengeSearchBar/ChallengeSearchBar.jsx';
 import FiltersPanel from './FiltersPanel/FiltersPanel.jsx';
 import FiltersSwitch from './FiltersSwitch/FiltersSwitch.jsx';
 import SimpleSwitch from './SimpleSwitch/SimpleSwitch.jsx';
-import FiltersCardsType from './FiltersCardsType/FiltersCardsType.jsx';
-import './ChallengeFilters.scss';
 
 const DATA_SCIENCE_TRACK = 'datasci';
 const DESIGN_TRACK = 'design';
@@ -84,7 +82,7 @@ class ChallengeFilters extends React.Component {
 
     return item => {
       if (!keywordsFilter(item, filters.keywords)) return false;
-      if (filters.tracks.length && !filters.tracks.includes(item.challengeType)) return false;
+      if (filters.tracks.length && !filters.tracks.includes(item.challengeType)) return false; 
       if (filters.startDate && filters.startDate.isAfter(item.submissionEndDate)) return false;
       if (filters.endDate && filters.endDate.isBefore(item.postingDate)) return false;
       return true;
@@ -123,7 +121,7 @@ class ChallengeFilters extends React.Component {
    *    (JS Set of DATA_SCIENCE_TRACK, DESIGN_TRACK, DEVELOP_TRACK constants);
    *  - The filter function.
    *
-   * @param {String} searchString
+   * @param {String} searchString 
    */
   onSearch(searchString) {
     if (!this.props.onSearch) return;
@@ -133,22 +131,19 @@ class ChallengeFilters extends React.Component {
 
   render() {
     return (
-      <div className="challenge-filters">
-        <div className="filter-header">
-          <FiltersCardsType setCardType={this.props.setCardType} isCardTypeSet={this.props.isCardTypeSet}></FiltersCardsType>
-          <ChallengeSearchBar
-            onSearch={str => this.onSearch(str)}
-            placeholder="Search Challenges"
-          />
-          <SimpleSwitch label="Design" onSwitch={on => this.setTrack(DESIGN_TRACK, on)} />
-          <SimpleSwitch label="Development" onSwitch={on => this.setTrack(DEVELOP_TRACK, on)} />
-          <SimpleSwitch label="Data Science" onSwitch={on => this.setTrack(DATA_SCIENCE_TRACK, on)} />
-          <FiltersSwitch
-            active={this.state.showFilters}
-            filtersCount={this.state.filtersCount}
-            onSwitch={active => this.setState({ showFilters: active })}
-          />
-        </div>
+      <div>
+        <ChallengeSearchBar
+          onSearch={str => this.onSearch(str)}
+          placeholder="Search Challenges"
+        />
+        <SimpleSwitch label="Design" onSwitch={on => this.setTrack(DESIGN_TRACK, on)} />
+        <SimpleSwitch label="Development" onSwitch={on => this.setTrack(DEVELOP_TRACK, on)} />
+        <SimpleSwitch label="Data Science" onSwitch={on => this.setTrack(DATA_SCIENCE_TRACK, on)} />
+        <FiltersSwitch
+          active={this.state.showFilters}
+          filtersCount={this.state.filtersCount}
+          onSwitch={active => this.setState({ showFilters: active })}
+        />
         <FiltersPanel
           hidden={!this.state.showFilters}
           onFilter={filters => this.onFilter(filters)}

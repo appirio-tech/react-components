@@ -1,38 +1,22 @@
-@import '../../../styles/tc-styles';
-
-$switch-space-10: $base-unit * 2;
-$switch-space-15: $base-unit * 3;
-$switch-space-100: $base-unit * 20;
-
-$switch-radius-2: $corner-radius;
-$switch-radius-4: $corner-radius * 2;
-
 .FiltersSwitch {
-  min-width: $switch-space-100 + 2;
+  border: 1px solid gray;
+  cursor: pointer;
+  display: inline-block;
+  padding: 12px;
+
   #icon {
-    margin-right: $switch-space-10;
-    position: relative;
-    top: $base-unit - 2;
+    margin-right: 6px;
   }
 
   &.active {
-    background: $tc-gray-20;
-    box-shadow: inset 0 1px 1px 0 rgba(71,71,79,0.38);
-    border-radius: $corner-radius;
+    background: lightgray;
   }
 
   .filtersCount {
-    display: inline-block;
-    background: $tc-dark-blue;
-    width: $switch-space-15;
-    height: $switch-space-15;
-    border-radius: 50%;
-    color: $tc-white;
-    margin-left: $base-unit;
-    line-height: $switch-space-15;
-    font-size: 12px;
-    color: $tc-white;
-    font-weight: 400;
-    text-align: center;
+    background: blue;
+    border-radius: 24px;
+    color: white;
+    margin-left: 6px;
+    padding: 6px 12px;
   }
 }

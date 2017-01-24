@@ -1,20 +1,3 @@
-@import '../../../styles/tc-styles';
-
-
 .hidden {
   display: none;
-}
-
-.tooltip {
-	position: absolute;
-	padding: $base-unit * 3;
-  background: $tc-gray-80;
-  border-radius: $corner-radius * 2;
-}
-// number registrant tooltip
-.num-reg-tooltip {
-  font-weight: 500;
-  font-size: 13px;
-  color: $tc-white;
-  letter-spacing: 0;
 }

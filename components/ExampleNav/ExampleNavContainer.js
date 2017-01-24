@@ -11,7 +11,6 @@ const navs = {
     'NavbarExample',
     'TCFooterExamples',
     'ChallengeCardExamples',
-    'SRMCardExamples',
     'MenuBarExamples'
   ],
   FileUploader: [

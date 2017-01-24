@@ -7,7 +7,7 @@
  * 'challenge' prop.
  */
 
-import React, { PropTypes as PT } from 'react'
+import React, { PropTypes as PT } from 'react';
 import Tooltip from '../Tooltip';
 import './PrizesTooltip.scss';
 

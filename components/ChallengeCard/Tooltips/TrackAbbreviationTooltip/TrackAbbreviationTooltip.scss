@@ -1,27 +1,16 @@
-@import '../../../styles/tc-styles';
-
-$track-space-20: $base-unit * 4;
-$track-radius-4: $corner-radius * 2;
-
 .track-abbreviation-tooltip {
-  min-width: $base-unit * 64;
-  line-height: $track-space-20 - 2;
   .header {
-    font-weight: 700;
-    padding-left: $base-unit * 2;
+    font-weight: bold;
+    padding-left: 12px;
     &.blue {
-      border-left: $track-radius-4 solid $tc-light_blue;
+      border-left: 6px solid skyblue;
     }
     &.green {
-      border-left: $track-radius-4 solid $tc-green;
-    }
-    &.orange {
-      border-left: $track-radius-4 solid $tc-orange;
+      border-left: 6px solid lime;
     }
   }
   .body {
-    font-weight: 300;
-    margin-top: $base-unit + 1;
-    color: $tc-gray-20;
+    font-weight: 100;
+    margin-top: 12px;
   }
 }

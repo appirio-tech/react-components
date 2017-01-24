@@ -1,22 +1,4 @@
-@import '../../styles/tc-styles';
-
-
-.challenges-container {
-  padding: $base-unit * 2;
-  width: 70%;
-  .title {
-    font-size: 13px;
-    color: $tc-gray-80;
-    line-height: $base-unit * 4;
-    padding: $base-unit * 2 $base-unit * 4;
-    font-family: 'Roboto';
-    font-weight: 500;
-    background: $tc-gray-neutral-light;
-    border-top-left-radius: $corner-radius * 2;
-    border-top-right-radius: $corner-radius * 2;
-    margin-top: $base-unit * 4;
-  }
-}
-.hidden {
-  display: none;
+.Challenge {
+  background: white;
+  margin: 24px 0;
 }

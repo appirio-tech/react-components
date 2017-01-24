@@ -1,5 +1,5 @@
-import React from 'react';
-import './ChallengeProgressBar.scss';
+import React from 'react'
+import './ChallengeProgressBar.scss'
 
 function ChallengeProgressBar({color, value, isLate}) {
   return (
@@ -9,4 +9,4 @@ function ChallengeProgressBar({color, value, isLate}) {
   )
 }
 
-export default ChallengeProgressBar;
+export default ChallengeProgressBar

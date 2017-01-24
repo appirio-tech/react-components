@@ -1,20 +1,12 @@
 // This is the partial where we load all the Roboto fonts for Webpack
 @import 'fonts';
 @import 'tc-colors';
-@import 'media';
-
 
 // Important global variables
 
 $base-unit: 5px;
 $corner-radius: 2px;
 
-// mixin for calculate the width of the element
-@mixin calc($property, $expression) {
-  #{$property}: -moz-calc(#{$expression});
-  #{$property}: -webkit-calc(#{$expression});
-  #{$property}: calc(#{$expression});
-}
 
 // Make the fonts render properly; under Chrome & Firefox Roboto render really
 // bad, so we have to force geometricPrecision.
@@ -23,27 +15,4 @@ html, body {
 	text-rendering: geometricPrecision;
 
 	box-sizing: border-box;
-	font-family: 'Roboto';
-	font-weight: 500;
-	text-shadow: none;
-}
-.tc-outline-btn {
-  border: 1px solid $tc-gray-50;
-  background: $tc-white;
-  cursor: pointer;
-  display: inline-block;
-  padding: $base-unit - 1 $base-unit * 2;
-  font-weight: 400;
-  font-size: 12px;
-  color: $tc-black;
-  line-height: $base-unit * 4;
-  border-radius: $corner-radius;
-  margin-left: $base-unit * 3;
-}
-.tc-blue-btn {
-  @extend .tc-outline-btn;
-  background: $tc-dark-blue;
-  color: $tc-white;
-  border: none;
-  line-height: $base-unit * 4 + 2;
 }
