@@ -1,17 +1,38 @@
 @import 'topcoder/tc-includes';
 @import '../../styles/tc-styles';
 
+$challenge-space-10: $base-unit * 2;
+$challenge-space-15: $base-unit * 3;
+$challenge-space-20: $base-unit * 4;
+$challenge-space-30: $base-unit * 6;
+$challenge-space-40: $base-unit * 8;
+$challenge-space-45: $base-unit * 9;
+$challenge-space-50: $base-unit * 10;
+$challenge-space-90: $base-unit * 18;
+$challenge-radius-1: $corner-radius / 2;
+$challenge-radius-4: $corner-radius * 2;
+
 .challengeCard {
   display: flex;
   justify-content: flex-start;
   position: relative;
   background: $tc-white;
-  padding: 20px;
+  padding: $challenge-space-20;
   border-top: 1px solid $tc-gray-10;
   color: $tc-black;
   font-size: 15px;
-  font-family: 'Roboto-Medium', sans-serif;
-
+  font-family: 'Roboto';
+  font-weight: 500;
+  &:last-child {
+    border-bottom: 1px solid $tc-gray-10;
+  }
+  @include xs-to-sm {
+    flex-wrap: wrap;
+    position: relative;
+  }
+  @include xs {
+    padding: $base-unit * 3;
+  }
   a, a:visited {
     color: $tc-black;
   }
@@ -23,54 +44,81 @@
   .left-panel {
     display: flex;
     justify-content: flex-start;
+    width: 50%;
+    @include xs-to-sm {
+      width: 100%;
+    }
+
   }
 
   .right-panel {
     display: flex;
     justify-content: space-between;
-    min-width: 50%;
+    width: 50%;
+    @include xs-to-sm {
+      width: 100%;
+    }
+    @include xs {
+      display: block;
+    }
+
   }
 
   // Challenge track icon
   .challenge-track {
     display: inline-block;
     vertical-align: top;
+    > span:first-child {
+      display: inline-block;
+    }
   }
 
   // Challenge title, end date & technologies
   .challenge-details {
     display: inline-block;
     vertical-align: baseline;
-    width: 320px;
-    max-width: 330px;
-    margin-right: 30px;
-
-    .details-footer {
-      margin-top: 10px;
-
-      .date {
-        font-size: 12px;
-        color: $tc-gray-60;
-        margin-right: 10px;
-      }
-
-      .technology {
+    width: 82%;
+    margin-right: $challenge-space-30;
+    @include sm {
+      margin-right: $challenge-space-90;
+    }
+    @include xs {
+      margin-right: 0;
+    }
+    a {
+      line-height: $challenge-space-20;
+      @include xs {
         display: inline-block;
-        text-align: center;
-        padding: 0 7px;
-        line-height: 19px;
-        background: $tc-gray-neutral-dark;
-        font-size: 10px;
-        font-family: 'Roboto-Bold', sans-serif;
-        color: $tc-gray-80;
-        margin-right: 5px;
-        border-radius: 3px;
-        height: 19px;
       }
+    }
+  }
+  // date and technologies
+  .details-footer {
+    margin-top: $challenge-space-10;
 
-      .technology:hover {
-        background: $tc-dark-blue-30;
-      }
+    .date {
+      font-size: 12px;
+      color: $tc-gray-60;
+      margin-right: $challenge-space-10;
+      line-height: ($challenge-space-10) + 2;
+      font-weight: 500;
+    }
+
+    .technology {
+      display: inline-block;
+      text-align: center;
+      padding: 0 $base-unit + 2;
+      line-height: $challenge-space-20 - 1;
+      background: $tc-gray-neutral-dark;
+      font-size: 10px;
+      font-family: 'Roboto-Bold', sans-serif;
+      color: $tc-gray-80;
+      margin-right: $base-unit;
+      border-radius: $corner-radius + 1;
+      height: $challenge-space-20 - 1;
+    }
+    .technology:hover {
+      background: $tc-dark-blue-30;
     }
   }
 
@@ -78,23 +126,52 @@
   .prizes {
     display: inline-block;
     font-size: 13px;
-    font-family: 'Roboto-Bold', sans-serif;
+    font-weight: 700;
     color: $prize-color;
-    line-height: 20px;
-    margin-right: 40px;
+    line-height: $challenge-space-20;
+    margin-right: $challenge-space-40;
+    min-width: $challenge-space-45;
+    @include xs-to-sm {
+
+    }
+    @include xs-to-sm {
+      position: absolute;
+      right: 0;
+      top: 20px;
+      margin-right: $challenge-space-20;
+    }
+    @include xs {
+      position: relative;
+      width: 100%;
+      display: block;
+      margin-top: $challenge-space-20;
+      padding-left: $challenge-space-50;
+      top: 0;
+    }
+    > span:first-child {
+      display: inline-block;
+    }
+    > span:first-child > div {
+      @include xs {
+        display: inline-block;
+      }
+    }
 
     .dollar {
       display: inline-block;
       color: $tc-gray-50;
-      min-width: 11px;
+      min-width: $challenge-space-10 + 1;
     }
 
     .label {
-      padding: 0 7px;
+      padding: 0 $challenge-space-10;
       background: $tc-gray-neutral-light;
       font-size: 10px;
       color: $tc-gray-70;
-      border-radius: 3px;
+      border-radius: $corner-radius + 1;
+      @include xs {
+        margin-left: 10px;
+      }
     }
   }
 
