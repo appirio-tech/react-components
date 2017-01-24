@@ -1,33 +1,18 @@
 @import '../../styles/tc-colors';
-@import '../../styles/tc-styles';
-
-$track-code-pad: ($base-unit * 2) - 2;
-$tco-line-hieght: $base-unit * 2 + 2;
-
-$track-space-10: $base-unit * 2;
-$track-space-15: $base-unit * 3;
-$track-space-20: $base-unit * 4;
-
-$track-radius-4: $corner-radius * 2;
 
 .trackIcon {
   display: inline-block;
-  width: $base-unit * 6;
-  height: $base-unit * 6;
-  margin-right: $track-space-20;
-  @include xs {
-    margin-right: $track-space-15;
-  }
+  width: 30px;
+  height: 30px;
+  margin-right: 20px;
+
   .main-icon {
     text-align: center;
     font-size: 13px;
-    font-family: 'Roboto';
-    font-weight: 700;
-    line-height: $track-space-15;
     color: $tc-gray-neutral-light;
-    padding: $track-code-pad - 1 0 $track-code-pad;
-    border-radius: $corner-radius;
-    cursor: pointer;
+    padding: 7px 0;
+    border-radius: 2px;
+
     &.design, &.generic {
       background: $tc-light_blue;
     }
@@ -45,10 +30,9 @@ $track-radius-4: $corner-radius * 2;
     text-align: center;
     font-size: 10px;
     font-family: 'Roboto-Bold', sans-serif;
-    border-radius: $corner-radius - 1;
-    line-height: $tco-line-hieght;
-    padding: $base-unit - 1 0;
-    margin-top: $base-unit - 4;
+    border-radius: 3px;
+    line-height: 19px;
+    margin-top: 1px;
 
     &.design, &.generic {
       color: $tc-light_blue;

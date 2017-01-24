@@ -1,32 +1,22 @@
-@import '../../styles/tc-styles';
-
-$leader-space-10: $base-unit * 2;
-$leader-space-15: $base-unit * 3;
-$leader-space-20: $base-unit * 4;
-$leader-space-25: $base-unit * 5;
-$leader-space-30: $base-unit * 6;
-$leader-space-40: $base-unit * 8;
-$leader-space-50: $base-unit * 10;
-
-$leader-radius-50: $corner-radius * 25;
-$leader-radius-4: $corner-radius * 2;
+@import '../../styles/tc-colors';
 
 .leaderboard-avatar {
   position: relative;
   text-align: center;
   font-size: 12px;
   color: $tc-white;
-  line-height: $leader-space-30;
+  line-height: 30px;
   display: inline-block;
-  width: $leader-space-30;
-  height: $leader-space-30;
-  border-radius: $leader-radius-50;
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  margin-right: 17px;
   vertical-align: text-bottom;
 
   img {
     width: 100%;
     height: 100%;
-    border-radius: $leader-radius-50;
+    border-radius: 50px;
   }
 
   &.dark-gray {
@@ -41,13 +31,13 @@ $leader-radius-4: $corner-radius * 2;
   .placement {
     position: absolute;
     display: block;
-    width: $leader-space-15 + 2;
-    height: $leader-space-15 + 2;
-    right: -($leader-space-10 - 3);
-    bottom: -($leader-space-10 - 3);
+    width: 17px;
+    height: 17px;
+    right: -7px;
+    bottom: -7px;
     text-align: center;
-    line-height: $leader-space-10 + 3;
-    border-radius: $leader-radius-50;
+    line-height: 15px;
+    border-radius: 50px;
     border: 2px solid $tc-white;
 
     &.placement-1 {

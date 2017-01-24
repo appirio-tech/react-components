@@ -1,61 +1,20 @@
 @import '../../styles/tc-styles';
-$challenge-space-10: $base-unit * 2;
-$challenge-space-15: $base-unit * 3;
-$challenge-space-20: $base-unit * 4;
-$challenge-radius-4: $corner-radius * 2;
 
-.tc-content-wrapper {
-  display: flex;
-  padding: $challenge-space-10;
-  @include xs {
-    display: block;
-    padding: $base-unit * 0;
-  }
-  &.srm {
-    @include sm {
-      display: block;
-      padding: $base-unit * 0;
-    }
-  }
-}
-.challenge-cards-container {
-  width: 100%;
-  padding: $challenge-space-10;
-  @include xs {
-    width: 100%;
-  }
-}
-.challenges-container.SRMs-container {
-  @include xs-to-sm {
-    width: 100%;
-  }
-}
-.sidebar-container {
-  width: 30%;
-  padding: $challenge-space-10;
-  @include xs {
-    width: 100%;
-  }
-  &.srm {
-    @include xs-to-sm {
-      width: 100%;
-    }
-  }
-}
 .ChallengeCardExamples {
   background: $tc-gray-neutral-light;
-  border-top-left-radius: $challenge-radius-4;
-  border-top-right-radius: $challenge-radius-4;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+
   .title {
-    font-size: 13px;
+    font-size: 14px;
     color: $tc-gray-80;
-    line-height: $base-unit * 4;
-    padding: $base-unit * 2 $challenge-space-20;
-    font-family: 'Roboto';
-    font-weight: 500;
-    background: #FAFAFB;
-    border-top-left-radius: $challenge-radius-4;
-    border-top-right-radius: $challenge-radius-4;
+    font-weight: 600;
+    padding: 15px 20px;
+    font-family: 'Roboto-Medium', sans-serif;
   }
 
+  &.example-lg {
+    width: 860px;
+    margin: 10px auto;
+  }
 }

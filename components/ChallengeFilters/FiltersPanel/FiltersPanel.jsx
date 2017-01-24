@@ -70,33 +70,31 @@ class FiltersPanel extends React.Component {
               value={this.state.keywords.join(',')}
             />
           </div>
-          <div className="filter-row">
-            <div className="filter" id="track">
-              <label>Subtrack</label>
-              <Select
-                multi={true}
-                onChange={value => this.setState({ tracks: value ? value.split(',') : [] }, this.filter)}
-                options={this.props.validTracks}
-                value={this.state.tracks.join(',')}
-              />
-            </div>
-            <div className="filter" id="dates">
-              <label>Date range</label>
-              <DateRangePicker
-                endDate={this.state.endDate}
-                onDatesChange={dates => this.setState(dates, this.filter)}
-                startDate={this.state.startDate}
-              />
-            </div>
+          <div className="filter" id="track">
+            <label>Track</label>
+            <Select
+              multi={true}
+              onChange={value => this.setState({ tracks: value ? value.split(',') : [] }, this.filter)}
+              options={this.props.validTracks}
+              value={this.state.tracks.join(',')}
+            />
+          </div>
+          <div className="filter" id="dates">
+            <label>Date range</label>
+            <DateRangePicker
+              endDate={this.state.endDate}
+              onDatesChange={dates => this.setState(dates, this.filter)}
+              startDate={this.state.startDate}
+            />
           </div>
         </div>
         <div id="buttons">
           <button
-            className="white tc-outline-btn"
+            className="white"
             onClick={() => this.setState(DEFAULT_STATE, this.filter)}>
             Clear filters
           </button>
-          <button className="blue tc-blue-btn">Save filter</button>
+          <button className="blue">Save filter</button>
         </div>
       </div>
     );
