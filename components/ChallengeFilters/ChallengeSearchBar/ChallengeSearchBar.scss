@@ -17,7 +17,7 @@ $search-input-width: '100% - 56px';
   vertical-align: middle;
   margin-right: $challenge-space-40;
   @include calc( width, $search-bar-width);
-  input {
+  input:not([type="checkbox"]) {
     display: inline-block;
     @include calc( width, $search-input-width);
     background: $tc-white;

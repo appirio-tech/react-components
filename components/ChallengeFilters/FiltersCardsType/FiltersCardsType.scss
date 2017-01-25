@@ -10,7 +10,8 @@ $type-radius-4: $corner-radius * 2;
   display: inline-block;
   vertical-align: middle;
   font-size: 0;
-  a {
+  > a {
+    font-family: 'Roboto';
     height: $type-space-60;
     font-weight: 400;
     font-size: 20px;
