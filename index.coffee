@@ -7,4 +7,4 @@ module.exports =
   ChallengeFilters: require './components/ChallengeFilters/ChallengeFilters.jsx'
   ChallengeFiltersExample: require './components/ChallengeFilters/ChallengeFiltersExample.jsx'
   SRMCard: require './components/SRMCard/SRMCard.jsx'
-  SRMCardExample: require './components/SRMCard/SRMCardExample.jsx'
+  SRMCardExamples: require './components/SRMCard/SRMCardExamples.jsx'
