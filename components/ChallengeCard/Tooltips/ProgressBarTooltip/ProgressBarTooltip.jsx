@@ -1,3 +1,4 @@
+import moment from 'moment';
 /**
  * Progress Bar Tooltip.
  *
@@ -15,6 +16,14 @@ import React, { PropTypes as PT } from 'react';
 import Tooltip from '../Tooltip';
 import './ProgressBarTooltip.scss';
 
+const getDate = (date) => {
+  return moment(date).format('MMM DD')
+}
+const getTime = (date) => {
+  const duration = moment(date)
+  const res = `${duration.hours()}:${duration.minutes()}`
+  return res[1] === '-' ? 'Late' : `${res}`
+}
 /**
  * Renders a separate challenge phase element.
  * It includes: phase name, starting date, the point, representing the starting
@@ -38,7 +47,7 @@ function Phase(props) {
         <div className="point" />
         <div className="inner-bar" style={{ width: props.progress }} />
       </div>
-      <div>{props.date.toLocaleString()}</div>
+      <div className="date">{getDate(props.date)}, {getTime(props.date)}</div>
     </div>
   );
 }
@@ -118,8 +127,10 @@ function Tip(props) {
       />
     );
   });
+
   return (
     <div className="tip">
+
       {steps}
     </div>
   );

@@ -12,6 +12,9 @@
 	-webkit-user-select: none;
 	user-select: none;
 	pointer-events: none;
+	font-weight: 500;
+	font-size: 13px;
+	letter-spacing: 0;
 }
 
 /* Arrow styles */

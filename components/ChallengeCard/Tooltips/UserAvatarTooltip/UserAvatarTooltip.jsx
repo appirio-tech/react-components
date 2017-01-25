@@ -34,7 +34,8 @@ function Tip(props) {
       <div className="handle">{props.user.handle}</div>
       <div className="info">
         <span className="country">{props.user.country}</span>
-        <span className="joined"> / Joined {joined}</span>
+        <span className="wins">&nbsp;<span className="separtor">/</span> 257 wins&nbsp;</span>
+        <span className="joined"><span className="separtor">/</span> Joined {joined}</span>
       </div>
       <div className="achievements">
         <h3>Rating</h3>

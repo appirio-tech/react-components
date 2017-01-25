@@ -1,4 +1,78 @@
-.Challenge {
-  background: white;
-  margin: 24px 0;
+@import '../../styles/tc-styles';
+$challenge-space-10: $base-unit * 2;
+$challenge-space-15: $base-unit * 3;
+$challenge-space-20: $base-unit * 4;
+$challenge-radius-4: $corner-radius * 2;
+
+.challenge-cards-container {
+  padding: $base-unit * 2;
+  width: 70%;
+  .title {
+    font-size: 13px;
+    color: $tc-gray-80;
+    line-height: $challenge-space-20;
+    padding: $base-unit * 2 $challenge-space-20;
+    font-family: 'Roboto';
+    font-weight: 500;
+    background: $tc-gray-neutral-light;
+    border-top-left-radius: $challenge-radius-4;
+    border-top-right-radius: $challenge-radius-4;
+  }
+}
+
+.tc-content-wrapper {
+  display: flex;
+  padding: $challenge-space-10;
+  @include xs {
+    display: block;
+    padding: $base-unit * 0;
+  }
+  &.srm {
+    @include sm {
+      display: block;
+      padding: $base-unit * 0;
+    }
+  }
+}
+.challenge-cards-container {
+  width: 70%;
+  padding: $challenge-space-10;
+  @include xs {
+    width: 100%;
+  }
+}
+.challenges-container.SRMs-container {
+  width: 70%;
+  padding: 10px;
+  @include xs-to-sm {
+    width: 100%;
+  }
+  .title {
+      font-size: 13px;
+      color: #47474F;
+      line-height: 20px;
+      padding: 10px 20px;
+      font-family: 'Roboto';
+      font-weight: 500;
+      background: #FAFAFB;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+      margin-top: 20px;
+  }
+}
+.sidebar-container {
+  width: 30%;
+  padding: $challenge-space-10;
+  @include xs {
+    width: 100%;
+  }
+  &.srm {
+    @include xs-to-sm {
+      width: 100%;
+    }
+  }
+}
+
+.hidden {
+  display: none;
 }

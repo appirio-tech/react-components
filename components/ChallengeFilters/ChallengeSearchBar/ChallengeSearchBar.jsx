@@ -37,11 +37,11 @@ class ChallengeSearchBar extends React.Component {
     return (
       <div className="ChallengeSearchBar">
         <input
-          onChange={event => this.setState({ value: event.target.value })} 
+          onChange={event => this.setState({ value: event.target.value })}
           onKeyPress={event => this.onKeyPress(event)}
           placeholder={this.props.placeholder}
           type="text"
-          value={this.state.value} 
+          value={this.state.value}
         />
         <span id="SearchButton" onClick={() => this.onSearch()} >
           <img src={require('./ui-zoom.svg')} />
