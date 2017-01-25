@@ -16,6 +16,7 @@
 import _ from 'lodash';
 import React, { PropTypes as PT } from 'react';
 import EditMyFilters from './EditMyFilters';
+import SideBarFilter, { MODE } from './SideBarFilter';
 import { FilterItem } from './FilterItems';
 import './SideBarFilters.scss';
 
@@ -24,22 +25,13 @@ import './SideBarFilters.scss';
  * Note that groupping of these into difference sections is defined in the jsx
  * layout markup. The js logic behind this does not care about that groupping.
  */
-const DEFAULT_FILTERS = [{
-  name: 'All Challenges',
-  filter: () => true,
-}, {
-  name: 'My Challenges',
-  filter: challenge => challenge.registered,
-}, {
-  name: 'Open for registration',
-  filter: challenge => challenge.registrationOpen.startsWith('Yes'),
-}, {
-  name: 'Ongoing challenges',
-  filter: challenge => !challenge.registrationOpen.startsWith('Yes'),
-}, {
-  name: 'Past challenges',
-  filter: challenge => challenge.status === 'Completed',
-}];
+const DEFAULT_FILTERS = [
+  new SideBarFilter(MODE.ALL_CHALLENGES),
+  new SideBarFilter(MODE.MY_CHALLENGES),
+  new SideBarFilter(MODE.OPEN_FOR_REGISTRATION),
+  new SideBarFilter(MODE.ONGOING_CHALLENGES),
+  new SideBarFilter(MODE.PAST_CHALLENGES),
+];
 
 /*
  * This auxiliary object holds the indices of standard filters in the filters array.
@@ -68,21 +60,40 @@ const MODES = {
  */
 const MY_FILTER_BASE_NAME = 'My Filter';
 
+const SAVE_FILTERS_API = 'https://lc1-user-settings-service.herokuapp.com/saved-searches';
+
 class SideBarFilters extends React.Component {
 
   constructor(props) {
     super(props);
-    const myFilters = localStorage.filters ? JSON.parse(localStorage.filters) : [];
-    myFilters.forEach(f => eval(`f.filter = ${f.filter}`));
+    let myFilters = localStorage.filters ? JSON.parse(localStorage.filters) : [];
+    myFilters = myFilters.map(item => new SideBarFilter(item));
     this.state = {
       currentFilter: DEFAULT_FILTERS[0],
       filters: _.clone(DEFAULT_FILTERS).concat(myFilters),
       mode: MODES.SELECT_FILTER,
     };
     for (let i = 0; i < this.state.filters.length; i += 1) {
-      const filter = this.state.filters[i];
-      filter.count = props.challenges.filter(filter.filter).length;
+      const item = this.state.filters[i];
+      item.count = props.challenges.filter(item.getFilterFunction()).length;
     }
+    for (let i = 0; i !== this.state.filters.length; i += 1) {
+      const f = this.state.filters[i];
+      // Match of UUID means that one of the filters we have already matches
+      // the one passed from the parent component, so we have just select it,
+      // and we can exit the constructor right after.
+      if (f.uuid === props.filter.uuid) {
+        this.state.currentFilter = f;
+        return;
+      }
+    }
+    // A fancy staff: if the parent has passed a filter, which does not exists
+    // (it is taken from a deep link), we add it to the list of filters and
+    // also select it.
+    const f = new SideBarFilter(props.filter);
+    f.count = props.challenges.filter(f.getFilterFunction()).length;
+    this.state.currentFilter = f;
+    this.state.filters.push(f);
   }
 
   /**
@@ -94,9 +105,9 @@ class SideBarFilters extends React.Component {
     let currentFilter;
     const filters = [];
     this.state.filters.forEach((filter) => {
-      const filterClone = _.clone(filter);
+      const filterClone = new SideBarFilter(filter);
       if (this.state.currentFilter === filter) currentFilter = filterClone;
-      filterClone.count = nextProps.challenges.filter(filter.filter).length;
+      filterClone.count = nextProps.challenges.filter(filter.getFilterFunction()).length;
       filters.push(filterClone);
     });
     this.setState({
@@ -147,9 +158,9 @@ class SideBarFilters extends React.Component {
    *  variables/functions in its outer scope).
    */
   addFilter(filter) {
-    const f = _.clone(filter);
+    const f = (new SideBarFilter(MODE.CUSTOM)).merge(filter);
     const filters = _.clone(this.state.filters);
-    f.count = this.props.challenges.filter(f.filter).length;
+    f.count = this.props.challenges.filter(f.getFilterFunction()).length;
     filters.push(f);
     this.setState({ filters });
     this.saveFilters(filters.slice(FILTER_ID.FIRST_USER_DEFINED));
@@ -181,9 +192,21 @@ class SideBarFilters extends React.Component {
    * but for now it stores in the browser's localStorage.
    */
   saveFilters(filters) {
-    const f = _.cloneDeep(filters);
-    for (let i = 0; i < f.length; i += 1) f[i].filter = f[i].filter.toString();
-    localStorage.filters = JSON.stringify(f);
+    // TODO: In theory, this code should save the stringified representation of
+    // the filters to the remote server. In practice, we cannot test it, as the
+    // development version of the save filters endpoint is down, and we cannot
+    // test against the production one, as production authentication system
+    // rejects to authenicate a locally deployed App.
+    fetch(SAVE_FILTERS_API, {
+      headers: {
+        Authorization: `Bearer ${this.tcjwt}`,
+      },
+      method: 'POST',
+      body: JSON.stringify(JSON.stringify(filters.map(item => item.stringify()))),
+    }).catch(() => {
+      // As the fallback, we save filters to the browser's local storage.
+      localStorage.filters = JSON.stringify(filters.map(item => item.stringify()));
+    });
   }
 
   /**
@@ -234,7 +257,7 @@ class SideBarFilters extends React.Component {
    */
   selectFilter(id) {
     const currentFilter = this.state.filters[id];
-    this.setState({ currentFilter }, () => this.props.onFilter(currentFilter.filter));
+    this.setState({ currentFilter }, () => this.props.onFilter(currentFilter));
   }
 
   /**
@@ -250,13 +273,16 @@ class SideBarFilters extends React.Component {
 }
 
 SideBarFilters.defaultProps = {
+  filter: new SideBarFilter(MODE.ALL_CHALLENGES),
   onFilter: _.noop,
   ref: _.noop,
 };
 
 SideBarFilters.propTypes = {
   challenges: PT.arrayOf(PT.shape({
+    registrationOpen: PT.string.isRequired,
   })).isRequired,
+  filter: PT.instanceOf(SideBarFilter),
   onFilter: PT.func,
   ref: PT.func,
 };

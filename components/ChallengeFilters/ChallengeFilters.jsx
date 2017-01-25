@@ -37,104 +37,33 @@
  */
 
 import _ from 'lodash';
-import moment from 'moment';
-import React from 'react';
-import ChallengeSearchBar from './ChallengeSearchBar/ChallengeSearchBar.jsx';
-import FiltersPanel from './FiltersPanel/FiltersPanel.jsx';
-import FiltersSwitch from './FiltersSwitch/FiltersSwitch.jsx';
-import SimpleSwitch from './SimpleSwitch/SimpleSwitch.jsx';
-import FiltersCardsType from './FiltersCardsType/FiltersCardsType.jsx';
+import React, { PropTypes as PT } from 'react';
+import ChallengeFilter, { DATA_SCIENCE_TRACK, DESIGN_TRACK, DEVELOP_TRACK } from './ChallengeFilter';
+import ChallengeSearchBar from './ChallengeSearchBar/ChallengeSearchBar';
+import FiltersPanel from './FiltersPanel/FiltersPanel';
+import FiltersSwitch from './FiltersSwitch/FiltersSwitch';
+import SimpleSwitch from './SimpleSwitch/SimpleSwitch';
+import FiltersCardsType from './FiltersCardsType/FiltersCardsType';
 import './ChallengeFilters.scss';
-
-const DATA_SCIENCE_TRACK = 'datasci';
-const DESIGN_TRACK = 'design';
-const DEVELOP_TRACK = 'develop';
 
 class ChallengeFilters extends React.Component {
 
   constructor(props) {
     super(props);
-    this.activeFilters = {
-      keywords: [],
-      tracks: [],
-    };
     this.state = {
-      filtersCount: 0,
+      filter: props.filter,
+      filtersCount: props.filter.count(),
       showFilters: false,
     };
-    this.tracks = new Set();
-  };
+  }
 
   /**
-   * Generates, for the specified set of filters, the filter function, which can
-   * be passed into the filter method of an array of challenges to filter them.
-   * @param {Object} filters The object received from the FiltersPanel component.
-   * @return {Function(Object)} This function takes a challenge object,
-   *  and returns 'true' if that challenge passes the filter.
+   * Clears the filters.
    */
-  generateFilterFunction(filters) {
-
-    // In case the startDate or endDate are present, we clone filters, and convert
-    // these fields from 'moment' objects into ISO strings. This allows to use Date
-    // object to manipulate with dates inside the filter function. This, in turns,
-    // simplifies serialization / deserialization of filter functions to / from
-    // strings, which is necessary when we save filter functions.
-    if (filters.startDate || filters.endDate) {
-      filters = _.clone(filters);
-      if (filters.startDate) filters.startDate = filters.startDate.toISOString();
-      if (filters.endDate) filters.endDate = filters.endDate.toISOString();
-    }
-
-    return item => {
-
-      // Takes a challenge object, and a keywords array.
-      // Returns 'true' if keywords array is empty, or at least one of the keywords
-      // can be found inside the challenge name, platforms or technologies.
-      const keywordsFilter = (item, keywords) => {
-        if (!keywords.length || (keywords.length === 1 && !keywords[0])) return true;
-        const platforms = item.platforms.join(' ');
-        const technologies = item.technologies.join(' ');
-        const data = `${item.challengeName} ${platforms} ${technologies}`.toLowerCase();
-        for (let i = 0; i < keywords.length; ++i) {
-          if (data.indexOf(keywords[i].toLowerCase()) >= 0) return true;
-        }
-        return false;
-      };
-
-      if (!keywordsFilter(item, filters.keywords)) return false;
-      if (filters.tracks.length && !filters.tracks.includes(item.challengeType)) return false; 
-      if (filters.startDate) {
-        const fa = new Date(filters.startDate);
-        const fb = new Date(item.submissionEndDate);
-        if (fa.getTime() > fb.getTime()) return false;
-      }
-      if (filters.endDate) {
-        const fa = new Date(filters.endDate);
-        const fb = new Date(item.postingDate);
-        if (fa.getTime() < fb.getTime()) return false;
-      }
-      return true;
-    };
-  };
-
-  /**
-   * Generates, for the specified set of filters, the filter function, which can
-   * be passed into the filter method of an array of challenges to filter them.
-   * Unlike generateFilterFunction(), this method wraps the filters object into
-   * the function, so that it can be serialized using toString() method, and
-   * deserialized later using eval().
-   * @param {Object} filters The object received from the FiltersPanel component.
-   * @return {Function(Object)} This function takes a challenge object,
-   *  and returns 'true' if that challenge passes the filter.
-   */
-  generateSerializableFilterFunction(filters) {
-    let res;
-    eval(`res = function(item) {
-      const filters = ${JSON.stringify(filters)};
-      const filter = ${this.generateFilterFunction(filters).toString()};
-      return filter(item);
-    }`);
-    return res;
+  onClearFilters() {
+    const filter = new ChallengeFilter();
+    this.setState({ filter, filtersCount: 0 });
+    this.props.onFilter(filter);
   }
 
   /**
@@ -148,13 +77,14 @@ class ChallengeFilters extends React.Component {
    *
    * @param {Object} filters Filters object, received from the FiltersPanel component.
    */
-  onFilter(filters) {
-    this.activeFilters = filters;
-    let filtersCount = filters.keywords.length + filters.tracks.length;
-    if (filters.endDate || filters.startDate) ++filtersCount;
-    if (filtersCount !== this.state.filtersCount) this.setState({filtersCount});
-    if (this.props.onFilter) this.props.onFilter(this.generateFilterFunction(filters));
-  };
+  onFilter(filter) {
+    const f = (new ChallengeFilter(this.state.filter)).merge(filter);
+    this.setState({
+      filter: f,
+      filtersCount: filter.count(),
+    });
+    this.props.onFilter(f);
+  }
 
   /**
    * Triggers the 'onSearch' callback provided by the parent component, if any.
@@ -173,22 +103,57 @@ class ChallengeFilters extends React.Component {
    */
   onSearch(searchString) {
     if (!this.props.onSearch) return;
-    const filter = this.activeFilters ? this.generateFilterFunction(this.activeFilters) : () => true;
-    this.props.onSearch('', searchString, this.tracks, filter);
-  };
+    this.props.onSearch(searchString, this.state.filter);
+  }
+
+  /**
+   * Sets the keywords filter in the FilterPanel to the specified value.
+   * @param {String} keywords A comma-separated list of the keywords.
+   */
+  setKeywords(keywords) {
+    if (this.filtersPanel) this.filtersPanel.onKeywordsChanged([keywords]);
+  }
+
+  /**
+   * Sets/unsets the specified track in the this.tracks set.
+   * @param {String} community One of DATA_SCIENCE_TRACK, DESIGN_TRACK, DEVELOP_TRACK.
+   * @param {Boolean} set True to include the track into the set, false to remove it.
+   */
+  setTracks(track, set) {
+    const filter = new ChallengeFilter(this.state.filter);
+    if (set) filter.tracks.add(track);
+    else filter.tracks.delete(track);
+    this.props.onFilter(filter);
+    this.setState({ filter });
+  }
 
   render() {
     return (
-      <div className="challenge-filters">
+      <div className="challenge-filters" ref={this.props.ref}>
         <div className="filter-header">
-          <FiltersCardsType setCardType={this.props.setCardType} isCardTypeSet={this.props.isCardTypeSet}></FiltersCardsType>
+          <FiltersCardsType
+            isCardTypeSet={this.props.isCardTypeSet}
+            setCardType={this.props.setCardType}
+          />
           <ChallengeSearchBar
             onSearch={str => this.onSearch(str)}
             placeholder="Search Challenges"
           />
-          <SimpleSwitch label="Design" onSwitch={on => this.setTrack(DESIGN_TRACK, on)} />
-          <SimpleSwitch label="Development" onSwitch={on => this.setTrack(DEVELOP_TRACK, on)} />
-          <SimpleSwitch label="Data Science" onSwitch={on => this.setTrack(DATA_SCIENCE_TRACK, on)} />
+          <SimpleSwitch
+            checked={this.state.filter.tracks.has(DESIGN_TRACK)}
+            label="Design"
+            onSwitch={on => this.setTracks(DESIGN_TRACK, on)}
+          />
+          <SimpleSwitch
+            checked={this.state.filter.tracks.has(DEVELOP_TRACK)}
+            label="Development"
+            onSwitch={on => this.setTracks(DEVELOP_TRACK, on)}
+          />
+          <SimpleSwitch
+            checked={this.state.filter.tracks.has(DATA_SCIENCE_TRACK)}
+            label="Data Science"
+            onSwitch={on => this.setTracks(DATA_SCIENCE_TRACK, on)}
+          />
           <FiltersSwitch
             active={this.state.showFilters}
             filtersCount={this.state.filtersCount}
@@ -197,35 +162,44 @@ class ChallengeFilters extends React.Component {
         </div>
         <FiltersPanel
           hidden={!this.state.showFilters}
-          onFilter={filters => this.onFilter(filters)}
-          onSaveFilter={() => this.props.onSaveFilter(this.generateSerializableFilterFunction(this.activeFilters))}
+          filter={this.state.filter}
+          onClearFilters={() => this.onClearFilters()}
+          onFilter={filter => this.onFilter(filter)}
+          onSaveFilter={() => this.props.onSaveFilter(this.state.filter)}
+          ref={(node) => { this.filtersPanel = node; }}
           validKeywords={this.props.validKeywords}
-          validTracks={this.props.validTracks}
+          validSubtracks={this.props.validSubtracks}
         />
       </div>
     );
-  };
+  }
+}
 
-  /**
-   * Sets/unsets the specified track in the this.tracks set.
-   * @param {String} track One of DATA_SCIENCE_TRACK, DESIGN_TRACK, DEVELOP_TRACK.
-   * @param {Boolean} set True to include the track into the set, false to remove it.
-   */
-  setTrack(track, set) {
-    if (set) this.tracks.add(track);
-    else this.tracks.delete(track);
-    this.props.onTrackSwitch(this.tracks);
-  };
-};
+const TagShape = PT.shape({
+  label: PT.string.isRequired,
+  value: PT.string.isRequired,
+});
 
 ChallengeFilters.defaultProps = {
+  filter: new ChallengeFilter(),
+  isCardTypeSet: '',
+  onFilter: _.noop,
   onSaveFilter: _.noop,
-  onTrackSwitch: _.noop,
+  onSearch: _.noop,
+  ref: _.noop,
+  setCardType: _.noop,
 };
 
-export {
-  DATA_SCIENCE_TRACK,
-  DESIGN_TRACK,
-  DEVELOP_TRACK,
-  ChallengeFilters,
+ChallengeFilters.propTypes = {
+  filter: PT.instanceOf(ChallengeFilter),
+  isCardTypeSet: PT.string,
+  onFilter: PT.func,
+  onSearch: PT.func,
+  onSaveFilter: PT.func,
+  setCardType: PT.func,
+  ref: PT.func,
+  validKeywords: PT.arrayOf(TagShape).isRequired,
+  validSubtracks: PT.arrayOf(TagShape).isRequired,
 };
+
+export default ChallengeFilters;
