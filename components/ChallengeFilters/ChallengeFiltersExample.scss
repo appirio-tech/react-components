@@ -19,10 +19,6 @@ $challenge-radius-4: $corner-radius * 2;
     border-top-right-radius: $challenge-radius-4;
   }
 }
-.hidden {
-  display: none;
-}
-
 
 .tc-content-wrapper {
   display: flex;
@@ -75,4 +71,8 @@ $challenge-radius-4: $corner-radius * 2;
       width: 100%;
     }
   }
+}
+
+.hidden {
+  display: none;
 }
