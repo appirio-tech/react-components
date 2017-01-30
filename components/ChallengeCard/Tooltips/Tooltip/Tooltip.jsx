@@ -11,7 +11,7 @@
  */
 
 import React, { PropTypes as PT } from 'react';
-import TooltipLib from './tooltip';
+import TooltipLib from './tooltip-lib';
 import './Tooltip.scss';
 
 class Tooltip extends React.Component {

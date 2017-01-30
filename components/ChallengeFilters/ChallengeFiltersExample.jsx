@@ -11,9 +11,12 @@
  * the related challenge.
  */
 
+import _ from 'lodash';
 import React from 'react';
 
 import { ChallengeFilters, DATA_SCIENCE_TRACK, DESIGN_TRACK, DEVELOP_TRACK } from './ChallengeFilters.jsx';
+import SideBarFilters from '../SideBarFilters';
+import Sticky from 'react-stickynode';
 import './ChallengeFiltersExample.scss';
 import ChallengeCard from '../ChallengeCard/ChallengeCard'
 import '../ChallengeCard/ChallengeCard.scss'
@@ -55,6 +58,7 @@ class ChallengeFiltersExample extends React.Component {
     this.state = {
       challenges: [],
       filter: () => true,
+      sidebarFilter: () => true,
     };
 
     // When the component is created, this fetches and displays all challenges.
@@ -116,7 +120,7 @@ class ChallengeFiltersExample extends React.Component {
     // was called already.
     if (!tracks.size) fetcher(`${V2_API}/challenges/active`);
     else {
-      if (tracks.has(DEVELOP_TRACK)) fetcher(`${V2_API}/challenges/active?type=develop`);
+      if (!tracks.size || tracks.has(DEVELOP_TRACK)) fetcher(`${V2_API}/challenges/active?type=develop`);
       else if (tracks.has(DATA_SCIENCE_TRACK)) fetcher(`${V2_API}/dataScience/challenges/active`);
       if (tracks.has(DESIGN_TRACK)) fetcher(`${V2_API}/challenges/active?type=design`);
     }
@@ -137,20 +141,40 @@ class ChallengeFiltersExample extends React.Component {
 
     var length = challenges.length;
 
-
     return (
       <div>
         <ChallengeFilters
           onFilter={filter => this.setState({filter})}
+          onSaveFilter={(filter) => {
+            if (this.sidebar) {
+              const name = this.sidebar.getAvailableFilterName();
+              this.sidebar.addFilter({
+                name,
+                filter,
+              });
+            }
+          }}
           onSearch={(query, searchString, tracks, filter) => this.onSearch(searchString, tracks, filter)}
+          onTrackSwitch={_.noop}
           validKeywords={VALID_KEYWORDS}
           validTracks={VALID_TRACKS}
         />
-        {challenges.map(function(challenge) {
-          return (
-            <ChallengeCard key={challenge.challengeId} challenge={challenge} />
-          )
-        })}
+        <div className="listing">
+          {challenges.filter(this.state.sidebarFilter).map(function(challenge) {
+            return (
+              <ChallengeCard key={challenge.challengeId} challenge={challenge} />
+            )
+          })}
+        </div>
+        <Sticky enableTransforms={false}>
+          <SideBarFilters
+            challenges={challenges}
+            onFilter={filter => this.setState({ sidebarFilter: filter })}
+            ref={node => {
+              this.sidebar = node;
+            }}
+          />
+        </Sticky>
       </div>
     );
   };

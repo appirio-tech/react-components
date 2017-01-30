@@ -25,6 +25,7 @@
  */
 
 import 'react-dates/lib/css/_datepicker.css';
+import _ from 'lodash';
 import React from 'react';
 import Select from 'react-select';
 import moment from 'moment';
@@ -94,11 +95,19 @@ class FiltersPanel extends React.Component {
             onClick={() => this.setState(DEFAULT_STATE, this.filter)}>
             Clear filters
           </button>
-          <button className="blue">Save filter</button>
+          <button
+            className="blue"
+            onClick={this.props.onSaveFilter}>
+            Save filter
+          </button>
         </div>
       </div>
     );
   };
+};
+
+FiltersPanel.defaultProps = {
+  onSaveFilter: _.noop,
 };
 
 export default FiltersPanel;
