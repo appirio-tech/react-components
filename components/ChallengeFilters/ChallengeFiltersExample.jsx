@@ -239,7 +239,11 @@ class ChallengeFiltersExample extends React.Component {
             </div>
           </div>
 
-          <Sticky className="sidebar-container" enableTransforms={false}>
+          <Sticky
+            className="sidebar-container"
+            enableTransforms={false}
+            top={18}
+          >
             <SideBarFilters
               challenges={challenges}
               onFilter={filter => this.setState({ sidebarFilter: filter })}

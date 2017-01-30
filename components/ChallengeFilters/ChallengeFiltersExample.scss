@@ -63,6 +63,10 @@ $challenge-radius-4: $corner-radius * 2;
 .sidebar-container {
   width: 30%;
   padding: $challenge-space-10;
+  &.active {
+    position: relative;
+    right: 20px;
+  }
   @include xs {
     width: 100%;
   }
