@@ -36,6 +36,8 @@
  * Design and Development tracks, and then filter them on the front-end side.
  */
 
+import _ from 'lodash';
+import moment from 'moment';
 import React from 'react';
 import ChallengeSearchBar from './ChallengeSearchBar/ChallengeSearchBar.jsx';
 import FiltersPanel from './FiltersPanel/FiltersPanel.jsx';
@@ -52,6 +54,10 @@ class ChallengeFilters extends React.Component {
 
   constructor(props) {
     super(props);
+    this.activeFilters = {
+      keywords: [],
+      tracks: [],
+    };
     this.state = {
       filtersCount: 0,
       showFilters: false,
@@ -68,28 +74,68 @@ class ChallengeFilters extends React.Component {
    */
   generateFilterFunction(filters) {
 
-    // Takes a challenge object, and a keywords array.
-    // Returns 'true' if keywords array is empty, or at least one of the keywords
-    // can be found inside the challenge name, platforms or technologies.
-    const keywordsFilter = (item, keywords) => {
-      if (!keywords.length || (keywords.length === 1 && !keywords[0])) return true;
-      const platforms = item.platforms.join(' ');
-      const technologies = item.technologies.join(' ');
-      const data = `${item.challengeName} ${platforms} ${technologies}`.toLowerCase();
-      for (let i = 0; i < keywords.length; ++i) {
-        if (data.indexOf(keywords[i].toLowerCase()) >= 0) return true;
-      }
-      return false;
-    };
+    // In case the startDate or endDate are present, we clone filters, and convert
+    // these fields from 'moment' objects into ISO strings. This allows to use Date
+    // object to manipulate with dates inside the filter function. This, in turns,
+    // simplifies serialization / deserialization of filter functions to / from
+    // strings, which is necessary when we save filter functions.
+    if (filters.startDate || filters.endDate) {
+      filters = _.clone(filters);
+      if (filters.startDate) filters.startDate = filters.startDate.toISOString();
+      if (filters.endDate) filters.endDate = filters.endDate.toISOString();
+    }
 
     return item => {
+
+      // Takes a challenge object, and a keywords array.
+      // Returns 'true' if keywords array is empty, or at least one of the keywords
+      // can be found inside the challenge name, platforms or technologies.
+      const keywordsFilter = (item, keywords) => {
+        if (!keywords.length || (keywords.length === 1 && !keywords[0])) return true;
+        const platforms = item.platforms.join(' ');
+        const technologies = item.technologies.join(' ');
+        const data = `${item.challengeName} ${platforms} ${technologies}`.toLowerCase();
+        for (let i = 0; i < keywords.length; ++i) {
+          if (data.indexOf(keywords[i].toLowerCase()) >= 0) return true;
+        }
+        return false;
+      };
+
       if (!keywordsFilter(item, filters.keywords)) return false;
-      if (filters.tracks.length && !filters.tracks.includes(item.challengeType)) return false;
-      if (filters.startDate && filters.startDate.isAfter(item.submissionEndDate)) return false;
-      if (filters.endDate && filters.endDate.isBefore(item.postingDate)) return false;
+      if (filters.tracks.length && !filters.tracks.includes(item.challengeType)) return false; 
+      if (filters.startDate) {
+        const fa = new Date(filters.startDate);
+        const fb = new Date(item.submissionEndDate);
+        if (fa.getTime() > fb.getTime()) return false;
+      }
+      if (filters.endDate) {
+        const fa = new Date(filters.endDate);
+        const fb = new Date(item.postingDate);
+        if (fa.getTime() < fb.getTime()) return false;
+      }
       return true;
     };
   };
+
+  /**
+   * Generates, for the specified set of filters, the filter function, which can
+   * be passed into the filter method of an array of challenges to filter them.
+   * Unlike generateFilterFunction(), this method wraps the filters object into
+   * the function, so that it can be serialized using toString() method, and
+   * deserialized later using eval().
+   * @param {Object} filters The object received from the FiltersPanel component.
+   * @return {Function(Object)} This function takes a challenge object,
+   *  and returns 'true' if that challenge passes the filter.
+   */
+  generateSerializableFilterFunction(filters) {
+    let res;
+    eval(`res = function(item) {
+      const filters = ${JSON.stringify(filters)};
+      const filter = ${this.generateFilterFunction(filters).toString()};
+      return filter(item);
+    }`);
+    return res;
+  }
 
   /**
    * Updates the count of active filters (displayed in the filter panel switch),
@@ -152,6 +198,7 @@ class ChallengeFilters extends React.Component {
         <FiltersPanel
           hidden={!this.state.showFilters}
           onFilter={filters => this.onFilter(filters)}
+          onSaveFilter={() => this.props.onSaveFilter(this.generateSerializableFilterFunction(this.activeFilters))}
           validKeywords={this.props.validKeywords}
           validTracks={this.props.validTracks}
         />
@@ -167,7 +214,13 @@ class ChallengeFilters extends React.Component {
   setTrack(track, set) {
     if (set) this.tracks.add(track);
     else this.tracks.delete(track);
+    this.props.onTrackSwitch(this.tracks);
   };
+};
+
+ChallengeFilters.defaultProps = {
+  onSaveFilter: _.noop,
+  onTrackSwitch: _.noop,
 };
 
 export {
