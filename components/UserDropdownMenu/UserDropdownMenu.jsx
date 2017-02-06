@@ -40,10 +40,15 @@ const UserDropdownMenu = ({ userName, userHandle, userImage, domain, loginUrl, r
 
   const menuList = menuItems ? menuItems : userDropdownLists
   const rendreLink = (link) => {
-    return forReactRouter && !link.absolute
-    ? <Link to={ link.link }>{ link.label }</Link>
-    : <a href={ link.link }>{ link.label }</a>
+    if (link.link) {
+      return forReactRouter && !link.absolute
+      ? <Link to={ link.link }>{ link.label }</Link>
+      : <a href={ link.link }>{ link.label }</a>
+    } else if (link.onClick) {
+      return <a href="#" onClick={link.onClick} >{ link.label }</a>
+    }
   }
+
   const loggedInDOM = (
     <div className="UserDropdownMenu">
       <Dropdown pointerShadow>
