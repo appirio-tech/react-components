@@ -12,8 +12,10 @@
  */
 
 import _ from 'lodash';
+import qs from 'qs';
 import React from 'react';
 import Sticky from 'react-stickynode';
+import url from 'url';
 
 import Filter from './Filter';
 import { DATA_SCIENCE_TRACK, DESIGN_TRACK, DEVELOP_TRACK } from './ChallengeFilter';
@@ -133,6 +135,20 @@ class ChallengeFiltersExample extends React.Component {
   }
 
   /**
+   * Saves current filters to the URL hash.
+   */
+  saveFiltersToHash() {
+    let u = url.parse(window.location.href);
+    const q = qs.parse(u.query);
+    q.filter = btoa(this.state.filter.stringify());
+    u.query = qs.stringify(q);
+    u = url.format(u);
+    window.location.href = u;
+    console.log(u);
+    //history.pushState({}, 'Filter Update', url.format(u));
+  }
+
+  /**
    * Fetches challenges from the backend API v2.
    *
    * As there is no single endpoint to fetch and filter challenges from all tracks,
@@ -223,7 +239,7 @@ class ChallengeFiltersExample extends React.Component {
     return (
       <div>
         <ChallengeFilters
-          onFilter={filter => this.setState({ filter })}
+          onFilter={filter => this.setState({ filter }, () => this.saveFiltersToHash())}
           onSaveFilter={(filter) => {
             if (this.sidebar) {
               const f = new SideBarFilter();

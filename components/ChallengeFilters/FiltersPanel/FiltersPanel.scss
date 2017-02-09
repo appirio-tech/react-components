@@ -168,6 +168,8 @@ $panel-radius-4: $corner-radius * 2;
     line-height: $panel-space-30 - 2;
   }
   .Select-input > input {
+    border:none;
+    box-shadow: none;
     height: $panel-space-30 - 2;
     &:focus {
       border: none;
