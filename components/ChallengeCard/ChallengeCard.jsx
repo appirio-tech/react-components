@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React from 'react';
 import TrackIcon from '../TrackIcon/TrackIcon';
 import ChallengeStatus from '../ChallengeStatus/ChallengeStatus';
@@ -23,7 +24,7 @@ const numberWithCommas = (n) => {
   return n ? n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') : 0;
 }
 
-function ChallengeCard ({challenge, sampleWinnerProfile}) {
+function ChallengeCard ({challenge, sampleWinnerProfile, onTechTagClicked}) {
   challenge.technologyList = challenge.technologies;
   if (challenge.technologyList.length > VISIBLE_TECHNOLOGIES) {
     const lastItem = '+' + (challenge.technologyList.length - VISIBLE_TECHNOLOGIES);
@@ -34,7 +35,13 @@ function ChallengeCard ({challenge, sampleWinnerProfile}) {
   // challenge.totalPrize = challenge.prize.reduce((x, y) => y + x, 0)
 
   const renderTechnologies = challenge.technologyList.map((c) => {
-    return (<a href="#" key={c} className="technology">{c}</a>);
+    return (
+      <a
+        key={c} className="technology"
+        onClick={() => onTechTagClicked(c)}
+      >{c}
+      </a>
+    );
   })
   return (
     <div className="challengeCard">
@@ -51,7 +58,13 @@ function ChallengeCard ({challenge, sampleWinnerProfile}) {
           </a>
           <div className="details-footer">
             <span className="date">{challenge.status === 'Active' ? 'Ends' : 'Ended'} {getEndDate(challenge.submissionEndDate)}</span>
-            {challenge.technologies.length === 0 ? <a className="technology">N/A</a> : renderTechnologies}
+            {
+              challenge.technologies.length === 0 ?
+                <a
+                  className="technology"
+                  onClick={() => onTechTagClicked('N/A')}
+                >N/A</a> : renderTechnologies
+            }
           </div>
         </div>
       </div>
@@ -68,5 +81,9 @@ function ChallengeCard ({challenge, sampleWinnerProfile}) {
     </div>
   )
 }
+
+ChallengeCard.defaultProps = {
+  onTechTagClicked: _.noop,
+};
 
 export default ChallengeCard

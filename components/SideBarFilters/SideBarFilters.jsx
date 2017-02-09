@@ -16,6 +16,7 @@
 import _ from 'lodash';
 import React, { PropTypes as PT } from 'react';
 import EditMyFilters from './EditMyFilters';
+import Filter, { MODE } from './SideBarFilter';
 import { FilterItem } from './FilterItems';
 import './SideBarFilters.scss';
 
@@ -24,22 +25,13 @@ import './SideBarFilters.scss';
  * Note that groupping of these into difference sections is defined in the jsx
  * layout markup. The js logic behind this does not care about that groupping.
  */
-const DEFAULT_FILTERS = [{
-  name: 'All Challenges',
-  filter: () => true,
-}, {
-  name: 'My Challenges',
-  filter: challenge => challenge.registered,
-}, {
-  name: 'Open for registration',
-  filter: challenge => challenge.registrationOpen.startsWith('Yes'),
-}, {
-  name: 'Ongoing challenges',
-  filter: challenge => !challenge.registrationOpen.startsWith('Yes'),
-}, {
-  name: 'Past challenges',
-  filter: challenge => challenge.status === 'Completed',
-}];
+const DEFAULT_FILTERS = [
+  new Filter(MODE.ALL_CHALLENGES),
+  new Filter(MODE.MY_CHALLENGES),
+  new Filter(MODE.OPEN_FOR_REGISTRATION),
+  new Filter(MODE.ONGOING_CHALLENGES),
+  new Filter(MODE.PAST_CHALLENGES),
+];
 
 /*
  * This auxiliary object holds the indices of standard filters in the filters array.
@@ -72,16 +64,16 @@ class SideBarFilters extends React.Component {
 
   constructor(props) {
     super(props);
-    const myFilters = localStorage.filters ? JSON.parse(localStorage.filters) : [];
-    myFilters.forEach(f => eval(`f.filter = ${f.filter}`));
+    let myFilters = localStorage.filters ? JSON.parse(localStorage.filters) : [];
+    myFilters = myFilters.map(item => new Filter(item));
     this.state = {
       currentFilter: DEFAULT_FILTERS[0],
       filters: _.clone(DEFAULT_FILTERS).concat(myFilters),
       mode: MODES.SELECT_FILTER,
     };
     for (let i = 0; i < this.state.filters.length; i += 1) {
-      const filter = this.state.filters[i];
-      filter.count = props.challenges.filter(filter.filter).length;
+      const item = this.state.filters[i];
+      item.count = props.challenges.filter(item.getFilterFunction()).length;
     }
   }
 
@@ -94,9 +86,9 @@ class SideBarFilters extends React.Component {
     let currentFilter;
     const filters = [];
     this.state.filters.forEach((filter) => {
-      const filterClone = _.clone(filter);
+      const filterClone = filter.clone();
       if (this.state.currentFilter === filter) currentFilter = filterClone;
-      filterClone.count = nextProps.challenges.filter(filter.filter).length;
+      filterClone.count = nextProps.challenges.filter(filter.getFilterFunction()).length;
       filters.push(filterClone);
     });
     this.setState({
@@ -147,9 +139,9 @@ class SideBarFilters extends React.Component {
    *  variables/functions in its outer scope).
    */
   addFilter(filter) {
-    const f = _.clone(filter);
+    const f = filter.clone();
     const filters = _.clone(this.state.filters);
-    f.count = this.props.challenges.filter(f.filter).length;
+    f.count = this.props.challenges.filter(f.getFilterFunction()).length;
     filters.push(f);
     this.setState({ filters });
     this.saveFilters(filters.slice(FILTER_ID.FIRST_USER_DEFINED));
@@ -181,9 +173,7 @@ class SideBarFilters extends React.Component {
    * but for now it stores in the browser's localStorage.
    */
   saveFilters(filters) {
-    const f = _.cloneDeep(filters);
-    for (let i = 0; i < f.length; i += 1) f[i].filter = f[i].filter.toString();
-    localStorage.filters = JSON.stringify(f);
+    localStorage.filters = JSON.stringify(filters.map(item => item.stringify()));
   }
 
   /**
@@ -234,7 +224,7 @@ class SideBarFilters extends React.Component {
    */
   selectFilter(id) {
     const currentFilter = this.state.filters[id];
-    this.setState({ currentFilter }, () => this.props.onFilter(currentFilter.filter));
+    this.setState({ currentFilter }, () => this.props.onFilter(currentFilter));
   }
 
   /**
@@ -256,6 +246,7 @@ SideBarFilters.defaultProps = {
 
 SideBarFilters.propTypes = {
   challenges: PT.arrayOf(PT.shape({
+    registrationOpen: PT.string.isRequired,
   })).isRequired,
   onFilter: PT.func,
   ref: PT.func,
