@@ -19,6 +19,14 @@ import EditMyFilters from './EditMyFilters';
 import { FilterItem } from './FilterItems';
 import './SideBarFilters.scss';
 
+const V2_API = 'https://api.topcoder.com/v2';
+const CHALLENGES_API = `${V2_API}/challenges/`;
+const MY_CHALLENGES_API = `${V2_API}/user/challenges?challengeType=Copilot+Posting,
+  Conceptualization,Specification,Architecture,Design,Development,
+  RIA+Build+Competition,UI+Prototype+Competition,Assembly+Competition,
+  Test+Suites,Test+Scenarios,Content+Creation,Marathon+Match,Bug+Hunt,
+  First2Finish,Code&type=active`
+
 /*
  * Default set of filters displayed in the component.
  * Note that groupping of these into difference sections is defined in the jsx
@@ -72,13 +80,19 @@ class SideBarFilters extends React.Component {
 
   constructor(props) {
     super(props);
-    const myFilters = localStorage.filters ? JSON.parse(localStorage.filters) : [];
+    let that = this
+    let myFilters = localStorage.filters ? JSON.parse(localStorage.filters) : [];
     myFilters.forEach(f => eval(`f.filter = ${f.filter}`));
+    setTimeout(function(){
+      // console.log(fetchMyChallenges())
+    }, 300)
+    // myFilters = myFilters.concat(fetchMyChallenges)
     this.state = {
       currentFilter: DEFAULT_FILTERS[0],
       filters: _.clone(DEFAULT_FILTERS).concat(myFilters),
       mode: MODES.SELECT_FILTER,
     };
+
     for (let i = 0; i < this.state.filters.length; i += 1) {
       const filter = this.state.filters[i];
       filter.count = props.challenges.filter(filter.filter).length;
@@ -203,8 +217,8 @@ class SideBarFilters extends React.Component {
     return (
       <div className="SideBarFilters" ref={ref => this.props.ref(ref)}>
         {filters[FILTER_ID.ALL_CHALLENGES]}
-        <hr />
-        {filters[FILTER_ID.MY_CHALLENGES]}
+
+        {this.props.isAuth ?<span><hr /> {filters[FILTER_ID.MY_CHALLENGES]}</span> : ''}
         <hr />
         {filters[FILTER_ID.OPEN_FOR_REGISTRATION]}
         {filters[FILTER_ID.ONGOING_CHALLENGES]}

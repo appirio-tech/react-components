@@ -8,7 +8,7 @@ $tip-space-35: $base-unit * 7;
 $tip-radius-15: $corner-radius * 7 + 1;
 $tip-radius-4: $corner-radius * 2;
 
-.progress-bar-tooltip {
+div.progress-bar-tooltip {
   max-width: none;
   padding: 0 $base-unit * 3;
   margin-left: -60px;

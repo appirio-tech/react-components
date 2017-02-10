@@ -6,7 +6,8 @@ function TrackIcon ({track, subTrack, tcoEligible}) {
   return (
     <span className="trackIcon">
       <div className={track.toLowerCase() + ' main-icon'}>{Abbreviation[track][subTrack]}</div>
-      <div className={tcoEligible ? track.toLowerCase() + ' tco-icon' : 'hidden'}>TCO</div>
+      <a href="https://www.topcoder.com/tco">
+      <div className={tcoEligible ? track.toLowerCase() + ' tco-icon' : 'hidden'}>TCO</div></a>
     </span>
   )
 }

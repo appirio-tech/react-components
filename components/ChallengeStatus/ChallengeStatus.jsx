@@ -37,9 +37,16 @@ const FORUM_URL = 'https://apps.topcoder.com/forums/?module=Category&categoryID=
 const CHALLENGE_URL = 'https://www.topcoder.com/challenge-details/'
 const STALLED_MSG = 'Stalled'
 
+
 const getTimeLeft = (date) => {
   const duration = moment.duration(moment(date).diff(moment()))
-  const res = `${duration.days() > 0 ? `${duration.days()}d` : ''} ${duration.hours()}:${duration.minutes()} h`
+  const hour = duration.hours()
+  let hString = hour < 10 ? '0'+hour : hour;
+  hString = hour < 0 ? '-'+hString : hString;
+  const min = duration.minutes()
+  let mString = min < 10 ? '0'+min : min;
+  mString = min < 0 ? '-'+mString : mString;
+  const res = `${duration.days() > 0 ? `${duration.days()}d` : ''} ${hString}:${mString} h`
   return res[1] === '-' ? 'Late' : `${res} to go`
 }
 

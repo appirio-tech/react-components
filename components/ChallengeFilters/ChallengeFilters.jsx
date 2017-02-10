@@ -91,8 +91,9 @@ class ChallengeFilters extends React.Component {
       // Returns 'true' if keywords array is empty, or at least one of the keywords
       // can be found inside the challenge name, platforms or technologies.
       const keywordsFilter = (item, keywords) => {
+        let platforms = ''
         if (!keywords.length || (keywords.length === 1 && !keywords[0])) return true;
-        const platforms = item.platforms.join(' ');
+        if (item.platforms) { platforms = item.platforms.join(' '); }
         const technologies = item.technologies.join(' ');
         const data = `${item.challengeName} ${platforms} ${technologies}`.toLowerCase();
         for (let i = 0; i < keywords.length; ++i) {
@@ -102,7 +103,7 @@ class ChallengeFilters extends React.Component {
       };
 
       if (!keywordsFilter(item, filters.keywords)) return false;
-      if (filters.tracks.length && !filters.tracks.includes(item.challengeType)) return false; 
+      if (filters.tracks.length && !filters.tracks.includes(item.challengeType)) return false;
       if (filters.startDate) {
         const fa = new Date(filters.startDate);
         const fb = new Date(item.submissionEndDate);

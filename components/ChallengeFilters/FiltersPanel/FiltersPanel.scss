@@ -69,6 +69,7 @@ $panel-radius-4: $corner-radius * 2;
     .Select {
       display: inline-block;
       width: 100%;
+      margin-bottom: 0;
       &#keywordsFilter {
         @include calc( width, '100% - 56px');
       }
@@ -167,8 +168,15 @@ $panel-radius-4: $corner-radius * 2;
     color: $tc-gray-50;
     line-height: $panel-space-30 - 2;
   }
-  .Select-input > input {
+  .Select-input > input:not([type="checkbox"]) {
     height: $panel-space-30 - 2;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    border-radius: 0;
+    transition: none;
+    padding-left: 0;
+    margin-bottom: 0;
     &:focus {
       border: none;
       box-shadow: none;
@@ -188,7 +196,7 @@ $panel-radius-4: $corner-radius * 2;
     font-weight: 500;
     font-size: 13px;
   }
-  .Select-item {
+  .Select-value {
     background: $tc-gray-neutral-dark;
     border: none;
     font-family: 'Roboto';
@@ -199,10 +207,10 @@ $panel-radius-4: $corner-radius * 2;
     margin-top: $base-unit - 1;
     border-radius: $corner-radius + 1;
     position: relative;
-    .Select-item-label {
+    .Select-value-label {
       padding: $base-unit - 1 $panel-space-25 $base-unit - 1 $panel-space-7;
     }
-    .Select-item-icon {
+    .Select-value-icon {
       position: absolute;
       right: 0;
       top: 0;
@@ -213,7 +221,7 @@ $panel-radius-4: $corner-radius * 2;
     }
   }
   &#track {
-    .Select-item {
+    .Select-value {
       background: $tc-light_blue;
       color: $tc-white;
     }

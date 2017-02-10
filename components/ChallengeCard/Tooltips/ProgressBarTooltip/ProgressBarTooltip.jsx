@@ -1,4 +1,5 @@
 import moment from 'moment';
+import _ from 'lodash';
 /**
  * Progress Bar Tooltip.
  *
@@ -16,14 +17,20 @@ import React, { PropTypes as PT } from 'react';
 import Tooltip from '../Tooltip';
 import './ProgressBarTooltip.scss';
 
+
 const getDate = (date) => {
   return moment(date).format('MMM DD')
 }
 const getTime = (date) => {
   const duration = moment(date)
-  const res = `${duration.hours()}:${duration.minutes()}`
+  const hour = duration.hours()
+  let hString = hour < 10 ? '0'+hour : hour;
+  const min = duration.minutes()
+  let mString = min < 10 ? '0'+min : min;
+  const res = `${hString}:${mString}`
   return res[1] === '-' ? 'Late' : `${res}`
 }
+
 /**
  * Renders a separate challenge phase element.
  * It includes: phase name, starting date, the point, representing the starting
@@ -40,12 +47,15 @@ const getTime = (date) => {
  * @param {String} props.width The width of the phase element in the UI.
  */
 function Phase(props) {
+  var progress = props.progress
+  var limitProgress = parseFloat(_.replace(progress, '%', ''))
+  var limitWidth = limitProgress <= 100 ? limitProgress : 100;
   return (
     <div className="phase" style={{ width: props.width }}>
       <div>{props.phase}</div>
       <div className={`bar ${props.last ? 'last' : ''} ${props.started ? 'started' : ''}`}>
         <div className="point" />
-        <div className="inner-bar" style={{ width: props.progress }} />
+        <div className="inner-bar" style={{ width: limitWidth+'%'}} />
       </div>
       <div className="date">{getDate(props.date)}, {getTime(props.date)}</div>
     </div>
@@ -95,6 +105,7 @@ function Tip(props) {
     date: new Date(c.appealsEndDate),
     name: 'End',
   });
+
   steps = steps.sort((a, b) => a.date.getTime() - b.date.getTime());
   const duration = steps[steps.length - 1].date.getTime() - steps[0].date.getTime();
   const currentPhaseEnd = new Date(c.currentPhaseEndDate);
@@ -114,6 +125,7 @@ function Tip(props) {
         }
       }
     }
+
     const phaseId = index;
     return (
       <Phase
@@ -123,7 +135,7 @@ function Tip(props) {
         phase={step.name}
         progress={`${progress}%`}
         started={step.date.getTime() < currentPhaseEnd.getTime()}
-        width={`${d}%`}
+        width={`${95}px`}
       />
     );
   });

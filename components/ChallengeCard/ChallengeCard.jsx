@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash'
 import TrackIcon from '../TrackIcon/TrackIcon';
 import ChallengeStatus from '../ChallengeStatus/ChallengeStatus';
 import './ChallengeCard.scss';
@@ -26,6 +27,10 @@ const numberWithCommas = (n) => {
 function ChallengeCard ({challenge, sampleWinnerProfile}) {
   challenge.technologyList = challenge.technologies;
   if (challenge.technologyList.length > VISIBLE_TECHNOLOGIES) {
+    if(_.indexOf(challenge.technologyList, 'Data Science') > -1) {
+      challenge.track = 'DATA_SCIENCE'
+      challenge.subTrack = 'MARATHON_MATCH'
+    }
     const lastItem = '+' + (challenge.technologyList.length - VISIBLE_TECHNOLOGIES);
     challenge.technologyList = challenge.technologyList.slice(0, VISIBLE_TECHNOLOGIES);
     challenge.technologyList.push(lastItem);

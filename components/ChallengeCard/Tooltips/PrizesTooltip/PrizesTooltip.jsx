@@ -56,7 +56,7 @@ Prize.propTypes = {
  */
 function Tip(props) {
   let prizes;
-  if (props.challenge) {
+  if (props.challenge.prize) {
     prizes = props.challenge.prize.map((prize, index) => {
       const place = 1 + index;
       return <Prize key={place} place={place} prize={prize} />;
