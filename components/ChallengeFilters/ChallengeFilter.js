@@ -5,7 +5,7 @@
 
 import _ from 'lodash';
 
-import BaseFilter from './FiltersPanel/Filter';
+import FilterPanelFilter from './FiltersPanel/FilterPanelFilter';
 
 export const DATA_SCIENCE_TRACK = 'datasci';
 export const DESIGN_TRACK = 'design';
@@ -27,23 +27,22 @@ function doIntersect(a, b) {
   return false;
 }
 
-class Filter extends BaseFilter {
+class ChallengeFilter extends FilterPanelFilter {
 
-  constructor(filterString) {
-    if (filterString) {
-      const f = JSON.parse(filterString);
-      super(f[0]);
-      this.tracks = new Set(f[1] !== '' ? f[1].split(',') : undefined);
-    } else {
+  constructor(arg) {
+    if (!arg) {
       super();
       this.tracks = new Set();
-    }
-  }
-
-  clone() {
-    const res = new Filter();
-    _.merge(res, _.cloneDeep(this));
-    return res;
+    } else if (_.isObject(arg)) {
+      if (!arg._isChallengeFilter) throw new Error ('Invalid argument!');
+      super(arg);
+      this.tracks = new Set(arg.tracks);
+    } else if (_.isString(arg)) {
+      const f = JSON.parse(atob(arg));
+      super(f[0]);
+      this.tracks = new Set(f[1] ? f[1].split(',') : undefined);
+    } else throw new Error('Invalid argument!');
+    this._isChallengeFilter = true;
   }
 
   count() {
@@ -62,12 +61,19 @@ class Filter extends BaseFilter {
     };
   }
 
+  merge(filter) {
+    super.merge(filter);
+    if (!filter._isChallengeFilter) return this;
+    this.tracks = new Set(filter.tracks);
+    return this;
+  }
+
   stringify() {
-    return JSON.stringify([
+    return btoa(JSON.stringify([
       super.stringify(),
       [...this.tracks].join(','),
-    ]);
+    ]));
   }
 }
 
-export default Filter;
+export default ChallengeFilter;

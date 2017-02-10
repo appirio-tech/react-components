@@ -7,7 +7,7 @@
 
 import _ from 'lodash';
 import uuid from 'uuid/v4';
-import BaseFilter from '../ChallengeFilters/ChallengeFilter';
+import ChallengeFilter from '../ChallengeFilters/ChallengeFilter';
 
 export const MODE = {
   ALL_CHALLENGES: 'All Challenges',
@@ -18,29 +18,37 @@ export const MODE = {
   CUSTOM: 'custom',
 };
 
-class SideBarFilter extends BaseFilter {
+class SideBarFilter extends ChallengeFilter {
 
-  constructor(modeOrFilterString) {
-    let f;
-    try {
-      f = JSON.parse(modeOrFilterString);
-    } catch (e) { /* noop */ }
-    if (f) {
-      super(f[0]);
-      this.mode = f[1];
-      this.name = f[2];
-      this.uuid = f[3];
-    } else {
+  // In addition to the standard arguments accepted by all parent filter classes,
+  // argument of this class may also be one of the filter modes, defined above.
+  constructor(arg) {
+    if (!arg) {
       super();
-      this.name = this.mode = modeOrFilterString || MODE.ALL_CHALLENGES;
-      this.uuid = uuid();
-    }
-  }
-
-  clone() {
-    const res = new SideBarFilter();
-    _.merge(res, _.cloneDeep(this));
-    return res;
+      this.mode = MODE.ALL_CHALLENGES;
+      this.name = MODE.ALL_CHALLENGES;
+      this.uuid = MODE.ALL_CHALLENGES;
+    } else if (_.isObject(arg)) {
+      if (!arg._isSideBarFilter) throw new Error('Invalid argument!');
+      super(arg);
+      this.mode = _.clone(arg.mode);
+      this.name = _.clone(arg.name);
+      this.uuid = _.clone(arg.uuid);
+    } else if (_.isString(arg)) {
+      try {
+        const f = JSON.parse(atob(arg));
+        super(f[0]);
+        this.mode = f[1];
+        this.name = f[2];
+        this.uuid = f[3];
+      } catch (e) {
+        super();
+        this.mode = arg;
+        this.name = arg;
+        this.uuid = arg === MODE.CUSTOM ? uuid() : this.mode;
+      }
+    } else throw new Error('Invalid argument!');
+    this._isSideBarFilter = true;
   }
 
   count() {
@@ -58,13 +66,22 @@ class SideBarFilter extends BaseFilter {
     }
   }
 
+  merge(filter) {
+    super.merge(filter);
+    if (!filter._isSideBarFilter) return this;
+    this.mode = _.clone(filter.mode);
+    this.name = _.clone(filter.name);
+    this.uuid = _.clone(filter.uuid);
+    return this;
+  }
+
   stringify() {
-    return JSON.stringify([
+    return btoa(JSON.stringify([
       super.stringify(),
       this.mode,
       this.name,
       this.uuid,
-    ]);
+    ]));
   }
 }
 

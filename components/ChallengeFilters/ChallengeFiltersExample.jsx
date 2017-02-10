@@ -17,8 +17,7 @@ import React from 'react';
 import Sticky from 'react-stickynode';
 import url from 'url';
 
-import Filter from './Filter';
-import { DATA_SCIENCE_TRACK, DESIGN_TRACK, DEVELOP_TRACK } from './ChallengeFilter';
+import ChallengeFilter, { DATA_SCIENCE_TRACK, DESIGN_TRACK, DEVELOP_TRACK } from './ChallengeFilter';
 import ChallengeFilterWithSearch from './ChallengeFilterWithSearch';
 import ChallengeFilters from './ChallengeFilters';
 import SideBarFilter, { MODE as SideBarFilterModes } from '../SideBarFilters/SideBarFilter';
@@ -81,10 +80,15 @@ class ChallengeFiltersExample extends React.Component {
     this.state = {
       challenges: [],
       currentCardType: 'Challenges',
-      filter: new Filter(),
+      filter: new ChallengeFilter(),
       lastFetchId: 0,
       sidebarFilter: new SideBarFilter(),
     };
+    if (props.filterFromUrl) {
+      const f = JSON.parse(atob(props.filterFromUrl));
+      this.state.filter = new ChallengeFilter(f[0]);
+      this.state.sidebarFilter = new SideBarFilter(f[1]);
+    }
     this.setCardType.bind(this);
     this.fetchChallenges(0).then(res => this.setChallenges(0, res));
   }
@@ -138,14 +142,11 @@ class ChallengeFiltersExample extends React.Component {
    * Saves current filters to the URL hash.
    */
   saveFiltersToHash() {
-    let u = url.parse(window.location.href);
-    const q = qs.parse(u.query);
-    q.filter = btoa(this.state.filter.stringify());
-    u.query = qs.stringify(q);
-    u = url.format(u);
-    window.location.href = u;
-    console.log(u);
-    //history.pushState({}, 'Filter Update', url.format(u));
+    const payload = btoa(JSON.stringify([
+      this.state.filter.stringify(),
+      this.state.sidebarFilter.stringify(),
+    ]));
+    this.props.onSaveFilterToUrl(payload);
   }
 
   /**
@@ -214,6 +215,10 @@ class ChallengeFiltersExample extends React.Component {
     });
   }
 
+  onFilterByTopFilter(filter) {
+    this.setState({ filter }, () => this.saveFiltersToHash(filter));
+  }
+
   // ReactJS render method.
   render() {
     const cardify = challenge => (
@@ -239,13 +244,12 @@ class ChallengeFiltersExample extends React.Component {
     return (
       <div>
         <ChallengeFilters
-          onFilter={filter => this.setState({ filter }, () => this.saveFiltersToHash())}
+          filter={this.state.filter}
+          onFilter={filter => this.onFilterByTopFilter(filter)}
           onSaveFilter={(filter) => {
             if (this.sidebar) {
-              const f = new SideBarFilter();
-              f.mode = SideBarFilterModes.CUSTOM;
+              const f = (new SideBarFilter(SideBarFilterModes.CUSTOM)).merge(filter);
               f.name = this.sidebar.getAvailableFilterName();
-              _.merge(f, filter);
               this.sidebar.addFilter(f);
             }
           }}
@@ -295,7 +299,8 @@ class ChallengeFiltersExample extends React.Component {
           >
             <SideBarFilters
               challenges={challenges}
-              onFilter={filter => this.setState({ sidebarFilter: filter })}
+              filter={this.state.sidebarFilter}
+              onFilter={filter => this.setState({ sidebarFilter: filter }, () => this.saveFiltersToHash())}
               ref={(node) => {
                 this.sidebar = node;
               }}
@@ -306,5 +311,10 @@ class ChallengeFiltersExample extends React.Component {
     );
   }
 }
+
+ChallengeFiltersExample.defaultProps = {
+  filterFromUrl: '',
+  onSaveFilterToUrl: _.noop,
+};
 
 export default ChallengeFiltersExample;

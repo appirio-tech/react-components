@@ -51,8 +51,8 @@ class ChallengeFilters extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      filter: new ChallengeFilter(),
-      filtersCount: 0,
+      filter: props.filter,
+      filtersCount: props.filter.count(),
       showFilters: false,
     };
   }
@@ -78,13 +78,12 @@ class ChallengeFilters extends React.Component {
    * @param {Object} filters Filters object, received from the FiltersPanel component.
    */
   onFilter(filter) {
-    const f = new ChallengeFilter();
-    _.merge(f, filter);
+    const f = (new ChallengeFilter(this.state.filter)).merge(filter);
     this.setState({
       filter: f,
       filtersCount: filter.count(),
     });
-    this.props.onFilter(filter);
+    this.props.onFilter(f);
   }
 
   /**
@@ -121,7 +120,7 @@ class ChallengeFilters extends React.Component {
    * @param {Boolean} set True to include the track into the set, false to remove it.
    */
   setTracks(track, set) {
-    const filter = this.state.filter.clone();
+    const filter = new ChallengeFilter(this.state.filter);
     if (set) filter.tracks.add(track);
     else filter.tracks.delete(track);
     this.props.onFilter(filter);
@@ -163,6 +162,7 @@ class ChallengeFilters extends React.Component {
         </div>
         <FiltersPanel
           hidden={!this.state.showFilters}
+          filter={this.state.filter}
           onClearFilters={() => this.onClearFilters()}
           onFilter={filter => this.onFilter(filter)}
           onSaveFilter={() => this.props.onSaveFilter(this.state.filter)}
@@ -181,6 +181,7 @@ const TagShape = PT.shape({
 });
 
 ChallengeFilters.defaultProps = {
+  filter: new ChallengeFilter(),
   isCardTypeSet: '',
   onFilter: _.noop,
   onSaveFilter: _.noop,
@@ -190,6 +191,7 @@ ChallengeFilters.defaultProps = {
 };
 
 ChallengeFilters.propTypes = {
+  filter: PT.instanceOf(ChallengeFilter),
   isCardTypeSet: PT.string,
   onFilter: PT.func,
   onSearch: PT.func,

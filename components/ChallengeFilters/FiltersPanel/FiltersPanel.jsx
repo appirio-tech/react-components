@@ -21,7 +21,7 @@ import 'react-dates/lib/css/_datepicker.css';
 import _ from 'lodash';
 import React, { PropTypes as PT } from 'react';
 import Select from 'react-select';
-import Filter from './Filter';
+import FilterPanelFilter from './FilterPanelFilter';
 
 import './FiltersPanel.scss';
 import DateRangePicker from '../DateRangePicker/DateRangePicker';
@@ -31,7 +31,7 @@ class FiltersPanel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      filter: new Filter(),
+      filter: props.filter,
     };
   }
 
@@ -42,7 +42,7 @@ class FiltersPanel extends React.Component {
    */
   onClearFilters() {
     this.props.onClearFilters();
-    this.setState({ filter: new Filter() });
+    this.setState({ filter: new FilterPanelFilter() });
   }
 
   /**
@@ -51,9 +51,9 @@ class FiltersPanel extends React.Component {
    * @param {Moment} endDate
    */
   onDatesChanged(startDate, endDate) {
-    const filter = this.state.filter.clone();
-    filter.startDate = startDate;
-    filter.endDate = endDate;
+    const filter = new FilterPanelFilter(this.state.filter);
+    filter.startDate = moment(startDate);
+    filter.endDate = moment(endDate);
     this.props.onFilter(filter);
     this.setState({ filter });
   }
@@ -63,7 +63,7 @@ class FiltersPanel extends React.Component {
    * @param {Array} keywords An array of selected keywords.
    */
   onKeywordsChanged(keywords) {
-    const filter = this.state.filter.clone();
+    const filter = new FilterPanelFilter(this.state.filter);
     filter.keywords = keywords;
     this.props.onFilter(filter);
     this.setState({ filter });
@@ -74,7 +74,7 @@ class FiltersPanel extends React.Component {
    * @param {Array} subtracks An array of selected subtracks.
    */
   onSubtracksChanged(subtracks) {
-    const filter = this.state.filter.clone();
+    const filter = new FilterPanelFilter(this.state.filter);
     filter.subtracks = subtracks;
     this.props.onFilter(filter);
     this.setState({ filter });
@@ -147,6 +147,7 @@ class FiltersPanel extends React.Component {
 }
 
 FiltersPanel.defaultProps = {
+  filter: new FilterPanelFilter(),
   hidden: false,
   onClearFilters: _.noop,
   onFilter: _.noop,
@@ -162,6 +163,7 @@ const SelectOptions = PT.arrayOf(
 );
 
 FiltersPanel.propTypes = {
+  filter: PT.instanceOf(FilterPanelFilter),
   hidden: PT.bool,
   onClearFilters: PT.func,
   onFilter: PT.func,
