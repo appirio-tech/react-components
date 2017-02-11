@@ -25,7 +25,7 @@ export default class Carousel extends Component {
   }
 
   componentDidMount() {
-    this.validatePagers()    
+    this.validatePagers()
   }
 
   componentDidUpdate() {

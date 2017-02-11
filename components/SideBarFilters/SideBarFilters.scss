@@ -1,0 +1,39 @@
+@import "../../styles/tc-styles";
+
+.SideBarFilters {
+
+  background: $tc-white;
+  float: right;
+  font: 400 13px/30px Roboto;
+  padding: 2*$base-unit;
+  width: 360px;
+
+  h1 {
+    border: none;
+    color: $tc-gray-50;
+    display: inline-block;
+    font-size: 12px;
+    margin: 0 3*$base-unit;
+    padding: 0;
+    text-align: left;
+    text-decoration: none;
+  }
+
+  hr {
+    background: $tc-gray-20;
+    height: 1px;
+    margin: 2*$base-unit;
+  }
+
+  #edit-button {
+    background: $tc-white;
+    border: 1px solid $tc-gray-50;
+    border-radius: 2*$corner-radius;
+    color: $tc-gray-50;
+    cursor: pointer;
+    float: right;
+    line-height: 13px;
+    padding: $base-unit 3*$base-unit;
+    text-transform: none;
+  }
+}
