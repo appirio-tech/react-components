@@ -1,0 +1,36 @@
+@import '../../styles/tc-styles';
+
+$progress-space-3: $base-unit - 2;
+$progress-space-15: $base-unit * 3;
+$progress-radius-16: $corner-radius * 8;
+
+.challenge-progress-bar {
+  display: block;
+  height: $base-unit - 1;
+  background: $tc-gray-neutral-dark;
+  border-radius: $progress-radius-16;
+  position: relative;
+  margin: $base-unit 0;
+  .fill {
+    display: inline-block;
+    height: 100%;
+    border-radius: $progress-radius-16;
+    border: $progress-space-3 solid #fff;
+    position: absolute;
+    box-sizing: content-box;
+    left: -$progress-space-3;
+    top: -$progress-space-3;
+
+    &.green {
+      background: $tc-green;
+    }
+
+    &.gray {
+      background: $tc-gray-20;
+    }
+
+    &.red {
+      background: $tc-red-70;
+    }
+  }
+}
