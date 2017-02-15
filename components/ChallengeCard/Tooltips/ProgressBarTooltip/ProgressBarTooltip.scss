@@ -5,10 +5,11 @@ $tip-offset: 80px;
 $tip-space-10: $base-unit * 2;
 $tip-space-15: $base-unit * 3;
 $tip-space-35: $base-unit * 7;
+$tip-space-95: $base-unit * 19;
 $tip-radius-15: $corner-radius * 7 + 1;
 $tip-radius-4: $corner-radius * 2;
 
-.progress-bar-tooltip {
+div.progress-bar-tooltip {
   max-width: none;
   padding: 0 $base-unit * 3;
   margin-left: -60px;
@@ -22,6 +23,7 @@ $tip-radius-4: $corner-radius * 2;
       min-width: $tip-offset;
       padding: $tip-space-15 0;
       background: $tc-gray-80;
+      width: $tip-space-95;
       &:last-child {
         border-radius: 0 $tip-radius-4 $tip-radius-4 0;
         padding-right: $tip-space-15;

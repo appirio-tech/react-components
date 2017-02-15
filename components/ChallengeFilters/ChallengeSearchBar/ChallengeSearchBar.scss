@@ -36,7 +36,7 @@ $search-input-width: '100% - 56px';
     font-weight: 300;
     font-size: 15px;
     color: $tc-gray-50;
-    line-height: $challenge-space-20;
+    line-height: $challenge-space-30 + 5;
     text-transform: capitalize;
     opacity: 1;
   }

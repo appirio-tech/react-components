@@ -1,4 +1,5 @@
 import moment from 'moment';
+import _ from 'lodash';
 /**
  * Progress Bar Tooltip.
  *
@@ -16,14 +17,24 @@ import React, { PropTypes as PT } from 'react';
 import Tooltip from '../Tooltip';
 import './ProgressBarTooltip.scss';
 
+const ID_LENGTH = 6
+const BASE_URL = 'https://api.topcoder.com/v2';
+const CHALLENGES_API = `${BASE_URL}/challenges/`;
+const V2_API = 'https://api.topcoder.com/v2';
+
 const getDate = (date) => {
   return moment(date).format('MMM DD')
 }
 const getTime = (date) => {
   const duration = moment(date)
-  const res = `${duration.hours()}:${duration.minutes()}`
+  const hour = duration.hours()
+  let hString = hour < 10 ? '0'+hour : hour;
+  const min = duration.minutes()
+  let mString = min < 10 ? '0'+min : min;
+  const res = `${hString}:${mString}`
   return res[1] === '-' ? 'Late' : `${res}`
 }
+
 /**
  * Renders a separate challenge phase element.
  * It includes: phase name, starting date, the point, representing the starting
@@ -40,12 +51,15 @@ const getTime = (date) => {
  * @param {String} props.width The width of the phase element in the UI.
  */
 function Phase(props) {
+  var progress = props.progress
+  var limitProgress = parseFloat(_.replace(progress, '%', ''))
+  var limitWidth = limitProgress <= 100 ? limitProgress : 100;
   return (
-    <div className="phase" style={{ width: props.width }}>
+    <div className="phase">
       <div>{props.phase}</div>
       <div className={`bar ${props.last ? 'last' : ''} ${props.started ? 'started' : ''}`}>
         <div className="point" />
-        <div className="inner-bar" style={{ width: props.progress }} />
+        <div className="inner-bar" style={{ width: limitWidth+'%'}} />
       </div>
       <div className="date">{getDate(props.date)}, {getTime(props.date)}</div>
     </div>
@@ -58,7 +72,6 @@ Phase.propTypes = {
   phase: PT.string.isRequired,
   progress: PT.string.isRequired,
   started: PT.bool.isRequired,
-  width: PT.string.isRequired,
 };
 
 /**
@@ -95,6 +108,7 @@ function Tip(props) {
     date: new Date(c.appealsEndDate),
     name: 'End',
   });
+
   steps = steps.sort((a, b) => a.date.getTime() - b.date.getTime());
   const duration = steps[steps.length - 1].date.getTime() - steps[0].date.getTime();
   const currentPhaseEnd = new Date(c.currentPhaseEndDate);
@@ -114,6 +128,7 @@ function Tip(props) {
         }
       }
     }
+
     const phaseId = index;
     return (
       <Phase
@@ -123,7 +138,6 @@ function Tip(props) {
         phase={step.name}
         progress={`${progress}%`}
         started={step.date.getTime() < currentPhaseEnd.getTime()}
-        width={`${d}%`}
       />
     );
   });
@@ -143,15 +157,52 @@ Tip.propTypes = {
 /**
  * Renders the tooltip.
  */
-function ProgressBarTooltip(props) {
-  const tip = <Tip challenge={props.challenge} />;
-  return (
-    <Tooltip className="progress-bar-tooltip" content={tip}>
-      {props.children}
-    </Tooltip>
-  );
-}
+class ProgressBarTooltip extends React.Component {
+  constructor(props) {
+    super(props);
+    const that = this;
+    this.state = {
+      chDetails: {}
+    }
+    this.onTooltipHover = this.onTooltipHover.bind(this)
+  }
+  onTooltipHover() {
+    const that = this;
+    console.log('hovered')
+    let chClone = _.clone(this.props.challenge);
+    this.fetchChallengeDetails(chClone.challengeId).then(details => {
+      let chId = chClone.challengeId + ''
+      if(chId.length < ID_LENGTH) {
+          details.postingDate = chClone.startDate
+          details.registrationEndDate = chClone.endDate
+          details.submissionEndDate = chClone.endDate
+          details.appealsEndDate = chClone.endDate
+        }
+      that.setState({chDetails: details})
+    });
+  }
+  // It fetches detailed challenge data and attaches them to the 'details'
+  // field of each challenge object.
+  fetchChallengeDetails = (id) => {
+    const challengeId = '' + id // change to string
+    if(challengeId.length < ID_LENGTH) {
+      console.log(`${V2_API}/data/marathon/challenges/${id} : called`)
+      return fetch(`${V2_API}/data/marathon/challenges/${id}`).then(res => res.json());
+    } else {
+      console.log(`${CHALLENGES_API}${id} : called`)
+      return fetch(`${CHALLENGES_API}${id}`).then(res => res.json());
+    }
+  }
+  render() {
 
+    const tip = <Tip challenge={this.state.chDetails} />;
+    return (
+      <Tooltip className="progress-bar-tooltip" content={tip} onTooltipHover={this.onTooltipHover}>
+        {this.props.children}
+      </Tooltip>
+    );
+  }
+}
 ProgressBarTooltip.defaultProps = {
   challenge: {},
 };

@@ -30,7 +30,15 @@ class Tooltip extends React.Component {
   }
 
   showTooltip() {
-    window.innerWidth < 768 ? this.tooltip.hide() : this.tooltip.position(this.wrapper).show();
+    if(window.innerWidth < 768) {
+      this.tooltip.hide()
+    }
+    else {
+      this.tooltip.position(this.wrapper).show();
+      if(this.props.onTooltipHover) {
+        this.props.onTooltipHover()
+      }
+    }
   }
 
   render() {
