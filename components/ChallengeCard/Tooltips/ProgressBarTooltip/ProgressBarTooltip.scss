@@ -72,4 +72,19 @@ div.progress-bar-tooltip {
     line-height: $tip-space-15;
     text-shadow: none;
   }
+  .Loader {
+    position: relative;
+    display: block;
+    .Loader__container {
+      padding: 0;
+    }
+    .Loader__loader {
+      width: 15px;
+      height: 15px;
+      border-top: 3px solid #d6d6d6;
+      border-right: 3px solid #d6d6d6;
+      border-bottom: 3px solid #d6d6d6;
+      border-left: 3px solid #f2f2f2;
+    }
+  }
 }

@@ -11,6 +11,10 @@ import moment from 'moment';
 import './ChallengeStatus.scss';
 
 // Constants
+const MM_LONGCONTEST = 'https://community.topcoder.com/longcontest/?module';
+const MM_REG = `${MM_LONGCONTEST}=ViewRegistrants&rd=`;
+const MM_SUB = `${MM_LONGCONTEST}=ViewStandings&rd=`;
+const ID_LENGTH = 6;
 
 // Mock winners array
 let MOCK_WINNERS = [
@@ -102,7 +106,18 @@ function ChallengeStatus ({challenge, sampleWinnerProfile}) {
       default: return `${number} total submissions`;
     }
   }
-
+  const registrantsLink = (challenge, type) => {
+    if(challenge.track === 'DATA_SCIENCE') {
+      const id = challenge.challengeId + '';
+      if(id.length < ID_LENGTH) {
+        return `${type}${challenge.challengeId}`;
+      } else {
+        return `${CHALLENGE_URL}${challenge.challengeId}/?type=develop#viewRegistrant`;
+      }
+    } else {
+      return `${CHALLENGE_URL}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}#viewRegistrant`;
+    }
+  }
   const activeChallenge = () => {
     return (
       <div className={challenge.registered || challenge.registrationOpen !== 'Yes' ? 'challenge-progress' : 'challenge-progress with-register-button'}>
@@ -110,14 +125,14 @@ function ChallengeStatus ({challenge, sampleWinnerProfile}) {
         <span className="challenge-stats">
           <span>
             <Tooltip content={numRegistrantsTipText(challenge.numRegistrants)} className="num-reg-tooltip">
-              <a className="num-reg" href={`${CHALLENGE_URL}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}#viewRegistrant`}>
+              <a className="num-reg" href={registrantsLink(challenge, MM_REG)}>
                 <RegistrantsIcon/> <span className="number">{challenge.numRegistrants}</span>
               </a>
             </Tooltip>
           </span>
           <span>
             <Tooltip content={numSubmissionsTipText(challenge.numSubmissions)}>
-              <a className="num-sub" href={`${CHALLENGE_URL}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}#viewRegistrant`}>
+              <a className="num-sub" href={registrantsLink(challenge, MM_SUB)}>
                 <SubmissionsIcon/> <span className="number">{challenge.numSubmissions}</span>
               </a>
             </Tooltip>

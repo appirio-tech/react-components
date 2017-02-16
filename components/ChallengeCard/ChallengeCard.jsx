@@ -11,7 +11,9 @@ import TrackAbbreviationTooltip from './Tooltips/TrackAbbreviationTooltip';
 
 // Constants
 const VISIBLE_TECHNOLOGIES = 3;
+const ID_LENGTH = 6
 const CHALLENGE_URL = 'https://www.topcoder.com/challenge-details/';
+const MM_DETAIL_URL = 'https://community.topcoder.com/tc?module=MatchDetails&rd='; // Marathon Match details
 
 // Get the End date of a challenge
 const getEndDate = (date) => {
@@ -41,6 +43,19 @@ function ChallengeCard ({challenge, sampleWinnerProfile}) {
   const renderTechnologies = challenge.technologyList.map((c) => {
     return (<a href="#" key={c} className="technology">{c}</a>);
   })
+
+  const challengeDetailLink = (challenge) => {
+    if(challenge.track === 'DATA_SCIENCE') {
+      const id = challenge.challengeId + '';
+      if(id.length < ID_LENGTH) {
+        return `${MM_DETAIL_URL}${challenge.challengeId}`;
+      } else {
+        return `${CHALLENGE_URL}${challenge.challengeId}/?type=develop`;
+      }
+    } else {
+      return `${CHALLENGE_URL}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}`;
+    }
+  }
   return (
     <div className="challengeCard">
       <div className="left-panel">
@@ -51,7 +66,7 @@ function ChallengeCard ({challenge, sampleWinnerProfile}) {
         </div>
 
         <div className="challenge-details">
-          <a className="challenge-title" href={`${CHALLENGE_URL}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}`}>
+          <a className="challenge-title" href={challengeDetailLink(challenge)}>
             {challenge.challengeName}
           </a>
           <div className="details-footer">

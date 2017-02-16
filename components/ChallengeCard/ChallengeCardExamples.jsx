@@ -5,7 +5,7 @@ import React from 'react'
 import './ChallengeCardExamples.scss'
 import _ from 'lodash';
 
-const BASE_URL = 'https://api.topcoder-dev.com/v2';
+const BASE_URL = 'https://api.topcoder.com/v2';
 const CHALLENGES_API = `${BASE_URL}/challenges/`;
 
 // A mock list of challenges side bar

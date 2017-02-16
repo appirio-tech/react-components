@@ -15,12 +15,14 @@ import _ from 'lodash';
 
 import React, { PropTypes as PT } from 'react';
 import Tooltip from '../Tooltip';
+import LoaderIcon from '../../../Loader/Loader';
 import './ProgressBarTooltip.scss';
 
 const ID_LENGTH = 6
 const BASE_URL = 'https://api.topcoder.com/v2';
 const CHALLENGES_API = `${BASE_URL}/challenges/`;
-const V2_API = 'https://api.topcoder.com/v2';
+const MM_API = `${BASE_URL}/data/marathon/challenges/`; // MM - marathon match
+
 
 const getDate = (date) => {
   return moment(date).format('MMM DD')
@@ -61,7 +63,9 @@ function Phase(props) {
         <div className="point" />
         <div className="inner-bar" style={{ width: limitWidth+'%'}} />
       </div>
-      <div className="date">{getDate(props.date)}, {getTime(props.date)}</div>
+      <div className="date">
+        {props.isLoaded ? getDate(props.date)+', '+getTime(props.date) : <span className="loading"><LoaderIcon/></span>}
+      </div>
     </div>
   );
 }
@@ -80,6 +84,7 @@ Phase.propTypes = {
 function Tip(props) {
   let steps = [];
   const c = props.challenge;
+  const isLoaded = props.isLoaded;
   if (!c) return <div />;
   // TC API v2 does not provide detailed information on challenge phases,
   // it just includes some deadlines into the challenge details. The code below,
@@ -87,7 +92,7 @@ function Tip(props) {
   // The result should be fine for simple dev challenges, but will be strange for
   // such as Assembly, etc.
   steps.push({
-    date: new Date(c.postingDate),
+    date: c.postingDate ? new Date(c.postingDate) : new Date(0),
     name: 'Posting',
   });
   steps.push({
@@ -138,6 +143,7 @@ function Tip(props) {
         phase={step.name}
         progress={`${progress}%`}
         started={step.date.getTime() < currentPhaseEnd.getTime()}
+        isLoaded={isLoaded}
       />
     );
   });
@@ -162,13 +168,13 @@ class ProgressBarTooltip extends React.Component {
     super(props);
     const that = this;
     this.state = {
-      chDetails: {}
+      chDetails: {},
+      isLoaded: false
     }
     this.onTooltipHover = this.onTooltipHover.bind(this)
   }
   onTooltipHover() {
     const that = this;
-    console.log('hovered')
     let chClone = _.clone(this.props.challenge);
     this.fetchChallengeDetails(chClone.challengeId).then(details => {
       let chId = chClone.challengeId + ''
@@ -178,7 +184,10 @@ class ProgressBarTooltip extends React.Component {
           details.submissionEndDate = chClone.endDate
           details.appealsEndDate = chClone.endDate
         }
-      that.setState({chDetails: details})
+      that.setState({
+        chDetails: details,
+        isLoaded: true
+      })
     });
   }
   // It fetches detailed challenge data and attaches them to the 'details'
@@ -186,16 +195,14 @@ class ProgressBarTooltip extends React.Component {
   fetchChallengeDetails = (id) => {
     const challengeId = '' + id // change to string
     if(challengeId.length < ID_LENGTH) {
-      console.log(`${V2_API}/data/marathon/challenges/${id} : called`)
-      return fetch(`${V2_API}/data/marathon/challenges/${id}`).then(res => res.json());
+      return fetch(`${MM_API}${id}`).then(res => res.json());
     } else {
-      console.log(`${CHALLENGES_API}${id} : called`)
       return fetch(`${CHALLENGES_API}${id}`).then(res => res.json());
     }
   }
   render() {
 
-    const tip = <Tip challenge={this.state.chDetails} />;
+    const tip = <Tip challenge={this.state.chDetails} isLoaded={this.state.isLoaded}/>;
     return (
       <Tooltip className="progress-bar-tooltip" content={tip} onTooltipHover={this.onTooltipHover}>
         {this.props.children}
