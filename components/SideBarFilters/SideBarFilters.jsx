@@ -19,7 +19,7 @@ import EditMyFilters from './EditMyFilters';
 import { FilterItem } from './FilterItems';
 import './SideBarFilters.scss';
 
-const V2_API = 'https://api.topcoder.com/v2';
+const V2_API = 'https://api.topcoder-dev.com/v2';
 const CHALLENGES_API = `${V2_API}/challenges/`;
 const MY_CHALLENGES_API = `${V2_API}/user/challenges?challengeType=Copilot+Posting,
   Conceptualization,Specification,Architecture,Design,Development,

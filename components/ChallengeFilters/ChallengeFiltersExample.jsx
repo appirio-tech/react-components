@@ -24,7 +24,7 @@ import ChallengesSidebar from '../ChallengesSidebar/ChallengesSidebar';
 import '../ChallengeCard/ChallengeCard.scss';
 
 const ID_LENGTH = 6
-const V2_API = 'https://api.topcoder.com/v2';
+const V2_API = 'https://api.topcoder-dev.com/v2';
 const CHALLENGES_API = `${V2_API}/challenges/`;
 /**
  * Helper function for generation of VALID_KEYWORDS and VALID_TRACKS arrays.
