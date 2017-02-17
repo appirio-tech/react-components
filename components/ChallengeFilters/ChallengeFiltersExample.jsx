@@ -288,7 +288,6 @@ class ChallengeFiltersExample extends React.Component {
         <div className={"tc-content-wrapper " + (this.state.currentCardType === 'Challenges' ? '': 'hidden') }>
           <div className="challenge-cards-container">
             <div className="ChallengeCardExamples example-lg">
-              <div className="title">Active Develop Challenges</div>
               {filterChallenges}
             </div>
           </div>

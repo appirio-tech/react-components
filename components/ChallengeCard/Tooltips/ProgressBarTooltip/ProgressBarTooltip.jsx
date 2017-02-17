@@ -93,7 +93,7 @@ function Tip(props) {
   // such as Assembly, etc.
   steps.push({
     date: c.postingDate ? new Date(c.postingDate) : new Date(0),
-    name: 'Posting',
+    name: 'Start',
   });
   steps.push({
     date: new Date(c.registrationEndDate),
