@@ -29,7 +29,9 @@ import ChallengesSidebar from '../ChallengesSidebar/ChallengesSidebar';
 import '../ChallengeCard/ChallengeCard.scss';
 
 const ID_LENGTH = 6
-const V2_API = 'https://api.topcoder-dev.com/v2';
+// TODO: This constant should import the proper base API URL from environment!
+// For now, let's just hardcode the produnction one.
+const V2_API = 'https://api.topcoder.com/v2';
 const CHALLENGES_API = `${V2_API}/challenges/`;
 /**
  * Helper function for generation of VALID_KEYWORDS and VALID_TRACKS arrays.
@@ -230,6 +232,16 @@ class ChallengeFiltersExample extends React.Component {
       fetch(`${V2_API}/challenges/active?type=design`).then(res => helper2(res, DESIGN_TRACK)),
       fetch(`${V2_API}/challenges/active?type=develop`).then(res => helper2(res, DEVELOP_TRACK)),
       fetch(`${V2_API}/dataScience/challenges/active`).then(res => helper2(res, DATA_SCIENCE_TRACK)),
+      // TODO: Actually marathon matches loaded by this endpoint, are already
+      // present in the results from the previous call, but this endpoint
+      // returns some MM specific data. For this method, it is not a problem:
+      // it properly merges results fetched from different endpoints, without
+      // dublicating challenge objects for the same challenge returned from
+      // several calls. But, it will be better to check whether we can
+      // avoid this call, and be happy with the data already included
+      // by the previous call? Proably, it is related to getting rid of
+      // constDataForMarathonMatch() function and related functionality.
+      fetch(`${V2_API}/data/marathon/challenges/?listType=active`).then(res => helper2(res, DATA_SCIENCE_TRACK)),
     ]).then(() => {
       // TODO: Using forceUpdate() in ReactJS is a bad practice. The reason here
       // is that we need to update the component if we have updated the mock list
