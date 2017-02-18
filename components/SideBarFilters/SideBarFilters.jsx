@@ -76,7 +76,17 @@ class SideBarFilters extends React.Component {
     super(props);
     let that = this;
     let myFilters = localStorage.filters ? JSON.parse(localStorage.filters) : [];
-    myFilters = myFilters.map(item => new SideBarFilter(item));
+    try {
+      myFilters = myFilters.map(item => new SideBarFilter(item));
+    } catch (e) {
+      // Ooops, serialization format for custom filters has changed, we cannot
+      // load filters stored in the local storage. Thus, we clear the storage,
+      // forget about all previously saved filters.
+      // TODO: Probably, some smarter way of tracking serialization format version
+      // should be implemented, as we move closer to the final release?
+      myFilters = [];
+      localStorage.filters = '';
+    }
     this.state = {
       currentFilter: DEFAULT_FILTERS[0],
       filters: _.clone(DEFAULT_FILTERS).concat(myFilters),

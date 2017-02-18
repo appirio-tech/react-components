@@ -59,7 +59,7 @@ class SideBarFilter extends ChallengeFilter {
   getFilterFunction() {
     switch (this.mode) {
       case MODE.ALL_CHALLENGES: return () => true;
-      case MODE.MY_CHALLENGES: return item => item.registered;
+      case MODE.MY_CHALLENGES: return item => item.myChallenge;
       case MODE.OPEN_FOR_REGISTRATION: return item => item.registrationOpen.startsWith('Yes');
       case MODE.ONGOING_CHALLENGES: return item => !item.registrationOpen.startsWith('Yes');
       default: return super.getFilterFunction();
