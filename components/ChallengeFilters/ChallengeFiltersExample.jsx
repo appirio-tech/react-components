@@ -134,32 +134,6 @@ class ChallengeFiltersExample extends React.Component {
   }
 
   /**
-   * TODO: fetchChallenges() method, merged from a parallel dev branch, takes
-   * care of normalization of loaded challenge objects, i.e. it attaches to them
-   * all expected fields, in case they are missing. Though, as this function does
-   * a way more assignments, and probably some of them done differently and other
-   * parts of the code rely on them, I don't merge this into fetchChallenges()
-   * yet. This should be done carefully at some later point.
-   * DEFINITELY DON'T ADD NEW ASSIGNMENTS HERE!
-   */
-  // construct data for marathon match which its properties name match to develop track
-  constDataForMarathonMatch(item) {
-    item.subTrack = 'MARATHON_MATCH'
-    item.track = 'DATA_SCIENCE'
-    item.challengeId = item.roundId
-    item.technologies = []
-    item.prize = []
-    item.submissionEndDate = item.endDate
-    item.totalPrize = 0
-    item.challengeName = item.fullName
-    item.numRegistrants = item.numberOfRegistrants
-    item.numSubmissions = item.numberOfSubmissions
-    item.registrationStartDate = item.startDate
-    item.currentPhaseEndDate = item.endDate
-    item.registrationOpen = 'Yes'
-  }
-
-  /**
    * Saves current filters to the URL hash.
    */
   saveFiltersToHash() {
@@ -202,22 +176,49 @@ class ChallengeFiltersExample extends React.Component {
       knownKeywords.add(key);
       forceUpdate = true;
     }
+    /* Normalizes challenge objects received from different API endpoints,
+     * and adds them to the list of loaded challenges. */
     function helper2(response, community) {
       return response.json().then(res => res.data.forEach((item) => {
-        const existing = map[item.challengeId];
-        if (existing) existing.communities.add(community);
-        else {
+        /* Only marathon matches, when received from the /data/marathon/challenges
+         * endpoint, satisfy this. */
+        if (item.roundId) {
           _.defaults(item, {
+            challengeId: item.roundId,
+            challengeName: item.fullName,
+            challengeCommunity: 'Data',
+            challengeType: 'Marathon',
+            communities: new Set([community]),
+            currentPhaseEndDate: item.endDate,
+            currentPhaseName: 'Active',
+            numRegistrants: item.numberOfRegistrants,
+            numSubmissions: item.numberOfSubmissions,
             platforms: [],
-            registrationOpen: '',
+            prize: [],
+            registrationOpen: 'Yes',
+            registrationStartDate: item.startDate,
+            submissionEndDate: item.endDate,
             technologies: [],
-            communities: new Set(),
+            totalPrize: 0,
+            track: 'DATA_SCIENCE',
+            subTrack: 'MARATHON_MATCH',
           });
           map[item.challengeId] = item;
-          item.communities.add(community);
-          challenges.push(item);
-          item.platforms.forEach(helper1);
-          item.technologies.forEach(helper1);
+        } else { /* All challenges from other endpoints have the same format. */
+          const existing = map[item.challengeId];
+          if (existing) existing.communities.add(community);
+          else {
+            _.defaults(item, {
+              communities: new Set([community]),
+              platforms: [],
+              technologies: [],
+              track: item.challengeCommunity.toUpperCase(),
+              subTrack: item.challengeType.toUpperCase().split(' ').join('_'),
+            });
+            map[item.challengeId] = item;
+            item.platforms.forEach(helper1);
+            item.technologies.forEach(helper1);
+          }
         }
       }));
     }
@@ -226,17 +227,9 @@ class ChallengeFiltersExample extends React.Component {
       fetch(`${api}/challenges/active?type=design`).then(res => helper2(res, DESIGN_TRACK)),
       fetch(`${api}/challenges/active?type=develop`).then(res => helper2(res, DEVELOP_TRACK)),
       fetch(`${api}/dataScience/challenges/active`).then(res => helper2(res, DATA_SCIENCE_TRACK)),
-      // TODO: Actually marathon matches loaded by this endpoint, are already
-      // present in the results from the previous call, but this endpoint
-      // returns some MM specific data. For this method, it is not a problem:
-      // it properly merges results fetched from different endpoints, without
-      // dublicating challenge objects for the same challenge returned from
-      // several calls. But, it will be better to check whether we can
-      // avoid this call, and be happy with the data already included
-      // by the previous call? Proably, it is related to getting rid of
-      // constDataForMarathonMatch() function and related functionality.
       fetch(`${api}/data/marathon/challenges/?listType=active`).then(res => helper2(res, DATA_SCIENCE_TRACK)),
     ]).then(() => {
+      _.forIn(map, item => challenges.push(item));
       // TODO: Using forceUpdate() in ReactJS is a bad practice. The reason here
       // is that we need to update the component if we have updated the mock list
       // VALID_KEYWORDS. In the real App the list of valid keywords will be passed
@@ -262,30 +255,26 @@ class ChallengeFiltersExample extends React.Component {
         key={challenge.challengeId}
       />
     );
-    let myChallengesId = []
+    // TODO: This is bad code. Generation of myChallengesId array is O(N),
+    // using it to mark `My Challenges` using that array is O(N^2). Not that
+    // critical for now, as nobody has huge amount of challenges he is participating,
+    // but... One should generate a set of myChallengesId, which is O(N), and
+    // then use it to mark `My Challenges`, which also will be O(N).
+    let myChallengesId = [];
     // get my challenges id
     if (this.props.myChallenges) {
-       myChallengesId = this.props.myChallenges.map(function(challenge) {
-        return challenge.id
-      })
+      myChallengesId = this.props.myChallenges.map(function(challenge) {
+        return challenge.id;
+      });
     }
     let challenges = this.state.challenges.filter(this.state.filter.getFilterFunction());
     challenges = challenges.map((item) => {
-      const i = _.clone(item);
-      if (item.roundId) {
-        // TODO: This should not be done here! All normalization of fetched challenge
-        // objects should happen inside fetchChallenges().
-        this.constDataForMarathonMatch(i);
-      } else {
-        i.subTrack = item.challengeType.toUpperCase().split(' ').join('_');
-        i.track = item.challengeCommunity.toUpperCase();
-      }
       // check the challenge id exist in my challenges id
       // TODO: This is also should be moved to a better place, fetchChallenges() ?
-      if(_.indexOf(myChallengesId, i.challengeId) > -1) {
-        i.myChallenge = true
+      if (_.indexOf(myChallengesId, item.challengeId) > -1) {
+        _.assign(item, { myChallenge: true });
       }
-      return i;
+      return item;
     });
 
     const filterChallenges = challenges.filter(
