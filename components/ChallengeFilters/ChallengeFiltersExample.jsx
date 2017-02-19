@@ -12,10 +12,8 @@
  */
 
 import _ from 'lodash';
-import qs from 'qs';
-import React from 'react';
+import React, { PropTypes as PT } from 'react';
 import Sticky from 'react-stickynode';
-import url from 'url';
 
 import ChallengeFilter, { DATA_SCIENCE_TRACK, DESIGN_TRACK, DEVELOP_TRACK } from './ChallengeFilter';
 import ChallengeFilterWithSearch from './ChallengeFilterWithSearch';
@@ -28,11 +26,6 @@ import SRMCard from '../SRMCard/SRMCard';
 import ChallengesSidebar from '../ChallengesSidebar/ChallengesSidebar';
 import '../ChallengeCard/ChallengeCard.scss';
 
-const ID_LENGTH = 6
-// TODO: This constant should import the proper base API URL from environment!
-// For now, let's just hardcode the produnction one.
-const V2_API = 'https://api.topcoder.com/v2';
-const CHALLENGES_API = `${V2_API}/challenges/`;
 /**
  * Helper function for generation of VALID_KEYWORDS and VALID_TRACKS arrays.
  * @param {String} keyword
@@ -228,10 +221,11 @@ class ChallengeFiltersExample extends React.Component {
         }
       }));
     }
+    const api = this.props.config.API_URL_V2;
     return Promise.all([
-      fetch(`${V2_API}/challenges/active?type=design`).then(res => helper2(res, DESIGN_TRACK)),
-      fetch(`${V2_API}/challenges/active?type=develop`).then(res => helper2(res, DEVELOP_TRACK)),
-      fetch(`${V2_API}/dataScience/challenges/active`).then(res => helper2(res, DATA_SCIENCE_TRACK)),
+      fetch(`${api}/challenges/active?type=design`).then(res => helper2(res, DESIGN_TRACK)),
+      fetch(`${api}/challenges/active?type=develop`).then(res => helper2(res, DEVELOP_TRACK)),
+      fetch(`${api}/dataScience/challenges/active`).then(res => helper2(res, DATA_SCIENCE_TRACK)),
       // TODO: Actually marathon matches loaded by this endpoint, are already
       // present in the results from the previous call, but this endpoint
       // returns some MM specific data. For this method, it is not a problem:
@@ -241,7 +235,7 @@ class ChallengeFiltersExample extends React.Component {
       // avoid this call, and be happy with the data already included
       // by the previous call? Proably, it is related to getting rid of
       // constDataForMarathonMatch() function and related functionality.
-      fetch(`${V2_API}/data/marathon/challenges/?listType=active`).then(res => helper2(res, DATA_SCIENCE_TRACK)),
+      fetch(`${api}/data/marathon/challenges/?listType=active`).then(res => helper2(res, DATA_SCIENCE_TRACK)),
     ]).then(() => {
       // TODO: Using forceUpdate() in ReactJS is a bad practice. The reason here
       // is that we need to update the component if we have updated the mock list
@@ -270,7 +264,7 @@ class ChallengeFiltersExample extends React.Component {
     );
     let myChallengesId = []
     // get my challenges id
-    if(this.props.myChallenges) {
+    if (this.props.myChallenges) {
        myChallengesId = this.props.myChallenges.map(function(challenge) {
         return challenge.id
       })
@@ -370,8 +364,19 @@ class ChallengeFiltersExample extends React.Component {
 }
 
 ChallengeFiltersExample.defaultProps = {
+  config: {
+    API_URL_V2: 'https://api.topcoder.com/v2',
+  },
   filterFromUrl: '',
   onSaveFilterToUrl: _.noop,
+};
+
+ChallengeFiltersExample.propTypes = {
+  config: PT.shape({
+    API_URL_V2: PT.string,
+  }),
+  filterFromUrl: PT.string,
+  onSaveFilterToUrl: PT.func,
 };
 
 export default ChallengeFiltersExample;
