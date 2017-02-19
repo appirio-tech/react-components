@@ -1,8 +1,8 @@
-require('./Tooltip.scss')
-
 import React, { Component, PropTypes } from 'react'
 import classNames from 'classnames'
 import ReactDOM from 'react-dom'
+
+require('./Tooltip.scss')
 
 class Tooltip extends Component {
   constructor(props) {
