@@ -297,7 +297,7 @@ class ChallengeFiltersExample extends React.Component {
       this.state.sidebarFilter.getFilterFunction()).map(cardify);
 
     return (
-      <div>
+      <div className="ChallengeFiltersExample">
         <ChallengeFilters
           filter={this.state.filter}
           onFilter={filter => this.onFilterByTopFilter(filter)}

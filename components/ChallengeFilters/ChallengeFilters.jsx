@@ -42,7 +42,7 @@ import ChallengeFilter, { DATA_SCIENCE_TRACK, DESIGN_TRACK, DEVELOP_TRACK } from
 import ChallengeSearchBar from './ChallengeSearchBar/ChallengeSearchBar';
 import FiltersPanel from './FiltersPanel/FiltersPanel';
 import FiltersSwitch from './FiltersSwitch/FiltersSwitch';
-import SimpleSwitch from './SimpleSwitch/SimpleSwitch';
+import SwitchWithLabel from '../SwitchWithLabel';
 import FiltersCardsType from './FiltersCardsType/FiltersCardsType';
 import './ChallengeFilters.scss';
 
@@ -139,20 +139,20 @@ class ChallengeFilters extends React.Component {
             onSearch={str => this.onSearch(str)}
             placeholder="Search Challenges"
           />
-          <SimpleSwitch
-            checked={this.state.filter.tracks.has(DESIGN_TRACK)}
-            label="Design"
-            onSwitch={on => this.setTracks(DESIGN_TRACK, on)}
+          <SwitchWithLabel
+            enabled={this.state.filter.tracks.has(DESIGN_TRACK)}
+            labelBefore="Design"
+            onSwitch={enable => this.setTracks(DESIGN_TRACK, enable)}
           />
-          <SimpleSwitch
-            checked={this.state.filter.tracks.has(DEVELOP_TRACK)}
-            label="Development"
-            onSwitch={on => this.setTracks(DEVELOP_TRACK, on)}
+          <SwitchWithLabel
+            enabled={this.state.filter.tracks.has(DEVELOP_TRACK)}
+            labelBefore="Development"
+            onSwitch={enable => this.setTracks(DEVELOP_TRACK, enable)}
           />
-          <SimpleSwitch
+          <SwitchWithLabel
             checked={this.state.filter.tracks.has(DATA_SCIENCE_TRACK)}
-            label="Data Science"
-            onSwitch={on => this.setTracks(DATA_SCIENCE_TRACK, on)}
+            labelBefore="Data Science"
+            onSwitch={enable => this.setTracks(DATA_SCIENCE_TRACK, enable)}
           />
           <FiltersSwitch
             active={this.state.showFilters}

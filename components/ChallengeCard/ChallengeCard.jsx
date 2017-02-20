@@ -79,10 +79,7 @@ function ChallengeCard ({challenge, sampleWinnerProfile, onTechTagClicked}) {
             <span className="date">{challenge.status === 'Active' ? 'Ends' : 'Ended'} {getEndDate(challenge.submissionEndDate)}</span>
             {
               challenge.technologies.length === 0 ?
-                <a
-                  className="technology"
-                  onClick={() => onTechTagClicked('N/A')}
-                >N/A</a> : renderTechnologies
+                '' : renderTechnologies
             }
           </div>
         </div>
