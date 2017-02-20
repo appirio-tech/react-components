@@ -8,6 +8,9 @@ $switch-radius-2: $corner-radius;
 $switch-radius-4: $corner-radius * 2;
 
 .FiltersSwitch {
+  background: $tc-gray-30;
+  border: 1px solid $tc-gray-30;
+  color: $tc-black;
   min-width: $switch-space-100 + 2;
   #icon {
     margin-right: $switch-space-10;

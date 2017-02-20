@@ -1,3 +1,6 @@
+/* This is 3-rd party code, thus does not have to comply with our code style. */
+/* eslint-disable */
+
 import './tooltip.css';
 
 /*!

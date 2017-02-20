@@ -38,10 +38,21 @@ const Abbreviation = {
     IDEA_GENERATION: 'IG',
     DESIGN_FIRST2FINISH: 'DF2F',
   },
+
+  // TODO: When data science challenges are returned by the API v2, they have
+  // their track set to `data` instead of `data_science` and their sub-track set
+  // to `marathon` rather than `marathon_match`. However, just renaming existing
+  // fields crushes the code, thus, as a rapid fix, the alternative entry is added
+  // below.
   DATA_SCIENCE: {
     SRM: 'SRM',
     MARATHON_MATCH: 'MM',
   },
+  DATA: {
+    SRM: 'SRM',
+    MARATHON: 'MM',
+  },
+
   GENERIC: {
     GENERIC_SCORECARDS: 'G',
   }
