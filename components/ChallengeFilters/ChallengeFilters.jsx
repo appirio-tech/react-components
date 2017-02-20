@@ -150,7 +150,7 @@ class ChallengeFilters extends React.Component {
             onSwitch={enable => this.setTracks(DEVELOP_TRACK, enable)}
           />
           <SwitchWithLabel
-            checked={this.state.filter.tracks.has(DATA_SCIENCE_TRACK)}
+            enabled={this.state.filter.tracks.has(DATA_SCIENCE_TRACK)}
             labelBefore="Data Science"
             onSwitch={enable => this.setTracks(DATA_SCIENCE_TRACK, enable)}
           />
