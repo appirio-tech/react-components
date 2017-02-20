@@ -183,6 +183,7 @@ class ChallengeFiltersExample extends React.Component {
         /* Only marathon matches, when received from the /data/marathon/challenges
          * endpoint, satisfy this. */
         if (item.roundId) {
+          const endTimestamp = new Date(item.endDate).getTime();
           _.defaults(item, {
             challengeId: item.roundId,
             challengeName: item.fullName,
@@ -190,29 +191,37 @@ class ChallengeFiltersExample extends React.Component {
             challengeType: 'Marathon',
             communities: new Set([community]),
             currentPhaseEndDate: item.endDate,
-            currentPhaseName: 'Active',
+            currentPhaseName: endTimestamp > Date.now() ? 'Submission' : '',
             numRegistrants: item.numberOfRegistrants,
             numSubmissions: item.numberOfSubmissions,
             platforms: [],
             prize: [],
-            registrationOpen: 'Yes',
+            registrationOpen: endTimestamp > Date.now() ? 'Yes' : 'No',
             registrationStartDate: item.startDate,
             submissionEndDate: item.endDate,
+            submissionEndTimestamp: endTimestamp,
             technologies: [],
             totalPrize: 0,
             track: 'DATA_SCIENCE',
+            status: endTimestamp > Date.now() ? 'Active' : 'Completed',
             subTrack: 'MARATHON_MATCH',
           });
           map[item.challengeId] = item;
+        } else if (item.challengeType === 'SRM') {
+          /* We don't support SRM yet, so we don't want them around */
         } else { /* All challenges from other endpoints have the same format. */
           const existing = map[item.challengeId];
           if (existing) existing.communities.add(community);
           else {
+            const endTimestamp = new Date(item.submissionEndDate).getTime();
             _.defaults(item, {
               communities: new Set([community]),
               platforms: [],
+              registrationOpen: endTimestamp > Date.now() ? 'Yes' : 'No',
               technologies: [],
               track: item.challengeCommunity.toUpperCase(),
+              status: endTimestamp > Date.now() ? 'Active' : 'Completed',
+              submissionEndTimestamp: endTimestamp,
               subTrack: item.challengeType.toUpperCase().split(' ').join('_'),
             });
             map[item.challengeId] = item;
@@ -224,12 +233,19 @@ class ChallengeFiltersExample extends React.Component {
     }
     const api = this.props.config.API_URL_V2;
     return Promise.all([
+      /* Fetching of active challenges */
       fetch(`${api}/challenges/active?type=design`).then(res => helper2(res, DESIGN_TRACK)),
       fetch(`${api}/challenges/active?type=develop`).then(res => helper2(res, DEVELOP_TRACK)),
       fetch(`${api}/dataScience/challenges/active`).then(res => helper2(res, DATA_SCIENCE_TRACK)),
       fetch(`${api}/data/marathon/challenges/?listType=active`).then(res => helper2(res, DATA_SCIENCE_TRACK)),
+      /* Fetching of some past challenges */
+      fetch(`${api}/challenges/past?type=design&pageSize=20`).then(res => helper2(res, DESIGN_TRACK)),
+      fetch(`${api}/challenges/past?type=develop&pageSize=20`).then(res => helper2(res, DEVELOP_TRACK)),
+      fetch(`${api}/dataScience/challenges/past?pageSize=20`).then(res => helper2(res, DATA_SCIENCE_TRACK)),
+      fetch(`${api}/data/marathon/challenges/?listType=past&pageSize=20`).then(res => helper2(res, DATA_SCIENCE_TRACK)),
     ]).then(() => {
       _.forIn(map, item => challenges.push(item));
+      challenges.sort((a, b) => b.submissionEndTimestamp - a.submissionEndTimestamp);
       // TODO: Using forceUpdate() in ReactJS is a bad practice. The reason here
       // is that we need to update the component if we have updated the mock list
       // VALID_KEYWORDS. In the real App the list of valid keywords will be passed
