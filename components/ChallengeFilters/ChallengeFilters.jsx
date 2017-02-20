@@ -81,7 +81,7 @@ class ChallengeFilters extends React.Component {
     const f = (new ChallengeFilter(this.state.filter)).merge(filter);
     this.setState({
       filter: f,
-      filtersCount: filter.count(),
+      filtersCount: f.count(),
     });
     this.props.onFilter(f);
   }

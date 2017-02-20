@@ -32,7 +32,7 @@ class ChallengeFilter extends FilterPanelFilter {
   constructor(arg) {
     if (!arg) {
       super();
-      this.tracks = new Set();
+      this.tracks = new Set([DATA_SCIENCE_TRACK, DESIGN_TRACK, DEVELOP_TRACK]);
     } else if (_.isObject(arg)) {
       if (!arg._isChallengeFilter) throw new Error ('Invalid argument!');
       super(arg);
@@ -46,9 +46,7 @@ class ChallengeFilter extends FilterPanelFilter {
   }
 
   count() {
-    let res = super.count();
-    if (this.tracks.size) res += 1;
-    return res;
+    return 1 + super.count();
   }
 
   getFilterFunction() {
