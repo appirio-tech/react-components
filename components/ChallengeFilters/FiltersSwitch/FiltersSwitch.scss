@@ -12,7 +12,7 @@ $switch-radius-4: $corner-radius * 2;
   border: 1px solid $tc-gray-30;
   color: $tc-black;
   min-width: $switch-space-100 + 2;
-  #icon {
+  .FiltersIcon {
     margin-right: $switch-space-10;
     position: relative;
     top: $base-unit - 2;

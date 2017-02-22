@@ -84,6 +84,7 @@
     cursor: pointer;
     padding: 0 3*$base-unit;
     .right {
+      color: $tc-gray-50;
       float: right;
       position: static;
     }

@@ -88,7 +88,7 @@ function ChallengeCard ({challenge, sampleWinnerProfile, onTechTagClicked}) {
         <div className="prizes">
           <PrizesTooltip challenge={challenge}>
             <div><span className="dollar">$</span>{numberWithCommas(challenge.totalPrize)}</div>
-            <div className="label">1 prize</div>
+            <div className="label">Prize pool</div>
           </PrizesTooltip>
         </div>
 

@@ -36,8 +36,8 @@ class FilterPanelFilter extends BaseFilter {
 
   count() {
     let res = super.count();
-    res += this.keywords.length;
-    res += this.subtracks.length;
+    if (this.keywords.length && this.keywords[0]) res += 1;
+    if (this.subtracks.length && this.subtracks[0]) res += 1;
     if (this.endDate || this.startDate) res += 1;
     return res;
   }
