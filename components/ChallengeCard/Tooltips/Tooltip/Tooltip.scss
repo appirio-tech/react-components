@@ -5,11 +5,13 @@
   display: none;
 }
 
-.tooltip {
+div.tooltip {
 	position: absolute;
 	padding: $base-unit * 3;
   background: $tc-gray-80;
   border-radius: $corner-radius * 2;
+  margin: 0;
+  top: 10px;
 }
 // number registrant tooltip
 .num-reg-tooltip {

@@ -11,6 +11,10 @@ import moment from 'moment';
 import './ChallengeStatus.scss';
 
 // Constants
+const MM_LONGCONTEST = 'https://community.topcoder.com/longcontest/?module';
+const MM_REG = `${MM_LONGCONTEST}=ViewRegistrants&rd=`;
+const MM_SUB = `${MM_LONGCONTEST}=ViewStandings&rd=`;
+const ID_LENGTH = 6;
 
 // Mock winners array
 let MOCK_WINNERS = [
@@ -37,9 +41,16 @@ const FORUM_URL = 'https://apps.topcoder.com/forums/?module=Category&categoryID=
 const CHALLENGE_URL = 'https://www.topcoder.com/challenge-details/'
 const STALLED_MSG = 'Stalled'
 
+
 const getTimeLeft = (date) => {
   const duration = moment.duration(moment(date).diff(moment()))
-  const res = `${duration.days() > 0 ? `${duration.days()}d` : ''} ${duration.hours()}:${duration.minutes()} h`
+  const hour = duration.hours()
+  let hString = hour < 10 ? '0'+hour : hour;
+  hString = hour < 0 ? '-'+hString : hString;
+  const min = duration.minutes()
+  let mString = min < 10 ? '0'+min : min;
+  mString = min < 0 ? '-'+mString : mString;
+  const res = `${duration.days() > 0 ? `${duration.days()}d` : ''} ${hString}:${mString} h`
   return res[1] === '-' ? 'Late' : `${res} to go`
 }
 
@@ -95,7 +106,18 @@ function ChallengeStatus ({challenge, sampleWinnerProfile}) {
       default: return `${number} total submissions`;
     }
   }
-
+  const registrantsLink = (challenge, type) => {
+    if(challenge.track === 'DATA_SCIENCE') {
+      const id = challenge.challengeId + '';
+      if(id.length < ID_LENGTH) {
+        return `${type}${challenge.challengeId}`;
+      } else {
+        return `${CHALLENGE_URL}${challenge.challengeId}/?type=develop#viewRegistrant`;
+      }
+    } else {
+      return `${CHALLENGE_URL}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}#viewRegistrant`;
+    }
+  }
   const activeChallenge = () => {
     return (
       <div className={challenge.registered || challenge.registrationOpen !== 'Yes' ? 'challenge-progress' : 'challenge-progress with-register-button'}>
@@ -103,14 +125,14 @@ function ChallengeStatus ({challenge, sampleWinnerProfile}) {
         <span className="challenge-stats">
           <span>
             <Tooltip content={numRegistrantsTipText(challenge.numRegistrants)} className="num-reg-tooltip">
-              <a className="num-reg" href={`${CHALLENGE_URL}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}#viewRegistrant`}>
+              <a className="num-reg" href={registrantsLink(challenge, MM_REG)}>
                 <RegistrantsIcon/> <span className="number">{challenge.numRegistrants}</span>
               </a>
             </Tooltip>
           </span>
           <span>
             <Tooltip content={numSubmissionsTipText(challenge.numSubmissions)}>
-              <a className="num-sub" href={`${CHALLENGE_URL}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}#viewRegistrant`}>
+              <a className="num-sub" href={registrantsLink(challenge, MM_SUB)}>
                 <SubmissionsIcon/> <span className="number">{challenge.numSubmissions}</span>
               </a>
             </Tooltip>
@@ -124,7 +146,7 @@ function ChallengeStatus ({challenge, sampleWinnerProfile}) {
             : renderRegisterButton()
           }
         </span>
-        <ProgressBarTooltip challenge={challenge.details}>
+        <ProgressBarTooltip challenge={challenge}>
           {
             challenge.status === 'Active' ?
             <div>

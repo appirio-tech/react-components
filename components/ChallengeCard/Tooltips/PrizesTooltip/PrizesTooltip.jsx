@@ -8,9 +8,15 @@
  */
 
 import React, { PropTypes as PT } from 'react'
+import _ from 'lodash'
 import Tooltip from '../Tooltip';
+import LoaderIcon from '../../../Loader/Loader';
 import './PrizesTooltip.scss';
 
+const ID_LENGTH = 6
+const BASE_URL = 'https://api.topcoder.com/v2';
+const CHALLENGES_API = `${BASE_URL}/challenges/`;
+const MM_API = `${BASE_URL}/data/marathon/challenges/`; // MM - marathon match
 /**
  * A single bonus componenent.
  * It renders the bonus name inside a colored rectangle,
@@ -56,11 +62,16 @@ Prize.propTypes = {
  */
 function Tip(props) {
   let prizes;
-  if (props.challenge) {
-    prizes = props.challenge.prize.map((prize, index) => {
-      const place = 1 + index;
-      return <Prize key={place} place={place} prize={prize} />;
-    });
+  const isLoaded = props.isLoaded;
+  if(isLoaded){
+    if (props.challenge.prize) {
+      prizes = props.challenge.prize.map((prize, index) => {
+        const place = 1 + index;
+        return <Prize key={place} place={place} prize={prize} isLoaded={isLoaded}/>;
+      });
+    }
+  } else {
+    return <span className="loading"><LoaderIcon/></span>
   }
   let bonuses;
   if (props.challenge && props.challenge.reliabilityBonus) {
@@ -92,13 +103,55 @@ Tip.propTypes = {
 /**
  * Renders the tooltip.
  */
-function PrizesTooltip(props) {
-  const tip = <Tip challenge={props.challenge} />;
-  return (
-    <Tooltip className="prizes-tooltip" content={tip}>
-      {props.children}
-    </Tooltip>
-  );
+
+class PrizesTooltip extends React.Component {
+  constructor(props) {
+    super(props);
+    const that = this;
+    this.state = {
+      chDetails: {},
+      isLoaded: false
+    }
+    this.onTooltipHover = this.onTooltipHover.bind(this)
+  }
+  onTooltipHover() {
+    const that = this;
+    console.log('hovered')
+    let chClone = _.clone(this.props.challenge);
+    this.fetchChallengeDetails(chClone.challengeId).then(details => {
+      let chId = chClone.challengeId + ''
+      if(chId.length < ID_LENGTH) {
+          details.postingDate = chClone.startDate
+          details.registrationEndDate = chClone.endDate
+          details.submissionEndDate = chClone.endDate
+          details.appealsEndDate = chClone.endDate
+        }
+      that.setState({
+        chDetails: details,
+        isLoaded: true
+      })
+    });
+  }
+  // It fetches detailed challenge data and attaches them to the 'details'
+  // field of each challenge object.
+  fetchChallengeDetails = (id) => {
+    const challengeId = '' + id // change to string
+    if(challengeId.length < ID_LENGTH) {
+      console.log(`${MM_API}${id} : called`)
+      return fetch(`${MM_API}${id}`).then(res => res.json());
+    } else {
+      console.log(`${CHALLENGES_API}${id} : called`)
+      return fetch(`${CHALLENGES_API}${id}`).then(res => res.json());
+    }
+  }
+  render() {
+    const tip = <Tip challenge={this.state.chDetails} isLoaded={this.state.isLoaded} />;
+    return (
+      <Tooltip className="prizes-tooltip" content={tip} onTooltipHover={this.onTooltipHover}>
+        {this.props.children}
+      </Tooltip>
+    );
+  }
 }
 
 PrizesTooltip.defaultProps = {

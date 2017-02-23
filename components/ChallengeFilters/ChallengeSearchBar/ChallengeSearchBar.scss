@@ -9,7 +9,10 @@ $challenge-space-40: $base-unit * 8;
 $challenge-radius-1: $corner-radius / 2;
 $challenge-radius-4: $corner-radius * 2;
 
-$search-bar-width: '100% - 640px';
+/* -100px is necessary to compensate for the temporarly added `Alpha preview`
+ * banner. Should be modified / removed together with banner. */
+$search-bar-width: '100% - 756px';
+
 $search-input-width: '100% - 56px';
 
 .ChallengeSearchBar {
@@ -36,7 +39,7 @@ $search-input-width: '100% - 56px';
     font-weight: 300;
     font-size: 15px;
     color: $tc-gray-50;
-    line-height: $challenge-space-20;
+    line-height: $challenge-space-30 + 5;
     text-transform: capitalize;
     opacity: 1;
   }

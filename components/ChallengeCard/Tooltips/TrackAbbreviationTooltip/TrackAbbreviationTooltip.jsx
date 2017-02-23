@@ -17,10 +17,12 @@ const DESCRIPTION = {
   FIRST2FINISH: 'Specific challenge type where the first to submit a passable solution is the winner',
   'PRINT/PRESENTATION': 'Specific challenge type focused on design of a print/presentation',
   UI_PROTOTYPE_COMPETITION: 'Specific challenge type focused on UI prototyping',
+  ARCHITECTURE: 'Specific challenge type focused on Architecture',
   WEB_DESIGN: 'Specific challenge type where the first to submit a passable solution is the winner',
   WIDGET_OR_MOBILE_SCREEN_DESIGN: 'Specific challenge type focused on design of a mobile widget or screen',
   WIREFRAMES: 'Specific challenge type focused on creation of a wireframes',
   SRM: 'Specific challenge type focused on algorithm',
+  MARATHON_MATCH: 'Specific challenge type focused on algorithm',
 };
 
 const HEADER = {
@@ -30,9 +32,11 @@ const HEADER = {
   FIRST2FINISH: 'First2Finish (F2F)',
   'PRINT/PRESENTATION': 'Print/Presentation (PP)',
   UI_PROTOTYPE_COMPETITION: 'UI Prototype (Pr)',
+  ARCHITECTURE: 'Architecture (Ar)',
   WEB_DESIGN: 'Web Design (Wd)',
   WIDGET_OR_MOBILE_SCREEN_DESIGN: 'Widget or Mobile Screen Design (Wg)',
   SRM: 'Single Round Match (SRM)',
+  MARATHON_MATCH: 'Marathon Match',
 };
 
 const TRACK_COLOR_CLASS = {

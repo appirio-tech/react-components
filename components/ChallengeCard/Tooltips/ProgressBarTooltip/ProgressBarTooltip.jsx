@@ -1,4 +1,5 @@
 import moment from 'moment';
+import _ from 'lodash';
 /**
  * Progress Bar Tooltip.
  *
@@ -14,16 +15,28 @@ import moment from 'moment';
 
 import React, { PropTypes as PT } from 'react';
 import Tooltip from '../Tooltip';
+import LoaderIcon from '../../../Loader/Loader';
 import './ProgressBarTooltip.scss';
+
+const ID_LENGTH = 6
+const BASE_URL = 'https://api.topcoder.com/v2';
+const CHALLENGES_API = `${BASE_URL}/challenges/`;
+const MM_API = `${BASE_URL}/data/marathon/challenges/`; // MM - marathon match
+
 
 const getDate = (date) => {
   return moment(date).format('MMM DD')
 }
 const getTime = (date) => {
   const duration = moment(date)
-  const res = `${duration.hours()}:${duration.minutes()}`
+  const hour = duration.hours()
+  let hString = hour < 10 ? '0'+hour : hour;
+  const min = duration.minutes()
+  let mString = min < 10 ? '0'+min : min;
+  const res = `${hString}:${mString}`
   return res[1] === '-' ? 'Late' : `${res}`
 }
+
 /**
  * Renders a separate challenge phase element.
  * It includes: phase name, starting date, the point, representing the starting
@@ -40,14 +53,19 @@ const getTime = (date) => {
  * @param {String} props.width The width of the phase element in the UI.
  */
 function Phase(props) {
+  var progress = props.progress
+  var limitProgress = parseFloat(_.replace(progress, '%', ''))
+  var limitWidth = limitProgress <= 100 ? limitProgress : 100;
   return (
-    <div className="phase" style={{ width: props.width }}>
+    <div className="phase">
       <div>{props.phase}</div>
       <div className={`bar ${props.last ? 'last' : ''} ${props.started ? 'started' : ''}`}>
         <div className="point" />
-        <div className="inner-bar" style={{ width: props.progress }} />
+        <div className="inner-bar" style={{ width: limitWidth+'%'}} />
       </div>
-      <div className="date">{getDate(props.date)}, {getTime(props.date)}</div>
+      <div className="date">
+        {props.isLoaded ? getDate(props.date)+', '+getTime(props.date) : <span className="loading"><LoaderIcon/></span>}
+      </div>
     </div>
   );
 }
@@ -58,7 +76,6 @@ Phase.propTypes = {
   phase: PT.string.isRequired,
   progress: PT.string.isRequired,
   started: PT.bool.isRequired,
-  width: PT.string.isRequired,
 };
 
 /**
@@ -67,6 +84,7 @@ Phase.propTypes = {
 function Tip(props) {
   let steps = [];
   const c = props.challenge;
+  const isLoaded = props.isLoaded;
   if (!c) return <div />;
   // TC API v2 does not provide detailed information on challenge phases,
   // it just includes some deadlines into the challenge details. The code below,
@@ -74,8 +92,8 @@ function Tip(props) {
   // The result should be fine for simple dev challenges, but will be strange for
   // such as Assembly, etc.
   steps.push({
-    date: new Date(c.postingDate),
-    name: 'Posting',
+    date: c.postingDate ? new Date(c.postingDate) : new Date(0),
+    name: 'Start',
   });
   steps.push({
     date: new Date(c.registrationEndDate),
@@ -95,6 +113,7 @@ function Tip(props) {
     date: new Date(c.appealsEndDate),
     name: 'End',
   });
+
   steps = steps.sort((a, b) => a.date.getTime() - b.date.getTime());
   const duration = steps[steps.length - 1].date.getTime() - steps[0].date.getTime();
   const currentPhaseEnd = new Date(c.currentPhaseEndDate);
@@ -114,6 +133,7 @@ function Tip(props) {
         }
       }
     }
+
     const phaseId = index;
     return (
       <Phase
@@ -123,7 +143,7 @@ function Tip(props) {
         phase={step.name}
         progress={`${progress}%`}
         started={step.date.getTime() < currentPhaseEnd.getTime()}
-        width={`${d}%`}
+        isLoaded={isLoaded}
       />
     );
   });
@@ -143,15 +163,53 @@ Tip.propTypes = {
 /**
  * Renders the tooltip.
  */
-function ProgressBarTooltip(props) {
-  const tip = <Tip challenge={props.challenge} />;
-  return (
-    <Tooltip className="progress-bar-tooltip" content={tip}>
-      {props.children}
-    </Tooltip>
-  );
-}
+class ProgressBarTooltip extends React.Component {
+  constructor(props) {
+    super(props);
+    const that = this;
+    this.state = {
+      chDetails: {},
+      isLoaded: false
+    }
+    this.onTooltipHover = this.onTooltipHover.bind(this)
+  }
+  onTooltipHover() {
+    const that = this;
+    let chClone = _.clone(this.props.challenge);
+    this.fetchChallengeDetails(chClone.challengeId).then(details => {
+      let chId = chClone.challengeId + ''
+      if(chId.length < ID_LENGTH) {
+          details.postingDate = chClone.startDate
+          details.registrationEndDate = chClone.endDate
+          details.submissionEndDate = chClone.endDate
+          details.appealsEndDate = chClone.endDate
+        }
+      that.setState({
+        chDetails: details,
+        isLoaded: true
+      })
+    });
+  }
+  // It fetches detailed challenge data and attaches them to the 'details'
+  // field of each challenge object.
+  fetchChallengeDetails = (id) => {
+    const challengeId = '' + id // change to string
+    if(challengeId.length < ID_LENGTH) {
+      return fetch(`${MM_API}${id}`).then(res => res.json());
+    } else {
+      return fetch(`${CHALLENGES_API}${id}`).then(res => res.json());
+    }
+  }
+  render() {
 
+    const tip = <Tip challenge={this.state.chDetails} isLoaded={this.state.isLoaded}/>;
+    return (
+      <Tooltip className="progress-bar-tooltip" content={tip} onTooltipHover={this.onTooltipHover}>
+        {this.props.children}
+      </Tooltip>
+    );
+  }
+}
 ProgressBarTooltip.defaultProps = {
   challenge: {},
 };

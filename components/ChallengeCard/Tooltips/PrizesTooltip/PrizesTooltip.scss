@@ -62,4 +62,19 @@ $prize-radius-15: $corner-radius * 7 + 1;
       }
     }
   }
+  .Loader {
+    position: relative;
+    display: block;
+    .Loader__container {
+      padding: 0;
+    }
+    .Loader__loader {
+      width: 15px;
+      height: 15px;
+      border-top: 3px solid #d6d6d6;
+      border-right: 3px solid #d6d6d6;
+      border-bottom: 3px solid #d6d6d6;
+      border-left: 3px solid #f2f2f2;
+    }
+  }
 }

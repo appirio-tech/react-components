@@ -13,63 +13,95 @@
  * can be hidden/displayed by setting the boolean 'hidden' property.
  *
  * Each time the user modifies any filter, this component triggers the callback
- * provided via the 'onFilter' property, if any, passing in the current filters,
- * formated as the following object:
- * {
- *  endDate: momentObj,
- *  keywords: string[],
- *  startDate: momentObj,
- *  tracks: string[],
- * }
- * The parent component should use this object to implement the actual filtering.
+ * provided via the 'onFilter' property, if any, passing in the current filter
+ * object.
  */
 
 import 'react-dates/lib/css/_datepicker.css';
 import _ from 'lodash';
 import React, { PropTypes as PT } from 'react';
 import Select from 'react-select';
+import FilterPanelFilter from './FilterPanelFilter';
 
 import './FiltersPanel.scss';
 import DateRangePicker from '../DateRangePicker/DateRangePicker';
-
-// Default state: no filters are set.
-const DEFAULT_STATE = {
-  endDate: null,
-  keywords: [],
-  startDate: null,
-  tracks: [],
-};
 
 class FiltersPanel extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = DEFAULT_STATE;
+    this.state = {
+      filter: props.filter,
+    };
+  }
+
+  /**
+   * Clears the the filters.
+   * Note that this method does not call the onFilter() callback passed via props,
+   * if any, just the onClearFilters().
+   */
+  onClearFilters() {
+    this.props.onClearFilters();
+    this.setState({ filter: new FilterPanelFilter() });
+  }
+
+  /**
+   * Handles updates of the dates filter.
+   * @param {Moment} startDate
+   * @param {Moment} endDate
+   */
+  onDatesChanged(startDate, endDate) {
+    const filter = new FilterPanelFilter(this.state.filter);
+    filter.startDate = moment(startDate);
+    filter.endDate = moment(endDate);
+    this.props.onFilter(filter);
+    this.setState({ filter });
+  }
+
+  /**
+   * Handles updates of the keywords filter.
+   * @param {Array} keywords An array of selected keywords.
+   */
+  onKeywordsChanged(keywords) {
+    const filter = new FilterPanelFilter(this.state.filter);
+    filter.keywords = keywords;
+    this.props.onFilter(filter);
+    this.setState({ filter });
+  }
+
+  /**
+   * Handles updates of the subtracks filter.
+   * @param {Array} subtracks An array of selected subtracks.
+   */
+  onSubtracksChanged(subtracks) {
+    const filter = new FilterPanelFilter(this.state.filter);
+    filter.subtracks = subtracks;
+    this.props.onFilter(filter);
+    this.setState({ filter });
   }
 
   /**
    * Triggers the 'onFilter' callback, if it is provided in properties.
    */
   filter() {
-    if (this.props.onFilter) this.props.onFilter(this.state);
+    this.props.onFilter(this.state.filter);
   }
 
   render() {
     let className = 'FiltersPanel';
     if (this.props.hidden) className += ' hidden';
-
     return (
-      <div className={className}>
+      <div className={className} ref={this.props.ref}>
         <div id="filters">
           <div className="filter" id="keywords">
             <label htmlFor="keyword-select">Keywords</label>
             <Select
               id="keyword-select"
               multi
-              onChange={value => this.setState({ keywords: value ? value.split(',') : [] }, this.filter)}
+              onChange={value => this.onKeywordsChanged(value ? value.split(',') : [])}
               options={this.props.validKeywords}
               simpleValue
-              value={this.state.keywords.join(',')}
+              value={this.state.filter.keywords.join(',')}
             />
           </div>
           <div className="filter-row">
@@ -78,19 +110,19 @@ class FiltersPanel extends React.Component {
               <Select
                 id="track-select"
                 multi
-                onChange={value => this.setState({ tracks: value ? value.split(',') : [] }, this.filter)}
-                options={this.props.validTracks}
+                onChange={value => this.onSubtracksChanged(value ? value.split(',') : [])}
+                options={this.props.validSubtracks}
                 simpleValue
-                value={this.state.tracks.join(',')}
+                value={this.state.filter.subtracks.join(',')}
               />
             </div>
             <div className="filter" id="dates">
               <label htmlFor="date-range-picker">Date range</label>
               <DateRangePicker
-                endDate={this.state.endDate}
+                endDate={this.state.filter.endDate}
                 id="date-range-picker"
-                onDatesChange={dates => this.setState(dates, this.filter)}
-                startDate={this.state.startDate}
+                onDatesChange={dates => this.onDatesChanged(dates.startDate, dates.endDate)}
+                startDate={this.state.filter.startDate}
               />
             </div>
           </div>
@@ -98,7 +130,7 @@ class FiltersPanel extends React.Component {
         <div id="buttons">
           <button
             className="white tc-outline-btn"
-            onClick={() => this.setState(DEFAULT_STATE, this.filter)}
+            onClick={() => this.onClearFilters()}
           >
             Clear filters
           </button>
@@ -115,9 +147,12 @@ class FiltersPanel extends React.Component {
 }
 
 FiltersPanel.defaultProps = {
+  filter: new FilterPanelFilter(),
   hidden: false,
+  onClearFilters: _.noop,
   onFilter: _.noop,
   onSaveFilter: _.noop,
+  ref: _.noop,
 };
 
 const SelectOptions = PT.arrayOf(
@@ -128,11 +163,14 @@ const SelectOptions = PT.arrayOf(
 );
 
 FiltersPanel.propTypes = {
+  filter: PT.instanceOf(FilterPanelFilter),
   hidden: PT.bool,
+  onClearFilters: PT.func,
   onFilter: PT.func,
   onSaveFilter: PT.func,
+  ref: PT.func,
   validKeywords: SelectOptions.isRequired,
-  validTracks: SelectOptions.isRequired,
+  validSubtracks: SelectOptions.isRequired,
 };
 
 export default FiltersPanel;

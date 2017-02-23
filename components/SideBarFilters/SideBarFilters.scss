@@ -21,8 +21,9 @@
 
   hr {
     background: $tc-gray-20;
+    border: none;
     height: 1px;
-    margin: 2*$base-unit;
+    margin: 2*$base-unit 0;
   }
 
   #edit-button {

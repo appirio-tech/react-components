@@ -1,9 +1,8 @@
-require('./UserDropdownMenu.scss')
-
 import React, {PropTypes} from 'react'
 import Avatar from '../Avatar/Avatar'
 import Dropdown from '../Dropdown/Dropdown'
 
+require('./UserDropdownMenu.scss')
 
 const UserDropdownMenu = ({username, userImage, domain, loginUrl, registerUrl}) => {
 
@@ -35,16 +34,16 @@ const UserDropdownMenu = ({username, userImage, domain, loginUrl, registerUrl}) 
         <div className="dropdown-menu-header">
           <span className="user-image"><Avatar avatarUrl={userImage} /></span>
           <span className="username">{ username }</span>
-          <img className="dropdown-arrow" src={ require('./arrow-small-down.svg') } />
+          <img className="dropdown-arrow" src={require('./arrow-small-down.svg')} />
         </div>
 
         <div className="dropdown-menu-list">
           {
             userDropdownLists.map((list, i) => {
-              return ( <ul key={ i }>
+              return ( <ul key={i}>
                 {
                   list.map((link, j) => {
-                    return <li className="user-menu-item transition" key={ j }><a href={ link.link }>{ link.label }</a></li>
+                    return <li className="user-menu-item transition" key={j}><a href={link.link}>{ link.label }</a></li>
                   })
                 }
               </ul> )
