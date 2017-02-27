@@ -27,7 +27,7 @@ class SelectDropdown extends Component {
       const handleOptionClick = this.handleClick.bind(this, option)
       return (
         <li key={ optIdx } className="dropdown-menu-list-item" onClick={ handleOptionClick }>
-          <a href="javascript:;">{ option.value }</a>
+          <a href="javascript:;">{ option.title ? option.title : option.value }</a>
         </li>
       )
     }
