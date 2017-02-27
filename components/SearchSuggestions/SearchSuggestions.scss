@@ -2,11 +2,11 @@
 
 .SearchSuggestions {
 	margin-bottom: 30px;
-	background-color: white;
+	background-color: $tc-white;
 	border: 1px solid $tc-gray-30;
 	box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.3);
 	border-radius: 2px;
-	// min-height: 303px;
+	min-height: 303px;
 	position: relative;
 
 	.panel-header {
@@ -18,7 +18,7 @@
 		.label {
 			font-size: 12px;
 			line-height: 14px;
-			color: $tc-gray-30;
+			color: $tc-gray-60;
 			position: relative;
 		}
 
@@ -37,7 +37,7 @@
 				a, a:visited {
 					font-size: 12px;
 					line-height: 14px;
-					color: $tc-gray-30;
+					color: $tc-gray-60;
 					background-color: transparent;
 					border: 0px;
 					outline: 0px;
@@ -66,10 +66,10 @@
 	.panel-body {
 		border: none;
 		padding: 0;
-		// padding-bottom: 5px;
+		padding-bottom: 5px;
 
 		li.selected {
-			background-color: $tc-gray-neutral-dark;
+			background-color: $tc-gray-neutral-light;
 		}
 
 		.StandardListItem {
@@ -92,7 +92,7 @@
 		}
 
 		.StandardListItem:hover {
-			background-color: $tc-gray-neutral-dark;
+			background-color: $tc-gray-neutral-light;
 
 		}
 
@@ -101,7 +101,7 @@
 			display:block;
 			height: 40px;
 			padding: 14px 15px;
-			background-color: $tc-dark-blue-10;
+			background-color: $tc-light-blue;
 			color: $tc-gray-90;
 			font-size: 12px;
 			line-height: 14px;
@@ -111,11 +111,11 @@
 			outline: 0px none;
 			white-space: nowrap;
 			text-overflow: ellipsis;
-			overflow: hidden;
+			overflow-x: hidden;
 		}
 
 		.footer-link:hover, .footer-link:active {
-			background-color: $tc-dark-blue-30;
+			background-color: $tc-light-blue-70;
 			color: $tc-black;
 			border: 0px none;
 			outline: 0px none;

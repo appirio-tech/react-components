@@ -1,12 +1,21 @@
-@import 'tc-includes';
+@import "tc-includes";
+
+$border-color: #D8D8DB;
+$active-icon-wrap-bg: #888894;
 
 .SearchBar {
-  @include roboto;
-  background: $tc-gray-80;
-  height: 30px;
+  // @include roboto;
+  // background: $tc-gray-80;
+  // height: 30px;
+  // width: 100%;
+  // border: 0;
+  // border-radius: 2px;
+
+  background-color: $tc-white;
+  height: 40px;
   width: 100%;
-  border: 0;
-  border-radius: 2px;
+  border: 1px solid $border-color;
+  border-radius: 4px;
   position: relative;
   padding-left: 15px;
   padding-right: 46px;
@@ -23,19 +32,22 @@
   }
 
   &.state-empty:before {
-    content: "Search for projects";
+    content: "Search Topcoder for challenges, people or content";
     position: absolute;
     left: 15px;
     top: 50%;
-    text-align: left;
     transform: translateY(-50%);
     color: $tc-gray-40;
-    font-size: 13px;
+    font-size: 15px;
     line-height: 20px;
     width: 75%;
     white-space: nowrap;
     overflow-x: hidden;
     text-overflow: ellipsis;
+
+    @media screen and (max-width: 768px) {
+      content: "Search Topcoder";
+    }
   }
 
   &.state-focused:before,
@@ -45,9 +57,11 @@
 
   &.state-filled,
   &.state-focused {
+    // border-color: $tc-gray-40;
+    // padding-right: 88px;
+    // background-color: white;
+
     border-color: $tc-gray-40;
-    padding-right: 88px;
-    background-color: white;
 
     .search-txt {
       display: block;
@@ -58,12 +72,23 @@
       background-color: $tc-dark-blue-90;
       z-index: 20;
       cursor: pointer;
+      background-color: $active-icon-wrap-bg;
+    }
+    .search-typeahead-text {
+      display: block;
     }
   }
 
-  &.state-focused {
+  &.state-filled {
+    border-color: $border-color;
+
     .search-typeahead-text {
-      display: block;
+      display: none;
+    }
+
+    .search-icon-wrap {
+      cursor: pointer;
+      background-color: $active-icon-wrap-bg;
     }
 
     .suggestions-panel {
@@ -73,24 +98,21 @@
 
   .search-bar__text,
   .search-typeahead-text {
-    @include roboto;
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
     outline: 0px;
     border: 0px none;
     font-size: 17px;
     color: $tc-gray-90;
     line-height: 20px;
-    // NOTE: If uncommented, it causes problems with the proper alignment of
-    //    the typeahead text.
-    // width: calc(100% - 15px - 46px);
+    width: 90%;
     position: absolute;
     left: 0;
     text-indent: 15px;
     top: 50%;
     transform: translateY(-50%);
-    background-color: transparent !important;
+    background-color: transparent;
     z-index: 20;
     padding-left: 0px;
-    height: 30px;
   }
 
   .search-bar__text {
@@ -104,11 +126,10 @@
   }
 
   .search-typeahead-text {
-    position: absolute;
     color: $tc-gray-40;
     display: none;
-    z-index: 20;
-    top: 19px;
+    z-index: 10;
+    left: 16.5px;
   }
 
   .search-bar__clear {
@@ -121,26 +142,27 @@
   }
 
   .search-icon-wrap {
+    width: 46px;
+    height: 40px;
     position: absolute;
-    right: 0;
-    top: 0;
-    height: 30px;
-    width: 37px;
-    background: $tc-gray-60 url("./ui-16px-2_zoom.svg") 10px 7px no-repeat;
-    border-radius: 0 2px 2px 0;
-    border-left: 1px solid $tc-black;
-    @include roboto;
-    font-size: 12px;
-    color: $tc-white;
-    padding-left: 36px;
-    text-align: left;
-    line-height: 30px;
+    top: -1px;
+    right: -1px;
+    background-color: $tc-gray-neutral-light;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+
+    .search-bar__icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
   }
 
   .suggestions-panel {
     display: none;
     position: absolute;
-    top: 30px;
+    top: 43px;
     left: 0;
     width: 100%;
     z-index: 1000;

@@ -42,7 +42,7 @@ class Panel extends Component {
 
     return (
       <div className="Panel">
-        {this.props.showHeader ? header : null}
+        {header}
         {body}
       </div>
     )
@@ -52,10 +52,6 @@ class Panel extends Component {
 Panel.propTypes = {
   children     : PropTypes.array.isRequired,
   expandTrigger: PropTypes.string
-}
-
-Panel.defaultProps = {
-  showHeader : true
 }
 
 export default Panel
