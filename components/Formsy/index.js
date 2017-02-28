@@ -11,7 +11,7 @@ import TiledRadioGroup from './TiledRadioGroup'
 
 require('./FormFields.scss')
 
-const RELAXED_URL_REGEX = /^(http(s?):\/\/)?(www\.)?[a-zA-Z0-9\.\-\_]+(\.[a-zA-Z]{2,15})+(\/[a-zA-Z0-9\_\-\s\.\/\?\%\#\&\=]*)?$/
+const RELAXED_URL_REGEX = /^(http(s?):\/\/)?(www\.)?[a-zA-Z0-9\.\-\_]+(\.[a-zA-Z]{2,15})+(\:[0-9]{2,5})?(\/[a-zA-Z0-9\_\-\s\.\/\?\%\#\&\=]*)?$/
 
 // validations
 Formsy.addValidationRule('isRequired', (values, value, array) => { // eslint-disable-line no-unused-vars
