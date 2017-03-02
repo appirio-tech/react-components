@@ -89,7 +89,7 @@ class SideBarFilters extends React.Component {
       localStorage.filters = '';
     }
     this.state = {
-      currentFilter: DEFAULT_FILTERS[0],
+      currentFilter: DEFAULT_FILTERS[3],
       filters: _.clone(DEFAULT_FILTERS).concat(myFilters),
       mode: MODES.SELECT_FILTER,
     };
