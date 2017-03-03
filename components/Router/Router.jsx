@@ -35,6 +35,7 @@ import SubTrackDetailsExample        from '../SubTrackDetails/SubTrackDetailsExa
 import PrizeExamples                 from '../Prize/PrizeExamples.jsx'
 import TooltipExamples               from '../Tooltip/TooltipExamples.jsx'
 import ProgressBarExample            from '../ProgressBar/ProgressBarExample.jsx'
+import ReactSvgLoaderDemo            from '../ReactSvgLoaderDemo'
 
 const Component = () => (
   <Provider store={store}>
@@ -101,6 +102,8 @@ const Component = () => (
         <Route path="/TooltipExamples" component={TooltipExamples} />
 
         <Route path="/ProgressBarExample" component={ProgressBarExample}/>
+
+        <Route path="/ReactSvgLoaderDemo" component={ReactSvgLoaderDemo}/>
       </Route>
     </Router>
   </Provider>

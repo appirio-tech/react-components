@@ -34,6 +34,9 @@ const navs = {
     'ManageStepsExamples',
     'StepRowExamples'
   ],
+  New: [
+    'ReactSvgLoaderDemo'
+  ],
 }
 
 class ExampleNavContainer extends Component {
