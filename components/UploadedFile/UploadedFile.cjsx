@@ -11,7 +11,7 @@ UploadedFile = ({ status, preview, progress, fileName, enableCaptions, captions,
       {
         if status == 'failed'
           <div className="failed flex column center">
-            <img className="icon" src={require './icon-alert-red.svg'}/>
+            <img className="icon" src={require '-!file!./icon-alert-red.svg'}/>
 
             <button className="clean" onClick="" type="button">
               retry
@@ -21,7 +21,7 @@ UploadedFile = ({ status, preview, progress, fileName, enableCaptions, captions,
           if preview
             <div className="preview" style={backgroundImage: "url(#{preview})"} />
           else
-            <img className="document-icon" src={require './icon-document.svg'} />
+            <img className="document-icon" src={require '-!file!./icon-document.svg'} />
       }
       {
         if status == 'uploading'

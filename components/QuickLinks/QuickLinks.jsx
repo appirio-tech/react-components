@@ -12,16 +12,16 @@ const QuickLinks = ({domain}) => {
   return (
     <div className="QuickLinks">
       <Dropdown pointerShadow>
-        <img src={ require('./grid.svg') } className="dropdown-menu-header" />
+        <img src={ require('-!file!./grid.svg') } className="dropdown-menu-header" />
         <ul className="dropdown-menu-list">
           <li className="dropdown-menu-list-item">
-            <StandardListItem labelText="Review" imgSrc={require('./placeholder.svg')} linkUrl={orLink} linkTarget="_blank" />
+            <StandardListItem labelText="Review" imgSrc={require('-!file!./placeholder.svg')} linkUrl={orLink} linkTarget="_blank" />
           </li>
           <li className="dropdown-menu-list-item">
-            <StandardListItem labelText="Web Arena" imgSrc={require('./placeholder.svg')} linkUrl={arenaLink} linkTarget="_blank" />
+            <StandardListItem labelText="Web Arena" imgSrc={require('-!file!./placeholder.svg')} linkUrl={arenaLink} linkTarget="_blank" />
           </li>
           <li className="dropdown-menu-list-item">
-            <StandardListItem labelText="Applet Arena" imgSrc={require('./placeholder.svg')} linkUrl={arenaAppletLink} linkTarget="_blank" />
+            <StandardListItem labelText="Applet Arena" imgSrc={require('-!file!./placeholder.svg')} linkUrl={arenaAppletLink} linkTarget="_blank" />
           </li>
         </ul>
       </Dropdown>

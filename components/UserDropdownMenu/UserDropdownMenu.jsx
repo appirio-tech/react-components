@@ -34,7 +34,7 @@ const UserDropdownMenu = ({username, userImage, domain, loginUrl, registerUrl}) 
         <div className="dropdown-menu-header">
           <span className="user-image"><Avatar avatarUrl={userImage} /></span>
           <span className="username">{ username }</span>
-          <img className="dropdown-arrow" src={require('./arrow-small-down.svg')} />
+          <img className="dropdown-arrow" src={require('-!file!./arrow-small-down.svg')} />
         </div>
 
         <div className="dropdown-menu-list">

@@ -4,7 +4,7 @@ require('./Avatar.scss');
 
 const Avatar = ({ avatarUrl }) => {
 
-  const src = avatarUrl || require('./place-holder.svg');
+  const src = avatarUrl || require('-!file!./place-holder.svg');
 
   return (
     <div className="Avatar">

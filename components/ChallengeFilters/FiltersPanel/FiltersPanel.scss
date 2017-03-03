@@ -121,7 +121,7 @@ $panel-radius-4: $corner-radius * 2;
       position: relative;
       &::before {
         content: '';
-        background-image: url('./calendar.svg');
+        background-image: url('./calendar._load_by_url_.svg');
         background-position: 0 0;
         background-repeat: no-repeat;
         width: $panel-space-15 - 1;

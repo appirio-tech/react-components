@@ -195,9 +195,9 @@ class SearchBar extends Component {
       <div className={ sbClasses }>
         <input className="search-bar__text" onFocus={ this.onFocus } onChange={ this.onChange } onKeyUp={ this.onKeyUp } ref="searchValue" value={this.state.searchValue} />
         <span className="search-typeahead-text">{ typeaheadText }</span>
-        <img className="search-bar__clear" src={ require('./x-mark.svg') } onClick={ this.clearSearch }/>
+        <img className="search-bar__clear" src={ require('-!file!./x-mark.svg') } onClick={ this.clearSearch }/>
         <div className="search-icon-wrap" onClick={ this.search }>
-          <img className="search-bar__icon" src={ require('./ico-mobile-search-selected.svg') } />
+          <img className="search-bar__icon" src={ require('-!file!./ico-mobile-search-selected.svg') } />
         </div>
         <div className="suggestions-panel">
           {results}

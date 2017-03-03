@@ -44,7 +44,7 @@ class ChallengeSearchBar extends React.Component {
           value={this.state.value}
         />
         <span id="SearchButton" onClick={() => this.onSearch()} >
-          <img src={require('./ui-zoom.svg')} />
+          <img src={require('-!file!./ui-zoom.svg')} />
         </span>
       </div>
     );
