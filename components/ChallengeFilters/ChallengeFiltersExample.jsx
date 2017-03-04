@@ -27,6 +27,11 @@ import ChallengesSidebar from '../ChallengesSidebar/ChallengesSidebar';
 import '../ChallengeCard/ChallengeCard.scss';
 
 /**
+ * Base API version 3 URL
+ */
+const API_V3 = `https://api.topcoder.com/v3/srms`
+
+/**
  * Helper function for generation of VALID_KEYWORDS and VALID_TRACKS arrays.
  * @param {String} keyword
  * @return {Object} The valid object to include into the array which will be
@@ -74,6 +79,7 @@ class ChallengeFiltersExample extends React.Component {
     super(props);
     this.state = {
       challenges: [],
+      srmChallenges: [],
       currentCardType: 'Challenges',
       filter: new ChallengeFilter(),
       lastFetchId: 0,
@@ -86,6 +92,13 @@ class ChallengeFiltersExample extends React.Component {
     }
     this.setCardType.bind(this);
     this.fetchChallenges(0).then(res => this.setChallenges(0, res));
+
+    /* Fetching of SRM challenges */
+    fetch(`${API_V3}/?filter=status=FUTURE`)
+      .then(res => res.json())
+      .then((json) => {
+        this.setState({srmChallenges: json.result.content})
+      })
   }
 
   /**
@@ -296,6 +309,17 @@ class ChallengeFiltersExample extends React.Component {
     const filterChallenges = challenges.filter(
       this.state.sidebarFilter.getFilterFunction()).map(cardify);
 
+    // Upcoming srms
+    let futureSRMChallenge = this.state.srmChallenges.filter(function(challenge) {
+      return challenge.status === "FUTURE"
+    })
+
+    futureSRMChallenge = futureSRMChallenge.sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime())
+
+    const UpcomingSrm = futureSRMChallenge.map((srmChallenge, i) => {
+      return <SRMCard category={'upcoming'} srmChallenge={srmChallenge} key={i}/>
+    })
+
     return (
       <div className="ChallengeFiltersExample">
         <ChallengeFilters
@@ -319,13 +343,12 @@ class ChallengeFiltersExample extends React.Component {
           <div className="challenges-container SRMs-container">
             {/* happening now */}
             <div className="SRMCardExamples example-lg">
-              <SRMCard category={'now'} />
+              <SRMCard category={'now'}/>
             </div>
             {/* upcoming SRMs */}
             <div className="SRMCardExamples example-lg">
               <div className="title">Upcoming SRMs</div>
-              <SRMCard category={'upcoming'} />
-              <SRMCard category={'upcoming'} />
+              { UpcomingSrm }
             </div>
             {/* past SRMs */}
             <div className="SRMCardExamples example-lg">
