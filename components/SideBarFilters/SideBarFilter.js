@@ -60,7 +60,12 @@ class SideBarFilter extends ChallengeFilter {
     switch (this.mode) {
       case MODE.ALL_CHALLENGES: return () => true;
       case MODE.MY_CHALLENGES: return item => item.myChallenge;
-      case MODE.OPEN_FOR_REGISTRATION: return item => item.registrationOpen.startsWith('Yes');
+      // The API has some incosistencies in the challenge items
+      // thus we have to check all fields that define a challenges as 'Open for registration'
+      case MODE.OPEN_FOR_REGISTRATION: return item => item.currentPhaseName
+        && item.currentPhaseName.startsWith('Registration')
+        && !item.status.startsWith('Completed')
+        && item.registrationOpen.startsWith('Yes');
       case MODE.ONGOING_CHALLENGES:
         return item => !item.registrationOpen.startsWith('Yes')
           && item.status === 'Active';
