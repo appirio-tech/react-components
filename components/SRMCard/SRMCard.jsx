@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { PropTypes as PT }from 'react';
+import moment from 'moment';
 import UserAvatarTooltip from '../ChallengeCard/Tooltips/UserAvatarTooltip';
 import LeaderboardAvatar from '../LeaderboardAvatar/LeaderboardAvatar';
 import TrackAbbreviationTooltip from '../ChallengeCard/Tooltips/TrackAbbreviationTooltip';
@@ -56,7 +57,7 @@ const renderLeaderboard = MOCK_REGISTRANTS.map((winner, index) => {
 })
 
 // Happening now
-const happeningNow = () => {
+const HappeningNow = () => {
   return (
     <div className="SRMCard">
       <div className="left-panel">
@@ -85,7 +86,7 @@ const happeningNow = () => {
   )
 }
 // upcoming SRMs
-const upcomingSRMs = () => {
+const UpcomingSRMs = ({srmChallenge}) => {
   return (
     <div className="SRMCard">
       <div className="left-panel upcoming">
@@ -95,19 +96,22 @@ const upcomingSRMs = () => {
           </TrackAbbreviationTooltip>
         </div>
         <div className="SRM-details">
-          <p className="upcoming-title">Competitive Programming - Single Round Match 679</p>
+          <p className="upcoming-title">Competitive Programming - {srmChallenge.name}</p>
         </div>
       </div>
       <div className="right-panel upcoming">
-        <div className="SRM-date">Aug 31, 2015 12:30 pm</div>
+        <div className="SRM-date">{moment(srmChallenge.startDate).format('MMM DD, YYYY hh:mm a')}</div>
         <a href="javascript:;" className="notify-me">Notify me</a>
       </div>
     </div>
   )
 }
+UpcomingSRMs.propTypes = {
+  srmChallenge: PT.object,
+}
 
 // past SRMs
-const pastSRMs = () => {
+const PastSRMs = () => {
   return (
     <div>
       <PastSRMCard></PastSRMCard>
@@ -120,14 +124,19 @@ const pastSRMs = () => {
 /*
 * SRM card
 */
-const SRMCard = ({category}) => {
+const SRMCard = ({category, srmChallenge}) => {
   return (
     <div className="SRMCard-container">
-      {category === 'now' ? happeningNow() : ''}
-      {category === 'upcoming' ? upcomingSRMs() : ''}
-      {category === 'past' ? pastSRMs() : ''}
+      {category === 'now' ? <HappeningNow/> : ''}
+      {category === 'upcoming' ? <UpcomingSRMs srmChallenge={srmChallenge}/> : ''}
+      {category === 'past' ? <PastSRMs/> : ''}
     </div>
   )
+}
+
+SRMCard.propTypes = {
+  category: PT.string,
+  srmChallenge: PT.object,
 }
 
 export default SRMCard;
