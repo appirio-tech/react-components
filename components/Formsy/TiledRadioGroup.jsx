@@ -39,7 +39,7 @@ class TiledRadioGroup extends Component {
           {
             curValue === opt.value &&
             <span className="check-mark">
-              <IconUICheckSimple fill="#fff" width={14} height={14}/>
+              <IconUICheckSimple fill="#fff" width={12} height={12}/>
             </span>
           }
         </a>
