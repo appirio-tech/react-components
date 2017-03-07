@@ -217,4 +217,14 @@ a.tiled-group-item {
     @include roboto;
     margin-top:10px;
   }
+  .check-mark {
+    background: $tc-accent-blue-90;
+    border-radius: 2px;
+    display: none;
+    height: 15px;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    width: 15px;
+  }
 }
