@@ -36,7 +36,7 @@ class TiledRadioGroup extends Component {
           <span className="title">{opt.title}</span>
           <small>{opt.desc}</small>
         </a>
-      );
+      )
       return (
         <span>
         {
