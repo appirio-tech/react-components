@@ -1,6 +1,7 @@
 @import 'tc-includes';
 
 .Tooltip {
+  @include roboto;
   position: relative;
   .tooltip-target {
     cursor: default;
