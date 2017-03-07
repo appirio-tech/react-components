@@ -1,40 +1,51 @@
 @import "../../styles/tc-styles";
 
 .SideBarFilters {
-
-  background: $tc-white;
   float: right;
   font: 400 13px/30px Roboto;
-  padding: 2*$base-unit;
   width: 360px;
 
-  h1 {
-    border: none;
-    color: $tc-gray-50;
-    display: inline-block;
-    font-size: 12px;
-    margin: 0 3*$base-unit;
-    padding: 0;
-    text-align: left;
-    text-decoration: none;
-  }
-
-  hr {
-    background: $tc-gray-20;
-    border: none;
-    height: 1px;
-    margin: 2*$base-unit 0;
-  }
-
-  #edit-button {
+  .FilterBox {
     background: $tc-white;
-    border: 1px solid $tc-gray-50;
-    border-radius: 2*$corner-radius;
-    color: $tc-gray-50;
-    cursor: pointer;
-    float: right;
-    line-height: 13px;
-    padding: $base-unit 3*$base-unit;
-    text-transform: none;
+    padding: 2*$base-unit;
+
+    h1 {
+      border: none;
+      color: $tc-gray-50;
+      display: inline-block;
+      font-size: 12px;
+      margin: 0 3*$base-unit;
+      padding: 0;
+      text-align: left;
+      text-decoration: none;
+    }
+
+    hr {
+      background: $tc-gray-20;
+      border: none;
+      height: 1px;
+      margin: 2*$base-unit 0;
+    }
+
+    #edit-button {
+      background: $tc-white;
+      border: 1px solid $tc-gray-50;
+      border-radius: 2*$corner-radius;
+      color: $tc-gray-50;
+      cursor: pointer;
+      float: right;
+      line-height: 13px;
+      padding: $base-unit 3*$base-unit;
+      text-transform: none;
+    }
+  }
+
+  .rss-link {
+    display: block;
+    font-family: 'Roboto';
+    font-size: 13px;
+    color: $tc-gray-70;
+    line-height: 30px;
+    margin: 10px;
   }
 }

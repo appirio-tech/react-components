@@ -28,10 +28,10 @@ const numberWithCommas = (n) => {
 
 function ChallengeCard ({challenge, sampleWinnerProfile, onTechTagClicked}) {
   challenge.technologyList = challenge.technologies;
+  challenge.isDataScience = false
   if (challenge.technologyList.length > VISIBLE_TECHNOLOGIES) {
     if(_.indexOf(challenge.technologyList, 'Data Science') > -1) {
-      challenge.track = 'DATA_SCIENCE'
-      challenge.subTrack = 'MARATHON_MATCH'
+      challenge.isDataScience = true
     }
     const lastItem = '+' + (challenge.technologyList.length - VISIBLE_TECHNOLOGIES);
     challenge.technologyList = challenge.technologyList.slice(0, VISIBLE_TECHNOLOGIES);
@@ -67,7 +67,8 @@ function ChallengeCard ({challenge, sampleWinnerProfile, onTechTagClicked}) {
       <div className="left-panel">
         <div className="challenge-track">
           <TrackAbbreviationTooltip track={challenge.track} subTrack={challenge.subTrack}>
-            <TrackIcon track={challenge.track} subTrack={challenge.subTrack} tcoEligible={challenge.eventName} />
+            <TrackIcon track={challenge.track} subTrack={challenge.subTrack} tcoEligible={challenge.eventName}
+            isDataScience={challenge.isDataScience} />
           </TrackAbbreviationTooltip>
         </div>
 

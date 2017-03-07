@@ -27,6 +27,7 @@ const MY_CHALLENGES_API = `${V2_API}/user/challenges?challengeType=Copilot+Posti
   RIA+Build+Competition,UI+Prototype+Competition,Assembly+Competition,
   Test+Suites,Test+Scenarios,Content+Creation,Marathon+Match,Bug+Hunt,
   First2Finish,Code&type=active`
+const RSS_LINK = 'http://feeds.topcoder.com/challenges/feed?list=active&contestType=all';
 
 /*
  * Default set of filters displayed in the component.
@@ -90,7 +91,7 @@ class SideBarFilters extends React.Component {
       localStorage.filters = '';
     }
     this.state = {
-      currentFilter: DEFAULT_FILTERS[0],
+      currentFilter: DEFAULT_FILTERS[3],
       filters: _.clone(DEFAULT_FILTERS).concat(myFilters),
       mode: MODES.SELECT_FILTER,
     };
@@ -194,17 +195,20 @@ class SideBarFilters extends React.Component {
   editMyFiltersMode() {
     return (
       <div className="SideBarFilters" ref={ref => this.props.ref(ref)}>
-        <EditMyFilters
-          filters={this.state.filters.slice(FILTER_ID.FIRST_USER_DEFINED)}
-          onDone={(myFilters) => {
-            const filters = _.clone(this.state.filters).slice(0, FILTER_ID.FIRST_USER_DEFINED);
-            this.setState({
-              filters: filters.concat(myFilters),
-              mode: MODES.SELECT_FILTER,
-            });
-            this.saveFilters(myFilters);
-          }}
-        />
+        <div className="FilterBox">
+          <EditMyFilters
+            filters={this.state.filters.slice(FILTER_ID.FIRST_USER_DEFINED)}
+            onDone={(myFilters) => {
+              const filters = _.clone(this.state.filters).slice(0, FILTER_ID.FIRST_USER_DEFINED);
+              this.setState({
+                filters: filters.concat(myFilters),
+                mode: MODES.SELECT_FILTER,
+              });
+              this.saveFilters(myFilters);
+            }}
+          />
+          </div>
+        <a className="rss-link" href={RSS_LINK}>Get the RSS feed</a>
       </div>
     );
   }
@@ -247,30 +251,33 @@ class SideBarFilters extends React.Component {
     const myFilters = filters.slice(FILTER_ID.FIRST_USER_DEFINED);
     return (
       <div className="SideBarFilters" ref={ref => this.props.ref(ref)}>
-        {filters[FILTER_ID.ALL_CHALLENGES]}
+        <div className="FilterBox">
+          {filters[FILTER_ID.ALL_CHALLENGES]}
 
-        {this.props.isAuth ?<span><hr /> {filters[FILTER_ID.MY_CHALLENGES]}</span> : ''}
-        <hr />
-        {filters[FILTER_ID.OPEN_FOR_REGISTRATION]}
-        {filters[FILTER_ID.ONGOING_CHALLENGES]}
-        {filters[FILTER_ID.PAST_CHALLENGES]}
-        {filters[FILTER_ID.OPEN_FOR_REVIEW]}
-        {
-          myFilters.length ?
-            <span>
-              <hr />
-              <h1>My filters</h1>
-              <button
-                id="edit-button"
-                onClick={() => {
-                  this.setState({ mode: MODES.EDIT_MY_FILTERS });
-                }}
-              >
-                Edit
-              </button>
-              {myFilters}
-            </span> : ''
-        }
+          {this.props.isAuth ?<span><hr /> {filters[FILTER_ID.MY_CHALLENGES]}</span> : ''}
+          <hr />
+          {filters[FILTER_ID.OPEN_FOR_REGISTRATION]}
+          {filters[FILTER_ID.ONGOING_CHALLENGES]}
+          {filters[FILTER_ID.PAST_CHALLENGES]}
+          {filters[FILTER_ID.OPEN_FOR_REVIEW]}
+          {
+            myFilters.length ?
+              <span>
+                <hr />
+                <h1>My filters</h1>
+                <button
+                  id="edit-button"
+                  onClick={() => {
+                    this.setState({ mode: MODES.EDIT_MY_FILTERS });
+                  }}
+                >
+                  Edit
+                </button>
+                {myFilters}
+              </span> : ''
+          }
+        </div>
+        <a className="rss-link" href={RSS_LINK} target="_blank">Get the RSS feed</a>
       </div>
     );
   }

@@ -26,9 +26,9 @@ class SideBarFilter extends ChallengeFilter {
   constructor(arg) {
     if (!arg) {
       super();
-      this.mode = MODE.ALL_CHALLENGES;
-      this.name = MODE.ALL_CHALLENGES;
-      this.uuid = MODE.ALL_CHALLENGES;
+      this.mode = MODE.ONGOING_CHALLENGES;
+      this.name = MODE.ONGOING_CHALLENGES;
+      this.uuid = MODE.ONGOING_CHALLENGES;
     } else if (_.isObject(arg)) {
       if (!arg._isSideBarFilter) throw new Error('Invalid argument!');
       super(arg);
@@ -54,15 +54,20 @@ class SideBarFilter extends ChallengeFilter {
 
   count() {
     if (this.mode === MODE.CUSTOM) return super.count();
-    return this.mode === MODE.ALL_CHALLENGES ? 0 : 1;
+    return this.mode === MODE.ONGOING_CHALLENGES ? 0 : 1;
   }
 
   getFilterFunction() {
     switch (this.mode) {
       case MODE.ALL_CHALLENGES: return () => true;
       case MODE.MY_CHALLENGES: return item => item.myChallenge;
-      case MODE.OPEN_FOR_REGISTRATION: return item => item.registrationOpen.startsWith('Yes');
       case MODE.OPEN_FOR_REVIEW: return item => item.currentPhaseName === 'Review';
+      // The API has some incosistencies in the challenge items
+      // thus we have to check all fields that define a challenges as 'Open for registration'
+      case MODE.OPEN_FOR_REGISTRATION: return item => item.currentPhaseName
+        && item.currentPhaseName.startsWith('Registration')
+        && !item.status.startsWith('Completed')
+        && item.registrationOpen.startsWith('Yes');
       case MODE.ONGOING_CHALLENGES:
         return item => !item.registrationOpen.startsWith('Yes')
           && item.status === 'Active';
