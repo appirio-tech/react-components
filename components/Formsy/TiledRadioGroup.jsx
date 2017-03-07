@@ -31,7 +31,7 @@ class TiledRadioGroup extends Component {
       const handleClick = () => this.onChange(opt.value)
       const Icon = opt.icon
       const renderTile = () => (
-        <a onClick={ !disabled && handleClick && !opt.disabled } data-value={opt.value} className={itemClassnames} key={idx} >
+        <a onClick={ !disabled && !opt.disabled && handleClick } data-value={opt.value} className={itemClassnames} key={idx} >
           <span className="icon">{ opt.icon && <Icon {...opt.iconOptions} />}</span>
           <span className="title">{opt.title}</span>
           <small>{opt.desc}</small>
