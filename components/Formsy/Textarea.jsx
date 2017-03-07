@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { HOC as hoc } from 'formsy-react'
 import classNames from 'classnames'
+import AutoresizeTextarea from 'react-textarea-autosize'
 
 class Textarea extends Component {
 
@@ -25,17 +26,31 @@ class Textarea extends Component {
     return (
       <div className={wrapperClass}>
         <label className="tc-label">{label}</label>
-        <textarea
-          rows={rows}
-          cols={cols}
-          id={name}
-          name={name}
-          placeholder={placeholder}
-          className={classes}
-          disabled={disabled}
-          onChange={this.changeValue}
-          value={this.props.getValue()}
-        />
+        {
+          this.props.autoResize ?
+            <AutoresizeTextarea
+              rows={rows}
+              cols={cols}
+              id={name}
+              name={name}
+              placeholder={placeholder}
+              className={classes}
+              disabled={disabled}
+              onChange={this.changeValue}
+              value={this.props.getValue()}
+            /> :
+            <textarea
+              rows={rows}
+              cols={cols}
+              id={name}
+              name={name}
+              placeholder={placeholder}
+              className={classes}
+              disabled={disabled}
+              onChange={this.changeValue}
+              value={this.props.getValue()}
+            />
+        }
       { hasError ? (<p className="error-message">{errorMessage}</p>) : null}
       </div>
 
