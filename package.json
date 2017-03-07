@@ -23,8 +23,8 @@
     "example": "webpack-dev-server -d --progress --inline --colors",
     "dev": "webpack-dev-server -d --progress --inline --colors --dev --tc",
     "clean": "rm -r dist",
-    "build": "webpack --config webpack.config.js; cp example/index.html dist/",
-    "lint": "eslint --format table --ext .js,.jsx .",
+    "build": "webpack --config webpack.config.js; cp index.html dist/",
+    "lint": "eslint ./components/ChallengeCardContainer",
     "test": "cross-env NODE_ENV=test mocha --reporter progress --compilers js:babel-core/register --require ignore-styles --recursive \"./components/**/*.spec.js\"",
     "test:watch": "npm run test -- --watch",
     "build-navbar": "webpack $BUILD --tc --config navbar.webpack.config.coffee;"
@@ -49,6 +49,7 @@
     "react-select": "^1.0.0-rc.3",
     "react-stickynode": "^1.2.1",
     "react-svg-loader": "^1.1.1",
-    "uuid": "^3.0.1"
+    "uuid": "^3.0.1",
+    "react-visibility-sensor": "^3.7.0"
   }
 }
