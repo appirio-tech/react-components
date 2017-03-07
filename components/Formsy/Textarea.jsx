@@ -19,7 +19,7 @@ class Textarea extends Component {
   render() {
     const { label, name, rows, cols, placeholder, wrapperClass} = this.props
     const hasError = !this.props.isPristine() && !this.props.isValid()
-    const classes = classNames('tc-textarea', {error: hasError})
+    const classes = classNames('tc-textarea', {error: hasError}, {empty: this.props.getValue() === ''})
     const disabled = this.props.isFormDisabled() || this.props.disabled
     const errorMessage = this.props.getErrorMessage() || this.props.validationError
 
