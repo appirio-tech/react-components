@@ -2,6 +2,7 @@
 import React, { PropTypes, Component } from 'react'
 import classNames from 'classnames'
 import Tooltip from '../Tooltip/Tooltip'
+import IconUICheckSimple from '../Icons/IconUICheckSimple'
 import { HOC as hoc } from 'formsy-react'
 
 class TiledRadioGroup extends Component {
@@ -35,6 +36,12 @@ class TiledRadioGroup extends Component {
           <span className="icon">{ opt.icon && <Icon {...opt.iconOptions} />}</span>
           <span className="title">{opt.title}</span>
           <small>{opt.desc}</small>
+          {
+            curValue === opt.value &&
+            <span className="check-mark">
+              <IconUICheckSimple fill="#fff" width={12} height={12}/>
+            </span>
+          }
         </a>
       )
       return (
