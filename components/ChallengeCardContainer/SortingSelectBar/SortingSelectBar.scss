@@ -4,6 +4,15 @@
 $view-options-toggle-right-margin: $base-unit * 2;
 $down-arrow-size: $base-unit * 2;
 
+%sorting-select-button {
+  line-height: 21px;
+  border-radius: 6px;
+  padding: 8px 24px;
+  background-color: $tc-white;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
 .sortingBar {
   display: flex;
   padding: $base-unit;
@@ -35,7 +44,7 @@ $down-arrow-size: $base-unit * 2;
     right: $view-options-toggle-right-margin;
     top: $base-unit * 10;
     z-index: 1;
-    background: white;
+    background: $tc-white;
     border-radius: $base-unit;
     padding: $base-unit;
     box-shadow: 1px 5px 15px $tc-gray-20;
@@ -44,6 +53,8 @@ $down-arrow-size: $base-unit * 2;
   }
 
   .view-option {
+    @extend %sorting-select-button;
+
     font-weight: 300;
     padding: $base-unit * 2;
     outline: none;
@@ -53,6 +64,8 @@ $down-arrow-size: $base-unit * 2;
   }
 
   .view-options-toggle {
+    @extend %sorting-select-button;
+
     color: $tc-gray-50;
     border: 1px solid $tc-gray-50;
     font-size: 12px;
