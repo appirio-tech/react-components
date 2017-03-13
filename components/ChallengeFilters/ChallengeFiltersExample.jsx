@@ -104,7 +104,7 @@ class ChallengeFiltersExample extends React.Component {
       let mf_ = {};
       let sf_ = {};
       for(let p in f) {
-        if (obj.hasOwnProperty(p)) {
+        if (f.hasOwnProperty(p)) {
           if (p.toString().indexOf('mf_') > -1) {
             mf_[p.toString().substring(3)] = f[p];
           } else {
