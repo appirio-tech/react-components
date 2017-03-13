@@ -105,6 +105,18 @@ class ChallengeFiltersExample extends React.Component {
       let sf_ = {};
       for(let p in f) {
         if (f.hasOwnProperty(p)) {
+          if (p.toString().substring(3) === 'keywords'
+            || p.toString().substring(3) === 'subtracks'
+            || p.toString().substring(3) === 'tracks') {
+            f[p] = f[p].split('|');
+          } else {
+            if (f[p] === 'null') f[p] = null;
+            else if (f[p] === 'true') f[p] = true;
+            else if (f[p] === 'false') f[p] = false;
+          }
+          if (p.toString().substring(3) === 'tracks') {
+            f[p] = new Set(f[p]);
+          }
           if (p.toString().indexOf('mf_') > -1) {
             mf_[p.toString().substring(3)] = f[p];
           } else {
