@@ -22,7 +22,7 @@ class Checkbox extends Component {
     const disabled = this.props.isFormDisabled() || this.props.disabled
     const errorMessage = this.props.getErrorMessage() || this.props.validationError
     const setRef = (c) => this.element = c
-    const groupClasses = classNames('checkbox-group-item',{'checkbox-item-checked':this.props.getValue()===true})
+    const groupClasses = classNames('checkbox-group-item', {'checkbox-item-checked': this.props.getValue()===true})
 
     return (
       <div className={groupClasses}>
