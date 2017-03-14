@@ -59,7 +59,7 @@ class Textarea extends Component {
 }
 Textarea.defaultProps = {
   onChange: () => {},
-  rows: 1,
+  rows: 3,
   cols: 0
 }
 export default hoc(Textarea)
