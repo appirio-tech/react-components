@@ -74,6 +74,19 @@ const SRMsSidebarMock = {
   ],
 };
 
+// helper function to serialize object to query string
+const serialize = (obj, prefix) => {
+  const str = [];
+  for(let p in obj)
+    if (obj.hasOwnProperty(p)) {
+      if (obj[p] && obj[p].constructor === Array) {
+        obj[p] = obj[p].join('|');
+      }
+      str.push(prefix + encodeURIComponent(p) + '=' + encodeURIComponent(obj[p]));
+    }
+  return str.join('&');
+};
+
 // The demo component itself.
 class ChallengeFiltersExample extends React.Component {
   constructor(props) {
@@ -87,9 +100,32 @@ class ChallengeFiltersExample extends React.Component {
       sidebarFilter: new SideBarFilter(),
     };
     if (props.filterFromUrl) {
-      const f = JSON.parse(atob(props.filterFromUrl));
-      this.state.filter = new ChallengeFilter(f[0]);
-      this.state.sidebarFilter = new SideBarFilter(f[1]);
+      const f = JSON.parse('{"' + decodeURI(props.filterFromUrl).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
+      let mf_ = {};
+      let sf_ = {};
+      for(let p in f) {
+        if (f.hasOwnProperty(p)) {
+          if (p.toString().substring(3) === 'keywords'
+            || p.toString().substring(3) === 'subtracks'
+            || p.toString().substring(3) === 'tracks') {
+            f[p] = f[p].split('|');
+          } else {
+            if (f[p] === 'null') f[p] = null;
+            else if (f[p] === 'true') f[p] = true;
+            else if (f[p] === 'false') f[p] = false;
+          }
+          if (p.toString().substring(3) === 'tracks') {
+            f[p] = new Set(f[p]);
+          }
+          if (p.toString().indexOf('mf_') > -1) {
+            mf_[p.toString().substring(3)] = f[p];
+          } else {
+            sf_[p.toString().substring(3)] = f[p];
+          }
+        }
+      }
+      this.state.filter = new ChallengeFilter(mf_);
+      this.state.sidebarFilter = new SideBarFilter(sf_);
     }
     this.setCardType.bind(this);
     this.fetchChallenges(0).then(res => this.setChallenges(0, res));
@@ -151,11 +187,17 @@ class ChallengeFiltersExample extends React.Component {
    * Saves current filters to the URL hash.
    */
   saveFiltersToHash() {
-    const payload = btoa(JSON.stringify([
-      this.state.filter.stringify(),
-      this.state.sidebarFilter.stringify(),
-    ]));
-    this.props.onSaveFilterToUrl(payload);
+    const payload = _.cloneDeep([
+      this.state.filter,
+      this.state.sidebarFilter
+    ]);
+    payload[0].tracks = Array.from(payload[0].tracks);
+    payload[1].tracks = Array.from(payload[1].tracks);
+    const serializedPayload = [
+      serialize(payload[0], 'mf_'), // mf_ prefix for main filter
+      serialize(payload[1], 'sf_') // sf_ prefix for sidebar filter
+    ];
+    this.props.onSaveFilterToUrl(serializedPayload.join('&'));
   }
 
   /**

@@ -22,6 +22,7 @@ import _ from 'lodash';
 import React, { PropTypes as PT } from 'react';
 import Select from 'react-select';
 import FilterPanelFilter from './FilterPanelFilter';
+import moment from 'moment';
 
 import './FiltersPanel.scss';
 import DateRangePicker from '../DateRangePicker/DateRangePicker';
