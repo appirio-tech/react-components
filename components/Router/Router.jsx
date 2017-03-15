@@ -27,6 +27,7 @@ import NavbarExample                 from '../Navbar/NavbarExample.jsx'
 import TCFooterExamples              from '../TCFooter/TCFooterExamples.jsx'
 import ChallengeCardExamples         from '../ChallengeCard/ChallengeCardExamples.jsx'
 import SRMCardExamples               from '../SRMCard/SRMCardExamples.jsx'
+import SubmissionManagementExamples  from '../SubmissionManagement/SubmissionManagementExamples.jsx'
 import ChallengeFiltersExample       from '../ChallengeFilters/ChallengeFiltersExample.jsx'
 import CarouselExamples              from '../Carousel/CarouselExamples.jsx'
 import SubNavExamples                from '../SubNav/SubNavExamples.jsx'
@@ -86,6 +87,8 @@ const Component = () => (
         <Route path="/ChallengeCardExamples" component={ChallengeCardExamples} />
 
         <Route path="/SRMCardExamples" component={SRMCardExamples} />
+
+        <Route path="/SubmissionManagementExamples" component={SubmissionManagementExamples} />
 
         <Route path="/ChallengeFiltersExample" component={ChallengeFiltersExample} />
 

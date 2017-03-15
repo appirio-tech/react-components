@@ -1,0 +1,37 @@
+@import '../../../styles/tc-styles';
+
+$status-space-10: $base-unit * 2;
+$status-space-20: $base-unit * 4;
+$status-space-25: $base-unit * 5;
+
+.submissions-table {
+  border: 1px solid #EDEDF2;
+  overflow:hidden;
+  border-radius: 4px 4px 0 0;
+  table {
+    width: 100%;
+    thead {
+      tr {
+        background: #FAFAFB;
+      }
+    }
+    th {
+      font-size: 13px;
+      color: $tc-black;
+      font-weight: 500;
+      line-height: $status-space-20;
+      text-align: left;
+      padding: $status-space-25 $status-space-20;
+      &.status,
+      &.actions {
+        text-align: center;
+      }
+    }
+  }
+  .status-col {
+    text-align: center;
+  }
+  .action-col {
+    text-align: center;
+  }
+}

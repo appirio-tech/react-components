@@ -8,3 +8,5 @@ module.exports =
   ChallengeFiltersExample: require './components/ChallengeFilters/ChallengeFiltersExample.jsx'
   SRMCard: require './components/SRMCard/SRMCard.jsx'
   SRMCardExamples: require './components/SRMCard/SRMCardExamples.jsx'
+  SubmissionManagement: require './components/SubmissionManagement/SubmissionManagement.jsx'
+  SubmissionManagementExamples: require './components/SubmissionManagement/SubmissionManagementExamples.jsx'

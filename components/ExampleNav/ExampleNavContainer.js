@@ -12,6 +12,7 @@ const navs = {
     'TCFooterExamples',
     'ChallengeCardExamples',
     'SRMCardExamples',
+    'SubmissionManagementExamples',
     'MenuBarExamples'
   ],
   FileUploader: [
