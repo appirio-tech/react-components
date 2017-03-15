@@ -239,6 +239,8 @@ class SideBarFilters extends React.Component {
    * Renders the component in the regular mode.
    */
   selectFilterMode() {
+    if (this.state.filters[FILTER_ID.ALL_CHALLENGES].count === 0) return null;
+
     const filters = this.state.filters.map((filter, index) => (
       <FilterItem
         count={filter.count}

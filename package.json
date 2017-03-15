@@ -50,6 +50,6 @@
     "react-stickynode": "^1.2.1",
     "react-svg-loader": "^1.1.1",
     "uuid": "^3.0.1",
-    "react-visibility-sensor": "^3.7.0"
+    "react-waypoint": "^5.1.0"
   }
 }
