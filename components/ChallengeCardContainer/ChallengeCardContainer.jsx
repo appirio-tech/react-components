@@ -21,7 +21,7 @@
 
 import _ from 'lodash';
 import React, { Component } from 'react';
-import VisibilitySensor from 'react-visibility-sensor';
+import Waypoint from 'react-waypoint';
 import ChallengeCard from '../ChallengeCard/ChallengeCard';
 import SortingSelectBar from './SortingSelectBar/SortingSelectBar';
 import defaultFilters from './filters';
@@ -76,13 +76,17 @@ class ChallengeCardContainer extends Component {
     }, this.props.onExpandFilterResult);
   }
 
-  onScrollChallenges(isLastChallengeVisible) {
-    if (!isLastChallengeVisible || this.loading) return;
+  onScrollChallenges() {
+    if (this.loading) return;
     const { currentFilter } = this.state;
     const { filterChallengesStore } = this.state;
     const maximumScrollY = getMaxWindowScrollY();
 
-    if (currentFilter && currentFilter.totalReached !== true) {
+    if (!currentFilter || currentFilter.totalReached === true) return;
+
+    // put the fetch and update operation to the end of the queue to allow
+    // the scrolling to finish
+    setTimeout(() => {
       const pageIndex = currentFilter.currentPageIndex || 1;
       this.loading = true;
 
@@ -105,7 +109,7 @@ class ChallengeCardContainer extends Component {
           )
         ),
       });
-    }
+    });
   }
 
   onSortingSelect(filterName, sortingOptionName) {
@@ -123,17 +127,28 @@ class ChallengeCardContainer extends Component {
     const initialNumberToShow = 10;
     const { additionalFilter, filters } = this.props;
     const { currentFilter, expanded, filterSortingStore, sortingFunctionStore } = this.state;
-    const visibilitySensor = !currentFilter.totalReached && expanded
-      ? <VisibilitySensor onChange={value => this.onScrollChallenges(value)} />
-      : null;
-    const loadingIndication = !currentFilter.totalReached && expanded
-      ? <h1 className="loading">Loading...</h1>
-      : null;
     const filterChallengesStore = filterFilterChallengesStore(
       this.state.filterChallengesStore,
       currentFilter,
       additionalFilter,
     );
+    let needToFetchMore = false;
+
+    if (expanded) {
+      needToFetchMore =
+        this.state.filterChallengesStore[currentFilter.name].length >= initialNumberToShow * 5;
+    }
+
+    const loadingIndication = needToFetchMore && expanded && !currentFilter.totalReached
+      ? <h1 className="loading">Loading...</h1>
+      : null;
+
+    const loadingWaypoint = needToFetchMore && expanded && !currentFilter.totalReached
+      ? <Waypoint
+          onEnter={value => this.onScrollChallenges(value)}
+          scrollableAncestor={window}
+        />
+      : null;
 
     return (
       <div className="challengeCardContainer">
@@ -182,11 +197,11 @@ class ChallengeCardContainer extends Component {
                 }
                 {expansionButtion}
                 {loadingIndication}
-                {visibilitySensor}
               </div>
             );
           })
         }
+        {loadingWaypoint}
       </div>
     );
   }
