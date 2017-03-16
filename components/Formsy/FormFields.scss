@@ -175,7 +175,6 @@ textarea{
 .tiled-group-row {
   display: flex;
   flex-flow: row wrap;
-  overflow: hidden;
   justify-content: center;
 }
 a.tiled-group-item {
@@ -217,5 +216,16 @@ a.tiled-group-item {
     color: $tc-gray-50;
     @include roboto;
     margin-top:10px;
+  }
+  .check-mark {
+    text-align: center;
+    background: $tc-dark-blue-90;
+    border-radius: 2px;
+    display: none;
+    height: 15px;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    width: 15px;
   }
 }
