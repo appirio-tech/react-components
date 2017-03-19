@@ -9,7 +9,7 @@ import _ from 'lodash';
 import React, { PropTypes as PT } from 'react';
 import { ActiveFilterItem } from '../FilterItems';
 import './EditMyFilters.scss';
-
+export const SAVE_FILTERS_API = 'https://lc1-user-settings-service.herokuapp.com/saved-searches';
 const MAX_FILTER_NAME_LENGTH = 35;
 
 class EditMyFilters extends React.Component {
@@ -87,6 +87,14 @@ class EditMyFilters extends React.Component {
           this.setState({ filters: newFilters });
         }}
         onRemove={() => {
+          const filterToRemove = this.state.filters[index].filter;
+          fetch(`${SAVE_FILTERS_API}/${filterToRemove.uuid}`, {
+            headers: {
+              Authorization: `Bearer ${this.props.token}`,
+              'Content-Type': 'application/json',
+            },
+            method: 'DELETE',
+          });
           const newFilters = _.clone(this.state.filters);
           newFilters.splice(index, 1);
           this.setState({ filters: newFilters });

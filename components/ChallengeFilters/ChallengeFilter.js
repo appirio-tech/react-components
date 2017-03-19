@@ -33,6 +33,15 @@ class ChallengeFilter extends FilterPanelFilter {
     if (!arg) {
       super();
       this.tracks = new Set([DATA_SCIENCE_TRACK, DESIGN_TRACK, DEVELOP_TRACK]);
+    } else if (arg.isSavedFilter) {
+      // If this is a saved filter then the track information is 
+      // present on the 'type' attribute
+
+      // TODO: The saved-search API requires type to be one of develop, design,
+      // or data. As this is not consistent with the frontend functionality, the API 
+      // needs to be updated in future, till then we use hardcoded DEVELOP_TRACK. 
+      super(arg);
+      this.tracks = new Set(DEVELOP_TRACK);
     } else if (_.isObject(arg)) {
       if (!arg._isChallengeFilter) throw new Error ('Invalid argument!');
       super(arg);
@@ -71,6 +80,10 @@ class ChallengeFilter extends FilterPanelFilter {
       super.stringify(),
       [...this.tracks].join(','),
     ]));
+  }
+
+  getTracks() {
+    return Array.from(this.tracks).join('&');
   }
 }
 

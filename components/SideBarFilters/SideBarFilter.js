@@ -29,6 +29,11 @@ class SideBarFilter extends ChallengeFilter {
       this.mode = MODE.ONGOING_CHALLENGES;
       this.name = MODE.ONGOING_CHALLENGES;
       this.uuid = MODE.ONGOING_CHALLENGES;
+    } else if (arg.isSavedFilter) {
+      super(arg);
+      this.mode = MODE.CUSTOM;
+      this.name = arg.name;
+      this.uuid = arg.id;
     } else if (_.isObject(arg)) {
       if (!arg._isSideBarFilter) throw new Error('Invalid argument!');
       super(arg);

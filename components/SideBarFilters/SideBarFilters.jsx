@@ -15,7 +15,7 @@
 
 import _ from 'lodash';
 import React, { PropTypes as PT } from 'react';
-import EditMyFilters from './EditMyFilters';
+import EditMyFilters, { SAVE_FILTERS_API } from './EditMyFilters';
 import SideBarFilter, { MODE } from './SideBarFilter';
 import { FilterItem } from './FilterItems';
 import './SideBarFilters.scss';
@@ -70,14 +70,20 @@ const MODES = {
  * that all other such indices in the similar filter names.
  */
 const MY_FILTER_BASE_NAME = 'My Filter';
-
-const SAVE_FILTERS_API = 'https://lc1-user-settings-service.herokuapp.com/saved-searches';
+const TOKEN_KEY = 'tcjwt';
 
 class SideBarFilters extends React.Component {
 
   constructor(props) {
     super(props);
     let that = this;
+
+    // TODO: Get the auth token from cookie for now.
+    // Ideally the token should be passed in from a parent container component
+    // http://stackoverflow.com/questions/5639346/
+    const token = document.cookie.match(`(^|;)\\s*${TOKEN_KEY}\\s*=\\s*([^;]+)`);
+    const authToken = token ? token.pop() : '';
+
     let myFilters = localStorage.filters ? JSON.parse(localStorage.filters) : [];
     try {
       myFilters = myFilters.map(item => new SideBarFilter(item));
@@ -91,6 +97,7 @@ class SideBarFilters extends React.Component {
       localStorage.filters = '';
     }
     this.state = {
+      authToken,
       currentFilter: DEFAULT_FILTERS[3],
       filters: _.clone(DEFAULT_FILTERS).concat(myFilters),
       mode: MODES.SELECT_FILTER,
@@ -119,6 +126,25 @@ class SideBarFilters extends React.Component {
     this.state.filters.push(f);
   }
 
+  componentDidMount() {
+    fetch(SAVE_FILTERS_API, {
+      headers: {
+        Authorization: `Bearer ${this.state.authToken}`,
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(res => res.json())
+      .then((data) => {
+        const myFilters = data.map((item) => {
+          const filter = item;
+          filter.isSavedFilter = true;
+          return new SideBarFilter(filter);
+        });
+        this.setState({
+          filters: this.state.filters.concat(myFilters),
+        });
+      });
+  }
   /**
    * When a new array of challenges is passed from the parent component via props,
    * this method updates counters of challenges matching each of the filters in
@@ -197,6 +223,7 @@ class SideBarFilters extends React.Component {
       <div className="SideBarFilters" ref={ref => this.props.ref(ref)}>
         <div className="FilterBox">
           <EditMyFilters
+            token={this.state.authToken}
             filters={this.state.filters.slice(FILTER_ID.FIRST_USER_DEFINED)}
             onDone={(myFilters) => {
               const filters = _.clone(this.state.filters).slice(0, FILTER_ID.FIRST_USER_DEFINED);
@@ -223,13 +250,35 @@ class SideBarFilters extends React.Component {
     // development version of the save filters endpoint is down, and we cannot
     // test against the production one, as production authentication system
     // rejects to authenicate a locally deployed App.
+
+    const [filter] = filters;
+
     fetch(SAVE_FILTERS_API, {
       headers: {
-        Authorization: `Bearer ${this.tcjwt}`,
+        Authorization: `Bearer ${this.state.authToken}`,
+        'Content-Type': 'application/json',
       },
       method: 'POST',
-      body: JSON.stringify(JSON.stringify(filters.map(item => item.stringify()))),
-    }).catch(() => {
+      body: JSON.stringify({
+        name: this.getAvailableFilterName(),
+        filter: filter.getURLEncoded(),
+        // TODO: The saved-search API requires type to be one of develop, design,
+        // or data. As this is not consistent with the frontend functionality, the API 
+        // needs to be updated in future, till then we use hardcoded 'develop'. 
+        type: 'develop',
+      }),
+    })
+    .then(res => res.json())
+    .then((res) => {
+      // Replace the SideBarFilter object created at the client side with a new
+      // SideBarFilter object which has correct id from the server response.
+      const updatedFilters = this.state.filters.filter(e => e.uuid !== filter.uuid);
+      const savedFilter = res;
+      savedFilter.isSavedFilter = true;
+      updatedFilters.push(new SideBarFilter(savedFilter));
+      this.setState({ filters: updatedFilters });
+    })
+    .catch(() => {
       // As the fallback, we save filters to the browser's local storage.
       localStorage.filters = JSON.stringify(filters.map(item => item.stringify()));
     });
@@ -306,6 +355,7 @@ class SideBarFilters extends React.Component {
 
 SideBarFilters.defaultProps = {
   filter: new SideBarFilter(MODE.ALL_CHALLENGES),
+  isAuth: false,
   onFilter: _.noop,
   ref: _.noop,
 };
@@ -316,6 +366,7 @@ SideBarFilters.propTypes = {
   })).isRequired,
   filter: PT.instanceOf(SideBarFilter),
   onFilter: PT.func,
+  isAuth: PT.bool,
   ref: PT.func,
 };
 
