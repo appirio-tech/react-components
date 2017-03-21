@@ -10,7 +10,7 @@ import _ from 'lodash';
  * It renders the tooltip with detailed timeline of a specified challenge.
  * As TC API v2 does not provide all necessary information for some types of
  * challenges, this component does not work perfect yet.
- * Componet updated to use TC API v3 api.
+ * Component updated to use TC API v3 api.
  *
  * USAGE:
  * Wrap with <ProgressBarTooltip></ProgressBarTooltip> the element(s) which should
@@ -95,51 +95,28 @@ function Tip(props) {
   // sorts these deadlines by their dates, and then generates the challenge timeline.
   // The result should be fine for simple dev challenges, but will be strange for
   // such as Assembly, etc.
-  // Componet is updated with TC API v3
-  const submissionPhase = c.allPhases.filter(phase => phase.phaseType === 'Submission');
-  const checkpointSubmission = c.allPhases.filter(phase => phase.phaseType === 'Checkpoint Submission');
-  const appeals = c.allPhases.filter(phase => phase.phaseType === 'Appeals');
-  const reviews = c.allPhases.filter(phase => phase.phaseType === 'Review');
-  const screening = c.allPhases.filter(phase => phase.phaseType === 'Screening');
-  const approval = c.allPhases.filter(phase => phase.phaseType === 'Approval');
+  // Component is updated with TC API v3
+  const endPhaseDate = Math.max(...c.allPhases.map(d => new Date(d.scheduledEndTime)));
   steps.push({
-    date: c.postingDate ? new Date(c.postingDate) : new Date(0),
+    date: new Date(c.registrationStartDate),
     name: 'Start',
   });
-  steps.push({
-    date: new Date(submissionPhase[0].scheduledEndTime),
-    name: 'Submission',
-  });
-  if (checkpointSubmission[0] && checkpointSubmission[0].scheduledEndTime) {
+  if (c.checkpointSubmissionEndDate) {
     steps.push({
-      date: new Date(checkpointSubmission[0].scheduledEndTime),
+      date: new Date(c.checkpointSubmissionEndDate),
       name: 'Checkpoint',
     });
   }
-  if (reviews[0] && reviews[0].scheduledEndTime) {
-    steps.push({
-      date: new Date(reviews[0].scheduledEndTime),
-      name: 'Review',
-    });
-  }
-  if (appeals[0] && appeals[0].scheduledEndTime) {
-    steps.push({
-      date: new Date(appeals[0].scheduledEndTime),
-      name: 'End',
-    });
-  }
-  if (screening[0] && screening[0].scheduledEndTime) {
-    steps.push({
-      date: new Date(screening[0].scheduledEndTime),
-      name: 'Screening',
-    });
-  }
-  if (approval[0] && approval[0].scheduledEndTime) {
-    steps.push({
-      date: new Date(approval[0].scheduledEndTime),
-      name: 'Approval',
-    });
-  }
+  steps.push({
+    date: new Date(c.submissionEndDate),
+    name: 'Submission',
+  });
+  steps.push({
+    date: new Date(endPhaseDate),
+    name: 'End',
+  });
+
+
   steps = steps.sort((a, b) => a.date.getTime() - b.date.getTime());
   const currentPhaseEnd = c.currentPhases[0] ? new Date(c.currentPhases[0].scheduledEndTime) :
    new Date();
