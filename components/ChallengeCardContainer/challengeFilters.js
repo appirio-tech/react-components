@@ -24,8 +24,8 @@ export default [
   {
     name: 'Open for registration',
     check(item) {
-      return item.registrationOpen.startsWith('Yes') && item.currentPhaseName
-        && item.currentPhaseName.startsWith('Registration');
+      const phase = item.currentPhases.filter(d => d.phaseType === 'Registration')[0];
+      return phase ? phase.phaseStatus === 'Open' : false;
     },
     sortingOptions: [
       'Most recent',
@@ -46,7 +46,8 @@ export default [
   {
     name: 'Ongoing challenges',
     check(item) {
-      return !item.registrationOpen.startsWith('Yes') && item.status === 'Active';
+      const phase = item.allPhases.filter(d => d.phaseType === 'Registration')[0];
+      return phase && item.allPhases.filter(d => d.phaseType === 'Registration')[0].phaseStatus === 'Closed' && item.status === 'ACTIVE';
     },
     sortingOptions: [
       'Most recent',
@@ -63,7 +64,7 @@ export default [
   {
     name: 'Past challenges',
     check(item) {
-      return item.status === 'Completed';
+      return item.status === 'COMPLETED';
     },
     sortingOptions: [
       'Most recent',

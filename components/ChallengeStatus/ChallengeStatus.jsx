@@ -73,7 +73,9 @@ function numSubmissionsTipText(number) {
 }
 
 const getStatusPhase = (challenge) => {
-  switch (challenge.currentPhaseName) {
+  const { currentPhases } = challenge;
+  const currentPhaseName = currentPhases.length > 0 ? currentPhases[currentPhases.length - 1].phaseType : '';
+  switch (currentPhaseName) {
     case 'Registration': {
       if (challenge.checkpointSubmissionEndDate && !getTimeLeft(challenge.checkpointSubmissionEndDate, 'Checkpoint').late) {
         return {
@@ -100,10 +102,36 @@ const getStatusPhase = (challenge) => {
         currentPhaseEndDate: challenge.submissionEndDate,
       };
     }
+    case 'Review': {
+      if (challenge.checkpointSubmissionEndDate && !getTimeLeft(challenge.checkpointSubmissionEndDate, 'Checkpoint').late) {
+        return {
+          currentPhaseName: 'Checkpoint',
+          currentPhaseEndDate: challenge.checkpointSubmissionEndDate,
+        };
+      }
+
+      return {
+        currentPhaseName: 'Review',
+        currentPhaseEndDate: challenge.submissionEndDate,
+      };
+    }
+    case 'Approval': {
+      if (challenge.checkpointSubmissionEndDate && !getTimeLeft(challenge.checkpointSubmissionEndDate, 'Checkpoint').late) {
+        return {
+          currentPhaseName: 'Checkpoint',
+          currentPhaseEndDate: challenge.checkpointSubmissionEndDate,
+        };
+      }
+
+      return {
+        currentPhaseName: 'Approval',
+        currentPhaseEndDate: challenge.submissionEndDate,
+      };
+    }
     default:
       return {
-        currentPhaseName: challenge.currentPhaseName,
-        currentPhaseEndDate: challenge.currentPhaseEndDate,
+        currentPhaseName,
+        currentPhaseEndDate: challenge.submissionEndDate,
       };
   }
 };
@@ -153,8 +181,8 @@ class ChallengeStatus extends Component {
   renderLeaderboard() {
     const { challenge } = this.props;
     const { DS_CHALLENGE_URL, CHALLENGE_URL } = this.state;
-    const { challengeId, challengeCommunity } = challenge;
-    const challengeURL = challengeCommunity.toLowerCase() === 'data' ? DS_CHALLENGE_URL : CHALLENGE_URL;
+    const { id, track } = challenge;
+    const challengeURL = track.toLowerCase() === 'data' ? DS_CHALLENGE_URL : CHALLENGE_URL;
     const leaderboard = this.state.winners && this.state.winners.map(winner => (
       <div className="avatar-container" key={winner.handle}>
         <UserAvatarTooltip user={getSampleProfile(winner)}>
@@ -164,7 +192,7 @@ class ChallengeStatus extends Component {
       ));
     return leaderboard || (
     <span className="winners" onMouseEnter={this.handleHover}>
-      <a href={`${challengeURL}${challengeId}`}>Winners</a>
+      <a href={`${challengeURL}${id}`}>Winners</a>
     </span>);
   }
 
@@ -173,7 +201,7 @@ class ChallengeStatus extends Component {
     const { detailLink } = this.props;
     const lng = getTimeLeft(
       challenge.registrationEndDate || challenge.submissionEndDate,
-      challenge.currentPhaseName,
+      challenge.currentPhases[0] ? challenge.currentPhases[0].phaseType : '',
     ).text.length;
     return (
       <a
@@ -185,7 +213,7 @@ class ChallengeStatus extends Component {
           {
             getTimeLeft(
               challenge.registrationEndDate || challenge.submissionEndDate,
-              challenge.currentPhaseName,
+              challenge.currentPhases[0] ? challenge.currentPhases[0].phaseType : '',
             ).text.substring(0, lng - 6)
           }
         </span>
@@ -197,13 +225,13 @@ class ChallengeStatus extends Component {
   registrantsLink(registrantsChallenge, type) {
     const { CHALLENGE_URL } = this.state;
     if (registrantsChallenge.track === 'DATA_SCIENCE') {
-      const id = `${registrantsChallenge.challengeId}`;
+      const id = `${registrantsChallenge.id}`;
       if (id.length < ID_LENGTH) {
-        return `${type}${registrantsChallenge.challengeId}`;
+        return `${type}${registrantsChallenge.id}`;
       }
-      return `${CHALLENGE_URL}${registrantsChallenge.challengeId}/?type=develop#viewRegistrant`;
+      return `${CHALLENGE_URL}${registrantsChallenge.id}/?type=develop#viewRegistrant`;
     }
-    return `${CHALLENGE_URL}${registrantsChallenge.challengeId}/?type=${registrantsChallenge.track.toLowerCase()}#viewRegistrant`;
+    return `${CHALLENGE_URL}${registrantsChallenge.id}/?type=${registrantsChallenge.track.toLowerCase()}#viewRegistrant`;
   }
 
   activeChallenge() {
@@ -212,11 +240,14 @@ class ChallengeStatus extends Component {
     const MM_LONGCONTEST = `https:${config.COMMUNITY_URL}/longcontest/?module`;
     const MM_REG = `${MM_LONGCONTEST}=ViewRegistrants&rd=`;
     const MM_SUB = `${MM_LONGCONTEST}=ViewStandings&rd=`;
+    const registrationPhase = challenge.allPhases.filter(phase => phase.phaseType === 'Registration')[0];
+    const isRegistrationOpen = registrationPhase ? registrationPhase.phaseStatus === 'Open' : false;
+    const currentPhaseName = challenge.currentPhases && challenge.currentPhases.length > 0;
     return (
-      <div className={challenge.registrationOpen === 'Yes' ? 'challenge-progress with-register-button' : 'challenge-progress'}>
+      <div className={isRegistrationOpen ? 'challenge-progress with-register-button' : 'challenge-progress'}>
         <span className="current-phase">
           {
-            challenge.currentPhaseName
+            currentPhaseName
               ? getStatusPhase(challenge).currentPhaseName
               : STALLED_MSG
           }
@@ -251,7 +282,7 @@ class ChallengeStatus extends Component {
         </span>
         <ProgressBarTooltip challenge={challenge} config={config}>
           {
-            challenge.status === 'Active' ?
+            challenge.status === 'ACTIVE' ?
               <div>
                 <ChallengeProgressBar
                   color="green"
@@ -281,7 +312,7 @@ class ChallengeStatus extends Component {
               <ChallengeProgressBar color="gray" value="100" />
           }
         </ProgressBarTooltip>
-        {challenge.registrationOpen === 'Yes' && this.renderRegisterButton()}
+        {isRegistrationOpen && this.renderRegisterButton()}
       </div>
     );
   }
@@ -295,14 +326,14 @@ class ChallengeStatus extends Component {
         <span className="challenge-stats">
           <span>
             <Tooltip content={numRegistrantsTipText(challenge.numRegistrants)}>
-              <a className="num-reg past" href={`${CHALLENGE_URL}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}#viewRegistrant`}>
+              <a className="num-reg past" href={`${CHALLENGE_URL}${challenge.id}/?type=${challenge.track.toLowerCase()}#viewRegistrant`}>
                 <RegistrantsIcon /> <span className="number">{challenge.numRegistrants}</span>
               </a>
             </Tooltip>
           </span>
           <span>
             <Tooltip content={numSubmissionsTipText(challenge.numSubmissions)}>
-              <a className="num-sub past" href={`${CHALLENGE_URL}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}#viewRegistrant`}>
+              <a className="num-sub past" href={`${CHALLENGE_URL}${challenge.id}/?type=${challenge.track.toLowerCase()}#viewRegistrant`}>
                 <SubmissionsIcon /> <span className="number">{challenge.numSubmissions}</span>
               </a>
             </Tooltip>
@@ -387,23 +418,23 @@ class ChallengeStatus extends Component {
   handleHover() {
     if (!this.state.winners) {
       const { challenge } = this.props;
-      const { challengeId, challengeCommunity } = challenge;
+      const { id, track } = challenge;
 
       // We don't have the API for data science challenge
-      if (challengeCommunity.toLowerCase() === 'data') {
+      if (track.toLowerCase() === 'data') {
         return;
       }
-      const results = this.getWinners(challengeCommunity.toLowerCase(), challengeId);
+      const results = this.getWinners(track.toLowerCase(), id);
       results.then(winners => this.setState({ winners }));
     }
   }
 
   render() {
     const { challenge } = this.props;
-    const status = challenge.status === 'Completed' ? 'completed' : '';
+    const status = challenge.status === 'COMPLETED' ? 'completed' : '';
     return (
       <div className={`challenge-status ${status}`}>
-        {challenge.status === 'Completed' ? this.completedChallenge() : this.activeChallenge()}
+        {challenge.status === 'COMPLETED' ? this.completedChallenge() : this.activeChallenge()}
       </div>
     );
   }
@@ -412,7 +443,7 @@ class ChallengeStatus extends Component {
 ChallengeStatus.defaultProps = {
   challenge: {},
   config: {},
-  detailLink: "",
+  detailLink: '',
   sampleWinnerProfile: undefined,
 };
 

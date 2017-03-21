@@ -17,14 +17,13 @@ export function filterFilterChallengesStore(filterChallengesStore, currentFilter
     },
     _.partialRight(_.pickBy, challenges => !_.isEmpty(challenges)),
   ];
-
   return _.flow(allFilters)(_.assign({}, filterChallengesStore));
 }
 
 export function findFilterByName(filterName, filters) {
   const foundfilter = _.find(
     filters,
-    filter => filter.name.toLowerCase() === filterName.toLowerCase()
+    filter => filter.name.toLowerCase() === filterName.toLowerCase(),
   );
 
   if (foundfilter) {
