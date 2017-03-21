@@ -208,7 +208,16 @@ class SideBarFilters extends React.Component {
             }}
           />
           </div>
-        <a className="rss-link" href={RSS_LINK}>Get the RSS feed</a>
+          <div className="sidebar-footer">
+            <ul>
+              <li><a href="javascript:;">About</a>&nbsp;•&nbsp;</li>
+              <li><a href="javascript:;">Contact</a>&nbsp;•&nbsp;</li>
+              <li><a href="javascript:;">Help</a>&nbsp;•&nbsp;</li>
+              <li><a href="javascript:;">Privacy</a>&nbsp;•&nbsp;</li>
+              <li><a href="javascript:;">Terms</a></li>
+            </ul>
+            <p className="copyright">Topcoder © 2016.</p>
+          </div>
       </div>
     );
   }
@@ -264,22 +273,34 @@ class SideBarFilters extends React.Component {
           {filters[FILTER_ID.OPEN_FOR_REVIEW]}
           {
             myFilters.length ?
-              <span>
+              <div>
                 <hr />
-                <h1>My filters</h1>
-                <button
-                  id="edit-button"
-                  onClick={() => {
-                    this.setState({ mode: MODES.EDIT_MY_FILTERS });
-                  }}
-                >
-                  Edit
-                </button>
+                <div className="my-filters">
+                  <h1>My filters</h1>
+                  <a 
+                    className="edit-link"
+                    href="javascript:;"
+                    onClick={() => {
+                      this.setState({ mode: MODES.EDIT_MY_FILTERS });
+                    }}
+                  >
+                    edit
+                  </a>
+                </div>
                 {myFilters}
-              </span> : ''
+              </div> : ''
           }
         </div>
-        <a className="rss-link" href={RSS_LINK} target="_blank">Get the RSS feed</a>
+        <div className="sidebar-footer">
+          <ul>
+            <li><a href="javascript:;">About</a>&nbsp;•&nbsp;</li>
+            <li><a href="javascript:;">Contact</a>&nbsp;•&nbsp;</li>
+            <li><a href="javascript:;">Help</a>&nbsp;•&nbsp;</li>
+            <li><a href="javascript:;">Privacy</a>&nbsp;•&nbsp;</li>
+            <li><a href="javascript:;">Terms</a></li>
+          </ul>
+          <p className="copyright">Topcoder © 2016.</p>
+        </div>
       </div>
     );
   }

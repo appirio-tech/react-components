@@ -1,51 +1,91 @@
 @import "../../styles/tc-styles";
 
 .SideBarFilters {
-  float: right;
   font: 400 13px/30px Roboto;
-  width: 360px;
+  width: 100%;
 
   .FilterBox {
     background: $tc-white;
     padding: 2*$base-unit;
-
-    h1 {
-      border: none;
-      color: $tc-gray-50;
-      display: inline-block;
-      font-size: 12px;
-      margin: 0 3*$base-unit;
-      padding: 0;
-      text-align: left;
-      text-decoration: none;
-    }
+    padding-bottom: 4*$base-unit;
+    border-radius: $corner-radius * 2;
 
     hr {
-      background: $tc-gray-20;
-      border: none;
+      color: $tc-gray-10;
+      background: $tc-gray-10;
+      border: 0;
       height: 1px;
-      margin: 2*$base-unit 0;
+      margin: 2*$base-unit;
     }
 
-    #edit-button {
-      background: $tc-white;
-      border: 1px solid $tc-gray-50;
-      border-radius: 2*$corner-radius;
-      color: $tc-gray-50;
-      cursor: pointer;
-      float: right;
-      line-height: 13px;
-      padding: $base-unit 3*$base-unit;
-      text-transform: none;
+    .my-filters {
+      display: block; 
+      position: relative;
+      padding: 0 3*$base-unit;
+      @include xs {
+        padding: 0;
+      }
+      h1 {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        font-weight: 500;
+        font-size: 12px;
+        color: $tc-gray-50;
+        letter-spacing: 0;
+        border: none;
+        @include xs {
+          font-size: 15px;
+        }
+      }
+
+      .edit-link {
+        float: right;
+        font-weight: 400;
+        font-size: 11px;
+        color: $tc-dark-blue;
+        line-height: $base-unit * 4;
+        @include xs {
+          font-size: 13px;
+        }
+      }
     }
   }
-
-  .rss-link {
-    display: block;
-    font-family: 'Roboto';
-    font-size: 13px;
-    color: $tc-gray-70;
-    line-height: 30px;
-    margin: 10px;
+  // sidebar footer
+  .sidebar-footer {
+    padding: 10px;
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    li {
+      font-weight: 400;
+      font-size: 13px;
+      color: $tc-gray-70;
+      line-height: 30px;
+    }
+    li a {
+      font-weight: 400;
+      font-size: 13px;
+      color: $tc-gray-70;
+      display: inline-block;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    .copyright {
+      font-weight: 500;
+      font-size: 13px;
+      color: $tc-gray-30;
+      line-height: 30px;
+    }
+    /*
+      On mobile devices, the ChallengesSidebar is not on the side
+      but on top of the list of challenges. Also, the footer is 
+      not displayed.
+    */
+    @include xs-to-sm {
+      display: none;
+    }
   }
 }

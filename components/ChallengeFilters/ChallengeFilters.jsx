@@ -40,6 +40,8 @@ import _ from 'lodash';
 import React, { PropTypes as PT } from 'react';
 import ChallengeFilter, { DATA_SCIENCE_TRACK, DESIGN_TRACK, DEVELOP_TRACK } from './ChallengeFilter';
 import ChallengeSearchBar from './ChallengeSearchBar/ChallengeSearchBar';
+import EditTrackPanel from './EditTrackPanel/EditTrackPanel';
+import FiltersIcon from './FiltersSwitch/FiltersIcon';
 import FiltersPanel from './FiltersPanel/FiltersPanel';
 import FiltersSwitch from './FiltersSwitch/FiltersSwitch';
 import SwitchWithLabel from '../SwitchWithLabel';
@@ -54,7 +56,22 @@ class ChallengeFilters extends React.Component {
       filter: props.filter,
       filtersCount: props.filter.count(),
       showFilters: false,
+      showEditTrackPanel: false, 
     };
+  }
+
+  /**
+   * Hide/Show the EditTrackPanel
+   */
+  toggleEditTrackPanel() {
+    this.setState({ showEditTrackPanel: !this.state.showEditTrackPanel });
+  }
+
+  /**
+   * Hide/Show the filters
+   */
+  toggleShowFilters() {
+    this.setState({ showFilters: !this.state.showFilters });
   }
 
   /**
@@ -139,36 +156,73 @@ class ChallengeFilters extends React.Component {
             onSearch={str => this.onSearch(str)}
             placeholder="Search Challenges"
           />
-          <SwitchWithLabel
-            enabled={this.state.filter.tracks.has(DESIGN_TRACK)}
-            labelBefore="Design"
-            onSwitch={enable => this.setTracks(DESIGN_TRACK, enable)}
-          />
-          <SwitchWithLabel
-            enabled={this.state.filter.tracks.has(DEVELOP_TRACK)}
-            labelBefore="Development"
-            onSwitch={enable => this.setTracks(DEVELOP_TRACK, enable)}
-          />
-          <SwitchWithLabel
-            enabled={this.state.filter.tracks.has(DATA_SCIENCE_TRACK)}
-            labelBefore="Data Science"
-            onSwitch={enable => this.setTracks(DATA_SCIENCE_TRACK, enable)}
-          />
-          <FiltersSwitch
-            active={this.state.showFilters}
-            filtersCount={this.state.filtersCount}
-            onSwitch={active => this.setState({ showFilters: active })}
-          />
+          {
+            this.props.isCardTypeSet === 'Challenges' ?
+            (
+              <span>
+                <SwitchWithLabel
+                  enabled={this.state.filter.tracks.has(DESIGN_TRACK)}
+                  labelBefore="Design"
+                  onSwitch={enable => this.setTracks(DESIGN_TRACK, enable)}
+                />
+                <SwitchWithLabel
+                  enabled={this.state.filter.tracks.has(DEVELOP_TRACK)}
+                  labelBefore="Development"
+                  onSwitch={enable => this.setTracks(DEVELOP_TRACK, enable)}
+                />
+                <SwitchWithLabel
+                  enabled={this.state.filter.tracks.has(DATA_SCIENCE_TRACK)}
+                  labelBefore="Data Science"
+                  onSwitch={enable => this.setTracks(DATA_SCIENCE_TRACK, enable)}
+                />
+              </span>
+            ) : ''
+          }
+          <span className="pulled-right">
+            {
+              this.props.isCardTypeSet === 'Challenges' ?
+              (
+                <span onClick={() => this.toggleEditTrackPanel()} className="track-btn">
+                  Tracks
+                  <span className="down-arrow" />
+                </span>
+              ) : ''
+            }
+            <span 
+              onClick={() => this.toggleShowFilters()} 
+              className="filter-btn"
+            >
+              <FiltersIcon color="#737380" />
+              Filter
+            </span>
+            <FiltersSwitch
+              active={this.state.showFilters}
+              filtersCount={this.state.filtersCount}
+              onSwitch={active => this.setState({ showFilters: active })}
+            />
+          </span>
         </div>
         <FiltersPanel
           hidden={!this.state.showFilters}
           filter={this.state.filter}
+          onClose={() => this.setState({ showFilters: false })}
           onClearFilters={() => this.onClearFilters()}
           onFilter={filter => this.onFilter(filter)}
           onSaveFilter={() => this.props.onSaveFilter(this.state.filter)}
           ref={(node) => { this.filtersPanel = node; }}
           validKeywords={this.props.validKeywords}
           validSubtracks={this.props.validSubtracks}
+        />
+
+        <EditTrackPanel
+          opened={this.state.showEditTrackPanel}
+          onClose={this.toggleEditTrackPanel.bind(this)}
+          designEnabled={this.state.filter.tracks.has(DESIGN_TRACK)}
+          switchDesign={enable => this.setTracks(DESIGN_TRACK, enable)}
+          devEnabled={this.state.filter.tracks.has(DEVELOP_TRACK)}
+          switchDev={enable => this.setTracks(DEVELOP_TRACK, enable)}
+          dataScienceEnabled={this.state.filter.tracks.has(DATA_SCIENCE_TRACK)}
+          switchDataScience={enable => this.setTracks(DATA_SCIENCE_TRACK, enable)}
         />
       </div>
     );

@@ -18,7 +18,10 @@ $search-input-width: '100% - 56px';
 .ChallengeSearchBar {
   display: inline-block;
   vertical-align: middle;
-  margin-right: $challenge-space-40;
+  margin-right: 35px;
+  @include xs-to-sm {
+    display: none;
+  }
   @include calc( width, $search-bar-width);
   input:not([type="checkbox"]) {
     display: inline-block;
