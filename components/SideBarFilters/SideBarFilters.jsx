@@ -87,7 +87,7 @@ class SideBarFilters extends React.Component {
     this.state = {
       authToken,
       currentFilter: DEFAULT_FILTERS[3],
-      filters: _.clone(DEFAULT_FILTERS).concat(myFilters),
+      filters: _.clone(DEFAULT_FILTERS),
       mode: MODES.SELECT_FILTER,
     };
 
