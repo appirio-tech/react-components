@@ -84,18 +84,6 @@ class SideBarFilters extends React.Component {
     const token = document.cookie.match(`(^|;)\\s*${TOKEN_KEY}\\s*=\\s*([^;]+)`);
     const authToken = token ? token.pop() : '';
 
-    let myFilters = localStorage.filters ? JSON.parse(localStorage.filters) : [];
-    try {
-      myFilters = myFilters.map(item => new SideBarFilter(item));
-    } catch (e) {
-      // Ooops, serialization format for custom filters has changed, we cannot
-      // load filters stored in the local storage. Thus, we clear the storage,
-      // forget about all previously saved filters.
-      // TODO: Probably, some smarter way of tracking serialization format version
-      // should be implemented, as we move closer to the final release?
-      myFilters = [];
-      localStorage.filters = '';
-    }
     this.state = {
       authToken,
       currentFilter: DEFAULT_FILTERS[3],
@@ -126,24 +114,30 @@ class SideBarFilters extends React.Component {
     this.state.filters.push(f);
   }
 
+
+  /**
+   * Retrieve the saved filters for a logged in user.
+   */
   componentDidMount() {
-    fetch(SAVE_FILTERS_API, {
-      headers: {
-        Authorization: `Bearer ${this.state.authToken}`,
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(res => res.json())
-      .then((data) => {
-        const myFilters = data.map((item) => {
-          const filter = item;
-          filter.isSavedFilter = true;
-          return new SideBarFilter(filter);
+    if (this.state.authToken) {
+      fetch(SAVE_FILTERS_API, {
+        headers: {
+          Authorization: `Bearer ${this.state.authToken}`,
+          'Content-Type': 'application/json',
+        },
+      })
+        .then(res => res.json())
+        .then((data) => {
+          const myFilters = data.map((item) => {
+            const filter = item;
+            filter.isSavedFilter = true;
+            return new SideBarFilter(filter);
+          });
+          this.setState({
+            filters: this.state.filters.concat(myFilters),
+          });
         });
-        this.setState({
-          filters: this.state.filters.concat(myFilters),
-        });
-      });
+    }
   }
   /**
    * When a new array of challenges is passed from the parent component via props,
@@ -231,7 +225,7 @@ class SideBarFilters extends React.Component {
                 filters: filters.concat(myFilters),
                 mode: MODES.SELECT_FILTER,
               });
-              this.saveFilters(myFilters);
+              this.updateFilters(myFilters);
             }}
           />
           </div>
@@ -240,18 +234,40 @@ class SideBarFilters extends React.Component {
     );
   }
 
+/**
+ * Updates already saved filters on the backend.
+ * Used to update name of the filter but can be used to update
+ * other properties if needed.
+ */
+  updateFilters(filters) {
+    // For each filter in filters, serialize it and then
+    // make a fetch PUT request
+    // there is no need to do anything with the response
+    filters.forEach((filter) => {
+      fetch(`${SAVE_FILTERS_API}/${filter.uuid}`, {
+        headers: {
+          Authorization: `Bearer ${this.state.authToken}`,
+          'Content-Type': 'application/json',
+        },
+        method: 'PUT',
+        body: JSON.stringify({
+          name: filter.name,
+          filter: filter.getURLEncoded(),
+          // TODO: The saved-search API requires type to be one of develop, design,
+          // or data. As this is not consistent with the frontend functionality, the API
+          // needs to be updated in future, till then we use hardcoded 'develop'.
+          type: 'develop',
+        }),
+      });
+    });
+  }
   /**
-   * Saves My Filters to a permanent storage. Will be the backend in future,
-   * but for now it stores in the browser's localStorage.
+   * Saves My Filters to the backend
    */
   saveFilters(filters) {
-    // TODO: In theory, this code should save the stringified representation of
-    // the filters to the remote server. In practice, we cannot test it, as the
-    // development version of the save filters endpoint is down, and we cannot
-    // test against the production one, as production authentication system
-    // rejects to authenicate a locally deployed App.
-
-    const [filter] = filters;
+    // This code saves the stringified representation of
+    // the filters to the remote server.
+    const [filter] = _.takeRight(filters);
 
     fetch(SAVE_FILTERS_API, {
       headers: {
@@ -263,8 +279,8 @@ class SideBarFilters extends React.Component {
         name: this.getAvailableFilterName(),
         filter: filter.getURLEncoded(),
         // TODO: The saved-search API requires type to be one of develop, design,
-        // or data. As this is not consistent with the frontend functionality, the API 
-        // needs to be updated in future, till then we use hardcoded 'develop'. 
+        // or data. As this is not consistent with the frontend functionality, the API
+        // needs to be updated in future, till then we use hardcoded 'develop'.
         type: 'develop',
       }),
     })
@@ -277,10 +293,6 @@ class SideBarFilters extends React.Component {
       savedFilter.isSavedFilter = true;
       updatedFilters.push(new SideBarFilter(savedFilter));
       this.setState({ filters: updatedFilters });
-    })
-    .catch(() => {
-      // As the fallback, we save filters to the browser's local storage.
-      localStorage.filters = JSON.stringify(filters.map(item => item.stringify()));
     });
   }
 
@@ -334,10 +346,10 @@ class SideBarFilters extends React.Component {
   }
 
   /**
-   * Selects the filter with the specified ID.
+   * Selects the filter with the specified index.
    */
-  selectFilter(id) {
-    const currentFilter = this.state.filters[id];
+  selectFilter(index) {
+    const currentFilter = this.state.filters[index];
     this.setState({ currentFilter }, () => this.props.onFilter(currentFilter));
   }
 

@@ -41,7 +41,7 @@ class ChallengeFilter extends FilterPanelFilter {
       // or data. As this is not consistent with the frontend functionality, the API 
       // needs to be updated in future, till then we use hardcoded DEVELOP_TRACK. 
       super(arg);
-      this.tracks = new Set(DEVELOP_TRACK);
+      this.tracks = new Set([DEVELOP_TRACK]);
     } else if (_.isObject(arg)) {
       if (!arg._isChallengeFilter) throw new Error ('Invalid argument!');
       super(arg);
@@ -84,6 +84,16 @@ class ChallengeFilter extends FilterPanelFilter {
 
   getTracks() {
     return Array.from(this.tracks).join('&');
+  }
+
+/**
+ * Get an URL Encoded string representation of the filter tracks.
+ * Used for saving to the backend and displaying on the URL for deep linking.
+ */
+  getURLEncoded() {
+    const str = this.tracks.size > 0 ?
+      Array.from(this.tracks).reduce((acc, track) => `${acc}&tracks=${encodeURIComponent(track)}`, '') : '';
+    return `${super.getURLEncoded()}${str}`;
   }
 }
 

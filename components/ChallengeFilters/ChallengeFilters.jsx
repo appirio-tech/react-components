@@ -57,6 +57,16 @@ class ChallengeFilters extends React.Component {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    debugger;
+    if (this.props.filter !== nextProps.filter) {
+      this.setState({
+        filter: nextProps.filter,
+        filtersCount: nextProps.filter.count(),
+      });
+    }
+  }
+
   /**
    * Clears the filters.
    */

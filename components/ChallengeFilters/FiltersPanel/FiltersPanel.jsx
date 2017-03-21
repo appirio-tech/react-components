@@ -36,6 +36,14 @@ class FiltersPanel extends React.Component {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.filter !== nextProps.filter) {
+      this.setState({
+        filter: nextProps.filter,
+      });
+    }
+  }
+
   /**
    * Clears the the filters.
    * Note that this method does not call the onFilter() callback passed via props,

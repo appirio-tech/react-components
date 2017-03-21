@@ -75,17 +75,14 @@ const SRMsSidebarMock = {
 };
 
 // helper function to serialize object to query string
-const serialize = (obj, prefix) => {
-  const str = [];
-  for(let p in obj)
-    if (obj.hasOwnProperty(p)) {
-      if (obj[p] && obj[p].constructor === Array) {
-        obj[p] = obj[p].join('|');
-      }
-      str.push(prefix + encodeURIComponent(p) + '=' + encodeURIComponent(obj[p]));
-    }
-  return str.join('&');
-};
+const serialize = filter => filter.getURLEncoded();
+
+
+// helper function to de-serialize query string to filter object
+const deserialize = queryString => new ChallengeFilter({
+  filter: queryString,
+  isSavedFilter: true, // So that we can reuse constructor for deserializing
+});
 
 // The demo component itself.
 class ChallengeFiltersExample extends React.Component {
@@ -100,32 +97,7 @@ class ChallengeFiltersExample extends React.Component {
       sidebarFilter: new SideBarFilter(),
     };
     if (props.filterFromUrl) {
-      const f = JSON.parse('{"' + decodeURI(props.filterFromUrl).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
-      let mf_ = {};
-      let sf_ = {};
-      for(let p in f) {
-        if (f.hasOwnProperty(p)) {
-          if (p.toString().substring(3) === 'keywords'
-            || p.toString().substring(3) === 'subtracks'
-            || p.toString().substring(3) === 'tracks') {
-            f[p] = f[p].split('|');
-          } else {
-            if (f[p] === 'null') f[p] = null;
-            else if (f[p] === 'true') f[p] = true;
-            else if (f[p] === 'false') f[p] = false;
-          }
-          if (p.toString().substring(3) === 'tracks') {
-            f[p] = new Set(f[p]);
-          }
-          if (p.toString().indexOf('mf_') > -1) {
-            mf_[p.toString().substring(3)] = f[p];
-          } else {
-            sf_[p.toString().substring(3)] = f[p];
-          }
-        }
-      }
-      this.state.filter = new ChallengeFilter(mf_);
-      this.state.sidebarFilter = new SideBarFilter(sf_);
+      this.state.filter = deserialize(props.filterFromUrl);
     }
     this.setCardType.bind(this);
     this.fetchChallenges(0).then(res => this.setChallenges(0, res));
@@ -186,18 +158,8 @@ class ChallengeFiltersExample extends React.Component {
   /**
    * Saves current filters to the URL hash.
    */
-  saveFiltersToHash() {
-    const payload = _.cloneDeep([
-      this.state.filter,
-      this.state.sidebarFilter
-    ]);
-    payload[0].tracks = Array.from(payload[0].tracks);
-    payload[1].tracks = Array.from(payload[1].tracks);
-    const serializedPayload = [
-      serialize(payload[0], 'mf_'), // mf_ prefix for main filter
-      serialize(payload[1], 'sf_') // sf_ prefix for sidebar filter
-    ];
-    this.props.onSaveFilterToUrl(serializedPayload.join('&'));
+  saveFiltersToHash(filter) {
+    this.props.onSaveFilterToUrl(serialize(filter));
   }
 
   /**
@@ -313,7 +275,8 @@ class ChallengeFiltersExample extends React.Component {
   }
 
   onFilterByTopFilter(filter) {
-    this.setState({ filter }, () => this.saveFiltersToHash(filter));
+    const updatedFilter = new ChallengeFilter(filter);
+    this.setState({ filter: updatedFilter }, this.saveFiltersToHash.bind(this, filter));
   }
 
   // ReactJS render method.
@@ -438,7 +401,7 @@ class ChallengeFiltersExample extends React.Component {
             <SideBarFilters
               challenges={challenges}
               filter={this.state.sidebarFilter}
-              onFilter={filter => this.setState({ sidebarFilter: filter }, () => this.saveFiltersToHash())}
+              onFilter={filter => this.onFilterByTopFilter(filter)}
               ref={(node) => {
                 this.sidebar = node;
               }}
