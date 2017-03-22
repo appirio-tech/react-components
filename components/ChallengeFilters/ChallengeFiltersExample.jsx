@@ -79,7 +79,7 @@ const serialize = filter => filter.getURLEncoded();
 
 
 // helper function to de-serialize query string to filter object
-const deserialize = queryString => new ChallengeFilter({
+const deserialize = queryString => new SideBarFilter({
   filter: queryString,
   isSavedFilter: true, // So that we can reuse constructor for deserializing
 });
@@ -92,9 +92,8 @@ class ChallengeFiltersExample extends React.Component {
       challenges: [],
       srmChallenges: [],
       currentCardType: 'Challenges',
-      filter: new ChallengeFilter(),
+      filter: new SideBarFilter(),
       lastFetchId: 0,
-      sidebarFilter: new SideBarFilter(),
     };
     if (props.filterFromUrl) {
       this.state.filter = deserialize(props.filterFromUrl);
@@ -275,7 +274,7 @@ class ChallengeFiltersExample extends React.Component {
   }
 
   onFilterByTopFilter(filter) {
-    const updatedFilter = new ChallengeFilter(filter);
+    const updatedFilter = new SideBarFilter(filter);
     this.setState({ filter: updatedFilter }, this.saveFiltersToHash.bind(this, filter));
   }
 
@@ -303,8 +302,8 @@ class ChallengeFiltersExample extends React.Component {
       return item;
     });
 
-    const { sidebarFilter } = this.state
-    const { mode: sidebarFilterMode, name: sidebarFilterName } = sidebarFilter
+    const { filter } = this.state
+    const { mode: sidebarFilterMode, name: sidebarFilterName } = filter;
 
     let challengeCardContainer
     if (sidebarFilterMode === 'custom') {
@@ -321,7 +320,7 @@ class ChallengeFiltersExample extends React.Component {
       challengeCardContainer = (
         <div className="challenge-cards-container">
           <div className="ChallengeCardExamples example-lg">
-            {challenges.filter(sidebarFilter.getFilterFunction()).map(cardify)}
+            {challenges.filter(filter.getFilterFunction()).map(cardify)}
           </div>
         </div>
       )
@@ -332,7 +331,7 @@ class ChallengeFiltersExample extends React.Component {
           challenges={challenges}
           currentFilterName={sidebarFilterName}
           expanded={sidebarFilterMode !== 'All Challenges'}
-          additionalFilter={sidebarFilter.getFilterFunction()}
+          additionalFilter={filter.getFilterFunction()}
         />
       )
     }
@@ -400,7 +399,7 @@ class ChallengeFiltersExample extends React.Component {
           >
             <SideBarFilters
               challenges={challenges}
-              filter={this.state.sidebarFilter}
+              filter={this.state.filter}
               onFilter={filter => this.onFilterByTopFilter(filter)}
               ref={(node) => {
                 this.sidebar = node;
