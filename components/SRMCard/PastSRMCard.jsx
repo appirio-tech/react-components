@@ -14,7 +14,7 @@ function numRegistrantsTipText(number) {
   switch (number) {
     case 0: return 'No percent';
     case 1: return '1 percent';
-    default: return `${number} percent`;
+    default: return `${number} total registrants`;
   }
 }
 

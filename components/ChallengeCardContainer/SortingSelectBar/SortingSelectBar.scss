@@ -2,45 +2,49 @@
 @import 'topcoder/tc-includes';
 
 $view-options-toggle-right-margin: $base-unit * 2;
-$down-arrow-size: $base-unit * 2;
+$down-arrow-size: $base-unit;
 
 %sorting-select-button {
-  line-height: 21px;
-  border-radius: 6px;
-  padding: 8px 24px;
+  line-height: 12px;
+  border-radius: 20px;
+  padding: 4px 10px;
   background-color: $tc-white;
-  font-weight: 700;
-  text-transform: uppercase;
+  font-weight: 400;
+  text-transform: none;
 }
 
 .sortingBar {
   display: flex;
-  padding: $base-unit;
+  justify-content: space-between;
+  padding: 2*$base-unit;
   position: relative;
 
   .title {
-    padding: $base-unit * 2;
+    display: flex;
+    align-items: center;
+    color: $tc-gray-80;
+    font-size: 13px;
     margin: 0;
+    padding: 0 0 0 10px;
     border: none;
-  }
-
-  .view-options-toggle-container, .view-options {
-    position: absolute;
+    text-transform: none;
   }
 
   .view-options-toggle-container {
-    right: $view-options-toggle-right-margin;
-    top: $base-unit;
     display: flex;
-    align-items: center;
+    align-items: center right;
   }
 
   .view-options-toggle-container-label {
+    display: flex;
+    align-items: center;
     font-weight: 300;
+    font-size: 12px;
     margin-right: $base-unit * 2;
   }
 
   .view-options {
+    position: absolute;
     right: $view-options-toggle-right-margin;
     top: $base-unit * 10;
     z-index: 1;
@@ -56,6 +60,7 @@ $down-arrow-size: $base-unit * 2;
     @extend %sorting-select-button;
 
     font-weight: 300;
+    font-size: 12px;
     padding: $base-unit * 2;
     outline: none;
     border: 0;
@@ -66,12 +71,12 @@ $down-arrow-size: $base-unit * 2;
   .view-options-toggle {
     @extend %sorting-select-button;
 
-    color: $tc-gray-50;
-    border: 1px solid $tc-gray-50;
-    font-size: 12px;
-    outline: none;
     display: flex;
     align-items: center;
+    color: #394146;
+    border: 1px solid $tc-gray-neutral-dark;
+    font-size: 12px;
+    outline: none;
   }
 
   .down-arrow {
@@ -80,6 +85,6 @@ $down-arrow-size: $base-unit * 2;
     border-left: $down-arrow-size solid transparent;
     border-right: $down-arrow-size solid transparent;
     border-top: $down-arrow-size solid $tc-gray-50;
-    margin-left: $base-unit;
+    margin-left: 3*$base-unit;
   }
 }

@@ -13,15 +13,22 @@ $sidebar-radius-4: $corner-radius * 2;
   background: $tc-white;
   border-radius: $sidebar-radius-4;
   .header {
-    background: #EDEDF2;
+    background: $tc-gray-10;
     border-radius: $sidebar-radius-4;
     padding: 0 $sidebar-space-10 0 $sidebar-space-15;
     margin-bottom: $sidebar-space-10;
+    @include xs {
+      padding: 0;
+      background: $tc-white;
+    }
     .l-row {
       font-weight: 700;
       font-size: 13px;
       color: $tc-black;
       line-height: $sidebar-space-30;
+      @include xs {
+        font-size: 15px;
+      }
     }
   }
 
@@ -29,6 +36,10 @@ $sidebar-radius-4: $corner-radius * 2;
     border-top: 1px solid $tc-gray-10;
     margin: 0 $sidebar-space-10;
     padding: $sidebar-space-10 0 $sidebar-space-10 $base-unit;
+    @include xs {
+      margin: 0;
+      padding: $sidebar-space-10 0 $sidebar-space-10 0;
+    }
   }
   .filters {
     margin-bottom: $sidebar-space-10;
@@ -38,12 +49,20 @@ $sidebar-radius-4: $corner-radius * 2;
       color: $tc-gray-50;
       letter-spacing: 0;
       line-height: $base-unit * 4;
+      @include xs {
+        font-size: 15px;
+      }
     }
     .r-row {
       font-weight: 400;
       font-size: 11px;
-      color: $tc-dark-blue;
       line-height: $base-unit * 4;
+      @include xs {
+        font-size: 13px;
+      }
+      a {
+        color: $tc-dark-blue;
+      }
     }
   }
 }
@@ -72,7 +91,15 @@ $sidebar-radius-4: $corner-radius * 2;
   .copyright {
     font-weight: 500;
     font-size: 13px;
-    color: $tc-gray-20;
+    color: $tc-gray-30;
     line-height: $sidebar-space-30;
+  }
+  /*
+    On mobile devices, the ChallengesSidebar is not on the side
+    but on top of the list of challenges. Also, the footer is 
+    not displayed.
+  */
+  @include xs-to-sm {
+    display: none;
   }
 }

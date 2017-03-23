@@ -1,13 +1,13 @@
 import _ from 'lodash';
-import React from 'react';
-import TrackIcon from '../TrackIcon/TrackIcon';
-import ChallengeStatus from '../ChallengeStatus/ChallengeStatus';
-import './ChallengeCard.scss';
 import moment from 'moment';
+import React from 'react';
 
-import Tooltip from './Tooltips/Tooltip';
+import ChallengeStatus from '../ChallengeStatus/ChallengeStatus';
 import PrizesTooltip from './Tooltips/PrizesTooltip';
+import Tooltip from './Tooltips/Tooltip';
 import TrackAbbreviationTooltip from './Tooltips/TrackAbbreviationTooltip';
+import TrackIcon from '../TrackIcon/TrackIcon';
+import './ChallengeCard.scss';
 
 // Constants
 const VISIBLE_TECHNOLOGIES = 3;

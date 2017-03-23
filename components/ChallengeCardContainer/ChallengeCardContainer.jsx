@@ -178,7 +178,7 @@ class ChallengeCardContainer extends Component {
             }
 
             return (
-              <div className="category-challenges-container example-lg" key={`${trimmedFilterName}-container`}>
+              <div className="category-challenges-container" key={`${trimmedFilterName}-container`}>
                 <SortingSelectBar
                   sortingOptions={sortingOptions}
                   filterName={filterName}

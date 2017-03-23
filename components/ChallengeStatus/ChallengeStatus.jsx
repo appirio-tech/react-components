@@ -82,12 +82,10 @@ function ChallengeStatus ({challenge, sampleWinnerProfile}) {
   const renderRegisterButton = () => {
     const lng = getTimeLeft(challenge.registrationEndDate).length
     return (
-      challenge.registrationOpen === 'Yes' && !challenge.registered ?
       <a href="#" className="register-button">
-        {getTimeLeft(challenge.registrationEndDate).substring(0, lng-6)}
+        <span>{getTimeLeft(challenge.registrationEndDate).substring(0, lng-6)}</span>
         <span className="to-register">to register</span>
       </a>
-      : <span></span>
     )
   }
 
@@ -120,7 +118,7 @@ function ChallengeStatus ({challenge, sampleWinnerProfile}) {
   }
   const activeChallenge = () => {
     return (
-      <div className={challenge.registered || challenge.registrationOpen !== 'Yes' ? 'challenge-progress' : 'challenge-progress with-register-button'}>
+      <div className={(!challenge.registered && challenge.registrationOpen === 'Yes') ? 'challenge-progress with-register-button' : 'challenge-progress'}>
         <span className="current-phase">{challenge.currentPhaseName ? challenge.currentPhaseName : STALLED_MSG}</span>
         <span className="challenge-stats">
           <span>
@@ -139,18 +137,18 @@ function ChallengeStatus ({challenge, sampleWinnerProfile}) {
           </span>
 
           {
-            challenge.registered === 'Active' ?
-            <span className={ challenge.registered ? '' : 'hidden'}>
+            challenge.registered ?
+            <span>
               <a className="link-forum" href={`${FORUM_URL}${challenge.forumId}`}><ForumIcon/></a>
             </span>
-            : renderRegisterButton()
+            : ''
           }
         </span>
         <ProgressBarTooltip challenge={challenge}>
           {
             challenge.status === 'Active' ?
             <div>
-              <ChallengeProgressBar color={challenge.status === 'Active' ? 'green' : 'gray'}
+              <ChallengeProgressBar color="green"
                 value={getTimeToGo(challenge.registrationStartDate, challenge.currentPhaseEndDate)}
                 isLate={getTimeLeft(challenge.currentPhaseEndDate) === 'Late'}
               />
@@ -160,6 +158,7 @@ function ChallengeStatus ({challenge, sampleWinnerProfile}) {
             <ChallengeProgressBar color="gray" value="100"/>
           }
         </ProgressBarTooltip>
+        {(!challenge.registered && challenge.registrationOpen === 'Yes') ? renderRegisterButton() : ''}
       </div>
     )
   }

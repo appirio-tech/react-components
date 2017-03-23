@@ -55,7 +55,7 @@
     left: $base-unit;
     position: absolute;
     fill: $tc-dark-blue;
-    top: 9px;
+    top: 12px;
   }
 
   .icon-cross {
@@ -80,19 +80,28 @@
   // Styling of FilterItem.
 
   .FilterItem {
+    color: $tc-black;
     border-radius: 2*$corner-radius;
     cursor: pointer;
-    padding: 0 3*$base-unit;
+    padding: 0 2*$base-unit 0 3*$base-unit;
+    @include xs {
+      font-size: 15px;
+      padding: 2px 0;
+    }
     .right {
       color: $tc-gray-50;
       float: right;
       position: static;
+      font-weight: 700;
     }
   }
 
   .FilterItem.highlighted {
     background: $tc-gray-10;
     cursor: default;
+    @include xs {
+      background: $tc-white;
+    }
     .left {
       font-weight: 600;
     }

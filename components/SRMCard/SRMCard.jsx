@@ -59,7 +59,7 @@ const renderLeaderboard = MOCK_REGISTRANTS.map((winner, index) => {
 // Happening now
 const HappeningNow = () => {
   return (
-    <div className="SRMCard">
+    <div className="SRMCard now">
       <div className="left-panel">
         <div className="SRM-track">
           <TrackAbbreviationTooltip track={'DATA_SCIENCE'} subTrack={'SRM'}>
@@ -88,7 +88,7 @@ const HappeningNow = () => {
 // upcoming SRMs
 const UpcomingSRMs = ({srmChallenge}) => {
   return (
-    <div className="SRMCard">
+    <div className="SRMCard upcoming">
       <div className="left-panel upcoming">
         <div className="SRM-track">
           <TrackAbbreviationTooltip track={'DATA_SCIENCE'} subTrack={'SRM'}>
@@ -97,12 +97,16 @@ const UpcomingSRMs = ({srmChallenge}) => {
         </div>
         <div className="SRM-details">
           <p className="upcoming-title">Competitive Programming - {srmChallenge.name}</p>
+          <div className="SRM-date">{moment(srmChallenge.startDate).format('MMM DD, YYYY hh:mm a')}</div>
         </div>
       </div>
       <div className="right-panel upcoming">
         <div className="SRM-date">{moment(srmChallenge.startDate).format('MMM DD, YYYY hh:mm a')}</div>
         <a href="javascript:;" className="notify-me">Notify me</a>
       </div>
+      <a href="javascript:;" className="notify-button">
+        <span className="notify-me">+ Notify me</span>
+      </a>
     </div>
   )
 }

@@ -77,7 +77,6 @@ class ChallengeCardExamples extends React.Component {
     fetch(`${BASE_URL}/data/marathon/challenges/?listType=active`, {method: 'GET', mode: 'cors'})
     .then((response) => {
       response.json().then((json) => {
-        console.log(json.data)
         that.setState({
           activeMarathonMatchChallenges: json.data
         })
@@ -133,29 +132,27 @@ class ChallengeCardExamples extends React.Component {
     })
 
     return (
-      <div className="tc-content-wrapper">
-        <div className="challenge-cards-container">
-          <div className="ChallengeCardExamples example-lg">
-            <div className="title">Active Develop Challenges</div>
-            {ActiveDevelopChallengeCards}
-          </div>
-          <div className="ChallengeCardExamples example-lg">
-            <div className="title">Past Develop Challenges</div>
-            {PastDevelopChallengeCards}
-          </div>
-          <div className="ChallengeCardExamples example-lg">
-            <div className="title">Past Design Challenges</div>
-            {ActiveDesignChallengeCards}
-          </div>
-          <div className="ChallengeCardExamples example-lg">
-            <div className="title">Past Design Challenges</div>
-            {PastDesignChallengeCards}
-          </div>
-          <div className="ChallengeCardExamples example-lg">
-            <div className="title">Active Marathon Match Challenges</div>
-            {ActiveMarathonMatchChallengeCards}
-            <br/><br/><br/>
-          </div>
+      <div className="ChallengeCardExamples wrapper">
+        <div className="cards-container">
+          <div className="title">Active Develop Challenges</div>
+          {ActiveDevelopChallengeCards}
+        </div>
+        <div className="cards-container">
+          <div className="title">Past Develop Challenges</div>
+          {PastDevelopChallengeCards}
+        </div>
+        <div className="cards-container">
+          <div className="title">Active Design Challenges</div>
+          {ActiveDesignChallengeCards}
+        </div>
+        <div className="cards-container">
+          <div className="title">Past Design Challenges</div>
+          {PastDesignChallengeCards}
+        </div>
+        <div className="cards-container">
+          <div className="title">Active Marathon Match Challenges</div>
+          {ActiveMarathonMatchChallengeCards}
+          <br/><br/><br/>
         </div>
       </div>
     )

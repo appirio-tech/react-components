@@ -357,20 +357,22 @@ class ChallengeFiltersExample extends React.Component {
 
       challengeCardContainer = (
         <div className="challenge-cards-container">
-          <div className="ChallengeCardExamples example-lg">
+          <div className="ChallengeCardExamples">
             {challenges.filter(sidebarFilter.getFilterFunction()).map(cardify)}
           </div>
         </div>
       )
     } else {
       challengeCardContainer = (
-        <ChallengeCardContainer
-          onTechTagClicked={(tag) => this.challengeFilters.setKeywords(tag)}
-          challenges={challenges}
-          currentFilterName={sidebarFilterName}
-          expanded={sidebarFilterMode !== 'All Challenges'}
-          additionalFilter={sidebarFilter.getFilterFunction()}
-        />
+        <div className="challenge-cards-container">
+          <ChallengeCardContainer
+            onTechTagClicked={(tag) => this.challengeFilters.setKeywords(tag)}
+            challenges={challenges}
+            currentFilterName={sidebarFilterName}
+            expanded={sidebarFilterMode !== 'All Challenges'}
+            additionalFilter={sidebarFilter.getFilterFunction()}
+          />
+        </div>
       )
     }
 
@@ -404,37 +406,35 @@ class ChallengeFiltersExample extends React.Component {
           isCardTypeSet={this.state.currentCardType}
           ref={(node) => { this.challengeFilters = node; }}
         />
-        <div className={`tc-content-wrapper srm ${this.state.currentCardType === 'SRMs' ? '' : 'hidden'}`}>
+        <div className={`tc-content-wrapper ${this.state.currentCardType === 'SRMs' ? '' : 'hidden'}`}>
+          <div className="sidebar-container xs-to-sm">
+            <ChallengesSidebar SidebarMock={SRMsSidebarMock} />
+          </div>
+
           <div className="challenges-container SRMs-container">
             {/* happening now */}
-            <div className="SRMCardExamples example-lg">
+            <div className="SRMCardExamples">
               <SRMCard category={'now'}/>
             </div>
             {/* upcoming SRMs */}
-            <div className="SRMCardExamples example-lg">
+            <div className="SRMCardExamples">
               <div className="title">Upcoming SRMs</div>
               { UpcomingSrm }
             </div>
             {/* past SRMs */}
-            <div className="SRMCardExamples example-lg">
+            <div className="SRMCardExamples">
               <div className="title">Past SRMs</div>
               <SRMCard category={'past'} />
             </div>
           </div>
 
-          <div className="sidebar-container srm">
+          <div className="sidebar-container desktop">
             <ChallengesSidebar SidebarMock={SRMsSidebarMock} />
           </div>
         </div>
 
         <div className={`tc-content-wrapper ${this.state.currentCardType === 'Challenges' ? '' : 'hidden'}`}>
-          {challengeCardContainer}
-
-          <Sticky
-            className="sidebar-container"
-            enableTransforms={false}
-            top={18}
-          >
+          <div className="sidebar-container xs-to-sm">
             <SideBarFilters
               challenges={challenges}
               filter={this.state.sidebarFilter}
@@ -445,7 +445,22 @@ class ChallengeFiltersExample extends React.Component {
               isAuth={this.props.isAuth}
               myChallenges={this.props.myChallenges}
             />
-          </Sticky>
+          </div>
+
+          {challengeCardContainer}
+
+          <div className="sidebar-container desktop">
+            <SideBarFilters
+              challenges={challenges}
+              filter={this.state.sidebarFilter}
+              onFilter={filter => this.setState({ sidebarFilter: filter }, () => this.saveFiltersToHash())}
+              ref={(node) => {
+                this.sidebar = node;
+              }}
+              isAuth={this.props.isAuth}
+              myChallenges={this.props.myChallenges}
+            />
+          </div>
         </div>
       </div>
     );
