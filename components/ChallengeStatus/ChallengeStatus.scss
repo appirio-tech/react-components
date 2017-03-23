@@ -21,6 +21,7 @@ $status-radius-4: $corner-radius * 2;
   }
   @include xs {
     margin-top: $status-space-15;
+    padding-left: $status-space-50;
   }
   &.completed {
     @include xs-to-sm {
@@ -52,10 +53,6 @@ $status-radius-4: $corner-radius * 2;
 
     &.with-register-button {
       padding-right: 108px;
-      @include xs {
-        padding-right: 0;
-        margin-bottom: 50px;
-      }
     }
 
     .current-phase {
@@ -82,9 +79,9 @@ $status-radius-4: $corner-radius * 2;
     color: $tc-black;
     margin-left: auto;
     a.num-reg {
-      margin-left: $status-space-20;
-      @include xs {
-        margin-left: $status-space-15;
+      margin-left: $status-space-15;
+      @media (min-width: #{$md-width + 1px}) and (max-width: $base-unit * 252) {
+        margin-left: 5%;
       }
     }
     a.num-sub {
@@ -106,58 +103,43 @@ $status-radius-4: $corner-radius * 2;
       padding-left: $base-unit - 3;
     }
   }
-  // register btn
-  a.register-button {
+}
+// register btn
+a.register-button {
+  display: block;
+  position: absolute;
+  height: 100%;
+  background: $tc-gray-neutral-light;
+  top: 0;
+  right: 0;
+  width: $base-unit * 20 + 8;
+  padding-left: $status-space-20;
+  text-align: left;
+  font-size: 13px;
+  color: $tc-gray-80;
+  line-height: $status-space-20;
+  @include xs {
+    width: $base-unit * 16;
+    padding-left: $base-unit * 2;
+  }
+  span {
+    display: inline-block;
+    font-size: 12px;
+    line-height: $status-space-15;
+    font-weight: 500;
     display: block;
     position: absolute;
-    height: 100%;
-    background: $tc-gray-neutral-light;
-    top: 0;
-    right: 0;
-    width: 108px;
-    padding-left: $status-space-20;
-    text-align: left;
-    font-size: 13px;
-    color: $tc-black;
-    line-height: $status-space-20;
-    @include xs {
-      position: absolute;
-      height: 50px; 
-      width: auto;
-      left: 0; 
-      right: 0;
-      top: auto;
-      bottom: 0;
-      text-align: center;
-      background: $tc-dark-blue-10;
-    }
-    span {
-      font-size: 12px;
-      line-height: $status-space-15;
-      font-weight: 500;
-      display: block;
-      position: absolute;
-      top: 50%;
-      transform: translate(0,-50%);
-      margin-top: -$status-space-10;
-      @include xs {
-        display: inline-block;
-        position: relative;
-        margin-top: 0;
-        color: $tc-dark-blue;
-      }
-    }
-    .to-register {
-      font-weight: 400;
-      margin-top: $status-space-10;
-      @include xs {
-        margin-top: 0;
-        padding-left: 5px;
-      }
-    }
-    &:hover {
-      background: $tc-dark-blue-10;
-      color: $tc-dark-blue;
-    }
+    top: 50%;
+    transform: translate(0,-50%);
+    margin-top: -$status-space-10;
+  }
+  .to-register {
+    font-weight: 400;
+    margin-top: $status-space-10;
+  }
+
+  &:hover {
+    background: $tc-dark-blue-30;
+    color: $tc-gray-80;
   }
 }

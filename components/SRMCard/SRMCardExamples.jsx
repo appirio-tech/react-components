@@ -28,7 +28,7 @@ class SRMCardExamples extends React.Component {
     }
 
     /* Fetching of SRM challenges */
-    fetch(`${API_V3}/?filter=status=FUTURE`)
+    fetch(`${API_V3}s/?filter=status=FUTURE`)
       .then(res => res.json())
       .then((json) => {
         this.setState({srmChallenges: json.result.content})
@@ -52,16 +52,16 @@ class SRMCardExamples extends React.Component {
         <div className={"tc-content-wrapper srm"}>
           <div className="challenges-container SRMs-container">
             {/* happening now */}
-            <div className="SRMCardExamples">
+            <div className="SRMCardExamples example-lg">
               <SRMCard category={'now'}></SRMCard>
             </div>
             {/* upcoming SRMs */}
-            <div className="SRMCardExamples">
+            <div className="SRMCardExamples example-lg">
               <div className="title">Upcoming SRMs</div>
               { UpcomingSrm }
             </div>
             {/* past SRMs */}
-            <div className="SRMCardExamples">
+            <div className="SRMCardExamples example-lg">
               <div className="title">Past SRMs</div>
               <SRMCard category={'past'}></SRMCard>
             </div>

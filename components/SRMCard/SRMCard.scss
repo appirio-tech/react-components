@@ -6,7 +6,6 @@ $srm-space-20: $base-unit * 4;
 $srm-space-25: $base-unit * 5;
 $srm-space-30: $base-unit * 6;
 $srm-space-40: $base-unit * 8;
-$srm-space-45: $base-unit * 9;
 $srm-space-50: $base-unit * 10;
 
 $srm-radius-1: $corner-radius / 2;
@@ -26,18 +25,8 @@ $srm-radius-4: $corner-radius * 2;
   font-family: 'Roboto';
   font-weight: 500;
   @include xs {
-    padding: $srm-space-15;
+    padding: $srm-space-10;
     display: block;
-  }
-  &.now {
-    @include xs {
-      padding-bottom: 65px;
-    }
-  }
-  &.upcoming {
-    @include xs {
-      padding-bottom: 65px;
-    }
   }
   .upper-row {
     display: flex;
@@ -68,13 +57,12 @@ $srm-radius-4: $corner-radius * 2;
   .SRM-details {
     .open-title {
       font-family: 'Roboto';
-      font-weight: 500;
+      font-weight: 700;
       font-size: 20px;
       color: $tc-black;
       line-height: $srm-space-30;
       @include xs {
-        font-size: 20px;
-        font-weight: 400;
+        font-size: 15px;
         line-height: $srm-space-20;
       }
     }
@@ -86,17 +74,6 @@ $srm-radius-4: $corner-radius * 2;
     .past-title {
       @extend .upcoming-title;
       padding-bottom: $srm-space-10;
-    }
-    .SRM-date {
-      display: none;
-      @include xs {
-        margin-top: $srm-space-10;
-        display: block;
-        font-weight: 400;
-        font-size: 12px;
-        color: $tc-gray-80;
-        line-height: $srm-space-15;
-      }
     }
   }
   .SRM-open-info {
@@ -111,7 +88,7 @@ $srm-radius-4: $corner-radius * 2;
       letter-spacing: 0;
       line-height: $srm-space-20;
       @include xs {
-        padding-top: 5px;
+        font-size: 10px;
         line-height: $srm-space-15;
       }
     }
@@ -124,7 +101,7 @@ $srm-radius-4: $corner-radius * 2;
       }
     }
   }
-  /* right panel */
+  /* rright panel */
   .right-panel {
     width: 50%;
     position: relative;
@@ -138,7 +115,10 @@ $srm-radius-4: $corner-radius * 2;
       text-align: right;
       width: 30%;
       @include xs {
-        display: none;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        margin-top: $srm-space-15;
       }
     }
     .SRM-date {
@@ -166,7 +146,7 @@ $srm-radius-4: $corner-radius * 2;
     padding-right: $srm-space-10;
     @include xs {
       justify-content: flex-start;
-      padding: $srm-space-20 $srm-space-15 0 $srm-space-45;
+      padding: $srm-space-20 $srm-space-15 $srm-space-10;
     }
   }
   .avatar-container {
@@ -180,64 +160,11 @@ $srm-radius-4: $corner-radius * 2;
     }
   }
   a.register-button {
-    display: block;
-    position: absolute;
-    height: 100%;
-    background: $tc-gray-neutral-light;
-    top: 0;
-    right: 0;
-    width: 108px;
-    padding-left: $srm-space-20;
-    text-align: left;
-    font-size: 13px;
-    color: $tc-black;
-    line-height: $srm-space-20;
     @include xs {
-      position: absolute;
-      height: 50px; 
-      width: auto;
-      left: 0; 
-      right: 0;
-      top: auto;
-      bottom: 0;
-      text-align: center;
-      background: $tc-dark-blue-10;
+      width: 70px;
     }
-    span.to-register {
-      display: inline-block;
-      font-size: 12px;
-      line-height: $srm-space-15;
-      font-weight: 400;
-      display: block;
-      position: absolute;
-      top: 50%;
-      transform: translate(0,-50%);
+    .to-register {
       margin-top: 0;
-      @include xs {
-        display: inline-block;
-        position: relative;
-        margin-top: 0;
-        color: $tc-dark-blue;
-      }
-    }
-    &:hover {
-      background: $tc-dark-blue-10;
-      color: $tc-dark-blue;
-    }
-  }
-  /*
-    This re-uses most of the code from .register-button, 
-    and adds the display property to hide/show depending the 
-    screen size
-  */
-  a.notify-button {
-    @extend a.register-button;
-    display: none; 
-    @include xs {
-      display: block;
-    }
-    span.notify-me {
-      @extend span.to-register;
     }
   }
   /* past SRMs */
@@ -246,9 +173,7 @@ $srm-radius-4: $corner-radius * 2;
     justify-content: flex-end;
     padding-bottom: $srm-space-10;
     .SRM-date {
-      font-size: 13px;
       margin-right: $srm-space-15;
-      padding-top: 3px;
     }
   }
   .challenge-stats {

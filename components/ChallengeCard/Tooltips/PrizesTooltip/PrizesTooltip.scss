@@ -5,7 +5,6 @@ $prize-space-15: $base-unit * 3;
 $prize-radius-15: $corner-radius * 7 + 1;
 
 .prizes-tooltip {
-  font-family: 'Roboto';
   max-width: 480px;
   .bonuses {
     border-top: 1px solid $tc-gray-70;

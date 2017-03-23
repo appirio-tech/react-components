@@ -1,32 +1,61 @@
 @import '../../styles/tc-styles';
-
 $challenge-space-10: $base-unit * 2;
+$challenge-space-15: $base-unit * 3;
 $challenge-space-20: $base-unit * 4;
 $challenge-radius-4: $corner-radius * 2;
 
-.ChallengeCardExamples {
-  &.wrapper {
+.tc-content-wrapper {
+  display: flex;
+  padding: $challenge-space-10;
+  @include xs {
     display: block;
-    width: 100%;
-    padding: $challenge-space-20;
-    @include xs {
-      padding: $challenge-space-10;
+    padding: $base-unit * 0;
+  }
+  &.srm {
+    @include sm {
+      display: block;
+      padding: $base-unit * 0;
     }
   }
-  .cards-container {
-    background: $tc-gray-neutral-light;
+}
+.challenge-cards-container {
+  width: 100%;
+  padding: $challenge-space-10;
+  @include xs {
+    width: 100%;
+  }
+}
+.challenges-container.SRMs-container {
+  @include xs-to-sm {
+    width: 100%;
+  }
+}
+.sidebar-container {
+  width: 30%;
+  padding: $challenge-space-10;
+  @include xs {
+    width: 100%;
+  }
+  &.srm {
+    @include xs-to-sm {
+      width: 100%;
+    }
+  }
+}
+.ChallengeCardExamples {
+  background: $tc-gray-neutral-light;
+  border-top-left-radius: $challenge-radius-4;
+  border-top-right-radius: $challenge-radius-4;
+  .title {
+    font-size: 13px;
+    color: $tc-gray-80;
+    line-height: $base-unit * 4;
+    padding: $base-unit * 2 $challenge-space-20;
+    font-family: 'Roboto';
+    font-weight: 500;
+    background: #FAFAFB;
     border-top-left-radius: $challenge-radius-4;
     border-top-right-radius: $challenge-radius-4;
-    .title {
-      font-size: 13px;
-      color: $tc-gray-80;
-      line-height: $base-unit * 4;
-      padding: $base-unit * 2 $challenge-space-20;
-      font-family: 'Roboto';
-      font-weight: 500;
-      background: #FAFAFB;
-      border-top-left-radius: $challenge-radius-4;
-      border-top-right-radius: $challenge-radius-4;
-    }
   }
+
 }

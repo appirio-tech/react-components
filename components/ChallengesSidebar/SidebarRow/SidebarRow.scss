@@ -8,10 +8,6 @@
     font-size: 13px;
     color: $tc-black;
     line-height: $base-unit * 6;
-    @include xs {
-      font-size: 15px;
-      line-height: $base-unit * 7;
-    }
   }
   .r-row {
     font-family: 'Roboto';
@@ -20,9 +16,5 @@
     color: $tc-gray-50;
     line-height: $base-unit * 6;
     margin-left: auto;
-    @include xs {
-      font-size: 15px;
-      line-height: $base-unit * 7;
-    }
   }
 }
