@@ -38,7 +38,7 @@ function Tip(props) {
         <span className="joined"><span className="separtor">/</span> Joined {joined}</span>
       </div>
       <div className="achievements">
-        <h3>Ratings</h3>
+        <h3>Rating</h3>
         {rating}
       </div>
     </div>

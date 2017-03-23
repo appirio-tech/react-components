@@ -22,7 +22,6 @@ import _ from 'lodash';
 import React, { PropTypes as PT } from 'react';
 import Select from 'react-select';
 import FilterPanelFilter from './FilterPanelFilter';
-import UiSimpleRemove from '../../Icons/UiSimpleRemove';
 import moment from 'moment';
 
 import './FiltersPanel.scss';
@@ -94,12 +93,6 @@ class FiltersPanel extends React.Component {
     if (this.props.hidden) className += ' hidden';
     return (
       <div className={className} ref={this.props.ref}>
-        <div className='header'>
-          <span className='title'>Filters</span>
-          <span className='close-icon' onClick={() => this.props.onClose()}>
-            <UiSimpleRemove className="cross" />
-          </span>
-        </div>
         <div id="filters">
           <div className="filter" id="keywords">
             <label htmlFor="keyword-select">Keywords</label>

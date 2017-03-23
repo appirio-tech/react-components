@@ -4,7 +4,6 @@ $track-space-20: $base-unit * 4;
 $track-radius-4: $corner-radius * 2;
 
 .track-abbreviation-tooltip {
-  font-family: 'Roboto';
   min-width: $base-unit * 64;
   line-height: $track-space-20 - 2;
   .header {

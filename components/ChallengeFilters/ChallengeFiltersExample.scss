@@ -1,5 +1,4 @@
 @import '../../styles/tc-styles';
-
 $challenge-space-10: $base-unit * 2;
 $challenge-space-15: $base-unit * 3;
 $challenge-space-20: $base-unit * 4;
@@ -7,64 +6,81 @@ $challenge-radius-4: $corner-radius * 2;
 
 .ChallengeFiltersExample {
   background: $tc-gray-neutral-dark;
+}
 
-  .tc-content-wrapper {
-    display: flex;
-    padding: $challenge-space-10;
-    @include xs-to-sm {
+.challenge-cards-container {
+  padding: $base-unit * 2;
+  width: 70%;
+  .title {
+    font-size: 13px;
+    color: $tc-gray-80;
+    line-height: $challenge-space-20;
+    padding: $base-unit * 2 $challenge-space-20;
+    font-family: 'Roboto';
+    font-weight: 500;
+    background: $tc-gray-neutral-light;
+    border-top-left-radius: $challenge-radius-4;
+    border-top-right-radius: $challenge-radius-4;
+  }
+}
+
+.tc-content-wrapper {
+  display: flex;
+  padding: $challenge-space-10;
+  @include xs {
+    display: block;
+    padding: $base-unit * 0;
+  }
+  &.srm {
+    @include sm {
       display: block;
       padding: $base-unit * 0;
     }
   }
-  .challenge-cards-container {
-    width: 70%;
-    padding: $challenge-space-10;
-    @include xs-to-sm {
-      width: 100%;
-      padding-top: 0;
-    }
+}
+.challenge-cards-container {
+  width: 70%;
+  padding: $challenge-space-10;
+  @include xs {
+    width: 100%;
   }
-  .challenges-container.SRMs-container {
-    width: 70%;
-    padding: $challenge-space-10;
-    @include xs-to-sm {
-      width: 100%;
-      padding-top: 0;
-    }
-    .title {
+}
+.challenges-container.SRMs-container {
+  width: 70%;
+  padding: 10px;
+  @include xs-to-sm {
+    width: 100%;
+  }
+  .title {
       font-size: 13px;
-      color: $tc-gray-80;
-      line-height: $base-unit * 4;
-      padding: $base-unit * 2 $base-unit * 4;
+      color: #47474F;
+      line-height: 20px;
+      padding: 10px 20px;
       font-family: 'Roboto';
       font-weight: 500;
       background: #FAFAFB;
-      border-top-left-radius: $corner-radius * 2;
-      border-top-right-radius: $corner-radius * 2;
-      margin-top: $base-unit * 4;
-      @include xs-to-sm {
-        margin-top: $base-unit * 2;
-      }
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+      margin-top: 20px;
+  }
+}
+.sidebar-container {
+  width: 30%;
+  padding: $challenge-space-10;
+  &.active {
+    position: relative;
+    right: 20px;
+  }
+  @include xs {
+    width: 100%;
+  }
+  &.srm {
+    @include xs-to-sm {
+      width: 100%;
     }
   }
-  .sidebar-container {
-    padding: $challenge-space-10;
-    &.xs-to-sm {
-      display: none;
-      @include xs-to-sm {
-        display: block;
-        width: 100%;
-      }
-    }
-    &.desktop {
-      width: 30%;
-      @include xs-to-sm {
-        display: none;
-      }
-    }
-  }
+}
 
-  .hidden {
-    display: none;
-  }
+.hidden {
+  display: none;
 }

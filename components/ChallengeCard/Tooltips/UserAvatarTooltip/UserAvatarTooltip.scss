@@ -10,7 +10,6 @@ $avatar-radius-4: $corner-radius * 2;
 
 .user-avatar-tooltip {
   max-width: 640px;
-  font-family: 'Roboto';
   .achievements {
     border-top: 1px solid $tc-gray-70;
     margin-top: 12px;
@@ -45,7 +44,7 @@ $avatar-radius-4: $corner-radius * 2;
     display: inline-block;
     font-weight: 500;
     font-size: 20px;
-    color: $tc-level-4;
+    color: $tc-gold;
     line-height: $base-unit * 6;
     text-shadow: none;
   }

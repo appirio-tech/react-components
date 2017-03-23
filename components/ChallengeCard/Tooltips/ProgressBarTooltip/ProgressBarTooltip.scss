@@ -10,13 +10,13 @@ $tip-radius-15: $corner-radius * 7 + 1;
 $tip-radius-4: $corner-radius * 2;
 
 div.progress-bar-tooltip {
-  color: $tc-white;
-  font-family: 'Roboto';
   max-width: none;
   padding: 0 $base-unit * 3;
+  margin-left: -60px;
   .tip {
     word-wrap: none;
     white-space: nowrap;
+    padding-right: $tip-space-35;
     .phase {
       display: inline-block;
       line-height: $tip-space-15;
@@ -67,7 +67,7 @@ div.progress-bar-tooltip {
   .date {
     font-weight: 400;
     font-size: 11px;
-    color: $tc-gray-30;
+    color: $tc-gray-20;
     letter-spacing: 0;
     line-height: $tip-space-15;
     text-shadow: none;
