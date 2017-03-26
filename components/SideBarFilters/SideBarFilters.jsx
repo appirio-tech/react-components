@@ -14,6 +14,7 @@
  */
 
 import _ from 'lodash';
+import uuid from 'uuid/v4';
 import React, { PropTypes as PT } from 'react';
 import EditMyFilters, { SAVE_FILTERS_API } from './EditMyFilters';
 import SideBarFilter, { MODE } from './SideBarFilter';
@@ -131,6 +132,7 @@ class SideBarFilters extends React.Component {
           const myFilters = data.map((item) => {
             const filter = item;
             filter.isSavedFilter = true;
+            filter.isCustomFilter = true;
             return new SideBarFilter(filter);
           });
           this.setState({
@@ -202,6 +204,7 @@ class SideBarFilters extends React.Component {
    */
   addFilter(filter) {
     const f = (new SideBarFilter(MODE.CUSTOM)).merge(filter);
+    f.uuid = uuid();
     const filters = _.clone(this.state.filters);
     f.count = this.props.challenges.filter(f.getFilterFunction()).length;
     filters.push(f);
@@ -278,9 +281,9 @@ class SideBarFilters extends React.Component {
       body: JSON.stringify({
         name: this.getAvailableFilterName(),
         filter: filter.getURLEncoded(),
-        // TODO: The saved-search API requires type to be one of develop, design,
-        // or data. As this is not consistent with the frontend functionality, the API
-        // needs to be updated in future, till then we use hardcoded 'develop'.
+        // The saved-search API requires type to be one of develop, design,
+        // or data. We are using the filter property to store tracks info and passing
+        // in type as develop just to keep the backend happy.
         type: 'develop',
       }),
     })
@@ -291,6 +294,7 @@ class SideBarFilters extends React.Component {
       const updatedFilters = this.state.filters.filter(e => e.uuid !== filter.uuid);
       const savedFilter = res;
       savedFilter.isSavedFilter = true;
+      savedFilter.isCustomFilter = true;
       updatedFilters.push(new SideBarFilter(savedFilter));
       this.setState({ filters: updatedFilters });
     });

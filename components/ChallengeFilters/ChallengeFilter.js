@@ -37,11 +37,11 @@ class ChallengeFilter extends FilterPanelFilter {
       // If this is a saved filter then the track information is 
       // present on the 'type' attribute
 
-      // TODO: The saved-search API requires type to be one of develop, design,
-      // or data. As this is not consistent with the frontend functionality, the API 
-      // needs to be updated in future, till then we use hardcoded DEVELOP_TRACK. 
       super(arg);
-      this.tracks = new Set([DEVELOP_TRACK]);
+      const filters = arg.filter.split('&');
+      const tracks = filters.filter(e => e.startsWith('tracks'))
+        .map(element => element.split('=')[1]);
+      this.tracks = new Set(tracks);
     } else if (_.isObject(arg)) {
       if (!arg._isChallengeFilter) throw new Error ('Invalid argument!');
       super(arg);

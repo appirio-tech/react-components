@@ -106,9 +106,10 @@ class FilterPanelFilter extends BaseFilter {
     result += this.startDate ? `&startDate=${this.startDate.format('YYYY-MM-DD')}` : '';
     result += this.endDate ? `&endDate=${this.endDate.format('YYYY-MM-DD')}` : '';
     result += this.keywords.length > 0 ?
-      this.keywords.reduce((acc, keyword) => `${acc}&keywords=${encodeURIComponent(keyword)}`, '') : '';
+      this.keywords.reduce((acc, keyword) => `${acc}&keywords=${keyword}`, '') : '';
     result += this.subtracks.length > 0 ?
-      this.subtracks.reduce((acc, subtrack) => `${acc}&challengeTypes=${encodeURIComponent(subtrack)}`, '') : '';
+      this.subtracks.reduce((acc, subtrack) => `${acc}&challengeTypes=${subtrack}`, '') : '';
+    debugger;
     return result;
   }
 }

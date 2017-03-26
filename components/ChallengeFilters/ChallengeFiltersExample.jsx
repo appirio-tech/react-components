@@ -82,6 +82,7 @@ const serialize = filter => filter.getURLEncoded();
 const deserialize = queryString => new SideBarFilter({
   filter: queryString,
   isSavedFilter: true, // So that we can reuse constructor for deserializing
+  isCustomFilter: true,
 });
 
 // The demo component itself.
@@ -274,8 +275,9 @@ class ChallengeFiltersExample extends React.Component {
   }
 
   onFilterByTopFilter(filter) {
-    const updatedFilter = new SideBarFilter(filter);
-    this.setState({ filter: updatedFilter }, this.saveFiltersToHash.bind(this, filter));
+    const mergedFilter = Object.assign({}, this.state.filter, filter);
+    const updatedFilter = new SideBarFilter(mergedFilter);
+    this.setState({ filter: updatedFilter }, this.saveFiltersToHash.bind(this, updatedFilter));
   }
 
   // ReactJS render method.
@@ -306,7 +308,7 @@ class ChallengeFiltersExample extends React.Component {
     const { mode: sidebarFilterMode, name: sidebarFilterName } = filter;
 
     let challengeCardContainer
-    if (sidebarFilterMode === 'custom') {
+    if (filter.isCustomFilter) {
       const cardify = challenge => (
         <ChallengeCard
           challenge={challenge}
