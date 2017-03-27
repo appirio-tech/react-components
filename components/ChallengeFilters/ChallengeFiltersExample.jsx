@@ -277,6 +277,7 @@ class ChallengeFiltersExample extends React.Component {
   onFilterByTopFilter(filter) {
     const mergedFilter = Object.assign({}, this.state.filter, filter);
     const updatedFilter = new SideBarFilter(mergedFilter);
+    updatedFilter.mode = SideBarFilterModes.CUSTOM;
     this.setState({ filter: updatedFilter }, this.saveFiltersToHash.bind(this, updatedFilter));
   }
 
