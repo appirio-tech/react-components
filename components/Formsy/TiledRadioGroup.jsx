@@ -45,7 +45,7 @@ class TiledRadioGroup extends Component {
         </a>
       )
       return (
-        <span>
+        <span key={ idx }>
         {
           opt.disabled ?
           <Tooltip>
