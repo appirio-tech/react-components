@@ -40,18 +40,37 @@ const MAX_VISIBLE_WINNERS = 3
 const FORUM_URL = 'https://apps.topcoder.com/forums/?module=Category&categoryID='
 const CHALLENGE_URL = 'https://www.topcoder.com/challenge-details/'
 const STALLED_MSG = 'Stalled'
+const STALLED_TIME_LEFT_MSG = 'Challenge is currently on hold'
+const FF_TIME_LEFT_MSG = 'Winner is working on fixes'
 
-
-const getTimeLeft = (date) => {
+const getTimeLeft = (date, currentPhase) => {
+  if (!currentPhase || currentPhase === 'Stalled') {
+    return {
+      late: false,
+      text: STALLED_TIME_LEFT_MSG
+    }
+  } else if (currentPhase === 'Final Fix') {
+    return {
+      late: false,
+      text: FF_TIME_LEFT_MSG
+    }
+  }
   const duration = moment.duration(moment(date).diff(moment()))
-  const hour = duration.hours()
-  let hString = hour < 10 ? '0'+hour : hour;
-  hString = hour < 0 ? '-'+hString : hString;
-  const min = duration.minutes()
-  let mString = min < 10 ? '0'+min : min;
-  mString = min < 0 ? '-'+mString : mString;
-  const res = `${duration.days() > 0 ? `${duration.days()}d` : ''} ${hString}:${mString} h`
-  return res[1] === '-' ? 'Late' : `${res} to go`
+  const h = duration.hours()
+  const d = duration.days()
+  const m = duration.minutes()
+  const late = (d < 0 || h < 0 || m < 0)
+  const suffix = h != 0 ? 'h' : 'min'
+  let text = `${d != 0 ? (Math.abs(d) + 'd ') : ''}${h != 0 ? (Math.abs(h) + ':') : ''}${m != 0 ? Math.abs(m) + suffix : ''}`
+  if (late) {
+    text = `Late by ${text}`
+  } else {
+    text = `${text} to go`
+  }
+  return {
+    late,
+    text
+  }
 }
 
 const getTimeToGo = (start, end) => {
@@ -80,10 +99,10 @@ function ChallengeStatus ({challenge, sampleWinnerProfile}) {
   })
 
   const renderRegisterButton = () => {
-    const lng = getTimeLeft(challenge.registrationEndDate).length
+    const lng = getTimeLeft(challenge.registrationEndDate, challenge.currentPhaseName).text.length
     return (
       <a href="#" className="register-button">
-        <span>{getTimeLeft(challenge.registrationEndDate).substring(0, lng-6)}</span>
+        <span>{getTimeLeft(challenge.registrationEndDate, challenge.currentPhaseName).text.substring(0, lng-6)}</span>
         <span className="to-register">to register</span>
       </a>
     )
@@ -152,9 +171,9 @@ function ChallengeStatus ({challenge, sampleWinnerProfile}) {
             <div>
               <ChallengeProgressBar color="green"
                 value={getTimeToGo(challenge.registrationStartDate, challenge.currentPhaseEndDate)}
-                isLate={getTimeLeft(challenge.currentPhaseEndDate) === 'Late'}
+                isLate={getTimeLeft(challenge.currentPhaseEndDate, challenge.currentPhaseName).late}
               />
-              <div className="time-left">{getTimeLeft(challenge.currentPhaseEndDate)}</div>
+            <div className="time-left">{getTimeLeft(challenge.currentPhaseEndDate, challenge.currentPhaseName).text}</div>
             </div>
               :
             <ChallengeProgressBar color="gray" value="100"/>
