@@ -44,12 +44,13 @@
     "react-dates": "^4.3.0",
     "react-datetime": "^2.0.2",
     "react-dom": "^0.14.7",
+    "react-dropdown": "^1.2.1",
     "react-dropzone": "^3.3.2",
     "react-redux": "^4.2.1",
     "react-select": "^1.0.0-rc.3",
     "react-stickynode": "^1.2.1",
     "react-svg-loader": "^1.1.1",
-    "uuid": "^3.0.1",
-    "react-waypoint": "^5.1.0"
+    "react-waypoint": "^5.1.0",
+    "uuid": "^3.0.1"
   }
 }

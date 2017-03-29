@@ -26,7 +26,7 @@ $challenge-radius-4: $corner-radius * 2;
   &:last-child {
     border-bottom: 1px solid $tc-gray-10;
   }
-  @include xs-to-sm {
+  @include xs-to-md {
     flex-wrap: wrap;
     position: relative;
   }
@@ -45,7 +45,7 @@ $challenge-radius-4: $corner-radius * 2;
     display: flex;
     justify-content: flex-start;
     width: 50%;
-    @include xs-to-sm {
+    @include xs-to-md {
       width: 100%;
     }
 
@@ -55,7 +55,7 @@ $challenge-radius-4: $corner-radius * 2;
     display: flex;
     justify-content: space-between;
     width: 50%;
-    @include xs-to-sm {
+    @include xs-to-md {
       width: 100%;
     }
     @include xs {
@@ -112,6 +112,7 @@ $challenge-radius-4: $corner-radius * 2;
       background: $tc-gray-neutral-dark;
       font-size: 10px;
       font-family: 'Roboto-Bold', sans-serif;
+      font-weight: 700;
       color: $tc-gray-80;
       margin-right: $base-unit;
       border-radius: $corner-radius + 1;
@@ -131,10 +132,7 @@ $challenge-radius-4: $corner-radius * 2;
     line-height: $challenge-space-20;
     margin-right: $challenge-space-40;
     min-width: $challenge-space-50 + 2;
-    @include xs-to-sm {
-
-    }
-    @include xs-to-sm {
+    @include xs-to-md {
       position: absolute;
       right: 0;
       top: 20px;
@@ -169,6 +167,7 @@ $challenge-radius-4: $corner-radius * 2;
       font-size: 10px;
       color: $tc-gray-70;
       border-radius: $corner-radius + 1;
+      min-width: 70px;
       @include xs {
         margin-left: 10px;
       }

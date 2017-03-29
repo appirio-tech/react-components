@@ -79,13 +79,5 @@
       color: $tc-gray-30;
       line-height: 30px;
     }
-    /*
-      On mobile devices, the ChallengesSidebar is not on the side
-      but on top of the list of challenges. Also, the footer is 
-      not displayed.
-    */
-    @include xs-to-sm {
-      display: none;
-    }
   }
 }

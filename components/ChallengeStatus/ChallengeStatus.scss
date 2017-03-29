@@ -15,7 +15,7 @@ $status-radius-4: $corner-radius * 2;
   display: inline-block;
   text-align: right;
   width: 77.7%;
-  @include xs-to-sm {
+  @include xs-to-md {
     width: 100%;
     margin-top: $status-space-20 + 3;
   }
@@ -23,7 +23,7 @@ $status-radius-4: $corner-radius * 2;
     margin-top: $status-space-15;
   }
   &.completed {
-    @include xs-to-sm {
+    @include xs-to-md {
       text-align: left;
       padding-left: 0;
       margin-bottom: $base-unit + 2;
@@ -31,7 +31,7 @@ $status-radius-4: $corner-radius * 2;
     > div {
       display: flex;
       align-items: center;
-      @include xs-to-sm {
+      @include xs-to-md {
         display: flex;
         align-items: center;
       }
@@ -39,12 +39,12 @@ $status-radius-4: $corner-radius * 2;
   }
   .avatar-container {
     margin-right: $status-space-15 + 2;
+    @media (min-width: $lg-width - 1) and (max-width: 1440px) {
+      margin-right: 14px;
+    }
     > span {
       display: inline-block;
       cursor: pointer;
-    }
-    @media (min-width: #{$md-width + 1px}) and (max-width: $base-unit * 252) {
-      margin-right: $base-unit;
     }
   }
   .challenge-progress {
@@ -93,11 +93,18 @@ $status-radius-4: $corner-radius * 2;
     a.link-forum {
       @extend .num-reg;
     }
+    a.num-reg.past, 
+    a.num-sub.past, 
+    a.link-forum.past {
+      @media (min-width: $lg-width - 1) and (max-width: 1380px) {
+        margin-left: 10px;
+      }
+    }
     @media (min-width: #{$md-width + 1px}) and (max-width: $base-unit * 252) {
       margin-left: auto;
       display: block;
     }
-    @include xs-to-sm {
+    @include xs-to-md {
       margin-left: auto;
       min-width: auto;
     }

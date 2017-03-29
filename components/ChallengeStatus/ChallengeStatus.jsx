@@ -124,7 +124,7 @@ function ChallengeStatus ({challenge, sampleWinnerProfile}) {
           <span>
             <Tooltip content={numRegistrantsTipText(challenge.numRegistrants)} className="num-reg-tooltip">
               <a className="num-reg" href={registrantsLink(challenge, MM_REG)}>
-                <RegistrantsIcon/> <span className="number">{challenge.numRegistrants}</span>
+                <RegistrantsIcon className="challenge-stats-icon" /> <span className="number">{challenge.numRegistrants}</span>
               </a>
             </Tooltip>
           </span>
@@ -139,7 +139,9 @@ function ChallengeStatus ({challenge, sampleWinnerProfile}) {
           {
             challenge.registered ?
             <span>
-              <a className="link-forum" href={`${FORUM_URL}${challenge.forumId}`}><ForumIcon/></a>
+              <a className="link-forum" href={`${FORUM_URL}${challenge.forumId}`}>
+                <ForumIcon/>
+              </a>
             </span>
             : ''
           }
@@ -170,20 +172,20 @@ function ChallengeStatus ({challenge, sampleWinnerProfile}) {
         <span className="challenge-stats">
           <span>
             <Tooltip content={numRegistrantsTipText(challenge.numRegistrants)}>
-              <a className="num-reg" href={`${CHALLENGE_URL}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}#viewRegistrant`}>
+              <a className="num-reg past" href={`${CHALLENGE_URL}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}#viewRegistrant`}>
                 <RegistrantsIcon/> <span className="number">{challenge.numRegistrants}</span>
               </a>
             </Tooltip>
           </span>
           <span>
             <Tooltip content={numSubmissionsTipText(challenge.numSubmissions)}>
-              <a className="num-sub" href={`${CHALLENGE_URL}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}#viewRegistrant`}>
+              <a className="num-sub past" href={`${CHALLENGE_URL}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}#viewRegistrant`}>
                 <SubmissionsIcon/> <span className="number">{challenge.numSubmissions}</span>
               </a>
             </Tooltip>
           </span>
           <span className={ challenge.registered ? '' : 'hidden'}>
-            <a className="link-forum" href={`${FORUM_URL}${challenge.forumId}`}><ForumIcon/></a>
+            <a className="link-forum past" href={`${FORUM_URL}${challenge.forumId}`}><ForumIcon/></a>
           </span>
         </span>
       </div>
