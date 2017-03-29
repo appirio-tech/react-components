@@ -7,7 +7,7 @@ export default [
   {
     name: 'Open for registration',
     check(item) {
-      return item.registrationOpen.startsWith('Yes');
+      return item.registrationOpen.startsWith('Yes') && item.status === 'Active';
     },
     sortingOptions: [
       'Most recent',
