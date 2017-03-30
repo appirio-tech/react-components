@@ -70,17 +70,15 @@ const SRMsSidebarMock = {
 };
 
 // helper function to serialize object to query string
-const serialize = (obj, prefix) => {
-  const str = [];
-  for(let p in obj)
-    if (obj.hasOwnProperty(p)) {
-      if (obj[p] && obj[p].constructor === Array) {
-        obj[p] = obj[p].join('|');
-      }
-      str.push(prefix + encodeURIComponent(p) + '=' + encodeURIComponent(obj[p]));
-    }
-  return str.join('&');
-};
+const serialize = filter => filter.getURLEncoded();
+
+
+// helper function to de-serialize query string to filter object
+const deserialize = queryString => new SideBarFilter({
+  filter: queryString,
+  isSavedFilter: true, // So that we can reuse constructor for deserializing
+  isCustomFilter: true,
+});
 
 // The demo component itself.
 class ChallengeFiltersExample extends React.Component {
@@ -90,37 +88,11 @@ class ChallengeFiltersExample extends React.Component {
       challenges: [],
       srmChallenges: [],
       currentCardType: 'Challenges',
-      filter: new ChallengeFilter(),
+      filter: new SideBarFilter(),
       lastFetchId: 0,
-      sidebarFilter: new SideBarFilter(),
     };
     if (props.filterFromUrl) {
-      const f = JSON.parse('{"' + decodeURI(props.filterFromUrl).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
-      let mf_ = {};
-      let sf_ = {};
-      for(let p in f) {
-        if (f.hasOwnProperty(p)) {
-          if (p.toString().substring(3) === 'keywords'
-            || p.toString().substring(3) === 'subtracks'
-            || p.toString().substring(3) === 'tracks') {
-            f[p] = f[p].split('|');
-          } else {
-            if (f[p] === 'null') f[p] = null;
-            else if (f[p] === 'true') f[p] = true;
-            else if (f[p] === 'false') f[p] = false;
-          }
-          if (p.toString().substring(3) === 'tracks') {
-            f[p] = new Set(f[p]);
-          }
-          if (p.toString().indexOf('mf_') > -1) {
-            mf_[p.toString().substring(3)] = f[p];
-          } else {
-            sf_[p.toString().substring(3)] = f[p];
-          }
-        }
-      }
-      this.state.filter = new ChallengeFilter(mf_);
-      this.state.sidebarFilter = new SideBarFilter(sf_);
+      this.state.filter = deserialize(props.filterFromUrl);
     }
     this.setCardType.bind(this);
     this.fetchChallenges(0).then(res => this.setChallenges(0, res));
@@ -181,18 +153,8 @@ class ChallengeFiltersExample extends React.Component {
   /**
    * Saves current filters to the URL hash.
    */
-  saveFiltersToHash() {
-    const payload = _.cloneDeep([
-      this.state.filter,
-      this.state.sidebarFilter
-    ]);
-    payload[0].tracks = Array.from(payload[0].tracks);
-    payload[1].tracks = Array.from(payload[1].tracks);
-    const serializedPayload = [
-      serialize(payload[0], 'mf_'), // mf_ prefix for main filter
-      serialize(payload[1], 'sf_') // sf_ prefix for sidebar filter
-    ];
-    this.props.onSaveFilterToUrl(serializedPayload.join('&'));
+  saveFiltersToHash(filter) {
+    this.props.onSaveFilterToUrl(serialize(filter));
   }
 
   /**
@@ -307,8 +269,13 @@ class ChallengeFiltersExample extends React.Component {
     });
   }
 
-  onFilterByTopFilter(filter) {
-    this.setState({ filter }, () => this.saveFiltersToHash(filter));
+  onFilterByTopFilter(filter, isSidebarFilter) {
+    const mergedFilter = Object.assign({}, this.state.filter, filter);
+    const updatedFilter = new SideBarFilter(mergedFilter);
+    if(!isSidebarFilter) {
+      updatedFilter.mode = SideBarFilterModes.CUSTOM;
+    }
+    this.setState({ filter: updatedFilter }, this.saveFiltersToHash.bind(this, updatedFilter));
   }
 
   // ReactJS render method.
@@ -325,7 +292,12 @@ class ChallengeFiltersExample extends React.Component {
         return challenge.id;
       });
     }
-    let challenges = this.state.challenges.filter(this.state.filter.getFilterFunction());
+
+    let challenges = this.state.challenges;
+    const currentFilter = this.state.filter;
+    if (currentFilter.mode === SideBarFilterModes.CUSTOM) {
+      challenges = this.state.challenges.filter(currentFilter.getFilterFunction());
+    }
     challenges = challenges.map((item) => {
       // check the challenge id exist in my challenges id
       // TODO: This is also should be moved to a better place, fetchChallenges() ?
@@ -335,11 +307,11 @@ class ChallengeFiltersExample extends React.Component {
       return item;
     });
 
-    const { sidebarFilter } = this.state
-    const { mode: sidebarFilterMode, name: sidebarFilterName } = sidebarFilter
+    const { filter } = this.state
+    const { mode: sidebarFilterMode, name: sidebarFilterName } = filter;
 
     let challengeCardContainer
-    if (sidebarFilterMode === 'custom') {
+    if (filter.isCustomFilter) {
       const cardify = challenge => (
         <ChallengeCard
           challenge={challenge}
@@ -354,7 +326,7 @@ class ChallengeFiltersExample extends React.Component {
       challengeCardContainer = (
         <div className="challenge-cards-container">
           <div className="ChallengeCardExamples">
-            {challenges.filter(sidebarFilter.getFilterFunction()).map(cardify)}
+            {challenges.filter(filter.getFilterFunction()).map(cardify)}
           </div>
         </div>
       )
@@ -449,8 +421,8 @@ class ChallengeFiltersExample extends React.Component {
           <div className="sidebar-container desktop">
             <SideBarFilters
               challenges={challenges}
-              filter={this.state.sidebarFilter}
-              onFilter={filter => this.setState({ sidebarFilter: filter }, () => this.saveFiltersToHash())}
+              filter={this.state.filter}
+              onFilter={filter => this.onFilterByTopFilter(filter, true)}
               ref={(node) => {
                 this.sidebar = node;
               }}
