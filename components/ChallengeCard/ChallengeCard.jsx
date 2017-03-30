@@ -12,8 +12,6 @@ import './ChallengeCard.scss';
 // Constants
 const VISIBLE_TECHNOLOGIES = 3;
 const ID_LENGTH = 6
-const CHALLENGE_URL = 'https://www.topcoder.com/challenge-details/';
-const MM_DETAIL_URL = 'https://community.topcoder.com/tc?module=MatchDetails&rd='; // Marathon Match details
 
 // Get the End date of a challenge
 const getEndDate = (date) => {
@@ -26,7 +24,7 @@ const numberWithCommas = (n) => {
   return n ? n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') : 0;
 }
 
-function ChallengeCard ({challenge, sampleWinnerProfile, onTechTagClicked}) {
+function ChallengeCard ({challenge, config, sampleWinnerProfile, onTechTagClicked}) {
   challenge.technologyList = challenge.technologies;
   challenge.isDataScience = false
   if (challenge.technologyList.length > VISIBLE_TECHNOLOGIES) {
@@ -51,15 +49,17 @@ function ChallengeCard ({challenge, sampleWinnerProfile, onTechTagClicked}) {
   })
 
   const challengeDetailLink = (challenge) => {
+    const challengeUrl = `${config.MAIN_URL}/challenge-details/`;
+    const mmDetailUrl = `${window.location.protocol}${config.COMMUNITY_URL}/tc?module=MatchDetails&rd=`; // Marathon Match details
     if(challenge.track === 'DATA_SCIENCE') {
       const id = challenge.challengeId + '';
       if(id.length < ID_LENGTH) {
-        return `${MM_DETAIL_URL}${challenge.challengeId}`;
+        return `${mmDetailUrl}${challenge.challengeId}`;
       } else {
-        return `${CHALLENGE_URL}${challenge.challengeId}/?type=develop`;
+        return `${challengeUrl}${challenge.challengeId}/?type=develop`;
       }
     } else {
-      return `${CHALLENGE_URL}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}`;
+      return `${challengeUrl}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}`;
     }
   }
   return (
@@ -87,7 +87,7 @@ function ChallengeCard ({challenge, sampleWinnerProfile, onTechTagClicked}) {
       </div>
       <div className="right-panel">
         <div className="prizes">
-          <PrizesTooltip challenge={challenge}>
+          <PrizesTooltip challenge={challenge} config={config}>
             <div><span className="dollar">$</span>{numberWithCommas(challenge.totalPrize)}</div>
             <div className="label">Prize pool</div>
           </PrizesTooltip>
