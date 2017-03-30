@@ -14,9 +14,7 @@ import LoaderIcon from '../../../Loader/Loader';
 import './PrizesTooltip.scss';
 
 const ID_LENGTH = 6
-const BASE_URL = 'https://api.topcoder.com/v2';
-const CHALLENGES_API = `${BASE_URL}/challenges/`;
-const MM_API = `${BASE_URL}/data/marathon/challenges/`; // MM - marathon match
+
 /**
  * A single bonus componenent.
  * It renders the bonus name inside a colored rectangle,
@@ -136,12 +134,13 @@ class PrizesTooltip extends React.Component {
   // field of each challenge object.
   fetchChallengeDetails = (id) => {
     const challengeId = '' + id // change to string
+    const baseUrl = this.props.config.API_URL_V2;
+    const challengesApi = `${baseUrl}/challenges/`;
+    const mmApi = `${baseUrl}/data/marathon/challenges/`; // MM - marathon match
     if(challengeId.length < ID_LENGTH) {
-      console.log(`${MM_API}${id} : called`)
-      return fetch(`${MM_API}${id}`).then(res => res.json());
+      return fetch(`${mmApi}${id}`).then(res => res.json());
     } else {
-      console.log(`${CHALLENGES_API}${id} : called`)
-      return fetch(`${CHALLENGES_API}${id}`).then(res => res.json());
+      return fetch(`${challengesApi}${id}`).then(res => res.json());
     }
   }
   render() {

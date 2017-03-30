@@ -28,11 +28,6 @@ import ChallengesSidebar from '../ChallengesSidebar/ChallengesSidebar';
 import '../ChallengeCard/ChallengeCard.scss';
 
 /**
- * Base API version 3 URL
- */
-const API_V3 = `https://api.topcoder.com/v3/srms`
-
-/**
  * Helper function for generation of VALID_KEYWORDS and VALID_TRACKS arrays.
  * @param {String} keyword
  * @return {Object} The valid object to include into the array which will be
@@ -131,7 +126,7 @@ class ChallengeFiltersExample extends React.Component {
     this.fetchChallenges(0).then(res => this.setChallenges(0, res));
 
     /* Fetching of SRM challenges */
-    fetch(`${API_V3}/?filter=status=FUTURE`)
+    fetch(`${props.config.API_URL}/srms/?filter=status=FUTURE`)
       .then(res => res.json())
       .then((json) => {
         this.setState({srmChallenges: json.result.content})
@@ -348,6 +343,7 @@ class ChallengeFiltersExample extends React.Component {
       const cardify = challenge => (
         <ChallengeCard
           challenge={challenge}
+          config={this.props.config}
           onTechTagClicked={(tag) => {
             if (this.challengeFilters) this.challengeFilters.setKeywords(tag);
           }}
@@ -366,6 +362,7 @@ class ChallengeFiltersExample extends React.Component {
       challengeCardContainer = (
         <div className="challenge-cards-container">
           <ChallengeCardContainer
+            config={this.props.config}
             onTechTagClicked={(tag) => this.challengeFilters.setKeywords(tag)}
             challenges={challenges}
             currentFilterName={sidebarFilterName}

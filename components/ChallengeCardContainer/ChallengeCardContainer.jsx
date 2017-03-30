@@ -190,6 +190,7 @@ class ChallengeCardContainer extends Component {
                   _.map(challenges, challenge => (
                     <ChallengeCard
                       challenge={challenge}
+                      config={this.props.config}
                       onTechTagClicked={tag => this.props.onTechTagClicked(tag)}
                       key={`${challenge.challengeId}-${trimmedFilterName}`}
                     />
