@@ -274,10 +274,12 @@ class ChallengeFiltersExample extends React.Component {
     });
   }
 
-  onFilterByTopFilter(filter) {
+  onFilterByTopFilter(filter, isSidebarFilter) {
     const mergedFilter = Object.assign({}, this.state.filter, filter);
     const updatedFilter = new SideBarFilter(mergedFilter);
-    updatedFilter.mode = SideBarFilterModes.CUSTOM;
+    if(!isSidebarFilter) {
+      updatedFilter.mode = SideBarFilterModes.CUSTOM;
+    }
     this.setState({ filter: updatedFilter }, this.saveFiltersToHash.bind(this, updatedFilter));
   }
 
@@ -403,7 +405,7 @@ class ChallengeFiltersExample extends React.Component {
             <SideBarFilters
               challenges={challenges}
               filter={this.state.filter}
-              onFilter={filter => this.onFilterByTopFilter(filter)}
+              onFilter={filter => this.onFilterByTopFilter(filter, true)}
               ref={(node) => {
                 this.sidebar = node;
               }}
