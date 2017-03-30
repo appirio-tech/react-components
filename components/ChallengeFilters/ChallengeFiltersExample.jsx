@@ -425,9 +425,12 @@ class ChallengeFiltersExample extends React.Component {
             </div>
           </div>
 
-          <div className="sidebar-container desktop">
+          <Sticky
+            className="sidebar-container desktop"
+            top={20}
+          >
             <ChallengesSidebar SidebarMock={SRMsSidebarMock} />
-          </div>
+          </Sticky>
         </div>
 
         <div className={`tc-content-wrapper ${this.state.currentCardType === 'Challenges' ? '' : 'hidden'}`}>
@@ -446,7 +449,10 @@ class ChallengeFiltersExample extends React.Component {
 
           {challengeCardContainer}
 
-          <div className="sidebar-container desktop">
+          <Sticky
+            className="sidebar-container desktop"
+            top={20}
+          >
             <SideBarFilters
               challenges={challenges}
               filter={this.state.sidebarFilter}
@@ -457,7 +463,7 @@ class ChallengeFiltersExample extends React.Component {
               isAuth={this.props.isAuth}
               myChallenges={this.props.myChallenges}
             />
-          </div>
+          </Sticky>
         </div>
       </div>
     );

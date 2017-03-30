@@ -48,11 +48,13 @@ $challenge-radius-4: $corner-radius * 2;
     }
   }
   .sidebar-container {
-    padding: $challenge-space-10;
+    margin: $challenge-space-10;
     &.xs-to-sm {
       display: none;
       @include xs-to-sm {
         display: block;
+        margin: 0;
+        padding: $challenge-space-10;
         width: 100%;
       }
     }
