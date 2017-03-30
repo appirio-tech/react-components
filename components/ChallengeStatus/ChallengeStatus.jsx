@@ -171,11 +171,14 @@ function ChallengeStatus ({challenge, sampleWinnerProfile}) {
               </a>
             </Tooltip>
           </span>
-          <span>
-            <a className="link-forum" href={`${FORUM_URL}${challenge.forumId}`}>
-              <ForumIcon/>
-            </a>
-          </span>
+          {
+            challenge.myChallenge &&
+            <span>
+              <a className="link-forum" href={`${FORUM_URL}${challenge.forumId}`}>
+                <ForumIcon/>
+              </a>
+            </span>
+          }
         </span>
         <ProgressBarTooltip challenge={challenge}>
           {
@@ -215,9 +218,12 @@ function ChallengeStatus ({challenge, sampleWinnerProfile}) {
               </a>
             </Tooltip>
           </span>
-          <span>
-            <a className="link-forum past" href={`${FORUM_URL}${challenge.forumId}`}><ForumIcon/></a>
-          </span>
+          {
+            challenge.myChallenge &&
+            <span>
+              <a className="link-forum past" href={`${FORUM_URL}${challenge.forumId}`}><ForumIcon/></a>
+            </span>
+          }
         </span>
       </div>
     )
