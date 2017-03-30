@@ -297,7 +297,12 @@ class ChallengeFiltersExample extends React.Component {
         return challenge.id;
       });
     }
-    let challenges = this.state.challenges.filter(this.state.filter.getFilterFunction());
+
+    let challenges = this.state.challenges;
+    const currentFilter = this.state.filter;
+    if (currentFilter.mode === SideBarFilterModes.CUSTOM) {
+      challenges = this.state.challenges.filter(currentFilter.getFilterFunction());
+    }
     challenges = challenges.map((item) => {
       // check the challenge id exist in my challenges id
       // TODO: This is also should be moved to a better place, fetchChallenges() ?
