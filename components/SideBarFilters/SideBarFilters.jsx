@@ -270,14 +270,14 @@ class SideBarFilters extends React.Component {
           {filters[FILTER_ID.OPEN_FOR_REGISTRATION]}
           {filters[FILTER_ID.ONGOING_CHALLENGES]}
           {filters[FILTER_ID.PAST_CHALLENGES]}
-          {filters[FILTER_ID.OPEN_FOR_REVIEW]}
+          {/* {filters[FILTER_ID.OPEN_FOR_REVIEW]} */}
           {
             myFilters.length ?
               <div>
                 <hr />
                 <div className="my-filters">
                   <h1>My filters</h1>
-                  <a 
+                  <a
                     className="edit-link"
                     href="javascript:;"
                     onClick={() => {
