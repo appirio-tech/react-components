@@ -61,7 +61,12 @@ const getTimeLeft = (date, currentPhase) => {
   const m = duration.minutes()
   const late = (d < 0 || h < 0 || m < 0)
   const suffix = h != 0 ? 'h' : 'min'
-  let text = `${d != 0 ? (Math.abs(d) + 'd ') : ''}${h != 0 ? (Math.abs(h) + ':') : ''}${m != 0 ? Math.abs(m) + suffix : ''}`
+  let text = ''
+  if (d != 0) text += `${Math.abs(d)}d `
+  if (h != 0) text += `${Math.abs(h)}`
+  if (h != 0 && m != 0) text += ':'
+  if (m != 0) text += `${Math.abs(m)}`
+  text += suffix
   if (late) {
     text = `Late by ${text}`
   } else {
@@ -79,9 +84,6 @@ const getTimeToGo = (start, end) => {
 }
 
 function ChallengeStatus ({challenge, sampleWinnerProfile}) {
-
-  challenge.registered = Math.random() > .5
-
   const lastItem = {
     handle: `+${MOCK_WINNERS.length - MAX_VISIBLE_WINNERS}`
   }
@@ -99,10 +101,10 @@ function ChallengeStatus ({challenge, sampleWinnerProfile}) {
   })
 
   const renderRegisterButton = () => {
-    const lng = getTimeLeft(challenge.registrationEndDate, challenge.currentPhaseName).text.length
+    const lng = getTimeLeft(challenge.registrationEndDate || challenge.submissionEndDate, challenge.currentPhaseName).text.length
     return (
       <a href="#" className="register-button">
-        <span>{getTimeLeft(challenge.registrationEndDate, challenge.currentPhaseName).text.substring(0, lng-6)}</span>
+        <span>{getTimeLeft(challenge.registrationEndDate || challenge.submissionEndDate, challenge.currentPhaseName).text.substring(0, lng-6)}</span>
         <span className="to-register">to register</span>
       </a>
     )
@@ -135,10 +137,25 @@ function ChallengeStatus ({challenge, sampleWinnerProfile}) {
       return `${CHALLENGE_URL}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}#viewRegistrant`;
     }
   }
+  const getStatusPhase = () => {
+    switch (challenge.currentPhaseName) {
+      case 'Registration':
+        return {
+          currentPhaseName: 'Submission',
+          currentPhaseEndDate: challenge.submissionEndDate
+        }
+      default:
+        return {
+          currentPhaseName: challenge.currentPhaseName,
+          currentPhaseEndDate: challenge.currentPhaseEndDate
+        }
+    }
+  }
+
   const activeChallenge = () => {
     return (
-      <div className={(!challenge.registered && challenge.registrationOpen === 'Yes') ? 'challenge-progress with-register-button' : 'challenge-progress'}>
-        <span className="current-phase">{challenge.currentPhaseName ? challenge.currentPhaseName : STALLED_MSG}</span>
+      <div className={challenge.registrationOpen === 'Yes' ? 'challenge-progress with-register-button' : 'challenge-progress'}>
+        <span className="current-phase">{challenge.currentPhaseName ? getStatusPhase().currentPhaseName : STALLED_MSG}</span>
         <span className="challenge-stats">
           <span>
             <Tooltip content={numRegistrantsTipText(challenge.numRegistrants)} className="num-reg-tooltip">
@@ -154,32 +171,27 @@ function ChallengeStatus ({challenge, sampleWinnerProfile}) {
               </a>
             </Tooltip>
           </span>
-
-          {
-            challenge.registered ?
-            <span>
-              <a className="link-forum" href={`${FORUM_URL}${challenge.forumId}`}>
-                <ForumIcon/>
-              </a>
-            </span>
-            : ''
-          }
+          <span>
+            <a className="link-forum" href={`${FORUM_URL}${challenge.forumId}`}>
+              <ForumIcon/>
+            </a>
+          </span>
         </span>
         <ProgressBarTooltip challenge={challenge}>
           {
             challenge.status === 'Active' ?
             <div>
               <ChallengeProgressBar color="green"
-                value={getTimeToGo(challenge.registrationStartDate, challenge.currentPhaseEndDate)}
-                isLate={getTimeLeft(challenge.currentPhaseEndDate, challenge.currentPhaseName).late}
+                value={getTimeToGo(challenge.registrationStartDate, getStatusPhase().currentPhaseEndDate)}
+                isLate={getTimeLeft(getStatusPhase().currentPhaseEndDate, getStatusPhase().currentPhaseName).late}
               />
-            <div className="time-left">{getTimeLeft(challenge.currentPhaseEndDate, challenge.currentPhaseName).text}</div>
+            <div className="time-left">{getTimeLeft(getStatusPhase().currentPhaseEndDate, getStatusPhase().currentPhaseName).text}</div>
             </div>
               :
             <ChallengeProgressBar color="gray" value="100"/>
           }
         </ProgressBarTooltip>
-        {(!challenge.registered && challenge.registrationOpen === 'Yes') ? renderRegisterButton() : ''}
+        {challenge.registrationOpen === 'Yes' && renderRegisterButton()}
       </div>
     )
   }
@@ -203,7 +215,7 @@ function ChallengeStatus ({challenge, sampleWinnerProfile}) {
               </a>
             </Tooltip>
           </span>
-          <span className={ challenge.registered ? '' : 'hidden'}>
+          <span>
             <a className="link-forum past" href={`${FORUM_URL}${challenge.forumId}`}><ForumIcon/></a>
           </span>
         </span>
