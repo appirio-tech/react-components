@@ -109,7 +109,6 @@ class FilterPanelFilter extends BaseFilter {
       this.keywords.reduce((acc, keyword) => `${acc}&keywords=${keyword}`, '') : '';
     result += this.subtracks.length > 0 ?
       this.subtracks.reduce((acc, subtrack) => `${acc}&challengeTypes=${subtrack}`, '') : '';
-    debugger;
     return result;
   }
 }

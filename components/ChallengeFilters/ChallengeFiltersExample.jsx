@@ -340,7 +340,7 @@ class ChallengeFiltersExample extends React.Component {
           onTechTagClicked={(tag) => this.challengeFilters.setKeywords(tag)}
           challenges={challenges}
           currentFilterName={sidebarFilterName}
-          expanded={sidebarFilterMode !== 'All Challenges'}
+          expanded={sidebarFilterName !== 'All Challenges'}
           additionalFilter={filter.getFilterFunction()}
         />
       )
