@@ -96,10 +96,6 @@ function Tip(props) {
     name: 'Start',
   });
   steps.push({
-    date: new Date(c.registrationEndDate),
-    name: 'Registration',
-  });
-  steps.push({
     date: new Date(c.submissionEndDate),
     name: 'Submission',
   });
