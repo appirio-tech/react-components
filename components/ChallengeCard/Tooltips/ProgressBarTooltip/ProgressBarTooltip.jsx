@@ -19,10 +19,6 @@ import LoaderIcon from '../../../Loader/Loader';
 import './ProgressBarTooltip.scss';
 
 const ID_LENGTH = 6
-const BASE_URL = 'https://api.topcoder.com/v2';
-const CHALLENGES_API = `${BASE_URL}/challenges/`;
-const MM_API = `${BASE_URL}/data/marathon/challenges/`; // MM - marathon match
-
 
 const getDate = (date) => {
   return moment(date).format('MMM DD')
@@ -189,11 +185,13 @@ class ProgressBarTooltip extends React.Component {
   // It fetches detailed challenge data and attaches them to the 'details'
   // field of each challenge object.
   fetchChallengeDetails = (id) => {
+    const challengesApi = `${this.props.config.API_URL_V2}/challenges/`;
+    const mmApi = `${this.props.config.API_URL_V2}/data/marathon/challenges/`; // MM - marathon match
     const challengeId = '' + id // change to string
     if(challengeId.length < ID_LENGTH) {
-      return fetch(`${MM_API}${id}`).then(res => res.json());
+      return fetch(`${mmApi}${id}`).then(res => res.json());
     } else {
-      return fetch(`${CHALLENGES_API}${id}`).then(res => res.json());
+      return fetch(`${challengesApi}${id}`).then(res => res.json());
     }
   }
   render() {
@@ -213,6 +211,7 @@ ProgressBarTooltip.defaultProps = {
 ProgressBarTooltip.propTypes = {
   challenge: PT.shape({}),
   children: PT.node.isRequired,
+  config: PT.object,
 };
 
 export default ProgressBarTooltip;

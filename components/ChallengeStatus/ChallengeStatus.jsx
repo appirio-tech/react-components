@@ -83,7 +83,7 @@ const getTimeToGo = (start, end) => {
   return (Math.round(percentageComplete * 100) / 100)
 }
 
-function ChallengeStatus ({challenge, sampleWinnerProfile}) {
+function ChallengeStatus ({challenge, config, sampleWinnerProfile}) {
   const lastItem = {
     handle: `+${MOCK_WINNERS.length - MAX_VISIBLE_WINNERS}`
   }
@@ -180,7 +180,7 @@ function ChallengeStatus ({challenge, sampleWinnerProfile}) {
             </span>
           }
         </span>
-        <ProgressBarTooltip challenge={challenge}>
+        <ProgressBarTooltip challenge={challenge} config={config}>
           {
             challenge.status === 'Active' ?
             <div>
