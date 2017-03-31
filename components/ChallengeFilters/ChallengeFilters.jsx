@@ -60,6 +60,15 @@ class ChallengeFilters extends React.Component {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.filter !== nextProps.filter) {
+      this.setState({
+        filter: nextProps.filter,
+        filtersCount: nextProps.filter.count(),
+      });
+    }
+  }
+
   /**
    * Hide/Show the EditTrackPanel
    */

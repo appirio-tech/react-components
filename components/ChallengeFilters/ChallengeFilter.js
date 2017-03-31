@@ -33,6 +33,15 @@ class ChallengeFilter extends FilterPanelFilter {
     if (!arg) {
       super();
       this.tracks = new Set([DATA_SCIENCE_TRACK, DESIGN_TRACK, DEVELOP_TRACK]);
+    } else if (arg.isSavedFilter) {
+      // If this is a saved filter then the track information is 
+      // present on the 'type' attribute
+
+      super(arg);
+      const filters = arg.filter.split('&');
+      const tracks = filters.filter(e => e.startsWith('tracks'))
+        .map(element => element.split('=')[1]);
+      this.tracks = new Set(tracks);
     } else if (_.isObject(arg)) {
       if (!arg._isChallengeFilter) throw new Error ('Invalid argument!');
       super(arg);
@@ -71,6 +80,20 @@ class ChallengeFilter extends FilterPanelFilter {
       super.stringify(),
       [...this.tracks].join(','),
     ]));
+  }
+
+  getTracks() {
+    return Array.from(this.tracks).join('&');
+  }
+
+/**
+ * Get an URL Encoded string representation of the filter tracks.
+ * Used for saving to the backend and displaying on the URL for deep linking.
+ */
+  getURLEncoded() {
+    const str = this.tracks.size > 0 ?
+      Array.from(this.tracks).reduce((acc, track) => `${acc}&tracks=${encodeURIComponent(track)}`, '') : '';
+    return `${super.getURLEncoded()}${str}`;
   }
 }
 

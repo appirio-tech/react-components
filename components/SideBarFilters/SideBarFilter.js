@@ -19,6 +19,7 @@ export const MODE = {
   CUSTOM: 'custom',
 };
 
+
 class SideBarFilter extends ChallengeFilter {
 
   // In addition to the standard arguments accepted by all parent filter classes,
@@ -29,9 +30,18 @@ class SideBarFilter extends ChallengeFilter {
       this.mode = MODE.ALL_CHALLENGES;
       this.name = MODE.ALL_CHALLENGES;
       this.uuid = MODE.ALL_CHALLENGES;
+    } else if (arg.isSavedFilter) {
+      super(arg);
+      this.isCustomFilter = arg.isCustomFilter;
+      const mode = arg.filter.split('&').filter(ele => ele.startsWith('mode='))[0];
+      const name = arg.filter.split('&').filter(ele => ele.startsWith('name='))[0]
+      this.mode = mode ? Object.values(MODE)[+mode.split('=')[1]]: MODE.CUSTOM;
+      this.name = arg.name || (name ? decodeURIComponent(name.split('=')[1]) : name) || 'Custom';
+      this.uuid = arg.id || uuid();
     } else if (_.isObject(arg)) {
       if (!arg._isSideBarFilter) throw new Error('Invalid argument!');
       super(arg);
+      this.isCustomFilter = arg.isCustomFilter;
       this.mode = _.clone(arg.mode);
       this.name = _.clone(arg.name);
       this.uuid = _.clone(arg.uuid);
@@ -92,6 +102,16 @@ class SideBarFilter extends ChallengeFilter {
       this.name,
       this.uuid,
     ]));
+  }
+
+ /**
+ * Get an URL Encoded string representation of the filter.
+ * Used for saving to the backend and displaying on the URL for deep linking.
+ */
+  getURLEncoded() {
+    const mode = `&mode=${Object.values(MODE).indexOf(this.mode)}`;
+    const name = `&name=${this.name}`;
+    return `${super.getURLEncoded()}${mode}${name}`;
   }
 }
 
