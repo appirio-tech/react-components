@@ -16,6 +16,22 @@ class FilterPanelFilter extends BaseFilter {
       this.keywords = [];
       this.startDate = null;
       this.subtracks = [];
+    } else if (arg.isSavedFilter) {
+      super(arg);
+      const filters = arg.filter.split('&');
+
+      this.startDate = filters.filter(e => e.startsWith('startDate'))
+        .map(element => element.split('=')[1]);
+      this.startDate = this.startDate[0] ? moment(this.startDate[0]) : null;
+      this.endDate = filters.filter(e => e.startsWith('endDate'))
+        .map(element => element.split('=')[1]);
+      this.endDate = this.endDate[0] ? moment(this.endDate[0]) : null;
+
+      this.keywords = filters.filter(e => e.startsWith('keywords'))
+        .map(element => element.split('=')[1]);
+      // We use "challengeTypes" to represent subtracks to maintain compatibility with old app
+      this.subtracks = filters.filter(e => e.startsWith('challengeTypes'))
+        .map(element => element.split('=')[1]);
     } else  if (_.isObject(arg)) {
       if (!arg._isFilterPanelFilter) throw new Error('Invalid argument!');
       super(arg);
@@ -79,6 +95,21 @@ class FilterPanelFilter extends BaseFilter {
       this.startDate ? this.startDate.toString() : 'null',
       this.subtracks.join(','),
     ]));
+  }
+  /**
+   *  Get an URL Encoded string representation of the filter properties.
+   *  Used for saving to the backend and displaying on the URL for deep linking.
+   *  We use "challengeTypes" to represent subtracks to maintain compatibility with old app
+   */
+  getURLEncoded() {
+    let result = '';
+    result += this.startDate ? `&startDate=${this.startDate.format('YYYY-MM-DD')}` : '';
+    result += this.endDate ? `&endDate=${this.endDate.format('YYYY-MM-DD')}` : '';
+    result += this.keywords.length > 0 ?
+      this.keywords.reduce((acc, keyword) => `${acc}&keywords=${keyword}`, '') : '';
+    result += this.subtracks.length > 0 ?
+      this.subtracks.reduce((acc, subtrack) => `${acc}&challengeTypes=${subtrack}`, '') : '';
+    return result;
   }
 }
 
