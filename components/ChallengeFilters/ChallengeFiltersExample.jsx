@@ -252,9 +252,9 @@ class ChallengeFiltersExample extends React.Component {
       fetch(`${api}/dataScience/challenges/active`).then(res => helper2(res, DATA_SCIENCE_TRACK)),
       fetch(`${api}/data/marathon/challenges/?listType=active`).then(res => helper2(res, DATA_SCIENCE_TRACK)),
       /* Fetching of some past challenges */
-      fetch(`${api}/challenges/past?type=design&pageSize=1000`).then(res => helper2(res, DESIGN_TRACK)),
-      fetch(`${api}/challenges/past?type=develop&pageSize=1000`).then(res => helper2(res, DEVELOP_TRACK)),
-      fetch(`${api}/dataScience/challenges/past?pageSize=1000`).then(res => helper2(res, DATA_SCIENCE_TRACK)),
+      fetch(`${api}/challenges/past?type=design&pageSize=500`).then(res => helper2(res, DESIGN_TRACK)),
+      fetch(`${api}/challenges/past?type=develop&pageSize=500`).then(res => helper2(res, DEVELOP_TRACK)),
+      fetch(`${api}/dataScience/challenges/past?pageSize=500`).then(res => helper2(res, DATA_SCIENCE_TRACK)),
       fetch(`${api}/data/marathon/challenges/?listType=past&pageSize=20`).then(res => helper2(res, DATA_SCIENCE_TRACK)),
     ]).then(() => {
       _.forIn(map, item => challenges.push(item));
