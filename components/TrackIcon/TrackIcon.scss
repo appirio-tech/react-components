@@ -22,7 +22,7 @@ $track-radius-4: $corner-radius * 2;
     text-align: center;
     font-size: 13px;
     font-family: 'Roboto';
-    font-weight: 700;
+    font-weight: 500;
     line-height: $track-space-15;
     color: $tc-gray-neutral-light;
     padding: $track-code-pad - 1 0 $track-code-pad;
@@ -44,7 +44,8 @@ $track-radius-4: $corner-radius * 2;
   .tco-icon {
     text-align: center;
     font-size: 10px;
-    font-family: 'Roboto-Bold', sans-serif;
+    font-family: 'Roboto';
+    font-weight: 700;
     border-radius: $corner-radius + 1px;
     line-height: $tco-line-hieght;
     padding: $base-unit - 1 0;

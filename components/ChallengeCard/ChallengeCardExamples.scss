@@ -24,7 +24,7 @@ $challenge-radius-4: $corner-radius * 2;
       padding: $base-unit * 2 $challenge-space-20;
       font-family: 'Roboto';
       font-weight: 500;
-      background: #FAFAFB;
+      background: $tc-gray-neutral-light;
       border-top-left-radius: $challenge-radius-4;
       border-top-right-radius: $challenge-radius-4;
     }
