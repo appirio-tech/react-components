@@ -11,7 +11,7 @@ import ChallengeFilter from '../ChallengeFilters/ChallengeFilter';
 
 export const MODE = {
   ALL_CHALLENGES: 'All Challenges',
-  MY_CHALLENGES: 'My challenges',
+  MY_CHALLENGES: 'My Challenges',
   OPEN_FOR_REGISTRATION: 'Open for registration',
   ONGOING_CHALLENGES: 'Ongoing challenges',
   PAST_CHALLENGES: 'Past challenges',
@@ -27,9 +27,9 @@ class SideBarFilter extends ChallengeFilter {
   constructor(arg) {
     if (!arg) {
       super();
-      this.mode = MODE.ONGOING_CHALLENGES;
-      this.name = MODE.ONGOING_CHALLENGES;
-      this.uuid = MODE.ONGOING_CHALLENGES;
+      this.mode = MODE.ALL_CHALLENGES;
+      this.name = MODE.ALL_CHALLENGES;
+      this.uuid = MODE.ALL_CHALLENGES;
     } else if (arg.isSavedFilter) {
       super(arg);
       this.isCustomFilter = arg.isCustomFilter;
@@ -63,7 +63,8 @@ class SideBarFilter extends ChallengeFilter {
   }
 
   count() {
-    return super.count();
+    if (this.mode === MODE.CUSTOM) return super.count();
+    return this.mode === MODE.ALL_CHALLENGES ? 0 : 1;
   }
 
   getFilterFunction() {
