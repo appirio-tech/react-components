@@ -93,7 +93,7 @@ function ChallengeCard ({challenge, config, sampleWinnerProfile, onTechTagClicke
           </PrizesTooltip>
         </div>
 
-        <ChallengeStatus challenge={challenge} sampleWinnerProfile={sampleWinnerProfile} />
+        <ChallengeStatus challenge={challenge} config={config} sampleWinnerProfile={sampleWinnerProfile} />
       </div>
     </div>
   )
