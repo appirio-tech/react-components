@@ -73,7 +73,7 @@ const ChallengesSidebar = ({ SidebarMock }) => {
           <li><a href="javascript:;">Terms</a>&nbsp;•&nbsp;</li>
           <li><a href="javascript:;">Get the RSS</a></li>
         </ul>
-        <p className="copyright">Topcoder © 2016.</p>
+        <p className="copyright">Topcoder © 2017.</p>
       </div>
     </div>
   )
