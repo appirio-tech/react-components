@@ -343,10 +343,7 @@ class SideBarFilters extends React.Component {
                 <hr />
                 <div className="my-filters">
                   <h1>My filters</h1>
-                  <a 
-                    className="edit-link"
-                    href="javascript:;"
-                    onClick={() => {
+                  <a className="edit-link" href="javascript:;" onClick={() => {
                       this.setState({ mode: MODES.EDIT_MY_FILTERS });
                     }}
                   >
@@ -364,7 +361,7 @@ class SideBarFilters extends React.Component {
             <li><a href="javascript:;">Help</a>&nbsp;•&nbsp;</li>
             <li><a href="javascript:;">Privacy</a>&nbsp;•&nbsp;</li>
             <li><a href="javascript:;">Terms</a>&nbsp;•&nbsp;</li>
-            <li><a href="javascript:;">Get the RSS</a></li>
+            <li><a href={RSS_LINK}>Get the RSS</a></li>
           </ul>
           <p className="copyright">Topcoder © 2016.</p>
         </div>
