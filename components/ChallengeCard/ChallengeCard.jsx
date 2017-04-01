@@ -89,7 +89,7 @@ function ChallengeCard ({challenge, config, sampleWinnerProfile, onTechTagClicke
         <div className="prizes">
           <PrizesTooltip challenge={challenge} config={config}>
             <div><span className="dollar">$</span>{numberWithCommas(challenge.totalPrize)}</div>
-            <div className="label">Prize pool</div>
+            <div className="label">Purse</div>
           </PrizesTooltip>
         </div>
 

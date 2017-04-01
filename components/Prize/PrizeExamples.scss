@@ -1,5 +1,7 @@
+@import '../../styles/tc-styles';
+
 .divStyle {
-   background-color: #47474F;
+   background-color: $tc-gray-80;
    padding: 15px;
    width: 400px;
    height: 200px !important;

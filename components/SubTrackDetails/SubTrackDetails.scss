@@ -1,9 +1,10 @@
 @import "topcoder/tc-includes";
+@import '../../styles/tc-styles';
 
 $develop-bar-color: #21B2F1;
-$design-bar-color: #60C700;
-$dataScience-bar-color: #FB7D22;
-$track-desc-text-color: #DCDCE0;
+$design-bar-color: $tc-green;
+$dataScience-bar-color: $tc-orange;
+$track-desc-text-color: $tc-gray-20;
 
 .SubTrackDetails{
   .heading {
