@@ -2,11 +2,12 @@
 @import 'topcoder/tc-includes';
 
 .challengeCardContainer {
+  border-radius: $base-unit;
+  min-width: $base-unit * 180;
 
   .category-challenges-container {
-    border-radius: 4px;
     background: $tc-gray-neutral-light;
-    margin-bottom: 20px;
+    margin: 20px 0;
   }
 
   .view-more {
@@ -29,7 +30,7 @@
     color: $tc-white;
     width: 100%;
     text-align: center;
-    padding-top: 5px;
+    padding-top: $base-unit;
     margin: 0;
   }
 }

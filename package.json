@@ -24,7 +24,7 @@
     "dev": "webpack-dev-server -d --progress --inline --colors --dev --tc",
     "clean": "rm -r dist",
     "build": "webpack --config webpack.config.js; cp index.html dist/",
-    "lint": "eslint ./components/ChallengeCardContainer",
+    "lint": "eslint --format table --ext .js,.jsx .",
     "test": "cross-env NODE_ENV=test mocha --reporter progress --compilers js:babel-core/register --require ignore-styles --recursive \"./components/**/*.spec.js\"",
     "test:watch": "npm run test -- --watch",
     "build-navbar": "webpack $BUILD --tc --config navbar.webpack.config.coffee;"

@@ -81,7 +81,7 @@ SortingSelectBar.defaultProps = {
 SortingSelectBar.propTypes = {
   filterName: PT.string,
   sortingOptions: PT.arrayOf(PT.string),
-  onSortingSelect: PT.func
+  onSortingSelect: PT.func,
 };
 
 export default SortingSelectBar;

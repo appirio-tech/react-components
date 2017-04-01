@@ -98,11 +98,11 @@ class ChallengeFiltersExample extends React.Component {
     this.fetchChallenges(0).then(res => this.setChallenges(0, res));
 
     /* Fetching of SRM challenges */
-    fetch(`${props.config.API_URL}/srms/?filter=status=FUTURE`)
-      .then(res => res.json())
-      .then((json) => {
-        this.setState({srmChallenges: json.result.content})
-      })
+    // fetch(`${props.config.API_URL}/srms/?filter=status=FUTURE`)
+    //   .then(res => res.json())
+    //   .then((json) => {
+    //     this.setState({srmChallenges: json.result.content})
+    //   })
   }
 
   /**
@@ -295,9 +295,6 @@ class ChallengeFiltersExample extends React.Component {
 
     let challenges = this.state.challenges;
     const currentFilter = this.state.filter;
-    if (currentFilter.mode === SideBarFilterModes.CUSTOM) {
-      challenges = this.state.challenges.filter(currentFilter.getFilterFunction());
-    }
     challenges = challenges.map((item) => {
       // check the challenge id exist in my challenges id
       // TODO: This is also should be moved to a better place, fetchChallenges() ?
@@ -312,6 +309,10 @@ class ChallengeFiltersExample extends React.Component {
 
     let challengeCardContainer
     if (filter.isCustomFilter) {
+      if (currentFilter.mode === SideBarFilterModes.CUSTOM) {
+        challenges = this.state.challenges.filter(currentFilter.getFilterFunction());
+      }
+
       const cardify = challenge => (
         <ChallengeCard
           challenge={challenge}
@@ -331,18 +332,36 @@ class ChallengeFiltersExample extends React.Component {
         </div>
       )
     } else {
+      const { config, challengeFilters } = this.props;
+      const filterFunc = filter.getFilterFunction();
+      const sidebarFilterFunc = (challenge) => {
+        if (currentFilter.mode !== SideBarFilterModes.CUSTOM) {
+          return true;
+        } else {
+          return currentFilter.getFilterFunction()(challenge);
+        }
+      };
+
       challengeCardContainer = (
-        <div className="challenge-cards-container">
-          <ChallengeCardContainer
-            config={this.props.config}
-            onTechTagClicked={(tag) => this.challengeFilters.setKeywords(tag)}
-            challenges={challenges}
-            currentFilterName={sidebarFilterName}
-            expanded={sidebarFilterName !== 'All Challenges'}
-            additionalFilter={filter.getFilterFunction()}
-          />
-        </div>
-      )
+        <ChallengeCardContainer
+          config={config}
+          onTechTagClicked={tag => challengeFilters.setKeywords(tag)}
+          challenges={_.uniqBy(challenges, 'challengeId')}
+          currentFilterName={sidebarFilterName}
+          expanded={sidebarFilterName !== 'All Challenges'}
+          fetchCallback={(fetchedChallenges) => {
+            this.setState({
+              challenges: _.uniqBy(
+                challenges.concat(fetchedChallenges),
+                'challengeId',
+              ),
+            });
+          }}
+          additionalFilter={
+            challenge => filterFunc(challenge) && sidebarFilterFunc(challenge)
+          }
+        />
+      );
     }
 
     // Upcoming srms
