@@ -1,5 +1,5 @@
-require('./node_modules/coffee-script/register')
-const webpackConfig = require('appirio-tech-webpack-config')
+require('./node_modules/coffee-script/register');
+const webpackConfig = require('appirio-tech-webpack-config');
 
 const config = webpackConfig({
   dirname: __dirname,
@@ -7,9 +7,9 @@ const config = webpackConfig({
   entry: {
     example: [
       'webpack-dev-server/client?http://localhost:8080',
-      './example.js'
-    ]
-  }
-})
+      './example.js',
+    ],
+  },
+});
 
-module.exports = config
+module.exports = config;

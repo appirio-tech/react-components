@@ -1,8 +1,9 @@
 @import "topcoder/tc-includes";
+@import '../../styles/tc-styles';
 
 .Dropdown {
   margin-top: 30px;
-  background-color: #fff;
+  background-color: $tc-white;
   box-shadow: 0px 2px 7px 1px rgba(0, 0, 0, 0.17);
   border-radius: 5px;
   display: inline-block;
@@ -15,12 +16,12 @@
     width: 100%;
     position: relative;
     z-index: 10;
-    background-color: #fff;
+    background-color: $tc-white;
     padding: 11px 20px;
     border-radius: 5px;
 
     li a {
-      color: #394146;
+      color: $tc-gray-90;
       font-size: "Roboto", Arial, Helvetica, sans-serif;
       font-size: 12px;
       line-height: 26px;
@@ -43,7 +44,7 @@
   height: 15px;
   display: block;
   transform: rotate(45deg);
-  background-color: #fff;
+  background-color: $tc-white;
   position: absolute;
   right: 15px;
   top: -6px;

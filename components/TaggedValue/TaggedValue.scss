@@ -1,9 +1,5 @@
 @import 'topcoder/tc-includes';
-
-$gray-30:  #C3C3C8;
-$gray: #47474F;
-$purple: #B47DD6;
-$accent: #59A7FF;
+@import '../../styles/tc-styles';
 
 .TaggedValue {
   display:inline-block;
@@ -13,14 +9,14 @@ $accent: #59A7FF;
     padding: 4px 4px 1px 4px;
     min-width: 15px;
     max-height: 15px;
-    background: $accent;
+    background: $tc-accent;
     border-radius: 8px;
     text-align: center;
     font-size: 11px;
     line-height: 13px;
     font-family: "Roboto", Arial, Helvetica, sans-serif;
     font-weight: bold;
-    color:  $gray;
+    color:  $tc-gray-80;
     padding: 1px 7px 2px 7px;
   }
   .subText {
@@ -35,6 +31,6 @@ $accent: #59A7FF;
 }
 .count-one {
   .tagged-value-bg {
-    background: $purple;
+    background: $tc-purple;
   }
 }
