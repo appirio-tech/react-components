@@ -50,11 +50,12 @@ const VALID_KEYWORDS = [
   'Salesforce', 'Salesforce.com',
 ].map(keywordsMapper);
 
-// A mock list of keywords to allow in the Tracks filter.
-const VALID_SUBTRACKS = [
-  'Code', 'Design First2Finish', 'First2Finish', 'Web Design',
-  'Widget or Mobile Screen Design',
-].map(keywordsMapper);
+// List of keywords to allow in the Tracks filter.
+const VALID_SUBTRACKS = [];
+
+// APIs to fetch valid subtracks.
+const SUBTRACKS_DESIGN_API = 'https://api.topcoder.com/v2/design/challengetypes';
+const SUBTRACKS_DEVELOP_API = 'https://api.topcoder.com/v2/develop/challengetypes';
 
 // A mock list of SRMs side bar
 const SRMsSidebarMock = {
@@ -103,6 +104,20 @@ class ChallengeFiltersExample extends React.Component {
       .then((json) => {
         this.setState({srmChallenges: json.result.content})
       })
+    
+    /* Fetching of design subtracks */
+    fetch(SUBTRACKS_DESIGN_API)
+      .then(res => res.json())
+      .then((json) => {
+        json.forEach(item => VALID_SUBTRACKS.push(keywordsMapper(item.name)));
+      })    
+    
+    /* Fetching of develop subtracks */
+    fetch(SUBTRACKS_DEVELOP_API)
+      .then(res => res.json())
+      .then((json) => {
+        json.forEach(item => VALID_SUBTRACKS.push(keywordsMapper(item.name)));
+      })      
   }
 
   /**
