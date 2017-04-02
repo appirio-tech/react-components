@@ -15,12 +15,6 @@
  *  items is equal to or more than the total item count passed in as props
  *  to the component. The total item count should be the total amount of items
  *  available for retrieval from the database.
- *
- *  For performance purposes, this component does not keep any state. All the
- *  state properties are kept at the component object level. And the component
- *  will only re-render if forceUpdate is called. forceUpdate is called in three
- *  methods, reCacheItemElements, setLoadingStatus and addNewItems. This is
- *  similar to how Redux updates a component.
  */
 
 import _ from 'lodash';
@@ -41,7 +35,12 @@ const { arrayOf, object, func, string, bool, number, oneOfType } = React.PropTyp
 class InfiniteList extends Component {
   constructor(props) {
     super(props);
-    this.initializeProperties(props, true);
+
+    this.state = { items: [], cachedItemElements: [] }
+  }
+
+  componentWillMount() {
+    this.initializeProperties(this.props, true);
   }
 
   // from the new props determine what have changed and blow away cache
@@ -51,7 +50,7 @@ class InfiniteList extends Component {
     const { itemCountTotal, filter, sort } = nextProps;
     const [newlyOrganizedItems, oldOrganizedItems] = [
       [filter, sort], [oldFilter, oldSort],
-    ].map(organizers => organizeItems(this.items, organizers[0], organizers[1]));
+    ].map(organizers => organizeItems(this.state.items, organizers[0], organizers[1]));
     const [newItemOrderRepresentation, oldItemOrderRepresentation] = [
       newlyOrganizedItems, oldOrganizedItems,
     ].map(items => _.map(items, uniqueIdentifier).join(''));
@@ -78,8 +77,6 @@ class InfiniteList extends Component {
     const initialLoadNumber = batchNumber + (items.length % batchNumber);
 
     this.currentPageIndex = initialPageIndex;
-    this.items = [];
-    this.cachedItemElements = [];
     this.ids = [];
     this.addBatchIds(initialLoadNumber);
     this.addNewItems(sortedItems.slice(0, initialLoadNumber), props, isMounting);
@@ -87,17 +84,17 @@ class InfiniteList extends Component {
   }
 
   reCacheItemElements(organizedItems, renderItem) {
-    this.cachedItemElements = organizedItems
-      .map(item => renderItem(item[assignedIdKey], item));
-
-    this.forceUpdate();
+    this.setState({
+      cachedItemElements: organizedItems.map(item => renderItem(item[assignedIdKey], item)),
+    })
   }
 
   addNewItems(newItems, nextProps = null, isInitialization = false) {
     if (!newItems) return;
 
+    const { items: existingItems, cachedItemElements } = this.state;
     const { renderItem, sort, filter } = nextProps || this.props;
-    const { items: existingItems, cachedItemElements, ids, idPrefix } = this;
+    const { ids, idPrefix } = this;
     const { length: existingItemCount } = existingItems;
 
     const stampedNewItems = newItems.map((item, index) => {
@@ -109,16 +106,14 @@ class InfiniteList extends Component {
     const newElements = organizeItems(stampedNewItems, filter, sort)
       .map(item => renderItem(item[assignedIdKey], item));
 
-    this.items = existingItems.concat(stampedNewItems);
-    this.cachedItemElements = cachedItemElements.concat(newElements);
-    if (!isInitialization) this.forceUpdate();
+    this.setState({
+      items: existingItems.concat(stampedNewItems),
+      cachedItemElements: cachedItemElements.concat(newElements),
+    })
   }
 
   setLoadingStatus(status) {
-    if (this.loading !== status) {
-      this.loading = status;
-      this.forceUpdate();
-    }
+    if (this.loading !== status) this.setState({ loading: status })
   }
 
   addBatchIds(numberToAdd) {
@@ -143,7 +138,7 @@ class InfiniteList extends Component {
   }
 
   onScrollToLoadPoint() {
-    if (this.loading || this.items.length >= this.props.itemCountTotal) return;
+    if (this.loading || this.state.items.length >= this.props.itemCountTotal) return;
 
     this.addBatchIds();
 
@@ -152,7 +147,7 @@ class InfiniteList extends Component {
 
     fetchAdditionalItems({
       itemUniqueIdentifier: uniqueIdentifier,
-      currentItems: this.items,
+      currentItems: this.state.items,
       fetchItems: () => this.fetchNewItems(),
       finishCallback: (newItems) => {
         this.props.fetchItemFinishCallback(newItems);
@@ -164,11 +159,12 @@ class InfiniteList extends Component {
   }
 
   render() {
-    const { ids, cachedItemElements, items: { length: loadedCount } } = this;
+    const { cachedItemElements, items: { length: loadedCount } } = this.state;
+    const { ids } = this;
     const { renderItemTemplate, batchNumber } = this.props;
     let templates;
 
-    if (this.loading) {
+    if (this.state.loading) {
       templates = _.slice(ids, loadedCount, loadedCount + batchNumber)
         .map(id => renderItemTemplate(id));
     } else {
