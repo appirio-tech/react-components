@@ -40,9 +40,7 @@ function keywordsMapper(keyword) {
   };
 }
 
-// A mock list of keywords to allow in the Keywords filter.
-// Note that each time challenges are fetched, all their platform and technology
-// tags are appended there, if they are missing.
+// List of keywords to allow in the Keywords filter.
 const VALID_KEYWORDS = [];
 
 // API to fetch valid keywords
