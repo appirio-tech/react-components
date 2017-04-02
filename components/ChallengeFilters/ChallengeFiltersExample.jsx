@@ -98,7 +98,7 @@ class ChallengeFiltersExample extends React.Component {
     this.fetchChallenges(0).then(res => this.setChallenges(0, res));
 
     /* Fetching of SRM challenges */
-    fetch(`${props.config.API_URL}/srms/?filter=status=FUTURE`)
+    fetch(`${props.config.API_URL_V3}/srms/?filter=status=FUTURE`)
       .then(res => res.json())
       .then((json) => {
         this.setState({srmChallenges: json.result.content})
@@ -445,6 +445,7 @@ class ChallengeFiltersExample extends React.Component {
 ChallengeFiltersExample.defaultProps = {
   config: {
     API_URL_V2: 'https://api.topcoder.com/v2',
+    API_URL_V3: 'https://api.topcoder.com/v3',
   },
   filterFromUrl: '',
   onSaveFilterToUrl: _.noop,
@@ -453,6 +454,7 @@ ChallengeFiltersExample.defaultProps = {
 ChallengeFiltersExample.propTypes = {
   config: PT.shape({
     API_URL_V2: PT.string,
+    API_URL_V3: PT.string,
   }),
   filterFromUrl: PT.string,
   onSaveFilterToUrl: PT.func,
