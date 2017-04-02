@@ -30,8 +30,10 @@ function Tip(props) {
   ));
   return (
     <div>
-      <img alt="User avatar" className="avatar" src={`https://topcoder.com${props.user.photoLink}`} />
+      <img alt="User avatar" className="avatar" src={`https://topcoder.com/${props.user.photoLink}`} />
       <div className="handle">{props.user.handle}</div>
+      {/* Below block is commented out as it's not possible to get this information
+      // as of now.
       <div className="info">
         <span className="country">{props.user.country}</span>
         <span className="wins">&nbsp;<span className="separtor">/</span> 257 wins&nbsp;</span>
@@ -40,7 +42,7 @@ function Tip(props) {
       <div className="achievements">
         <h3>Ratings</h3>
         {rating}
-      </div>
+      </div> */}
     </div>
   );
 }
