@@ -155,6 +155,14 @@ class SideBarFilters extends React.Component {
       filterClone.count = nextProps.challenges.filter(filter.getFilterFunction()).length;
       filters.push(filterClone);
     });
+    for (let i = 0; i < filters.length; ++i) 
+      if (filters[i].mode === "All Challenges") {
+        console.log(filters[i].count);
+        filters[i].count = 0;
+        for (let j = 0; j < filters.length; ++j)
+          if (filters[j].mode === "Open for registration" || filters[j].mode === "Ongoing challenges")
+            filters[i].count += filters[j].count;
+      }
     this.setState({
       currentFilter,
       filters,
@@ -343,10 +351,7 @@ class SideBarFilters extends React.Component {
                 <hr />
                 <div className="my-filters">
                   <h1>My filters</h1>
-                  <a 
-                    className="edit-link"
-                    href="javascript:;"
-                    onClick={() => {
+                  <a className="edit-link" href="javascript:;" onClick={() => {
                       this.setState({ mode: MODES.EDIT_MY_FILTERS });
                     }}
                   >
@@ -364,7 +369,7 @@ class SideBarFilters extends React.Component {
             <li><a href="javascript:;">Help</a>&nbsp;•&nbsp;</li>
             <li><a href="javascript:;">Privacy</a>&nbsp;•&nbsp;</li>
             <li><a href="javascript:;">Terms</a>&nbsp;•&nbsp;</li>
-            <li><a href="javascript:;">Get the RSS</a></li>
+            <li><a href={RSS_LINK}>Get the RSS</a></li>
           </ul>
           <p className="copyright">Topcoder © 2016.</p>
         </div>
