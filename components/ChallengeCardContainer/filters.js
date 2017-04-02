@@ -63,24 +63,4 @@ export default [
     ],
     getApiUrl: pageIndex => `http://api.topcoder.com/v2/challenges/past?pageIndex=${pageIndex}&pageSize=50`,
   },
-  {
-    name: 'Open for review',
-    check(item) {
-      return item.currentPhaseName === 'Review';
-    },
-    sortingOptions: [
-      'Most recent',
-      '# of registrants',
-      '# of submissions',
-      'Prize high to low',
-      'Title A-Z',
-    ],
-    getApiUrl: (pageIndex) => {
-      const yesterday = new Date();
-      yesterday.setDate(yesterday.getDate() - 1);
-      const yesterdayFormatted = yesterday.toJSON().slice(0, 10);
-
-      return `http://api.topcoder.com/v2/challenges/open?pageIndex=${pageIndex}&pageSize=50&submissionEndTo=${yesterdayFormatted}`;
-    },
-  },
 ];
