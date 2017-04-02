@@ -44,6 +44,7 @@ class Tooltip extends React.Component {
   render() {
     return (
       <span
+        onMouseOver={() => this.showTooltip()}
         onMouseEnter={() => this.showTooltip()}
         onMouseLeave={() => this.hideTooltip()}
         ref={(node) => { this.wrapper = node; }}

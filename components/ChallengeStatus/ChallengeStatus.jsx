@@ -40,8 +40,7 @@ let MOCK_WINNERS = [
 const MAX_VISIBLE_WINNERS = 3
 const FORUM_URL = 'https://apps.topcoder.com/forums/?module=Category&categoryID='
 const CHALLENGE_URL = 'https://www.topcoder.com/challenge-details/'
-const DEV_CHALLENGE_DETAILS_API = 'https://api.topcoder.com/v2/develop/challenges/'
-const DES_CHALLENGE_DETAILS_API = 'https://api.topcoder.com/v2/design/challenges/result/'
+const DS_CHALLENGE_URL = 'https://community.topcoder.com/longcontest/stats/?module=ViewOverview&rd='
 const DS_CHALLENGE_DETAILS_API = ''
 const MOCK_PHOTO = 'https://acrobatusers.com/assets/images/template/author_generic.jpg'
 const STALLED_MSG = 'Stalled'
@@ -131,50 +130,7 @@ const getTimeToGo = (start, end) => {
   return (Math.round(percentageComplete * 100) / 100)
 }
 
-function getDevelopmentWinners(challengeId) {
-  return new Promise((resolve, reject) => {
-    fetch(`${DEV_CHALLENGE_DETAILS_API}${challengeId}`)
-      .then(res => res.json())
-      .then(data => {
-        const winners = data.submissions.filter(submission => submission.placement < 4)
-          .map(winner => ({
-            handle: winner.handle,
-            position: winner.placement,
-            photoURL: MOCK_PHOTO
-          }));
-        const uniqeWinners = _.uniqWith(winners, _.isEqual);
-        resolve(uniqeWinners);
-      })
-      .catch(err => reject(err));
-  });
-}
 
-function getDesignWinners(challengeId) {
-  return new Promise((resolve, reject) => {
-    fetch(`${DES_CHALLENGE_DETAILS_API}${challengeId}`)
-      .then(res => res.json())
-      .then(data => {
-        const winners = data.results.filter(submission => submission.placement <=3)
-        .map(winner => ({
-          handle: winner.handle,
-          position: winner.placement,
-          photoURL: MOCK_PHOTO
-        }));
-        resolve(winners);
-      })
-      .catch(err => reject(err));
-  });
-}
-
-/**
- * TODO
- * Return a list of winners given the challenge ID for a
- * Data Science challenge.
- * @param {String} challengeId 
- */
-function getDataScienceWinners(challengeId) {
-
-}
 
 /**
  * Returns an user profile object as expected by the UserAvatarTooltip
@@ -198,30 +154,33 @@ class ChallengeStatus extends Component {
     const {challenge, config, sampleWinnerProfile} = props;
     const lastItem = {
       handle: `+${MOCK_WINNERS.length - MAX_VISIBLE_WINNERS}`
-    }
+    };
     MOCK_WINNERS = MOCK_WINNERS.slice(0, MAX_VISIBLE_WINNERS);
     MOCK_WINNERS.push(lastItem);
     this.state = {
-      winners: ''
+      winners: '',
     };
     this.handleHover = this.handleHover.bind(this);
-  } 
+    this.getDevelopmentWinners = this.getDevelopmentWinners.bind(this);
+    this.getDesignWinners = this.getDesignWinners.bind(this);
+  }
 
   renderLeaderboard() {
-    const { challenge, sampleWinnerProfile } = this.props;
+    const { challenge } = this.props;
+    const { challengeId, challengeCommunity } = challenge;
+    const challengeURL = challengeCommunity.toLowerCase() == 'data' ? DS_CHALLENGE_URL : CHALLENGE_URL;
     const leaderboard = this.state.winners && this.state.winners.map((winner) => {
-
       return (
         <div className="avatar-container" key={winner.handle}>
           <UserAvatarTooltip user={getSampleProfile(winner)}>
             <LeaderboardAvatar member={winner} />
           </UserAvatarTooltip>
         </div>
-      )
+      );
     });
     return leaderboard || (
     <span className="winners" onMouseEnter={this.handleHover}>
-      <a href={`${CHALLENGE_URL}${challenge.challengeId}/#winner`}>Winners</a>
+      <a href={`${challengeURL}${challengeId}`}>Winners</a>
     </span>);
   }
 
@@ -314,16 +273,50 @@ class ChallengeStatus extends Component {
     )
   }
 
+  getDevelopmentWinners(challengeId) {
+    return new Promise((resolve, reject) => {
+      fetch(`${this.props.config.API_URL_V2}/develop/challenges/${challengeId}`)
+        .then(res => res.json())
+        .then((data) => {
+          const winners = data.submissions.filter(submission => submission.placement && submission.placement < 4)
+            .map(winner => ({
+              handle: winner.handle,
+              position: winner.placement,
+              photoURL: MOCK_PHOTO,
+            }));
+          const uniqeWinners = _.uniqWith(winners, _.isEqual);
+          resolve(uniqeWinners);
+        })
+        .catch(err => reject(err));
+    });
+  }
+
+  getDesignWinners(challengeId) {
+    return new Promise((resolve, reject) => {
+      fetch(`${this.props.config.API_URL_V2}/design/challenges/result/${challengeId}`)
+        .then(res => res.json())
+        .then(data => {
+          const winners = data.results.filter(submission => submission.placement && submission.placement < 4)
+          .map(winner => ({
+            handle: winner.handle,
+            position: winner.placement,
+            photoURL: MOCK_PHOTO,
+          }));
+          resolve(winners);
+        })
+        .catch(err => reject(err));
+    });
+  }
+
+
   getWinners(challengeType, challengeId) {
     switch (challengeType) {
       case 'develop':
-        return getDevelopmentWinners(challengeId);
-      case 'data':
-        return getDataScienceWinners(challengeId);
+        return this.getDevelopmentWinners(challengeId);
       case 'design':
-        return getDesignWinners(challengeId);
+        return this.getDesignWinners(challengeId);
     }
-    return getDevelopmentWinners(challengeId);
+    return this.getDevelopmentWinners(challengeId);
   }
 
     /**
@@ -345,13 +338,13 @@ class ChallengeStatus extends Component {
   }
 
   render() {
-  const { challenge } = this.props;
-  const status = challenge.status === 'Completed' ? "completed" : "";
-  return (
-    <div className={"challenge-status "+status}>
-      {challenge.status === 'Completed' ? this.completedChallenge() : this.activeChallenge()}
-    </div>
-    )
+    const { challenge } = this.props;
+    const status = challenge.status === 'Completed' ? "completed" : "";
+    return (
+      <div className={"challenge-status "+status}>
+        {challenge.status === 'Completed' ? this.completedChallenge() : this.activeChallenge()}
+      </div>
+    );
   }
 
 }
