@@ -53,10 +53,6 @@ const VALID_KEYWORDS = [
 // List of keywords to allow in the Tracks filter.
 const VALID_SUBTRACKS = [];
 
-// APIs to fetch valid subtracks.
-const SUBTRACKS_DESIGN_API = 'https://api.topcoder.com/v2/design/challengetypes';
-const SUBTRACKS_DEVELOP_API = 'https://api.topcoder.com/v2/develop/challengetypes';
-
 // A mock list of SRMs side bar
 const SRMsSidebarMock = {
   all: { name: 'All SRMs', value: 853 },
@@ -104,6 +100,10 @@ class ChallengeFiltersExample extends React.Component {
       .then((json) => {
         this.setState({srmChallenges: json.result.content})
       })
+    
+    // APIs to fetch valid subtracks.
+    const SUBTRACKS_DESIGN_API = `${this.props.config.API_URL_V2}/design/challengetypes`;
+    const SUBTRACKS_DEVELOP_API = `${this.props.config.API_URL_V2}/develop/challengetypes`;    
     
     /* Fetching of design subtracks */
     fetch(SUBTRACKS_DESIGN_API)
