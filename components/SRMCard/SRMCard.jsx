@@ -1,14 +1,14 @@
-import React, { PropTypes as PT }from 'react';
-import moment from 'moment';
-import UserAvatarTooltip from '../ChallengeCard/Tooltips/UserAvatarTooltip';
-import LeaderboardAvatar from '../LeaderboardAvatar/LeaderboardAvatar';
-import TrackAbbreviationTooltip from '../ChallengeCard/Tooltips/TrackAbbreviationTooltip';
-import ProgressBarTooltip from '../ChallengeCard/Tooltips/ProgressBarTooltip';
-import TrackIcon from '../TrackIcon/TrackIcon';
-import Tooltip from '../ChallengeCard/Tooltips/Tooltip';
-import PastSRMCard from './PastSRMCard';
+import React, { PropTypes as PT }from 'react'
+import moment from 'moment'
+import UserAvatarTooltip from '../ChallengeCard/Tooltips/UserAvatarTooltip'
+import LeaderboardAvatar from '../LeaderboardAvatar/LeaderboardAvatar'
+import TrackAbbreviationTooltip from '../ChallengeCard/Tooltips/TrackAbbreviationTooltip'
+import ProgressBarTooltip from '../ChallengeCard/Tooltips/ProgressBarTooltip'
+import TrackIcon from '../TrackIcon/TrackIcon'
+import Tooltip from '../ChallengeCard/Tooltips/Tooltip'
+import PastSRMCard from './PastSRMCard'
 
-require('./SRMCard.scss');
+require('./SRMCard.scss')
 
 // Mock REGISTRANTS array
 let MOCK_REGISTRANTS = [
@@ -38,14 +38,14 @@ let MOCK_REGISTRANTS = [
     handle: 'KalininN',
     isSmr: true
   }
-];
-const MAX_VISIBLE_REGISTRANTS = 4;
+]
+const MAX_VISIBLE_REGISTRANTS = 4
 
 const lastItem = {
   handle: `+${MOCK_REGISTRANTS.length - MAX_VISIBLE_REGISTRANTS}`
 }
-MOCK_REGISTRANTS = MOCK_REGISTRANTS.slice(0, MAX_VISIBLE_REGISTRANTS);
-MOCK_REGISTRANTS.push(lastItem);
+MOCK_REGISTRANTS = MOCK_REGISTRANTS.slice(0, MAX_VISIBLE_REGISTRANTS)
+MOCK_REGISTRANTS.push(lastItem)
 
 const renderLeaderboard = MOCK_REGISTRANTS.map((winner, index) => {
   return (
@@ -118,9 +118,9 @@ UpcomingSRMs.propTypes = {
 const PastSRMs = () => {
   return (
     <div>
-      <PastSRMCard></PastSRMCard>
-      <PastSRMCard></PastSRMCard>
-      <PastSRMCard></PastSRMCard>
+      <PastSRMCard />
+      <PastSRMCard />
+      <PastSRMCard />
     </div>
   )
 }
@@ -143,4 +143,4 @@ SRMCard.propTypes = {
   srmChallenge: PT.object,
 }
 
-export default SRMCard;
+export default SRMCard

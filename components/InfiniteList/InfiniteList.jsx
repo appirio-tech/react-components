@@ -2,6 +2,8 @@
   Math, window, Promise
 */
 
+/* eslint react/no-unused-prop-types: 0 */  // this rule not working properly here
+
 /**
  *  This component handles the display of an infinite list of items as well as
  *  their sorting, filtering and any further loading.
@@ -30,13 +32,13 @@ import {
 const assignedIdKey = 'assignedId';
 const loadpointBottomOffset = -150;
 const initialPageIndex = 1;
-const { arrayOf, object, func, string, bool, number, oneOfType } = React.PropTypes;
+const { func, string, bool, number, oneOfType } = React.PropTypes;
 
 class InfiniteList extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { items: [], cachedItemElements: [] }
+    this.state = { items: [], cachedItemElements: [] };
   }
 
   componentWillMount() {
@@ -86,10 +88,10 @@ class InfiniteList extends Component {
   reCacheItemElements(organizedItems, renderItem) {
     this.setState({
       cachedItemElements: organizedItems.map(item => renderItem(item[assignedIdKey], item)),
-    })
+    });
   }
 
-  addNewItems(newItems, nextProps = null, isInitialization = false) {
+  addNewItems(newItems, nextProps = null) {
     if (!newItems) return;
 
     const { items: existingItems, cachedItemElements } = this.state;
@@ -109,11 +111,11 @@ class InfiniteList extends Component {
     this.setState({
       items: existingItems.concat(stampedNewItems),
       cachedItemElements: cachedItemElements.concat(newElements),
-    })
+    });
   }
 
   setLoadingStatus(status) {
-    if (this.state.loading !== status) this.setState({ loading: status })
+    if (this.state.loading !== status) this.setState({ loading: status });
   }
 
   addBatchIds(numberToAdd) {
@@ -131,10 +133,9 @@ class InfiniteList extends Component {
 
     if (cachedPassedInItems.length === 0) {
       return fetchItems(this.currentPageIndex + 1);
-    } else {
-      this.cachedPassedInItems = cachedPassedInItems.slice(batchNumber);
-      return Promise.resolve(cachedPassedInItems.slice(0, batchNumber));
     }
+    this.cachedPassedInItems = cachedPassedInItems.slice(batchNumber);
+    return Promise.resolve(cachedPassedInItems.slice(0, batchNumber));
   }
 
   onScrollToLoadPoint() {
@@ -187,30 +188,28 @@ class InfiniteList extends Component {
 }
 
 InfiniteList.defaultProps = {
-  items: [],
   itemCountTotal: 0,
   batchNumber: 50,
   fetchMoreItems: _.noop,
-  renderItem: _.noop,
   renderItemTemplate: _.noop,
   filter: () => true,
   sort: () => true,
   fetchItems: null,
   uniqueIdentifier: false,
   fetchItemFinishCallback: _.noop,
+  renderItem: _.noop,
 };
 
 InfiniteList.propTypes = {
-  items: arrayOf(object),
   itemCountTotal: number,
   batchNumber: number,
   fetchItems: func,
-  renderItem: func,
   renderItemTemplate: func,
   filter: func,
   sort: func,
   uniqueIdentifier: oneOfType([string, bool]),
   fetchItemFinishCallback: func,
+  renderItem: func,
 };
 
 export default InfiniteList;

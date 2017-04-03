@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react'
 
-require('./SidebarRow.scss');
+require('./SidebarRow.scss')
 
 const SidebarRow = (props) => {
   return (
@@ -10,4 +10,4 @@ const SidebarRow = (props) => {
   )
 }
 
-export default SidebarRow;
+export default SidebarRow

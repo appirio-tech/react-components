@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React, { Component, PropTypes as PT } from 'react';
-import Dropdown from 'react-dropdown'
+import Dropdown from 'react-dropdown';
 import './SortingSelectBar.scss';
 
 const { string, arrayOf, func } = React.PropTypes;

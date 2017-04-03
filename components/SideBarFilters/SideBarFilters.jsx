@@ -27,7 +27,7 @@ const MY_CHALLENGES_API = `${V2_API}/user/challenges?challengeType=Copilot+Posti
   Conceptualization,Specification,Architecture,Design,Development,
   RIA+Build+Competition,UI+Prototype+Competition,Assembly+Competition,
   Test+Suites,Test+Scenarios,Content+Creation,Marathon+Match,Bug+Hunt,
-  First2Finish,Code&type=active`
+  First2Finish,Code&type=active`;
 const RSS_LINK = 'http://feeds.topcoder.com/challenges/feed?list=active&contestType=all';
 
 /*
@@ -77,7 +77,7 @@ class SideBarFilters extends React.Component {
 
   constructor(props) {
     super(props);
-    let that = this;
+    const that = this;
 
     // TODO: Get the auth token from cookie for now.
     // Ideally the token should be passed in from a parent container component
@@ -231,18 +231,18 @@ class SideBarFilters extends React.Component {
               this.updateFilters(myFilters);
             }}
           />
-          </div>
-          <div className="sidebar-footer">
-            <ul>
-              <li><a href="javascript:;">About</a>&nbsp;•&nbsp;</li>
-              <li><a href="javascript:;">Contact</a>&nbsp;•&nbsp;</li>
-              <li><a href="javascript:;">Help</a>&nbsp;•&nbsp;</li>
-              <li><a href="javascript:;">Privacy</a>&nbsp;•&nbsp;</li>
-              <li><a href="javascript:;">Terms</a></li>
-              <li><a href="javascript:;">Get the RSS</a></li>
-            </ul>
-            <p className="copyright">Topcoder © 2017.</p>
-          </div>
+        </div>
+        <div className="sidebar-footer">
+          <ul>
+            <li><a href="javascript:;">About</a>&nbsp;•&nbsp;</li>
+            <li><a href="javascript:;">Contact</a>&nbsp;•&nbsp;</li>
+            <li><a href="javascript:;">Help</a>&nbsp;•&nbsp;</li>
+            <li><a href="javascript:;">Privacy</a>&nbsp;•&nbsp;</li>
+            <li><a href="javascript:;">Terms</a></li>
+            <li><a href="javascript:;">Get the RSS</a></li>
+          </ul>
+          <p className="copyright">Topcoder © 2017.</p>
+        </div>
       </div>
     );
   }
@@ -331,7 +331,7 @@ class SideBarFilters extends React.Component {
         <div className="FilterBox">
           {filters[FILTER_ID.ALL_CHALLENGES]}
 
-          {this.props.isAuth ?<span><hr /> {filters[FILTER_ID.MY_CHALLENGES]}</span> : ''}
+          {this.props.isAuth ? <span><hr /> {filters[FILTER_ID.MY_CHALLENGES]}</span> : ''}
           <hr />
           {filters[FILTER_ID.OPEN_FOR_REGISTRATION]}
           {filters[FILTER_ID.ONGOING_CHALLENGES]}
@@ -343,7 +343,7 @@ class SideBarFilters extends React.Component {
                 <hr />
                 <div className="my-filters">
                   <h1>My filters</h1>
-                  <a 
+                  <a
                     className="edit-link"
                     href="javascript:;"
                     onClick={() => {

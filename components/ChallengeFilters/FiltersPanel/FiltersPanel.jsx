@@ -102,9 +102,9 @@ class FiltersPanel extends React.Component {
     if (this.props.hidden) className += ' hidden';
     return (
       <div className={className} ref={this.props.ref}>
-        <div className='header'>
-          <span className='title'>Filters</span>
-          <span className='close-icon' onClick={() => this.props.onClose()}>
+        <div className="header">
+          <span className="title">Filters</span>
+          <span className="close-icon" onClick={() => this.props.onClose()}>
             <UiSimpleRemove className="cross" />
           </span>
         </div>

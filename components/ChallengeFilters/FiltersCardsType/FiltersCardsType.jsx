@@ -7,14 +7,13 @@ import React from 'react';
 
 import './FiltersCardsType.scss';
 
-const FiltersCardsType = ({setCardType, isCardTypeSet}) => {
-    return (
-      <div className="cards-type-col">
-        <a href="javascript:;" className={"challengs-tab " + (isCardTypeSet === 'Challenges' ? 'active' : '')}>
+const FiltersCardsType = ({ setCardType, isCardTypeSet }) => (
+  <div className="cards-type-col">
+    <a href="javascript:;" className={`challengs-tab ${isCardTypeSet === 'Challenges' ? 'active' : ''}`}>
           Challenges
         </a>
-      </div>
-    );
+  </div>
+    )
 
     // return (
     // <div className="cards-type-col">
@@ -26,6 +25,6 @@ const FiltersCardsType = ({setCardType, isCardTypeSet}) => {
     //     onClick={() => setCardType('SRMs')}>SRMs</a>
     // </div>
     // );
-};
+;
 
 export default FiltersCardsType;

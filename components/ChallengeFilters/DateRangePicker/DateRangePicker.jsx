@@ -19,7 +19,7 @@ class DateRangePicker extends React.Component {
     this.state = {
       focusedInput: null,
     };
-  };
+  }
 
   render() {
     return (
@@ -27,14 +27,14 @@ class DateRangePicker extends React.Component {
         focusedInput={this.state.focusedInput}
         isOutsideRange={() => false}
         onDatesChange={this.props.onDatesChange}
-        onFocusChange={focusedInput => { this.setState({ focusedInput }); }}
+        onFocusChange={(focusedInput) => { this.setState({ focusedInput }); }}
         startDate={this.props.startDate}
         endDate={this.props.endDate}
         anchorDirection={'right'}
         displayFormat={'MMM DD, YYYY'}
       />
     );
-  };
-};
+  }
+}
 
 export default DateRangePicker;

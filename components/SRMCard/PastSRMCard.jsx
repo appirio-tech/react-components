@@ -1,28 +1,28 @@
-import React from 'react';
-import TrackAbbreviationTooltip from '../ChallengeCard/Tooltips/TrackAbbreviationTooltip';
-import TrackIcon from '../TrackIcon/TrackIcon';
-import Tooltip from '../ChallengeCard/Tooltips/Tooltip';
-import Division from './Division/Division';
-import RegistrantsIcon from '../Icons/RegistrantsIcon';
-import SubmissionsIcon from '../Icons/SubmissionsIcon';
+import React from 'react'
+import TrackAbbreviationTooltip from '../ChallengeCard/Tooltips/TrackAbbreviationTooltip'
+import TrackIcon from '../TrackIcon/TrackIcon'
+import Tooltip from '../ChallengeCard/Tooltips/Tooltip'
+import Division from './Division/Division'
+import RegistrantsIcon from '../Icons/RegistrantsIcon'
+import SubmissionsIcon from '../Icons/SubmissionsIcon'
 
 // constants
-const NUM_REGISTRANTS = 28;
-const NUM_SUBMISSION = 1365;
+const NUM_REGISTRANTS = 28
+const NUM_SUBMISSION = 1365
 
 function numRegistrantsTipText(number) {
   switch (number) {
-    case 0: return 'No percent';
-    case 1: return '1 percent';
-    default: return `${number} total registrants`;
+  case 0: return 'No percent'
+  case 1: return '1 percent'
+  default: return `${number} total registrants`
   }
 }
 
 function numSubmissionsTipText(number) {
   switch (number) {
-    case 0: return 'No submissions';
-    case 1: return '1 total submission';
-    default: return `${number} total submissions`;
+  case 0: return 'No submissions'
+  case 1: return '1 total submission'
+  default: return `${number} total submissions`
   }
 }
 
@@ -64,17 +64,17 @@ const PastSRMCard = () => (
 				</div>
 			</div>
 		</div>
-    <div className="border-line"></div>
+    <div className="border-line" />
 
 		<div className="division-row">
 			<div className="division-col left">
-				<Division division={'Division 1'}></Division>
+				<Division division={'Division 1'} />
 			</div>
 			<div className="division-col right">
-				<Division division={'Division 2'}></Division>
+				<Division division={'Division 2'} />
 			</div>
 		</div>
 	</div>
 )
 
-module.exports = PastSRMCard;
+module.exports = PastSRMCard

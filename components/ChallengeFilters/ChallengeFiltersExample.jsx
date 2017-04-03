@@ -1,3 +1,7 @@
+/* global
+  fetch, JSON
+*/
+
 /**
  * This component implements a demo of ChallengeFilters in action.
  *
@@ -15,7 +19,7 @@ import _ from 'lodash';
 import React, { PropTypes as PT } from 'react';
 import Sticky from 'react-stickynode';
 
-import ChallengeFilter, { DATA_SCIENCE_TRACK, DESIGN_TRACK, DEVELOP_TRACK } from './ChallengeFilter';
+import { DATA_SCIENCE_TRACK, DESIGN_TRACK, DEVELOP_TRACK } from './ChallengeFilter';
 import ChallengeFilterWithSearch from './ChallengeFilterWithSearch';
 import ChallengeFilters from './ChallengeFilters';
 import SideBarFilter, { MODE as SideBarFilterModes } from '../SideBarFilters/SideBarFilter';
@@ -272,7 +276,7 @@ class ChallengeFiltersExample extends React.Component {
   onFilterByTopFilter(filter, isSidebarFilter) {
     const mergedFilter = Object.assign({}, this.state.filter, filter);
     const updatedFilter = new SideBarFilter(mergedFilter);
-    if(!isSidebarFilter) {
+    if (!isSidebarFilter) {
       updatedFilter.mode = SideBarFilterModes.CUSTOM;
     }
     this.setState({ filter: updatedFilter }, this.saveFiltersToHash.bind(this, updatedFilter));
@@ -288,9 +292,7 @@ class ChallengeFiltersExample extends React.Component {
     let myChallengesId = [];
     // get my challenges id
     if (this.props.myChallenges) {
-      myChallengesId = this.props.myChallenges.map(function(challenge) {
-        return challenge.id;
-      });
+      myChallengesId = this.props.myChallenges.map(challenge => challenge.id);
     }
 
     let challenges = this.state.challenges;
@@ -304,10 +306,10 @@ class ChallengeFiltersExample extends React.Component {
       return item;
     });
 
-    const { filter } = this.state
-    const { mode: sidebarFilterMode, name: sidebarFilterName } = filter;
+    const { filter } = this.state;
+    const { name: sidebarFilterName } = filter;
 
-    let challengeCardContainer
+    let challengeCardContainer;
     if (filter.isCustomFilter) {
       if (currentFilter.mode === SideBarFilterModes.CUSTOM) {
         challenges = this.state.challenges.filter(currentFilter.getFilterFunction());
@@ -322,7 +324,7 @@ class ChallengeFiltersExample extends React.Component {
           }}
           key={challenge.challengeId}
         />
-      )
+      );
 
       challengeCardContainer = (
         <div className="challenge-cards-container">
@@ -330,16 +332,15 @@ class ChallengeFiltersExample extends React.Component {
             {challenges.filter(filter.getFilterFunction()).map(cardify)}
           </div>
         </div>
-      )
+      );
     } else {
       const { config, challengeFilters } = this.props;
       const filterFunc = filter.getFilterFunction();
       const sidebarFilterFunc = (challenge) => {
         if (currentFilter.mode !== SideBarFilterModes.CUSTOM) {
           return true;
-        } else {
-          return currentFilter.getFilterFunction()(challenge);
         }
+        return currentFilter.getFilterFunction()(challenge);
       };
 
       challengeCardContainer = (
@@ -365,29 +366,35 @@ class ChallengeFiltersExample extends React.Component {
     }
 
     // Upcoming srms
-    let futureSRMChallenge = this.state.srmChallenges.filter(function(challenge) {
-      return challenge.status === "FUTURE"
-    })
+    let futureSRMChallenge = this.state.srmChallenges.filter(challenge => challenge.status === 'FUTURE');
 
-    futureSRMChallenge = futureSRMChallenge.sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime())
+    futureSRMChallenge = futureSRMChallenge.sort(
+      (a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime(),
+    );
 
-    const UpcomingSrm = futureSRMChallenge.map((srmChallenge, i) => {
-      return <SRMCard category={'upcoming'} srmChallenge={srmChallenge} key={i}/>
-    })
+    const UpcomingSrm = futureSRMChallenge.map(
+      srmChallenge => (
+        <SRMCard
+          category={'upcoming'}
+          srmChallenge={srmChallenge}
+          key={JSON.stringify(srmChallenge)}
+        />
+      ),
+    );
 
     return (
       <div className="ChallengeFiltersExample">
         <ChallengeFilters
           filter={this.state.filter}
-          onFilter={filter => this.onFilterByTopFilter(filter)}
-          onSaveFilter={(filter) => {
+          onFilter={topFilter => this.onFilterByTopFilter(topFilter)}
+          onSaveFilter={(filterToSave) => {
             if (this.sidebar) {
-              const f = (new SideBarFilter(SideBarFilterModes.CUSTOM)).merge(filter);
+              const f = (new SideBarFilter(SideBarFilterModes.CUSTOM)).merge(filterToSave);
               f.name = this.sidebar.getAvailableFilterName();
               this.sidebar.addFilter(f);
             }
           }}
-          onSearch={(query, filter) => this.onSearch(query, filter)}
+          onSearch={(query, existingFilter) => this.onSearch(query, existingFilter)}
           validKeywords={VALID_KEYWORDS}
           validSubtracks={VALID_SUBTRACKS}
           setCardType={cardType => this.setCardType(cardType)}
@@ -402,7 +409,7 @@ class ChallengeFiltersExample extends React.Component {
           <div className="challenges-container SRMs-container">
             {/* happening now */}
             <div className="SRMCardExamples">
-              <SRMCard category={'now'}/>
+              <SRMCard category={'now'} />
             </div>
             {/* upcoming SRMs */}
             <div className="SRMCardExamples">
@@ -429,7 +436,12 @@ class ChallengeFiltersExample extends React.Component {
             <SideBarFilters
               challenges={challenges}
               filter={this.state.sidebarFilter}
-              onFilter={filter => this.setState({ sidebarFilter: filter }, () => this.saveFiltersToHash())}
+              onFilter={
+                selectedFilter => this.setState(
+                  { sidebarFilter: selectedFilter },
+                  () => this.saveFiltersToHash(),
+                )
+              }
               ref={(node) => {
                 this.sidebar = node;
               }}
@@ -447,7 +459,7 @@ class ChallengeFiltersExample extends React.Component {
             <SideBarFilters
               challenges={challenges}
               filter={this.state.filter}
-              onFilter={filter => this.onFilterByTopFilter(filter, true)}
+              onFilter={topFilter => this.onFilterByTopFilter(topFilter, true)}
               ref={(node) => {
                 this.sidebar = node;
               }}
@@ -467,6 +479,9 @@ ChallengeFiltersExample.defaultProps = {
   },
   filterFromUrl: '',
   onSaveFilterToUrl: _.noop,
+  myChallenges: [],
+  challengeFilters: undefined,
+  isAuth: false,
 };
 
 ChallengeFiltersExample.propTypes = {
@@ -475,6 +490,9 @@ ChallengeFiltersExample.propTypes = {
   }),
   filterFromUrl: PT.string,
   onSaveFilterToUrl: PT.func,
+  myChallenges: PT.array,
+  challengeFilters: PT.object,
+  isAuth: PT.bool,
 };
 
 export default ChallengeFiltersExample;

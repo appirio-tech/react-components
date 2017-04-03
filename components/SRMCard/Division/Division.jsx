@@ -1,29 +1,29 @@
-import React from 'react';
-import UserAvatarTooltip from '../../ChallengeCard/Tooltips/UserAvatarTooltip';
-import LeaderboardAvatar from '../../LeaderboardAvatar/LeaderboardAvatar';
-import Tooltip from '../../ChallengeCard/Tooltips/Tooltip';
-import RegistrantsIcon from '../../Icons/RegistrantsIcon';
-import SubmissionsIcon from '../../Icons/SubmissionsIcon';
+import React from 'react'
+import UserAvatarTooltip from '../../ChallengeCard/Tooltips/UserAvatarTooltip'
+import LeaderboardAvatar from '../../LeaderboardAvatar/LeaderboardAvatar'
+import Tooltip from '../../ChallengeCard/Tooltips/Tooltip'
+import RegistrantsIcon from '../../Icons/RegistrantsIcon'
+import SubmissionsIcon from '../../Icons/SubmissionsIcon'
 
-require('./Division.scss');
+require('./Division.scss')
 
 // constants
-const NUM_REGISTRANTS = 34.33;
-const NUM_SUBMISSION = 99;
+const NUM_REGISTRANTS = 34.33
+const NUM_SUBMISSION = 99
 
 function numRegistrantsTipText(number) {
   switch (number) {
-    case 0: return 'No registrants';
-    case 1: return '1 total registrant';
-    default: return `${number} total registrants`;
+  case 0: return 'No registrants'
+  case 1: return '1 total registrant'
+  default: return `${number} total registrants`
   }
 }
 
 function numSubmissionsTipText(number) {
   switch (number) {
-    case 0: return 'No submissions';
-    case 1: return '1 total submission';
-    default: return `${number} total submissions`;
+  case 0: return 'No submissions'
+  case 1: return '1 total submission'
+  default: return `${number} total submissions`
   }
 }
 // Mock WINNERS array
@@ -71,9 +71,9 @@ const renderLeaderboard = MOCK_WINNERS.map((winner, index) => {
 
 // mock resultsRows
 const MOCK_RESULTS = [
-  {title: "The Basics Of Buying A Telescope", submission: 99, percent: 34.33},
-  {title: "Shooting Stars", submission: 12, percent: 50},
-  {title: "The Amazing Hubble", submission: 4, percent: 32.1},
+  {title: 'The Basics Of Buying A Telescope', submission: 99, percent: 34.33},
+  {title: 'Shooting Stars', submission: 12, percent: 50},
+  {title: 'The Amazing Hubble', submission: 4, percent: 32.1},
 ]
 const resultsRows = MOCK_RESULTS.map((row, index) => {
   return (
@@ -112,4 +112,4 @@ const Division = (props) => (
 	</div>
 )
 
-module.exports = Division;
+module.exports = Division

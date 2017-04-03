@@ -2,8 +2,9 @@
 @import 'topcoder/tc-includes';
 
 .challengeCardContainer {
-  border-radius: $base-unit;
-  min-width: $base-unit * 180;
+  border-radius: $corner-radius;
+  width: 70%;
+  padding: 0 $base-unit;
 
   .category-challenges-container {
     background: $tc-gray-neutral-light;

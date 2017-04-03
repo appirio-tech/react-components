@@ -34,8 +34,8 @@ class SideBarFilter extends ChallengeFilter {
       super(arg);
       this.isCustomFilter = arg.isCustomFilter;
       const mode = arg.filter.split('&').filter(ele => ele.startsWith('mode='))[0];
-      const name = arg.filter.split('&').filter(ele => ele.startsWith('name='))[0]
-      this.mode = mode ? Object.values(MODE)[+mode.split('=')[1]]: MODE.CUSTOM;
+      const name = arg.filter.split('&').filter(ele => ele.startsWith('name='))[0];
+      this.mode = mode ? Object.values(MODE)[+mode.split('=')[1]] : MODE.CUSTOM;
       this.name = arg.name || (name ? decodeURIComponent(name.split('=')[1]) : name) || 'Custom';
       this.uuid = arg.id || uuid();
     } else if (_.isObject(arg)) {
