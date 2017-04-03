@@ -373,6 +373,9 @@ class ChallengeFiltersExample extends React.Component {
     const UpcomingSrm = futureSRMChallenge.map((srmChallenge, i) => {
       return <SRMCard category={'upcoming'} srmChallenge={srmChallenge} key={i}/>
     })
+    
+    // sort subtracks
+    VALID_SUBTRACKS.sort((a, b) => (a.label < b.label ? -1 : (a.label > b.label ? 1 : 0)));
 
     return (
       <div className="ChallengeFiltersExample">
