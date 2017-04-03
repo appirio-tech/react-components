@@ -22,7 +22,7 @@ $lg-width: 1280px;
 }
 
 @mixin xs-to-sm {
-  @media (min-width: #{$xs-width}) and (max-width: #{$md-width}) {
+  @media (min-width: #{$xs-width}) and (max-width: #{$md-width} - 1px) {
     @content;
   }
 }

@@ -40,15 +40,8 @@ function keywordsMapper(keyword) {
   };
 }
 
-// A mock list of keywords to allow in the Keywords filter.
-// Note that each time challenges are fetched, all their platform and technology
-// tags are appended there, if they are missing.
-const VALID_KEYWORDS = [
-  'ActionScript', 'ADO.NET', 'AJAX', 'Android', 'Angular.js', 'Apache Derby',
-  'Apex', 'AWS', 'Box', 'Brivo Labs', 'Cisco', 'Cloud Foundry', 'CloudFactor',
-  'Data Science', 'EC2', 'Force.com', 'iOS', 'Java', '.NET', '.NET System.Addins',
-  'Salesforce', 'Salesforce.com',
-].map(keywordsMapper);
+// List of keywords to allow in the Keywords filter.
+const VALID_KEYWORDS = [];
 
 // List of keywords to allow in the Tracks filter.
 const VALID_SUBTRACKS = [];
@@ -95,12 +88,13 @@ class ChallengeFiltersExample extends React.Component {
     this.fetchChallenges(0).then(res => this.setChallenges(0, res));
 
     /* Fetching of SRM challenges */
-    fetch(`${props.config.API_URL}/srms/?filter=status=FUTURE`)
+    fetch(`${props.config.API_URL_V3}/srms/?filter=status=FUTURE`)
       .then(res => res.json())
       .then((json) => {
         this.setState({srmChallenges: json.result.content})
       })
     
+
     // APIs to fetch valid subtracks.
     const SUBTRACKS_DESIGN_API = `${this.props.config.API_URL_V2}/design/challengetypes`;
     const SUBTRACKS_DEVELOP_API = `${this.props.config.API_URL_V2}/develop/challengetypes`;    
@@ -117,7 +111,17 @@ class ChallengeFiltersExample extends React.Component {
       .then(res => res.json())
       .then((json) => {
         json.forEach(item => VALID_SUBTRACKS.push(keywordsMapper(item.name)));
-      })      
+      })
+    
+    // API to fetch valid keywords
+    const KEYWORDS_API = `${this.props.config.API_URL}/technologies/`; 
+    
+    /* Fetching of keywords */
+    fetch(KEYWORDS_API)
+      .then(res => res.json())
+      .then((json) => {
+        json.result.content.forEach(item => VALID_KEYWORDS.push(keywordsMapper(item.name)));
+      })
   }
 
   /**
@@ -200,7 +204,6 @@ class ChallengeFiltersExample extends React.Component {
     let forceUpdate = false;
     function helper1(key) {
       if (knownKeywords.has(key)) return;
-      VALID_KEYWORDS.push(keywordsMapper(key));
       knownKeywords.add(key);
       forceUpdate = true;
     }
@@ -460,6 +463,7 @@ class ChallengeFiltersExample extends React.Component {
 ChallengeFiltersExample.defaultProps = {
   config: {
     API_URL_V2: 'https://api.topcoder.com/v2',
+    API_URL_V3: 'https://api.topcoder.com/v3',
   },
   filterFromUrl: '',
   onSaveFilterToUrl: _.noop,
@@ -468,6 +472,7 @@ ChallengeFiltersExample.defaultProps = {
 ChallengeFiltersExample.propTypes = {
   config: PT.shape({
     API_URL_V2: PT.string,
+    API_URL_V3: PT.string,
   }),
   filterFromUrl: PT.string,
   onSaveFilterToUrl: PT.func,
