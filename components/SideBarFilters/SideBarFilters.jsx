@@ -338,16 +338,15 @@ class SideBarFilters extends React.Component {
         <div className="FilterBox">
           {filters[FILTER_ID.ALL_CHALLENGES]}
 
-          {this.props.isAuth ?<span><hr /> {filters[FILTER_ID.MY_CHALLENGES]}</span> : ''}
-          <hr />
+          {this.props.isAuth ?<span> {filters[FILTER_ID.MY_CHALLENGES]}</span> : ''}
           {filters[FILTER_ID.OPEN_FOR_REGISTRATION]}
           {filters[FILTER_ID.ONGOING_CHALLENGES]}
-          {filters[FILTER_ID.PAST_CHALLENGES]}
           {filters[FILTER_ID.OPEN_FOR_REVIEW]}
+          <hr />
+          {filters[FILTER_ID.PAST_CHALLENGES]}           
           {
             myFilters.length ?
               <div>
-                <hr />
                 <div className="my-filters">
                   <h1>My filters</h1>
                   <a className="edit-link" href="javascript:;" onClick={() => {

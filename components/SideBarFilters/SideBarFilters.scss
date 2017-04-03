@@ -17,11 +17,12 @@
       height: 1px;
       margin: 2*$base-unit;
     }
-
+    
     .my-filters {
       display: block; 
       position: relative;
       padding: 0 3*$base-unit;
+      margin-top: 7*$base-unit;
       @include xs {
         padding: 0;
       }
