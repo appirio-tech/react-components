@@ -7,7 +7,7 @@
   .FilterBox {
     background: $tc-white;
     padding: 2*$base-unit;
-    padding-bottom: 4*$base-unit;
+    padding-bottom: 2*$base-unit;
     border-radius: $corner-radius * 2;
 
     hr {
@@ -48,6 +48,16 @@
         @include xs {
           font-size: 13px;
         }
+      }
+    }
+    
+    .get-rss {
+      text-align: center;
+      
+      a {
+        color: $tc-gray-50;
+        font-size: 13px;
+        line-height: 30px;
       }
     }
   }

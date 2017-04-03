@@ -247,7 +247,6 @@ class SideBarFilters extends React.Component {
               <li><a href="javascript:;">Help</a>&nbsp;•&nbsp;</li>
               <li><a href="javascript:;">Privacy</a>&nbsp;•&nbsp;</li>
               <li><a href="javascript:;">Terms</a></li>
-              <li><a href="javascript:;">Get the RSS</a></li>
             </ul>
             <p className="copyright">Topcoder © 2017.</p>
           </div>
@@ -361,6 +360,10 @@ class SideBarFilters extends React.Component {
                 {myFilters}
               </div> : ''
           }
+          <hr />
+          <div className="get-rss">
+            <a href={RSS_LINK}>Get the RSS feed</a>
+          </div>
         </div>
         <div className="sidebar-footer">
           <ul>
@@ -369,7 +372,6 @@ class SideBarFilters extends React.Component {
             <li><a href="javascript:;">Help</a>&nbsp;•&nbsp;</li>
             <li><a href="javascript:;">Privacy</a>&nbsp;•&nbsp;</li>
             <li><a href="javascript:;">Terms</a>&nbsp;•&nbsp;</li>
-            <li><a href={RSS_LINK}>Get the RSS</a></li>
           </ul>
           <p className="copyright">Topcoder © 2016.</p>
         </div>
