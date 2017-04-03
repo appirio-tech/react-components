@@ -43,9 +43,6 @@ function keywordsMapper(keyword) {
 // List of keywords to allow in the Keywords filter.
 const VALID_KEYWORDS = [];
 
-// API to fetch valid keywords
-const KEYWORDS_API = 'https://api.topcoder.com/v3/technologies/';
-
 // A mock list of keywords to allow in the Tracks filter.
 const VALID_SUBTRACKS = [
   'Code', 'Design First2Finish', 'First2Finish', 'Web Design',
@@ -99,6 +96,9 @@ class ChallengeFiltersExample extends React.Component {
       .then((json) => {
         this.setState({srmChallenges: json.result.content})
       })
+    
+    // API to fetch valid keywords
+    const KEYWORDS_API = `${this.props.config.API_URL}/technologies/`; 
     
     /* Fetching of keywords */
     fetch(KEYWORDS_API)
