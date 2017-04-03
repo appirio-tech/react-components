@@ -69,7 +69,7 @@ class SideBarFilter extends ChallengeFilter {
 
   getFilterFunction() {
     switch (this.mode) {
-      case MODE.ALL_CHALLENGES: return () => true;
+      case MODE.ALL_CHALLENGES: return item => item.status !== 'Completed';
       case MODE.MY_CHALLENGES: return item => item.myChallenge;
       case MODE.OPEN_FOR_REVIEW: return item => item.currentPhaseName === 'Review';
       // The API has some incosistencies in the challenge items
