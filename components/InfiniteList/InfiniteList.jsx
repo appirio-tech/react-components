@@ -113,7 +113,7 @@ class InfiniteList extends Component {
   }
 
   setLoadingStatus(status) {
-    if (this.loading !== status) this.setState({ loading: status })
+    if (this.state.loading !== status) this.setState({ loading: status })
   }
 
   addBatchIds(numberToAdd) {
@@ -138,7 +138,7 @@ class InfiniteList extends Component {
   }
 
   onScrollToLoadPoint() {
-    if (this.loading || this.state.items.length >= this.props.itemCountTotal) return;
+    if (this.state.loading || this.state.items.length >= this.props.itemCountTotal) return;
 
     this.addBatchIds();
 
