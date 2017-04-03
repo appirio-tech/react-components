@@ -114,7 +114,7 @@ class ChallengeFiltersExample extends React.Component {
       })
     
     // API to fetch valid keywords
-    const KEYWORDS_API = `${this.props.config.API_URL}/technologies/`; 
+    const KEYWORDS_API = `${this.props.config.API_URL_V3}/technologies/`; 
     
     /* Fetching of keywords */
     fetch(KEYWORDS_API)
