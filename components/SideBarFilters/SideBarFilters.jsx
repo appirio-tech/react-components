@@ -78,13 +78,12 @@ class SideBarFilters extends React.Component {
   constructor(props) {
     super(props);
     let that = this;
-
+    
     // TODO: Get the auth token from cookie for now.
     // Ideally the token should be passed in from a parent container component
     // http://stackoverflow.com/questions/5639346/
     const token = document.cookie.match(`(^|;)\\s*${TOKEN_KEY}\\s*=\\s*([^;]+)`);
     const authToken = token ? token.pop() : '';
-
     this.state = {
       authToken,
       currentFilter: DEFAULT_FILTERS[3],
@@ -379,7 +378,7 @@ class SideBarFilters extends React.Component {
     const currentFilter = this.state.filters[index];
     if (currentFilter.mode === "Open for review") {
       // Jump to Development Review Opportunities page
-      window.location.href = 'https://www.topcoder.com/review/development-review-opportunities/';
+      window.location.href = `${this.props.config.MAIN_URL}/review/development-review-opportunities/`;
     }
     this.setState({ currentFilter }, () => this.props.onFilter(currentFilter));
   }
