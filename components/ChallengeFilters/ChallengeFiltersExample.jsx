@@ -73,7 +73,7 @@ const deserialize = queryString => new SideBarFilter({
 // The demo component itself.
 class ChallengeFiltersExample extends React.Component {
   constructor(props) {
-    super(props);
+    super(props);  
     this.state = {
       challenges: [],
       srmChallenges: [],
@@ -426,6 +426,7 @@ class ChallengeFiltersExample extends React.Component {
         <div className={`tc-content-wrapper ${this.state.currentCardType === 'Challenges' ? '' : 'hidden'}`}>
           <div className="sidebar-container xs-to-sm">
             <SideBarFilters
+              config={this.props.config}
               challenges={challenges}
               filter={this.state.sidebarFilter}
               onFilter={filter => this.setState({ sidebarFilter: filter }, () => this.saveFiltersToHash())}
@@ -444,6 +445,7 @@ class ChallengeFiltersExample extends React.Component {
             top={20}
           >
             <SideBarFilters
+              config={this.props.config}
               challenges={challenges}
               filter={this.state.filter}
               onFilter={filter => this.onFilterByTopFilter(filter, true)}
