@@ -43,11 +43,8 @@ function keywordsMapper(keyword) {
 // List of keywords to allow in the Keywords filter.
 const VALID_KEYWORDS = [];
 
-// A mock list of keywords to allow in the Tracks filter.
-const VALID_SUBTRACKS = [
-  'Code', 'Design First2Finish', 'First2Finish', 'Web Design',
-  'Widget or Mobile Screen Design',
-].map(keywordsMapper);
+// List of keywords to allow in the Tracks filter.
+const VALID_SUBTRACKS = [];
 
 // A mock list of SRMs side bar
 const SRMsSidebarMock = {
@@ -95,6 +92,25 @@ class ChallengeFiltersExample extends React.Component {
       .then(res => res.json())
       .then((json) => {
         this.setState({srmChallenges: json.result.content})
+      })
+    
+
+    // APIs to fetch valid subtracks.
+    const SUBTRACKS_DESIGN_API = `${this.props.config.API_URL_V2}/design/challengetypes`;
+    const SUBTRACKS_DEVELOP_API = `${this.props.config.API_URL_V2}/develop/challengetypes`;    
+    
+    /* Fetching of design subtracks */
+    fetch(SUBTRACKS_DESIGN_API)
+      .then(res => res.json())
+      .then((json) => {
+        json.forEach(item => VALID_SUBTRACKS.push(keywordsMapper(item.name)));
+      })    
+    
+    /* Fetching of develop subtracks */
+    fetch(SUBTRACKS_DEVELOP_API)
+      .then(res => res.json())
+      .then((json) => {
+        json.forEach(item => VALID_SUBTRACKS.push(keywordsMapper(item.name)));
       })
     
     // API to fetch valid keywords
