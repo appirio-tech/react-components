@@ -59,7 +59,7 @@ const VALID_SUBTRACKS = [
 // A mock list of SRMs side bar
 const SRMsSidebarMock = {
   all: { name: 'All SRMs', value: 853 },
-  myChallenges: { name: 'My Challenges', value: 3 },
+  myChallenges: { name: 'Participating', value: 3 },
   others: [
     { name: 'Upcoming SRM', value: 16 },
     { name: 'Past SRM', value: 34 },
@@ -338,7 +338,7 @@ class ChallengeFiltersExample extends React.Component {
             onTechTagClicked={(tag) => this.challengeFilters.setKeywords(tag)}
             challenges={challenges}
             currentFilterName={sidebarFilterName}
-            expanded={sidebarFilterName !== 'All Challenges'}
+            expanded={sidebarFilterName !== 'All active'}
             additionalFilter={filter.getFilterFunction()}
           />
         </div>

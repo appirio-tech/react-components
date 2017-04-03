@@ -10,11 +10,11 @@ const CHALLENGES_API = `${BASE_URL}/challenges/`;
 
 // A mock list of challenges side bar
 const ChallengesSidebarMock = {
-  all: {name: 'All Challenges', value: 3},
-  myChallenges: {name: 'My Challenges', value: 3},
+  all: {name: 'All active', value: 3},
+  myChallenges: {name: 'Participating', value: 3},
   others: [
     {name: 'Open for registration', value: 16},
-    {name: 'Ongoing challenges', value: 34},
+    {name: 'Running', value: 34},
     {name: 'Past challenges', value: 580},
   ],
   myFilters: [

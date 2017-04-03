@@ -10,10 +10,10 @@ import uuid from 'uuid/v4';
 import ChallengeFilter from '../ChallengeFilters/ChallengeFilter';
 
 export const MODE = {
-  ALL_CHALLENGES: 'All Challenges',
-  MY_CHALLENGES: 'My Challenges',
+  ALL_CHALLENGES: 'All active',
+  MY_CHALLENGES: 'Participating',
   OPEN_FOR_REGISTRATION: 'Open for registration',
-  ONGOING_CHALLENGES: 'Ongoing challenges',
+  ONGOING_CHALLENGES: 'Running',
   PAST_CHALLENGES: 'Past challenges',
   OPEN_FOR_REVIEW: 'Open for review',
   CUSTOM: 'custom',

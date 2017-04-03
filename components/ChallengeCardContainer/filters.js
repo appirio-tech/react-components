@@ -1,6 +1,6 @@
 export default [
   {
-    name: 'All Challenges',
+    name: 'All active',
     allIncluded: true,
     sortingOptions: ['Most recent'],
   },
@@ -24,7 +24,7 @@ export default [
     getApiUrl: pageIndex => `http://api.topcoder.com/v2/challenges/open?pageIndex=${pageIndex}&pageSize=50`,
   },
   {
-    name: 'My challenges',
+    name: 'Participating',
     check(item) {
       return item.myChallenge;
     },
@@ -39,7 +39,7 @@ export default [
     getApiUrl: pageIndex => `http://api.topcoder.com/v2/user/challenges?&pageIndex=${pageIndex}&pageSize=50`,
   },
   {
-    name: 'Ongoing challenges',
+    name: 'Running',
     check(item) {
       return !item.registrationOpen.startsWith('Yes') && item.status === 'Active';
     },

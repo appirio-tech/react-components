@@ -156,11 +156,11 @@ class SideBarFilters extends React.Component {
       filters.push(filterClone);
     });
     for (let i = 0; i < filters.length; ++i) 
-      if (filters[i].mode === "All Challenges") {
+      if (filters[i].mode === "All active") {
         console.log(filters[i].count);
         filters[i].count = 0;
         for (let j = 0; j < filters.length; ++j)
-          if (filters[j].mode === "Open for registration" || filters[j].mode === "Ongoing challenges")
+          if (filters[j].mode === "Open for registration" || filters[j].mode === "Running")
             filters[i].count += filters[j].count;
       }
     this.setState({
