@@ -72,7 +72,7 @@ function ChallengeCard ({challenge, config, sampleWinnerProfile, onTechTagClicke
           </TrackAbbreviationTooltip>
         </div>
 
-        <div className="challenge-details">
+        <div className={challenge.registrationOpen === 'Yes' ? 'challenge-details with-register-button' : 'challenge-details'}>
           <a className="challenge-title" href={challengeDetailLink(challenge)}>
             {challenge.challengeName}
           </a>
@@ -86,7 +86,7 @@ function ChallengeCard ({challenge, config, sampleWinnerProfile, onTechTagClicke
         </div>
       </div>
       <div className="right-panel">
-        <div className="prizes">
+        <div className={challenge.registrationOpen === 'Yes' ? 'prizes with-register-button' : 'prizes'}>
           <PrizesTooltip challenge={challenge} config={config}>
             <div><span className="dollar">$</span>{numberWithCommas(challenge.totalPrize)}</div>
             <div className="label">Purse</div>
