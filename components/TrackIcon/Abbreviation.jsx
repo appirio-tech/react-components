@@ -58,4 +58,4 @@ const Abbreviation = {
   }
 }
 
-export default Abbreviation;
+export default Abbreviation

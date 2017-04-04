@@ -180,8 +180,7 @@ class Tooltip extends Component {
         }
         <div className="tooltip-container tooltip-hide">
           <div className="tooltip-content-container">
-            <div className="tooltip-pointer">
-            </div>
+            <div className="tooltip-pointer" />
             {body}
           </div>
         </div>
