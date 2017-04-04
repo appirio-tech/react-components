@@ -37,8 +37,6 @@ const { func, string, bool, number, oneOfType } = React.PropTypes;
 class InfiniteList extends Component {
   constructor(props) {
     super(props);
-
-    this.state = { items: [], cachedItemElements: [] };
   }
 
   componentWillMount() {
@@ -82,10 +80,13 @@ class InfiniteList extends Component {
     const initialLoadNumber = batchNumber + (items.length % batchNumber);
 
     this.currentPageIndex = initialPageIndex;
-    this.ids = [];
-    this.addBatchIds(initialLoadNumber);
-    this.addNewItems(sortedItems.slice(0, initialLoadNumber), props, isMounting);
-    this.cachedPassedInItems = sortedItems.slice(initialLoadNumber);
+
+    this.setState({items: [], cachedItemElements: []}, () => {
+      this.ids = [];
+      this.addBatchIds(initialLoadNumber);
+      this.addNewItems(sortedItems.slice(0, initialLoadNumber), props, isMounting);
+      this.cachedPassedInItems = sortedItems.slice(initialLoadNumber);
+    });
   }
 
   reCacheItemElements(organizedItems, renderItem) {
