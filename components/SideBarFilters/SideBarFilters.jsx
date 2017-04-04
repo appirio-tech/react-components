@@ -148,7 +148,6 @@ class SideBarFilters extends React.Component {
       filterClone.count = nextProps.challenges.filter(filter.getFilterFunction()).length;
       filters.push(filterClone);
     });
-
     for (let i = 0; i < filters.length; i += 1) {
       if (filters[i].mode === 'All Challenges') {
         filters[i].count = 0;
