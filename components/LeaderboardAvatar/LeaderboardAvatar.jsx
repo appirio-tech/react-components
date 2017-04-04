@@ -1,8 +1,8 @@
-import React from 'react';
-import './LeaderboardAvatar.scss';
+import React from 'react'
+import './LeaderboardAvatar.scss'
 
 // Constants
-const VISIBLE_CHARACTERS = 3;
+const VISIBLE_CHARACTERS = 3
 
 function LeaderboardAvatar ({member}) {
   return (
@@ -15,4 +15,4 @@ function LeaderboardAvatar ({member}) {
   )
 }
 
-export default LeaderboardAvatar;
+export default LeaderboardAvatar

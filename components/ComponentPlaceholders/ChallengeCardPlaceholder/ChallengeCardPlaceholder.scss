@@ -1,0 +1,44 @@
+@import '../../../styles/tc-styles';
+
+.challengeCard.placeholder {
+  .challenge-track {
+    width: $base-unit * 6;
+    height: $base-unit * 6;
+  }
+
+  .challenge-title {
+    height: $base-unit * 8;
+    margin-left: $base-unit * 2;
+  }
+
+  .details-footer {
+    height: $base-unit * 4;
+    margin-left: $base-unit * 2;
+  }
+
+  .prizes {
+    height: $base-unit * 10;
+    width: $base-unit * 13;
+  }
+
+  .challenge-status {
+    display: flex;
+  }
+
+  .progress-container {
+    height: $base-unit * 10;
+    width: $base-unit * 36;
+  }
+
+  .challenge-stats-container {
+    display: flex;
+    justify-content: flex-end;
+    flex-grow: 1;
+  }
+
+  .challenge-stats {
+    width: $base-unit * 10;
+    height: $base-unit * 6;
+    margin-left: $base-unit * 4;
+  }
+}

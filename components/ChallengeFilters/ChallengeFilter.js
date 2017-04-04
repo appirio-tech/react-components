@@ -1,3 +1,7 @@
+/* global
+  atob, btoa
+*/
+
 /**
  * This Filter class represents the filters managed by the ChallengeFilters
  * component. It inherits the filters managed by the FilterPanel.
@@ -34,7 +38,7 @@ class ChallengeFilter extends FilterPanelFilter {
       super();
       this.tracks = new Set([DATA_SCIENCE_TRACK, DESIGN_TRACK, DEVELOP_TRACK]);
     } else if (arg.isSavedFilter) {
-      // If this is a saved filter then the track information is 
+      // If this is a saved filter then the track information is
       // present on the 'type' attribute
 
       super(arg);
@@ -43,7 +47,7 @@ class ChallengeFilter extends FilterPanelFilter {
         .map(element => element.split('=')[1]);
       this.tracks = new Set(tracks);
     } else if (_.isObject(arg)) {
-      if (!arg._isChallengeFilter) throw new Error ('Invalid argument!');
+      if (!arg._isChallengeFilter) throw new Error('Invalid argument!');
       super(arg);
       this.tracks = new Set(arg.tracks);
     } else if (_.isString(arg)) {
