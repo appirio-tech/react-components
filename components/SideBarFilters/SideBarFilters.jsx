@@ -78,7 +78,7 @@ class SideBarFilters extends React.Component {
   constructor(props) {
     super(props);
     let that = this;
-    
+
     // TODO: Get the auth token from cookie for now.
     // Ideally the token should be passed in from a parent container component
     // http://stackoverflow.com/questions/5639346/
@@ -95,17 +95,18 @@ class SideBarFilters extends React.Component {
       const item = this.state.filters[i];
       item.count = props.challenges.filter(item.getFilterFunction()).length;
     }
-    for (let i = 0; i !== this.state.filters.length; i += 1) {
-      const f = this.state.filters[i];
-      // Match of UUID means that one of the filters we have already matches
-      // the one passed from the parent component, so we have just select it,
-      // and we can exit the constructor right after.
-      if (f.uuid === props.filter.uuid) {
-        this.state.currentFilter = f;
-        return;
-      }
+    // Match of name means that one of the filters we have already matches
+    // the one passed from the parent component, so we have just select it,
+    // and we can exit the constructor right after.
+    const isDefaultFilter = _.find(this.state.filters, (filter) => {
+      return filter.name.toLowerCase() === props.filter.name.toLowerCase();
+    });
+    if (isDefaultFilter) {
+      this.state.currentFilter = isDefaultFilter;
+      return;
     }
-    // A fancy staff: if the parent has passed a filter, which does not exists
+
+    // A fancy stuff: if the parent has passed a filter, which does not exists
     // (it is taken from a deep link), we add it to the list of filters and
     // also select it.
     const f = new SideBarFilter(props.filter);
@@ -154,7 +155,7 @@ class SideBarFilters extends React.Component {
       filterClone.count = nextProps.challenges.filter(filter.getFilterFunction()).length;
       filters.push(filterClone);
     });
-    for (let i = 0; i < filters.length; ++i) 
+    for (let i = 0; i < filters.length; ++i)
       if (filters[i].mode === "All Challenges") {
         console.log(filters[i].count);
         filters[i].count = 0;
