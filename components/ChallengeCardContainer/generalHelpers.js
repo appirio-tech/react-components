@@ -22,7 +22,10 @@ export function filterFilterChallengesStore(filterChallengesStore, currentFilter
 }
 
 export function findFilterByName(filterName, filters) {
-  const foundfilter = _.find(filters, filter => filter.name === filterName);
+  const foundfilter = _.find(
+    filters,
+    filter => filter.name.toLowerCase() === filterName.toLowerCase()
+  );
 
   if (foundfilter) {
     return _.assign({}, foundfilter);

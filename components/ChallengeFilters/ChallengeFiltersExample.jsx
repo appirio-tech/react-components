@@ -400,7 +400,13 @@ class ChallengeFiltersExample extends React.Component {
         />
       ),
     );
-    VALID_SUBTRACKS.sort((a, b) => (a.label < b.label ? -1 : (a.label > b.label ? 1 : 0)));
+    VALID_SUBTRACKS.sort(function(a, b) {
+      if (a.label < b.label) {
+        return -1
+      } else if (a.label > b.label) {
+        return 1
+      } else return 0
+    });
 
     return (
       <div className="ChallengeFiltersExample">
