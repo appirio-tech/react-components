@@ -8,7 +8,7 @@
  */
 
 import React, { Component, PropTypes as PT } from 'react';
-import moment from 'moment';
+// import moment from 'moment';
 import Tooltip from '../Tooltip';
 import './UserAvatarTooltip.scss';
 
