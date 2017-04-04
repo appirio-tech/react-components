@@ -79,7 +79,7 @@ FilterItem.propTypes = {
   highlighted: PT.bool,
   onClick: PT.func,
   name: PT.string.isRequired,
-  id: PT.bool,
+  myFilter: PT.bool,
 };
 
 export { ActiveFilterItem, FilterItem };
