@@ -21,6 +21,10 @@ class ChallengeSearchBar extends React.Component {
     this.state = {
       value: '',
     };
+    if (this.props.query) {
+      this.state.value = this.props.query;
+      this.onSearch();
+    }
   }
 
   onKeyPress(event) {

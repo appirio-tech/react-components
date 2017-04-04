@@ -58,6 +58,12 @@ class ChallengeFilters extends React.Component {
       showFilters: false,
       showEditTrackPanel: false, 
     };
+    this.searchBarProps = {
+      placeholder: "Search Challenges",
+    };
+    if (props.searchQuery) {
+      this.searchBarProps.query = props.searchQuery;
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -163,7 +169,7 @@ class ChallengeFilters extends React.Component {
           />
           <ChallengeSearchBar
             onSearch={str => this.onSearch(str)}
-            placeholder="Search Challenges"
+            {...this.searchBarProps}
           />
           {
             this.props.isCardTypeSet === 'Challenges' ?
