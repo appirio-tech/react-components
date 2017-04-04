@@ -1,3 +1,9 @@
+/* global
+  atob, btoa
+*/
+
+/* eslint constructor-super: 0 */  // line 63 need that super in the catch block
+
 /**
  * The SideBarFilter extends the ChallengeFilter from the ChallengeFilters
  * component. This way any ChallengeFilter can be easily added to the sidebar.

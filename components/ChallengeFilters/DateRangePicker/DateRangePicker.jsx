@@ -1,3 +1,5 @@
+/* eslint react/prop-types: 0 */  // startDate and endDate are instances of Moment
+
 /**
  * This is an auxiliary wrapper around the DateRangePicker from the react-dates
  * package. It takes care about focus management and styling, leaving for the
@@ -11,6 +13,8 @@
 
 import React from 'react';
 import { DateRangePicker as WrappedDateRangePicker } from 'react-dates';
+
+const { func } = React.PropTypes;
 
 class DateRangePicker extends React.Component {
 
@@ -36,5 +40,13 @@ class DateRangePicker extends React.Component {
     );
   }
 }
+
+DateRangePicker.defaultProps = {
+  onDatesChange: () => true,
+};
+
+DateRangePicker.propTypes = {
+  onDatesChange: func,
+};
 
 export default DateRangePicker;

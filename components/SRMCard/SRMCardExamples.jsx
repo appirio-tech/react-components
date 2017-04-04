@@ -8,18 +8,6 @@ require('./SRMCardExamples.scss')
  */
 const API_V3 = 'https://api.topcoder.com/v3/srms'
 
-// A mock list of SRMs side bar
-const SRMsSidebarMock = {
-  all: {name: 'All SRMs', value: 853},
-  myChallenges: {name: 'My Challenges', value: 3},
-  others: [
-    {name: 'Upcoming SRM', value: 16},
-    {name: 'Past SRM', value: 34},
-  ],
-  myFilters: [
-    {name: 'TCO Finals', value: 23},
-  ]
-}
 class SRMCardExamples extends React.Component {
   constructor(props) {
     super(props)

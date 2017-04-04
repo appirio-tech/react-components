@@ -1,4 +1,7 @@
+/* eslint eqeqeq: 0 */  // The non-strict comparisons here may be necessary
+
 import React from 'react';
+import moment from 'moment';
 import LeaderboardAvatar from '../LeaderboardAvatar/LeaderboardAvatar';
 import ChallengeProgressBar from '../ChallengeProgressBar/ChallengeProgressBar';
 import ProgressBarTooltip from '../ChallengeCard/Tooltips/ProgressBarTooltip';
@@ -7,7 +10,6 @@ import SubmissionsIcon from '../Icons/SubmissionsIcon';
 import Tooltip from '../ChallengeCard/Tooltips/Tooltip';
 import UserAvatarTooltip from '../ChallengeCard/Tooltips/UserAvatarTooltip';
 import ForumIcon from '../Icons/ForumIcon';
-import moment from 'moment';
 import './ChallengeStatus.scss';
 
 // Constants
@@ -79,9 +81,13 @@ const getTimeLeft = (date, currentPhase) => {
 };
 
 const getTimeToGo = (start, end) => {
-  const percentageComplete = (moment() - moment(start)) / (moment(end) - moment(start)) * 100;
+  const percentageComplete = (
+    (moment() - moment(start)) / (moment(end) - moment(start))
+  ) * 100;
   return (Math.round(percentageComplete * 100) / 100);
 };
+
+const { object } = React.PropTypes;
 
 function ChallengeStatus({ challenge, config, sampleWinnerProfile }) {
   const lastItem = {
@@ -99,10 +105,23 @@ function ChallengeStatus({ challenge, config, sampleWinnerProfile }) {
     ));
 
   const renderRegisterButton = () => {
-    const lng = getTimeLeft(challenge.registrationEndDate || challenge.submissionEndDate, challenge.currentPhaseName).text.length;
+    const lng = getTimeLeft(
+      challenge.registrationEndDate || challenge.submissionEndDate,
+      challenge.currentPhaseName,
+    ).text.length;
     return (
-      <a href="#" className="register-button">
-        <span>{getTimeLeft(challenge.registrationEndDate || challenge.submissionEndDate, challenge.currentPhaseName).text.substring(0, lng - 6)}</span>
+      <a
+        className="register-button"
+        onClick={() => false}
+      >
+        <span>
+          {
+            getTimeLeft(
+              challenge.registrationEndDate || challenge.submissionEndDate,
+              challenge.currentPhaseName,
+            ).text.substring(0, lng - 6)
+          }
+        </span>
         <span className="to-register">to register</span>
       </a>
     );
@@ -123,15 +142,15 @@ function ChallengeStatus({ challenge, config, sampleWinnerProfile }) {
       default: return `${number} total submissions`;
     }
   }
-  const registrantsLink = (challenge, type) => {
-    if (challenge.track === 'DATA_SCIENCE') {
-      const id = `${challenge.challengeId}`;
+  const registrantsLink = (registrantsChallenge, type) => {
+    if (registrantsChallenge.track === 'DATA_SCIENCE') {
+      const id = `${registrantsChallenge.challengeId}`;
       if (id.length < ID_LENGTH) {
-        return `${type}${challenge.challengeId}`;
+        return `${type}${registrantsChallenge.challengeId}`;
       }
-      return `${CHALLENGE_URL}${challenge.challengeId}/?type=develop#viewRegistrant`;
+      return `${CHALLENGE_URL}${registrantsChallenge.challengeId}/?type=develop#viewRegistrant`;
     }
-    return `${CHALLENGE_URL}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}#viewRegistrant`;
+    return `${CHALLENGE_URL}${registrantsChallenge.challengeId}/?type=${registrantsChallenge.track.toLowerCase()}#viewRegistrant`;
   };
   const getStatusPhase = () => {
     switch (challenge.currentPhaseName) {
@@ -150,12 +169,22 @@ function ChallengeStatus({ challenge, config, sampleWinnerProfile }) {
 
   const activeChallenge = () => (
     <div className={challenge.registrationOpen === 'Yes' ? 'challenge-progress with-register-button' : 'challenge-progress'}>
-      <span className="current-phase">{challenge.currentPhaseName ? getStatusPhase().currentPhaseName : STALLED_MSG}</span>
+      <span className="current-phase">
+        {
+          challenge.currentPhaseName
+          ? getStatusPhase().currentPhaseName
+          : STALLED_MSG
+        }
+      </span>
       <span className="challenge-stats">
         <span>
-          <Tooltip content={numRegistrantsTipText(challenge.numRegistrants)} className="num-reg-tooltip">
+          <Tooltip
+            content={numRegistrantsTipText(challenge.numRegistrants)}
+            className="num-reg-tooltip"
+          >
             <a className="num-reg" href={registrantsLink(challenge, MM_REG)}>
-              <RegistrantsIcon className="challenge-stats-icon" /> <span className="number">{challenge.numRegistrants}</span>
+              <RegistrantsIcon className="challenge-stats-icon" />
+              <span className="number">{challenge.numRegistrants}</span>
             </a>
           </Tooltip>
         </span>
@@ -181,10 +210,27 @@ function ChallengeStatus({ challenge, config, sampleWinnerProfile }) {
               <div>
                 <ChallengeProgressBar
                   color="green"
-                  value={getTimeToGo(challenge.registrationStartDate, getStatusPhase().currentPhaseEndDate)}
-                  isLate={getTimeLeft(getStatusPhase().currentPhaseEndDate, getStatusPhase().currentPhaseName).late}
+                  value={
+                    getTimeToGo(
+                      challenge.registrationStartDate,
+                      getStatusPhase().currentPhaseEndDate,
+                    )
+                  }
+                  isLate={
+                    getTimeLeft(
+                      getStatusPhase().currentPhaseEndDate,
+                      getStatusPhase().currentPhaseName,
+                    ).late
+                  }
                 />
-                <div className="time-left">{getTimeLeft(getStatusPhase().currentPhaseEndDate, getStatusPhase().currentPhaseName).text}</div>
+                <div className="time-left">
+                  {
+                    getTimeLeft(
+                      getStatusPhase().currentPhaseEndDate,
+                      getStatusPhase().currentPhaseName,
+                    ).text
+                  }
+                </div>
               </div>
               :
               <ChallengeProgressBar color="gray" value="100" />
@@ -230,5 +276,17 @@ function ChallengeStatus({ challenge, config, sampleWinnerProfile }) {
     </div>
   );
 }
+
+ChallengeStatus.defaultProps = {
+  challenge: {},
+  config: {},
+  sampleWinnerProfile: undefined,
+};
+
+ChallengeStatus.propTypes = {
+  challenge: object,
+  config: object,
+  sampleWinnerProfile: object,
+};
 
 export default ChallengeStatus;

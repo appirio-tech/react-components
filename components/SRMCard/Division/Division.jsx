@@ -1,15 +1,9 @@
 import React from 'react'
-import UserAvatarTooltip from '../../ChallengeCard/Tooltips/UserAvatarTooltip'
 import LeaderboardAvatar from '../../LeaderboardAvatar/LeaderboardAvatar'
 import Tooltip from '../../ChallengeCard/Tooltips/Tooltip'
 import RegistrantsIcon from '../../Icons/RegistrantsIcon'
 import SubmissionsIcon from '../../Icons/SubmissionsIcon'
-
-require('./Division.scss')
-
-// constants
-const NUM_REGISTRANTS = 34.33
-const NUM_SUBMISSION = 99
+import './Division.scss'
 
 function numRegistrantsTipText(number) {
   switch (number) {
@@ -60,7 +54,7 @@ const MAX_VISIBLE_WINNERS = 5
 
 MOCK_WINNERS = MOCK_WINNERS.slice(0, MAX_VISIBLE_WINNERS)
 
-const renderLeaderboard = MOCK_WINNERS.map((winner, index) => {
+const renderLeaderboard = MOCK_WINNERS.map((winner) => {
   return (
     <div className="avatar-container" key={winner.handle}>
       <LeaderboardAvatar member={winner}/>

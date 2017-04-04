@@ -1,11 +1,8 @@
 import React, { PropTypes as PT }from 'react'
 import moment from 'moment'
-import UserAvatarTooltip from '../ChallengeCard/Tooltips/UserAvatarTooltip'
 import LeaderboardAvatar from '../LeaderboardAvatar/LeaderboardAvatar'
 import TrackAbbreviationTooltip from '../ChallengeCard/Tooltips/TrackAbbreviationTooltip'
-import ProgressBarTooltip from '../ChallengeCard/Tooltips/ProgressBarTooltip'
 import TrackIcon from '../TrackIcon/TrackIcon'
-import Tooltip from '../ChallengeCard/Tooltips/Tooltip'
 import PastSRMCard from './PastSRMCard'
 
 require('./SRMCard.scss')

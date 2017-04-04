@@ -1,3 +1,7 @@
+/* global
+  atob, btoa
+*/
+
 /**
  * This Filter class represents the filters managed by the FiltersPanel component.
  * Have a look at the base class for additional details.

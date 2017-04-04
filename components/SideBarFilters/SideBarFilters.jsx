@@ -1,3 +1,7 @@
+/* global
+  document, fetch
+*/
+
 /**
  * Sidebar Filters Component (for an additional filtering of the challenge listing).
  *
@@ -20,15 +24,6 @@ import EditMyFilters, { SAVE_FILTERS_API } from './EditMyFilters';
 import SideBarFilter, { MODE } from './SideBarFilter';
 import { FilterItem } from './FilterItems';
 import './SideBarFilters.scss';
-
-const V2_API = 'https://api.topcoder-dev.com/v2';
-const CHALLENGES_API = `${V2_API}/challenges/`;
-const MY_CHALLENGES_API = `${V2_API}/user/challenges?challengeType=Copilot+Posting,
-  Conceptualization,Specification,Architecture,Design,Development,
-  RIA+Build+Competition,UI+Prototype+Competition,Assembly+Competition,
-  Test+Suites,Test+Scenarios,Content+Creation,Marathon+Match,Bug+Hunt,
-  First2Finish,Code&type=active`;
-const RSS_LINK = 'http://feeds.topcoder.com/challenges/feed?list=active&contestType=all';
 
 /*
  * Default set of filters displayed in the component.
@@ -77,7 +72,6 @@ class SideBarFilters extends React.Component {
 
   constructor(props) {
     super(props);
-    const that = this;
 
     // TODO: Get the auth token from cookie for now.
     // Ideally the token should be passed in from a parent container component
@@ -234,12 +228,12 @@ class SideBarFilters extends React.Component {
         </div>
         <div className="sidebar-footer">
           <ul>
-            <li><a href="javascript:;">About</a>&nbsp;•&nbsp;</li>
-            <li><a href="javascript:;">Contact</a>&nbsp;•&nbsp;</li>
-            <li><a href="javascript:;">Help</a>&nbsp;•&nbsp;</li>
-            <li><a href="javascript:;">Privacy</a>&nbsp;•&nbsp;</li>
-            <li><a href="javascript:;">Terms</a></li>
-            <li><a href="javascript:;">Get the RSS</a></li>
+            <li><a onClick={() => false}>About</a>&nbsp;•&nbsp;</li>
+            <li><a onClick={() => false}>Contact</a>&nbsp;•&nbsp;</li>
+            <li><a onClick={() => false}>Help</a>&nbsp;•&nbsp;</li>
+            <li><a onClick={() => false}>Privacy</a>&nbsp;•&nbsp;</li>
+            <li><a onClick={() => false}>Terms</a></li>
+            <li><a onClick={() => false}>Get the RSS</a></li>
           </ul>
           <p className="copyright">Topcoder © 2017.</p>
         </div>
@@ -320,7 +314,7 @@ class SideBarFilters extends React.Component {
       <FilterItem
         count={filter.count}
         highlighted={filter === this.state.currentFilter}
-        key={index}
+        key={`${filter.name}-filter`}
         name={filter.name}
         onClick={() => this.selectFilter(index)}
       />
@@ -345,9 +339,9 @@ class SideBarFilters extends React.Component {
                   <h1>My filters</h1>
                   <a
                     className="edit-link"
-                    href="javascript:;"
                     onClick={() => {
                       this.setState({ mode: MODES.EDIT_MY_FILTERS });
+                      return false;
                     }}
                   >
                     edit
@@ -359,12 +353,12 @@ class SideBarFilters extends React.Component {
         </div>
         <div className="sidebar-footer">
           <ul>
-            <li><a href="javascript:;">About</a>&nbsp;•&nbsp;</li>
-            <li><a href="javascript:;">Contact</a>&nbsp;•&nbsp;</li>
-            <li><a href="javascript:;">Help</a>&nbsp;•&nbsp;</li>
-            <li><a href="javascript:;">Privacy</a>&nbsp;•&nbsp;</li>
-            <li><a href="javascript:;">Terms</a>&nbsp;•&nbsp;</li>
-            <li><a href="javascript:;">Get the RSS</a></li>
+            <li><a onClick={() => false}>About</a>&nbsp;•&nbsp;</li>
+            <li><a onClick={() => false}>Contact</a>&nbsp;•&nbsp;</li>
+            <li><a onClick={() => false}>Help</a>&nbsp;•&nbsp;</li>
+            <li><a onClick={() => false}>Privacy</a>&nbsp;•&nbsp;</li>
+            <li><a onClick={() => false}>Terms</a>&nbsp;•&nbsp;</li>
+            <li><a onClick={() => false}>Get the RSS</a></li>
           </ul>
           <p className="copyright">Topcoder © 2016.</p>
         </div>

@@ -52,6 +52,9 @@ ActiveFilterItem.defaultProps = {
 ActiveFilterItem.propTypes = {
   name: PT.string.isRequired,
   onRemove: PT.func,
+  onDrag: PT.func,
+  onDragStart: PT.func,
+  onNameChange: PT.func,
 };
 
 /**

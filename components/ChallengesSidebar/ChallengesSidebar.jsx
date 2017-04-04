@@ -1,6 +1,12 @@
+/* global
+  JSON
+*/
+
 import React from 'react'
 import SidebarRow from './SidebarRow/SidebarRow'
-require('./ChallengesSidebar.scss')
+import './ChallengesSidebar.scss'
+
+const { object } = React.PropTypes
 
 const ChallengesSidebar = ({ SidebarMock }) => {
   const all = () => {
@@ -21,18 +27,18 @@ const ChallengesSidebar = ({ SidebarMock }) => {
     )
   }
 
-  const others = SidebarMock.others.map((other, index) => {
+  const others = SidebarMock.others.map((other) => {
     return (
-      <SidebarRow key={index}>
+      <SidebarRow key={JSON.stringify(other)}>
         <p className={'l-row'}>{other.name}</p>
         <p className={'r-row'}>{other.value}</p>
       </SidebarRow>
     )
   })
 
-  const myFilters = SidebarMock.myFilters.map((other, index) => {
+  const myFilters = SidebarMock.myFilters.map((other) => {
     return (
-      <SidebarRow key={index}>
+      <SidebarRow key={JSON.stringify(other)}>
         <p className={'l-row'}>{other.name}</p>
         <p className={'r-row'}>{other.value}</p>
       </SidebarRow>
@@ -77,6 +83,14 @@ const ChallengesSidebar = ({ SidebarMock }) => {
       </div>
     </div>
   )
+}
+
+ChallengesSidebar.defaultProps = {
+  SidebarMock: undefined,
+}
+
+ChallengesSidebar.propTypes = {
+  SidebarMock: object,
 }
 
 export default ChallengesSidebar
