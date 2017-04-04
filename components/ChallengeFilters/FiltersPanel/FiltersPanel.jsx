@@ -17,13 +17,14 @@
  * object.
  */
 
-import 'react-dates/lib/css/_datepicker.css';
 import _ from 'lodash';
 import React, { PropTypes as PT } from 'react';
 import Select from 'react-select';
+import moment from 'moment';
+import 'react-dates/lib/css/_datepicker.css';
+
 import FilterPanelFilter from './FilterPanelFilter';
 import UiSimpleRemove from '../../Icons/UiSimpleRemove';
-import moment from 'moment';
 
 import './FiltersPanel.scss';
 import DateRangePicker from '../DateRangePicker/DateRangePicker';
@@ -102,9 +103,9 @@ class FiltersPanel extends React.Component {
     if (this.props.hidden) className += ' hidden';
     return (
       <div className={className} ref={this.props.ref}>
-        <div className='header'>
-          <span className='title'>Filters</span>
-          <span className='close-icon' onClick={() => this.props.onClose()}>
+        <div className="header">
+          <span className="title">Filters</span>
+          <span className="close-icon" onClick={() => this.props.onClose()}>
             <UiSimpleRemove className="cross" />
           </span>
         </div>
@@ -169,6 +170,7 @@ FiltersPanel.defaultProps = {
   onFilter: _.noop,
   onSaveFilter: _.noop,
   ref: _.noop,
+  onClose: _.noop,
 };
 
 const SelectOptions = PT.arrayOf(
@@ -187,6 +189,7 @@ FiltersPanel.propTypes = {
   ref: PT.func,
   validKeywords: SelectOptions.isRequired,
   validSubtracks: SelectOptions.isRequired,
+  onClose: PT.func,
 };
 
 export default FiltersPanel;

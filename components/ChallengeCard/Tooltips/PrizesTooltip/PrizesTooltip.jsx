@@ -1,3 +1,7 @@
+/* global
+  fetch
+*/
+
 /**
  * Prizes Tooltip Component.
  *
@@ -7,13 +11,13 @@
  * 'challenge' prop.
  */
 
-import React, { PropTypes as PT } from 'react'
-import _ from 'lodash'
+import React, { PropTypes as PT } from 'react';
+import _ from 'lodash';
 import Tooltip from '../Tooltip';
-import LoaderIcon from '../../../Loader/Loader';
+import LoaderIcon from '../../../Loader/Loader.cjsx';
 import './PrizesTooltip.scss';
 
-const ID_LENGTH = 6
+const ID_LENGTH = 6;
 
 /**
  * A single bonus componenent.
@@ -61,15 +65,15 @@ Prize.propTypes = {
 function Tip(props) {
   let prizes;
   const isLoaded = props.isLoaded;
-  if(isLoaded){
+  if (isLoaded) {
     if (props.challenge.prize) {
       prizes = props.challenge.prize.map((prize, index) => {
         const place = 1 + index;
-        return <Prize key={place} place={place} prize={prize} isLoaded={isLoaded}/>;
+        return <Prize key={place} place={place} prize={prize} isLoaded={isLoaded} />;
       });
     }
   } else {
-    return <span className="loading"><LoaderIcon/></span>
+    return <span className="loading"><LoaderIcon /></span>;
   }
   let bonuses;
   if (props.challenge && props.challenge.reliabilityBonus) {
@@ -91,11 +95,16 @@ function Tip(props) {
   );
 }
 
+Tip.defaultProps = {
+  isLoaded: false,
+};
+
 Tip.propTypes = {
   challenge: PT.shape({
     prize: PT.array,
     reliabilityBonus: PT.number,
   }).isRequired,
+  isLoaded: PT.bool,
 };
 
 /**
@@ -105,43 +114,41 @@ Tip.propTypes = {
 class PrizesTooltip extends React.Component {
   constructor(props) {
     super(props);
-    const that = this;
     this.state = {
       chDetails: {},
-      isLoaded: false
-    }
-    this.onTooltipHover = this.onTooltipHover.bind(this)
+      isLoaded: false,
+    };
+    this.onTooltipHover = this.onTooltipHover.bind(this);
   }
   onTooltipHover() {
     const that = this;
-    console.log('hovered')
-    let chClone = _.clone(this.props.challenge);
-    this.fetchChallengeDetails(chClone.challengeId).then(details => {
-      let chId = chClone.challengeId + ''
-      if(chId.length < ID_LENGTH) {
-          details.postingDate = chClone.startDate
-          details.registrationEndDate = chClone.endDate
-          details.submissionEndDate = chClone.endDate
-          details.appealsEndDate = chClone.endDate
-        }
+    const chClone = _.clone(this.props.challenge);
+    this.fetchChallengeDetails(chClone.challengeId).then((passedIndetails) => {
+      const details = passedIndetails;
+      const chId = `${chClone.challengeId}`;
+      if (chId.length < ID_LENGTH) {
+        details.postingDate = chClone.startDate;
+        details.registrationEndDate = chClone.endDate;
+        details.submissionEndDate = chClone.endDate;
+        details.appealsEndDate = chClone.endDate;
+      }
       that.setState({
         chDetails: details,
-        isLoaded: true
-      })
+        isLoaded: true,
+      });
     });
   }
   // It fetches detailed challenge data and attaches them to the 'details'
   // field of each challenge object.
-  fetchChallengeDetails = (id) => {
-    const challengeId = '' + id // change to string
+  fetchChallengeDetails(id) {
+    const challengeId = `${id}`; // change to string
     const baseUrl = this.props.config.API_URL_V2;
     const challengesApi = `${baseUrl}/challenges/`;
     const mmApi = `${baseUrl}/data/marathon/challenges/`; // MM - marathon match
-    if(challengeId.length < ID_LENGTH) {
+    if (challengeId.length < ID_LENGTH) {
       return fetch(`${mmApi}${id}`).then(res => res.json());
-    } else {
-      return fetch(`${challengesApi}${id}`).then(res => res.json());
     }
+    return fetch(`${challengesApi}${id}`).then(res => res.json());
   }
   render() {
     const tip = <Tip challenge={this.state.chDetails} isLoaded={this.state.isLoaded} />;
@@ -157,6 +164,10 @@ PrizesTooltip.defaultProps = {
   challenge: {
     prize: [],
   },
+  children: [],
+  config: {
+    API_URL_V2: '',
+  },
 };
 
 PrizesTooltip.propTypes = {
@@ -165,6 +176,9 @@ PrizesTooltip.propTypes = {
     reliabilityBonus: PT.number,
   }),
   children: PT.node.isRequired,
+  config: PT.shape({
+    API_URL_V2: PT.string,
+  }),
 };
 
 export default PrizesTooltip;

@@ -55,5 +55,8 @@ $search-input-width: '100% - 56px';
     cursor: pointer;
     padding: $challenge-space-10 + 1 $challenge-space-20;
     border-radius: 0 $challenge-radius-4 $challenge-radius-4 0;
+    &.active, &:hover {
+      background: $tc-dark-blue;
+    }
   }
 }

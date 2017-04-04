@@ -1,3 +1,7 @@
+/* global
+  fetch
+*/
+
 import moment from 'moment';
 import _ from 'lodash';
 /**
@@ -15,23 +19,21 @@ import _ from 'lodash';
 
 import React, { PropTypes as PT } from 'react';
 import Tooltip from '../Tooltip';
-import LoaderIcon from '../../../Loader/Loader';
+import LoaderIcon from '../../../Loader/Loader.cjsx';
 import './ProgressBarTooltip.scss';
 
-const ID_LENGTH = 6
+const ID_LENGTH = 6;
 
-const getDate = (date) => {
-  return moment(date).format('MMM DD')
-}
+const getDate = date => moment(date).format('MMM DD');
 const getTime = (date) => {
-  const duration = moment(date)
-  const hour = duration.hours()
-  let hString = hour < 10 ? '0'+hour : hour;
-  const min = duration.minutes()
-  let mString = min < 10 ? '0'+min : min;
-  const res = `${hString}:${mString}`
-  return res[1] === '-' ? 'Late' : `${res}`
-}
+  const duration = moment(date);
+  const hour = duration.hours();
+  const hString = hour < 10 ? `0${hour}` : hour;
+  const min = duration.minutes();
+  const mString = min < 10 ? `0${min}` : min;
+  const res = `${hString}:${mString}`;
+  return res[1] === '-' ? 'Late' : `${res}`;
+};
 
 /**
  * Renders a separate challenge phase element.
@@ -49,22 +51,26 @@ const getTime = (date) => {
  * @param {String} props.width The width of the phase element in the UI.
  */
 function Phase(props) {
-  var progress = props.progress
-  var limitProgress = parseFloat(_.replace(progress, '%', ''))
-  var limitWidth = limitProgress <= 100 ? limitProgress : 100;
+  const progress = props.progress;
+  const limitProgress = parseFloat(_.replace(progress, '%', ''));
+  const limitWidth = limitProgress <= 100 ? limitProgress : 100;
   return (
     <div className="phase">
       <div>{props.phase}</div>
       <div className={`bar ${props.last ? 'last' : ''} ${props.started ? 'started' : ''}`}>
         <div className="point" />
-        <div className="inner-bar" style={{ width: limitWidth+'%'}} />
+        <div className="inner-bar" style={{ width: `${limitWidth}%` }} />
       </div>
       <div className="date">
-        {props.isLoaded ? getDate(props.date)+', '+getTime(props.date) : <span className="loading"><LoaderIcon/></span>}
+        {props.isLoaded ? `${getDate(props.date)}, ${getTime(props.date)}` : <span className="loading"><LoaderIcon /></span>}
       </div>
     </div>
   );
 }
+
+Phase.defaultProps = {
+  isLoaded: false,
+};
 
 Phase.propTypes = {
   date: PT.shape({}).isRequired,
@@ -72,6 +78,7 @@ Phase.propTypes = {
   phase: PT.string.isRequired,
   progress: PT.string.isRequired,
   started: PT.bool.isRequired,
+  isLoaded: PT.bool,
 };
 
 /**
@@ -107,12 +114,8 @@ function Tip(props) {
   });
 
   steps = steps.sort((a, b) => a.date.getTime() - b.date.getTime());
-  const duration = steps[steps.length - 1].date.getTime() - steps[0].date.getTime();
   const currentPhaseEnd = new Date(c.currentPhaseEndDate);
   steps = steps.map((step, index) => {
-    let d;
-    if (index === steps.length - 1) d = 10;
-    else d = 90 * ((steps[1 + index].date.getTime() - step.date.getTime()) / duration);
     let progress = 0;
     if (index < steps.length - 1) {
       if (steps[1 + index].date.getTime() < currentPhaseEnd.getTime()) progress = 100;
@@ -148,8 +151,13 @@ function Tip(props) {
   );
 }
 
+Tip.defaultProps = {
+  isLoaded: false,
+};
+
 Tip.propTypes = {
   challenge: PT.shape({}).isRequired,
+  isLoaded: PT.bool,
 };
 
 /**
@@ -158,45 +166,43 @@ Tip.propTypes = {
 class ProgressBarTooltip extends React.Component {
   constructor(props) {
     super(props);
-    const that = this;
     this.state = {
       chDetails: {},
-      isLoaded: false
-    }
-    this.onTooltipHover = this.onTooltipHover.bind(this)
+      isLoaded: false,
+    };
+    this.onTooltipHover = this.onTooltipHover.bind(this);
   }
   onTooltipHover() {
     const that = this;
-    let chClone = _.clone(this.props.challenge);
-    this.fetchChallengeDetails(chClone.challengeId).then(details => {
-      let chId = chClone.challengeId + ''
-      if(chId.length < ID_LENGTH) {
-          details.postingDate = chClone.startDate
-          details.registrationEndDate = chClone.endDate
-          details.submissionEndDate = chClone.endDate
-          details.appealsEndDate = chClone.endDate
-        }
+    const chClone = _.clone(this.props.challenge);
+    this.fetchChallengeDetails(chClone.challengeId).then((passedInDetails) => {
+      const details = passedInDetails;
+      const chId = `${chClone.challengeId}`;
+      if (chId.length < ID_LENGTH) {
+        details.postingDate = chClone.startDate;
+        details.registrationEndDate = chClone.endDate;
+        details.submissionEndDate = chClone.endDate;
+        details.appealsEndDate = chClone.endDate;
+      }
       that.setState({
         chDetails: details,
-        isLoaded: true
-      })
+        isLoaded: true,
+      });
     });
   }
   // It fetches detailed challenge data and attaches them to the 'details'
   // field of each challenge object.
-  fetchChallengeDetails = (id) => {
+  fetchChallengeDetails(id) {
     const challengesApi = `${this.props.config.API_URL_V2}/challenges/`;
     const mmApi = `${this.props.config.API_URL_V2}/data/marathon/challenges/`; // MM - marathon match
-    const challengeId = '' + id // change to string
-    if(challengeId.length < ID_LENGTH) {
+    const challengeId = `${id}`; // change to string
+    if (challengeId.length < ID_LENGTH) {
       return fetch(`${mmApi}${id}`).then(res => res.json());
-    } else {
-      return fetch(`${challengesApi}${id}`).then(res => res.json());
     }
+    return fetch(`${challengesApi}${id}`).then(res => res.json());
   }
   render() {
-
-    const tip = <Tip challenge={this.state.chDetails} isLoaded={this.state.isLoaded}/>;
+    const tip = <Tip challenge={this.state.chDetails} isLoaded={this.state.isLoaded} />;
     return (
       <Tooltip className="progress-bar-tooltip" content={tip} onTooltipHover={this.onTooltipHover}>
         {this.props.children}
@@ -206,6 +212,7 @@ class ProgressBarTooltip extends React.Component {
 }
 ProgressBarTooltip.defaultProps = {
   challenge: {},
+  config: {},
 };
 
 ProgressBarTooltip.propTypes = {

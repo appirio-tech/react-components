@@ -1,3 +1,7 @@
+/* global
+  document, fetch, window
+*/
+
 /**
  * Sidebar Filters Component (for an additional filtering of the challenge listing).
  *
@@ -20,15 +24,6 @@ import EditMyFilters, { SAVE_FILTERS_API } from './EditMyFilters';
 import SideBarFilter, { MODE } from './SideBarFilter';
 import { FilterItem } from './FilterItems';
 import './SideBarFilters.scss';
-
-const V2_API = 'https://api.topcoder-dev.com/v2';
-const CHALLENGES_API = `${V2_API}/challenges/`;
-const MY_CHALLENGES_API = `${V2_API}/user/challenges?challengeType=Copilot+Posting,
-  Conceptualization,Specification,Architecture,Design,Development,
-  RIA+Build+Competition,UI+Prototype+Competition,Assembly+Competition,
-  Test+Suites,Test+Scenarios,Content+Creation,Marathon+Match,Bug+Hunt,
-  First2Finish,Code&type=active`
-const RSS_LINK = 'http://feeds.topcoder.com/challenges/feed?list=active&contestType=all';
 
 /*
  * Default set of filters displayed in the component.
@@ -77,14 +72,12 @@ class SideBarFilters extends React.Component {
 
   constructor(props) {
     super(props);
-    let that = this;
 
     // TODO: Get the auth token from cookie for now.
     // Ideally the token should be passed in from a parent container component
     // http://stackoverflow.com/questions/5639346/
     const token = document.cookie.match(`(^|;)\\s*${TOKEN_KEY}\\s*=\\s*([^;]+)`);
     const authToken = token ? token.pop() : '';
-
     this.state = {
       authToken,
       currentFilter: DEFAULT_FILTERS[3],
@@ -155,6 +148,16 @@ class SideBarFilters extends React.Component {
       filterClone.count = nextProps.challenges.filter(filter.getFilterFunction()).length;
       filters.push(filterClone);
     });
+    for (let i = 0; i < filters.length; i += 1) {
+      if (filters[i].mode === 'All Challenges') {
+        filters[i].count = 0;
+        for (let j = 0; j < filters.length; j += 1) {
+          if (filters[j].mode === 'Open for registration' || filters[j].mode === 'Ongoing challenges') {
+            filters[i].count += filters[j].count;
+          }
+        }
+      }
+    }
     this.setState({
       currentFilter,
       filters,
@@ -231,18 +234,18 @@ class SideBarFilters extends React.Component {
               this.updateFilters(myFilters);
             }}
           />
-          </div>
-          <div className="sidebar-footer">
-            <ul>
-              <li><a href="javascript:;">About</a>&nbsp;•&nbsp;</li>
-              <li><a href="javascript:;">Contact</a>&nbsp;•&nbsp;</li>
-              <li><a href="javascript:;">Help</a>&nbsp;•&nbsp;</li>
-              <li><a href="javascript:;">Privacy</a>&nbsp;•&nbsp;</li>
-              <li><a href="javascript:;">Terms</a></li>
-              <li><a href="javascript:;">Get the RSS</a></li>
-            </ul>
-            <p className="copyright">Topcoder © 2017.</p>
-          </div>
+        </div>
+        <div className="sidebar-footer">
+          <ul>
+            <li><a onClick={() => false}>About</a>&nbsp;•&nbsp;</li>
+            <li><a onClick={() => false}>Contact</a>&nbsp;•&nbsp;</li>
+            <li><a onClick={() => false}>Help</a>&nbsp;•&nbsp;</li>
+            <li><a onClick={() => false}>Privacy</a>&nbsp;•&nbsp;</li>
+            <li><a onClick={() => false}>Terms</a></li>
+            <li><a onClick={() => false}>Get the RSS</a></li>
+          </ul>
+          <p className="copyright">Topcoder © 2017.</p>
+        </div>
       </div>
     );
   }
@@ -320,7 +323,8 @@ class SideBarFilters extends React.Component {
       <FilterItem
         count={filter.count}
         highlighted={filter === this.state.currentFilter}
-        key={index}
+        myFilter={index >= FILTER_ID.FIRST_USER_DEFINED}
+        key={`${filter.name}-filter`}
         name={filter.name}
         onClick={() => this.selectFilter(index)}
       />
@@ -331,7 +335,7 @@ class SideBarFilters extends React.Component {
         <div className="FilterBox">
           {filters[FILTER_ID.ALL_CHALLENGES]}
 
-          {this.props.isAuth ?<span><hr /> {filters[FILTER_ID.MY_CHALLENGES]}</span> : ''}
+          {this.props.isAuth ? <span><hr /> {filters[FILTER_ID.MY_CHALLENGES]}</span> : ''}
           <hr />
           {filters[FILTER_ID.OPEN_FOR_REGISTRATION]}
           {filters[FILTER_ID.ONGOING_CHALLENGES]}
@@ -343,11 +347,11 @@ class SideBarFilters extends React.Component {
                 <hr />
                 <div className="my-filters">
                   <h1>My filters</h1>
-                  <a 
+                  <a
                     className="edit-link"
-                    href="javascript:;"
                     onClick={() => {
                       this.setState({ mode: MODES.EDIT_MY_FILTERS });
+                      return false;
                     }}
                   >
                     edit
@@ -359,12 +363,12 @@ class SideBarFilters extends React.Component {
         </div>
         <div className="sidebar-footer">
           <ul>
-            <li><a href="javascript:;">About</a>&nbsp;•&nbsp;</li>
-            <li><a href="javascript:;">Contact</a>&nbsp;•&nbsp;</li>
-            <li><a href="javascript:;">Help</a>&nbsp;•&nbsp;</li>
-            <li><a href="javascript:;">Privacy</a>&nbsp;•&nbsp;</li>
-            <li><a href="javascript:;">Terms</a>&nbsp;•&nbsp;</li>
-            <li><a href="javascript:;">Get the RSS</a></li>
+            <li><a onClick={() => false}>About</a>&nbsp;•&nbsp;</li>
+            <li><a onClick={() => false}>Contact</a>&nbsp;•&nbsp;</li>
+            <li><a onClick={() => false}>Help</a>&nbsp;•&nbsp;</li>
+            <li><a onClick={() => false}>Privacy</a>&nbsp;•&nbsp;</li>
+            <li><a onClick={() => false}>Terms</a>&nbsp;•&nbsp;</li>
+            <li><a onClick={() => false}>Get the RSS</a></li>
           </ul>
           <p className="copyright">Topcoder © 2016.</p>
         </div>
@@ -377,6 +381,10 @@ class SideBarFilters extends React.Component {
    */
   selectFilter(index) {
     const currentFilter = this.state.filters[index];
+    if (currentFilter.mode === 'Open for review') {
+      // Jump to Development Review Opportunities page
+      window.location.href = `${this.props.config.MAIN_URL}/review/development-review-opportunities/`;
+    }
     this.setState({ currentFilter }, () => this.props.onFilter(currentFilter));
   }
 
@@ -397,6 +405,9 @@ SideBarFilters.defaultProps = {
   isAuth: false,
   onFilter: _.noop,
   ref: _.noop,
+  config: {
+    MAIN_URL: '',
+  },
 };
 
 SideBarFilters.propTypes = {
@@ -407,6 +418,9 @@ SideBarFilters.propTypes = {
   onFilter: PT.func,
   isAuth: PT.bool,
   ref: PT.func,
+  config: PT.shape({
+    MAIN_URL: PT.string,
+  }),
 };
 
 export default SideBarFilters;

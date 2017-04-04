@@ -20,9 +20,9 @@ const SubTrackDetails = ({name, code, description, tracks}) => {
   return (
     <div className="SubTrackDetails">
     <div className="heading">
-        <div className={developClass}></div>
-        <div className={designClass}></div>
-        <div className={dataScienceClass}></div>
+        <div className={developClass} />
+        <div className={designClass} />
+        <div className={dataScienceClass} />
         <div className="title">{name} ({code})</div>
         </div>
     <p className={description ? '' : 'hidden' }>{description}</p>
