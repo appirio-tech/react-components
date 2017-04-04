@@ -366,13 +366,12 @@ class SideBarFilters extends React.Component {
         </div>
         <div className="sidebar-footer">
           <ul>
-            <li><a href="javascript:;">About</a>&nbsp;•&nbsp;</li>
-            <li><a href="javascript:;">Contact</a>&nbsp;•&nbsp;</li>
             <li><a href="javascript:;">Help</a>&nbsp;•&nbsp;</li>
             <li><a href="javascript:;">Privacy</a>&nbsp;•&nbsp;</li>
             <li><a href="javascript:;">Terms</a>&nbsp;•&nbsp;</li>
+            <li><a href="javascript:;">More</a></li>   
           </ul>
-          <p className="copyright">Topcoder © 2016.</p>
+          <p className="copyright">Topcoder © 2017</p>            
         </div>
       </div>
     );
