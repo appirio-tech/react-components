@@ -389,6 +389,19 @@ class SideBarFilters extends React.Component {
   }
 
   /**
+   * Selects the filter with the specified name.
+   */
+  selectFilterWithName(filterName) {
+    // find a filter with matching name
+    const currentFilter = _.find(this.state.filters, filter => filter.name === filterName);
+    if (currentFilter.mode === "Open for review") {
+      // Jump to Development Review Opportunities page
+      window.location.href = `${this.props.config.MAIN_URL}/review/development-review-opportunities/`;
+    }
+    this.setState({ currentFilter }, () => this.props.onFilter(currentFilter));
+  }
+
+  /**
    * Renders the component.
    */
   render() {

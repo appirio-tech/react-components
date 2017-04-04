@@ -379,6 +379,10 @@ class ChallengeFiltersExample extends React.Component {
           additionalFilter={
             challenge => filterFunc(challenge) && sidebarFilterFunc(challenge)
           }
+          // Handle onExpandFilterResult to update the sidebar
+          onExpandFilterResult={
+            filterName => this.sidebar.selectFilterWithName(filterName)
+          }
         />
       );
     }
