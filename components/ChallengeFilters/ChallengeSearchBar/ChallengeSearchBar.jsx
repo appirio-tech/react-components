@@ -67,11 +67,13 @@ class ChallengeSearchBar extends React.Component {
 ChallengeSearchBar.defaultProps = {
   onSearch: () => true,
   placeholder: '',
+  query: '',
 };
 
 ChallengeSearchBar.propTypes = {
   onSearch: func,
   placeholder: string,
+  query: string,
 };
 
 export default ChallengeSearchBar;

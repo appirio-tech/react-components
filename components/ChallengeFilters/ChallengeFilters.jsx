@@ -252,6 +252,7 @@ const TagShape = PT.shape({
 ChallengeFilters.defaultProps = {
   filter: new ChallengeFilter(),
   isCardTypeSet: '',
+  searchQuery: '',
   onFilter: _.noop,
   onSaveFilter: _.noop,
   onSearch: _.noop,
@@ -262,6 +263,7 @@ ChallengeFilters.defaultProps = {
 ChallengeFilters.propTypes = {
   filter: PT.instanceOf(ChallengeFilter),
   isCardTypeSet: PT.string,
+  searchQuery: PT.string,
   onFilter: PT.func,
   onSearch: PT.func,
   onSaveFilter: PT.func,
