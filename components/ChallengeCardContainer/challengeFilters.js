@@ -7,7 +7,8 @@ export default [
   {
     name: 'Open for registration',
     check(item) {
-      return item.registrationOpen.startsWith('Yes') && item.status === 'Active';
+      return item.registrationOpen.startsWith('Yes') && item.currentPhaseName
+        && item.currentPhaseName.startsWith('Registration');
     },
     sortingOptions: [
       'Most recent',
@@ -21,7 +22,9 @@ export default [
     info: {
       phaseName: 'registration',
     },
-    getApiUrl: pageIndex => `http://api.topcoder.com/v2/challenges/open?pageIndex=${pageIndex}&pageSize=50`,
+    getApiUrl: (pageIndex, pageSize = 50) => (
+      `http://api.topcoder.com/v2/challenges/open?pageIndex=${pageIndex}&pageSize=${pageSize}`
+    ),
   },
   {
     name: 'My challenges',
@@ -36,7 +39,9 @@ export default [
       'Prize high to low',
       'Title A-Z',
     ],
-    getApiUrl: pageIndex => `http://api.topcoder.com/v2/user/challenges?&pageIndex=${pageIndex}&pageSize=50`,
+    getApiUrl: (pageIndex, pageSize = 50) => (
+      `http://api.topcoder.com/v2/user/challenges?&pageIndex=${pageIndex}&pageSize=${pageSize}`
+    ),
   },
   {
     name: 'Ongoing challenges',
@@ -49,7 +54,11 @@ export default [
       'Title A-Z',
       'Prize high to low',
     ],
-    getApiUrl: pageIndex => `http://api.topcoder.com/v2/challenges/active?pageIndex=${pageIndex}&pageSize=50`,
+    // this api endpoint probably doesn't match the filter criteria exactly
+    // kept for reference
+    // getApiUrl: (pageIndex, pageSize = 50) => (
+    //   `http://api.topcoder.com/v2/challenges/active?pageIndex=${pageIndex}&pageSize=${pageSize}`
+    // ),
   },
   {
     name: 'Past challenges',
@@ -61,7 +70,9 @@ export default [
       'Title A-Z',
       'Prize high to low',
     ],
-    getApiUrl: pageIndex => `http://api.topcoder.com/v2/challenges/past?pageIndex=${pageIndex}&pageSize=50`,
+    getApiUrl: (pageIndex, pageSize = 50) => (
+      `http://api.topcoder.com/v2/challenges/past?pageIndex=${pageIndex}&pageSize=${pageSize}`
+    ),
   },
   {
     name: 'Open for review',
@@ -75,12 +86,15 @@ export default [
       'Prize high to low',
       'Title A-Z',
     ],
-    getApiUrl: (pageIndex) => {
-      const yesterday = new Date();
-      yesterday.setDate(yesterday.getDate() - 1);
-      const yesterdayFormatted = yesterday.toJSON().slice(0, 10);
-
-      return `http://api.topcoder.com/v2/challenges/open?pageIndex=${pageIndex}&pageSize=50&submissionEndTo=${yesterdayFormatted}`;
-    },
+    // No api endpoint available currently
+    // the commented out api endpoint is most likely wrong
+    // kept for reference
+    // getApiUrl: (pageIndex, pageSize = 50) => {
+    //   const yesterday = new Date();
+    //   yesterday.setDate(yesterday.getDate() - 1);
+    //   const yesterdayFormatted = yesterday.toJSON().slice(0, 10);
+    //
+    //   return `http://api.topcoder.com/v2/challenges/open?pageIndex=${pageIndex}&pageSize=${pageSize}&submissionEndTo=${yesterdayFormatted}`;
+    // },
   },
 ];

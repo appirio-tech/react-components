@@ -1,4 +1,7 @@
 import React, { Component, PropTypes } from 'react';
+import fetch from 'isomorphic-fetch';
+import moment from 'moment';
+import _ from 'lodash';
 import LeaderboardAvatar from '../LeaderboardAvatar/LeaderboardAvatar';
 import ChallengeProgressBar from '../ChallengeProgressBar/ChallengeProgressBar';
 import ProgressBarTooltip from '../ChallengeCard/Tooltips/ProgressBarTooltip';
@@ -7,80 +10,51 @@ import SubmissionsIcon from '../Icons/SubmissionsIcon';
 import Tooltip from '../ChallengeCard/Tooltips/Tooltip';
 import UserAvatarTooltip from '../ChallengeCard/Tooltips/UserAvatarTooltip';
 import ForumIcon from '../Icons/ForumIcon';
-import moment from 'moment';
-import _ from 'lodash';
 import './ChallengeStatus.scss';
 
 // Constants
-const MM_LONGCONTEST = 'https://community.topcoder.com/longcontest/?module';
-const MM_REG = `${MM_LONGCONTEST}=ViewRegistrants&rd=`;
-const MM_SUB = `${MM_LONGCONTEST}=ViewStandings&rd=`;
 const ID_LENGTH = 6;
+const MAX_VISIBLE_WINNERS = 3;
+const MOCK_PHOTO = 'https://acrobatusers.com/assets/images/template/author_generic.jpg';
+const STALLED_MSG = 'Stalled';
+const STALLED_TIME_LEFT_MSG = 'Challenge is currently on hold';
+const FF_TIME_LEFT_MSG = 'Winner is working on fixes';
 
-// Mock winners array
-let MOCK_WINNERS = [
-  {
-    handle: 'tc1',
-    position: 1
-  },
-  {
-    handle: 'tc2',
-    position: 2,
-    photoURL: 'https://acrobatusers.com/assets/images/template/author_generic.jpg'
-  },
-  {
-    handle: 'tc3',
-    position: 3
-  },
-  {
-    handle: 'tc4',
-    position: 4
-  }
-]
-const MAX_VISIBLE_WINNERS = 3
-const FORUM_URL = 'https://apps.topcoder.com/forums/?module=Category&categoryID='
-const CHALLENGE_URL = 'https://www.topcoder.com/challenge-details/'
-const DS_CHALLENGE_URL = 'https://community.topcoder.com/longcontest/stats/?module=ViewOverview&rd='
-const DS_CHALLENGE_DETAILS_API = ''
-const MOCK_PHOTO = 'https://acrobatusers.com/assets/images/template/author_generic.jpg'
-const STALLED_MSG = 'Stalled'
-const STALLED_TIME_LEFT_MSG = 'Challenge is currently on hold'
-const FF_TIME_LEFT_MSG = 'Winner is working on fixes'
 
 const getTimeLeft = (date, currentPhase) => {
   if (!currentPhase || currentPhase === 'Stalled') {
     return {
       late: false,
-      text: STALLED_TIME_LEFT_MSG
-    }
+      text: STALLED_TIME_LEFT_MSG,
+    };
   } else if (currentPhase === 'Final Fix') {
     return {
       late: false,
-      text: FF_TIME_LEFT_MSG
-    }
+      text: FF_TIME_LEFT_MSG,
+    };
   }
-  const duration = moment.duration(moment(date).diff(moment()))
-  const h = duration.hours()
-  const d = duration.days()
-  const m = duration.minutes()
-  const late = (d < 0 || h < 0 || m < 0)
-  const suffix = h != 0 ? 'h' : 'min'
-  let text = ''
-  if (d != 0) text += `${Math.abs(d)}d `
-  if (h != 0) text += `${Math.abs(h)}`
-  if (h != 0 && m != 0) text += ':'
-  if (m != 0) text += `${Math.abs(m)}`
-  text += suffix
+  const duration = moment.duration(moment(date).diff(moment()));
+  const h = duration.hours();
+  const d = duration.days();
+  const m = duration.minutes();
+  const late = (d < 0 || h < 0 || m < 0);
+  const suffix = h != 0 ? 'h' : 'min';
+  let text = '';
+  if (d != 0) text += `${Math.abs(d)}d `;
+  if (h != 0) text += `${Math.abs(h)}`;
+  if (h != 0 && m != 0) text += ':';
+  if (m != 0) text += `${Math.abs(m)}`;
+  text += suffix;
   if (late) {
-    text = `Late by ${text}`
+    text = `Late by ${text}`;
   } else {
-    text = `${text} to go`
+    text = `${text} to go`;
   }
   return {
     late,
-    text
-  }
-}
+    text,
+  };
+};
 
 function numRegistrantsTipText(number) {
   switch (number) {
@@ -97,44 +71,54 @@ function numSubmissionsTipText(number) {
     default: return `${number} total submissions`;
   }
 }
-const registrantsLink = (challenge, type) => {
-  if(challenge.track === 'DATA_SCIENCE') {
-    const id = challenge.challengeId + '';
-    if(id.length < ID_LENGTH) {
-      return `${type}${challenge.challengeId}`;
-    } else {
-      return `${CHALLENGE_URL}${challenge.challengeId}/?type=develop#viewRegistrant`;
-    }
-  } else {
-    return `${CHALLENGE_URL}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}#viewRegistrant`;
-  }
-}
 
-const getStatusPhase = ( challenge ) => {
+const getStatusPhase = (challenge) => {
   switch (challenge.currentPhaseName) {
-    case 'Registration':
+    case 'Registration': {
+      if (challenge.checkpointSubmissionEndDate && !getTimeLeft(challenge.checkpointSubmissionEndDate, 'Checkpoint').late) {
+        return {
+          currentPhaseName: 'Checkpoint',
+          currentPhaseEndDate: challenge.checkpointSubmissionEndDate,
+        };
+      }
+
       return {
         currentPhaseName: 'Submission',
-        currentPhaseEndDate: challenge.submissionEndDate
+        currentPhaseEndDate: challenge.submissionEndDate,
+      };
+    }
+    case 'Submission': {
+      if (challenge.checkpointSubmissionEndDate && !getTimeLeft(challenge.checkpointSubmissionEndDate, 'Checkpoint').late) {
+        return {
+          currentPhaseName: 'Checkpoint',
+          currentPhaseEndDate: challenge.checkpointSubmissionEndDate,
+        };
       }
+
+      return {
+        currentPhaseName: 'Submission',
+        currentPhaseEndDate: challenge.submissionEndDate,
+      };
+    }
     default:
       return {
         currentPhaseName: challenge.currentPhaseName,
-        currentPhaseEndDate: challenge.currentPhaseEndDate
-      }
+        currentPhaseEndDate: challenge.currentPhaseEndDate,
+      };
   }
-}
+};
 
 const getTimeToGo = (start, end) => {
-  const percentageComplete = (moment() - moment(start)) / (moment(end) - moment(start)) * 100
-  return (Math.round(percentageComplete * 100) / 100)
-}
-
+  const percentageComplete = (
+    (moment() - moment(start)) / (moment(end) - moment(start))
+  ) * 100;
+  return (Math.round(percentageComplete * 100) / 100);
+};
 
 
 /**
  * Returns an user profile object as expected by the UserAvatarTooltip
- * @param {String} handle 
+ * @param {String} handle
  */
 function getSampleProfile(user) {
   const { handle } = user;
@@ -144,73 +128,113 @@ function getSampleProfile(user) {
     memberSince: '',
     photoLink: `i/m/${handle}.jpeg`,
     ratingSummary: [],
-  }
+  };
 }
 
 
 class ChallengeStatus extends Component {
   constructor(props) {
     super(props);
-    const {challenge, config, sampleWinnerProfile} = props;
-    const lastItem = {
-      handle: `+${MOCK_WINNERS.length - MAX_VISIBLE_WINNERS}`
-    };
-    MOCK_WINNERS = MOCK_WINNERS.slice(0, MAX_VISIBLE_WINNERS);
-    MOCK_WINNERS.push(lastItem);
+    const CHALLENGE_URL = `${props.config.MAIN_URL}/challenge-details/`;
+    const DS_CHALLENGE_URL = `https:${props.config.COMMUNITY_URL}/longcontest/stats/?module=ViewOverview&rd=`;
+    const FORUM_URL = `https:${props.config.FORUMS_APP_URL}/?module=Category&categoryID=`;
     this.state = {
       winners: '',
+      CHALLENGE_URL,
+      DS_CHALLENGE_URL,
+      FORUM_URL,
     };
     this.handleHover = this.handleHover.bind(this);
     this.getDevelopmentWinners = this.getDevelopmentWinners.bind(this);
     this.getDesignWinners = this.getDesignWinners.bind(this);
+    this.registrantsLink = this.registrantsLink.bind(this);
   }
 
   renderLeaderboard() {
     const { challenge } = this.props;
+    const { DS_CHALLENGE_URL, CHALLENGE_URL } = this.state;
     const { challengeId, challengeCommunity } = challenge;
-    const challengeURL = challengeCommunity.toLowerCase() == 'data' ? DS_CHALLENGE_URL : CHALLENGE_URL;
-    const leaderboard = this.state.winners && this.state.winners.map((winner) => {
-      return (
-        <div className="avatar-container" key={winner.handle}>
-          <UserAvatarTooltip user={getSampleProfile(winner)}>
-            <LeaderboardAvatar member={winner} />
-          </UserAvatarTooltip>
-        </div>
-      );
-    });
+    const challengeURL = challengeCommunity.toLowerCase() === 'data' ? DS_CHALLENGE_URL : CHALLENGE_URL;
+    const leaderboard = this.state.winners && this.state.winners.map(winner => (
+      <div className="avatar-container" key={winner.handle}>
+        <UserAvatarTooltip user={getSampleProfile(winner)}>
+          <LeaderboardAvatar member={winner} />
+        </UserAvatarTooltip>
+      </div>
+      ));
     return leaderboard || (
     <span className="winners" onMouseEnter={this.handleHover}>
       <a href={`${challengeURL}${challengeId}`}>Winners</a>
     </span>);
   }
 
-  renderRegisterButton(challenge) {
-    const lng = getTimeLeft(challenge.registrationEndDate || challenge.submissionEndDate, challenge.currentPhaseName).text.length
+  renderRegisterButton() {
+    const { challenge } = this.props;
+    const lng = getTimeLeft(
+      challenge.registrationEndDate || challenge.submissionEndDate,
+      challenge.currentPhaseName,
+    ).text.length;
     return (
-      <a href="#" className="register-button">
-        <span>{getTimeLeft(challenge.registrationEndDate || challenge.submissionEndDate, challenge.currentPhaseName).text.substring(0, lng-6)}</span>
+      <a
+        className="register-button"
+        onClick={() => false}
+      >
+        <span>
+          {
+            getTimeLeft(
+              challenge.registrationEndDate || challenge.submissionEndDate,
+              challenge.currentPhaseName,
+            ).text.substring(0, lng - 6)
+          }
+        </span>
         <span className="to-register">to register</span>
       </a>
-    )
+    );
+  }
+
+  registrantsLink(registrantsChallenge, type) {
+    const { CHALLENGE_URL } = this.state;
+    if (registrantsChallenge.track === 'DATA_SCIENCE') {
+      const id = `${registrantsChallenge.challengeId}`;
+      if (id.length < ID_LENGTH) {
+        return `${type}${registrantsChallenge.challengeId}`;
+      }
+      return `${CHALLENGE_URL}${registrantsChallenge.challengeId}/?type=develop#viewRegistrant`;
+    }
+    return `${CHALLENGE_URL}${registrantsChallenge.challengeId}/?type=${registrantsChallenge.track.toLowerCase()}#viewRegistrant`;
   }
 
   activeChallenge() {
     const { challenge, config } = this.props;
+    const { FORUM_URL } = this.state;
+    const MM_LONGCONTEST = `https:${config.COMMUNITY_URL}/longcontest/?module`;
+    const MM_REG = `${MM_LONGCONTEST}=ViewRegistrants&rd=`;
+    const MM_SUB = `${MM_LONGCONTEST}=ViewStandings&rd=`;
     return (
       <div className={challenge.registrationOpen === 'Yes' ? 'challenge-progress with-register-button' : 'challenge-progress'}>
-        <span className="current-phase">{challenge.currentPhaseName ? getStatusPhase(challenge).currentPhaseName : STALLED_MSG}</span>
+        <span className="current-phase">
+          {
+            challenge.currentPhaseName
+              ? getStatusPhase(challenge).currentPhaseName
+              : STALLED_MSG
+          }
+        </span>
         <span className="challenge-stats">
           <span>
-            <Tooltip content={numRegistrantsTipText(challenge.numRegistrants)} className="num-reg-tooltip">
-              <a className="num-reg" href={registrantsLink(challenge, MM_REG)}>
-                <RegistrantsIcon className="challenge-stats-icon" /> <span className="number">{challenge.numRegistrants}</span>
+            <Tooltip
+              content={numRegistrantsTipText(challenge.numRegistrants)}
+              className="num-reg-tooltip"
+            >
+              <a className="num-reg" href={this.registrantsLink(challenge, MM_REG)}>
+                <RegistrantsIcon className="challenge-stats-icon" />
+                <span className="number">{challenge.numRegistrants}</span>
               </a>
             </Tooltip>
           </span>
           <span>
             <Tooltip content={numSubmissionsTipText(challenge.numSubmissions)}>
-              <a className="num-sub" href={registrantsLink(challenge, MM_SUB)}>
-                <SubmissionsIcon/> <span className="number">{challenge.numSubmissions}</span>
+              <a className="num-sub" href={this.registrantsLink(challenge, MM_SUB)}>
+                <SubmissionsIcon /> <span className="number">{challenge.numSubmissions}</span>
               </a>
             </Tooltip>
           </span>
@@ -218,7 +242,7 @@ class ChallengeStatus extends Component {
             challenge.myChallenge &&
             <span>
               <a className="link-forum" href={`${FORUM_URL}${challenge.forumId}`}>
-                <ForumIcon/>
+                <ForumIcon />
               </a>
             </span>
           }
@@ -226,24 +250,43 @@ class ChallengeStatus extends Component {
         <ProgressBarTooltip challenge={challenge} config={config}>
           {
             challenge.status === 'Active' ?
-            <div>
-              <ChallengeProgressBar color="green"
-                value={getTimeToGo(challenge.registrationStartDate, getStatusPhase(challenge).currentPhaseEndDate)}
-                isLate={getTimeLeft(getStatusPhase(challenge).currentPhaseEndDate, getStatusPhase(challenge).currentPhaseName).late}
-              />
-            <div className="time-left">{getTimeLeft(getStatusPhase(challenge).currentPhaseEndDate, getStatusPhase(challenge).currentPhaseName).text}</div>
-            </div>
+              <div>
+                <ChallengeProgressBar
+                  color="green"
+                  value={
+                    getTimeToGo(
+                      challenge.registrationStartDate,
+                      getStatusPhase(challenge).currentPhaseEndDate,
+                    )
+                  }
+                  isLate={
+                    getTimeLeft(
+                      getStatusPhase(challenge).currentPhaseEndDate,
+                      getStatusPhase(challenge).currentPhaseName,
+                    ).late
+                  }
+                />
+                <div className="time-left">
+                  {
+                    getTimeLeft(
+                      getStatusPhase(challenge).currentPhaseEndDate,
+                      getStatusPhase(challenge).currentPhaseName,
+                    ).text
+                  }
+                </div>
+              </div>
               :
-            <ChallengeProgressBar color="gray" value="100"/>
+              <ChallengeProgressBar color="gray" value="100" />
           }
         </ProgressBarTooltip>
-        {challenge.registrationOpen === 'Yes' && this.renderRegisterButton(challenge)}
+        {challenge.registrationOpen === 'Yes' && this.renderRegisterButton()}
       </div>
-    )
+    );
   }
 
   completedChallenge() {
     const { challenge } = this.props;
+    const { CHALLENGE_URL, FORUM_URL } = this.state;
     return (
       <div>
         {this.renderLeaderboard()}
@@ -251,26 +294,26 @@ class ChallengeStatus extends Component {
           <span>
             <Tooltip content={numRegistrantsTipText(challenge.numRegistrants)}>
               <a className="num-reg past" href={`${CHALLENGE_URL}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}#viewRegistrant`}>
-                <RegistrantsIcon/> <span className="number">{challenge.numRegistrants}</span>
+                <RegistrantsIcon /> <span className="number">{challenge.numRegistrants}</span>
               </a>
             </Tooltip>
           </span>
           <span>
             <Tooltip content={numSubmissionsTipText(challenge.numSubmissions)}>
               <a className="num-sub past" href={`${CHALLENGE_URL}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}#viewRegistrant`}>
-                <SubmissionsIcon/> <span className="number">{challenge.numSubmissions}</span>
+                <SubmissionsIcon /> <span className="number">{challenge.numSubmissions}</span>
               </a>
             </Tooltip>
           </span>
           {
             challenge.myChallenge &&
             <span>
-              <a className="link-forum past" href={`${FORUM_URL}${challenge.forumId}`}><ForumIcon/></a>
+              <a className="link-forum past" href={`${FORUM_URL}${challenge.forumId}`}><ForumIcon /></a>
             </span>
           }
         </span>
       </div>
-    )
+    );
   }
 
   getDevelopmentWinners(challengeId) {
@@ -278,14 +321,19 @@ class ChallengeStatus extends Component {
       fetch(`${this.props.config.API_URL_V2}/develop/challenges/${challengeId}`)
         .then(res => res.json())
         .then((data) => {
-          const winners = data.submissions.filter(submission => submission.placement && submission.placement < 4)
+          let winners = data.submissions.filter(sub => sub.placement)
             .map(winner => ({
               handle: winner.handle,
               position: winner.placement,
               photoURL: MOCK_PHOTO,
             }));
-          const uniqeWinners = _.uniqWith(winners, _.isEqual);
-          resolve(uniqeWinners);
+          winners = _.uniqWith(winners, _.isEqual);
+          const lastItem = {
+            handle: `+${winners.length - MAX_VISIBLE_WINNERS}`,
+          };
+          winners = winners.slice(0, MAX_VISIBLE_WINNERS);
+          winners.push(lastItem);
+          resolve(winners);
         })
         .catch(err => reject(err));
     });
@@ -295,13 +343,19 @@ class ChallengeStatus extends Component {
     return new Promise((resolve, reject) => {
       fetch(`${this.props.config.API_URL_V2}/design/challenges/result/${challengeId}`)
         .then(res => res.json())
-        .then(data => {
-          const winners = data.results.filter(submission => submission.placement && submission.placement < 4)
+        .then((data) => {
+          let winners = data.results.filter(sub => sub.placement)
           .map(winner => ({
             handle: winner.handle,
             position: winner.placement,
             photoURL: MOCK_PHOTO,
           }));
+          winners = _.uniqWith(winners, _.isEqual);
+          const lastItem = {
+            handle: `+${winners.length - MAX_VISIBLE_WINNERS}`,
+          };
+          winners = winners.slice(0, MAX_VISIBLE_WINNERS);
+          winners.push(lastItem);
           resolve(winners);
         })
         .catch(err => reject(err));
@@ -315,8 +369,9 @@ class ChallengeStatus extends Component {
         return this.getDevelopmentWinners(challengeId);
       case 'design':
         return this.getDesignWinners(challengeId);
+      default:
+        return this.getDevelopmentWinners(challengeId);
     }
-    return this.getDevelopmentWinners(challengeId);
   }
 
     /**
@@ -339,14 +394,24 @@ class ChallengeStatus extends Component {
 
   render() {
     const { challenge } = this.props;
-    const status = challenge.status === 'Completed' ? "completed" : "";
+    const status = challenge.status === 'Completed' ? 'completed' : '';
     return (
-      <div className={"challenge-status "+status}>
+      <div className={`challenge-status ${status}`}>
         {challenge.status === 'Completed' ? this.completedChallenge() : this.activeChallenge()}
       </div>
     );
   }
-
 }
+
+ChallengeStatus.defaultProps = {
+  challenge: {},
+  config: {},
+  sampleWinnerProfile: undefined,
+};
+
+ChallengeStatus.propTypes = {
+  challenge: PropTypes.object,
+  config: PropTypes.object,
+};
 
 export default ChallengeStatus;

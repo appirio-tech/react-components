@@ -47,13 +47,7 @@ class BaseFilter {
     return () => true;
   }
 
-  /**
-   * Merges given filter into this one, assuming filter is of the same or inherited
-   * type.
-   * @param {Object} filter
-   * @return This object.
-   */
-  merge(filter) {
+  merge() {
     _.noop(this);
     return this;
   }

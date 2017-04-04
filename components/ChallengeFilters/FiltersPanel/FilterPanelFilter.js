@@ -1,3 +1,7 @@
+/* global
+  atob, btoa
+*/
+
 /**
  * This Filter class represents the filters managed by the FiltersPanel component.
  * Have a look at the base class for additional details.
@@ -32,7 +36,7 @@ class FilterPanelFilter extends BaseFilter {
       // We use "challengeTypes" to represent subtracks to maintain compatibility with old app
       this.subtracks = filters.filter(e => e.startsWith('challengeTypes'))
         .map(element => element.split('=')[1]);
-    } else  if (_.isObject(arg)) {
+    } else if (_.isObject(arg)) {
       if (!arg._isFilterPanelFilter) throw new Error('Invalid argument!');
       super(arg);
       this.endDate = arg.endDate ? moment(arg.endDate) : null;

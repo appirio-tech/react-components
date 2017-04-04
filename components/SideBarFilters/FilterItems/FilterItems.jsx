@@ -52,6 +52,9 @@ ActiveFilterItem.defaultProps = {
 ActiveFilterItem.propTypes = {
   name: PT.string.isRequired,
   onRemove: PT.func,
+  onDrag: PT.func,
+  onDragStart: PT.func,
+  onNameChange: PT.func,
 };
 
 /**
@@ -64,7 +67,7 @@ function FilterItem(props) {
   return (
     <div className={baseClasses} onClick={props.onClick}>
       <span className="left">{props.name}</span>
-      <span className="right">{props.name === 'Past challenges' ? '' : props.count}</span>
+      <span className="right">{(props.name === 'Past challenges' || props.myFilter) ? '' : props.count}</span>
     </div>
   );
 }
@@ -79,6 +82,7 @@ FilterItem.propTypes = {
   highlighted: PT.bool,
   onClick: PT.func,
   name: PT.string.isRequired,
+  myFilter: PT.bool,
 };
 
 export { ActiveFilterItem, FilterItem };
