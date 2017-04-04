@@ -98,7 +98,7 @@ class ChallengeFiltersExample extends React.Component {
         this.setState({ srmChallenges: json.result.content });
       });
 
-    
+
     // APIs to fetch valid subtracks.
     const SUBTRACKS_DESIGN_API = `${this.props.config.API_URL_V2}/design/challengetypes`;
     const SUBTRACKS_DEVELOP_API = `${this.props.config.API_URL_V2}/develop/challengetypes`;
