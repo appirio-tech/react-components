@@ -62,7 +62,10 @@ class InfiniteList extends Component {
       this.initializeProperties(nextProps);
       this.setLoadingStatus(false);
     } else if (newItemOrderRepresentation !== oldItemOrderRepresentation) {
-      this.reCacheItemElements(newlyOrganizedItems, nextProps.renderItem);
+      this.reCacheItemElements(
+        _.uniqBy(newlyOrganizedItems, uniqueIdentifier),
+        nextProps.renderItem,
+      );
     }
   }
 
