@@ -7,7 +7,7 @@ const TaggedValue = ({title, subText, style, count}) => {
   const taggedValueClass = classNames(
     'TaggedValue',
     { [`${style}`]: style,
-    'count-one' : !style && count === '1'}
+      'count-one' : !style && count === '1'}
   )
   if(count) {
     subText = `${subText} x ${count}`
