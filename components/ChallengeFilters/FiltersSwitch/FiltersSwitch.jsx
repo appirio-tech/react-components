@@ -16,7 +16,6 @@ import FiltersIcon from './FiltersIcon';
 import './FiltersSwitch.scss';
 
 export default function FiltersSwitch(props) {
-
   let className = 'FiltersSwitch tc-outline-btn';
   if (props.active) className += ' active';
 
