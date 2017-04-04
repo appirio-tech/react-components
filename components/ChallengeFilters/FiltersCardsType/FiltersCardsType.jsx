@@ -13,6 +13,9 @@ const FiltersCardsType = ({setCardType, isCardTypeSet}) => {
         <a href="javascript:;" className={"challengs-tab " + (isCardTypeSet === 'Challenges' ? 'active' : '')}>
           Challenges
         </a>
+        <a href="//arena.topcoder.com" className="challenges-tab" target="_blank">
+          SRMs
+        </a>
       </div>
     );
 
