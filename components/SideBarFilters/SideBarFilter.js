@@ -1,3 +1,9 @@
+/* global
+  atob, btoa
+*/
+
+/* eslint constructor-super: 0 */  // line 63 need that super in the catch block
+
 /**
  * The SideBarFilter extends the ChallengeFilter from the ChallengeFilters
  * component. This way any ChallengeFilter can be easily added to the sidebar.
@@ -34,8 +40,8 @@ class SideBarFilter extends ChallengeFilter {
       super(arg);
       this.isCustomFilter = arg.isCustomFilter;
       const mode = arg.filter.split('&').filter(ele => ele.startsWith('mode='))[0];
-      const name = arg.filter.split('&').filter(ele => ele.startsWith('name='))[0]
-      this.mode = mode ? Object.values(MODE)[+mode.split('=')[1]]: MODE.CUSTOM;
+      const name = arg.filter.split('&').filter(ele => ele.startsWith('name='))[0];
+      this.mode = mode ? Object.values(MODE)[+mode.split('=')[1]] : MODE.CUSTOM;
       this.name = arg.name || (name ? decodeURIComponent(name.split('=')[1]) : name) || 'Custom';
       this.uuid = arg.id || uuid();
     } else if (_.isObject(arg)) {
@@ -75,7 +81,7 @@ class SideBarFilter extends ChallengeFilter {
       // The API has some incosistencies in the challenge items
       // thus we have to check all fields that define a challenges as 'Open for registration'
       case MODE.OPEN_FOR_REGISTRATION: return item => (item.currentPhaseName
-        && item.currentPhaseName.startsWith('Registration') || item.challengeType.startsWith('Marathon'))                    
+        && (item.currentPhaseName.startsWith('Registration') || item.challengeType.startsWith('Marathon')))
         && !item.status.startsWith('Completed')
         && item.registrationOpen.startsWith('Yes');
       case MODE.ONGOING_CHALLENGES:
