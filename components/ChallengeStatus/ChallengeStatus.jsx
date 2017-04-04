@@ -38,12 +38,12 @@ const getTimeLeft = (date, currentPhase) => {
   const d = duration.days();
   const m = duration.minutes();
   const late = (d < 0 || h < 0 || m < 0);
-  const suffix = h != 0 ? 'h' : 'min';
+  const suffix = h !== 0 ? 'h' : 'min';
   let text = '';
-  if (d != 0) text += `${Math.abs(d)}d `;
-  if (h != 0) text += `${Math.abs(h)}`;
-  if (h != 0 && m != 0) text += ':';
-  if (m != 0) text += `${Math.abs(m)}`;
+  if (d !== 0) text += `${Math.abs(d)}d `;
+  if (h !== 0) text += `${Math.abs(h)}`;
+  if (h !== 0 && m !== 0) text += ':';
+  if (m !== 0) text += `${Math.abs(m)}`;
   text += suffix;
   if (late) {
     text = `Late by ${text}`;

@@ -12,7 +12,7 @@ import moment from 'moment';
 import Tooltip from '../Tooltip';
 import './UserAvatarTooltip.scss';
 
-const MOCK_PHOTO = 'https://acrobatusers.com/assets/images/template/author_generic.jpg'
+const MOCK_PHOTO = 'https://acrobatusers.com/assets/images/template/author_generic.jpg';
 /**
  * Renders the tooltip's content.
  * It includes: user profile picture, handle, his country and the TC registration
@@ -22,13 +22,13 @@ const MOCK_PHOTO = 'https://acrobatusers.com/assets/images/template/author_gener
  * efficient way to query those.
  */
 function Tip(props) {
-  const joined = moment(props.user.memberSince).format('MMM YYYY');
+  /* const joined = moment(props.user.memberSince).format('MMM YYYY');
   const rating = props.user.ratingSummary.map(item => (
     <span className="rating" key={item.name}>
       <span>{item.name}</span>
       <span>{item.rating}</span>
     </span>
-  ));
+  ));*/
   const { photoLink } = props.user;
   const src = photoLink.startsWith('https') ? photoLink : `https://topcoder.com/${photoLink}`;
 
