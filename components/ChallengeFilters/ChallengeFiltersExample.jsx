@@ -73,7 +73,7 @@ const deserialize = queryString => new SideBarFilter({
 // The demo component itself.
 class ChallengeFiltersExample extends React.Component {
   constructor(props) {
-    super(props);  
+    super(props);
     this.state = {
       challenges: [],
       srmChallenges: [],
@@ -93,29 +93,29 @@ class ChallengeFiltersExample extends React.Component {
       .then((json) => {
         this.setState({srmChallenges: json.result.content})
       })
-    
+
 
     // APIs to fetch valid subtracks.
     const SUBTRACKS_DESIGN_API = `${this.props.config.API_URL_V2}/design/challengetypes`;
-    const SUBTRACKS_DEVELOP_API = `${this.props.config.API_URL_V2}/develop/challengetypes`;    
-    
+    const SUBTRACKS_DEVELOP_API = `${this.props.config.API_URL_V2}/develop/challengetypes`;
+
     /* Fetching of design subtracks */
     fetch(SUBTRACKS_DESIGN_API)
       .then(res => res.json())
       .then((json) => {
         json.forEach(item => VALID_SUBTRACKS.push(keywordsMapper(item.name)));
-      })    
-    
+      })
+
     /* Fetching of develop subtracks */
     fetch(SUBTRACKS_DEVELOP_API)
       .then(res => res.json())
       .then((json) => {
         json.forEach(item => VALID_SUBTRACKS.push(keywordsMapper(item.name)));
       })
-    
+
     // API to fetch valid keywords
-    const KEYWORDS_API = `${this.props.config.API_URL_V3}/technologies/`; 
-    
+    const KEYWORDS_API = `${this.props.config.API_URL_V3}/technologies/`;
+
     /* Fetching of keywords */
     fetch(KEYWORDS_API)
       .then(res => res.json())
@@ -358,6 +358,8 @@ class ChallengeFiltersExample extends React.Component {
             currentFilterName={sidebarFilterName}
             expanded={sidebarFilterName !== 'All Challenges'}
             additionalFilter={filter.getFilterFunction()}
+            // Handle onExpandFilterResult to update the sidebar
+            onExpandFilterResult={(filterName) => this.sidebar.selectFilterWithName(filterName)}
           />
         </div>
       )

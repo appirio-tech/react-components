@@ -73,7 +73,7 @@ class ChallengeCardContainer extends Component {
     this.setState({
       currentFilter: findFilterByName(filterName, this.props.filters),
       expanded: true,
-    }, this.props.onExpandFilterResult);
+    }, this.props.onExpandFilterResult(filterName)); // pass filterName
   }
 
   onScrollChallenges() {

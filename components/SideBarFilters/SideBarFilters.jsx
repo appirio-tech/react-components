@@ -78,7 +78,7 @@ class SideBarFilters extends React.Component {
   constructor(props) {
     super(props);
     let that = this;
-    
+
     // TODO: Get the auth token from cookie for now.
     // Ideally the token should be passed in from a parent container component
     // http://stackoverflow.com/questions/5639346/
@@ -154,7 +154,7 @@ class SideBarFilters extends React.Component {
       filterClone.count = nextProps.challenges.filter(filter.getFilterFunction()).length;
       filters.push(filterClone);
     });
-    for (let i = 0; i < filters.length; ++i) 
+    for (let i = 0; i < filters.length; ++i)
       if (filters[i].mode === "All Challenges") {
         console.log(filters[i].count);
         filters[i].count = 0;
@@ -381,6 +381,19 @@ class SideBarFilters extends React.Component {
    */
   selectFilter(index) {
     const currentFilter = this.state.filters[index];
+    if (currentFilter.mode === "Open for review") {
+      // Jump to Development Review Opportunities page
+      window.location.href = `${this.props.config.MAIN_URL}/review/development-review-opportunities/`;
+    }
+    this.setState({ currentFilter }, () => this.props.onFilter(currentFilter));
+  }
+
+  /**
+   * Selects the filter with the specified name.
+   */
+  selectFilter(filterName) {
+    // find a filter with matching name
+    const currentFilter = _.find(this.state.filters, filter => filter.name === filterName);
     if (currentFilter.mode === "Open for review") {
       // Jump to Development Review Opportunities page
       window.location.href = `${this.props.config.MAIN_URL}/review/development-review-opportunities/`;
