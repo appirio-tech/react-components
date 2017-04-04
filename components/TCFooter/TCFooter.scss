@@ -1,4 +1,5 @@
 @import 'topcoder/tc-includes';
+@import '../../styles/tc-styles';
 
 .TCFooter {
   width: 100%;
@@ -13,7 +14,7 @@
     text-align: center;
     font-weight: normal;
     margin: 30px 2px 0;
-    color: #fff;
+    color: $tc-white;
 
   a {
     display: inline-block;
@@ -104,7 +105,7 @@
         font-weight: normal;
 
         a {
-          color: #fff;
+          color: $tc-white;
           font-size: 16px;
           line-height: 21px;
         }
@@ -117,7 +118,7 @@
 
   .copyright-notice {
     font-size: 15px;
-      color: #fff;
+      color: $tc-white;
   }
 
   .TCFooter .other-nav-items.non-mobile {

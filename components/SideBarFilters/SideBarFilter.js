@@ -80,8 +80,8 @@ class SideBarFilter extends ChallengeFilter {
       case MODE.OPEN_FOR_REVIEW: return item => item.currentPhaseName === 'Review';
       // The API has some incosistencies in the challenge items
       // thus we have to check all fields that define a challenges as 'Open for registration'
-      case MODE.OPEN_FOR_REGISTRATION: return item => item.currentPhaseName
-        && item.currentPhaseName.startsWith('Registration')
+      case MODE.OPEN_FOR_REGISTRATION: return item => (item.currentPhaseName
+        && (item.currentPhaseName.startsWith('Registration') || item.challengeType.startsWith('Marathon')))
         && !item.status.startsWith('Completed')
         && item.registrationOpen.startsWith('Yes');
       case MODE.ONGOING_CHALLENGES:

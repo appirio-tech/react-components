@@ -1,5 +1,5 @@
 /* global
-  document, fetch
+  document, fetch, window
 */
 
 /**
@@ -78,7 +78,6 @@ class SideBarFilters extends React.Component {
     // http://stackoverflow.com/questions/5639346/
     const token = document.cookie.match(`(^|;)\\s*${TOKEN_KEY}\\s*=\\s*([^;]+)`);
     const authToken = token ? token.pop() : '';
-
     this.state = {
       authToken,
       currentFilter: DEFAULT_FILTERS[3],
@@ -149,6 +148,16 @@ class SideBarFilters extends React.Component {
       filterClone.count = nextProps.challenges.filter(filter.getFilterFunction()).length;
       filters.push(filterClone);
     });
+    for (let i = 0; i < filters.length; i += 1) {
+      if (filters[i].mode === 'All Challenges') {
+        filters[i].count = 0;
+        for (let j = 0; j < filters.length; j += 1) {
+          if (filters[j].mode === 'Open for registration' || filters[j].mode === 'Ongoing challenges') {
+            filters[i].count += filters[j].count;
+          }
+        }
+      }
+    }
     this.setState({
       currentFilter,
       filters,
@@ -371,6 +380,10 @@ class SideBarFilters extends React.Component {
    */
   selectFilter(index) {
     const currentFilter = this.state.filters[index];
+    if (currentFilter.mode === 'Open for review') {
+      // Jump to Development Review Opportunities page
+      window.location.href = `${this.props.config.MAIN_URL}/review/development-review-opportunities/`;
+    }
     this.setState({ currentFilter }, () => this.props.onFilter(currentFilter));
   }
 
@@ -391,6 +404,9 @@ SideBarFilters.defaultProps = {
   isAuth: false,
   onFilter: _.noop,
   ref: _.noop,
+  config: {
+    MAIN_URL: '',
+  },
 };
 
 SideBarFilters.propTypes = {
@@ -401,6 +417,9 @@ SideBarFilters.propTypes = {
   onFilter: PT.func,
   isAuth: PT.bool,
   ref: PT.func,
+  config: PT.shape({
+    MAIN_URL: PT.string,
+  }),
 };
 
 export default SideBarFilters;

@@ -154,11 +154,32 @@ function ChallengeStatus({ challenge, config, sampleWinnerProfile }) {
   };
   const getStatusPhase = () => {
     switch (challenge.currentPhaseName) {
-      case 'Registration':
+      case 'Registration': {
+        if (challenge.checkpointSubmissionEndDate && !getTimeLeft(challenge.checkpointSubmissionEndDate, 'Checkpoint').late) {
+          return {
+            currentPhaseName: 'Checkpoint',
+            currentPhaseEndDate: challenge.checkpointSubmissionEndDate,
+          };
+        }
+
         return {
           currentPhaseName: 'Submission',
           currentPhaseEndDate: challenge.submissionEndDate,
         };
+      }
+      case 'Submission': {
+        if (challenge.checkpointSubmissionEndDate && !getTimeLeft(challenge.checkpointSubmissionEndDate, 'Checkpoint').late) {
+          return {
+            currentPhaseName: 'Checkpoint',
+            currentPhaseEndDate: challenge.checkpointSubmissionEndDate,
+          };
+        }
+
+        return {
+          currentPhaseName: 'Submission',
+          currentPhaseEndDate: challenge.submissionEndDate,
+        };
+      }
       default:
         return {
           currentPhaseName: challenge.currentPhaseName,

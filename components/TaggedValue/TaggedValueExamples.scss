@@ -1,10 +1,9 @@
-$gray: #47474F;
-$blue : #59A7FF;
-$purple: #B47DD6;
+
+@import '../../styles/tc-styles';
 
 .sample1 {
   .tagged-value-bg {
-    background-color: $purple;
+    background-color: $tc-purple;
     color: white;
   }
   .subText {
@@ -14,7 +13,7 @@ $purple: #B47DD6;
 
 .sample2 {
   .tagged-value-bg {
-    color: $gray;
+    color: $tc-gray-80;
   }
   .subText{
     color: lightblue;

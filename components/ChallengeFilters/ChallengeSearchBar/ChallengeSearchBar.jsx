@@ -48,7 +48,11 @@ class ChallengeSearchBar extends React.Component {
           type="text"
           value={this.state.value}
         />
-        <span id="SearchButton" onClick={() => this.onSearch()} >
+        <span
+          id="SearchButton"
+          className={this.state.value ? 'active' : ''}
+          onClick={() => this.onSearch()}
+        >
           <img src={zoomIcon} />
         </span>
       </div>

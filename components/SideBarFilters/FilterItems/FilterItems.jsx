@@ -67,7 +67,7 @@ function FilterItem(props) {
   return (
     <div className={baseClasses} onClick={props.onClick}>
       <span className="left">{props.name}</span>
-      <span className="right">{props.count}</span>
+      <span className="right">{props.name === 'Past challenges' ? '' : props.count}</span>
     </div>
   );
 }

@@ -1,7 +1,8 @@
 @import "topcoder/tc-includes";
+@import '../../styles/tc-styles';
 
 $border-color: #D8D8DB;
-$active-icon-wrap-bg: #888894;
+$active-icon-wrap-bg: $tc-gray-50;
 
 .SearchBar {
   background-color: $white;

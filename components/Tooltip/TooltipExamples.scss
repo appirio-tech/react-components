@@ -1,15 +1,17 @@
+@import '../../styles/tc-styles';
+
 .tooltip-examples-container {
 
   .Tooltip {
     .tooltip-target {
       position: relative;
       width: 150px;
-      background-color: #999;
+      background-color: $tc-gray-80;
       height: 150px;
       margin: 10px;
       font-size: 14px;
       font-weight: bold;
-      color: #fff;
+      color: $tc-white;
       text-align: center;
       padding: 15px;
 
@@ -65,7 +67,7 @@
           background-color: #0000CC;
         }
         .tooltip-body {
-          color: #FFF;
+          color: $tc-white;
         }
       }
     }

@@ -79,8 +79,8 @@ function ChallengeCard({
           </TrackAbbreviationTooltip>
         </div>
 
-        <div className="challenge-details">
-          <a className="challenge-title" href={challengeDetailLink()}>
+        <div className={challenge.registrationOpen === 'Yes' ? 'challenge-details with-register-button' : 'challenge-details'}>
+          <a className="challenge-title" href={challengeDetailLink(challenge)}>
             {challenge.challengeName}
           </a>
           <div className="details-footer">
@@ -96,10 +96,10 @@ function ChallengeCard({
         </div>
       </div>
       <div className="right-panel">
-        <div className="prizes">
+        <div className={challenge.registrationOpen === 'Yes' ? 'prizes with-register-button' : 'prizes'}>
           <PrizesTooltip challenge={challenge} config={config}>
             <div><span className="dollar">$</span>{numberWithCommas(challenge.totalPrize)}</div>
-            <div className="label">Prize pool</div>
+            <div className="label">Purse</div>
           </PrizesTooltip>
         </div>
 
