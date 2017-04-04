@@ -73,7 +73,7 @@ const deserialize = queryString => new SideBarFilter({
 // The demo component itself.
 class ChallengeFiltersExample extends React.Component {
   constructor(props) {
-    super(props);  
+    super(props);
     this.state = {
       challenges: [],
       srmChallenges: [],
@@ -88,34 +88,34 @@ class ChallengeFiltersExample extends React.Component {
     this.fetchChallenges(0).then(res => this.setChallenges(0, res));
 
     /* Fetching of SRM challenges */
-    fetch(`${props.config.API_URL_V3}/srms/?filter=status=FUTURE`)
+    fetch(`${props.config.API_URL}/srms/?filter=status=FUTURE`)
       .then(res => res.json())
       .then((json) => {
         this.setState({srmChallenges: json.result.content})
       })
-    
+
 
     // APIs to fetch valid subtracks.
     const SUBTRACKS_DESIGN_API = `${this.props.config.API_URL_V2}/design/challengetypes`;
-    const SUBTRACKS_DEVELOP_API = `${this.props.config.API_URL_V2}/develop/challengetypes`;    
-    
+    const SUBTRACKS_DEVELOP_API = `${this.props.config.API_URL_V2}/develop/challengetypes`;
+
     /* Fetching of design subtracks */
     fetch(SUBTRACKS_DESIGN_API)
       .then(res => res.json())
       .then((json) => {
         json.forEach(item => VALID_SUBTRACKS.push(keywordsMapper(item.name)));
-      })    
-    
+      })
+
     /* Fetching of develop subtracks */
     fetch(SUBTRACKS_DEVELOP_API)
       .then(res => res.json())
       .then((json) => {
         json.forEach(item => VALID_SUBTRACKS.push(keywordsMapper(item.name)));
       })
-    
+
     // API to fetch valid keywords
-    const KEYWORDS_API = `${this.props.config.API_URL_V3}/technologies/`; 
-    
+    const KEYWORDS_API = `${this.props.config.API_URL}/technologies/`;
+
     /* Fetching of keywords */
     fetch(KEYWORDS_API)
       .then(res => res.json())
@@ -465,7 +465,7 @@ class ChallengeFiltersExample extends React.Component {
 ChallengeFiltersExample.defaultProps = {
   config: {
     API_URL_V2: 'https://api.topcoder.com/v2',
-    API_URL_V3: 'https://api.topcoder.com/v3',
+    API_URL: 'https://api.topcoder.com/v3',
   },
   filterFromUrl: '',
   onSaveFilterToUrl: _.noop,
@@ -474,7 +474,7 @@ ChallengeFiltersExample.defaultProps = {
 ChallengeFiltersExample.propTypes = {
   config: PT.shape({
     API_URL_V2: PT.string,
-    API_URL_V3: PT.string,
+    API_URL: PT.string,
   }),
   filterFromUrl: PT.string,
   onSaveFilterToUrl: PT.func,
