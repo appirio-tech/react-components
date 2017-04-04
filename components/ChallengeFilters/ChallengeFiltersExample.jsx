@@ -390,6 +390,7 @@ class ChallengeFiltersExample extends React.Component {
       (a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime(),
     );
 
+
     const UpcomingSrm = futureSRMChallenge.map(
       srmChallenge => (
         <SRMCard
@@ -399,6 +400,7 @@ class ChallengeFiltersExample extends React.Component {
         />
       ),
     );
+    VALID_SUBTRACKS.sort((a, b) => (a.label < b.label ? -1 : (a.label > b.label ? 1 : 0)));
 
     return (
       <div className="ChallengeFiltersExample">
