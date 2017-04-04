@@ -323,6 +323,7 @@ class SideBarFilters extends React.Component {
       <FilterItem
         count={filter.count}
         highlighted={filter === this.state.currentFilter}
+        myFilter={index >= FILTER_ID.FIRST_USER_DEFINED}
         key={`${filter.name}-filter`}
         name={filter.name}
         onClick={() => this.selectFilter(index)}
