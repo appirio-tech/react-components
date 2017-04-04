@@ -328,11 +328,13 @@ class ChallengeStatus extends Component {
               photoURL: MOCK_PHOTO,
             }));
           winners = _.uniqWith(winners, _.isEqual);
-          const lastItem = {
-            handle: `+${winners.length - MAX_VISIBLE_WINNERS}`,
-          };
-          winners = winners.slice(0, MAX_VISIBLE_WINNERS);
-          winners.push(lastItem);
+          if (winners.length > MAX_VISIBLE_WINNERS) {
+            const lastItem = {
+              handle: `+${winners.length - MAX_VISIBLE_WINNERS}`,
+            };
+            winners = winners.slice(0, MAX_VISIBLE_WINNERS);
+            winners.push(lastItem);
+          }
           resolve(winners);
         })
         .catch(err => reject(err));
@@ -351,11 +353,13 @@ class ChallengeStatus extends Component {
             photoURL: MOCK_PHOTO,
           }));
           winners = _.uniqWith(winners, _.isEqual);
-          const lastItem = {
-            handle: `+${winners.length - MAX_VISIBLE_WINNERS}`,
-          };
-          winners = winners.slice(0, MAX_VISIBLE_WINNERS);
-          winners.push(lastItem);
+          if (winners.length > MAX_VISIBLE_WINNERS) {
+            const lastItem = {
+              handle: `+${winners.length - MAX_VISIBLE_WINNERS}`,
+            };
+            winners = winners.slice(0, MAX_VISIBLE_WINNERS);
+            winners.push(lastItem);
+          }
           resolve(winners);
         })
         .catch(err => reject(err));
