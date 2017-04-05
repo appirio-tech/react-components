@@ -31,6 +31,7 @@ $status-radius-4: $corner-radius * 2;
     > div {
       display: flex;
       align-items: center;
+      height: 30px;
       @include xs-to-md {
         display: flex;
         align-items: center;

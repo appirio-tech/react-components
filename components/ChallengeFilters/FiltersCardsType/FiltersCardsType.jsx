@@ -20,7 +20,7 @@ const FiltersCardsType = ({ isCardTypeSet }) => (
     </a>
     <a
       href="//arena.topcoder.com"
-      className="challenges-tab"
+      className="challenges-tab" 
       target="_blank"
       rel="noopener noreferrer"
     >
