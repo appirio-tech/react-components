@@ -1,6 +1,6 @@
 export default [
   {
-    name: 'All active',
+    name: 'All Challenges',
     allIncluded: true,
     sortingOptions: ['Most recent'],
   },
@@ -27,7 +27,7 @@ export default [
     ),
   },
   {
-    name: 'My Challenges',
+    name: 'My challenges',
     check(item) {
       return item.myChallenge;
     },

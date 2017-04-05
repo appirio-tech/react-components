@@ -68,6 +68,8 @@ const MODES = {
 const MY_FILTER_BASE_NAME = 'My Filter';
 const TOKEN_KEY = 'tcjwt';
 
+const RSS_LINK = 'http://feeds.topcoder.com/challenges/feed?list=active&contestType=all';
+
 class SideBarFilters extends React.Component {
 
   constructor(props) {
