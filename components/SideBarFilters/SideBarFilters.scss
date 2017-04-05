@@ -7,7 +7,7 @@
   .FilterBox {
     background: $tc-white;
     padding: 2*$base-unit;
-    padding-bottom: 4*$base-unit;
+    padding-bottom: 2*$base-unit;
     border-radius: $corner-radius * 2;
 
     hr {
@@ -17,11 +17,12 @@
       height: 1px;
       margin: 2*$base-unit;
     }
-
+    
     .my-filters {
       display: block; 
       position: relative;
       padding: 0 3*$base-unit;
+      margin-top: 7*$base-unit;
       @include xs {
         padding: 0;
       }
@@ -50,15 +51,25 @@
         }
       }
     }
+    
+    .get-rss {
+      text-align: center;
+      
+      a {
+        color: $tc-gray-50;
+        font-size: 13px;
+        line-height: 30px;
+      }
+    }
   }
   // sidebar footer
   .sidebar-footer {
     padding: 10px;
     ul {
-      display: flex;
-      flex-wrap: wrap;
+      display: inline-block;
     }
     li {
+      display: inline-block;
       font-weight: 400;
       font-size: 13px;
       color: $tc-gray-70;
@@ -74,6 +85,9 @@
       }
     }
     .copyright {
+      display: inline-block;
+      position: absolute;
+      right: 0;
       font-weight: 500;
       font-size: 13px;
       color: $tc-gray-30;

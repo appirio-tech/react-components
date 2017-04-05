@@ -68,6 +68,8 @@ const MODES = {
 const MY_FILTER_BASE_NAME = 'My Filter';
 const TOKEN_KEY = 'tcjwt';
 
+const RSS_LINK = 'http://feeds.topcoder.com/challenges/feed?list=active&contestType=all';
+
 class SideBarFilters extends React.Component {
 
   constructor(props) {
@@ -242,7 +244,6 @@ class SideBarFilters extends React.Component {
             <li><a onClick={() => false}>Help</a>&nbsp;•&nbsp;</li>
             <li><a onClick={() => false}>Privacy</a>&nbsp;•&nbsp;</li>
             <li><a onClick={() => false}>Terms</a></li>
-            <li><a onClick={() => false}>Get the RSS</a></li>
           </ul>
           <p className="copyright">Topcoder © 2017.</p>
         </div>
@@ -335,16 +336,15 @@ class SideBarFilters extends React.Component {
         <div className="FilterBox">
           {filters[FILTER_ID.ALL_CHALLENGES]}
 
-          {this.props.isAuth ? <span><hr /> {filters[FILTER_ID.MY_CHALLENGES]}</span> : ''}
-          <hr />
+          {this.props.isAuth ?<span> {filters[FILTER_ID.MY_CHALLENGES]}</span> : ''}
           {filters[FILTER_ID.OPEN_FOR_REGISTRATION]}
           {filters[FILTER_ID.ONGOING_CHALLENGES]}
-          {filters[FILTER_ID.PAST_CHALLENGES]}
           {filters[FILTER_ID.OPEN_FOR_REVIEW]}
+          <hr />
+          {filters[FILTER_ID.PAST_CHALLENGES]}           
           {
             myFilters.length ?
               <div>
-                <hr />
                 <div className="my-filters">
                   <h1>My filters</h1>
                   <a
@@ -360,6 +360,10 @@ class SideBarFilters extends React.Component {
                 {myFilters}
               </div> : ''
           }
+          <hr />
+          <div className="get-rss">
+            <a href={RSS_LINK}>Get the RSS feed</a>
+          </div>
         </div>
         <div className="sidebar-footer">
           <ul>
@@ -368,9 +372,9 @@ class SideBarFilters extends React.Component {
             <li><a onClick={() => false}>Help</a>&nbsp;•&nbsp;</li>
             <li><a onClick={() => false}>Privacy</a>&nbsp;•&nbsp;</li>
             <li><a onClick={() => false}>Terms</a>&nbsp;•&nbsp;</li>
-            <li><a onClick={() => false}>Get the RSS</a></li>
+            <li><a onClick={() => false}>More</a></li>
           </ul>
-          <p className="copyright">Topcoder © 2016.</p>
+          <p className="copyright">Topcoder © 2017</p>            
         </div>
       </div>
     );
