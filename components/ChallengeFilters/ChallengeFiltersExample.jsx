@@ -87,6 +87,7 @@ class ChallengeFiltersExample extends React.Component {
     };
     if (props.filterFromUrl) {
       this.state.filter = deserialize(props.filterFromUrl);
+      this.state.searchQuery = props.filterFromUrl.split('&').filter(e => e.startsWith('query')).map(element => element.split('=')[1])[0];
     }
     this.setCardType.bind(this);
     this.fetchChallenges(0).then(res => this.setChallenges(0, res));
@@ -146,8 +147,9 @@ class ChallengeFiltersExample extends React.Component {
     _.merge(f, filter);
     f.query = searchString;
     const fetchId = 1 + this.state.lastFetchId;
-    this.setState({ challenges: [], lastFetchId: fetchId });
+    this.setState({ challenges: [], lastFetchId: fetchId, searchQuery: searchString });
     this.fetchChallenges(fetchId).then(res => this.setChallenges(fetchId, res, f));
+    this.onFilterByTopFilter(f);
   }
 
   /**
@@ -177,7 +179,9 @@ class ChallengeFiltersExample extends React.Component {
    * Saves current filters to the URL hash.
    */
   saveFiltersToHash(filter) {
-    this.props.onSaveFilterToUrl(serialize(filter));
+    let urlString = this.state.searchQuery ? `&query=${this.state.searchQuery}` : '';
+    urlString += serialize(filter);
+    this.props.onSaveFilterToUrl(urlString);
   }
 
   /**
@@ -424,6 +428,7 @@ class ChallengeFiltersExample extends React.Component {
               this.sidebar.addFilter(f);
             }
           }}
+          searchQuery={this.state.searchQuery}
           onSearch={(query, existingFilter) => this.onSearch(query, existingFilter)}
           validKeywords={VALID_KEYWORDS}
           validSubtracks={VALID_SUBTRACKS}

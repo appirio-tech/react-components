@@ -58,6 +58,12 @@ class ChallengeFilters extends React.Component {
       showFilters: false,
       showEditTrackPanel: false,
     };
+    this.searchBarProps = {
+      placeholder: "Search Challenges",
+    };
+    if (props.searchQuery) {
+      this.searchBarProps.query = props.searchQuery;
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -163,7 +169,7 @@ class ChallengeFilters extends React.Component {
           />
           <ChallengeSearchBar
             onSearch={str => this.onSearch(str)}
-            placeholder="Search Challenges"
+            {...this.searchBarProps}
           />
           {
             this.props.isCardTypeSet === 'Challenges' ?
@@ -246,6 +252,7 @@ const TagShape = PT.shape({
 ChallengeFilters.defaultProps = {
   filter: new ChallengeFilter(),
   isCardTypeSet: '',
+  searchQuery: '',
   onFilter: _.noop,
   onSaveFilter: _.noop,
   onSearch: _.noop,
@@ -256,6 +263,7 @@ ChallengeFilters.defaultProps = {
 ChallengeFilters.propTypes = {
   filter: PT.instanceOf(ChallengeFilter),
   isCardTypeSet: PT.string,
+  searchQuery: PT.string,
   onFilter: PT.func,
   onSearch: PT.func,
   onSaveFilter: PT.func,
