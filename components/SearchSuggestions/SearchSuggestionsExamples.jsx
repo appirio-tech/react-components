@@ -15,7 +15,7 @@ const SearchSuggestionsExamples = () => {
 			<SearchSuggestions recentSearch={ recentList } onSuggestionSelect={ handleSelection } />
 			<SearchSuggestions popularSearch={ popularList } onSuggestionSelect={ handleSelection } />
 		</section>
-	)
+  )
 }
 
 module.exports = SearchSuggestionsExamples

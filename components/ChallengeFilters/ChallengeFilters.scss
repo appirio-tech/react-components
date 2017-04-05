@@ -13,6 +13,7 @@
   }
   .FiltersSwitch {
     margin-top: 14.3px;
+    margin-left: 0;
     @include xs-to-sm {
       display: none;
     }
@@ -23,10 +24,10 @@
       display: none;
     }
   }
-  .pulled-right { 
+  .pulled-right {
     float: right;
     display: inline-block;
-    height: 60px; 
+    height: 60px;
     @include xs-to-sm {
       height: 40px;
     }

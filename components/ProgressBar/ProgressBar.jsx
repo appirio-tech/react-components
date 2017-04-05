@@ -45,10 +45,8 @@ const ProgressBar = ({completionPercentage, checkPoints}) => {
           })}
         </div>
         <div className="progress-ui">
-          <div className="progress-line">
-          </div>
-          <div className="completion-line" style={getLengthScaledStyle(completionPercentage)}>
-          </div>
+          <div className="progress-line" />
+          <div className="completion-line" style={getLengthScaledStyle(completionPercentage)} />
           <div className="progress-circles">
             {checkPoints.map((checkPoint, index) => {
               if(!checkPoint.hideCircle) {

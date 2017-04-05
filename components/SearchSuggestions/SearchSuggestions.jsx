@@ -105,7 +105,7 @@ class SearchSuggestions extends Component {
 				{ popularSearch }
 				{ recentSearches }
 			</div>
-		)
+    )
   }
 }
 

@@ -85,6 +85,11 @@ $challenge-radius-4: $corner-radius * 2;
     @include xs {
       margin-right: 0;
     }
+    &.with-register-button {
+      @include sm {
+        margin-right: 180px;
+      }
+    }
     a {
       line-height: $challenge-space-20;
       @include xs {
@@ -132,7 +137,7 @@ $challenge-radius-4: $corner-radius * 2;
     line-height: $challenge-space-20;
     margin-right: $challenge-space-20;
     min-width: $challenge-space-50 + 2;
-    @include xs-to-md {
+    @media (min-width: #{$xs-width}) and (max-width: #{$md-width - 1px}) {
       position: absolute;
       right: 0;
       top: 20px;
@@ -145,6 +150,11 @@ $challenge-radius-4: $corner-radius * 2;
       margin-top: $challenge-space-20;
       padding-left: $challenge-space-50;
       top: 0;
+    }
+    &.with-register-button {
+      @media (min-width: #{$sm-width}) and (max-width: #{$md-width - 1px}) {
+        right: 108px;
+      }
     }
     > span:first-child {
       display: inline-block;

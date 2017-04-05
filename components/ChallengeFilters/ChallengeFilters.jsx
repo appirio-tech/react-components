@@ -56,7 +56,7 @@ class ChallengeFilters extends React.Component {
       filter: props.filter,
       filtersCount: props.filter.count(),
       showFilters: false,
-      showEditTrackPanel: false, 
+      showEditTrackPanel: false,
     };
   }
 
@@ -197,8 +197,8 @@ class ChallengeFilters extends React.Component {
                 </span>
               ) : ''
             }
-            <span 
-              onClick={() => this.toggleShowFilters()} 
+            <span
+              onClick={() => this.toggleShowFilters()}
               className="filter-btn"
             >
               <FiltersIcon color="#737380" />
@@ -225,7 +225,7 @@ class ChallengeFilters extends React.Component {
 
         <EditTrackPanel
           opened={this.state.showEditTrackPanel}
-          onClose={this.toggleEditTrackPanel.bind(this)}
+          onClose={() => this.toggleEditTrackPanel()}
           designEnabled={this.state.filter.tracks.has(DESIGN_TRACK)}
           switchDesign={enable => this.setTracks(DESIGN_TRACK, enable)}
           devEnabled={this.state.filter.tracks.has(DEVELOP_TRACK)}
