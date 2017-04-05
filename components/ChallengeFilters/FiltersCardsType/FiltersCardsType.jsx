@@ -6,6 +6,7 @@
 import React from 'react';
 import './FiltersCardsType.scss';
 
+
 const { bool, string, oneOfType } = React.PropTypes;
 
 const FiltersCardsType = ({ isCardTypeSet }) => (
@@ -16,6 +17,9 @@ const FiltersCardsType = ({ isCardTypeSet }) => (
       onClick={() => false}
     >
       Challenges
+    </a>
+    <a href="//arena.topcoder.com" className="challenges-tab" target="_blank">
+      SRMs
     </a>
   </div>
 );
