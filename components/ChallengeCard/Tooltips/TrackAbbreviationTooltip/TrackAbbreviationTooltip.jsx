@@ -11,18 +11,18 @@ import Tooltip from '../Tooltip';
 import './TrackAbbreviationTooltip.scss';
 
 const DESCRIPTION = {
-  'APPLICATION_FRONT-END_DESIGN': 'Specific challenge type focused on an application\'s front-end design',
-  ASSEMBLY_COMPETITION: 'Specific challenge type focused on assembly of a final product',
-  CODE: 'Specific challenge type where the best solution selected by reviewers is the winner',
-  FIRST2FINISH: 'Specific challenge type where the first to submit a passable solution is the winner',
-  'PRINT/PRESENTATION': 'Specific challenge type focused on design of a print/presentation',
-  UI_PROTOTYPE_COMPETITION: 'Specific challenge type focused on UI prototyping',
-  ARCHITECTURE: 'Specific challenge type focused on Architecture',
-  WEB_DESIGN: 'Specific challenge type where the first to submit a passable solution is the winner',
-  WIDGET_OR_MOBILE_SCREEN_DESIGN: 'Specific challenge type focused on design of a mobile widget or screen',
-  WIREFRAMES: 'Specific challenge type focused on creation of a wireframes',
-  SRM: 'Specific challenge type focused on algorithm',
-  MARATHON_MATCH: 'Specific challenge type focused on algorithm',
+  'APPLICATION_FRONT-END_DESIGN': 'Design UI and front end experiences for apps',
+  ASSEMBLY_COMPETITION: 'Develop code for a variety of use cases. Rigorous review and final fix process is included.',
+  CODE: 'Develop code for apps, services, etc. Final fixes are not included',
+  FIRST2FINISH: 'Be the first to deliver the solution',
+  'PRINT/PRESENTATION': 'Design print and presentation assets',
+  UI_PROTOTYPE_COMPETITION: 'Develop the front end of a UX',
+  ARCHITECTURE: 'Architect modules, components, or full applications',
+  WEB_DESIGN: 'Design UI and front end experiences for web experiences',
+  WIDGET_OR_MOBILE_SCREEN_DESIGN: 'Design UI and front end experiences for mobile',
+  WIREFRAMES: 'Produce the information architecture for user experiences',
+  SRM: 'Single Round Match - quickly write code to solve algorythm problems head to head against other competitors',
+  MARATHON_MATCH: 'Write algorythms to solve complex problems, often for real world issues',
 };
 
 const HEADER = {
