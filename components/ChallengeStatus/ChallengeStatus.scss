@@ -17,6 +17,8 @@ $status-radius-4: $corner-radius * 2;
   width: 77.7%;
   @include xs-to-md {
     width: 100%;
+  }
+  @media (min-width: #{$xs-width}) and (max-width: #{$md-width - 1px}) {
     margin-top: $status-space-20 + 3;
   }
   @include xs {
