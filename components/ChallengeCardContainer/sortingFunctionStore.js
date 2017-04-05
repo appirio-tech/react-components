@@ -1,7 +1,7 @@
 const getTimeStamp = dateTime => new Date(dateTime).getTime();
 
 export default {
-  'Most recent': item => -item.challengeId,
+  'Most recent': item => -getTimeStamp(item.submissionEndTimestamp),
   'Time to register': item => getTimeStamp(item.registrationEndDate),
   'Time to submit': item => item.submissionEndTimestamp,
   'Phase end time': item => item.currentPhaseRemainingTime,
