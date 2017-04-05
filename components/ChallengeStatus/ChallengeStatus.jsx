@@ -170,12 +170,14 @@ class ChallengeStatus extends Component {
 
   renderRegisterButton() {
     const { challenge } = this.props;
+    const { detailLink } = this.props;
     const lng = getTimeLeft(
       challenge.registrationEndDate || challenge.submissionEndDate,
       challenge.currentPhaseName,
     ).text.length;
     return (
       <a
+        href={detailLink}
         className="register-button"
         onClick={() => false}
       >
@@ -410,12 +412,14 @@ class ChallengeStatus extends Component {
 ChallengeStatus.defaultProps = {
   challenge: {},
   config: {},
+  detailLink: "",
   sampleWinnerProfile: undefined,
 };
 
 ChallengeStatus.propTypes = {
   challenge: PropTypes.object,
   config: PropTypes.object,
+  detailLink: PropTypes.string,
 };
 
 export default ChallengeStatus;
