@@ -72,19 +72,6 @@ function numSubmissionsTipText(number) {
   }
 }
 
-const challengeDetailLink = (challenge, config) => {
-  const challengeUrl = `${config.MAIN_URL}/challenge-details/`;
-  const mmDetailUrl = `${window.location.protocol}${config.COMMUNITY_URL}/tc?module=MatchDetails&rd=`; // Marathon Match details
-  if (challenge.track === 'DATA_SCIENCE') {
-    const id = `${challenge.challengeId}`;
-    if (id.length < ID_LENGTH) {
-      return `${mmDetailUrl}${challenge.challengeId}`;
-    }
-    return `${challengeUrl}${challenge.challengeId}/?type=develop`;
-  }
-  return `${challengeUrl}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}`;
-};
-
 const getStatusPhase = (challenge) => {
   switch (challenge.currentPhaseName) {
     case 'Registration': {
@@ -183,14 +170,14 @@ class ChallengeStatus extends Component {
 
   renderRegisterButton() {
     const { challenge } = this.props;
-    const { config } = this.props;
+    const { detailLink } = this.props;
     const lng = getTimeLeft(
       challenge.registrationEndDate || challenge.submissionEndDate,
       challenge.currentPhaseName,
     ).text.length;
     return (
       <a
-        href={challengeDetailLink(challenge, config)}
+        href={detailLink}
         className="register-button"
         onClick={() => false}
       >
@@ -425,12 +412,14 @@ class ChallengeStatus extends Component {
 ChallengeStatus.defaultProps = {
   challenge: {},
   config: {},
+  detailLink: "",
   sampleWinnerProfile: undefined,
 };
 
 ChallengeStatus.propTypes = {
   challenge: PropTypes.object,
   config: PropTypes.object,
+  detailLink: PropTypes.string,
 };
 
 export default ChallengeStatus;
