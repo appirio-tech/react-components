@@ -72,11 +72,11 @@ const ChallengesSidebar = ({ SidebarMock }) => {
       </div>
       <div className="sidebar-footer">
         <ul>
-          <li><a href="javascript:;">About</a>&nbsp;•&nbsp;</li>
-          <li><a href="javascript:;">Contact</a>&nbsp;•&nbsp;</li>
-          <li><a href="javascript:;">Help</a>&nbsp;•&nbsp;</li>
-          <li><a href="javascript:;">Privacy</a>&nbsp;•&nbsp;</li>
-          <li><a href="javascript:;">Terms</a>&nbsp;•&nbsp;</li>
+          <li><a href="/about">About</a>&nbsp;•&nbsp;</li>
+          <li><a href="https://help.topcoder.com/hc/en-us/articles/219069687-Contact-Support">Contact</a>&nbsp;•&nbsp;</li>
+          <li><a href="https://help.topcoder.com/">Help</a>&nbsp;•&nbsp;</li>
+          <li><a href="/community/how-it-works/privacy-policy/">Privacy</a>&nbsp;•&nbsp;</li>
+          <li><a href="/community/how-it-works/terms/">Terms</a>&nbsp;•&nbsp;</li>
         </ul>
         <p className="copyright">Topcoder © 2017.</p>
       </div>
