@@ -12,7 +12,7 @@ const { bool, string, oneOfType } = React.PropTypes;
 const FiltersCardsType = ({ isCardTypeSet }) => (
   <div className="cards-type-col">
     <a
-      href=""
+      href="#"
       className={`challengs-tab ${isCardTypeSet === 'Challenges' ? 'active' : ''}`}
       onClick={(e) => e.preventDefault()}
     >
