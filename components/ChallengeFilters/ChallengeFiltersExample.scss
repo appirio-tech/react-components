@@ -48,7 +48,7 @@ $challenge-radius-4: $corner-radius * 2;
     }
   }
   .sidebar-container {
-    margin: $challenge-space-10;
+    margin: $challenge-space-20 $challenge-space-10 $challenge-space-10;
     &.xs-to-sm {
       display: none;
       @include xs-to-sm {
