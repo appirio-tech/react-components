@@ -106,6 +106,7 @@ function ChallengeCard({
         <ChallengeStatus
           challenge={challenge}
           config={config}
+          detailLink={challengeDetailLink(challenge)}
           sampleWinnerProfile={sampleWinnerProfile}
         />
       </div>
