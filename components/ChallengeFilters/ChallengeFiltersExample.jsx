@@ -416,6 +416,16 @@ class ChallengeFiltersExample extends React.Component {
       } else return 0
     });
 
+    VALID_KEYWORDS.sort(function(a, b) {
+      if (a.label < b.label) {
+        return -1
+      } else if (a.label > b.label) {
+        return 1
+      } else return 0
+    });
+
+
+
     return (
       <div className="ChallengeFiltersExample">
         <ChallengeFilters
