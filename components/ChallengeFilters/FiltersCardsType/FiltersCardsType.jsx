@@ -14,7 +14,7 @@ const FiltersCardsType = ({ isCardTypeSet }) => (
     <a
       href=""
       className={`challengs-tab ${isCardTypeSet === 'Challenges' ? 'active' : ''}`}
-      onClick={() => false}
+      onClick={(e) => e.preventDefault()}
     >
       Challenges
     </a>
