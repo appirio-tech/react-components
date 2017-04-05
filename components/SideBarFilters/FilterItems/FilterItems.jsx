@@ -75,6 +75,7 @@ function FilterItem(props) {
 FilterItem.defaultProps = {
   highlighted: false,
   onClick: _.noop,
+  myFilter: false,
 };
 
 FilterItem.propTypes = {

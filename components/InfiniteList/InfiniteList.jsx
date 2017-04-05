@@ -35,9 +35,6 @@ const initialPageIndex = 1;
 const { func, string, bool, number, oneOfType } = React.PropTypes;
 
 class InfiniteList extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   componentWillMount() {
     this.initializeProperties(this.props, true);
