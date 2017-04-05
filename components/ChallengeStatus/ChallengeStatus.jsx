@@ -72,6 +72,19 @@ function numSubmissionsTipText(number) {
   }
 }
 
+const challengeDetailLink = (challenge, config) => {
+  const challengeUrl = `${config.MAIN_URL}/challenge-details/`;
+  const mmDetailUrl = `${window.location.protocol}${config.COMMUNITY_URL}/tc?module=MatchDetails&rd=`; // Marathon Match details
+  if (challenge.track === 'DATA_SCIENCE') {
+    const id = `${challenge.challengeId}`;
+    if (id.length < ID_LENGTH) {
+      return `${mmDetailUrl}${challenge.challengeId}`;
+    }
+    return `${challengeUrl}${challenge.challengeId}/?type=develop`;
+  }
+  return `${challengeUrl}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}`;
+};
+
 const getStatusPhase = (challenge) => {
   switch (challenge.currentPhaseName) {
     case 'Registration': {
@@ -177,7 +190,7 @@ class ChallengeStatus extends Component {
     ).text.length;
     return (
       <a
-        href={this.challengeDetailLink(challenge, config)}
+        href={challengeDetailLink(challenge, config)}
         className="register-button"
         onClick={() => false}
       >
@@ -285,19 +298,6 @@ class ChallengeStatus extends Component {
       </div>
     );
   }
-
-  challengeDetailLink(challenge, config) {
-    const challengeUrl = `${config.MAIN_URL}/challenge-details/`;
-    const mmDetailUrl = `${window.location.protocol}${config.COMMUNITY_URL}/tc?module=MatchDetails&rd=`; // Marathon Match details
-    if (challenge.track === 'DATA_SCIENCE') {
-      const id = `${challenge.challengeId}`;
-      if (id.length < ID_LENGTH) {
-        return `${mmDetailUrl}${challenge.challengeId}`;
-      }
-      return `${challengeUrl}${challenge.challengeId}/?type=develop`;
-    }
-    return `${challengeUrl}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}`;
-  };
 
   completedChallenge() {
     const { challenge } = this.props;
