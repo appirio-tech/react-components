@@ -234,7 +234,7 @@ class SideBarFilters extends React.Component {
    * Renders the component in the Edit My Filters mode.
    */
   editMyFiltersMode() {
-    const domain = this.domainFromUrl(this.props.config.MAIN_URL);
+    const domain = SideBarFilters.domainFromUrl(this.props.config.MAIN_URL);
     return (
       <div className="SideBarFilters" ref={ref => this.props.ref(ref)}>
         <div className="FilterBox">
@@ -345,7 +345,7 @@ class SideBarFilters extends React.Component {
       />
     ));
     const myFilters = filters.slice(FILTER_ID.FIRST_USER_DEFINED);
-    const domain = this.domainFromUrl(this.props.config.MAIN_URL);
+    const domain = SideBarFilters.domainFromUrl(this.props.config.MAIN_URL);
     return (
       <div className="SideBarFilters" ref={ref => this.props.ref(ref)}>
         <div className="FilterBox">
