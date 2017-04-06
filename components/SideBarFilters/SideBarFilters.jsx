@@ -98,7 +98,9 @@ class SideBarFilters extends React.Component {
       return filter.name.toLowerCase() === props.filter.name.toLowerCase();
     });
     if (isDefaultFilter) {
-      this.state.currentFilter = isDefaultFilter;
+      this.setState({
+        currentFilter: isDefaultFilter
+      });
       return;
     }
     // A fancy staff: if the parent has passed a filter, which does not exists
