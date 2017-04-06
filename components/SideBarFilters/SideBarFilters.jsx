@@ -409,6 +409,7 @@ class SideBarFilters extends React.Component {
     if (currentFilter.mode === "Open for review") {
       // Jump to Development Review Opportunities page
       window.location.href = `${this.props.config.MAIN_URL}/review/development-review-opportunities/`;
+      return;
     }
     this.setState({ currentFilter }, () => this.props.onFilter(currentFilter));
   }
