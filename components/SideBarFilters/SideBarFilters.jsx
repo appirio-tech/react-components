@@ -216,6 +216,21 @@ class SideBarFilters extends React.Component {
     this.setState({ filters });
     this.saveFilters(filters.slice(FILTER_ID.FIRST_USER_DEFINED));
   }
+  
+  domainFromUrl(url) {
+    const firstSlashIndex = _.findIndex(url, (c) => c == "/");
+    const secondSlashIndex = _.findIndex(url, (c) => c == "/", firstSlashIndex+1);
+    const thirdSlashIndex = _.findIndex(url, (c) => c == "/", secondSlashIndex+1);
+    const fullDomainName = _.slice(url, secondSlashIndex+1, thirdSlashIndex);
+    const lastDotIndex = _.findLastIndex(fullDomainName, (c) => c == ".");
+    const secondLastDotIndex = _.findLastIndex(fullDomainName, (c) => c == ".", lastDotIndex-1);
+    if(secondLastDotIndex === -1) {
+      return fullDomainName; 
+    }
+    else {
+      return _.slice(fullDomainName, secondLastDotIndex+1);
+    }
+  }
 
   /**
    * Renders the component in the Edit My Filters mode.
@@ -239,11 +254,11 @@ class SideBarFilters extends React.Component {
         </div>
         <div className="sidebar-footer">
           <ul>
-            <li><a onClick={() => false}>About</a>&nbsp;•&nbsp;</li>
-            <li><a onClick={() => false}>Contact</a>&nbsp;•&nbsp;</li>
-            <li><a onClick={() => false}>Help</a>&nbsp;•&nbsp;</li>
-            <li><a onClick={() => false}>Privacy</a>&nbsp;•&nbsp;</li>
-            <li><a onClick={() => false}>Terms</a></li>
+            <li><a href={`https://www.${domain}/about`}>About</a>&nbsp;•&nbsp;</li>
+            <li><a href={`https://help.${domain}/hc/en-us/articles/219069687-Contact-Support`}>Contact</a>&nbsp;•&nbsp;</li>
+            <li><a href={`https://help.${domain}`}>Help</a>&nbsp;•&nbsp;</li>
+            <li><a href={`https://www.${domain}/community/how-it-works/privacy-policy/`}>Privacy</a>&nbsp;•&nbsp;</li>
+            <li><a href={`https://www.${domain}/community/how-it-works/terms/`}>Terms</a></li>
           </ul>
           <p className="copyright">Topcoder © 2017.</p>
         </div>
@@ -331,6 +346,7 @@ class SideBarFilters extends React.Component {
       />
     ));
     const myFilters = filters.slice(FILTER_ID.FIRST_USER_DEFINED);
+    const domain = domainFromUrl(this.props.config.MAIN_URL);
     return (
       <div className="SideBarFilters" ref={ref => this.props.ref(ref)}>
         <div className="FilterBox">
@@ -367,11 +383,11 @@ class SideBarFilters extends React.Component {
         </div>
         <div className="sidebar-footer">
           <ul>
-            <li><a onClick={() => false}>About</a>&nbsp;•&nbsp;</li>
-            <li><a onClick={() => false}>Contact</a>&nbsp;•&nbsp;</li>
-            <li><a onClick={() => false}>Help</a>&nbsp;•&nbsp;</li>
-            <li><a onClick={() => false}>Privacy</a>&nbsp;•&nbsp;</li>
-            <li><a onClick={() => false}>Terms</a></li>
+            <li><a href={`https://www.${domain}/about`}>About</a>&nbsp;•&nbsp;</li>
+            <li><a href={`https://help.${domain}/hc/en-us/articles/219069687-Contact-Support`}>Contact</a>&nbsp;•&nbsp;</li>
+            <li><a href={`https://help.${domain}`}>Help</a>&nbsp;•&nbsp;</li>
+            <li><a href={`https://www.${domain}/community/how-it-works/privacy-policy/`}>Privacy</a>&nbsp;•&nbsp;</li>
+            <li><a href={`https://www.${domain}/community/how-it-works/terms/`}>Terms</a></li>
           </ul>
           <p className="copyright">Topcoder © 2017</p>            
         </div>
