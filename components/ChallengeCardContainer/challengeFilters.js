@@ -5,6 +5,23 @@ export default [
     sortingOptions: ['Most recent'],
   },
   {
+    name: 'My challenges',
+    check(item) {
+      return item.myChallenge;
+    },
+    sortingOptions: [
+      'Most recent',
+      'Time to submit',
+      '# of registrants',
+      '# of submissions',
+      'Prize high to low',
+      'Title A-Z',
+    ],
+    getApiUrl: (pageIndex, pageSize = 50) => (
+      `http://api.topcoder.com/v2/user/challenges?&pageIndex=${pageIndex}&pageSize=${pageSize}`
+    ),
+  },  
+  {
     name: 'Open for registration',
     check(item) {
       return item.registrationOpen.startsWith('Yes') && item.currentPhaseName
@@ -24,23 +41,6 @@ export default [
     },
     getApiUrl: (pageIndex, pageSize = 50) => (
       `http://api.topcoder.com/v2/challenges/open?pageIndex=${pageIndex}&pageSize=${pageSize}`
-    ),
-  },
-  {
-    name: 'My challenges',
-    check(item) {
-      return item.myChallenge;
-    },
-    sortingOptions: [
-      'Most recent',
-      'Time to submit',
-      '# of registrants',
-      '# of submissions',
-      'Prize high to low',
-      'Title A-Z',
-    ],
-    getApiUrl: (pageIndex, pageSize = 50) => (
-      `http://api.topcoder.com/v2/user/challenges?&pageIndex=${pageIndex}&pageSize=${pageSize}`
     ),
   },
   {
