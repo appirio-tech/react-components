@@ -91,15 +91,15 @@ class SideBarFilters extends React.Component {
       const item = this.state.filters[i];
       item.count = props.challenges.filter(item.getFilterFunction()).length;
     }
-    for (let i = 0; i !== this.state.filters.length; i += 1) {
-      const f = this.state.filters[i];
-      // Match of UUID means that one of the filters we have already matches
-      // the one passed from the parent component, so we have just select it,
-      // and we can exit the constructor right after.
-      if (f.uuid === props.filter.uuid) {
-        this.state.currentFilter = f;
-        return;
-      }
+    // Match of name means that one of the filters we have already matches
+    // the one passed from the parent component, so we have just select it,
+    // and we can exit the constructor right after.
+    const isDefaultFilter = _.find(this.state.filters, (filter) => {
+      return filter.name.toLowerCase() === props.filter.name.toLowerCase();
+    });
+    if (isDefaultFilter) {
+      this.state.currentFilter = isDefaultFilter;
+      return;
     }
     // A fancy staff: if the parent has passed a filter, which does not exists
     // (it is taken from a deep link), we add it to the list of filters and
