@@ -371,8 +371,7 @@ class SideBarFilters extends React.Component {
             <li><a onClick={() => false}>Contact</a>&nbsp;•&nbsp;</li>
             <li><a onClick={() => false}>Help</a>&nbsp;•&nbsp;</li>
             <li><a onClick={() => false}>Privacy</a>&nbsp;•&nbsp;</li>
-            <li><a onClick={() => false}>Terms</a>&nbsp;•&nbsp;</li>
-            <li><a onClick={() => false}>More</a></li>
+            <li><a onClick={() => false}>Terms</a></li>
           </ul>
           <p className="copyright">Topcoder © 2017</p>            
         </div>
