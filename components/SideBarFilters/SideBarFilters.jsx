@@ -110,7 +110,7 @@ class SideBarFilters extends React.Component {
     this.state.filters.push(f);
   }
 
-  domainFromUrl(url) {
+  static domainFromUrl(url) {
     const firstSlashIndex = url.indexOf("/");
     const secondSlashIndex = url.indexOf("/", firstSlashIndex+1);
     const fullDomainName = url.slice(secondSlashIndex+1);
