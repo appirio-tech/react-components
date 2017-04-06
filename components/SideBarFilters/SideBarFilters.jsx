@@ -104,10 +104,18 @@ class SideBarFilters extends React.Component {
     // A fancy staff: if the parent has passed a filter, which does not exists
     // (it is taken from a deep link), we add it to the list of filters and
     // also select it.
-    const f = new SideBarFilter(props.filter);
-    f.count = props.challenges.filter(f.getFilterFunction()).length;
-    this.state.currentFilter = f;
-    this.state.filters.push(f);
+    // if the filter is one of the default filters then 
+    // select it by default. We check on name and assume that 
+    // a custom filter will never be named the same as a default filter.
+    if (_.values(MODE).includes(props.filter.name)) {
+      this.state.currentFilter = DEFAULT_FILTERS[_.values(MODE).indexOf(props.filter.name)]
+    }
+    else {
+      const f = new SideBarFilter(props.filter);
+      f.count = props.challenges.filter(f.getFilterFunction()).length;
+      this.state.currentFilter = f;
+      this.state.filters.push(f);
+    }
   }
 
 

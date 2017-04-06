@@ -68,11 +68,16 @@ const serialize = filter => filter.getURLEncoded();
 
 
 // helper function to de-serialize query string to filter object
-const deserialize = queryString => new SideBarFilter({
-  filter: queryString,
-  isSavedFilter: true, // So that we can reuse constructor for deserializing
-  isCustomFilter: true,
-});
+const deserialize = queryString => {
+  const filter = new SideBarFilter({
+    filter: queryString,
+    isSavedFilter: true, // So that we can reuse constructor for deserializing
+  });
+  if (!_.values(SideBarFilterModes).includes(filter.name)) {
+    filter.isCustomFilter = true;
+  }
+  return filter;
+}
 
 // The demo component itself.
 class ChallengeFiltersExample extends React.Component {
