@@ -111,6 +111,10 @@ class SideBarFilters extends React.Component {
   }
 
   static domainFromUrl(url) {
+    // if MAIN_URL is not defined or null return default domain (production)
+    if(url == null) {
+      return "topcoder.com";
+    }
     const firstSlashIndex = url.indexOf("/");
     const secondSlashIndex = url.indexOf("/", firstSlashIndex+1);
     const fullDomainName = url.slice(secondSlashIndex+1);
