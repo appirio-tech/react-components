@@ -18,7 +18,7 @@ export default [
       'Title A-Z',
     ],
     getApiUrl: (pageIndex, pageSize = 50) => (
-      `http://api.topcoder.com/v2/user/challenges?&pageIndex=${pageIndex}&pageSize=${pageSize}`
+      `https://api.topcoder.com/v2/user/challenges?&pageIndex=${pageIndex}&pageSize=${pageSize}`
     ),
   },  
   {
@@ -40,7 +40,7 @@ export default [
       phaseName: 'registration',
     },
     getApiUrl: (pageIndex, pageSize = 50) => (
-      `http://api.topcoder.com/v2/challenges/open?pageIndex=${pageIndex}&pageSize=${pageSize}`
+      `https://api.topcoder.com/v2/challenges/open?pageIndex=${pageIndex}&pageSize=${pageSize}`
     ),
   },
   {
@@ -71,7 +71,7 @@ export default [
       'Prize high to low',
     ],
     getApiUrl: (pageIndex, pageSize = 50) => (
-      `http://api.topcoder.com/v2/challenges/past?pageIndex=${pageIndex}&pageSize=${pageSize}`
+      `https://api.topcoder.com/v2/challenges/past?pageIndex=${pageIndex}&pageSize=${pageSize}`
     ),
   },
   {
