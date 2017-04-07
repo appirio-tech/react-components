@@ -22,7 +22,7 @@ class ChallengeCardExamples extends React.Component {
       pastDevelopChallenges: [],
       activeDesignChallenges: [],
       pastDesignChallenges: [],
-      activeMarathonMatchChallenges: [],
+      activeMarathonMatchChallenges: []
     };
     const that = this;
 
