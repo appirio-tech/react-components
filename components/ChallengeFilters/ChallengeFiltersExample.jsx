@@ -235,7 +235,7 @@ class ChallengeFiltersExample extends React.Component {
             challengeType: 'Marathon',
             communities: new Set([community]),
             currentPhaseEndDate: item.endDate,
-            currentPhaseName: endTimestamp > Date.now() ? 'Submission' : '',
+            currentPhaseName: endTimestamp > Date.now() ? 'Registration' : '',
             numRegistrants: item.numberOfRegistrants,
             numSubmissions: item.numberOfSubmissions,
             platforms: [],
