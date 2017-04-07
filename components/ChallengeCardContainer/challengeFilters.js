@@ -74,6 +74,8 @@ export default [
       `https://api.topcoder.com/v2/challenges/past?pageIndex=${pageIndex}&pageSize=${pageSize}`
     ),
   },
+  /**
+  // Removed: sidebar link points to another page
   {
     name: 'Open for review',
     check(item) {
@@ -97,4 +99,5 @@ export default [
     //   return `http://api.topcoder.com/v2/challenges/open?pageIndex=${pageIndex}&pageSize=${pageSize}&submissionEndTo=${yesterdayFormatted}`;
     // },
   },
+   */
 ];
