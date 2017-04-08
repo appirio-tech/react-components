@@ -322,6 +322,11 @@ class ChallengeFiltersExample extends React.Component {
       myChallengesId = this.props.myChallenges.map(challenge => challenge.id);
     }
 
+    if (props.getFilterFromUrl()) {
+      this.state.filter = deserialize(props.filterFromUrl);
+      this.state.searchQuery = props.filterFromUrl.split('&').filter(e => e.startsWith('query')).map(element => element.split('=')[1])[0];
+    }
+    
     let challenges = this.state.challenges;
     const currentFilter = this.state.filter;
     challenges = challenges.map((item) => {
@@ -532,6 +537,7 @@ ChallengeFiltersExample.defaultProps = {
   },
   filterFromUrl: '',
   onSaveFilterToUrl: _.noop,
+  getFilterFromUrl: _.noop,
   myChallenges: [],
   challengeFilters: undefined,
   isAuth: false,
@@ -544,6 +550,7 @@ ChallengeFiltersExample.propTypes = {
   }),
   filterFromUrl: PT.string,
   onSaveFilterToUrl: PT.func,
+  getFilterFromUrl: PT.func,
   myChallenges: PT.array,
   challengeFilters: PT.object,
   isAuth: PT.bool,
