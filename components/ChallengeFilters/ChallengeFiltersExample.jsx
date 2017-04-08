@@ -132,6 +132,7 @@ class ChallengeFiltersExample extends React.Component {
       .then((json) => {
         json.result.content.forEach(item => VALID_KEYWORDS.push(keywordsMapper(item.name)));
       });
+    this.props.setChallengeFilter(this);
   }
 
   /**
@@ -538,6 +539,7 @@ ChallengeFiltersExample.defaultProps = {
   filterFromUrl: '',
   onSaveFilterToUrl: _.noop,
   getFilterFromUrl: _.noop,
+  setChallengeFilter: _.noop,
   myChallenges: [],
   challengeFilters: undefined,
   isAuth: false,
@@ -551,6 +553,7 @@ ChallengeFiltersExample.propTypes = {
   filterFromUrl: PT.string,
   onSaveFilterToUrl: PT.func,
   getFilterFromUrl: PT.func,
+  setChallengeFilter: PT.func,
   myChallenges: PT.array,
   challengeFilters: PT.object,
   isAuth: PT.bool,
