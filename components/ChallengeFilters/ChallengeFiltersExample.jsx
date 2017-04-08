@@ -132,7 +132,8 @@ class ChallengeFiltersExample extends React.Component {
       .then((json) => {
         json.result.content.forEach(item => VALID_KEYWORDS.push(keywordsMapper(item.name)));
       });
-    this.props.setChallengeFilter(this);
+    // callback to listings.controller.js
+    props.setChallengeFilter(this);
   }
 
   /**
@@ -323,10 +324,12 @@ class ChallengeFiltersExample extends React.Component {
       myChallengesId = this.props.myChallenges.map(challenge => challenge.id);
     }
 
+    // get the latest filter and update current challenges
     if (this.props.getFilterFromUrl()) {
       this.state.filter = deserialize(this.props.filterFromUrl);
       this.state.searchQuery = this.props.filterFromUrl.split('&').filter(e => e.startsWith('query')).map(element => element.split('=')[1])[0];
     }
+    this.fetchChallenges(0).then(res => this.setChallenges(0, res));
     
     let challenges = this.state.challenges;
     const currentFilter = this.state.filter;
