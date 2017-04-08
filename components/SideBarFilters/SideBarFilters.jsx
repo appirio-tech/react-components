@@ -392,12 +392,14 @@ class SideBarFilters extends React.Component {
    * Selects the filter with the specified index.
    */
   selectFilter(index) {
-    const currentFilter = this.state.filters[index];
-    if (currentFilter.mode === 'Open for review') {
+    if (this.state.filters[index] === 'Open for review') {
       // Jump to Development Review Opportunities page
       window.location.href = `${this.props.config.MAIN_URL}/review/development-review-opportunities/`;
     }
-    this.setState({ currentFilter }, () => this.props.onFilter(currentFilter));
+    else {
+      const currentFilter = this.state.filters[index];
+      this.setState({ currentFilter }, () => this.props.onFilter(currentFilter));
+    }
   }
 
   /**
