@@ -326,8 +326,8 @@ class ChallengeFiltersExample extends React.Component {
 
     // get the latest filter and update current challenges
     if (this.props.getFilterFromUrl()) {
-      this.state.filter = deserialize(this.props.filterFromUrl);
-      this.state.searchQuery = this.props.filterFromUrl.split('&').filter(e => e.startsWith('query')).map(element => element.split('=')[1])[0];
+      this.state.filter = deserialize(this.props.getFilterFromUrl());
+      this.state.searchQuery = this.props.getFilterFromUrl().split('&').filter(e => e.startsWith('query')).map(element => element.split('=')[1])[0];
     }
     this.fetchChallenges(0).then(res => this.setChallenges(0, res));
     
