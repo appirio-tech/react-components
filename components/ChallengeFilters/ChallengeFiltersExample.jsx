@@ -313,13 +313,20 @@ class ChallengeFiltersExample extends React.Component {
 
   updateFilter(hash) {
     // get the latest filter and update current challenges
+    this.state = {
+      challenges: [],
+      srmChallenges: [],
+      currentCardType: 'Challenges',
+      filter: new SideBarFilter(),
+      lastFetchId: 0,
+    };
     if (hash) {
       this.state.filter = deserialize(hash);
       this.state.searchQuery = hash.split('&').filter(e => e.startsWith('query')).map(element => element.split('=')[1])[0];
     }
     this.fetchChallenges(0).then(res => this.setChallenges(0, res));
   }
-  
+
   // ReactJS render method.
   render() {
     // TODO: This is bad code. Generation of myChallengesId array is O(N),
