@@ -311,6 +311,15 @@ class ChallengeFiltersExample extends React.Component {
     this.setState({ filter: updatedFilter }, this.saveFiltersToHash.bind(this, updatedFilter));
   }
 
+  updateFilter(hash) {
+    // get the latest filter and update current challenges
+    if (hash) {
+      this.state.filter = deserialize(hash);
+      this.state.searchQuery = hash.split('&').filter(e => e.startsWith('query')).map(element => element.split('=')[1])[0];
+    }
+    this.fetchChallenges(0).then(res => this.setChallenges(0, res));
+  }
+  
   // ReactJS render method.
   render() {
     // TODO: This is bad code. Generation of myChallengesId array is O(N),
@@ -324,13 +333,6 @@ class ChallengeFiltersExample extends React.Component {
       myChallengesId = this.props.myChallenges.map(challenge => challenge.id);
     }
 
-    // get the latest filter and update current challenges
-    if (this.props.getFilterFromUrl()) {
-      this.state.filter = deserialize(this.props.getFilterFromUrl());
-      this.state.searchQuery = this.props.getFilterFromUrl().split('&').filter(e => e.startsWith('query')).map(element => element.split('=')[1])[0];
-    }
-    this.fetchChallenges(0).then(res => this.setChallenges(0, res));
-    
     let challenges = this.state.challenges;
     const currentFilter = this.state.filter;
     challenges = challenges.map((item) => {
