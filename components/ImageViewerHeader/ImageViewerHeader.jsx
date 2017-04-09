@@ -31,12 +31,12 @@ const ImageViewerHeader = ({
       <main className="flex column light-bg">
         <div className="header flex space-between">
           <div className="user flex middle">
-            <a href={'https://www.topcoder.com/members/' + handle}>
+            <a href={`${process.env.MAIN_URL}/members/${handle}`}>
               <Avatar avatar-url={avatar} />
             </a>
 
             <div className="titles flex column">
-              <a hrf={'https://www.topcoder.com/members/' + handle}>
+              <a href={`${process.env.MAIN_URL}/members/${handle}`}>
                 <p className="name"> {handle}
                 </p>
               </a>

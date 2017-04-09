@@ -18,8 +18,8 @@ const FiltersCardsType = ({ isCardTypeSet }) => (
       Challenges
     </a>
     <a
-      href="//arena.topcoder.com"
-      className="challenges-tab" 
+      href={`${process.env.ARENA_URL}`}
+      className="challenges-tab"
       target="_blank"
       rel="noopener noreferrer"
     >

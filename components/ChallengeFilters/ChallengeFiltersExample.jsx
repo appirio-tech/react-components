@@ -527,8 +527,8 @@ class ChallengeFiltersExample extends React.Component {
 
 ChallengeFiltersExample.defaultProps = {
   config: {
-    API_URL_V2: 'https://api.topcoder.com/v2',
-    API_URL: 'https://api.topcoder.com/v3',
+    API_URL_V2: process.env.API_URL_V2,
+    API_URL: process.env.API_URL,
   },
   filterFromUrl: '',
   onSaveFilterToUrl: _.noop,

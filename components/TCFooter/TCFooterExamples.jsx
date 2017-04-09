@@ -6,7 +6,7 @@ import React from 'react'
 
 const TCFooterExamples = () => (
   <div className="TCFooterExamples flex column middle center light-bg">
-    <TCFooter domain="topcoder-dev.com" />
+    <TCFooter domain={`${process.env.domain}`} />
   </div>
 )
 

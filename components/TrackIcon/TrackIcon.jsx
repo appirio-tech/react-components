@@ -2,7 +2,7 @@ import React from 'react'
 import Abbreviation from './Abbreviation'
 import './TrackIcon.scss'
 
-const TCO_URL = 'https://www.topcoder.com/tco'
+const TCO_URL = `${process.env.MAIN_URL}/tco`
 
 function TrackIcon ({track, subTrack, tcoEligible, isDataScience}) {
   return (

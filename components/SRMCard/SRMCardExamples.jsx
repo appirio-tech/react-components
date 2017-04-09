@@ -1,12 +1,11 @@
 import React from 'react'
 import SRMCard from './SRMCard.jsx'
-
 require('./SRMCardExamples.scss')
 
 /**
  * Base API version 3 URL
  */
-const API_V3 = 'https://api.topcoder.com/v3/srms'
+const API_V3 = `${process.env.API_URL}/srms`
 
 class SRMCardExamples extends React.Component {
   constructor(props) {

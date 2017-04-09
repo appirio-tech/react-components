@@ -30,7 +30,7 @@ function Tip(props) {
     </span>
   ));*/
   const { photoLink } = props.user;
-  const src = photoLink.startsWith('https') ? photoLink : `https://topcoder.com/${photoLink}`;
+  const src = photoLink.startsWith('https') ? photoLink : `${process.env.MAIN_URL}/${photoLink}`;
 
   return (
     <div>

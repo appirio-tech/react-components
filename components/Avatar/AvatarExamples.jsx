@@ -9,7 +9,7 @@ const AvatarExamples = () => (
 
     <h1>Url is provided</h1>
 
-    <Avatar avatarUrl="http://www.topcoder.com/i/m/cardiboy_big.jpg" />
+    <Avatar avatarUrl={`${process.env.MAIN_URL}/i/m/cardiboy_big.jpg`} />
   </div>
 )
 

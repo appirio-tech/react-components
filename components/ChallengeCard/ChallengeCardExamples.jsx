@@ -6,7 +6,7 @@ import React from 'react';
 import ChallengeCard from './ChallengeCard';
 import './ChallengeCardExamples.scss';
 
-const BASE_URL = 'https://api.topcoder.com/v2';
+const BASE_URL = process.env.API_URL_V2;
 const CHALLENGES_API = `${BASE_URL}/challenges/`;
 
 const fetchUserProfile = (handle) => {
