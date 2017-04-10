@@ -118,6 +118,23 @@ class SideBarFilters extends React.Component {
     }
   }
 
+  static domainFromUrl(url) {
+    // if MAIN_URL is not defined or null return default domain (production)
+    if(url == null) {
+      return "topcoder.com";
+    }
+    const firstSlashIndex = url.indexOf("/");
+    const secondSlashIndex = url.indexOf("/", firstSlashIndex+1);
+    const fullDomainName = url.slice(secondSlashIndex+1);
+    const lastDotIndex = fullDomainName.lastIndexOf(".");
+    const secondLastDotIndex = fullDomainName.lastIndexOf(".", lastDotIndex-1);
+    if(secondLastDotIndex === -1) {
+      return fullDomainName;
+    }
+    else {
+      return fullDomainName.slice(secondLastDotIndex+1, fullDomainName.length);
+    }
+  }
 
   /**
    * Retrieve the saved filters for a logged in user.
@@ -229,6 +246,7 @@ class SideBarFilters extends React.Component {
    * Renders the component in the Edit My Filters mode.
    */
   editMyFiltersMode() {
+    const domain = SideBarFilters.domainFromUrl(this.props.config.MAIN_URL);
     return (
       <div className="SideBarFilters" ref={ref => this.props.ref(ref)}>
         <div className="FilterBox">
@@ -247,11 +265,11 @@ class SideBarFilters extends React.Component {
         </div>
         <div className="sidebar-footer">
           <ul>
-            <li><a onClick={() => false}>About</a>&nbsp;•&nbsp;</li>
-            <li><a onClick={() => false}>Contact</a>&nbsp;•&nbsp;</li>
-            <li><a onClick={() => false}>Help</a>&nbsp;•&nbsp;</li>
-            <li><a onClick={() => false}>Privacy</a>&nbsp;•&nbsp;</li>
-            <li><a onClick={() => false}>Terms</a></li>
+            <li><a href={`https://www.${domain}/about`}>About</a>&nbsp;•&nbsp;</li>
+            <li><a href={`https://help.${domain}/hc/en-us/articles/219069687-Contact-Support`}>Contact</a>&nbsp;•&nbsp;</li>
+            <li><a href={`https://help.${domain}`}>Help</a>&nbsp;•&nbsp;</li>
+            <li><a href={`https://www.${domain}/community/how-it-works/privacy-policy/`}>Privacy</a>&nbsp;•&nbsp;</li>
+            <li><a href={`https://www.${domain}/community/how-it-works/terms/`}>Terms</a></li>
           </ul>
           <p className="copyright">Topcoder © 2017.</p>
         </div>
@@ -339,6 +357,7 @@ class SideBarFilters extends React.Component {
       />
     ));
     const myFilters = filters.slice(FILTER_ID.FIRST_USER_DEFINED);
+    const domain = SideBarFilters.domainFromUrl(this.props.config.MAIN_URL);
     return (
       <div className="SideBarFilters" ref={ref => this.props.ref(ref)}>
         <div className="FilterBox">
@@ -349,7 +368,7 @@ class SideBarFilters extends React.Component {
           {filters[FILTER_ID.ONGOING_CHALLENGES]}
           {filters[FILTER_ID.OPEN_FOR_REVIEW]}
           <hr />
-          {filters[FILTER_ID.PAST_CHALLENGES]}           
+          {filters[FILTER_ID.PAST_CHALLENGES]}
           {
             myFilters.length ?
               <div>
@@ -375,14 +394,13 @@ class SideBarFilters extends React.Component {
         </div>
         <div className="sidebar-footer">
           <ul>
-            <li><a onClick={() => false}>About</a>&nbsp;•&nbsp;</li>
-            <li><a onClick={() => false}>Contact</a>&nbsp;•&nbsp;</li>
-            <li><a onClick={() => false}>Help</a>&nbsp;•&nbsp;</li>
-            <li><a onClick={() => false}>Privacy</a>&nbsp;•&nbsp;</li>
-            <li><a onClick={() => false}>Terms</a>&nbsp;•&nbsp;</li>
-            <li><a onClick={() => false}>More</a></li>
+            <li><a href={`https://www.${domain}/about`}>About</a>&nbsp;•&nbsp;</li>
+            <li><a href={`https://help.${domain}/hc/en-us/articles/219069687-Contact-Support`}>Contact</a>&nbsp;•&nbsp;</li>
+            <li><a href={`https://help.${domain}`}>Help</a>&nbsp;•&nbsp;</li>
+            <li><a href={`https://www.${domain}/community/how-it-works/privacy-policy/`}>Privacy</a>&nbsp;•&nbsp;</li>
+            <li><a href={`https://www.${domain}/community/how-it-works/terms/`}>Terms</a></li>
           </ul>
-          <p className="copyright">Topcoder © 2017</p>            
+          <p className="copyright">Topcoder © 2017</p>
         </div>
       </div>
     );
