@@ -10,7 +10,8 @@ const ImageViewerHeader = ({
   downloadUrl,
   commentsAllowed,
   downloadAllowed,
-  toggleComments
+  toggleComments,
+  MAIN_URL
  }) => {
   const downloadButton = downloadAllowed && (
     <button className="clean">
@@ -31,12 +32,12 @@ const ImageViewerHeader = ({
       <main className="flex column light-bg">
         <div className="header flex space-between">
           <div className="user flex middle">
-            <a href={`${process.env.MAIN_URL}/members/${handle}`}>
+            <a href={`${MAIN_URL}/members/${handle}`}>
               <Avatar avatar-url={avatar} />
             </a>
 
             <div className="titles flex column">
-              <a href={`${process.env.MAIN_URL}/members/${handle}`}>
+              <a href={`${MAIN_URL}/members/${handle}`}>
                 <p className="name"> {handle}
                 </p>
               </a>
@@ -56,6 +57,13 @@ const ImageViewerHeader = ({
       </main>
     </div>
   )
+}
+ImageViewerHeader.defaultProps = {
+  MAIN_URL: process.env.MAIN_URL,
+}
+
+ImageViewerHeader.propTypes = {
+  MAIN_URL: React.PropTypes.string,
 }
 
 export default ImageViewerHeader

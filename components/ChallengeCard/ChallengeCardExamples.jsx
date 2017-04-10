@@ -6,13 +6,6 @@ import React from 'react';
 import ChallengeCard from './ChallengeCard';
 import './ChallengeCardExamples.scss';
 
-const BASE_URL = process.env.API_URL_V2;
-const CHALLENGES_API = `${BASE_URL}/challenges/`;
-
-const fetchUserProfile = (handle) => {
-  const url = `${BASE_URL}/users/${handle}`;
-  return fetch(url).then(res => res.json());
-};
 
 class ChallengeCardExamples extends React.Component {
   constructor() {
@@ -22,10 +15,15 @@ class ChallengeCardExamples extends React.Component {
       pastDevelopChallenges: [],
       activeDesignChallenges: [],
       pastDesignChallenges: [],
-      activeMarathonMatchChallenges: []
+      activeMarathonMatchChallenges: [],
     };
     const that = this;
-
+    const BASE_URL = this.props.API_URL_V2;
+    const CHALLENGES_API = `${BASE_URL}/challenges/`;
+    const fetchUserProfile = (handle) => {
+      const url = `${BASE_URL}/users/${handle}`;
+      return fetch(url).then(res => res.json());
+    };
     // Fetches a sample user profile to show in User Avatar Tooltips.
     // Effective loading of all winner profiles for all challenges is
     // somewhat out of the scope of the current challenge.
@@ -183,5 +181,13 @@ class ChallengeCardExamples extends React.Component {
     );
   }
 }
+
+ChallengeCardExamples.propTypes = {
+  API_URL_V2: React.PropTypes.string,
+};
+
+ChallengeCardExamples.defaultProps = {
+  API_URL_V2: process.env.API_URL_V2,
+};
 
 module.exports = ChallengeCardExamples;
