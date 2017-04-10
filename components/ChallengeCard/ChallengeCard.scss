@@ -122,6 +122,7 @@ $challenge-radius-4: $corner-radius * 2;
       margin-right: $base-unit;
       border-radius: $corner-radius + 2;
       height: $challenge-space-20;
+      margin-bottom: 2px;
     }
     .technology:hover {
       background: $tc-dark-blue-30;
