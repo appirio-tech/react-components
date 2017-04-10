@@ -59,7 +59,7 @@ SRMCardExamples.defaultProps = {
 }
 
 SRMCardExamples.propTypes = {
-  API_URL: React.propTypes.string
+  API_URL: React.PropTypes.string
 }
 
 export default SRMCardExamples
