@@ -391,7 +391,9 @@ class ChallengeFiltersExample extends React.Component {
       challengeCardContainer = (
         <ChallengeCardContainer
           config={config}
-          onTechTagClicked={tag => challengeFilters.setKeywords(tag)}
+          onTechTagClicked={tag => {
+            if (this.challengeFilters) this.challengeFilters.setKeywords(tag);
+          }
           challenges={_.uniqBy(challenges, 'challengeId')}
           currentFilterName={sidebarFilterName}
           expanded={sidebarFilterName !== 'All Challenges'}
