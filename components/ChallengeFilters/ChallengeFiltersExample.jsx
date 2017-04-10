@@ -132,6 +132,8 @@ class ChallengeFiltersExample extends React.Component {
       .then((json) => {
         json.result.content.forEach(item => VALID_KEYWORDS.push(keywordsMapper(item.name)));
       });
+    // callback to listings.controller.js
+    props.setChallengeFilter(this);
   }
 
   /**
@@ -307,6 +309,22 @@ class ChallengeFiltersExample extends React.Component {
       updatedFilter.mode = SideBarFilterModes.CUSTOM;
     }
     this.setState({ filter: updatedFilter }, this.saveFiltersToHash.bind(this, updatedFilter));
+  }
+
+  updateFilter(hash) {
+    // get the latest filter and update current challenges
+    this.state = {
+      challenges: [],
+      srmChallenges: [],
+      currentCardType: 'Challenges',
+      filter: new SideBarFilter(),
+      lastFetchId: 0,
+    };
+    if (hash) {
+      this.state.filter = deserialize(hash);
+      this.state.searchQuery = hash.split('&').filter(e => e.startsWith('query')).map(element => element.split('=')[1])[0];
+    }
+    this.fetchChallenges(0).then(res => this.setChallenges(0, res));
   }
 
   // ReactJS render method.
@@ -532,6 +550,7 @@ ChallengeFiltersExample.defaultProps = {
   },
   filterFromUrl: '',
   onSaveFilterToUrl: _.noop,
+  setChallengeFilter: _.noop,
   myChallenges: [],
   challengeFilters: undefined,
   isAuth: false,
@@ -544,6 +563,7 @@ ChallengeFiltersExample.propTypes = {
   }),
   filterFromUrl: PT.string,
   onSaveFilterToUrl: PT.func,
+  setChallengeFilter: PT.func,
   myChallenges: PT.array,
   challengeFilters: PT.object,
   isAuth: PT.bool,
