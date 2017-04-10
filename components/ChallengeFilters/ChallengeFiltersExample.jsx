@@ -393,7 +393,7 @@ class ChallengeFiltersExample extends React.Component {
           config={config}
           onTechTagClicked={tag => {
             if (this.challengeFilters) this.challengeFilters.setKeywords(tag);
-          }
+          }}
           challenges={_.uniqBy(challenges, 'challengeId')}
           currentFilterName={sidebarFilterName}
           expanded={sidebarFilterName !== 'All Challenges'}
