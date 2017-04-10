@@ -31,26 +31,12 @@ function ChallengeCard({
 }) {
   const challenge = passedInChallenge;
 
-  challenge.technologyList = challenge.technologies;
   challenge.isDataScience = false;
-  if (challenge.technologyList.length > VISIBLE_TECHNOLOGIES) {
-    if (_.indexOf(challenge.technologyList, 'Data Science') > -1) {
-      challenge.isDataScience = true;
-    }
-    const lastItem = `+${challenge.technologyList.length - VISIBLE_TECHNOLOGIES}`;
-    challenge.technologyList = challenge.technologyList.slice(0, VISIBLE_TECHNOLOGIES);
-    challenge.technologyList.push(lastItem);
+  if (_.indexOf(challenge.technologies, 'Data Science') > -1) {
+    challenge.isDataScience = true;
   }
   challenge.prize = challenge.prize || [];
   // challenge.totalPrize = challenge.prize.reduce((x, y) => y + x, 0)
-
-  const renderTechnologies = challenge.technologyList.map(c => (
-    <a
-      key={c} className="technology"
-      onClick={() => onTechTagClicked(c)}
-    >{c}
-    </a>
-    ));
 
   const challengeDetailLink = () => {
     const challengeUrl = `${config.MAIN_URL}/challenge-details/`;
@@ -88,10 +74,7 @@ function ChallengeCard({
               {challenge.status === 'Active' ? 'Ends ' : 'Ended '}
               {getEndDate(challenge.submissionEndDate)}
             </span>
-            {
-              challenge.technologies.length === 0 ?
-                '' : renderTechnologies
-            }
+            <Tags technologies={challenge.technologies} onTechTagClicked={onTechTagClicked} />
           </div>
         </div>
       </div>
@@ -126,6 +109,64 @@ ChallengeCard.propTypes = {
   challenge: object,
   config: object,
   sampleWinnerProfile: object,
+};
+
+/**
+ * Renders the Tags
+ */
+
+class Tags extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      expanded: false,
+    };
+    this.onClick = this.onClick.bind(this);
+  }
+
+  renderTechnologies() {
+    if (this.props.technologies.length) {
+      let technologyList = this.props.technologies;
+      if (this.props.technologies.length > VISIBLE_TECHNOLOGIES && !this.state.expanded) {
+        const lastItem = `+${technologyList.length - VISIBLE_TECHNOLOGIES}`;
+        technologyList = this.props.technologies.slice(0, VISIBLE_TECHNOLOGIES);
+        technologyList.push(lastItem);
+      }
+      return technologyList.map(c => (
+        <a
+          key={c} className="technology"
+          onClick={() => this.onClick(c)}
+        >{c}
+        </a>
+      ));
+    }
+    return '';
+  }
+  onClick(c) {
+    if (c.indexOf('+') > -1) {
+      this.setState({ expanded: true });
+    } else {
+      this.props.onTechTagClicked(c);
+    }
+  }
+
+  render() {
+    const technologies = this.renderTechnologies();
+    return (
+      <span>
+        { technologies }
+      </span>
+    );
+  }
+}
+Tags.defaultProps = {
+  technologies: [],
+  onTechTagClicked: _.noop,
+};
+
+Tags.propTypes = {
+  technologies: React.PropTypes.array,
+  onTechTagClicked: React.PropTypes.func,
 };
 
 export default ChallengeCard;
