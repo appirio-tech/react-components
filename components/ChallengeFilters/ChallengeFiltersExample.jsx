@@ -554,7 +554,7 @@ ChallengeFiltersExample.defaultProps = {
   onSaveFilterToUrl: _.noop,
   setChallengeFilter: _.noop,
   myChallenges: [],
-  challengeFilters: undefined,
+  // challengeFilters: undefined,
   isAuth: false,
 };
 
@@ -567,7 +567,7 @@ ChallengeFiltersExample.propTypes = {
   onSaveFilterToUrl: PT.func,
   setChallengeFilter: PT.func,
   myChallenges: PT.array,
-  challengeFilters: PT.object,
+  // challengeFilters: PT.object,
   isAuth: PT.bool,
 };
 
