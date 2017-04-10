@@ -55,7 +55,10 @@ class SortingSelectBar extends Component {
           <Dropdown
             options={sortingOptions}
             onChange={optionName => this.onSelectOption(optionName.value)}
-            value={selectedSortingOption}
+            value={{
+              label: selectedSortingOption, 
+              value: selectedSortingOption
+            }}
             placeholder="Select an option"
           />
         </div>
