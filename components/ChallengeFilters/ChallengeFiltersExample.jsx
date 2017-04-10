@@ -379,7 +379,7 @@ class ChallengeFiltersExample extends React.Component {
         </div>
       );
     } else {
-      const { config, challengeFilters } = this.props;
+      const { config } = this.props;
       const filterFunc = filter.getFilterFunction();
       const sidebarFilterFunc = (challenge) => {
         if (currentFilter.mode !== SideBarFilterModes.CUSTOM) {
