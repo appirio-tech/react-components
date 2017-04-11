@@ -64,13 +64,24 @@ Tip.propTypes = {
   track: PT.string.isRequired,
 };
 
+function placeArrow(TooltipNode) {
+  const arrow = TooltipNode.querySelector('.rc-tooltip-arrow');
+  requestAnimationFrame(function () {
+    arrow.style.left = '15px';
+  });
+}
 /**
  * Renders the tooltip.
  */
 function TrackAbbreviationTooltip(props) {
   const tip = <Tip track={props.track} subTrack={props.subTrack} />;
   return (
-    <Tooltip className="track-abbreviation-tooltip" content={tip}>
+    <Tooltip
+      className="track-abbreviation-tooltip"
+      content={tip}
+      position="topLeft"
+      placeArrow={placeArrow}
+    >
       {props.children}
     </Tooltip>
   );

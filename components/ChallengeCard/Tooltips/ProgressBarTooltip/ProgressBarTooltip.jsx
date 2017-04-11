@@ -160,6 +160,13 @@ Tip.propTypes = {
   isLoaded: PT.bool,
 };
 
+function placeArrow(TooltipNode) {
+  const arrow = TooltipNode.querySelector('.rc-tooltip-arrow');
+  requestAnimationFrame(function () {
+    arrow.style.top = '100%';
+  });
+}
+
 /**
  * Renders the tooltip.
  */
@@ -202,9 +209,18 @@ class ProgressBarTooltip extends React.Component {
     return fetch(`${challengesApi}${id}`).then(res => res.json());
   }
   render() {
+    const tooltipAlign = {
+      targetOffset: ['-150%'],
+    };
     const tip = <Tip challenge={this.state.chDetails} isLoaded={this.state.isLoaded} />;
     return (
-      <Tooltip className="progress-bar-tooltip" content={tip} onTooltipHover={this.onTooltipHover}>
+      <Tooltip
+        className="progress-bar-tooltip"
+        content={tip}
+        onTooltipHover={this.onTooltipHover}
+        placeArrow={placeArrow}
+        align={tooltipAlign}
+      >
         {this.props.children}
       </Tooltip>
     );
