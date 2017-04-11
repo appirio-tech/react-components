@@ -162,9 +162,7 @@ Tip.propTypes = {
 
 function placeArrow(TooltipNode) {
   const arrow = TooltipNode.querySelector('.rc-tooltip-arrow');
-  requestAnimationFrame(function () {
-    arrow.style.top = '100%';
-  });
+  arrow.style.top = '100%';
 }
 
 /**

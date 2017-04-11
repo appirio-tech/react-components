@@ -66,9 +66,7 @@ Tip.propTypes = {
 
 function placeArrow(TooltipNode) {
   const arrow = TooltipNode.querySelector('.rc-tooltip-arrow');
-  requestAnimationFrame(function () {
-    arrow.style.left = '15px';
-  });
+  arrow.style.left = '15px';
 }
 /**
  * Renders the tooltip.
