@@ -17,6 +17,7 @@ const ID_LENGTH = 6;
 const MAX_VISIBLE_WINNERS = 3;
 const MOCK_PHOTO = 'https://acrobatusers.com/assets/images/template/author_generic.jpg';
 const STALLED_MSG = 'Stalled';
+const DRAFT_MSG = 'Draft';
 const STALLED_TIME_LEFT_MSG = 'Challenge is currently on hold';
 const FF_TIME_LEFT_MSG = 'Winner is working on fixes';
 
@@ -218,7 +219,7 @@ class ChallengeStatus extends Component {
           {
             challenge.currentPhaseName
               ? getStatusPhase(challenge).currentPhaseName
-              : STALLED_MSG
+              : challenge.status === 'Draft' ? DRAFT_MSG : STALLED_MSG
           }
         </span>
         <span className="challenge-stats">

@@ -289,6 +289,10 @@ class ChallengeFiltersExample extends React.Component {
       fetch(`${api}/challenges/past?type=develop&pageSize=100`).then(res => helper2(res, DEVELOP_TRACK)),
       fetch(`${api}/dataScience/challenges/past?pageSize=100`).then(res => helper2(res, DATA_SCIENCE_TRACK)),
       fetch(`${api}/data/marathon/challenges/?listType=past&pageSize=100`).then(res => helper2(res, DATA_SCIENCE_TRACK)),
+      // Fetching upcoming challenges
+      fetch(`${api}/challenges/upcoming?type=design&pageSize=100`).then(res => helper2(res, DESIGN_TRACK)),
+      fetch(`${api}/challenges/upcoming?type=develop&pageSize=100`).then(res => helper2(res, DEVELOP_TRACK)),
+      fetch(`${api}/dataScience/challenges/upcoming?pageSize=100`).then(res => helper2(res, DATA_SCIENCE_TRACK)),
     ]).then(() => {
       _.forIn(map, item => challenges.push(item));
       challenges.sort((a, b) => b.submissionEndTimestamp - a.submissionEndTimestamp);

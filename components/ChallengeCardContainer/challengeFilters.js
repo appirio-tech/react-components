@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export default [
   {
     name: 'All Challenges',
@@ -96,5 +98,19 @@ export default [
     //
     //   return `http://api.topcoder.com/v2/challenges/open?pageIndex=${pageIndex}&pageSize=${pageSize}&submissionEndTo=${yesterdayFormatted}`;
     // },
+  },
+  {
+    name: 'Upcoming challenges',
+    check(item) {
+      return moment(item.registrationStartDate) > moment();
+    },
+    sortingOptions: [
+      'Most recent',
+      'Title A-Z',
+      'Prize high to low',
+    ],
+    getApiUrl: (pageIndex, pageSize = 50) => (
+      `https://api.topcoder.com/v2/challenges/upcoming?pageIndex=${pageIndex}&pageSize=${pageSize}`
+    ),
   },
 ];
