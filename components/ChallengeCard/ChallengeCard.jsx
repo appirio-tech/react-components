@@ -143,7 +143,8 @@ class Tags extends React.Component {
     return '';
   }
   onClick(c) {
-    if (c.indexOf('+') > -1) {
+    // resolved conflict with c++ tag
+    if (c.indexOf('+') === 0) {
       this.setState({ expanded: true });
     } else {
       this.props.onTechTagClicked(c);

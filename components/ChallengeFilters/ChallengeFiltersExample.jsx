@@ -379,7 +379,7 @@ class ChallengeFiltersExample extends React.Component {
         </div>
       );
     } else {
-      const { config, challengeFilters } = this.props;
+      const { config } = this.props;
       const filterFunc = filter.getFilterFunction();
       const sidebarFilterFunc = (challenge) => {
         if (currentFilter.mode !== SideBarFilterModes.CUSTOM) {
@@ -391,7 +391,9 @@ class ChallengeFiltersExample extends React.Component {
       challengeCardContainer = (
         <ChallengeCardContainer
           config={config}
-          onTechTagClicked={tag => challengeFilters.setKeywords(tag)}
+          onTechTagClicked={tag => {
+            if (this.challengeFilters) this.challengeFilters.setKeywords(tag);
+          }}
           challenges={_.uniqBy(challenges, 'challengeId')}
           currentFilterName={sidebarFilterName}
           expanded={sidebarFilterName !== 'All Challenges'}
@@ -552,7 +554,7 @@ ChallengeFiltersExample.defaultProps = {
   onSaveFilterToUrl: _.noop,
   setChallengeFilter: _.noop,
   myChallenges: [],
-  challengeFilters: undefined,
+  // challengeFilters: undefined,
   isAuth: false,
 };
 
@@ -565,7 +567,7 @@ ChallengeFiltersExample.propTypes = {
   onSaveFilterToUrl: PT.func,
   setChallengeFilter: PT.func,
   myChallenges: PT.array,
-  challengeFilters: PT.object,
+  // challengeFilters: PT.object,
   isAuth: PT.bool,
 };
 
