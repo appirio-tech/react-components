@@ -41,7 +41,8 @@ class SideBarFilter extends ChallengeFilter {
       this.isCustomFilter = arg.isCustomFilter;
       const mode = arg.filter.split('&').filter(ele => ele.startsWith('mode='))[0];
       const name = arg.filter.split('&').filter(ele => ele.startsWith('name='))[0];
-      this.mode = mode ? Object.values(MODE)[+mode.split('=')[1]] : MODE.CUSTOM;
+      const modes = Object.keys(MODE).map((key) => MODE[key]);
+      this.mode = mode ? modes[+mode.split('=')[1]] : MODE.CUSTOM;
       this.name = arg.name || (name ? decodeURIComponent(name.split('=')[1]) : name) || 'Custom';
       this.uuid = arg.id || uuid();
     } else if (_.isObject(arg)) {
@@ -115,7 +116,8 @@ class SideBarFilter extends ChallengeFilter {
  * Used for saving to the backend and displaying on the URL for deep linking.
  */
   getURLEncoded() {
-    const mode = `&mode=${Object.values(MODE).indexOf(this.mode)}`;
+    const modes = Object.keys(MODE).map((key) => MODE[key]);
+    const mode = `&mode=${modes.indexOf(this.mode)}`;
     const name = `&name=${this.name}`;
     return `${super.getURLEncoded()}${mode}${name}`;
   }
