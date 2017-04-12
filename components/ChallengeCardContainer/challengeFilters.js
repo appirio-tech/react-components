@@ -22,7 +22,7 @@ export default [
     getApiUrl: (pageIndex, pageSize = 50) => (
       `https://api.topcoder.com/v2/user/challenges?&pageIndex=${pageIndex}&pageSize=${pageSize}`
     ),
-  },  
+  },
   {
     name: 'Open for registration',
     check(item) {
@@ -110,7 +110,7 @@ export default [
       'Prize high to low',
     ],
     getApiUrl: (pageIndex, pageSize = 50) => (
-      `https://api.topcoder.com/v2/challenges/upcoming?pageIndex=${pageIndex}&pageSize=${pageSize}`
+      `${process.env.API_URL_V2}/challenges/upcoming?pageIndex=${pageIndex}&pageSize=${pageSize}`
     ),
   },
 ];
