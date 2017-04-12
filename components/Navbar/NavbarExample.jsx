@@ -5,7 +5,8 @@ import React, {Component, PropTypes} from 'react'
 import fetch from 'isomorphic-fetch'
 import _ from 'lodash'
 
-const suggest = (searchTerm, INTERNAL_API_URL) => {
+const suggest = (searchTerm) => {
+  const INTERNAL_API_URL = process.env.INTERNAL_API_URL
   return fetch(`${INTERNAL_API_URL}/tags/_suggest/?q=${searchTerm}`)
   .then(response => {
     if (response.status >= 200 && response.status < 400) {
@@ -134,12 +135,10 @@ class NavbarExample extends Component {
   }
 }
 NavbarExample.defaultProps = {
-  INTERNAL_API_URL: process.env.INTERNAL_API_URL,
   domain: process.env.domain
 }
 
 NavbarExample.propTypes = {
-  INTERNAL_API_URL: React.PropTypes.string,
   domain: React.PropTypes.string
 }
 module.exports = NavbarExample

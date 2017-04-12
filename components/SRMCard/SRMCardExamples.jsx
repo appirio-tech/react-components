@@ -10,7 +10,7 @@ class SRMCardExamples extends React.Component {
     }
 
     /* Fetching of SRM challenges */
-    fetch(`${this.props.API_V3}/?filter=status=FUTURE`)
+    fetch(`${this.props.API_URL}/?filter=status=FUTURE`)
       .then(res => res.json())
       .then((json) => {
         this.setState({srmChallenges: json.result.content})

@@ -8,7 +8,7 @@ import './ChallengeCardExamples.scss';
 
 
 class ChallengeCardExamples extends React.Component {
-  constructor() {
+  constructor(props) {
     super();
     this.state = {
       activeDevelopChallenges: [],
@@ -18,7 +18,7 @@ class ChallengeCardExamples extends React.Component {
       activeMarathonMatchChallenges: [],
     };
     const that = this;
-    const BASE_URL = this.props.API_URL_V2;
+    const BASE_URL = props.API_URL_V2;
     const CHALLENGES_API = `${BASE_URL}/challenges/`;
     const fetchUserProfile = (handle) => {
       const url = `${BASE_URL}/users/${handle}`;

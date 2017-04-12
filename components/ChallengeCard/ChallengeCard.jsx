@@ -117,7 +117,7 @@ function ChallengeCard({
 ChallengeCard.defaultProps = {
   onTechTagClicked: _.noop,
   challenge: {},
-  config: {},
+  config: process.env,
   sampleWinnerProfile: undefined,
 };
 
