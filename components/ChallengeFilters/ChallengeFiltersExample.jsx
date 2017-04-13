@@ -27,6 +27,8 @@ import SideBarFilters from '../SideBarFilters';
 import './ChallengeFiltersExample.scss';
 import ChallengeCard from '../ChallengeCard/ChallengeCard';
 import ChallengeCardContainer from '../ChallengeCardContainer/ChallengeCardContainer';
+import ChallengeCardPlaceholder from '../ComponentPlaceholders/ChallengeCardPlaceholder/ChallengeCardPlaceholder';
+import SidebarFilterPlaceholder from '../ComponentPlaceholders/SidebarFilterPlaceholder/SidebarFilterPlaceholder';
 import SRMCard from '../SRMCard/SRMCard';
 import ChallengesSidebar from '../ChallengesSidebar/ChallengesSidebar';
 import '../ChallengeCard/ChallengeCard.scss';
@@ -43,6 +45,9 @@ function keywordsMapper(keyword) {
     value: keyword,
   };
 }
+
+// Number of challenge placeholder card to display
+const CHALLENGE_PLACEHOLDER_COUNT = 8;
 
 // List of keywords to allow in the Keywords filter.
 const VALID_KEYWORDS = [];
@@ -68,7 +73,7 @@ const serialize = filter => filter.getURLEncoded();
 
 
 // helper function to de-serialize query string to filter object
-const deserialize = queryString => {
+const deserialize = (queryString) => {
   const filter = new SideBarFilter({
     filter: queryString,
     isSavedFilter: true, // So that we can reuse constructor for deserializing
@@ -77,7 +82,7 @@ const deserialize = queryString => {
     filter.isCustomFilter = true;
   }
   return filter;
-}
+};
 
 // The demo component itself.
 class ChallengeFiltersExample extends React.Component {
@@ -89,6 +94,7 @@ class ChallengeFiltersExample extends React.Component {
       currentCardType: 'Challenges',
       filter: new SideBarFilter(),
       lastFetchId: 0,
+      isLoaded: false,
     };
     if (props.filterFromUrl) {
       this.state.filter = deserialize(props.filterFromUrl);
@@ -121,7 +127,7 @@ class ChallengeFiltersExample extends React.Component {
       .then(res => res.json())
       .then((json) => {
         json.forEach(item => VALID_SUBTRACKS.push(keywordsMapper(item.name)));
-      })
+      });
 
     // API to fetch valid keywords
     const KEYWORDS_API = `${this.props.config.API_URL}/technologies/`;
@@ -172,7 +178,7 @@ class ChallengeFiltersExample extends React.Component {
   setChallenges(fetchId, challenges, filter) {
     if (fetchId !== this.state.lastFetchId) return;
     const c = filter ? challenges.filter(filter.getFilterFunction()) : challenges;
-    this.setState({ challenges: c });
+    this.setState({ challenges: c, isLoaded: true });
   }
 
   // set current card type
@@ -355,7 +361,17 @@ class ChallengeFiltersExample extends React.Component {
     const { name: sidebarFilterName } = filter;
 
     let challengeCardContainer;
-    if (filter.isCustomFilter) {
+    if (!this.state.isLoaded) {
+      const challengeCards = _.range(CHALLENGE_PLACEHOLDER_COUNT)
+      .map(key => <ChallengeCardPlaceholder id={key} key={key} />);
+      challengeCardContainer = (
+        <div className="challenge-cards-container">
+          <div className="ChallengeCardExamples">
+            { challengeCards }
+          </div>
+        </div>
+      );
+    } else if (filter.isCustomFilter) {
       if (currentFilter.mode === SideBarFilterModes.CUSTOM) {
         challenges = this.state.challenges.filter(currentFilter.getFilterFunction());
       }
@@ -415,6 +431,7 @@ class ChallengeFiltersExample extends React.Component {
         />
       );
     }
+
 
     // Upcoming srms
     let futureSRMChallenge = this.state.srmChallenges.filter(challenge => challenge.status === 'FUTURE');
@@ -503,7 +520,7 @@ class ChallengeFiltersExample extends React.Component {
 
         <div className={`tc-content-wrapper ${this.state.currentCardType === 'Challenges' ? '' : 'hidden'}`}>
           <div className="sidebar-container xs-to-sm">
-            <SideBarFilters
+            {this.state.isLoaded ? (<SideBarFilters
               config={this.props.config}
               challenges={challenges}
               filter={this.state.sidebarFilter}
@@ -518,7 +535,7 @@ class ChallengeFiltersExample extends React.Component {
               }}
               isAuth={this.props.isAuth}
               myChallenges={this.props.myChallenges}
-            />
+            />) : <SidebarFilterPlaceholder />}
           </div>
 
           {challengeCardContainer}
@@ -527,7 +544,7 @@ class ChallengeFiltersExample extends React.Component {
             className="sidebar-container desktop"
             top={20}
           >
-            <SideBarFilters
+            {this.state.isLoaded ? (<SideBarFilters
               config={this.props.config}
               challenges={challenges}
               filter={this.state.filter}
@@ -537,7 +554,7 @@ class ChallengeFiltersExample extends React.Component {
               }}
               isAuth={this.props.isAuth}
               myChallenges={this.props.myChallenges}
-            />
+            />) : <SidebarFilterPlaceholder />}
           </Sticky>
         </div>
       </div>

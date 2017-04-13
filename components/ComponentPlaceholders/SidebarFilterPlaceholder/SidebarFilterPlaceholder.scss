@@ -1,0 +1,8 @@
+@import '../../../styles/tc-styles';
+
+.SideBarFilters.placeholder {
+        .filter-item {
+            height: $base-unit * 2;
+            margin: $base-unit * 4;
+        }
+}
