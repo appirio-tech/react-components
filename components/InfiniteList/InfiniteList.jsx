@@ -140,7 +140,10 @@ class InfiniteList extends Component {
   }
 
   onScrollToLoadPoint() {
-    if (this.state.newItemsCount === 0 || this.state.loading || this.state.items.length >= this.props.itemCountTotal) return;
+    if (this.state.newItemsCount === 0
+        || this.state.loading 
+        || this.state.items.length >= this.props.itemCountTotal)
+      return;
 
     this.addBatchIds();
 
