@@ -547,8 +547,10 @@ class ChallengeFiltersExample extends React.Component {
 
 ChallengeFiltersExample.defaultProps = {
   config: {
-    API_URL_V2: 'https://api.topcoder.com/v2',
-    API_URL: 'https://api.topcoder.com/v3',
+    API_URL_V2: process.env.API_URL_V2,
+    API_URL: process.env.API_URL,
+    MAIN_URL: process.env.MAIN_URL,
+    COMMUNITY_URL: process.env.COMMUNITY_URL,
   },
   filterFromUrl: '',
   onSaveFilterToUrl: _.noop,
@@ -562,6 +564,8 @@ ChallengeFiltersExample.propTypes = {
   config: PT.shape({
     API_URL_V2: PT.string,
     API_URL: PT.string,
+    MAIN_URL: PT.MAIN_URL,
+    COMMUNITY_URL: PT.COMMUNITY_URL,
   }),
   filterFromUrl: PT.string,
   onSaveFilterToUrl: PT.func,

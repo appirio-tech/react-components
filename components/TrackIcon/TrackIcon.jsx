@@ -2,9 +2,9 @@ import React from 'react'
 import Abbreviation from './Abbreviation'
 import './TrackIcon.scss'
 
-const TCO_URL = 'https://www.topcoder.com/tco'
 
-function TrackIcon ({track, subTrack, tcoEligible, isDataScience}) {
+function TrackIcon ({track, subTrack, tcoEligible, isDataScience, MAIN_URL}) {
+  const TCO_URL = `${MAIN_URL}/tco`
   return (
     <span className="trackIcon">
       <div className={(isDataScience ? 'data_science' : track.toLowerCase()) + ' main-icon'}>{Abbreviation[track][subTrack]}</div>
@@ -13,5 +13,11 @@ function TrackIcon ({track, subTrack, tcoEligible, isDataScience}) {
     </span>
   )
 }
+TrackIcon.defaultProps = {
+  MAIN_URL: process.env.MAIN_URL
+}
 
+TrackIcon.propTypes = {
+  MAIN_URL: React.PropTypes.string,
+}
 export default TrackIcon
