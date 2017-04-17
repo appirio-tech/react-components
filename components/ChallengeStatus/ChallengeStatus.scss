@@ -85,6 +85,9 @@ $status-radius-4: $corner-radius * 2;
     font-size: 13px;
     color: $tc-black;
     margin-left: auto;
+    span.num-reg, span.num-sub {
+      display: inline-block;
+    }
     a.num-reg {
       font-weight: 400;
       margin-left: $status-space-20;

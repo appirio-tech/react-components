@@ -33,9 +33,9 @@ function Tooltip({ position, content, className, onTooltipHover, children, place
       align={align}
       onVisibleChange={_.once(onTooltipHover)}
     >
-      <span>
+      <div>
         { children }
-      </span>
+      </div>
     </RCTooltip>
   );
 }

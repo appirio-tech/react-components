@@ -207,9 +207,7 @@ class ProgressBarTooltip extends React.Component {
     return fetch(`${challengesApi}${id}`).then(res => res.json());
   }
   render() {
-    const tooltipAlign = {
-      targetOffset: ['-150%'],
-    };
+
     const tip = <Tip challenge={this.state.chDetails} isLoaded={this.state.isLoaded} />;
     return (
       <Tooltip
@@ -217,7 +215,6 @@ class ProgressBarTooltip extends React.Component {
         content={tip}
         onTooltipHover={this.onTooltipHover}
         placeArrow={placeArrow}
-        align={tooltipAlign}
       >
         {this.props.children}
       </Tooltip>

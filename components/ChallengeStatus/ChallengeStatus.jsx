@@ -222,7 +222,7 @@ class ChallengeStatus extends Component {
           }
         </span>
         <span className="challenge-stats">
-          <span>
+          <span className="num-reg">
             <Tooltip
               content={numRegistrantsTipText(challenge.numRegistrants)}
               className="num-reg-tooltip"
@@ -233,7 +233,7 @@ class ChallengeStatus extends Component {
               </a>
             </Tooltip>
           </span>
-          <span>
+          <span className="num-sub">
             <Tooltip content={numSubmissionsTipText(challenge.numSubmissions)}>
               <a className="num-sub" href={this.registrantsLink(challenge, MM_SUB)}>
                 <SubmissionsIcon /> <span className="number">{challenge.numSubmissions}</span>
