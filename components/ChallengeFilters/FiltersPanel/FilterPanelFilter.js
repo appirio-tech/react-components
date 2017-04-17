@@ -73,9 +73,9 @@ class FilterPanelFilter extends BaseFilter {
       if (!this.keywords.length || !this.keywords[0]) return true;
       const platforms = item.platforms.join(' ');
       const techs = item.technologies.join(' ');
-      const data = `${item.challengeName} ${platforms} ${techs}`.toLowerCase();
+      const data = ` ${item.challengeName} ${platforms} ${techs} `.toLowerCase();
       for (let i = 0; i !== this.keywords.length; i += 1) {
-        if (data.indexOf(this.keywords[i].toLowerCase()) >= 0) return true;
+        if (data.indexOf(" " + this.keywords[i].toLowerCase() + " ") >= 0) return true;
       }
       return false;
     };

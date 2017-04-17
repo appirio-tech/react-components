@@ -1,12 +1,6 @@
 import React from 'react'
 import SRMCard from './SRMCard.jsx'
-
 require('./SRMCardExamples.scss')
-
-/**
- * Base API version 3 URL
- */
-const API_V3 = 'https://api.topcoder.com/v3/srms'
 
 class SRMCardExamples extends React.Component {
   constructor(props) {
@@ -16,7 +10,7 @@ class SRMCardExamples extends React.Component {
     }
 
     /* Fetching of SRM challenges */
-    fetch(`${API_V3}/?filter=status=FUTURE`)
+    fetch(`${this.props.API_URL}/?filter=status=FUTURE`)
       .then(res => res.json())
       .then((json) => {
         this.setState({srmChallenges: json.result.content})
@@ -60,5 +54,12 @@ class SRMCardExamples extends React.Component {
   }
 }
 
+SRMCardExamples.defaultProps = {
+  API_URL: process.env.API_URL
+}
+
+SRMCardExamples.propTypes = {
+  API_URL: React.PropTypes.string
+}
 
 export default SRMCardExamples

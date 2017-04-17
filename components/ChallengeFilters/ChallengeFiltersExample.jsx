@@ -383,7 +383,7 @@ class ChallengeFiltersExample extends React.Component {
         </div>
       );
     } else {
-      const { config, challengeFilters } = this.props;
+      const { config } = this.props;
       const filterFunc = filter.getFilterFunction();
       const sidebarFilterFunc = (challenge) => {
         if (currentFilter.mode !== SideBarFilterModes.CUSTOM) {
@@ -395,7 +395,9 @@ class ChallengeFiltersExample extends React.Component {
       challengeCardContainer = (
         <ChallengeCardContainer
           config={config}
-          onTechTagClicked={tag => challengeFilters.setKeywords(tag)}
+          onTechTagClicked={tag => {
+            if (this.challengeFilters) this.challengeFilters.setKeywords(tag);
+          }}
           challenges={_.uniqBy(challenges, 'challengeId')}
           currentFilterName={sidebarFilterName}
           expanded={sidebarFilterName !== 'All Challenges'}
@@ -549,14 +551,16 @@ class ChallengeFiltersExample extends React.Component {
 
 ChallengeFiltersExample.defaultProps = {
   config: {
-    API_URL_V2: 'https://api.topcoder.com/v2',
-    API_URL: 'https://api.topcoder.com/v3',
+    API_URL_V2: process.env.API_URL_V2,
+    API_URL: process.env.API_URL,
+    MAIN_URL: process.env.MAIN_URL,
+    COMMUNITY_URL: process.env.COMMUNITY_URL,
   },
   filterFromUrl: '',
   onSaveFilterToUrl: _.noop,
   setChallengeFilter: _.noop,
   myChallenges: [],
-  challengeFilters: undefined,
+  // challengeFilters: undefined,
   isAuth: false,
 };
 
@@ -564,12 +568,14 @@ ChallengeFiltersExample.propTypes = {
   config: PT.shape({
     API_URL_V2: PT.string,
     API_URL: PT.string,
+    MAIN_URL: PT.MAIN_URL,
+    COMMUNITY_URL: PT.COMMUNITY_URL,
   }),
   filterFromUrl: PT.string,
   onSaveFilterToUrl: PT.func,
   setChallengeFilter: PT.func,
   myChallenges: PT.array,
-  challengeFilters: PT.object,
+  // challengeFilters: PT.object,
   isAuth: PT.bool,
 };
 
