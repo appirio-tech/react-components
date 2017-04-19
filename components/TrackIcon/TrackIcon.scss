@@ -36,7 +36,7 @@ $track-radius-4: $corner-radius * 2;
       background: $tc-green;
     }
 
-    &.data_science {
+    &.data_science, &.data {
       background: $tc-orange;
     }
   }
@@ -61,7 +61,7 @@ $track-radius-4: $corner-radius * 2;
       background: $tc-green-10;
     }
 
-    &.data_science {
+    &.data_science, &.data {
       color: $tc-orange;
       background: $tc-orange-10;
     }

@@ -17,6 +17,7 @@ const ID_LENGTH = 6;
 const MAX_VISIBLE_WINNERS = 3;
 const MOCK_PHOTO = 'https://acrobatusers.com/assets/images/template/author_generic.jpg';
 const STALLED_MSG = 'Stalled';
+const DRAFT_MSG = 'In Draft';
 const STALLED_TIME_LEFT_MSG = 'Challenge is currently on hold';
 const FF_TIME_LEFT_MSG = 'Winner is working on fixes';
 
@@ -212,14 +213,16 @@ class ChallengeStatus extends Component {
     const MM_LONGCONTEST = `https:${config.COMMUNITY_URL}/longcontest/?module`;
     const MM_REG = `${MM_LONGCONTEST}=ViewRegistrants&rd=`;
     const MM_SUB = `${MM_LONGCONTEST}=ViewStandings&rd=`;
+    let phaseMessage = STALLED_MSG;
+    if (challenge.currentPhaseName) {
+      phaseMessage = getStatusPhase(challenge).currentPhaseName;
+    } else if (challenge.status === 'Draft') {
+      phaseMessage = DRAFT_MSG;
+    }
     return (
       <div className={challenge.registrationOpen === 'Yes' ? 'challenge-progress with-register-button' : 'challenge-progress'}>
         <span className="current-phase">
-          {
-            challenge.currentPhaseName
-              ? getStatusPhase(challenge).currentPhaseName
-              : STALLED_MSG
-          }
+          { phaseMessage }
         </span>
         <span className="challenge-stats">
           <span>
