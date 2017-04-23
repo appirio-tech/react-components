@@ -290,22 +290,25 @@ class ChallengeStatus extends Component {
   }
 
   completedChallenge() {
-    const { challenge } = this.props;
-    const { CHALLENGE_URL, FORUM_URL } = this.state;
+    const { challenge, config } = this.props;
+    const { FORUM_URL } = this.state;
+    const MM_LONGCONTEST = `https:${config.COMMUNITY_URL}/longcontest/?module`;
+    const MM_REG = `${MM_LONGCONTEST}=ViewRegistrants&rd=`;
+    const MM_SUB = `${MM_LONGCONTEST}=ViewStandings&rd=`;
     return (
       <div>
         {this.renderLeaderboard()}
         <span className="challenge-stats">
           <span>
             <Tooltip content={numRegistrantsTipText(challenge.numRegistrants)}>
-              <a className="num-reg past" href={`${CHALLENGE_URL}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}#viewRegistrant`}>
+              <a className="num-reg past" href={this.registrantsLink(challenge, MM_REG)}>
                 <RegistrantsIcon /> <span className="number">{challenge.numRegistrants}</span>
               </a>
             </Tooltip>
           </span>
           <span>
             <Tooltip content={numSubmissionsTipText(challenge.numSubmissions)}>
-              <a className="num-sub past" href={`${CHALLENGE_URL}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}#viewRegistrant`}>
+              <a className="num-sub past" href={this.registrantsLink(challenge, MM_SUB)}>
                 <SubmissionsIcon /> <span className="number">{challenge.numSubmissions}</span>
               </a>
             </Tooltip>
