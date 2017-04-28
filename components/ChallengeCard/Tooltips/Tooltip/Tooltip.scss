@@ -27,7 +27,7 @@ div.tooltip {
 .rc-tooltip-inner {
   border-radius: 3px;
   background: $tc-gray-80;
-  padding: $base-unit * 3;
+  padding: $base-unit * 2 $base-unit * 3;
 }
 
 .rc-tooltip-placement-top .rc-tooltip-arrow,
