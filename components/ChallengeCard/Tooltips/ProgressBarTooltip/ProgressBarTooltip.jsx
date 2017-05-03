@@ -213,6 +213,9 @@ class ProgressBarTooltip extends React.Component {
       <Tooltip
         className="progress-bar-tooltip"
         content={tip}
+        align={{
+          offset: [0, -15],
+        }}
         onTooltipHover={this.onTooltipHover}
         placeArrow={placeArrow}
       >
