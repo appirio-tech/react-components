@@ -5,21 +5,31 @@
 
 import React from 'react';
 import '../../SideBarFilters/SideBarFilters.scss';
+import { MODE } from '../../SideBarFilters/SideBarFilter';
 import './SidebarFilterPlaceholder.scss';
 import '../ComponentPlaceholder.scss';
 
 const domain = '';
-const { string, number, oneOfType } = React.PropTypes;
 
 const SidebarFilterPlaceholder = () => (
   <div className="SideBarFilters placeholder">
     <div className="FilterBox">
-      <div className="filter-item placeholder-template" />
-      <div className="filter-item placeholder-template" />
-      <div className="filter-item placeholder-template" />
-      <div className="filter-item placeholder-template" />
+      <div className="FilterItem highlighted">
+        <span className="left">{MODE.ALL_CHALLENGES}</span>
+      </div>
+      <div className="FilterItem">
+        <span className="left">{MODE.OPEN_FOR_REGISTRATION}</span>
+      </div>
+      <div className="FilterItem">
+        <span className="left">{MODE.ONGOING_CHALLENGES}</span>
+      </div>
+      <div className="FilterItem">
+        <span className="left">{MODE.OPEN_FOR_REVIEW}</span>
+      </div>
       <hr />
-      <div className="filter-item placeholder-template" />
+      <div className="FilterItem">
+        <span className="left">{MODE.PAST_CHALLENGES}</span>
+      </div>
       <hr />
       <div className="get-rss">
         <a href={'RSS_LINK'}>Get the RSS feed</a>
