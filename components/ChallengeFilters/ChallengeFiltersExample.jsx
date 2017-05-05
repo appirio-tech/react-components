@@ -19,7 +19,7 @@ import _ from 'lodash';
 import React, { PropTypes as PT } from 'react';
 import Sticky from 'react-stickynode';
 
-import { DATA_SCIENCE_TRACK, DESIGN_TRACK, DEVELOP_TRACK } from './ChallengeFilter';
+import { DESIGN_TRACK, DEVELOP_TRACK } from './ChallengeFilter';
 import ChallengeFilterWithSearch from './ChallengeFilterWithSearch';
 import ChallengeFilters from './ChallengeFilters';
 import SideBarFilter, { MODE as SideBarFilterModes } from '../SideBarFilters/SideBarFilter';
@@ -231,7 +231,7 @@ class ChallengeFiltersExample extends React.Component {
     /* Normalizes challenge objects received from different API endpoints,
      * and adds them to the list of loaded challenges. */
     function helper2(response, community) {
-      return response.json().then(res => res.data.forEach((item) => {
+      return response.json().then(res => res.result.content.forEach((item) => {
         /* Only marathon matches, when received from the /data/marathon/challenges
          * endpoint, satisfy this. */
         if (item.roundId) {
@@ -258,50 +258,42 @@ class ChallengeFiltersExample extends React.Component {
             status: endTimestamp > Date.now() ? 'Active' : 'Completed',
             subTrack: 'MARATHON_MATCH',
           });
-          map[item.challengeId] = item;
-        } else if (item.challengeType === 'SRM') {
+          map[item.id] = item;
+        } else if (item.track === 'SRM') {
           /* We don't support SRM yet, so we don't want them around */
         } else { /* All challenges from other endpoints have the same format. */
-          const existing = map[item.challengeId];
+          const existing = map[item.id];
           if (existing) existing.communities.add(community);
           else {
-            const endTimestamp = new Date(item.submissionEndDate).getTime();
             _.defaults(item, {
               communities: new Set([community]),
-              platforms: [],
-              registrationOpen: endTimestamp > Date.now() ? 'Yes' : 'No',
-              technologies: [],
-              track: item.challengeCommunity.toUpperCase(),
-              status: endTimestamp > Date.now() ? 'Active' : 'Completed',
-              submissionEndTimestamp: endTimestamp,
-              subTrack: item.challengeType.toUpperCase().split(' ').join('_'),
+              platforms: '',
+              registrationOpen: item.allPhases.filter(d => d.phaseType === 'Registration')[0].phaseStatus === 'Open' ? 'Yes' : 'No',
+              technologies: '',
+              track: item.track,
+              status: item.status,
+              submissionEndTimestamp: item.submissionEndDate,
+              subTrack: item.subTrack,
             });
-            map[item.challengeId] = item;
-            item.platforms.forEach(helper1);
-            item.technologies.forEach(helper1);
+            map[item.id] = item;
+            if (item.platforms) {
+              item.platforms.split(',').forEach(helper1);
+            }
+            if (item.technologies) {
+              item.technologies.split(',').forEach(helper1);
+            }
           }
         }
       }));
     }
-    const api = this.props.config.API_URL_V2;
+    const api = this.props.config.API_URL;
     return Promise.all([
       /* Fetching of active challenges */
-      fetch(`${api}/challenges/active?type=design`).then(res => helper2(res, DESIGN_TRACK)),
-      fetch(`${api}/challenges/active?type=develop`).then(res => helper2(res, DEVELOP_TRACK)),
-      fetch(`${api}/dataScience/challenges/active`).then(res => helper2(res, DATA_SCIENCE_TRACK)),
-      fetch(`${api}/data/marathon/challenges/?listType=active`).then(res => helper2(res, DATA_SCIENCE_TRACK)),
-      /* Fetching of some past challenges */
-      fetch(`${api}/challenges/past?type=design&pageSize=100`).then(res => helper2(res, DESIGN_TRACK)),
-      fetch(`${api}/challenges/past?type=develop&pageSize=100`).then(res => helper2(res, DEVELOP_TRACK)),
-      fetch(`${api}/dataScience/challenges/past?pageSize=100`).then(res => helper2(res, DATA_SCIENCE_TRACK)),
-      fetch(`${api}/data/marathon/challenges/?listType=past&pageSize=100`).then(res => helper2(res, DATA_SCIENCE_TRACK)),
-      // Fetching upcoming challenges
-      fetch(`${api}/challenges/upcoming?type=design&pageSize=100`).then(res => helper2(res, DESIGN_TRACK)),
-      fetch(`${api}/challenges/upcoming?type=develop&pageSize=100`).then(res => helper2(res, DEVELOP_TRACK)),
-      fetch(`${api}/dataScience/challenges/upcoming?pageSize=100`).then(res => helper2(res, DATA_SCIENCE_TRACK)),
+      fetch(`${api}/challenges/?filter=track%3Ddesign`).then(res => helper2(res, DESIGN_TRACK)),
+      fetch(`${api}/challenges/?filter=track%3Ddevelop`).then(res => helper2(res, DEVELOP_TRACK)),
     ]).then(() => {
       _.forIn(map, item => challenges.push(item));
-      challenges.sort((a, b) => b.submissionEndTimestamp - a.submissionEndTimestamp);
+      challenges.sort((a, b) => b.submissionEndDate - a.submissionEndDate);
       // TODO: Using forceUpdate() in ReactJS is a bad practice. The reason here
       // is that we need to update the component if we have updated the mock list
       // VALID_KEYWORDS. In the real App the list of valid keywords will be passed
@@ -355,7 +347,7 @@ class ChallengeFiltersExample extends React.Component {
     challenges = challenges.map((item) => {
       // check the challenge id exist in my challenges id
       // TODO: This is also should be moved to a better place, fetchChallenges() ?
-      if (_.indexOf(myChallengesId, item.challengeId) > -1) {
+      if (_.indexOf(myChallengesId, item.id) > -1) {
         _.assign(item, { myChallenge: true });
       }
       return item;
@@ -387,7 +379,7 @@ class ChallengeFiltersExample extends React.Component {
           onTechTagClicked={(tag) => {
             if (this.challengeFilters) this.challengeFilters.setKeywords(tag);
           }}
-          key={challenge.challengeId}
+          key={challenge.id}
         />
       );
 
@@ -407,21 +399,20 @@ class ChallengeFiltersExample extends React.Component {
         }
         return currentFilter.getFilterFunction()(challenge);
       };
-
       challengeCardContainer = (
         <ChallengeCardContainer
           config={config}
-          onTechTagClicked={tag => {
+          onTechTagClicked={(tag) => {
             if (this.challengeFilters) this.challengeFilters.setKeywords(tag);
           }}
-          challenges={_.uniqBy(challenges, 'challengeId')}
+          challenges={_.uniqBy(challenges, 'id')}
           currentFilterName={sidebarFilterName}
           expanded={sidebarFilterName !== 'All Challenges'}
           fetchCallback={(fetchedChallenges) => {
             this.setState({
               challenges: _.uniqBy(
                 challenges.concat(fetchedChallenges),
-                'challengeId',
+                'id',
               ),
             });
           }}
@@ -454,22 +445,21 @@ class ChallengeFiltersExample extends React.Component {
         />
       ),
     );
-    VALID_SUBTRACKS.sort(function(a, b) {
+    VALID_SUBTRACKS.sort((a, b) => {
       if (a.label < b.label) {
-        return -1
+        return -1;
       } else if (a.label > b.label) {
-        return 1
-      } else return 0
+        return 1;
+      } return 0;
     });
 
-    VALID_KEYWORDS.sort(function(a, b) {
+    VALID_KEYWORDS.sort((a, b) => {
       if (a.label < b.label) {
-        return -1
+        return -1;
       } else if (a.label > b.label) {
-        return 1
-      } else return 0
+        return 1;
+      } return 0;
     });
-
 
 
     return (
