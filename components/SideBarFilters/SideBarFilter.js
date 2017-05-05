@@ -13,6 +13,7 @@
 
 import _ from 'lodash';
 import uuid from 'uuid/v4';
+import moment from 'moment';
 import ChallengeFilter from '../ChallengeFilters/ChallengeFilter';
 
 export const MODE = {
@@ -22,6 +23,7 @@ export const MODE = {
   ONGOING_CHALLENGES: 'Ongoing challenges',
   PAST_CHALLENGES: 'Past challenges',
   OPEN_FOR_REVIEW: 'Open for review',
+  UPCOMING_CHALLENGES: 'Upcoming challenges',
   CUSTOM: 'custom',
 };
 
