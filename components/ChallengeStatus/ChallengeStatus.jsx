@@ -17,7 +17,6 @@ const ID_LENGTH = 6;
 const MAX_VISIBLE_WINNERS = 3;
 const MOCK_PHOTO = 'https://acrobatusers.com/assets/images/template/author_generic.jpg';
 const STALLED_MSG = 'Stalled';
-const DRAFT_MSG = 'In Draft';
 const STALLED_TIME_LEFT_MSG = 'Challenge is currently on hold';
 const FF_TIME_LEFT_MSG = 'Winner is working on fixes';
 
@@ -323,11 +322,8 @@ class ChallengeStatus extends Component {
   }
 
   completedChallenge() {
-    const { challenge, config } = this.props;
-    const { FORUM_URL } = this.state;
-    const MM_LONGCONTEST = `https:${config.COMMUNITY_URL}/longcontest/?module`;
-    const MM_REG = `${MM_LONGCONTEST}=ViewRegistrants&rd=`;
-    const MM_SUB = `${MM_LONGCONTEST}=ViewStandings&rd=`;
+    const { challenge } = this.props;
+    const { CHALLENGE_URL, FORUM_URL } = this.state;
     return (
       <div>
         {this.renderLeaderboard()}
