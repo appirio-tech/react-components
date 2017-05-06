@@ -160,9 +160,22 @@ Tip.propTypes = {
   isLoaded: PT.bool,
 };
 
+/** Handles arrow placement of the Progressbar tooltip
+ *  because rc-tooltip doesnot display arrow correctly
+ *  for progressbar tooltip out of the box.
+ */
 function placeArrow(TooltipNode) {
+  const toolTip = TooltipNode;
   const arrow = TooltipNode.querySelector('.rc-tooltip-arrow');
-  arrow.style.top = '100%';
+  const rootTopOffset = this.getRootDomNode().getBoundingClientRect().top;
+  const tooltipTopOffset = TooltipNode.getBoundingClientRect().top;
+
+  if (rootTopOffset < tooltipTopOffset) {
+    toolTip.style.top = `${parseInt(toolTip.style.top, 10) - 20}px`;
+    arrow.style.top = '-5px';
+  } else {
+    arrow.style.top = '100%';
+  }
 }
 
 /**
