@@ -57,7 +57,7 @@ class SortingSelectBar extends Component {
             onChange={optionName => this.onSelectOption(optionName.value)}
             value={{
               label: selectedSortingOption,
-              value: selectedSortingOption
+              value: selectedSortingOption,
             }}
             placeholder="Select an option"
           />

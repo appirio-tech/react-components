@@ -17,14 +17,13 @@ export function filterFilterChallengesStore(filterChallengesStore, currentFilter
     },
     _.partialRight(_.pickBy, challenges => !_.isEmpty(challenges)),
   ];
-
   return _.flow(allFilters)(_.assign({}, filterChallengesStore));
 }
 
 export function findFilterByName(filterName, filters) {
   const foundfilter = _.find(
     filters,
-    filter => filter.name.toLowerCase() === filterName.toLowerCase()
+    filter => filter.name.toLowerCase() === filterName.toLowerCase(),
   );
 
   if (foundfilter) {
@@ -36,20 +35,21 @@ export function findFilterByName(filterName, filters) {
 // format a challenge gotten from the API endpoint
 // this is necessary for the challenge to be filtered and sorted in
 // other components
-function formatChallenge(challenge) {
-  const formattedChallenge = _.assign({}, challenge);
+// No need to call this function as data is in correct format with V3 api.
+// function formatChallenge(challenge) {
+//   const formattedChallenge = _.assign({}, challenge);
 
-  formattedChallenge.communities = new Set([formattedChallenge.challengeCommunity]);
-  formattedChallenge.track = challenge.challengeCommunity.toUpperCase();
-  formattedChallenge.subTrack = challenge.challengeType.toUpperCase().split(' ').join('_');
+//   formattedChallenge.communities = new Set([formattedChallenge.challengeCommunity]);
+//   formattedChallenge.track = challenge.challengeCommunity.toUpperCase();
+//   formattedChallenge.subTrack = challenge.challengeType.toUpperCase().split(' ').join('_');
 
-  return formattedChallenge;
-}
+//   return formattedChallenge;
+// }
 
 export function fetchChallenges(getUrl, pageIndex) {
   return fetch(getUrl(pageIndex))
     .then(response => response.json())
-    .then(responseJson => responseJson.data.map(formatChallenge));
+    .then(responseJson => responseJson.result.content);
 }
 
 // check if the category can be expanded beyond initial number to show more challenges
