@@ -13,7 +13,7 @@ const FiltersCardsType = ({ isCardTypeSet, ARENA_URL }) => (
   <div className="cards-type-col">
     <a
       className={`challengs-tab ${isCardTypeSet === 'Challenges' ? 'active' : ''}`}
-      onClick={(e) => e.preventDefault()}
+      onClick={e => e.preventDefault()}
     >
       Challenges
     </a>
