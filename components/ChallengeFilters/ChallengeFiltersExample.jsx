@@ -19,7 +19,7 @@ import _ from 'lodash';
 import React, { PropTypes as PT } from 'react';
 import Sticky from 'react-stickynode';
 
-import { DESIGN_TRACK, DEVELOP_TRACK, DATA_SCIENCE_TRACK } from './ChallengeFilter';
+import { DESIGN_TRACK, DEVELOP_TRACK } from './ChallengeFilter';
 import ChallengeFilterWithSearch from './ChallengeFilterWithSearch';
 import ChallengeFilters from './ChallengeFilters';
 import SideBarFilter, { MODE as SideBarFilterModes } from '../SideBarFilters/SideBarFilter';
