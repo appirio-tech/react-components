@@ -23,6 +23,7 @@ const Abbreviation = {
     REPORTING: 'Rp',
     DEVELOP_MARATHON_MATCH: 'MM',
     FIRST2FINISH: 'F2F',
+    FIRST_2_FINISH: 'F2F',
     CODE: 'Cd',
   },
   DESIGN: {
@@ -37,6 +38,8 @@ const Abbreviation = {
     STUDIO_OTHER: 'O',
     IDEA_GENERATION: 'IG',
     DESIGN_FIRST2FINISH: 'DF2F',
+    DESIGN_FIRST_2_FINISH: 'DF2F',
+    WEB_DESIGNS: 'Wb',
   },
 
   // TODO: When data science challenges are returned by the API v2, they have

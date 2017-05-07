@@ -51,7 +51,7 @@ import './ChallengeCardContainer.scss';
 const { arrayOf, object, shape, func, string, bool, oneOfType } = React.PropTypes;
 const initialNumberToShow = 10;
 const batchLoadNumber = 50;
-const challengeUniqueIdentifier = 'challengeId';
+const challengeUniqueIdentifier = 'id';
 
 class ChallengeCardContainer extends Component {
   constructor(props) {
