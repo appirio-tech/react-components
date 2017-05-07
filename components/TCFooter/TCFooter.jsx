@@ -54,5 +54,11 @@ const TCFooter = ({domain}) => {
     </div>
   )
 }
+TCFooter.defaultProps = {
+  domain: process.env.domain,
+}
 
+TCFooter.propTypes = {
+  domain: React.PropTypes.string,
+}
 export default TCFooter

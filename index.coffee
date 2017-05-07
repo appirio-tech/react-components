@@ -4,3 +4,7 @@ module.exports =
   SearchBar: require './components/SearchBar/SearchBar.jsx'
   UserDropdown: require './components/UserDropdownMenu/UserDropdownMenu.jsx'
   TCFooter: require './components/TCFooter/TCFooter.jsx'
+  ChallengeFilters: require './components/ChallengeFilters/ChallengeFilters.jsx'
+  ChallengeFiltersExample: require './components/ChallengeFilters/ChallengeFiltersExample.jsx'
+  SRMCard: require './components/SRMCard/SRMCard.jsx'
+  SRMCardExamples: require './components/SRMCard/SRMCardExamples.jsx'

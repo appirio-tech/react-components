@@ -1,8 +1,8 @@
-require('./Tooltip.scss')
-
 import React, { Component, PropTypes } from 'react'
 import classNames from 'classnames'
 import ReactDOM from 'react-dom'
+
+require('./Tooltip.scss')
 
 class Tooltip extends Component {
   constructor(props) {
@@ -180,8 +180,7 @@ class Tooltip extends Component {
         }
         <div className="tooltip-container tooltip-hide">
           <div className="tooltip-content-container">
-            <div className="tooltip-pointer">
-            </div>
+            <div className="tooltip-pointer" />
             {body}
           </div>
         </div>

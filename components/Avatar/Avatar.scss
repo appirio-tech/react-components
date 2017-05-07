@@ -1,10 +1,12 @@
+@import '../../styles/tc-styles';
+
 $avatar-diameter: 35px;
 
 .Avatar {
   width           : $avatar-diameter;
   height          : $avatar-diameter;
   border-radius   : 50%;
-  background-color: #eee;
+  background-color: $tc-gray-10;
   overflow        : hidden;
 
   img {

@@ -25,6 +25,9 @@ import SearchSuggestionsExamples     from '../SearchSuggestions/SearchSuggestion
 import SearchBarExample              from '../SearchBar/SearchBarExamples.jsx'
 import NavbarExample                 from '../Navbar/NavbarExample.jsx'
 import TCFooterExamples              from '../TCFooter/TCFooterExamples.jsx'
+import ChallengeCardExamples         from '../ChallengeCard/ChallengeCardExamples.jsx'
+import SRMCardExamples               from '../SRMCard/SRMCardExamples.jsx'
+import ChallengeFiltersExample       from '../ChallengeFilters/ChallengeFiltersExample.jsx'
 import CarouselExamples              from '../Carousel/CarouselExamples.jsx'
 import SubNavExamples                from '../SubNav/SubNavExamples.jsx'
 import TaggedValueExamples           from '../TaggedValue/TaggedValueExamples.jsx'
@@ -78,7 +81,13 @@ const Component = () => (
         <Route path="/NavbarExample" component={NavbarExample} />
 
         <Route path="/TCFooterExamples" component={TCFooterExamples} />
-        
+
+        <Route path="/ChallengeCardExamples" component={ChallengeCardExamples} />
+
+        <Route path="/SRMCardExamples" component={SRMCardExamples} />
+
+        <Route path="/ChallengeFiltersExample" component={ChallengeFiltersExample} />
+
         <Route path="/TaggedValueExamples" component={TaggedValueExamples} />
 
         <Route path="/CarouselExamples" component={CarouselExamples} />
@@ -90,7 +99,7 @@ const Component = () => (
         <Route path="/PrizeExamples" component={PrizeExamples}/>
 
         <Route path="/TooltipExamples" component={TooltipExamples} />
-        
+
         <Route path="/ProgressBarExample" component={ProgressBarExample}/>
       </Route>
     </Router>

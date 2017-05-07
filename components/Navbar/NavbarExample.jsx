@@ -6,7 +6,8 @@ import fetch from 'isomorphic-fetch'
 import _ from 'lodash'
 
 const suggest = (searchTerm) => {
-  return fetch('https://internal-api.topcoder-dev.com/v3/tags/_suggest/?q=' + searchTerm)
+  const INTERNAL_API_URL = process.env.INTERNAL_API_URL
+  return fetch(`${INTERNAL_API_URL}/tags/_suggest/?q=${searchTerm}`)
   .then(response => {
     if (response.status >= 200 && response.status < 400) {
       return Promise.resolve(response)
@@ -123,9 +124,9 @@ class NavbarExample extends Component {
     return (
       <div>
         <p>Logged In Example</p>
-        <Navbar username="vic-tor" userImage="https://topcoder-prod-media.s3.amazonaws.com/member/profile/vic-tor-1446848838388.jpeg" domain="topcoder-dev.com" searchSuggestionsFunc={ suggest } onSearch={ this.search } />
+        <Navbar username="vic-tor" userImage="https://topcoder-prod-media.s3.amazonaws.com/member/profile/vic-tor-1446848838388.jpeg" domain={`${this.props.domain}`} searchSuggestionsFunc={ suggest } onSearch={ this.search } />
         <p>Non Logged In Example</p>
-        <Navbar domain="topcoder-dev.com" searchSuggestionsFunc={ suggest } onSearch={ this.search } />
+        <Navbar domain={`${this.props.domain}`} searchSuggestionsFunc={ suggest } onSearch={ this.search } />
         <div className="search-results">
           <SearchResults results={ this.state.searchResults } />
         </div>
@@ -133,5 +134,11 @@ class NavbarExample extends Component {
     )
   }
 }
+NavbarExample.defaultProps = {
+  domain: process.env.domain
+}
 
+NavbarExample.propTypes = {
+  domain: React.PropTypes.string
+}
 module.exports = NavbarExample

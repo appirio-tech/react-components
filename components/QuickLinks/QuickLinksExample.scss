@@ -1,8 +1,9 @@
 @import "topcoder/tc-includes";
+@import '../../styles/tc-styles';
 
 .example-wrap {
   width: 332px;
-  background-color: #FAFAFB;
+  background-color: $tc-gray-neutral-light;
   padding: 23px 30px;
   position: relative;
 
