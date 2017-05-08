@@ -85,7 +85,7 @@ function Tip(props) {
     );
   }
   return (
-    <div>
+    <div style={{ overflow: 'auto' }}>
       <div>
         <h1>Prizes</h1>
         {prizes}

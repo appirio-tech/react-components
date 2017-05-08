@@ -15,67 +15,49 @@
  */
 
 import React, { PropTypes as PT } from 'react';
-import TooltipLib from './tooltip-lib';
+import RCTooltip from 'rc-tooltip';
+import 'rc-tooltip/assets/bootstrap.css';
+import _ from 'lodash';
+
+// import TooltipLib from './tooltip-lib';
 import './Tooltip.scss';
 
-class Tooltip extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.tooltip = new TooltipLib('', {
-      auto: true,
-      typeClass: props.className,
-    });
-  }
-
-
-  hideTooltip() {
-    this.tooltip.hide();
-  }
-
-  showTooltip() {
-    if (window.innerWidth < 768) {
-      this.tooltip.hide();
-    } else {
-      this.tooltip.position(this.wrapper).show();
-      if (this.props.onTooltipHover) {
-        this.props.onTooltipHover();
-      }
-    }
-  }
-
-  render() {
-    return (
-      <span
-        onMouseOver={() => this.showTooltip()}
-        onMouseEnter={() => this.showTooltip()}
-        onMouseLeave={() => this.hideTooltip()}
-        ref={(node) => { this.wrapper = node; }}
-      >
-        <span className="hidden ">
-          <span
-            ref={(node) => {
-              if (node) this.tooltip.content(node.cloneNode(true));
-            }}
-          >{this.props.content}</span>
-        </span>
-        {this.props.children}
-      </span>
-    );
-  }
+function Tooltip({ position, content, className, onTooltipHover, children, placeArrow, align }) {
+  return (
+    <RCTooltip
+      placement={position}
+      overlay={content}
+      overlayClassName={className}
+      onPopupAlign={placeArrow}
+      align={align}
+      onVisibleChange={_.once(onTooltipHover)}
+    >
+      <div>
+        { children }
+      </div>
+    </RCTooltip>
+  );
 }
 
 Tooltip.defaultProps = {
+  align: {},
+  position: 'top',
   className: '',
   content: 'TOOLTIP',
-  onTooltipHover: undefined,
+  defaultVisible: false,
+  onTooltipHover: _.noop,
+  placeArrow: _.noop,
 };
 
 Tooltip.propTypes = {
+  align: PT.any,
+  position: PT.string,
   children: PT.node.isRequired,
   className: PT.string,
   content: PT.node,
   onTooltipHover: PT.func,
+  placeArrow: PT.func,
 };
 
 export default Tooltip;

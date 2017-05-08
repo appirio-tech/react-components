@@ -165,6 +165,24 @@ Tip.propTypes = {
   isLoaded: PT.bool,
 };
 
+/** Handles arrow placement of the Progressbar tooltip
+ *  because rc-tooltip doesnot display arrow correctly
+ *  for progressbar tooltip out of the box.
+ */
+function placeArrow(TooltipNode) {
+  const toolTip = TooltipNode;
+  const arrow = TooltipNode.querySelector('.rc-tooltip-arrow');
+  const rootTopOffset = this.getRootDomNode().getBoundingClientRect().top;
+  const tooltipTopOffset = TooltipNode.getBoundingClientRect().top;
+
+  if (rootTopOffset < tooltipTopOffset) {
+    toolTip.style.top = `${parseInt(toolTip.style.top, 10) - 20}px`;
+    arrow.style.top = '-5px';
+  } else {
+    arrow.style.top = '100%';
+  }
+}
+
 /**
  * Renders the tooltip.
  */
@@ -195,7 +213,15 @@ class ProgressBarTooltip extends React.Component {
   render() {
     const tip = <Tip challenge={this.state.chDetails} isLoaded />;
     return (
-      <Tooltip className="progress-bar-tooltip" content={tip} onTooltipHover={this.onTooltipHover}>
+      <Tooltip
+        className="progress-bar-tooltip"
+        content={tip}
+        align={{
+          offset: [0, -15],
+        }}
+        onTooltipHover={this.onTooltipHover}
+        placeArrow={placeArrow}
+      >
         {this.props.children}
       </Tooltip>
     );

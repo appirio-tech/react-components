@@ -33,7 +33,7 @@ function Tip(props) {
   const src = photoLink.startsWith('https') ? photoLink : `${props.MAIN_URL}/${photoLink}`;
 
   return (
-    <div>
+    <div style={{ overflow: 'auto' }}>
       <img
         alt="User avatar"
         className="avatar"
