@@ -10,6 +10,7 @@ import _ from 'lodash';
  * It renders the tooltip with detailed timeline of a specified challenge.
  * As TC API v2 does not provide all necessary information for some types of
  * challenges, this component does not work perfect yet.
+ * Component updated to use TC API v3 api.
  *
  * USAGE:
  * Wrap with <ProgressBarTooltip></ProgressBarTooltip> the element(s) which should
@@ -88,19 +89,17 @@ function Tip(props) {
   let steps = [];
   const c = props.challenge;
   const isLoaded = props.isLoaded;
-  if (!c) return <div />;
+  if (!c || _.isEmpty(c)) return <div />;
   // TC API v2 does not provide detailed information on challenge phases,
   // it just includes some deadlines into the challenge details. The code below,
   // sorts these deadlines by their dates, and then generates the challenge timeline.
   // The result should be fine for simple dev challenges, but will be strange for
   // such as Assembly, etc.
+  // Component is updated with TC API v3
+  const endPhaseDate = Math.max(...c.allPhases.map(d => new Date(d.scheduledEndTime)));
   steps.push({
-    date: c.postingDate ? new Date(c.postingDate) : new Date(0),
+    date: new Date(c.registrationStartDate),
     name: 'Start',
-  });
-  steps.push({
-    date: new Date(c.submissionEndDate),
-    name: 'Submission',
   });
   if (c.checkpointSubmissionEndDate) {
     steps.push({
@@ -109,12 +108,18 @@ function Tip(props) {
     });
   }
   steps.push({
-    date: new Date(c.appealsEndDate),
+    date: new Date(c.submissionEndDate),
+    name: 'Submission',
+  });
+  steps.push({
+    date: new Date(endPhaseDate),
     name: 'End',
   });
 
+
   steps = steps.sort((a, b) => a.date.getTime() - b.date.getTime());
-  const currentPhaseEnd = new Date(c.currentPhaseEndDate);
+  const currentPhaseEnd = c.currentPhases[0] ? new Date(c.currentPhases[0].scheduledEndTime) :
+   new Date();
   steps = steps.map((step, index) => {
     let progress = 0;
     if (index < steps.length - 1) {
@@ -168,41 +173,27 @@ class ProgressBarTooltip extends React.Component {
     super(props);
     this.state = {
       chDetails: {},
-      isLoaded: false,
     };
     this.onTooltipHover = this.onTooltipHover.bind(this);
   }
   onTooltipHover() {
     const that = this;
     const chClone = _.clone(this.props.challenge);
-    this.fetchChallengeDetails(chClone.challengeId).then((passedInDetails) => {
-      const details = passedInDetails;
-      const chId = `${chClone.challengeId}`;
-      if (chId.length < ID_LENGTH) {
-        details.postingDate = chClone.startDate;
-        details.registrationEndDate = chClone.endDate;
-        details.submissionEndDate = chClone.endDate;
-        details.appealsEndDate = chClone.endDate;
-      }
-      that.setState({
-        chDetails: details,
-        isLoaded: true,
-      });
+    let details = {};
+    const chId = `${chClone.id}`;
+    details = chClone;
+    if (chId.length < ID_LENGTH) {
+      details.postingDate = chClone.startDate;
+      details.registrationEndDate = chClone.endDate;
+      details.submissionEndDate = chClone.endDate;
+      details.appealsEndDate = chClone.endDate;
+    }
+    that.setState({
+      chDetails: details,
     });
   }
-  // It fetches detailed challenge data and attaches them to the 'details'
-  // field of each challenge object.
-  fetchChallengeDetails(id) {
-    const challengesApi = `${this.props.config.API_URL_V2}/challenges/`;
-    const mmApi = `${this.props.config.API_URL_V2}/data/marathon/challenges/`; // MM - marathon match
-    const challengeId = `${id}`; // change to string
-    if (challengeId.length < ID_LENGTH) {
-      return fetch(`${mmApi}${id}`).then(res => res.json());
-    }
-    return fetch(`${challengesApi}${id}`).then(res => res.json());
-  }
   render() {
-    const tip = <Tip challenge={this.state.chDetails} isLoaded={this.state.isLoaded} />;
+    const tip = <Tip challenge={this.state.chDetails} isLoaded />;
     return (
       <Tooltip className="progress-bar-tooltip" content={tip} onTooltipHover={this.onTooltipHover}>
         {this.props.children}
@@ -212,13 +203,11 @@ class ProgressBarTooltip extends React.Component {
 }
 ProgressBarTooltip.defaultProps = {
   challenge: {},
-  config: {},
 };
 
 ProgressBarTooltip.propTypes = {
   challenge: PT.shape({}),
   children: PT.node.isRequired,
-  config: PT.object,
 };
 
 export default ProgressBarTooltip;
