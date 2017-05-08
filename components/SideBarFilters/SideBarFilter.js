@@ -13,6 +13,7 @@
 
 import _ from 'lodash';
 import uuid from 'uuid/v4';
+import moment from 'moment';
 import ChallengeFilter from '../ChallengeFilters/ChallengeFilter';
 
 export const MODE = {
@@ -22,6 +23,7 @@ export const MODE = {
   ONGOING_CHALLENGES: 'Ongoing challenges',
   PAST_CHALLENGES: 'Past challenges',
   OPEN_FOR_REVIEW: 'Open for review',
+  UPCOMING_CHALLENGES: 'Upcoming challenges',
   CUSTOM: 'custom',
 };
 
@@ -41,7 +43,8 @@ class SideBarFilter extends ChallengeFilter {
       this.isCustomFilter = arg.isCustomFilter;
       const mode = arg.filter.split('&').filter(ele => ele.startsWith('mode='))[0];
       const name = arg.filter.split('&').filter(ele => ele.startsWith('name='))[0];
-      this.mode = mode ? Object.values(MODE)[+mode.split('=')[1]] : MODE.CUSTOM;
+      const modes = Object.keys(MODE).map(key => MODE[key]);
+      this.mode = mode ? modes[+mode.split('=')[1]] : MODE.CUSTOM;
       this.name = arg.name || (name ? decodeURIComponent(name.split('=')[1]) : name) || 'Custom';
       this.uuid = arg.id || uuid();
     } else if (_.isObject(arg)) {
@@ -77,17 +80,17 @@ class SideBarFilter extends ChallengeFilter {
     switch (this.mode) {
       case MODE.ALL_CHALLENGES: return () => true;
       case MODE.MY_CHALLENGES: return item => item.myChallenge;
-      case MODE.OPEN_FOR_REVIEW: return item => item.currentPhaseName === 'Review';
+      case MODE.OPEN_FOR_REVIEW: return item => item.allPhases.filter(d => d.phaseType === 'Registration')[0].phaseStatus === 'REVIEW';
       // The API has some incosistencies in the challenge items
       // thus we have to check all fields that define a challenges as 'Open for registration'
-      case MODE.OPEN_FOR_REGISTRATION: return item => (item.currentPhaseName
-        && (item.currentPhaseName.startsWith('Registration') || item.challengeType.startsWith('Marathon')))
-        && !item.status.startsWith('Completed')
-        && item.registrationOpen.startsWith('Yes');
+      case MODE.OPEN_FOR_REGISTRATION: return item => (item.allPhases.filter(d => d.phaseType === 'Registration')[0]
+        && (item.allPhases.filter(d => d.phaseType === 'Registration')[0].phaseStatus === 'Open' || item.subTrack.startsWith('MARATHON')))
+        && !item.status.startsWith('COMPLETED');
       case MODE.ONGOING_CHALLENGES:
-        return item => !item.registrationOpen.startsWith('Yes')
-          && item.status === 'Active';
-      case MODE.PAST_CHALLENGES: return item => item.status === 'Completed';
+        return item => item.allPhases.filter(d => d.phaseType === 'Registration')[0].phaseStatus === 'Closed'
+          && item.status === 'ACTIVE';
+      case MODE.PAST_CHALLENGES: return item => item.status === 'COMPLETED';
+      case MODE.UPCOMING_CHALLENGES: return item => moment(item.registrationStartDate) > moment();
       default: return super.getFilterFunction();
     }
   }
@@ -115,7 +118,8 @@ class SideBarFilter extends ChallengeFilter {
  * Used for saving to the backend and displaying on the URL for deep linking.
  */
   getURLEncoded() {
-    const mode = `&mode=${Object.values(MODE).indexOf(this.mode)}`;
+    const modes = Object.keys(MODE).map(key => MODE[key]);
+    const mode = `&mode=${modes.indexOf(this.mode)}`;
     const name = `&name=${this.name}`;
     return `${super.getURLEncoded()}${mode}${name}`;
   }

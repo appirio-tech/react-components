@@ -35,22 +35,23 @@ function ChallengeCard({
   if (_.indexOf(challenge.technologies, 'Data Science') > -1) {
     challenge.isDataScience = true;
   }
-  challenge.prize = challenge.prize || [];
+  challenge.prize = challenge.prizes || [];
   // challenge.totalPrize = challenge.prize.reduce((x, y) => y + x, 0)
 
   const challengeDetailLink = () => {
     const challengeUrl = `${config.MAIN_URL}/challenge-details/`;
     const mmDetailUrl = `${window.location.protocol}${config.COMMUNITY_URL}/tc?module=MatchDetails&rd=`; // Marathon Match details
     if (challenge.track === 'DATA_SCIENCE') {
-      const id = `${challenge.challengeId}`;
+      const id = `${challenge.id}`;
       if (id.length < ID_LENGTH) {
-        return `${mmDetailUrl}${challenge.challengeId}`;
+        return `${mmDetailUrl}${challenge.id}`;
       }
-      return `${challengeUrl}${challenge.challengeId}/?type=develop`;
+      return `${challengeUrl}${challenge.id}/?type=develop`;
     }
-    return `${challengeUrl}${challenge.challengeId}/?type=${challenge.track.toLowerCase()}`;
+    return `${challengeUrl}${challenge.id}/?type=${challenge.track.toLowerCase()}`;
   };
-
+  const registrationPhase = challenge.allPhases.filter(phase => phase.phaseType === 'Registration')[0];
+  const isRegistrationOpen = registrationPhase ? registrationPhase.phaseStatus === 'Open' : false;
   return (
     <div className="challengeCard">
       <div className="left-panel">
@@ -59,19 +60,19 @@ function ChallengeCard({
             <TrackIcon
               track={challenge.track}
               subTrack={challenge.subTrack}
-              tcoEligible={challenge.eventName}
+              tcoEligible={challenge.events ? challenge.events[0].eventName : ''}
               isDataScience={challenge.isDataScience}
             />
           </TrackAbbreviationTooltip>
         </div>
 
-        <div className={challenge.registrationOpen === 'Yes' ? 'challenge-details with-register-button' : 'challenge-details'}>
+        <div className={isRegistrationOpen ? 'challenge-details with-register-button' : 'challenge-details'}>
           <a className="challenge-title" href={challengeDetailLink(challenge)}>
-            {challenge.challengeName}
+            {challenge.name}
           </a>
           <div className="details-footer">
             <span className="date">
-              {challenge.status === 'Active' ? 'Ends ' : 'Ended '}
+              {challenge.status === 'ACTIVE' ? 'Ends ' : 'Ended '}
               {getEndDate(challenge.submissionEndDate)}
             </span>
             <Tags technologies={challenge.technologies} onTechTagClicked={onTechTagClicked} />
@@ -79,7 +80,7 @@ function ChallengeCard({
         </div>
       </div>
       <div className="right-panel">
-        <div className={challenge.registrationOpen === 'Yes' ? 'prizes with-register-button' : 'prizes'}>
+        <div className={isRegistrationOpen ? 'prizes with-register-button' : 'prizes'}>
           <PrizesTooltip challenge={challenge} config={config}>
             <div><span className="dollar">$</span>{numberWithCommas(challenge.totalPrize)}</div>
             <div className="label">Purse</div>
@@ -100,7 +101,7 @@ function ChallengeCard({
 ChallengeCard.defaultProps = {
   onTechTagClicked: _.noop,
   challenge: {},
-  config: {},
+  config: process.env,
   sampleWinnerProfile: undefined,
 };
 
@@ -125,11 +126,12 @@ class Tags extends React.Component {
   }
 
   renderTechnologies() {
-    if (this.props.technologies.length) {
-      let technologyList = this.props.technologies;
-      if (this.props.technologies.length > VISIBLE_TECHNOLOGIES && !this.state.expanded) {
+    const technologies = this.props.technologies ? this.props.technologies.split(',') : [];
+    if (technologies.length) {
+      let technologyList = technologies;
+      if (technologies.length > VISIBLE_TECHNOLOGIES && !this.state.expanded) {
         const lastItem = `+${technologyList.length - VISIBLE_TECHNOLOGIES}`;
-        technologyList = this.props.technologies.slice(0, VISIBLE_TECHNOLOGIES);
+        technologyList = technologies.slice(0, VISIBLE_TECHNOLOGIES);
         technologyList.push(lastItem);
       }
       return technologyList.map(c => (
@@ -143,7 +145,8 @@ class Tags extends React.Component {
     return '';
   }
   onClick(c) {
-    if (c.indexOf('+') > -1) {
+    // resolved conflict with c++ tag
+    if (c.indexOf('+') === 0) {
       this.setState({ expanded: true });
     } else {
       this.props.onTechTagClicked(c);
@@ -160,12 +163,12 @@ class Tags extends React.Component {
   }
 }
 Tags.defaultProps = {
-  technologies: [],
+  technologies: '',
   onTechTagClicked: _.noop,
 };
 
 Tags.propTypes = {
-  technologies: React.PropTypes.array,
+  technologies: React.PropTypes.string,
   onTechTagClicked: React.PropTypes.func,
 };
 

@@ -78,7 +78,7 @@ class InfiniteList extends Component {
 
     this.currentPageIndex = initialPageIndex;
 
-    this.setState({items: [], cachedItemElements: []}, () => {
+    this.setState({ items: [], cachedItemElements: [] }, () => {
       this.ids = [];
       this.addBatchIds(initialLoadNumber);
       this.addNewItems(sortedItems.slice(0, initialLoadNumber), props, isMounting);
@@ -140,7 +140,9 @@ class InfiniteList extends Component {
   }
 
   onScrollToLoadPoint() {
-    if (this.state.loading || this.state.items.length >= this.props.itemCountTotal) return;
+    if (this.state.newItemsCount === 0
+        || this.state.loading
+        || this.state.items.length >= this.props.itemCountTotal) { return; }
 
     this.addBatchIds();
 
@@ -152,6 +154,7 @@ class InfiniteList extends Component {
       currentItems: this.state.items,
       fetchItems: () => this.fetchNewItems(),
       finishCallback: (newItems) => {
+        this.state.newItemsCount = newItems.length ? newItems.length : 0;
         this.props.fetchItemFinishCallback(newItems);
         this.currentPageIndex += 1;
         this.setLoadingStatus(false);

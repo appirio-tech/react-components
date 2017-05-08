@@ -6,69 +6,53 @@ import React from 'react';
 import ChallengeCard from './ChallengeCard';
 import './ChallengeCardExamples.scss';
 
-const BASE_URL = 'https://api.topcoder.com/v2';
-const CHALLENGES_API = `${BASE_URL}/challenges/`;
-
-const fetchUserProfile = (handle) => {
-  const url = `${BASE_URL}/users/${handle}`;
-  return fetch(url).then(res => res.json());
-};
 
 class ChallengeCardExamples extends React.Component {
-  constructor() {
+  constructor(props) {
     super();
     this.state = {
       activeDevelopChallenges: [],
       pastDevelopChallenges: [],
       activeDesignChallenges: [],
       pastDesignChallenges: [],
-      activeMarathonMatchChallenges: []
+      activeMarathonMatchChallenges: [],
     };
     const that = this;
-
+    const BASE_URL = props.API_URL_V3;
+    const CHALLENGES_API = `${BASE_URL}/challenges/`;
+    const fetchUserProfile = (handle) => {
+      const url = `${BASE_URL}/users/${handle}`;
+      return fetch(url).then(res => res.json());
+    };
     // Fetches a sample user profile to show in User Avatar Tooltips.
     // Effective loading of all winner profiles for all challenges is
     // somewhat out of the scope of the current challenge.
     fetchUserProfile('Sky_').then(profile => this.setState({ sampleUserProfile: profile }));
 
-    fetch(`${CHALLENGES_API}active?type=develop`, { method: 'GET', mode: 'cors' })
+    fetch(`${CHALLENGES_API}?filter=track%3Ddevelop`, { method: 'GET', mode: 'cors' })
     .then((response) => {
       response.json().then((json) => {
         that.setState({
-          activeDevelopChallenges: json.data.slice(0, 15),
+          activeDevelopChallenges: json.result.content.filter(challenge => challenge.status === 'ACTIVE').slice(0, 15),
+          pastDevelopChallenges: json.result.content.filter(challenge => challenge.status === 'COMPLETED').slice(0, 15),
         });
       });
     });
-    fetch(`${CHALLENGES_API}past?type=develop`, { method: 'GET', mode: 'cors' })
+    fetch(`${CHALLENGES_API}?filter=track%3Ddesign`, { method: 'GET', mode: 'cors' })
     .then((response) => {
       response.json().then((json) => {
         that.setState({
-          pastDevelopChallenges: json.data.slice(0, 15),
-        });
-      });
-    });
-    fetch(`${CHALLENGES_API}active?type=design`, { method: 'GET', mode: 'cors' })
-    .then((response) => {
-      response.json().then((json) => {
-        that.setState({
-          activeDesignChallenges: json.data.slice(0, 15),
-        });
-      });
-    });
-    fetch(`${CHALLENGES_API}past?type=design`, { method: 'GET', mode: 'cors' })
-    .then((response) => {
-      response.json().then((json) => {
-        that.setState({
-          pastDesignChallenges: json.data.slice(0, 15),
+          activeDesignChallenges: json.result.content.filter(challenge => challenge.status === 'ACTIVE').slice(0, 15),
+          pastDesignChallenges: json.result.content.filter(challenge => challenge.status === 'COMPLETED').slice(0, 15),
         });
       });
     });
      // fetch marathon match
-    fetch(`${BASE_URL}/data/marathon/challenges/?listType=active`, { method: 'GET', mode: 'cors' })
+    fetch(`${BASE_URL}/marathonMatches/`, { method: 'GET', mode: 'cors' })
     .then((response) => {
       response.json().then((json) => {
         that.setState({
-          activeMarathonMatchChallenges: json.data,
+          activeMarathonMatchChallenges: json.result.content,
         });
       });
     });
@@ -77,12 +61,9 @@ class ChallengeCardExamples extends React.Component {
   render() {
     const ActiveDevelopChallengeCards = this.state.activeDevelopChallenges.map((challenge) => {
       const c = challenge;
-
-      c.subTrack = c.challengeType.toUpperCase().split(' ').join('_');
-      c.track = 'DEVELOP';
       return (
         <ChallengeCard
-          key={c.challengeId}
+          key={c.id}
           challenge={c}
           sampleWinnerProfile={this.state.sampleUserProfile}
         />);
@@ -90,12 +71,9 @@ class ChallengeCardExamples extends React.Component {
 
     const PastDevelopChallengeCards = this.state.pastDevelopChallenges.map((challenge) => {
       const c = challenge;
-
-      c.subTrack = c.challengeType.toUpperCase().split(' ').join('_');
-      c.track = 'DEVELOP';
       return (
         <ChallengeCard
-          key={c.challengeId}
+          key={c.id}
           challenge={c}
           sampleWinnerProfile={this.state.sampleUserProfile}
         />
@@ -104,12 +82,9 @@ class ChallengeCardExamples extends React.Component {
 
     const ActiveDesignChallengeCards = this.state.activeDesignChallenges.map((challenge) => {
       const c = challenge;
-
-      c.subTrack = c.challengeType.toUpperCase().split(' ').join('_');
-      c.track = 'DESIGN';
       return (
         <ChallengeCard
-          key={c.challengeId}
+          key={c.id}
           challenge={c}
           sampleWinnerProfile={this.state.sampleUserProfile}
         />
@@ -118,12 +93,9 @@ class ChallengeCardExamples extends React.Component {
 
     const PastDesignChallengeCards = this.state.pastDesignChallenges.map((challenge) => {
       const c = challenge;
-
-      c.subTrack = c.challengeType.toUpperCase().split(' ').join('_');
-      c.track = 'DESIGN';
       return (
         <ChallengeCard
-          key={c.challengeId}
+          key={c.id}
           challenge={c}
           sampleWinnerProfile={this.state.sampleUserProfile}
         />
@@ -134,22 +106,20 @@ class ChallengeCardExamples extends React.Component {
     const ActiveMarathonMatchChallengeCards = this.state
       .activeMarathonMatchChallenges.map((challenge) => {
         const c = challenge;
-
-        c.subTrack = 'MARATHON_MATCH';
-        c.track = 'DATA_SCIENCE';
-        c.challengeId = c.roundId;
-        c.technologies = [];
+        c.challengeId = c.rounds.id;
+        c.technologies = '';
         c.prize = c.prizes;
         c.submissionEndDate = c.endDate;
         c.totalPrize = 0;
-        c.challengeName = c.fullName;
-        c.numRegistrants = c.numberOfRegistrants;
-        c.numSubmissions = c.numberOfSubmissions;
+        c.challengeName = c.name;
+        c.numRegistrants = c.numRegistrants;
+        c.numSubmissions = c.numSubmissions;
         c.registrationStartDate = c.startDate;
         c.currentPhaseEndDate = c.endDate;
+        c.allPhases = [];
         return (
           <ChallengeCard
-            key={c.roundId}
+            key={c.id}
             challenge={c}
             sampleWinnerProfile={this.state.sampleUserProfile}
           />
@@ -183,5 +153,13 @@ class ChallengeCardExamples extends React.Component {
     );
   }
 }
+
+ChallengeCardExamples.propTypes = {
+  API_URL_V3: React.PropTypes.string,
+};
+
+ChallengeCardExamples.defaultProps = {
+  API_URL_V3: process.env.API_URL,
+};
 
 module.exports = ChallengeCardExamples;

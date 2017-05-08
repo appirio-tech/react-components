@@ -30,7 +30,7 @@ function Tip(props) {
     </span>
   ));*/
   const { photoLink } = props.user;
-  const src = photoLink.startsWith('https') ? photoLink : `https://topcoder.com/${photoLink}`;
+  const src = photoLink.startsWith('https') ? photoLink : `${props.MAIN_URL}/${photoLink}`;
 
   return (
     <div style={{ overflow: 'auto' }}>
@@ -58,6 +58,7 @@ function Tip(props) {
 
 Tip.propTypes = {
   handleError: PT.func.isRequired,
+  MAIN_URL: PT.string,
   user: PT.shape({
     country: PT.string,
     handle: PT.string,
@@ -65,6 +66,10 @@ Tip.propTypes = {
     photoLink: PT.string,
     ratingSummary: PT.array,
   }).isRequired,
+};
+
+Tip.defaultProps = {
+  MAIN_URL: process.env.MAIN_URL,
 };
 
 /**

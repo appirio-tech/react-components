@@ -59,7 +59,7 @@ class ChallengeFilters extends React.Component {
       showEditTrackPanel: false,
     };
     this.searchBarProps = {
-      placeholder: "Search Challenges",
+      placeholder: 'Search Challenges',
     };
     if (props.searchQuery) {
       this.searchBarProps.query = props.searchQuery;

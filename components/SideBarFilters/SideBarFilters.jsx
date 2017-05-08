@@ -37,6 +37,7 @@ const DEFAULT_FILTERS = [
   new SideBarFilter(MODE.ONGOING_CHALLENGES),
   new SideBarFilter(MODE.PAST_CHALLENGES),
   new SideBarFilter(MODE.OPEN_FOR_REVIEW),
+  new SideBarFilter(MODE.UPCOMING_CHALLENGES),
 ];
 
 /*
@@ -49,7 +50,8 @@ const FILTER_ID = {
   ONGOING_CHALLENGES: 3,
   PAST_CHALLENGES: 4,
   OPEN_FOR_REVIEW: 5,
-  FIRST_USER_DEFINED: 6,
+  UPCOMING_CHALLENGES: 6,
+  FIRST_USER_DEFINED: 7,
 };
 
 /*
@@ -104,13 +106,12 @@ class SideBarFilters extends React.Component {
     // A fancy staff: if the parent has passed a filter, which does not exists
     // (it is taken from a deep link), we add it to the list of filters and
     // also select it.
-    // if the filter is one of the default filters then 
-    // select it by default. We check on name and assume that 
+    // if the filter is one of the default filters then
+    // select it by default. We check on name and assume that
     // a custom filter will never be named the same as a default filter.
     if (_.values(MODE).includes(props.filter.name)) {
-      this.state.currentFilter = DEFAULT_FILTERS[_.values(MODE).indexOf(props.filter.name)]
-    }
-    else {
+      this.state.currentFilter = DEFAULT_FILTERS[_.values(MODE).indexOf(props.filter.name)];
+    } else {
       const f = new SideBarFilter(props.filter);
       f.count = props.challenges.filter(f.getFilterFunction()).length;
       this.state.currentFilter = f;
@@ -120,20 +121,19 @@ class SideBarFilters extends React.Component {
 
   static domainFromUrl(url) {
     // if MAIN_URL is not defined or null return default domain (production)
-    if(url == null) {
-      return "topcoder.com";
+    if (url == null) {
+      return 'topcoder.com';
     }
-    const firstSlashIndex = url.indexOf("/");
-    const secondSlashIndex = url.indexOf("/", firstSlashIndex+1);
-    const fullDomainName = url.slice(secondSlashIndex+1);
-    const lastDotIndex = fullDomainName.lastIndexOf(".");
-    const secondLastDotIndex = fullDomainName.lastIndexOf(".", lastDotIndex-1);
-    if(secondLastDotIndex === -1) {
+    const firstSlashIndex = url.indexOf('/');
+    const secondSlashIndex = url.indexOf('/', firstSlashIndex + 1);
+    const fullDomainName = url.slice(secondSlashIndex + 1);
+    const lastDotIndex = fullDomainName.lastIndexOf('.');
+    const secondLastDotIndex = fullDomainName.lastIndexOf('.', lastDotIndex - 1);
+    if (secondLastDotIndex === -1) {
       return fullDomainName;
     }
-    else {
-      return fullDomainName.slice(secondLastDotIndex+1, fullDomainName.length);
-    }
+
+    return fullDomainName.slice(secondLastDotIndex + 1, fullDomainName.length);
   }
 
   /**
@@ -363,10 +363,11 @@ class SideBarFilters extends React.Component {
         <div className="FilterBox">
           {filters[FILTER_ID.ALL_CHALLENGES]}
 
-          {this.props.isAuth ?<span> {filters[FILTER_ID.MY_CHALLENGES]}</span> : ''}
+          {this.props.isAuth ? <span> {filters[FILTER_ID.MY_CHALLENGES]}</span> : ''}
           {filters[FILTER_ID.OPEN_FOR_REGISTRATION]}
           {filters[FILTER_ID.ONGOING_CHALLENGES]}
           {filters[FILTER_ID.OPEN_FOR_REVIEW]}
+          {filters[FILTER_ID.UPCOMING_CHALLENGES]}
           <hr />
           {filters[FILTER_ID.PAST_CHALLENGES]}
           {
@@ -410,12 +411,13 @@ class SideBarFilters extends React.Component {
    * Selects the filter with the specified index.
    */
   selectFilter(index) {
-    const currentFilter = this.state.filters[index];
-    if (currentFilter.mode === 'Open for review') {
+    if (this.state.filters[index].mode === 'Open for review') {
       // Jump to Development Review Opportunities page
       window.location.href = `${this.props.config.MAIN_URL}/review/development-review-opportunities/`;
+    } else {
+      const currentFilter = this.state.filters[index];
+      this.setState({ currentFilter }, () => this.props.onFilter(currentFilter));
     }
-    this.setState({ currentFilter }, () => this.props.onFilter(currentFilter));
   }
 
   /**
@@ -424,7 +426,7 @@ class SideBarFilters extends React.Component {
   selectFilterWithName(filterName) {
     // find a filter with matching name
     const currentFilter = _.find(this.state.filters, filter => filter.name === filterName);
-    if (currentFilter.mode === "Open for review") {
+    if (currentFilter.mode === 'Open for review') {
       // Jump to Development Review Opportunities page
       window.location.href = `${this.props.config.MAIN_URL}/review/development-review-opportunities/`;
       return;
