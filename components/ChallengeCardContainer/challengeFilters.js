@@ -74,7 +74,7 @@ export default [
       'Prize high to low',
     ],
     getApiUrl: (pageIndex, pageSize = 50) => (
-      `${process.env.API_URL}/challenges/?filter=status%3DCompleted&offset=${pageIndex}&limit=${pageSize}`
+      `${process.env.API_URL}/challenges/?filter=status%3DCompleted&offset=${pageIndex * pageSize}&limit=${pageSize}`
     ),
   },
   /**
