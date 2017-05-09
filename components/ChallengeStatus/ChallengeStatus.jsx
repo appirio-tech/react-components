@@ -15,7 +15,6 @@ import './ChallengeStatus.scss';
 // Constants
 const ID_LENGTH = 6;
 const MAX_VISIBLE_WINNERS = 3;
-const MOCK_PHOTO = 'https://acrobatusers.com/assets/images/template/author_generic.jpg';
 const STALLED_MSG = 'Stalled';
 const DRAFT_MSG = 'In Draft';
 const STALLED_TIME_LEFT_MSG = 'Challenge is currently on hold';
