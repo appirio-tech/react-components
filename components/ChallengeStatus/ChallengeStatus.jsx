@@ -184,13 +184,17 @@ class ChallengeStatus extends Component {
     const { DS_CHALLENGE_URL, CHALLENGE_URL } = this.state;
     const { id, track } = challenge;
     const challengeURL = track.toLowerCase() === 'data' ? DS_CHALLENGE_URL : CHALLENGE_URL;
-    const leaderboard = this.state.winners && this.state.winners.map(winner => (
-      <div className="avatar-container" key={winner.handle}>
-        <UserAvatarTooltip user={getSampleProfile(winner)}>
-          <LeaderboardAvatar member={winner} />
-        </UserAvatarTooltip>
-      </div>
-      ));
+    const leaderboard = this.state.winners && this.state.winners.map((winner) => {
+      if (winner.isLastItem) {
+        return <LeaderboardAvatar member={winner} url={`${this.props.detailLink}#winner`} />;
+      }
+      return (
+        <div className="avatar-container" key={winner.handle}>
+          <UserAvatarTooltip user={getSampleProfile(winner)}>
+            <LeaderboardAvatar member={winner} />
+          </UserAvatarTooltip>
+        </div>);
+    });
     return leaderboard || (
     <span className="winners" onMouseEnter={this.handleHover}>
       <a href={`${challengeURL}${id}`}>Winners</a>
@@ -334,16 +338,15 @@ class ChallengeStatus extends Component {
       <div>
         {this.renderLeaderboard()}
         <span className="challenge-stats">
-          <span>
+          <span className="num-reg">
             <Tooltip content={numRegistrantsTipText(challenge.numRegistrants)}>
               <a className="num-reg past" href={this.registrantsLink(challenge, MM_REG)}>
                 <RegistrantsIcon /> <span className="number">{challenge.numRegistrants}</span>
               </a>
             </Tooltip>
           </span>
-          <span>
+          <span className="num-sub">
             <Tooltip content={numSubmissionsTipText(challenge.numSubmissions)}>
-
               <a className="num-sub past" href={this.registrantsLink(challenge, MM_SUB)}>
                 <SubmissionsIcon /> <span className="number">{challenge.numSubmissions}</span>
               </a>
@@ -365,16 +368,18 @@ class ChallengeStatus extends Component {
       fetch(`${this.props.config.API_URL_V2}/develop/challenges/${challengeId}`)
         .then(res => res.json())
         .then((data) => {
-          let winners = data.submissions.filter(sub => sub.placement)
+          const winnerCount = this.props.challenge.prizes.length;
+          let winners = data.submissions.filter(sub => sub.placement <= winnerCount)
             .map(winner => ({
               handle: winner.handle,
               position: winner.placement,
-              photoURL: MOCK_PHOTO,
+              photoURL: `${this.props.MAIN_URL}/i/m/${winner.handle}.jpeg`,
             }));
-          winners = _.uniqWith(winners, _.isEqual);
+          winners = _.sortBy(_.uniqWith(winners, _.isEqual), ['position']);
           if (winners.length > MAX_VISIBLE_WINNERS) {
             const lastItem = {
               handle: `+${winners.length - MAX_VISIBLE_WINNERS}`,
+              isLastItem: true,
             };
             winners = winners.slice(0, MAX_VISIBLE_WINNERS);
             winners.push(lastItem);
@@ -390,16 +395,18 @@ class ChallengeStatus extends Component {
       fetch(`${this.props.config.API_URL_V2}/design/challenges/result/${challengeId}`)
         .then(res => res.json())
         .then((data) => {
-          let winners = data.results.filter(sub => sub.placement)
+          const winnerCount = this.props.challenge.prizes.length;
+          let winners = data.results.filter(sub => sub.placement && sub.placement <= winnerCount)
           .map(winner => ({
             handle: winner.handle,
             position: winner.placement,
-            photoURL: MOCK_PHOTO,
+            photoURL: `${this.props.MAIN_URL}/i/m/${winner.handle}.jpeg`,
           }));
-          winners = _.uniqWith(winners, _.isEqual);
+          winners = _.sortBy(_.uniqWith(winners, _.isEqual), ['position']);
           if (winners.length > MAX_VISIBLE_WINNERS) {
             const lastItem = {
               handle: `+${winners.length - MAX_VISIBLE_WINNERS}`,
+              isLastItem: true,
             };
             winners = winners.slice(0, MAX_VISIBLE_WINNERS);
             winners.push(lastItem);
@@ -456,12 +463,14 @@ ChallengeStatus.defaultProps = {
   config: {},
   detailLink: '',
   sampleWinnerProfile: undefined,
+  MAIN_URL: process.env.MAIN_URL,
 };
 
 ChallengeStatus.propTypes = {
   challenge: PropTypes.object,
   config: PropTypes.object,
   detailLink: PropTypes.string,
+  MAIN_URL: PropTypes.string,
 };
 
 export default ChallengeStatus;
