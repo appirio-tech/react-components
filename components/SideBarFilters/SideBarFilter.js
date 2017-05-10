@@ -77,15 +77,25 @@ class SideBarFilter extends ChallengeFilter {
   }
 
   getFilterFunction() {
+    const openForRegistrationFilter = (item) => {
+      const registrationPhase = item.allPhases.filter(d => d.phaseType === 'Registration')[0];
+      const registrationOpen = registrationPhase && registrationPhase.phaseStatus === 'Open';
+      const checkPointPhase = item.allPhases.filter(d => d.phaseType === 'Checkpoint Submission')[0];
+      const checkPointOpen = checkPointPhase && checkPointPhase.phaseStatus === 'Open';
+
+      return (item.track === 'DEVELOP' && registrationOpen)
+        || (item.track === 'DESIGN' && registrationOpen && checkPointOpen)
+        || (item.subTrack.startsWith('MARATHON') && !item.status.startsWith('COMPLETED'));
+    };
+
     switch (this.mode) {
       case MODE.ALL_CHALLENGES: return () => true;
       case MODE.MY_CHALLENGES: return item => item.myChallenge;
       case MODE.OPEN_FOR_REVIEW: return item => item.allPhases.filter(d => d.phaseType === 'Registration')[0].phaseStatus === 'REVIEW';
       // The API has some incosistencies in the challenge items
       // thus we have to check all fields that define a challenges as 'Open for registration'
-      case MODE.OPEN_FOR_REGISTRATION: return item => (item.allPhases.filter(d => d.phaseType === 'Registration')[0]
-        && (item.allPhases.filter(d => d.phaseType === 'Registration')[0].phaseStatus === 'Open' || item.subTrack.startsWith('MARATHON')))
-        && !item.status.startsWith('COMPLETED');
+      case MODE.OPEN_FOR_REGISTRATION:
+        return openForRegistrationFilter;
       case MODE.ONGOING_CHALLENGES:
         return item => item.allPhases.filter(d => d.phaseType === 'Registration')[0].phaseStatus === 'Closed'
           && item.status === 'ACTIVE';
