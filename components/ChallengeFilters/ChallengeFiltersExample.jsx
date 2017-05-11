@@ -259,7 +259,8 @@ class ChallengeFiltersExample extends React.Component {
           const existing = map[item.challengeId];
           if (existing) existing.communities.add(community);
           else {
-            const endTimestamp = new Date(item.submissionEndDate).getTime();
+            const submissionEndDate = item.submissionEndDate.split(' ')[0]; // Support non-standard date format
+            const endTimestamp = new Date(submissionEndDate).getTime();
             _.defaults(item, {
               communities: new Set([community]),
               platforms: [],

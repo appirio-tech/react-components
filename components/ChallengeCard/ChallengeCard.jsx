@@ -18,7 +18,10 @@ const ID_LENGTH = 6;
 const { func, object } = React.PropTypes;
 
 // Get the End date of a challenge
-const getEndDate = date => moment(date).format('MMM DD');
+const getEndDate = (date) => {
+  const endDate = date.split(' ')[0]; // Support non-standard date format
+  return moment(endDate).format('MMM DD');
+};
 
 // Convert a number to string with thousands separated by comma
 const numberWithCommas = n => (n ? n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') : 0);
