@@ -181,6 +181,7 @@ class ChallengeCardContainer extends Component {
                   fetchItemFinishCallback={fetchCallback}
                   batchNumber={batchLoadNumber}
                   filter={additionalFilter}
+                  tempDataFilter={filterName}
                   sort={sortingFunctionStore[filterSortingStore[filterName]]}
                   uniqueIdentifier={challengeUniqueIdentifier}
                 />
