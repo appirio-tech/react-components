@@ -41,9 +41,8 @@ export default [
     info: {
       phaseName: 'registration',
     },
-    // v3 end point need to be updated once it is created for open for registration challenges
     getApiUrl: (pageIndex, pageSize = 50) => (
-      `${process.env.API_URL}/challenges/?filter=status%3DActive&offset=${pageIndex * pageSize}&limit=${pageSize}`
+      `${process.env.API_URL_V2}/challenges/open?pageIndex=${pageIndex}&pageSize=${pageSize}`
     ),
   },
   {
@@ -58,10 +57,11 @@ export default [
       'Title A-Z',
       'Prize high to low',
     ],
-    // v3 end point need to be updated once it is created for open for ongoing challenges
-    getApiUrl: (pageIndex, pageSize = 50) => (
-      `${process.env.API_URL}/challenges/?filter=status%3DActive&offset=${pageIndex * pageSize}&limit=${pageSize}`
-    ),
+    // this api endpoint probably doesn't match the filter criteria exactly
+    // kept for reference
+    // getApiUrl: (pageIndex, pageSize = 50) => (
+    //   `http://api.topcoder.com/v2/challenges/active?pageIndex=${pageIndex}&pageSize=${pageSize}`
+    // ),
   },
   {
     name: 'Past challenges',
@@ -73,7 +73,6 @@ export default [
       'Title A-Z',
       'Prize high to low',
     ],
-    // v3 end point need to be updated once it is created for past challenges
     getApiUrl: (pageIndex, pageSize = 50) => (
       `${process.env.API_URL}/challenges/?filter=status%3DCompleted&offset=${pageIndex * pageSize}&limit=${pageSize}`
     ),
