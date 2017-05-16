@@ -1,7 +1,3 @@
-/* global
-  fetch
-*/
-
 /**
  * Prizes Tooltip Component.
  *
