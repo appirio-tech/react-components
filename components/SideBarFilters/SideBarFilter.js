@@ -83,13 +83,13 @@ class SideBarFilter extends ChallengeFilter {
       const reviewPhase = item.allPhases.filter(d => d.phaseType === 'Iterative Review')[0];
       const isReviewClosed = reviewPhase && reviewPhase.phaseStatus === 'Closed';
       const checkPointPhase = item.allPhases.filter(d => d.phaseType === 'Checkpoint Submission')[0];
-      const checkPointOpen = checkPointPhase && checkPointPhase.phaseStatus === 'Open';
+      const isCheckPointClosed = checkPointPhase && checkPointPhase.phaseStatus === 'Closed';
       const isFirst2Finish = item.subTrack === 'FIRST_2_FINISH';
 
       return (item.track === 'DEVELOP' && !isFirst2Finish && registrationOpen)
       // First 2 Finish challenges may be closed even if registration is open
         || (item.track === 'DEVELOP' && isFirst2Finish && registrationOpen && !isReviewClosed)
-        || (item.track === 'DESIGN' && registrationOpen && checkPointOpen)
+        || (item.track === 'DESIGN' && registrationOpen && !isCheckPointClosed)
         || (item.subTrack.startsWith('MARATHON') && !item.status.startsWith('COMPLETED'));
     };
 
