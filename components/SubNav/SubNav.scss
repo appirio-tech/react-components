@@ -1,6 +1,7 @@
 @import 'topcoder/tc-includes';
+@import '../../styles/tc-styles';
 
-$subnav-item-bg-color: #B47DD6;
+$subnav-item-bg-color: $tc-purple;
 $subnav-item-text-color: #7A7F83;
 
 .SubNav {

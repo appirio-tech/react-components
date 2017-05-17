@@ -1,7 +1,6 @@
-require('appirio-tech-api-schemas')
+import ReactDOM from 'react-dom';
+import router from './components/Router/Router';
 
-import ReactDOM from 'react-dom'
-import router from './components/Router/Router.jsx'
+require('appirio-tech-api-schemas');
 
-ReactDOM.render(router(), document.getElementById('root'))
-
+ReactDOM.render(router(), document.getElementById('root'));

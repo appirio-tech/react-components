@@ -1,8 +1,9 @@
 @import "topcoder/tc-includes";
 @import "topcoder/tc-buttons";
+@import '../../styles/tc-styles';
 
-$user-dropdown-bg: #FAFAFB;
-$placeholder-bg: #B47DD6;
+$user-dropdown-bg: $tc-gray-neutral-light;
+$placeholder-bg: $tc-purple;
 $username-color: #737380;
 
 .UserDropdownMenu {
