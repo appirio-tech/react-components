@@ -27,7 +27,7 @@ export default [
     name: 'Open for registration',
     check(item) {
       const phase = item.currentPhases.filter(d => d.phaseType === 'Registration')[0];
-      return phase ? phase.phaseStatus === 'Open' : false;
+      return phase ? phase.phaseStatus === 'Open' && !item.status.startsWith('COMPLETED') : false;
     },
     sortingOptions: [
       'Most recent',
