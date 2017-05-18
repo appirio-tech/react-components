@@ -72,7 +72,7 @@ class FilterPanelFilter extends BaseFilter {
       if (this.subtracks.length && this.subtracks[0]
       && !filterSubtrack.includes(itemSubtrack)) return false;
       if (this.startDate && this.startDate.isAfter(item.submissionEndDate)) return false;
-      if (this.endDate && this.endDate.isBefore(item.postingDate)) return false;
+      if (this.endDate && this.endDate.isBefore(item.createdAt)) return false;
       if (!this.keywords.length || !this.keywords[0]) return true;
       const data = ` ${item.name} ${item.platforms} ${item.technologies} `.toLowerCase();
       for (let i = 0; i !== this.keywords.length; i += 1) {
