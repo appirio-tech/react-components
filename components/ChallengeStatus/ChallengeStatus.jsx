@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import fetch from 'isomorphic-fetch';
 import moment from 'moment';
 import _ from 'lodash';
 import LeaderboardAvatar from '../LeaderboardAvatar/LeaderboardAvatar';
@@ -148,13 +147,15 @@ const getTimeToGo = (start, end) => {
  * Returns an user profile object as expected by the UserAvatarTooltip
  * @param {String} handle
  */
-function getSampleProfile(user) {
-  const { handle } = user;
+function getProfile(user) {
+  const { handle, placement } = user;
+  const photoLink = user.photoURL || `i/m/${handle}.jpeg`;
   return {
     handle,
+    placement,
     country: '',
     memberSince: '',
-    photoLink: `i/m/${handle}.jpeg`,
+    photoLink,
     ratingSummary: [],
   };
 }
@@ -172,9 +173,7 @@ class ChallengeStatus extends Component {
       DS_CHALLENGE_URL,
       FORUM_URL,
     };
-    this.handleHover = this.handleHover.bind(this);
-    this.getDevelopmentWinners = this.getDevelopmentWinners.bind(this);
-    this.getDesignWinners = this.getDesignWinners.bind(this);
+
     this.registrantsLink = this.registrantsLink.bind(this);
   }
 
@@ -183,21 +182,39 @@ class ChallengeStatus extends Component {
     const { DS_CHALLENGE_URL, CHALLENGE_URL } = this.state;
     const { id, track } = challenge;
     const challengeURL = track.toLowerCase() === 'data' ? DS_CHALLENGE_URL : CHALLENGE_URL;
-    const leaderboard = this.state.winners && this.state.winners.map((winner) => {
+
+    let winners = challenge.winners && challenge.winners.filter(winner => winner.type === 'final')
+    .map(winner => ({
+      handle: winner.handle,
+      position: winner.placement,
+      photoURL: winner.photoURL || `${this.props.MAIN_URL}/i/m/${winner.handle}.jpeg`,
+    }));
+
+    if (winners && winners.length > MAX_VISIBLE_WINNERS) {
+      const lastItem = {
+        handle: `+${winners.length - MAX_VISIBLE_WINNERS}`,
+        isLastItem: true,
+      };
+      winners = winners.slice(0, MAX_VISIBLE_WINNERS);
+      winners.push(lastItem);
+    }
+
+    const leaderboard = winners && winners.map((winner) => {
       if (winner.isLastItem) {
-        return <LeaderboardAvatar member={winner} url={`${this.props.detailLink}#winner`} />;
+        return <LeaderboardAvatar key={winner.handle} member={winner} url={`${this.props.detailLink}#winner`} />;
       }
+      const userProfile = getProfile(winner);
       return (
         <div className="avatar-container" key={winner.handle}>
-          <UserAvatarTooltip user={getSampleProfile(winner)}>
+          <UserAvatarTooltip user={userProfile}>
             <LeaderboardAvatar member={winner} />
           </UserAvatarTooltip>
         </div>);
     });
     return leaderboard || (
-    <span className="winners" onMouseEnter={this.handleHover}>
-      <a href={`${challengeURL}${id}`}>Winners</a>
-    </span>);
+      <span className="winners">
+        <a href={`${challengeURL}${id}`}>Winners</a>
+      </span>);
   }
 
   renderRegisterButton() {
@@ -360,90 +377,6 @@ class ChallengeStatus extends Component {
         </span>
       </div>
     );
-  }
-
-  getDevelopmentWinners(challengeId) {
-    return new Promise((resolve, reject) => {
-      fetch(`${this.props.config.API_URL_V2}/develop/challenges/${challengeId}`)
-        .then(res => res.json())
-        .then((data) => {
-          const winnerCount = this.props.challenge.prizes.length;
-          let winners = data.submissions.filter(sub => sub.placement <= winnerCount)
-            .map(winner => ({
-              handle: winner.handle,
-              position: winner.placement,
-              photoURL: `${this.props.MAIN_URL}/i/m/${winner.handle}.jpeg`,
-            }));
-          winners = _.sortBy(_.uniqWith(winners, _.isEqual), ['position']);
-          if (winners.length > MAX_VISIBLE_WINNERS) {
-            const lastItem = {
-              handle: `+${winners.length - MAX_VISIBLE_WINNERS}`,
-              isLastItem: true,
-            };
-            winners = winners.slice(0, MAX_VISIBLE_WINNERS);
-            winners.push(lastItem);
-          }
-          resolve(winners);
-        })
-        .catch(err => reject(err));
-    });
-  }
-
-  getDesignWinners(challengeId) {
-    return new Promise((resolve, reject) => {
-      fetch(`${this.props.config.API_URL_V2}/design/challenges/result/${challengeId}`)
-        .then(res => res.json())
-        .then((data) => {
-          const winnerCount = this.props.challenge.prizes.length;
-          let winners = data.results.filter(sub => sub.placement && sub.placement <= winnerCount)
-          .map(winner => ({
-            handle: winner.handle,
-            position: winner.placement,
-            photoURL: `${this.props.MAIN_URL}/i/m/${winner.handle}.jpeg`,
-          }));
-          winners = _.sortBy(_.uniqWith(winners, _.isEqual), ['position']);
-          if (winners.length > MAX_VISIBLE_WINNERS) {
-            const lastItem = {
-              handle: `+${winners.length - MAX_VISIBLE_WINNERS}`,
-              isLastItem: true,
-            };
-            winners = winners.slice(0, MAX_VISIBLE_WINNERS);
-            winners.push(lastItem);
-          }
-          resolve(winners);
-        })
-        .catch(err => reject(err));
-    });
-  }
-
-
-  getWinners(challengeType, challengeId) {
-    switch (challengeType) {
-      case 'develop':
-        return this.getDevelopmentWinners(challengeId);
-      case 'design':
-        return this.getDesignWinners(challengeId);
-      default:
-        return this.getDevelopmentWinners(challengeId);
-    }
-  }
-
-    /**
-   * Get the list of winners when the user hovers
-   * over the status
-   */
-  handleHover() {
-    if (!this.state.winners) {
-      const { challenge } = this.props;
-      const { id, track } = challenge;
-
-      // We don't have the API for data science challenge
-      if (track.toLowerCase() === 'data') {
-        return;
-      }
-      const results = this.getWinners(track.toLowerCase(), id);
-      results.then(winners => this.setState({ winners }));
-    }
   }
 
   render() {
