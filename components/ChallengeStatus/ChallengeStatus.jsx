@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
-import _ from 'lodash';
 import LeaderboardAvatar from '../LeaderboardAvatar/LeaderboardAvatar';
 import ChallengeProgressBar from '../ChallengeProgressBar/ChallengeProgressBar';
 import ProgressBarTooltip from '../ChallengeCard/Tooltips/ProgressBarTooltip';
