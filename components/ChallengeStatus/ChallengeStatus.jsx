@@ -289,7 +289,7 @@ class ChallengeStatus extends Component {
         </span>
         <ProgressBarTooltip challenge={challenge} config={config}>
           {
-            challenge.status === 'ACTIVE' ?
+            challenge.status === 'ACTIVE' && challenge.currentPhases.length > 0 ?
               <div>
                 <ChallengeProgressBar
                   color="green"
