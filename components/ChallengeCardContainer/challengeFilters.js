@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { openForRegistrationFilter } from '../SideBarFilters/SideBarFilter';
 
 export default [
   {
@@ -25,10 +26,7 @@ export default [
   },
   {
     name: 'Open for registration',
-    check(item) {
-      const phase = item.currentPhases.filter(d => d.phaseType === 'Registration')[0];
-      return phase ? phase.phaseStatus === 'Open' && !item.status.startsWith('COMPLETED') : false;
-    },
+    check: openForRegistrationFilter,
     sortingOptions: [
       'Most recent',
       'Time to register',
