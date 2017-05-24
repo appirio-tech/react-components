@@ -153,10 +153,11 @@ class ChallengeFiltersExample extends React.Component {
     const f = new ChallengeFilterWithSearch();
     _.merge(f, filter);
     f.query = searchString;
-    const fetchId = 1 + this.state.lastFetchId;
-    this.setState({ challenges: [], lastFetchId: fetchId, searchQuery: searchString });
-    this.fetchChallenges(fetchId).then(res => this.setChallenges(fetchId, res, f));
-    this.onFilterByTopFilter(f);
+    this.setState({
+      searchQuery: searchString,
+    },
+      () => this.onFilterByTopFilter(f),
+    );
   }
 
   /**
@@ -304,28 +305,26 @@ class ChallengeFiltersExample extends React.Component {
   }
 
   onFilterByTopFilter(filter, isSidebarFilter) {
-    const mergedFilter = Object.assign({}, this.state.filter, filter);
-    const updatedFilter = new SideBarFilter(mergedFilter);
-    if (!isSidebarFilter) {
+    let updatedFilter;
+    if (filter.query && filter.query !== '') {
+      updatedFilter = filter;
+      updatedFilter.isCustomFilter = true;
       updatedFilter.mode = SideBarFilterModes.CUSTOM;
+    } else {
+      const mergedFilter = Object.assign({}, this.state.filter, filter);
+      updatedFilter = new SideBarFilter(mergedFilter);
+      if (!isSidebarFilter) {
+        updatedFilter.mode = SideBarFilterModes.CUSTOM;
+      }
     }
     this.setState({ filter: updatedFilter }, this.saveFiltersToHash.bind(this, updatedFilter));
   }
 
-  updateFilter(hash) {
-    // get the latest filter and update current challenges
-    this.state = {
-      challenges: [],
-      srmChallenges: [],
-      currentCardType: 'Challenges',
-      filter: new SideBarFilter(),
-      lastFetchId: 0,
-    };
-    if (hash) {
-      this.state.filter = deserialize(hash);
-      this.state.searchQuery = hash.split('&').filter(e => e.startsWith('query')).map(element => element.split('=')[1])[0];
-    }
-    this.fetchChallenges(0).then(res => this.setChallenges(0, res));
+  // This method is not being used any more
+  // and should be removed in future.
+  updateFilter() {
+    const filter = this.state.filter;
+    return filter;
   }
 
   // ReactJS render method.
