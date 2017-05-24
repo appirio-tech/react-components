@@ -212,7 +212,7 @@ class ChallengeStatus extends Component {
     });
     return leaderboard || (
       <span className="winners">
-        <a href={`${challengeURL}${id}`}>Results</a>
+        <a href={`${challengeURL}${id}#winner`}>Results</a>
       </span>);
   }
 
