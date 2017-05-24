@@ -25,6 +25,7 @@
  */
 
 import _ from 'lodash';
+import moment from 'moment';
 import React, { Component } from 'react';
 import SortingSelectBar from '../SortingSelectBar/SortingSelectBar';
 import InfiniteList from '../InfiniteList/InfiniteList';
@@ -75,6 +76,7 @@ class ChallengeCardContainer extends Component {
     getFilterTotalCountStore().then(
       filterTotalCountStore => this.setState({ filterTotalCountStore }),
     );
+    this.fetchMoreItems = this.fetchMoreItems.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -105,6 +107,17 @@ class ChallengeCardContainer extends Component {
     sessionStorage.challengeFilterSortingStore = JSON.stringify(filterSortingStore);
 
     this.setState({ filterSortingStore });
+  }
+
+
+  fetchMoreItems(challenges) {
+    const filter = this.props.filter;
+    const filterFunc = filter.startDate ? (challenge) => {
+      const challengeEndDate = moment(challenge.registrationEndDate);
+      const filterStartDate = filter.startDate;
+      return challengeEndDate.isAfter(filterStartDate, 'day');
+    } : _.stubTrue;
+    return _.every(challenges, filterFunc);
   }
 
   render() {
@@ -179,6 +192,7 @@ class ChallengeCardContainer extends Component {
                     : null
                   }
                   fetchItemFinishCallback={fetchCallback}
+                  fetchMoreItems={this.fetchMoreItems}
                   batchNumber={batchLoadNumber}
                   filter={additionalFilter}
                   sort={sortingFunctionStore[filterSortingStore[filterName]]}
@@ -214,6 +228,7 @@ ChallengeCardContainer.propTypes = {
   additionalFilter: func,
   challenges: arrayOf(object),
   currentFilterName: string,
+  filter: object.isRequired,
   filters: arrayOf(shape({
     check: func,
     name: string,

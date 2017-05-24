@@ -397,6 +397,7 @@ class ChallengeFiltersExample extends React.Component {
           challenges={_.uniqBy(challenges, 'challengeId')}
           currentFilterName={sidebarFilterName}
           expanded={sidebarFilterName !== 'All Challenges'}
+          filter={this.state.filter}
           fetchCallback={(fetchedChallenges) => {
             this.setState({
               challenges: _.uniqBy(
