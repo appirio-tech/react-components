@@ -54,6 +54,7 @@ export function findFilterByName(filterName, filters) {
 function addCommunity(challenge) {
   const updatedChallenge = _.assign({}, challenge);
   updatedChallenge.communities = new Set([COMMUNITIES[challenge.track]]);
+  return updatedChallenge;
 }
 export function fetchChallenges(getUrl, pageIndex) {
   return fetch(getUrl(pageIndex))
