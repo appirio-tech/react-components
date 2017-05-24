@@ -113,7 +113,6 @@ class ChallengeCardContainer extends Component {
   fetchMoreItems(challenges) {
     const filter = this.props.filter;
     const filterFunc = filter.startDate ? (challenge) => {
-      debugger;
       const challengeEndDate = moment(challenge.registrationEndDate);
       const filterStartDate = filter.startDate;
       return challengeEndDate.isAfter(filterStartDate, 'day');
