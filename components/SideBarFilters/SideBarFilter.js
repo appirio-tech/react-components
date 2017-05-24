@@ -119,6 +119,13 @@ class SideBarFilter extends ChallengeFilter {
     return this;
   }
 
+  copySidebarFilterProps(filter) {
+    if (!filter._isSideBarFilter) return this;
+    this.name = _.clone(filter.name);
+    this.uuid = _.clone(filter.uuid);
+    return this;
+  }
+
   stringify() {
     return btoa(JSON.stringify([
       super.stringify(),
