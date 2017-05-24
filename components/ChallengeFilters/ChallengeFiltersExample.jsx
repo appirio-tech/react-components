@@ -19,7 +19,7 @@ import _ from 'lodash';
 import React, { PropTypes as PT } from 'react';
 import Sticky from 'react-stickynode';
 
-import { DESIGN_TRACK, DEVELOP_TRACK } from './ChallengeFilter';
+import { DESIGN_TRACK, DEVELOP_TRACK, DATA_SCIENCE_TRACK } from './ChallengeFilter';
 import ChallengeFilterWithSearch from './ChallengeFilterWithSearch';
 import ChallengeFilters from './ChallengeFilters';
 import SideBarFilter, { MODE as SideBarFilterModes } from '../SideBarFilters/SideBarFilter';
@@ -231,67 +231,78 @@ class ChallengeFiltersExample extends React.Component {
     /* Normalizes challenge objects received from different API endpoints,
      * and adds them to the list of loaded challenges. */
     function helper2(response, community) {
-      return response.json().then(res => res.result.content.forEach((item) => {
+      return response.json().then((res) => {
+        const content = res.result ? res.result.content : res.data;
+        content.forEach((item) => {
         /* Only marathon matches, when received from the /data/marathon/challenges
          * endpoint, satisfy this. */
-        if (item.roundId) {
-          const endTimestamp = new Date(item.endDate).getTime();
-          _.defaults(item, {
-            challengeId: item.roundId,
-            challengeName: item.fullName,
-            challengeCommunity: 'Data',
-            challengeType: 'Marathon',
-            communities: new Set([community]),
-            currentPhaseEndDate: item.endDate,
-            currentPhaseName: endTimestamp > Date.now() ? 'Registration' : '',
-            numRegistrants: item.numberOfRegistrants,
-            numSubmissions: item.numberOfSubmissions,
-            platforms: [],
-            prize: [],
-            registrationOpen: endTimestamp > Date.now() ? 'Yes' : 'No',
-            registrationStartDate: item.startDate,
-            submissionEndDate: item.endDate,
-            submissionEndTimestamp: endTimestamp,
-            technologies: [],
-            totalPrize: 0,
-            track: 'DATA_SCIENCE',
-            status: endTimestamp > Date.now() ? 'Active' : 'Completed',
-            subTrack: 'MARATHON_MATCH',
-          });
-          map[item.id] = item;
-        } else if (item.track === 'SRM') {
-          /* We don't support SRM yet, so we don't want them around */
-        } else { /* All challenges from other endpoints have the same format. */
-          const existing = map[item.id];
-          if (existing) existing.communities.add(community);
-          else {
+          if (item.roundId) {
+            const endTimestamp = new Date(item.endDate).getTime();
+            const allphases = [{
+              challengeId: item.roundId,
+              phaseType: 'Registration',
+              phaseStatus: endTimestamp > Date.now() ? 'Open' : 'Close',
+              scheduledEndTime: item.endDate,
+            },
+            ];
             _.defaults(item, {
+              id: item.roundId,
+              name: item.fullName,
+              challengeCommunity: 'Data',
+              challengeType: 'Marathon',
+              allPhases: allphases,
+              currentPhases: allphases.filter(phase => phase.phaseStatus === 'Open'),
               communities: new Set([community]),
+              currentPhaseName: endTimestamp > Date.now() ? 'Registration' : '',
+              numRegistrants: item.numberOfRegistrants,
+              numSubmissions: item.numberOfSubmissions,
               platforms: '',
-              registrationOpen: item.allPhases.filter(d => d.phaseType === 'Registration')[0].phaseStatus === 'Open' ? 'Yes' : 'No',
+              prizes: [0],
+              registrationOpen: endTimestamp > Date.now() ? 'Yes' : 'No',
+              registrationStartDate: item.startDate,
+              submissionEndDate: item.endDate,
+              submissionEndTimestamp: endTimestamp,
               technologies: '',
-              track: item.track,
-              status: item.status,
-              submissionEndTimestamp: item.submissionEndDate,
-              subTrack: item.subTrack,
+              totalPrize: 0,
+              track: 'DATA_SCIENCE',
+              status: endTimestamp > Date.now() ? 'ACTIVE' : 'COMPLETED',
+              subTrack: 'MARATHON_MATCH',
             });
             map[item.id] = item;
-            if (item.platforms) {
-              item.platforms.split(',').forEach(helper1);
-            }
-            if (item.technologies) {
-              item.technologies.split(',').forEach(helper1);
+          } else if (item.track === 'SRM') {
+            /* We don't support SRM yet, so we don't want them around */
+          } else { /* All challenges from other endpoints have the same format. */
+            const existing = map[item.id];
+            if (existing) existing.communities.add(community);
+            else {
+              _.defaults(item, {
+                communities: new Set([community]),
+                platforms: '',
+                registrationOpen: item.allPhases.filter(d => d.phaseType === 'Registration')[0].phaseStatus === 'Open' ? 'Yes' : 'No',
+                technologies: '',
+                submissionEndTimestamp: item.submissionEndDate,
+              });
+              map[item.id] = item;
+              if (item.platforms) {
+                item.platforms.split(',').forEach(helper1);
+              }
+              if (item.technologies) {
+                item.technologies.split(',').forEach(helper1);
+              }
             }
           }
-        }
-      }));
+        });
+      },
+      );
     }
     const api = this.props.config.API_URL;
+    const api2 = this.props.config.API_URL_V2;
     return Promise.all([
       /* Fetching of active challenges */
       fetch(`${api}/challenges/?filter=track%3Ddesign`).then(res => helper2(res, DESIGN_TRACK)),
       fetch(`${api}/challenges/?filter=track%3Ddevelop`).then(res => helper2(res, DEVELOP_TRACK)),
-      fetch(`${api}/challenges/marathonMatches`),
+      fetch(`${api2}/data/marathon/challenges/?listType=past&pageSize=100`).then(res => helper2(res, DATA_SCIENCE_TRACK)),
+      fetch(`${api2}/data/marathon/challenges/?listType=active`).then(res => helper2(res, DATA_SCIENCE_TRACK)),
     ]).then(() => {
       _.forIn(map, item => challenges.push(item));
       challenges.sort((a, b) => b.submissionEndDate - a.submissionEndDate);
