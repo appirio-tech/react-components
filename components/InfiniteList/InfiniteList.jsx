@@ -78,7 +78,11 @@ class InfiniteList extends Component {
 
     this.currentPageIndex = initialPageIndex;
 
-    this.setState({items: [], cachedItemElements: []}, () => {
+    this.setState({
+      items: [],
+      cachedItemElements: [],
+      done: false,
+    }, () => {
       this.ids = [];
       this.addBatchIds(initialLoadNumber);
       this.addNewItems(sortedItems.slice(0, initialLoadNumber), props, isMounting);
@@ -119,6 +123,10 @@ class InfiniteList extends Component {
     if (this.state.loading !== status) this.setState({ loading: status });
   }
 
+  setDone(status) {
+    if (this.state.done !== status) this.setState({ done: status });
+  }
+
   addBatchIds(numberToAdd) {
     const { batchNumber } = this.props;
     const { ids = [], idPrefix } = this;
@@ -140,7 +148,9 @@ class InfiniteList extends Component {
   }
 
   onScrollToLoadPoint() {
-    if (this.state.loading || this.state.items.length >= this.props.itemCountTotal) return;
+    const { loading, done } = this.state;
+
+    if (loading || done || this.state.items.length >= this.props.itemCountTotal) return;
 
     this.addBatchIds();
 
@@ -155,6 +165,11 @@ class InfiniteList extends Component {
         this.props.fetchItemFinishCallback(newItems);
         this.currentPageIndex += 1;
         this.setLoadingStatus(false);
+        const shouldFetchMoreItems = this.props.fetchMoreItems(newItems);
+        if (!shouldFetchMoreItems) {
+          stopNewItemReturnChain();
+          this.setDone(true);
+        }
       },
       successCallback: newItems => this.addNewItems(newItems),
     });
@@ -166,7 +181,7 @@ class InfiniteList extends Component {
     const { renderItemTemplate, batchNumber } = this.props;
     let templates;
 
-    if (this.state.loading) {
+    if (this.state.loading && !this.state.done) {
       templates = _.slice(ids, loadedCount, loadedCount + batchNumber)
         .map(id => renderItemTemplate(id));
     } else {
@@ -191,7 +206,7 @@ class InfiniteList extends Component {
 InfiniteList.defaultProps = {
   itemCountTotal: 0,
   batchNumber: 50,
-  fetchMoreItems: _.noop,
+  fetchMoreItems: _.stubTrue,
   renderItemTemplate: _.noop,
   filter: () => true,
   sort: () => true,
@@ -205,6 +220,7 @@ InfiniteList.propTypes = {
   itemCountTotal: number,
   batchNumber: number,
   fetchItems: func,
+  fetchMoreItems: func,
   renderItemTemplate: func,
   filter: func,
   sort: func,
