@@ -102,8 +102,7 @@ class SideBarFilter extends ChallengeFilter {
       case MODE.OPEN_FOR_REGISTRATION:
         return openForRegistrationFilter;
       case MODE.ONGOING_CHALLENGES:
-        return item => item.allPhases.filter(d => d.phaseType === 'Registration')[0].phaseStatus === 'Closed'
-          && item.status === 'ACTIVE';
+        return item => !openForRegistrationFilter(item) && item.status === 'ACTIVE';
       case MODE.PAST_CHALLENGES: return item => item.status === 'COMPLETED';
       case MODE.UPCOMING_CHALLENGES: return item => moment(item.registrationStartDate) > moment();
       default: return super.getFilterFunction();

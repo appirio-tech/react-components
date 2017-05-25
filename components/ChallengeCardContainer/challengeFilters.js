@@ -47,8 +47,7 @@ export default [
   {
     name: 'Ongoing challenges',
     check(item) {
-      const phase = item.allPhases.filter(d => d.phaseType === 'Registration')[0];
-      return phase && item.allPhases.filter(d => d.phaseType === 'Registration')[0].phaseStatus === 'Closed' && item.status === 'ACTIVE';
+      return !openForRegistrationFilter(item) && item.status === 'ACTIVE';
     },
     sortingOptions: [
       'Most recent',
