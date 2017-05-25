@@ -7,6 +7,7 @@ import _ from 'lodash';
 const COMMUNITIES = {
   DEVELOP: 'develop',
   DESIGN: 'design',
+  DATA_SCIENCE: 'datasci',
 };
 
 // filter out empty challenge buckets, and if currentFilter is passed in,
