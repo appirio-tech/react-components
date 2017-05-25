@@ -183,7 +183,7 @@ class ChallengeStatus extends Component {
     const { challenge } = this.props;
     const { DS_CHALLENGE_URL, CHALLENGE_URL } = this.state;
     const { id, track } = challenge;
-    const challengeURL = track.toLowerCase() === 'data' ? DS_CHALLENGE_URL : CHALLENGE_URL;
+    const challengeURL = track === 'DATA_SCIENCE' ? DS_CHALLENGE_URL : CHALLENGE_URL;
     const leaderboard = this.state.winners && this.state.winners.map(winner => (
       <div className="avatar-container" key={winner.handle}>
         <UserAvatarTooltip user={getSampleProfile(winner)}>
@@ -432,7 +432,7 @@ class ChallengeStatus extends Component {
       const { id, track } = challenge;
 
       // We don't have the API for data science challenge
-      if (track.toLowerCase() === 'data') {
+      if (track === 'DATA_SCIENCE') {
         return;
       }
       const results = this.getWinners(track.toLowerCase(), id);
