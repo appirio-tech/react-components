@@ -32,7 +32,7 @@ function ChallengeCard({
   const challenge = passedInChallenge;
 
   challenge.isDataScience = false;
-  if (_.indexOf(challenge.technologies, 'Data Science') > -1) {
+  if (challenge.technologies.includes('Data Science')) {
     challenge.isDataScience = true;
   }
   challenge.prize = challenge.prizes || [];

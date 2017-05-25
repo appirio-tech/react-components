@@ -180,8 +180,8 @@ class ChallengeStatus extends Component {
     const { challenge } = this.props;
     const { DS_CHALLENGE_URL, CHALLENGE_URL } = this.state;
     const { id, track } = challenge;
-    const challengeURL = track.toLowerCase() === 'data' ? DS_CHALLENGE_URL : CHALLENGE_URL;
 
+    const challengeURL = track === 'DATA_SCIENCE' ? DS_CHALLENGE_URL : CHALLENGE_URL;
     let winners = challenge.winners && challenge.winners.filter(winner => winner.type === 'final')
     .map(winner => ({
       handle: winner.handle,
@@ -308,7 +308,7 @@ class ChallengeStatus extends Component {
         </span>
         <ProgressBarTooltip challenge={challenge} config={config}>
           {
-            challenge.status === 'ACTIVE' ?
+            challenge.status === 'ACTIVE' && challenge.currentPhases.length > 0 ?
               <div>
                 <ChallengeProgressBar
                   color="green"

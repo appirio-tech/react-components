@@ -1,7 +1,3 @@
-/* global
-  fetch
-*/
-
 import moment from 'moment';
 import _ from 'lodash';
 /**
