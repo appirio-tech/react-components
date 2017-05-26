@@ -309,7 +309,7 @@ class ChallengeFiltersExample extends React.Component {
       fetch(`${apiV2}/data/marathon/challenges/?listType=active`).then(res => helper2(res, DATA_SCIENCE_TRACK)),
 
       // Fetch some past challenges
-      fetch(`${api}/challenges/?filter=status%3DCompleted&offset=0&limit=150`).then(res => helper2(res)),
+      fetch(`${api}/challenges/?filter=status%3DCompleted&offset=0&limit=50`).then(res => helper2(res)),
       fetch(`${apiV2}/data/marathon/challenges/?listType=past&pageSize=100`).then(res => helper2(res, DATA_SCIENCE_TRACK)),
     ]).then(() => {
       _.forIn(map, item => challenges.push(item));
