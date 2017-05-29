@@ -30,8 +30,8 @@ export const MODE = {
 export const openForRegistrationFilter = (item) => {
   const registrationPhase = item.allPhases.filter(d => d.phaseType === 'Registration')[0];
   const registrationOpen = registrationPhase && registrationPhase.phaseStatus === 'Open';
-  const reviewPhase = item.allPhases.filter(d => d.phaseType === 'Iterative Review')[0];
-  const isReviewClosed = reviewPhase && reviewPhase.phaseStatus === 'Closed';
+  const reviewPhase = item.allPhases.filter(d => d.phaseType === 'Iterative Review');
+  const isReviewClosed = !_.isEmpty(reviewPhase) && _.every(reviewPhase, phase => phase.phaseStatus === 'Closed');
   const checkPointPhase = item.allPhases.filter(d => d.phaseType === 'Checkpoint Submission')[0];
   const isCheckPointClosed = checkPointPhase && checkPointPhase.phaseStatus === 'Closed';
   const isFirst2Finish = item.subTrack === 'FIRST_2_FINISH';
