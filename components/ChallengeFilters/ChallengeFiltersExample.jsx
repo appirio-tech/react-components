@@ -304,12 +304,11 @@ class ChallengeFiltersExample extends React.Component {
     const apiV2 = this.props.config.API_URL_V2;
     return Promise.all([
       /* Fetching of active challenges */
-      fetch(`${api}/challenges/?filter=track%3Ddesign`).then(res => helper2(res, DESIGN_TRACK)),
-      fetch(`${api}/challenges/?filter=track%3Ddevelop`).then(res => helper2(res, DEVELOP_TRACK)),
+      fetch(`${api}/challenges/?filter=status=active`).then(res => helper2(res)),
       fetch(`${apiV2}/data/marathon/challenges/?listType=active`).then(res => helper2(res, DATA_SCIENCE_TRACK)),
 
       // Fetch some past challenges
-      fetch(`${api}/challenges/?filter=status%3DCompleted&offset=0&limit=50`).then(res => helper2(res)),
+      ...this.fetchPastChallenges(400, helper2),
       fetch(`${apiV2}/data/marathon/challenges/?listType=past&pageSize=100`).then(res => helper2(res, DATA_SCIENCE_TRACK)),
     ]).then(() => {
       _.forIn(map, item => challenges.push(item));
@@ -322,6 +321,23 @@ class ChallengeFiltersExample extends React.Component {
       if (forceUpdate) this.forceUpdate();
       return challenges;
     });
+  }
+
+  /** Fetch Past challenges
+   * {param} limit: Number of challenges to fetch
+   * {param} helper: Function to invoke to map response
+   */
+  fetchPastChallenges(limit, helper) {
+    const api = this.props.config.API_URL;
+    const MAX_LIMIT = 50;
+    const result = [];
+    const numFetch = Math.ceil(limit / MAX_LIMIT);
+    const handleResponse = res => helper(res);
+    for (let i = 0; i < numFetch; i += 1) {
+      result.push(fetch(`${api}/challenges/?filter=status=Completed&offset=${i * MAX_LIMIT}&limit=50`)
+      .then(handleResponse));
+    }
+    return result;
   }
 
   onFilterByTopFilter(filter, isSidebarFilter) {
