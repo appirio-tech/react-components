@@ -45,7 +45,11 @@ function keywordsMapper(keyword) {
     value: keyword,
   };
 }
-
+const communityMap = {
+  DEVELOP: DEVELOP_TRACK,
+  DESIGN: DESIGN_TRACK,
+  DATA_SCIENCE: DATA_SCIENCE_TRACK,
+};
 // Number of challenge placeholder card to display
 const CHALLENGE_PLACEHOLDER_COUNT = 8;
 
@@ -273,10 +277,11 @@ class ChallengeFiltersExample extends React.Component {
             /* We don't support SRM yet, so we don't want them around */
           } else { /* All challenges from other endpoints have the same format. */
             const existing = map[item.id];
-            if (existing) existing.communities.add(community);
+            const challengeCommunity = community || communityMap[item.track];
+            if (existing) existing.communities.add(challengeCommunity);
             else {
               _.defaults(item, {
-                communities: new Set([community]),
+                communities: new Set([challengeCommunity]),
                 platforms: '',
                 registrationOpen: item.allPhases.filter(d => d.phaseType === 'Registration')[0].phaseStatus === 'Open' ? 'Yes' : 'No',
                 technologies: '',
@@ -296,13 +301,15 @@ class ChallengeFiltersExample extends React.Component {
       );
     }
     const api = this.props.config.API_URL;
-    const api2 = this.props.config.API_URL_V2;
+    const apiV2 = this.props.config.API_URL_V2;
     return Promise.all([
       /* Fetching of active challenges */
-      fetch(`${api}/challenges/?filter=track%3Ddesign`).then(res => helper2(res, DESIGN_TRACK)),
-      fetch(`${api}/challenges/?filter=track%3Ddevelop`).then(res => helper2(res, DEVELOP_TRACK)),
-      fetch(`${api2}/data/marathon/challenges/?listType=past&pageSize=100`).then(res => helper2(res, DATA_SCIENCE_TRACK)),
-      fetch(`${api2}/data/marathon/challenges/?listType=active`).then(res => helper2(res, DATA_SCIENCE_TRACK)),
+      fetch(`${api}/challenges/?filter=status=active`).then(res => helper2(res)),
+      fetch(`${apiV2}/data/marathon/challenges/?listType=active`).then(res => helper2(res, DATA_SCIENCE_TRACK)),
+
+      // Fetch some past challenges
+      ...this.fetchPastChallenges(400, helper2),
+      fetch(`${apiV2}/data/marathon/challenges/?listType=past&pageSize=100`).then(res => helper2(res, DATA_SCIENCE_TRACK)),
     ]).then(() => {
       _.forIn(map, item => challenges.push(item));
       challenges.sort((a, b) => b.submissionEndDate - a.submissionEndDate);
@@ -314,6 +321,23 @@ class ChallengeFiltersExample extends React.Component {
       if (forceUpdate) this.forceUpdate();
       return challenges;
     });
+  }
+
+  /** Fetch Past challenges
+   * {param} limit: Number of challenges to fetch
+   * {param} helper: Function to invoke to map response
+   */
+  fetchPastChallenges(limit, helper) {
+    const api = this.props.config.API_URL;
+    const MAX_LIMIT = 50;
+    const result = [];
+    const numFetch = Math.ceil(limit / MAX_LIMIT);
+    const handleResponse = res => helper(res);
+    for (let i = 0; i < numFetch; i += 1) {
+      result.push(fetch(`${api}/challenges/?filter=status=Completed&offset=${i * MAX_LIMIT}&limit=50`)
+      .then(handleResponse));
+    }
+    return result;
   }
 
   onFilterByTopFilter(filter, isSidebarFilter) {
