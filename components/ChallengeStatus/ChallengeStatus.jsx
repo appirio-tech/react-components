@@ -72,7 +72,8 @@ function numSubmissionsTipText(number) {
 
 const getStatusPhase = (challenge) => {
   const { currentPhases } = challenge;
-  const currentPhaseName = currentPhases.length > 0 ? currentPhases[currentPhases.length - 1].phaseType : '';
+  const currentPhase = currentPhases.length > 0 ? currentPhases[0] : '';
+  const currentPhaseName = currentPhase ? currentPhase.phaseType : '';
   switch (currentPhaseName) {
     case 'Registration': {
       if (challenge.checkpointSubmissionEndDate && !getTimeLeft(challenge.checkpointSubmissionEndDate, 'Checkpoint').late) {
@@ -100,36 +101,10 @@ const getStatusPhase = (challenge) => {
         currentPhaseEndDate: challenge.submissionEndDate,
       };
     }
-    case 'Review': {
-      if (challenge.checkpointSubmissionEndDate && !getTimeLeft(challenge.checkpointSubmissionEndDate, 'Checkpoint').late) {
-        return {
-          currentPhaseName: 'Checkpoint',
-          currentPhaseEndDate: challenge.checkpointSubmissionEndDate,
-        };
-      }
-
-      return {
-        currentPhaseName: 'Review',
-        currentPhaseEndDate: challenge.submissionEndDate,
-      };
-    }
-    case 'Approval': {
-      if (challenge.checkpointSubmissionEndDate && !getTimeLeft(challenge.checkpointSubmissionEndDate, 'Checkpoint').late) {
-        return {
-          currentPhaseName: 'Checkpoint',
-          currentPhaseEndDate: challenge.checkpointSubmissionEndDate,
-        };
-      }
-
-      return {
-        currentPhaseName: 'Approval',
-        currentPhaseEndDate: challenge.submissionEndDate,
-      };
-    }
     default:
       return {
         currentPhaseName,
-        currentPhaseEndDate: challenge.submissionEndDate,
+        currentPhaseEndDate: currentPhase.scheduledEndTime,
       };
   }
 };
