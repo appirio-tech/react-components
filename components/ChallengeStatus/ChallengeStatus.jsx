@@ -1,7 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import fetch from 'isomorphic-fetch';
 import moment from 'moment';
-import _ from 'lodash';
 import LeaderboardAvatar from '../LeaderboardAvatar/LeaderboardAvatar';
 import ChallengeProgressBar from '../ChallengeProgressBar/ChallengeProgressBar';
 import ProgressBarTooltip from '../ChallengeCard/Tooltips/ProgressBarTooltip';
@@ -15,7 +13,6 @@ import './ChallengeStatus.scss';
 // Constants
 const ID_LENGTH = 6;
 const MAX_VISIBLE_WINNERS = 3;
-const MOCK_PHOTO = 'https://acrobatusers.com/assets/images/template/author_generic.jpg';
 const STALLED_MSG = 'Stalled';
 const DRAFT_MSG = 'In Draft';
 const STALLED_TIME_LEFT_MSG = 'Challenge is currently on hold';
@@ -36,12 +33,12 @@ const getTimeLeft = (date, currentPhase) => {
   }
   const duration = moment.duration(moment(date).diff(moment()));
   const h = duration.hours();
-  const d = duration.days();
+  const d = duration.asDays();
   const m = duration.minutes();
   const late = (d < 0 || h < 0 || m < 0);
   const suffix = h !== 0 ? 'h' : 'min';
   let text = '';
-  if (d !== 0) text += `${Math.abs(d)}d `;
+  if (d !== 0) text += `${Math.abs(parseInt(d, 10))}d `;
   if (h !== 0) text += `${Math.abs(h)}`;
   if (h !== 0 && m !== 0) text += ':';
   if (m !== 0) text += `${Math.abs(m)}`;
@@ -124,13 +121,15 @@ const getTimeToGo = (start, end) => {
  * Returns an user profile object as expected by the UserAvatarTooltip
  * @param {String} handle
  */
-function getSampleProfile(user) {
-  const { handle } = user;
+function getProfile(user) {
+  const { handle, placement } = user;
+  const photoLink = user.photoURL || `i/m/${handle}.jpeg`;
   return {
     handle,
+    placement,
     country: '',
     memberSince: '',
-    photoLink: `i/m/${handle}.jpeg`,
+    photoLink,
     ratingSummary: [],
   };
 }
@@ -148,9 +147,7 @@ class ChallengeStatus extends Component {
       DS_CHALLENGE_URL,
       FORUM_URL,
     };
-    this.handleHover = this.handleHover.bind(this);
-    this.getDevelopmentWinners = this.getDevelopmentWinners.bind(this);
-    this.getDesignWinners = this.getDesignWinners.bind(this);
+
     this.registrantsLink = this.registrantsLink.bind(this);
   }
 
@@ -158,18 +155,40 @@ class ChallengeStatus extends Component {
     const { challenge } = this.props;
     const { DS_CHALLENGE_URL, CHALLENGE_URL } = this.state;
     const { id, track } = challenge;
+
     const challengeURL = track === 'DATA_SCIENCE' ? DS_CHALLENGE_URL : CHALLENGE_URL;
-    const leaderboard = this.state.winners && this.state.winners.map(winner => (
-      <div className="avatar-container" key={winner.handle}>
-        <UserAvatarTooltip user={getSampleProfile(winner)}>
-          <LeaderboardAvatar member={winner} />
-        </UserAvatarTooltip>
-      </div>
-      ));
+    let winners = challenge.winners && challenge.winners.filter(winner => winner.type === 'final')
+    .map(winner => ({
+      handle: winner.handle,
+      position: winner.placement,
+      photoURL: winner.photoURL || `${this.props.MAIN_URL}/i/m/${winner.handle}.jpeg`,
+    }));
+
+    if (winners && winners.length > MAX_VISIBLE_WINNERS) {
+      const lastItem = {
+        handle: `+${winners.length - MAX_VISIBLE_WINNERS}`,
+        isLastItem: true,
+      };
+      winners = winners.slice(0, MAX_VISIBLE_WINNERS);
+      winners.push(lastItem);
+    }
+
+    const leaderboard = winners && winners.map((winner) => {
+      if (winner.isLastItem) {
+        return <LeaderboardAvatar key={winner.handle} member={winner} url={`${this.props.detailLink}#winner`} />;
+      }
+      const userProfile = getProfile(winner);
+      return (
+        <div className="avatar-container" key={winner.handle}>
+          <UserAvatarTooltip user={userProfile}>
+            <LeaderboardAvatar member={winner} />
+          </UserAvatarTooltip>
+        </div>);
+    });
     return leaderboard || (
-    <span className="winners" onMouseEnter={this.handleHover}>
-      <a href={`${challengeURL}${id}`}>Winners</a>
-    </span>);
+      <span className="winners">
+        <a href={`${challengeURL}${id}#winner`}>Results</a>
+      </span>);
   }
 
   renderRegisterButton() {
@@ -309,16 +328,15 @@ class ChallengeStatus extends Component {
       <div>
         {this.renderLeaderboard()}
         <span className="challenge-stats">
-          <span>
+          <span className="num-reg">
             <Tooltip content={numRegistrantsTipText(challenge.numRegistrants)}>
               <a className="num-reg past" href={this.registrantsLink(challenge, MM_REG)}>
                 <RegistrantsIcon /> <span className="number">{challenge.numRegistrants}</span>
               </a>
             </Tooltip>
           </span>
-          <span>
+          <span className="num-sub">
             <Tooltip content={numSubmissionsTipText(challenge.numSubmissions)}>
-
               <a className="num-sub past" href={this.registrantsLink(challenge, MM_SUB)}>
                 <SubmissionsIcon /> <span className="number">{challenge.numSubmissions}</span>
               </a>
@@ -333,86 +351,6 @@ class ChallengeStatus extends Component {
         </span>
       </div>
     );
-  }
-
-  getDevelopmentWinners(challengeId) {
-    return new Promise((resolve, reject) => {
-      fetch(`${this.props.config.API_URL_V2}/develop/challenges/${challengeId}`)
-        .then(res => res.json())
-        .then((data) => {
-          let winners = data.submissions.filter(sub => sub.placement)
-            .map(winner => ({
-              handle: winner.handle,
-              position: winner.placement,
-              photoURL: MOCK_PHOTO,
-            }));
-          winners = _.uniqWith(winners, _.isEqual);
-          if (winners.length > MAX_VISIBLE_WINNERS) {
-            const lastItem = {
-              handle: `+${winners.length - MAX_VISIBLE_WINNERS}`,
-            };
-            winners = winners.slice(0, MAX_VISIBLE_WINNERS);
-            winners.push(lastItem);
-          }
-          resolve(winners);
-        })
-        .catch(err => reject(err));
-    });
-  }
-
-  getDesignWinners(challengeId) {
-    return new Promise((resolve, reject) => {
-      fetch(`${this.props.config.API_URL_V2}/design/challenges/result/${challengeId}`)
-        .then(res => res.json())
-        .then((data) => {
-          let winners = data.results.filter(sub => sub.placement)
-          .map(winner => ({
-            handle: winner.handle,
-            position: winner.placement,
-            photoURL: MOCK_PHOTO,
-          }));
-          winners = _.uniqWith(winners, _.isEqual);
-          if (winners.length > MAX_VISIBLE_WINNERS) {
-            const lastItem = {
-              handle: `+${winners.length - MAX_VISIBLE_WINNERS}`,
-            };
-            winners = winners.slice(0, MAX_VISIBLE_WINNERS);
-            winners.push(lastItem);
-          }
-          resolve(winners);
-        })
-        .catch(err => reject(err));
-    });
-  }
-
-
-  getWinners(challengeType, challengeId) {
-    switch (challengeType) {
-      case 'develop':
-        return this.getDevelopmentWinners(challengeId);
-      case 'design':
-        return this.getDesignWinners(challengeId);
-      default:
-        return this.getDevelopmentWinners(challengeId);
-    }
-  }
-
-    /**
-   * Get the list of winners when the user hovers
-   * over the status
-   */
-  handleHover() {
-    if (!this.state.winners) {
-      const { challenge } = this.props;
-      const { id, track } = challenge;
-
-      // We don't have the API for data science challenge
-      if (track === 'DATA_SCIENCE') {
-        return;
-      }
-      const results = this.getWinners(track.toLowerCase(), id);
-      results.then(winners => this.setState({ winners }));
-    }
   }
 
   render() {
@@ -431,12 +369,14 @@ ChallengeStatus.defaultProps = {
   config: {},
   detailLink: '',
   sampleWinnerProfile: undefined,
+  MAIN_URL: process.env.MAIN_URL,
 };
 
 ChallengeStatus.propTypes = {
   challenge: PropTypes.object,
   config: PropTypes.object,
   detailLink: PropTypes.string,
+  MAIN_URL: PropTypes.string,
 };
 
 export default ChallengeStatus;

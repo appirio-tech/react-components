@@ -32,7 +32,7 @@ import {
 
 const assignedIdKey = 'assignedId';
 const loadpointBottomOffset = -150;
-const initialPageIndex = 1;
+const initialPageIndex = -1;
 const { func, string, bool, number, oneOfType } = React.PropTypes;
 
 class InfiniteList extends Component {
