@@ -123,14 +123,14 @@ class ChallengeFiltersExample extends React.Component {
     fetch(SUBTRACKS_DESIGN_API)
       .then(res => res.json())
       .then((json) => {
-        json.forEach(item => VALID_SUBTRACKS.push(keywordsMapper(item.name)));
+        json.forEach(item => VALID_SUBTRACKS.push(keywordsMapper(item.description)));
       });
 
     /* Fetching of develop subtracks */
     fetch(SUBTRACKS_DEVELOP_API)
       .then(res => res.json())
       .then((json) => {
-        json.forEach(item => VALID_SUBTRACKS.push(keywordsMapper(item.name)));
+        json.forEach(item => VALID_SUBTRACKS.push(keywordsMapper(item.description)));
       });
 
     // API to fetch valid keywords
