@@ -38,7 +38,7 @@ const getTimeLeft = (date, currentPhase) => {
   const late = (d < 0 || h < 0 || m < 0);
   const suffix = h !== 0 ? 'h' : 'min';
   let text = '';
-  if (d !== 0) text += `${Math.abs(parseInt(d, 10))}d `;
+  if (d >= 1) text += `${Math.abs(parseInt(d, 10))}d `;
   if (h !== 0) text += `${Math.abs(h)}`;
   if (h !== 0 && m !== 0) text += ':';
   if (m !== 0) text += `${Math.abs(m)}`;
