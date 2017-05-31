@@ -3,7 +3,7 @@ import './LeaderboardAvatar.scss'
 
 // Constants
 const VISIBLE_CHARACTERS = 3
-const MOCK_PHOTO = 'https://acrobatusers.com/assets/images/template/author_generic.jpg'
+const MOCK_PHOTO = 'https://s3.amazonaws.com/app.topcoder.com/ab4a084a9815ebb1cf8f7b451ce4c88f.svg'
 
 class LeaderboardAvatar extends Component {
   constructor(props) {
