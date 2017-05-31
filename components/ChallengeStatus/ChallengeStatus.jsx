@@ -310,7 +310,12 @@ class ChallengeStatus extends Component {
                 </div>
               </div>
               :
-              <ChallengeProgressBar color="gray" value="100" />
+              <div>
+                <ChallengeProgressBar color="gray" value="100" />
+                <div className="time-left">
+                  { STALLED_TIME_LEFT_MSG }
+                </div>
+              </div>
           }
         </ProgressBarTooltip>
         {isRegistrationOpen && this.renderRegisterButton()}
