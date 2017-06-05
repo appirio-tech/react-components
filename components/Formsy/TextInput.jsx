@@ -16,14 +16,15 @@ class TextInput extends Component {
   }
 
   render() {
-    const { label, name, type, placeholder, wrapperClass, maxLength } = this.props
+    const { label, name, type, placeholder, wrapperClass, maxLength, theme } = this.props
     const hasError = !this.props.isPristine() && !this.props.isValid()
+    const wrapperClasses = classNames(wrapperClass, theme)
     const classes = classNames('tc-file-field__inputs', {error: hasError}, {empty: this.props.getValue() === ''})
     const disabled = this.props.isFormDisabled() || this.props.disabled
     const errorMessage = this.props.getErrorMessage() || this.props.validationError
 
     return (
-      <div className={wrapperClass}>
+      <div className={wrapperClasses}>
         <label className="tc-label">{label}</label>
         <input
           name={name}
