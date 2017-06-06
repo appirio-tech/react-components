@@ -12,7 +12,7 @@ import React, { Component, PropTypes as PT } from 'react';
 import Tooltip from '../Tooltip';
 import './UserAvatarTooltip.scss';
 
-const MOCK_PHOTO = 'https://acrobatusers.com/assets/images/template/author_generic.jpg';
+const MOCK_PHOTO = 'https://s3.amazonaws.com/app.topcoder.com/ab4a084a9815ebb1cf8f7b451ce4c88f.svg';
 /**
  * Renders the tooltip's content.
  * It includes: user profile picture, handle, his country and the TC registration

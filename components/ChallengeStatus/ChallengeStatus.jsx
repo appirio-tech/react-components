@@ -187,7 +187,7 @@ class ChallengeStatus extends Component {
     });
     return leaderboard || (
       <span className="winners">
-        <a href={`${challengeURL}${id}#winner`}>Results</a>
+        <a href={`${challengeURL}${id}#winner`} target="_top" rel="noopener noreferrer">Results</a>
       </span>);
   }
 
@@ -310,7 +310,12 @@ class ChallengeStatus extends Component {
                 </div>
               </div>
               :
-              <ChallengeProgressBar color="gray" value="100" />
+              <div>
+                <ChallengeProgressBar color="gray" value="100" />
+                <div className="time-left">
+                  { STALLED_TIME_LEFT_MSG }
+                </div>
+              </div>
           }
         </ProgressBarTooltip>
         {isRegistrationOpen && this.renderRegisterButton()}

@@ -203,7 +203,8 @@ class SideBarFilters extends React.Component {
    * they are filtered.
    */
   componentDidUpdate() {
-    if (this.state.filters.indexOf(this.state.currentFilter) < 0) {
+    const currentFilter = this.props.filter;
+    if (!_.some(this.state.filters, filter => filter.name === currentFilter.name)) {
       this.selectFilter(FILTER_ID.ALL_CHALLENGES);
     }
   }
@@ -349,7 +350,7 @@ class SideBarFilters extends React.Component {
     const filters = this.state.filters.map((filter, index) => (
       <FilterItem
         count={filter.count}
-        highlighted={filter === this.state.currentFilter}
+        highlighted={filter.name === (this.props.filter && this.props.filter.name)}
         myFilter={index >= FILTER_ID.FIRST_USER_DEFINED}
         key={`${filter.name}-filter`}
         name={filter.name}

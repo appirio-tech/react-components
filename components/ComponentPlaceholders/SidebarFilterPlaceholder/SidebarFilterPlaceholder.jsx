@@ -26,6 +26,9 @@ const SidebarFilterPlaceholder = () => (
       <div className="FilterItem">
         <span className="left">{MODE.OPEN_FOR_REVIEW}</span>
       </div>
+      <div className="FilterItem">
+        <span className="left">{MODE.UPCOMING_CHALLENGES}</span>
+      </div>
       <hr />
       <div className="FilterItem">
         <span className="left">{MODE.PAST_CHALLENGES}</span>

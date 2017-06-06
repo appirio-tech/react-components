@@ -18,8 +18,8 @@ $leader-radius-4: $corner-radius * 2;
   color: $tc-white;
   line-height: $leader-space-30;
   display: inline-block;
-  width: $leader-space-30;
-  height: $leader-space-30;
+  width: $leader-space-30 + 1;
+  height: $leader-space-30 + 1;
   border-radius: $leader-radius-50;
   vertical-align: text-bottom;
 
@@ -27,13 +27,6 @@ $leader-radius-4: $corner-radius * 2;
     width: 100%;
     height: 100%;
     border-radius: $leader-radius-50;
-  }
-
-  &.dark-gray {
-    background: $tc-gray-60;
-    &:hover {
-      background: $tc-gray-70;
-    }
   }
 
   &.light-gray {
