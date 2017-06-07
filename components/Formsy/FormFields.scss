@@ -193,6 +193,9 @@ a.tiled-group-item {
   &:hover{
     border: 1px solid $tc-dark-blue-70;
   }
+  &.focused {
+    border: 1px solid $tc-dark-blue-70;
+  }
 
   span.title{
     display:block;
@@ -227,5 +230,56 @@ a.tiled-group-item {
     right: 15px;
     top: 15px;
     width: 15px;
+  }
+}
+
+a.tiled-group-item.dark {
+  border: 1px solid $tc-gray-20;
+  border-radius: 4px;
+  display: inline-block;
+  margin: 10px 10px 0;
+  position: relative;
+  vertical-align: top;
+  .check-mark {
+    background: $tc-dark-blue-90;
+    border-radius: 2px;
+    display: none;
+    height: 15px;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    width: 15px;
+    .Icon {
+      position: relative;
+      margin: 0;
+      top: -5px;
+    }
+  }
+  &.disabled {
+    opacity: 0.3
+  }
+  &:hover {
+    border-color: $tc-dark-blue-70;
+    cursor: pointer;
+    .icon {
+      color: $tc-dark-blue-70;
+    }
+  }
+
+  &.active {
+    background: $tc-gray-10;
+    border-color: transparent;
+    &:hover {
+      border-color: transparent;
+      .icon span {
+        color: $tc-gray-70;
+      }
+    }
+    .check-mark {
+      display: block;
+    }
+  }
+  &.focused {
+    border: 1px solid $tc-dark-blue-70;
   }
 }
