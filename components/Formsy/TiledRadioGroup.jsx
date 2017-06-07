@@ -40,7 +40,7 @@ class TiledRadioGroup extends Component {
       const renderTile = () => (
         <a onClick={ !disabled && !opt.disabled && handleClick } data-value={opt.value} className={itemClassnames} key={idx} >
           <input type="radio" name={ this.props.name }
-            style={{'position' : 'absolute', 'left' : '-9999px'}}
+            style={{ position : 'absolute', left : '-9999px'}}
             onFocus={handleFocus}
             onChange={handleClick}
             onBlur={handleBlur}
