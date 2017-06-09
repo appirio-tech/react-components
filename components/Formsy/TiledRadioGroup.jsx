@@ -17,7 +17,7 @@ class TiledRadioGroup extends Component {
   }
 
   render() {
-    const { wrapperClass, options, theme } = this.props
+    const { wrapperClass, options, theme, tabable } = this.props
     const hasError = !this.props.isPristine() && !this.props.isValid()
     const disabled = this.props.isFormDisabled() || this.props.disabled
     const errorMessage = this.props.getErrorMessage() || this.props.validationError
@@ -39,12 +39,15 @@ class TiledRadioGroup extends Component {
       const Icon = opt.icon
       const renderTile = () => (
         <a onClick={ !disabled && !opt.disabled && handleClick } data-value={opt.value} className={itemClassnames} key={idx} >
-          <input type="radio" name={ this.props.name }
-            style={{ position : 'absolute', left : '-9999px'}}
-            onFocus={handleFocus}
-            onChange={handleClick}
-            onBlur={handleBlur}
-          />
+          {
+            !!tabable &&
+            <input type="radio" name={ this.props.name }
+              style={{ position : 'absolute', left : '-9999px'}}
+              onFocus={handleFocus}
+              onChange={handleClick}
+              onBlur={handleBlur}
+            />
+          }
           <span className="icon">{ opt.icon && <Icon {...opt.iconOptions} />}</span>
           <span className="title">{opt.title}</span>
           <small>{opt.desc}</small>
