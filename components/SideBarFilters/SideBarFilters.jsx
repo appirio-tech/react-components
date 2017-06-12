@@ -89,10 +89,6 @@ class SideBarFilters extends React.Component {
       mode: MODES.SELECT_FILTER,
     };
 
-    for (let i = 0; i < this.state.filters.length; i += 1) {
-      const item = this.state.filters[i];
-      item.count = props.challenges.filter(item.getFilterFunction()).length;
-    }
     for (let i = 0; i !== this.state.filters.length; i += 1) {
       const f = this.state.filters[i];
       // Match of UUID means that one of the filters we have already matches
@@ -160,19 +156,20 @@ class SideBarFilters extends React.Component {
           });
         });
     }
+    this.updateCounters(this.props.challenges);
   }
   /**
    * When a new array of challenges is passed from the parent component via props,
    * this method updates counters of challenges matching each of the filters in
    * this sidebar.
    */
-  componentWillReceiveProps(nextProps) {
+  updateCounters(challenges) {
     let currentFilter;
     const filters = [];
     this.state.filters.forEach((filter) => {
       const filterClone = new SideBarFilter(filter);
       if (this.state.currentFilter === filter) currentFilter = filterClone;
-      filterClone.count = nextProps.challenges.filter(filter.getFilterFunction()).length;
+      filterClone.count = challenges.filter(filter.getFilterFunction()).length;
       filters.push(filterClone);
     });
     for (let i = 0; i < filters.length; i += 1) {
@@ -189,6 +186,10 @@ class SideBarFilters extends React.Component {
       currentFilter,
       filters,
     });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.updateCounters(nextProps.challenges);
   }
 
   /**
