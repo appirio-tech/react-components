@@ -1,4 +1,13 @@
 {
+  "name": "appirio-tech-react-components",
+  "version": "2.0.34",
+  "description": "Topcoder UI Kit library of components for our React apps.",
+  "keywords": "Topcoder, UI Kit, React components, Connect",
+  "homepage": "https://github.com/appirio-tech/react-components/tree/feature/connectv2",
+  "bugs": {
+    "url": "https://github.com/appirio-tech/react-components/issues",
+    "email" : "devops@topcoder.com"
+  },
   "_args": [
     [
       {
@@ -76,7 +85,6 @@
     "tc-ui": "git+https://github.com/appirio-tech/tc-ui.git#feature/connectv2",
     "uncontrollable": "^4.0.1"
   },
-  "description": "[![npm version](https://badge.fury.io/js/appirio-tech-react-components.svg)](https://badge.fury.io/js/appirio-tech-react-components) [![Build Status](https://travis-ci.org/appirio-tech/react-components.svg?branch=master)](https://travis-ci.org/appirio-tech/react-components)",
   "devDependencies": {
     "appirio-tech-webpack-config": "github:appirio-tech/webpack-config#feature/connectv2",
     "babel-core": "^6.6.5",
@@ -92,7 +100,6 @@
   },
   "gitHead": "84d9030a427a5520eb660efb4ecb98d654b80efa",
   "main": "./exports.coffee",
-  "name": "appirio-tech-react-components",
   "optionalDependencies": {},
   "readme": "[![npm version](https://badge.fury.io/js/appirio-tech-react-components.svg)](https://badge.fury.io/js/appirio-tech-react-components) [![Build Status](https://travis-ci.org/appirio-tech/react-components.svg?branch=master)](https://travis-ci.org/appirio-tech/react-components)\n\n# React Components\n\nThis repository is used to distribute reusable React components.\n\n## Installation\n\nWe use node 5.x and npm 3.x, so you may need to download a new version of node. The easiest way is to download [nvm](https://github.com/creationix/nvm). We have a `.nvmrc` file in the root of the project, so you can just run `nvm use` to switch to the correct version of node.\n\nInstall dependencies by running the following in the root of the project:\n - `npm i`\n - **Note:** You must use npm 3. Type `npm -v` to ensure you have a 3.x version.\n\n## NPM Commands\n- To run locally, run `npm run dev` and head to `localhost:8080`\n- To run the test runner: `npm test`\n- To make sure your code passes linting: `npm run lint`\n- To create the build: `npm run build`\n\n## Contributing\n\n### Pull Requests\n\nTo contribute to the repository, please create a feature branch off of the dev branch. Once you're finished working on the feature, make a pull request to merge it into dev. Please make sure that every pull request has passed the build checks, which appear just before the \"Merge pull request\" button in github.\n\n### Code Style\n\n***Checkout the code and comments in `/components/ExampleComponent` for an example functional React component, `.scss` file, and tests.***\n\nReact\n  - Most components should be stateless and use the [functional component](https://facebook.github.io/react/blog/2015/10/07/react-v0.14.html#stateless-functional-components) pattern\n  - If you need a stateful component, use [ES6 classes](http://facebook.github.io/react/docs/reusable-components.html#es6-classes)\n  - Always use [PropTypes](http://facebook.github.io/react/docs/reusable-components.html#prop-validation) for all props\n  - Use `classnames` for dynamic classes. See `ExampleComponent` for an example.\n\nJavaScript\n  - Make sure your variable names are easy to understand and descriptive. No acronyms, except for common ones like `i` or `err`.\n  - Use `lodash` and functional JavaScript if it makes the code clearer.\n  - Please use ES2015 syntax whenever possible\n  - Specific rules are enforced via `.eslintrc.json`\n  - Run `npm run lint` to check your code against the linter\n\nSCSS Files\n  - This repository uses flexbox for arranging content\n  - The use of any extra CSS libraries should be discussed with the team\n  - Use SCSS syntax, but do not overly nest\n  - Use 2 spaces for indentation\n  - Use variables, mixins, and classes as much as possible from our [style guide](https://github.com/appirio-tech/styles/tree/master/styles/topcoder)\n  - To include variables from the style guide mentioned above, place `@import 'topcoder/tc-includes;'` at the top of your `.scss` file. Locally, you can look in `./node_modules/appirio-styles/styles/topcoder/_tc-colors.scss` to find many colors already defined (e.g. `#A3A3AE` => `$accent-gray`)\n  - When adding media queries, nest them inside the element, rather than creating a new section\n  ```\n  @import 'topcoder/tc-includes;'\n\n  $my-local-var: 50px;\n\n  .box {\n    height: $my-local-var;\n    width: 50px;\n    color: $medium-gray;\n    @media screen and (min-width: 768px) {\n      height: 100px;\n      width: 100px;\n      color: $dark-gray;\n    }\n\n    .inside-box {\n      font-size: 14px;\n      @media screen and (min-width: 768px) {\n        font-size: 18px;\n      }\n    }\n  }\n  ```\n\n### Writing Tests\n- `npm test` will run the current tests\n- Place your test files in the same directory as the component it's testing\n- Test files should be named `ComponentName.spec.js`\n\n## Recommended Developer Tools\n\n### Syntax highlighting for ES6 and React JSX\n- Install [babel](https://packagecontrol.io/packages/Babel) via the package manager in Sublime Text\n  - **Note:** Sublime Text 3 is required for this plugin\n- Set the plugin as the default syntax for a particular extension\n  - Open a file with the `.js` extension\n  - Select `View` from the menu\n  - Then `Syntax -> Open all with current extension as...`\n  - Then `Babel -> JavaScript (Babel)`\n  - Repeat for any other extensions, e.g. `.jsx`\n\n### Recommended Theme\n- Install [Oceanic Next Color Theme](https://github.com/voronianski/oceanic-next-color-scheme) via the Sublime Text package manager.\n- Add the following to `Sublime Text -> Preferences -> Settings-User` (`⌘ + ,` on Mac)\n```\n{\n  \"color_scheme\": \"Packages/Oceanic Next Color Scheme/Oceanic Next.tmTheme\",\n  \"theme\": \"Oceanic Next.sublime-theme\"\n}\n```\n\n### Automatic JavaScript linting in Sublime Text\n- Install [SublimeLinter](http://sublimelinter.readthedocs.org/en/latest/installation.html) following the instructions under \"Installing via Package Control\"\n- Install [SublimeLinter-eslint](https://github.com/roadhump/SublimeLinter-eslint) with the package manager. The package is called `SublimeLinter-contrib-eslint`\n\n### Code expander\n- Examples:\n  - `div.cool-class` becomes `<div className=\"cool-class\"></div>`\n  - `a` becomes `<a href=\"\"></a>`\n- Install [Emmet](https://github.com/sergeche/emmet-sublime) via Sublime Text package manager\n- Configure Emmet to work with React, e.g. classes expand to `className` instead of `class`\n- Follow the instructions under [Get Emmet working](http://www.nitinh.com/2015/02/setting-sublime-text-react-jsx-development/)\n  - **Note:** Add the last snippet of code to `reg_replace.sublime-settings` by navigating to  `Sublime Text -> Preferences -> Package Settings -> Reg Replace -> Settings-User`\n\n## Using the react-components repository in your app\n\n## Install\n\n```\nnpm install appirio-tech-react-components\n```\n",
   "readmeFilename": "README.md",
@@ -105,6 +112,5 @@
     "lint": "eslint --format table --ext .js,.jsx .",
     "test": "cross-env NODE_ENV=test mocha --reporter progress --compilers js:babel-core/register --require ignore-styles --recursive \"./components/**/*.spec.js\"",
     "test:watch": "npm run test -- --watch"
-  },
-  "version": "0.0.0"
+  }
 }
