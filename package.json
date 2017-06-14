@@ -1,12 +1,12 @@
 {
   "name": "appirio-tech-react-components",
-  "version": "2.0.34",
+  "version": "2.0.35",
   "description": "Topcoder UI Kit library of components for our React apps.",
   "keywords": "Topcoder, UI Kit, React components, Connect",
   "homepage": "https://github.com/appirio-tech/react-components/tree/feature/connectv2",
   "bugs": {
     "url": "https://github.com/appirio-tech/react-components/issues",
-    "email" : "devops@topcoder.com"
+    "email": "devops@topcoder.com"
   },
   "_args": [
     [
