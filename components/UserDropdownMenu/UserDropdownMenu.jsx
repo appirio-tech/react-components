@@ -28,7 +28,7 @@ const UserDropdownMenu = ({ userName, userHandle, userImage, domain, loginUrl, r
     // if register url is not present, we are not showing register button
     // and if register button is not there, we assume it is present somewhere on the page itself
     // and Login button should be secondary in that case
-    'tc-btn-secondary' : !registerUrl,
+    'tc-btn-default' : !registerUrl,
     'tc-btn-primary': registerUrl
   })
   const publicDOM = (
