@@ -66,11 +66,11 @@ input {
   }
 
   &.error{
-    border-left: 3px solid $tc-red-70!important;
+    border: 1px solid $tc-red-70!important;
     background: $tc-gray-neutral-light!important;
     &:focus{
       background: $tc-white!important;
-      border-color: $tc-dark-blue-90!important;
+      // border-color: $tc-dark-blue-90!important;
     }
   }
 }
@@ -102,11 +102,11 @@ textarea{
   }
 
   &.error{
-    border-left: 3px solid $tc-red-70!important;
     background: $tc-gray-neutral-light!important;
+    border: 1px solid $tc-red-70!important;
     &:focus{
       background: $tc-white!important;
-      border-color: $tc-dark-blue-90!important;
+      // border-color: $tc-dark-blue-90!important;
     }
   }
 }
