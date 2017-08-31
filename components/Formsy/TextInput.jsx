@@ -6,13 +6,29 @@ class TextInput extends Component {
 
   constructor(props) {
     super(props)
+    this.state = { value : props.getValue() }
     this.changeValue = this.changeValue.bind(this)
   }
 
+  componentDidMount() {
+    this.setState({ value : this.props.getValue() })
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return (nextState.value != this.state.value || nextProps.name !== this.props.name);
+  }
+  
+  componentWillUpdate(nextProps, nextState) {
+    if(nextState.value != this.state.value) {
+      this.props.setValue(nextState.value)
+      this.props.onChange(this.props.name, nextState.value)
+    }
+  }
+
   changeValue(e) {
-    const value = e.target.value
-    this.props.setValue(value)
-    this.props.onChange(this.props.name, value)
+    this.setState({
+      value : e.target.value
+    });
   }
 
   render() {
@@ -31,7 +47,7 @@ class TextInput extends Component {
           className={classes}
           type={type}
           placeholder={placeholder}
-          value={this.props.getValue()}
+          value={this.state.value}
           disabled={disabled}
           onChange={this.changeValue}
           maxLength={maxLength}
