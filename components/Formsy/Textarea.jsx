@@ -27,7 +27,7 @@ class Textarea extends Component {
   }
   
   changeValue(e) {
-    this.setState({ value : e.target.value });
+    this.setState({ value : e.target.value })
   }
 
   render() {
