@@ -17,18 +17,18 @@ class TiledRadioGroup extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return (nextState.value != this.state.value || nextProps.name !== this.props.name);
+    return (nextState.value !== this.state.value || nextProps.name !== this.props.name)
   }
   
   componentWillUpdate(nextProps, nextState) {
-    if(nextState.value != this.state.value) {
+    if(nextState.value !== this.state.value) {
       this.props.setValue(nextState.value)
       this.props.onChange(this.props.name, nextState.value)
     }
   }
 
   onChange(value) {
-    this.setState({ value : value });
+    this.setState({ value })
   }
 
   render() {
