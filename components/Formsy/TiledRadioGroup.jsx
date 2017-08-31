@@ -8,12 +8,27 @@ import { HOC as hoc } from 'formsy-react'
 class TiledRadioGroup extends Component {
   constructor(props) {
     super(props)
+    this.state = { value : props.getValue() }
     this.onChange = this.onChange.bind(this)
   }
 
+  componentDidMount() {
+    this.setState({ value : this.props.getValue() })
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return (nextState.value != this.state.value || nextProps.name !== this.props.name);
+  }
+  
+  componentWillUpdate(nextProps, nextState) {
+    if(nextState.value != this.state.value) {
+      this.props.setValue(nextState.value)
+      this.props.onChange(this.props.name, nextState.value)
+    }
+  }
+
   onChange(value) {
-    this.props.setValue(value)
-    this.props.onChange(this.props.name, value)
+    this.setState({ value : value });
   }
 
   render() {
