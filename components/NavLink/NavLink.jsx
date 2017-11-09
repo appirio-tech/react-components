@@ -14,7 +14,7 @@ class NavLink extends Component {
     const attrs = { to }
     if (to && router) {
       const pathname = _.get(router, 'route.location.pathname', '')
-      const active = matchPath(pathname, { path: to }) != null
+      const active = matchPath(pathname, { path: to }) !== null
       if (active) {
         classes += ' selected'
       }
