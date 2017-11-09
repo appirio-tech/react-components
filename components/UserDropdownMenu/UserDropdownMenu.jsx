@@ -2,7 +2,7 @@ require('./UserDropdownMenu.scss')
 
 import React, {PropTypes} from 'react'
 import classNames from 'classnames'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 import Avatar from '../Avatar/Avatar'
 import Dropdown from '../Dropdown/Dropdown'
 
