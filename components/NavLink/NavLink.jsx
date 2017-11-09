@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react'
-import {withRouter, Link} from 'react-router'
+import {withRouter, Link} from 'react-router-dom'
 
 class NavLink extends Component {
   constructor(props) {
