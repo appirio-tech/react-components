@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react'
-import {withRouter, Link} from 'react-router-dom'
+import { NavLink as RNavLink} from 'react-router-dom'
 
 class NavLink extends Component {
   constructor(props) {
@@ -9,10 +9,6 @@ class NavLink extends Component {
   render() {
     const { to, content, target } = this.props
     let classes = this.props.classes
-    const isActive = this.props.router.isActive(this.props.to, true)
-    if (isActive) {
-      classes += ' selected'
-    }
     const attrs = { to }
     if (target || target !== '_self') {
       attrs.target = target
@@ -22,7 +18,7 @@ class NavLink extends Component {
     }
     return (
       <li className={classes}>
-        <Link {...attrs}>{content}</Link>
+        <RNavLink activeClassName="selected" {...attrs}>{content}</RNavLink>
       </li>
     )
   }
@@ -35,4 +31,4 @@ NavLink.propTypes = {
   classes: PropTypes.string.isRequired
 }
 
-export default withRouter(NavLink)
+export default NavLink
