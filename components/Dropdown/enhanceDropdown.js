@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export const enhanceDropdown = (CompositeComponent) => class extends Component {
+const enhanceDropdown = (CompositeComponent) => class extends Component {
   constructor(props) {
     super(props)
     this.state = { isOpen: false }
@@ -102,3 +102,5 @@ export const enhanceDropdown = (CompositeComponent) => class extends Component {
     )
   }
 }
+
+export default enhanceDropdown
