@@ -84,10 +84,14 @@ export const enhanceDropdown = (CompositeComponent) => class extends Component {
     document.removeEventListener('dropdownClicked', this.onClickOtherDropdown)
   }
 
+  stopEventPropagation(e) {
+    e.stopPropagation()
+  }
+
   render() {
     const { isOpen } = this.state
     return (
-      <div onClick={(e) => e.stopPropagation()} className="dropdown-wrap">
+      <div onClick={ this.stopEventPropagation } className="dropdown-wrap">
         <CompositeComponent
           { ...this.props }
           isOpen={isOpen}
