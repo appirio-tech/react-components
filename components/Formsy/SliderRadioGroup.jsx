@@ -6,7 +6,6 @@ import 'rc-slider/assets/index.css'
 import cn from 'classnames'
 import _ from 'lodash'
 import { HOC as hoc } from 'formsy-react'
-import './SliderRadioGroup.scss'
 
 class SliderRadioGroup extends Component {
   constructor(props) {
