@@ -1,6 +1,6 @@
 require('./Dropdown.scss')
 
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import classNames from 'classnames'
 import enhanceDropdown from './enhanceDropdown'
 
