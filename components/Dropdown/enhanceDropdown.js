@@ -5,7 +5,7 @@ const enhanceDropdown = (CompositeComponent) => class extends Component {
     super(props)
     this.state = { isOpen: false }
     this.handleClick = this.handleClick.bind(this)
-    this.onSelect = this.onSelect.bind(this)
+    // this.onSelect = this.onSelect.bind(this)
     this.onClickOutside = this.onClickOutside.bind(this)
     this.onClickOtherDropdown = this.onClickOtherDropdown.bind(this)
     this.refreshEventHandlers = this.refreshEventHandlers.bind(this)
