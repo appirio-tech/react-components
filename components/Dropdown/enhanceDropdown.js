@@ -32,10 +32,10 @@ const enhanceDropdown = (CompositeComponent) => class extends Component {
     })
   }
 
-  onSelect(value) {
-    this.handleClick()
-    if (this.props.onSelect) this.props.onSelect(value)
-  }
+  // onSelect(value) {
+  //   this.handleClick()
+  //   if (this.props.onSelect) this.props.onSelect(value)
+  // }
 
   onClickOutside(evt) {
     let currNode = evt.target
@@ -96,7 +96,7 @@ const enhanceDropdown = (CompositeComponent) => class extends Component {
           { ...this.props }
           isOpen={isOpen}
           handleClick={this.handleClick}
-          onSelect={this.onSelect}
+          // onSelect={this.onSelect}
         />
       </div>
     )
