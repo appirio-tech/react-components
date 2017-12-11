@@ -33,11 +33,6 @@ FilePicker          = require './components/FilePicker/FilePicker'
 # Forms
 FormsyForm          = require './components/Formsy'
 
-Form                = require './components/Forms/Form'
-FormFields          = require './components/Forms/Fields'
-Validations         = require './components/Forms/Validations'
-BaseInputField      = require './components/Forms/BaseInputField'
-
 #RichDataTable
 RichDataTableHeader = require './components/RichDataTable/RichDataTableHeader'
 
@@ -78,20 +73,6 @@ module.exports =
 # Formsy
   Formsy            : FormsyForm.default.Formsy
   TCFormFields      : FormsyForm.default.Fields
-
-# Forms
-  Form              : Form.default
-  Validations       : Validations
-  TextInput         : FormFields.default.TextInput
-  TextareaInput     : FormFields.default.TextareaInput
-  RadioGroupInput   : FormFields.default.RadioGroupInput
-  RadioButton       : FormFields.default.RadioButton
-  CheckboxInput     : FormFields.default.CheckboxInput
-  CheckboxGroupInput: FormFields.default.CheckboxGroupInput
-  SubmitButton      : FormFields.default.SubmitButton
-  SliderRadioGroupInput : FormFields.default.SliderRadioGroupInput
-  TiledCheckboxInput: FormFields.default.TiledCheckboxInput
-  BaseInputField    : BaseInputField.default
 
 # RichDataTable
   RichDataTableHeader : RichDataTableHeader.default
