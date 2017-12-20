@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import enhanceDropdown from './enhanceDropdown'
 
 function Dropdown(props) {
-  const { className, pointerShadow, noPointer, pointerLeft, isOpen, theme } = props
+  const { className, pointerShadow, noPointer, pointerLeft, isOpen, handleClick, theme } = props
   const ddClasses = classNames('dropdown-wrap', {
     [`${className}`] : true,
     [`${ theme }`] : true
@@ -19,12 +19,14 @@ function Dropdown(props) {
 
   return (
     <div className={ ddClasses }>
-      {
-        props.children.map((child) => {
-          if (child.props.className.indexOf('dropdown-menu-header') > -1)
-            return child
-        })
-      }
+      <div onClick={ handleClick }>
+        {
+          props.children.map((child) => {
+            if (child.props.className.indexOf('dropdown-menu-header') > -1)
+              return child
+          })
+        }
+      </div>
 
       <div className = {ndClasses}>
         {
