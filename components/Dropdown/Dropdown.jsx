@@ -18,15 +18,13 @@ function Dropdown(props) {
   })
 
   return (
-    <div className={ ddClasses }>
-      <div onClick={ handleClick }>
-        {
-          props.children.map((child) => {
-            if (child.props.className.indexOf('dropdown-menu-header') > -1)
-              return child
-          })
-        }
-      </div>
+    <div className={ ddClasses } onClick={ handleClick }>
+      {
+        props.children.map((child) => {
+          if (child.props.className.indexOf('dropdown-menu-header') > -1)
+            return child
+        })
+      }
 
       <div className = {ndClasses}>
         {
