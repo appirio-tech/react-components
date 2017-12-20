@@ -16,6 +16,7 @@ Tooltip             = require './components/Tooltip/Tooltip'
 Avatar              = require './components/Avatar/Avatar'
 Carousel            = require './components/Carousel/Carousel'
 Checkbox            = require './components/Checkbox/Checkbox'
+enhanceDropdown     = require './components/Dropdown/enhanceDropdown'
 Dropdown            = require './components/Dropdown/Dropdown'
 DropdownItem        = require './components/Dropdown/DropdownItem'
 SelectDropdown      = require './components/SelectDropdown/SelectDropdown'
@@ -56,6 +57,7 @@ module.exports =
   Avatar            : Avatar.default
   Carousel          : Carousel.default
   Checkbox          : Checkbox.default
+  enhanceDropdown   : enhanceDropdown.default
   Dropdown          : Dropdown.default
   DropdownItem      : DropdownItem.default
   SelectDropdown    : SelectDropdown.default
