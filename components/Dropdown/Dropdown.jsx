@@ -5,7 +5,7 @@ import classNames from 'classnames'
 import enhanceDropdown from './enhanceDropdown'
 
 function Dropdown(props) {
-  const { className, pointerShadow, noPointer, pointerLeft, isOpen, handleClick, theme } = props
+  const { className, pointerShadow, noPointer, pointerLeft, isOpen, handleClick, theme, noAutoclose } = props
   const ddClasses = classNames('dropdown-wrap', {
     [`${className}`] : true,
     [`${ theme }`] : true
@@ -14,15 +14,19 @@ function Dropdown(props) {
     'pointer-shadow' : pointerShadow,
     'pointer-hide'   : noPointer,
     'pointer-left'   : pointerLeft,
+    'no-autoclose'   : noAutoclose,
     hide             : !isOpen
   })
 
   return (
-    <div className={ ddClasses } onClick={ handleClick }>
+    <div className={ddClasses} onClick={noAutoclose ? () => { } : handleClick}>
       {
-        props.children.map((child) => {
+        props.children.map((child, index) => {
           if (child.props.className.indexOf('dropdown-menu-header') > -1)
-            return child
+            return noAutoclose ? React.cloneElement(child, {
+              onClick: handleClick,
+              key: child.props.key || index
+            }) : child
         })
       }
 
@@ -39,7 +43,11 @@ function Dropdown(props) {
 }
 
 Dropdown.propTypes = {
-  children: PropTypes.array.isRequired
+  children: PropTypes.array.isRequired,
+  /*
+    If true, prevents dropdown closing when clicked inside dropdown
+  */
+  noAutoclose: PropTypes.bool
 }
 
 export default enhanceDropdown(Dropdown)

@@ -107,6 +107,10 @@
   display: none;
 }
 
+.Dropdown.no-autoclose {
+  cursor: default;
+}
+
 .new-theme {
   text-align: left;
   height: 30px;
