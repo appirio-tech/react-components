@@ -1,7 +1,7 @@
 import Tooltip from './Tooltip'
 import React from 'react'
 
-require('./TooltipExamples.scss')
+import './TooltipExamples.scss'
 
 const TooltipExamples = () => (
   <div className="tooltip-examples-container">
