@@ -76,11 +76,13 @@
     "react-datetime": "^2.0.2",
     "react-dom": "^15.3.1",
     "react-dropzone": "^3.5.3",
+    "react-popper": "^0.7.5",
     "react-redux": "^4.4.5",
     "react-router-dom": "^4.2.2",
     "react-select": "^0.9.1",
     "react-switch-button": "^1.1.2",
     "react-textarea-autosize": "^4.0.5",
+    "react-transition-group": "^2.2.1",
     "redux-thunk": "^2.1.0",
     "tc-ui": "git+https://github.com/appirio-tech/tc-ui.git#feature/connectv2",
     "uncontrollable": "^4.0.1"
