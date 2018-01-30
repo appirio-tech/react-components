@@ -1,5 +1,5 @@
 // this is to include tc styles in the output library
-@import 'tc-includes';
+@import '~tc-ui/src/styles/tc-includes';
 
 /* Breakpoints - update as necessary */
 $mobile: 768px;
@@ -56,7 +56,7 @@ $super-wide: 1376px;
 
     @media screen and (min-width: $super-wide) {
       margin-right: 32px;
-    }    
+    }
 
     @media screen and (max-width: $mobile) {
       flex: 0 0 60px;

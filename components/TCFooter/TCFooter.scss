@@ -1,4 +1,4 @@
-@import 'tc-includes';
+@import '~tc-ui/src/styles/tc-includes';
 
 .TCFooter {
   width: 100%;
@@ -56,7 +56,7 @@
       }
     }
   }
-  
+
   .TCFooter .menu-item {
     display: none;
     margin-top: 30px;

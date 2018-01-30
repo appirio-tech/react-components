@@ -1,4 +1,4 @@
-@import 'tc-includes';
+@import '~tc-ui/src/styles/tc-includes';
 
 .example-wrap {
   width: 332px;
@@ -15,7 +15,7 @@
       right: 30px;
       top: 50%;
       transform: translateY(-50%);
-    } 
+    }
   }
 
 }

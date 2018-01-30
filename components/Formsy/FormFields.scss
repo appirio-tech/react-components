@@ -1,4 +1,4 @@
-@import 'tc-includes';
+@import '~tc-ui/src/styles/tc-includes';
 
 .row {
   margin-bottom: 20px;
@@ -232,7 +232,7 @@ a.tiled-group-item {
       border-color: $tc-gray-10;
     }
   }
-  
+
 
   span.title{
     display:block;

@@ -1,6 +1,6 @@
 // Whenever you need predefined color variables or mixins
 // Add the following line to the top of your .scss file
-@import 'tc-includes';
+@import '~tc-ui/src/styles/tc-includes';
 
 // Declare local variables, if necessary
 $peaches: #ffdab9;
