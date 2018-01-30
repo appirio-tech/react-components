@@ -38,6 +38,14 @@ class Textarea extends Component {
               disabled={disabled}
               onChange={this.changeValue}
               value={this.props.getValue()}
+              onHeightChange={(height, instance) => {
+                if(!this.props._sizeInit) {
+                  setTimeout(() => {
+                    instance._resizeComponent();
+                  });
+                  this.props._sizeInit = true;
+                }
+              }}
             /> :
             <textarea
               rows={rows}
