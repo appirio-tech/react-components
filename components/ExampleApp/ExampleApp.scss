@@ -1,18 +1,21 @@
 @import '~tc-ui/src/styles/tc-styles';
 
-body {
-  background-color: $tc-gray-neutral-light;
-  padding: 15px;
-
-  .invisible {
-    opacity: .3;
-    visibility: visible;
-  }
-
-  h1 {
-    margin        : 80px 0 40px 0;
-    text-align    : center;
-    padding-bottom: 10px;
-    border-bottom : 1px solid $tc-gray-neutral-dark;
+:global {
+  body {
+    background-color: $tc-gray-neutral-light;
+    padding: 15px;
+  
+    .invisible {
+      opacity: .3;
+      visibility: visible;
+    }
+  
+    h1 {
+      margin        : 80px 0 40px 0;
+      text-align    : center;
+      padding-bottom: 10px;
+      border-bottom : 1px solid $tc-gray-neutral-dark;
+    }
   }
 }
+  

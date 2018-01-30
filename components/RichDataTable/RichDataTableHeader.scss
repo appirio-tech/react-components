@@ -1,41 +1,44 @@
 @import '~tc-ui/src/styles/tc-includes';
 
-.RichDataTableHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: calc(4 * #{$base_unit});
-  margin: 0px auto;
-  border-bottom: 1px solid rgba(163, 163, 174, 0.3);
-  @media (max-width: 700px) {
-    display: block;
-    padding: calc(2 * #{$base_unit});
-  }
-  background-color: $tc-gray-neutral-light;
-
-  .rich-data-table-header-column {
+:global {
+  .RichDataTableHeader {
     display: flex;
-    color: $tc-gray-50;
     align-items: center;
-
-    &:hover {
-      color: $tc-black;
+    justify-content: space-between;
+    padding: calc(4 * #{$base_unit});
+    margin: 0px auto;
+    border-bottom: 1px solid rgba(163, 163, 174, 0.3);
+    @media (max-width: 700px) {
+      display: block;
+      padding: calc(2 * #{$base_unit});
     }
-
-    &.sorted-asc::after {
-      content: '';
-      background-image: url(./arrow-down-big.svg);
-      width: 10px;
-      height: 12px;
-      margin-left: calc(2 * #{$base_unit});
-    }
-
-    &.sorted-desc::after {
-      content: '';
-      background-image: url(./arrow-up-big.svg);
-      width: 10px;
-      height: 12px;
-      margin-left: calc(2 * #{$base_unit});
+    background-color: $tc-gray-neutral-light;
+  
+    .rich-data-table-header-column {
+      display: flex;
+      color: $tc-gray-50;
+      align-items: center;
+  
+      &:hover {
+        color: $tc-black;
+      }
+  
+      &.sorted-asc::after {
+        content: '';
+        background-image: url(./arrow-down-big.svg);
+        width: 10px;
+        height: 12px;
+        margin-left: calc(2 * #{$base_unit});
+      }
+  
+      &.sorted-desc::after {
+        content: '';
+        background-image: url(./arrow-up-big.svg);
+        width: 10px;
+        height: 12px;
+        margin-left: calc(2 * #{$base_unit});
+      }
     }
   }
 }
+  

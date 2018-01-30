@@ -1,144 +1,147 @@
 @import '~tc-ui/src/styles/tc-includes';
 
-.TCFooter {
-  width: 100%;
-  background-color: $tc-gray-90;
-  padding: 1px 20px 30px 20px;
-  font-family: 'Roboto', Arial;
-
-  .social-links {
-      font-size: 13px;
-      line-height: 1.2em;
-      text-align: center;
-      font-weight: normal;
-      margin: 30px 2px 0;
-      color: #fff;
-
-    a {
-      display: inline-block;
-      background-size: contain;
-      background-repeat: no-repeat;
-      margin: 23px 0;
-
-      + a {
-        margin-left: 30px;
-      }
-    }
-  }
-
-  .copyright-notice {
-    text-align: center;
-      font-size: 12px;
-      line-height: 14px;
-      color: #656565;
-  }
-}
-
-
-@media only screen and (max-width : 767px) {
-
-  .TCFooter .other-nav-items.mobile {
-
-    .Panel {
-      .panel-header {
-        padding-left: 15px;
-        padding-right: 15px;
-      }
-      .panel-body {
-        padding: 0px;
-      }
-    }
-    .MenuBar {
-      width: 100%;
-      li {
-        background-color: white;
-        border-bottom: 1px solid $tc-gray-neutral-dark;
-      }
-    }
-  }
-
-  .TCFooter .menu-item {
-    display: none;
-    margin-top: 30px;
-  }
-
-  .TCFooter .other-nav-items.non-mobile {
-    display: none;
-  }
-
-  .TCFooter .other-nav-items.mobile {
-    display: block;
-  }
-
-  .menu-visible .TCFooter .menu-item {
-    display: block;
-  }
-
-  .TCFooter .social-links {
-
-    a {
-      width: 27px;
-      height: 27px;
-      margin-top: 10px;
-
-      svg {
-        width: 27px;
-        height: 27px;
-      }
-    }
-  }
-}
-
-@media only screen and (min-width : 768px) {
-
-  .TCFooter .other-nav-items.non-mobile {
-    .MenuBar {
-      padding-top: 20px;
-
-      li  + li  {
-        margin-left: 15px;
-      }
-
-      li {
+:global {
+  .TCFooter {
+    width: 100%;
+    background-color: $tc-gray-90;
+    padding: 1px 20px 30px 20px;
+    font-family: 'Roboto', Arial;
+  
+    .social-links {
+        font-size: 13px;
+        line-height: 1.2em;
         text-align: center;
         font-weight: normal;
-
-        a {
-          color: #fff;
-          font-size: 16px;
-          line-height: 21px;
+        margin: 30px 2px 0;
+        color: #fff;
+  
+      a {
+        display: inline-block;
+        background-size: contain;
+        background-repeat: no-repeat;
+        margin: 23px 0;
+  
+        + a {
+          margin-left: 30px;
         }
-        a:hover {
-            color: #0096ff;
+      }
+    }
+  
+    .copyright-notice {
+      text-align: center;
+        font-size: 12px;
+        line-height: 14px;
+        color: #656565;
+    }
+  }
+  
+  
+  @media only screen and (max-width : 767px) {
+  
+    .TCFooter .other-nav-items.mobile {
+  
+      .Panel {
+        .panel-header {
+          padding-left: 15px;
+          padding-right: 15px;
+        }
+        .panel-body {
+          padding: 0px;
+        }
+      }
+      .MenuBar {
+        width: 100%;
+        li {
+          background-color: white;
+          border-bottom: 1px solid $tc-gray-neutral-dark;
+        }
+      }
+    }
+  
+    .TCFooter .menu-item {
+      display: none;
+      margin-top: 30px;
+    }
+  
+    .TCFooter .other-nav-items.non-mobile {
+      display: none;
+    }
+  
+    .TCFooter .other-nav-items.mobile {
+      display: block;
+    }
+  
+    .menu-visible .TCFooter .menu-item {
+      display: block;
+    }
+  
+    .TCFooter .social-links {
+  
+      a {
+        width: 27px;
+        height: 27px;
+        margin-top: 10px;
+  
+        svg {
+          width: 27px;
+          height: 27px;
         }
       }
     }
   }
-
-  .TCFooter .copyright-notice {
-    font-size: 15px;
-      color: #fff;
-  }
-
-  .TCFooter .other-nav-items.non-mobile {
-    display: block;
-  }
-
-  .TCFooter .other-nav-items.mobile {
-    display: none;
-  }
-
-  .TCFooter .social-links {
-
-    a {
-      width: 32px;
-      height: 32px;
-      margin-top: 13px;
-
-      svg {
+  
+  @media only screen and (min-width : 768px) {
+  
+    .TCFooter .other-nav-items.non-mobile {
+      .MenuBar {
+        padding-top: 20px;
+  
+        li  + li  {
+          margin-left: 15px;
+        }
+  
+        li {
+          text-align: center;
+          font-weight: normal;
+  
+          a {
+            color: #fff;
+            font-size: 16px;
+            line-height: 21px;
+          }
+          a:hover {
+              color: #0096ff;
+          }
+        }
+      }
+    }
+  
+    .TCFooter .copyright-notice {
+      font-size: 15px;
+        color: #fff;
+    }
+  
+    .TCFooter .other-nav-items.non-mobile {
+      display: block;
+    }
+  
+    .TCFooter .other-nav-items.mobile {
+      display: none;
+    }
+  
+    .TCFooter .social-links {
+  
+      a {
         width: 32px;
         height: 32px;
+        margin-top: 13px;
+  
+        svg {
+          width: 32px;
+          height: 32px;
+        }
       }
     }
   }
 }
+  

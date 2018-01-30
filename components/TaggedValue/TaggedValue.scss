@@ -1,35 +1,38 @@
 @import '~tc-ui/src/styles/tc-includes';
 
-.TaggedValue {
-  display:inline-block;
-  height: 20px;
-  .tagged-value-bg {
-    display: inline;
-    padding: 4px 4px 1px 4px;
-    min-width: 15px;
-    max-height: 15px;
-    background: $tc-dark-blue-70;
-    border-radius: 8px;
-    text-align: center;
-    font-size: 11px;
-    line-height: 13px;
-    font-family: "Roboto", Arial, Helvetica, sans-serif;
-    font-weight: bold;
-    color:  $tc-gray-80;
-    padding: 1px 7px 2px 7px;
+:global {
+  .TaggedValue {
+    display:inline-block;
+    height: 20px;
+    .tagged-value-bg {
+      display: inline;
+      padding: 4px 4px 1px 4px;
+      min-width: 15px;
+      max-height: 15px;
+      background: $tc-dark-blue-70;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 11px;
+      line-height: 13px;
+      font-family: "Roboto", Arial, Helvetica, sans-serif;
+      font-weight: bold;
+      color:  $tc-gray-80;
+      padding: 1px 7px 2px 7px;
+    }
+    .subText {
+      font-family: "Roboto", Arial, Helvetica, sans-serif;
+      font-size: 13px;
+      line-height: 15px;
+      color: white;
+      font-weight: 500;
+      padding-left: 6px;
+      padding-right: 10px;
+    }
   }
-  .subText {
-    font-family: "Roboto", Arial, Helvetica, sans-serif;
-    font-size: 13px;
-    line-height: 15px;
-    color: white;
-    font-weight: 500;
-    padding-left: 6px;
-    padding-right: 10px;
+  .count-one {
+    .tagged-value-bg {
+      background: $tc-purple-70;
+    }
   }
 }
-.count-one {
-  .tagged-value-bg {
-    background: $tc-purple-70;
-  }
-}
+  

@@ -1,18 +1,21 @@
 @import '~tc-ui/src/styles/tc-includes';
 
-.SubNav {
-  background-color: $tc-gray-50;
-
-  .StandardListItem {
-    padding: 20px 0px;
-
-    .label {
-      color: $tc-gray-60;
-    }
-
-    .label:active,
-    .label:hover {
-      color: white;
+:global {
+  .SubNav {
+    background-color: $tc-gray-50;
+  
+    .StandardListItem {
+      padding: 20px 0px;
+  
+      .label {
+        color: $tc-gray-60;
+      }
+  
+      .label:active,
+      .label:hover {
+        color: white;
+      }
     }
   }
 }
+  

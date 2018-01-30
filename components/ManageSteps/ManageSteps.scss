@@ -1,57 +1,59 @@
 
 
-.ManageSteps {
-  h5 {
-    font-weight: bold;
-  }
-
-  .StepRow {
-    justify-content: center;
-  }
-
-  hr {
-    height: 10px;
-    margin: 20px 0 30px 0;
-  }
-
-  .project-Steps {
-    margin-top: 60px;
-
-    > header {
-      button {
-        padding: 4px 40px;
-      }
+:global {
+  .ManageSteps {
+    h5 {
+      font-weight: bold;
     }
-
-    .column-headers {
-      margin-top: 15px;
-      font-weight: normal;
-
-      li {
-        &:nth-child(1) {
-          min-width: 162px;
-        }
-
-        &:nth-child(2), &:nth-child(3), &:nth-child(4) {
-          min-width: 135px;
-          margin-left: 20px;
-        }
-
-        &:nth-child(5) {
-          min-width: 162px;
-          margin: 0px 10px 0px 30px;
-        }
-
-        &:nth-child(6) {
-          min-width: 162px;
-          margin-right: 35px;
+  
+    .StepRow {
+      justify-content: center;
+    }
+  
+    hr {
+      height: 10px;
+      margin: 20px 0 30px 0;
+    }
+  
+    .project-Steps {
+      margin-top: 60px;
+  
+      > header {
+        button {
+          padding: 4px 40px;
         }
       }
-    }
-
-    .Steps {
-      > li {
-        margin-top: 25px;
+  
+      .column-headers {
+        margin-top: 15px;
+        font-weight: normal;
+  
+        li {
+          &:nth-child(1) {
+            min-width: 162px;
+          }
+  
+          &:nth-child(2), &:nth-child(3), &:nth-child(4) {
+            min-width: 135px;
+            margin-left: 20px;
+          }
+  
+          &:nth-child(5) {
+            min-width: 162px;
+            margin: 0px 10px 0px 30px;
+          }
+  
+          &:nth-child(6) {
+            min-width: 162px;
+            margin-right: 35px;
+          }
+        }
+      }
+  
+      .Steps {
+        > li {
+          margin-top: 25px;
+        }
       }
     }
   }

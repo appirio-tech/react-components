@@ -1,112 +1,115 @@
 @import '~tc-ui/src/styles/tc-includes';
-.Tooltip {
-  @include roboto;
-  position: relative;
-
-  .tooltip-popper {
-    z-index: 1000;
-  }
-
-  .fade-enter {
-    opacity: 0;
-    transition: opacity 0.2s ease;
-  }
-
-  .fade-enter-active {
-    opacity: 1;
-  }
-
-  .tooltip-pointer {
-    position: absolute;
-    transform: rotate(45deg);
-  }
-
-  [data-placement="top"] .tooltip-pointer {
-    border-right: 1px solid rgba($tc-black, 0.2);
-    border-bottom: 1px solid rgba($tc-black, 0.2);
-    bottom: -5px !important;
-  }
-
-  [data-placement="bottom"] .tooltip-pointer {
-    border-left: 1px solid rgba($tc-black, 0.2);
-    border-top: 1px solid rgba($tc-black, 0.2);
-    top: -5px !important;
-  }
-
-
-  .tooltip-target {
-    cursor: default;
-    display: block;
-    &.click-pointer {
-      cursor: pointer;
-    }
-  }
-  .tooltip-container {
+:global {
+  .Tooltip {
+    @include roboto;
     position: relative;
-    white-space: nowrap;
-    display: block;
-    visibility: visible;
-    opacity: 1;
-    transition: opacity 0s linear;
-    z-index: 1000;
-    &.tooltip-hide {
-      visibility: hidden;
+  
+    .tooltip-popper {
+      z-index: 1000;
+    }
+  
+    .fade-enter {
       opacity: 0;
+      transition: opacity 0.2s ease;
     }
-    .tooltip-content-container {
-      width: 100%;
-      overflow: hidden;
-      padding: 15px;
-      -webkit-border-radius: 5px;
-      -moz-border-radius: 5px;
-      border-radius: 5px;
-      .tooltip-body {
-        font-size: 14px;
-        padding: 0;
-        margin: 0;
-      }
+  
+    .fade-enter-active {
+      opacity: 1;
     }
-  } //tooltip theme styling
-  &.default {
-    .tooltip-content-container {
-      background-color: $tc-gray-80;
-      color: #fff; //additional theme styling goes here
-      .tooltip-pointer {
-        background-color: $tc-gray-80;
-      }
-      .tooltip-body {
-        color: #fff;
-      }
-    }
-  } //tooltip light theme
-  &.light {
+  
     .tooltip-pointer {
-      background-color: $tc-white;
-      border-style: solid;
-      border-color: $tc-gray-neutral-dark;
+      position: absolute;
+      transform: rotate(45deg);
     }
-
+  
     [data-placement="top"] .tooltip-pointer {
-      border-width: 0px 1px 1px 0px;
+      border-right: 1px solid rgba($tc-black, 0.2);
+      border-bottom: 1px solid rgba($tc-black, 0.2);
+      bottom: -5px !important;
     }
-
+  
     [data-placement="bottom"] .tooltip-pointer {
-      border-width: 1px 0px 0px 1px;
+      border-left: 1px solid rgba($tc-black, 0.2);
+      border-top: 1px solid rgba($tc-black, 0.2);
+      top: -5px !important;
     }
-
-    [data-placement="right"] .tooltip-pointer {
-      border-width: 0px 0px 1px 1px;
+  
+  
+    .tooltip-target {
+      cursor: default;
+      display: block;
+      &.click-pointer {
+        cursor: pointer;
+      }
     }
-
-    .tooltip-content-container {
-      background-color: $tc-white;
-      border: 1px solid $tc-gray-neutral-dark;
-      box-shadow: 0px 2px 7px 1px rgba(0, 0, 0, 0.17);
-      color: $tc-gray-80; //additional theme styling goes here
-
-      .tooltip-body {
-        color: $tc-gray-80;
+    .tooltip-container {
+      position: relative;
+      white-space: nowrap;
+      display: block;
+      visibility: visible;
+      opacity: 1;
+      transition: opacity 0s linear;
+      z-index: 1000;
+      &.tooltip-hide {
+        visibility: hidden;
+        opacity: 0;
+      }
+      .tooltip-content-container {
+        width: 100%;
+        overflow: hidden;
+        padding: 15px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        .tooltip-body {
+          font-size: 14px;
+          padding: 0;
+          margin: 0;
+        }
+      }
+    } //tooltip theme styling
+    &.default {
+      .tooltip-content-container {
+        background-color: $tc-gray-80;
+        color: #fff; //additional theme styling goes here
+        .tooltip-pointer {
+          background-color: $tc-gray-80;
+        }
+        .tooltip-body {
+          color: #fff;
+        }
+      }
+    } //tooltip light theme
+    &.light {
+      .tooltip-pointer {
+        background-color: $tc-white;
+        border-style: solid;
+        border-color: $tc-gray-neutral-dark;
+      }
+  
+      [data-placement="top"] .tooltip-pointer {
+        border-width: 0px 1px 1px 0px;
+      }
+  
+      [data-placement="bottom"] .tooltip-pointer {
+        border-width: 1px 0px 0px 1px;
+      }
+  
+      [data-placement="right"] .tooltip-pointer {
+        border-width: 0px 0px 1px 1px;
+      }
+  
+      .tooltip-content-container {
+        background-color: $tc-white;
+        border: 1px solid $tc-gray-neutral-dark;
+        box-shadow: 0px 2px 7px 1px rgba(0, 0, 0, 0.17);
+        color: $tc-gray-80; //additional theme styling goes here
+  
+        .tooltip-body {
+          color: $tc-gray-80;
+        }
       }
     }
   }
 }
+  

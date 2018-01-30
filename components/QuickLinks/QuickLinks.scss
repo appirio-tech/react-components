@@ -2,55 +2,58 @@
 
 $link-text-hover-color: #7A7F83;
 
-.QuickLinks {
-  position: relative;
-  display: inline-block;
-
-  .dropdown-menu-header {
-    cursor: pointer;
-  }
-
-  .Dropdown {
-    width: auto;
-    margin-top: 20px;
-    left: initial;
-    right: -16px;
-
-    .dropdown-menu-list {
-      padding: 20px;
-      white-space: nowrap;
-
-      .dropdown-menu-list-item {
-        display: inline-block;
-        cursor: pointer;
-
-        .StandardListItem {
-          padding: 0;
-
-          &:active,
-          &:hover {
+:global {
+  .QuickLinks {
+    position: relative;
+    display: inline-block;
+  
+    .dropdown-menu-header {
+      cursor: pointer;
+    }
+  
+    .Dropdown {
+      width: auto;
+      margin-top: 20px;
+      left: initial;
+      right: -16px;
+  
+      .dropdown-menu-list {
+        padding: 20px;
+        white-space: nowrap;
+  
+        .dropdown-menu-list-item {
+          display: inline-block;
+          cursor: pointer;
+  
+          .StandardListItem {
+            padding: 0;
+  
+            &:active,
+            &:hover {
+              .label {
+                color: $link-text-hover-color;
+              }
+            }
+  
             .label {
-              color: $link-text-hover-color;
+              font-size: 12px;
+              line-height: 26px;
+              color: $tc-gray-90;
             }
           }
-
-          .label {
-            font-size: 12px;
-            line-height: 26px;
-            color: $tc-gray-90;
-          }
+        }
+  
+        .dropdown-menu-list-item:not(:last-child) {
+          margin-right: 30px;
+          text-align: center;
         }
       }
-
-      .dropdown-menu-list-item:not(:last-child) {
-        margin-right: 30px;
-        text-align: center;
-      }
     }
+  
+    .Dropdown:before {
+      right: 47px;
+    }
+  
   }
-
-  .Dropdown:before {
-    right: 47px;
-  }
-
 }
+  

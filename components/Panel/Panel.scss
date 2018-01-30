@@ -3,24 +3,27 @@
 $panel-header-text-color: #737380;
 $panel-header-bg-color: #DFDFE1;
 
-.Panel {
-  .panel-header {
-    line-height     : 16px;
-    font-size       : 14px;
-    display         : flex;
-    justify-content : space-between;
-    background-color: $panel-header-bg-color;
-    padding         : 10px;
-    color           : $panel-header-text-color
-  }
-
-  .panel-body {
-    border-left : 1px solid $tc-gray-40;
-    border-right : 1px solid $tc-gray-40;
-    border-bottom : 1px solid $tc-gray-40;
-    padding: 10px;
-    overflow-x: visible;
-    overflow-y: scroll;
-    max-height: 252px;
+:global {
+  .Panel {
+    .panel-header {
+      line-height     : 16px;
+      font-size       : 14px;
+      display         : flex;
+      justify-content : space-between;
+      background-color: $panel-header-bg-color;
+      padding         : 10px;
+      color           : $panel-header-text-color
+    }
+  
+    .panel-body {
+      border-left : 1px solid $tc-gray-40;
+      border-right : 1px solid $tc-gray-40;
+      border-bottom : 1px solid $tc-gray-40;
+      padding: 10px;
+      overflow-x: visible;
+      overflow-y: scroll;
+      max-height: 252px;
+    }
   }
 }
+  
