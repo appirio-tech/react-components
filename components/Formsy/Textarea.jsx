@@ -39,11 +39,11 @@ class Textarea extends Component {
               onChange={this.changeValue}
               value={this.props.getValue()}
               onHeightChange={(height, instance) => {
-                if(!this.props._sizeInit) {
+                if(!this.state._sizeInit) {
                   setTimeout(() => {
                     instance._resizeComponent();
                   });
-                  this.props._sizeInit = true;
+                  this.state._sizeInit = true;
                 }
               }}
             /> :
