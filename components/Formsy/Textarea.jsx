@@ -16,6 +16,17 @@ class Textarea extends Component {
     this.props.onChange(this.props.name, value)
   }
 
+  heightChanged(height, instance) {
+    if(!instance.state || !instance.state._sizeInitialized) {
+      setTimeout(() => {
+        instance._resizeComponent()
+      })
+      instance.setState({
+        _sizeInitialized: true
+      })
+    }
+  }
+
   render() {
     const { label, name, rows, cols, placeholder, wrapperClass} = this.props
     const hasError = !this.props.isPristine() && !this.props.isValid()
@@ -38,14 +49,7 @@ class Textarea extends Component {
               disabled={disabled}
               onChange={this.changeValue}
               value={this.props.getValue()}
-              onHeightChange={(height, instance) => {
-                if(!this.state._sizeInit) {
-                  setTimeout(() => {
-                    instance._resizeComponent();
-                  });
-                  this.state._sizeInit = true;
-                }
-              }}
+              onHeightChange={this.heightChanged}
             /> :
             <textarea
               rows={rows}
