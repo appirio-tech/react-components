@@ -41,6 +41,13 @@ class SearchBar extends Component {
     window.removeEventListener('click', this.handleOutsideClick)
   }
 
+  componentWillReceiveProps(nextProps,nextState) {
+    const searchVal = this.getQueryStringValue(nextProps.searchTermKey)
+    if (searchVal !== this.state.searchValue) {
+      this.setState({ searchState: 'filled', searchValue: searchVal })
+    }
+  }
+
   handleOutsideClick(evt) {
     let t = evt.target
     let i = 0
