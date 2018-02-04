@@ -81,7 +81,7 @@
     "react-router-dom": "^4.2.2",
     "react-select": "^0.9.1",
     "react-switch-button": "^1.1.2",
-    "react-textarea-autosize": "^4.0.5",
+    "react-textarea-autosize": "^5.2.1",
     "react-transition-group": "^2.2.1",
     "redux-thunk": "^2.1.0",
     "tc-ui": "git+https://github.com/appirio-tech/tc-ui.git#feature/connectv2",
