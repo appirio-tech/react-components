@@ -1,52 +1,55 @@
-@import 'tc-includes';
+@import '~tc-ui/src/styles/tc-includes';
 
 $track-desc-text-color: #DCDCE0;
 
-.SubTrackDetails{
-  .heading {
-    height:20px;
-
-    .title {
-      font-size: 15px;
+:global {
+  .SubTrackDetails{
+    .heading {
+      height:20px;
+  
+      .title {
+        font-size: 15px;
+        line-height: 18px;
+        margin-left: 11px;
+        color: white;
+        float: left;
+        font-weight: bold;
+        font-family: "Roboto", Arial, Helvetica, sans-serif;
+  	}
+  
+      .develop {
+        @include tc-track-colors;
+      }
+  
+      .design {
+        @include tc-track-colors;
+      }
+  
+      .data {
+        @include tc-track-colors;
+      }
+    }
+  
+    p {
+      width: 290px;
+      font-size: 13px;
       line-height: 18px;
-      margin-left: 11px;
-      color: white;
-      float: left;
-      font-weight: bold;
+      margin-top: 7px;
       font-family: "Roboto", Arial, Helvetica, sans-serif;
-	}
-
-    .develop {
-      @include tc-track-colors;
+      color: $tc-gray-20;
     }
-
-    .design {
-      @include tc-track-colors;
+  
+    .verticalLine {
+      width: 4px; /* Use only border style */
+      height: 19px;
+      display: block;
+      margin-right: 3px;
+      float: left;
     }
-
-    .data {
-      @include tc-track-colors;
+  
+    .hidden {
+      display:none;
     }
-  }
-
-  p {
-    width: 290px;
-    font-size: 13px;
-    line-height: 18px;
-    margin-top: 7px;
-    font-family: "Roboto", Arial, Helvetica, sans-serif;
-    color: $tc-gray-20;
-  }
-
-  .verticalLine {
-    width: 4px; /* Use only border style */
-    height: 19px;
-    display: block;
-    margin-right: 3px;
-    float: left;
-  }
-
-  .hidden {
-    display:none;
   }
 }
+  

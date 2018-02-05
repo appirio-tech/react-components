@@ -1,7 +1,10 @@
-@import 'tc-includes';
+@import '~tc-ui/src/styles/tc-includes';
 
-.MenuBar {
-  &.vertical {
-    width: 100px;
+:global {
+  .MenuBar {
+    &.vertical {
+      width: 100px;
+    }
   }
 }
+  

@@ -1,8 +1,11 @@
-@import 'tc-includes';
+@import '~tc-ui/src/styles/tc-includes';
 
-.SubNavExamples {
-  > p {
-    border: 1px solid $tc-gray-40;
-    margin: 20px 0px;
+:global {
+  .SubNavExamples {
+    > p {
+      border: 1px solid $tc-gray-40;
+      margin: 20px 0px;
+    }
   }
 }
+  

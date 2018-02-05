@@ -1,21 +1,24 @@
-@import 'tc-includes';
+@import '~tc-ui/src/styles/tc-includes';
 
-.ExampleNav {
-  position: fixed;
-  bottom: 0;
-  background-color: #fff;
-  opacity: 0.6;
-
-  li {
-    display: inline-block;
-  }
-
-  a {
-    margin: 10px;
-    display: inline-block;
-  }
-
-  .back {
-    color: $tc-gray-30;
+:global {
+  .ExampleNav {
+    position: fixed;
+    bottom: 0;
+    background-color: #fff;
+    opacity: 0.6;
+  
+    li {
+      display: inline-block;
+    }
+  
+    a {
+      margin: 10px;
+      display: inline-block;
+    }
+  
+    .back {
+      color: $tc-gray-30;
+    }
   }
 }
+  

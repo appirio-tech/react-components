@@ -1,10 +1,13 @@
 
 
-.UploadedFiles {
-  margin-right: auto;
-  margin-left: auto;
-
-  li {
-    margin: 12px 10px;
+:global {
+  .UploadedFiles {
+    margin-right: auto;
+    margin-left: auto;
+  
+    li {
+      margin: 12px 10px;
+    }
   }
 }
+  
