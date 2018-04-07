@@ -14,9 +14,11 @@ const enhanceDropdown = (CompositeComponent) => class extends Component {
   refreshEventHandlers() {
     if (this.state.isOpen) {
       document.addEventListener('click', this.onClickOutside)
+      document.addEventListener('touchstart', this.onClickOutside)
       document.addEventListener('dropdownClicked', this.onClickOtherDropdown)
     } else {
       document.removeEventListener('click', this.onClickOutside)
+      document.removeEventListener('touchstart', this.onClickOutside)
       document.removeEventListener('dropdownClicked', this.onClickOtherDropdown)
     }
   }
@@ -71,16 +73,19 @@ const enhanceDropdown = (CompositeComponent) => class extends Component {
 
   componentDidMount() {
     document.removeEventListener('click', this.onClickOutside)
+    document.removeEventListener('touchstart', this.onClickOutside)
     document.removeEventListener('dropdownClicked', this.onClickOtherDropdown)
 
     if (this.state.isOpen) {
       document.addEventListener('click', this.onClickOutside)
+      document.addEventListener('touchstart', this.onClickOutside)
       document.addEventListener('dropdownClicked', this.onClickOtherDropdown)
     }
   }
 
   componentWillUnmount() {
     document.removeEventListener('click', this.onClickOutside)
+    document.removeEventListener('touchstart', this.onClickOutside)
     document.removeEventListener('dropdownClicked', this.onClickOtherDropdown)
   }
 
