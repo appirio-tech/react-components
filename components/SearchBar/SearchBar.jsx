@@ -78,6 +78,10 @@ class SearchBar extends Component {
     this.setState({ searchState: 'focused' })
   }
 
+  blur() {
+    this.refs.searchValue.blur()
+  }
+
   handleSuggestionsUpdate(requestNo, data) {
     if (requestNo === this.state.maxRequestNo) {
       console.log('SUGGESTIONS', data)
@@ -128,6 +132,7 @@ class SearchBar extends Component {
     if (eventKey === 13) {
       this.setState({ searchState: 'filled', finalTerm: this.state.searchValue }, function() {
         this.search()
+        this.blur()
       })
     } else if (eventKey === 39) { // right arrow key is pressed
       const suggestion = this.state.suggestions[0]
