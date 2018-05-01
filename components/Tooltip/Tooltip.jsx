@@ -45,9 +45,11 @@ class Tooltip extends Component {
 
     if (!tooltipDelay) {
       this.setState({ isPopoverOpen: true })
+      document.addEventListener('touchstart', this.handleOnClickOutside)
     } else {
       this.tooltipShowTimeout = setTimeout(() => {
         this.setState({ isPopoverOpen: true })
+        document.addEventListener('touchstart', this.handleOnClickOutside)
       }, tooltipDelay)
     }
   }
@@ -65,9 +67,11 @@ class Tooltip extends Component {
 
     if (!tooltipHideDelay) {
       this.setState({ isPopoverOpen: false })
+      document.removeEventListener('touchstart', this.handleOnClickOutside)
     } else {
       this.tooltipHideTimeout = setTimeout(() => {
         this.setState({ isPopoverOpen: false })
+        document.removeEventListener('touchstart', this.handleOnClickOutside)
       }, tooltipHideDelay)
     }
   }
@@ -110,7 +114,9 @@ class Tooltip extends Component {
       popMethod === 'hover' ?
       {
         onMouseEnter: this.handleOnMouseEnter,
-        onMouseLeave: this.handleOnMouseLeave
+        onMouseLeave: this.handleOnMouseLeave,
+        // add on click handle to show tooltip on mobile devices on tap
+        onClick: this.handleOnMouseEnter
       } : {
         onClick: this.handleOnClick
       }
@@ -145,6 +151,7 @@ class Tooltip extends Component {
             <Target
               {...child.props}
               {...popMethodHandler}
+              className={cn(child.props.className, { active: isPopoverOpen })}
             >
               {child.props.children}
             </Target>
