@@ -34,6 +34,7 @@ import PrizeExamples                 from '../Prize/PrizeExamples.jsx'
 import TooltipExamples               from '../Tooltip/TooltipExamples.jsx'
 import ProgressBarExample            from '../ProgressBar/ProgressBarExample.jsx'
 import RichDataTableExample          from '../RichDataTable/RichDataTableExample.jsx'
+import RadioGroupExample             from '../Formsy/RadioGroupExample.jsx'
 
 const renderApp = (component) => () => (
   <ExampleApp>
@@ -86,7 +87,7 @@ const Component = () => (
         <Route path="/NavbarExample" render={renderApp(<NavbarExample />)} />
 
         <Route path="/TCFooterExamples" render={renderApp(<TCFooterExamples />)} />
-        
+
         <Route path="/TaggedValueExamples" render={renderApp(<TaggedValueExamples />)} />
 
         <Route path="/CarouselExamples" render={renderApp(<CarouselExamples />)} />
@@ -98,10 +99,12 @@ const Component = () => (
         <Route path="/PrizeExamples" render={renderApp(<PrizeExamples />)} />
 
         <Route path="/TooltipExamples" render={renderApp(<TooltipExamples />)} />
-        
+
         <Route path="/ProgressBarExample" render={renderApp(<ProgressBarExample />)} />
-        
+
         <Route path="/RichDataTableExample" render={renderApp(<RichDataTableExample />)} />
+
+        <Route path="/RadioGroupExample" render={renderApp(<RadioGroupExample />)} />
       </Switch>
     </BrowserRouter>
   </Provider>

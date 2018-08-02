@@ -8,12 +8,32 @@ import { HOC as hoc } from 'formsy-react'
 class TiledRadioGroup extends Component {
   constructor(props) {
     super(props)
+    props.multipleOptions?(
+      this.state = {
+        curValue: []
+      }
+    ):(
+      this.state = {
+        curValue: []
+      }
+    )
     this.onChange = this.onChange.bind(this)
+    this.state.curValue = (this.props.getValue())
   }
 
   onChange(value) {
+    const index = this.state.curValue.indexOf(value)
+    if (this.props.multipleOptions) {
+      if (index > -1) {
+        this.state.curValue.splice(index, 1)
+      } else {
+        this.state.curValue.push(value)
+      }
+    } else {
+      this.state.curValue = value
+    }
     this.props.setValue(value)
-    this.props.onChange(this.props.name, value)
+    this.props.onChange(this.props.name, this.state.curValue)
   }
 
   render() {
@@ -21,11 +41,10 @@ class TiledRadioGroup extends Component {
     const hasError = !this.props.isPristine() && !this.props.isValid()
     const disabled = this.props.isFormDisabled() || this.props.disabled
     const errorMessage = this.props.getErrorMessage() || this.props.validationError
-    const curValue = this.props.getValue()
 
     const renderOption = (opt, idx) => {
       const itemClassnames = classNames('tiled-group-item', theme, {
-        active: curValue === opt.value
+        active: this.state.curValue.indexOf(opt.value) > -1
       }, {
         disabled: opt.disabled
       })
@@ -52,7 +71,7 @@ class TiledRadioGroup extends Component {
           <span className="title">{opt.title}</span>
           <small>{opt.desc}</small>
           {
-            curValue === opt.value &&
+            this.state.curValue.indexOf(opt.value) > -1 &&
             <span className="check-mark">
               <IconUICheckSimple fill="#fff" width={12} height={12}/>
             </span>
@@ -93,11 +112,13 @@ TiledRadioGroup.propTypes = {
       desc: PropTypes.string
       // icon: PropTypes.
     }).isRequired
-  ).isRequired
+  ).isRequired,
+  multipleOptions: PropTypes.bool
 }
 
 TiledRadioGroup.defaultProps = {
-  onChange: () => {}
+  onChange: () => {},
+  multipleOptions: false
 }
 
 export default hoc(TiledRadioGroup)
