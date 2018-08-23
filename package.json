@@ -65,7 +65,7 @@
     "appirio-tech-api-schemas": "^5.0.69",
     "appirio-tech-client-app-layer": "^0.1.3",
     "classnames": "^2.2.3",
-    "formsy-react": "^0.18.1",
+    "formsy-react": "^0.19.5",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.0.0",
     "moment": "^2.11.2",
