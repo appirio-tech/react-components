@@ -1,0 +1,16 @@
+@import '~tc-ui/src/styles/tc-includes';
+
+.label-help-icon {
+  display: inline-block;
+  line-height: normal;
+  margin-left: $base-unit;
+  position: relative;
+  top: 3px;
+  text-transform: none;
+
+  svg {
+    g {
+      fill: $tc-gray-50;
+    }
+  }
+}
