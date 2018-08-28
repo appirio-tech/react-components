@@ -6,7 +6,7 @@ import _ from 'lodash'
 import PT from 'prop-types'
 import cn from 'classnames'
 
-import HelpIconSvg from '../icons/round-e-help.svg'
+import HelpIconSvg from '../Icons/round-e-help.svg'
 import Tooltip from '../Tooltip/Tooltip'
 
 import styles from './HelpIcon.scss'
