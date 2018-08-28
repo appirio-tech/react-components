@@ -16,7 +16,7 @@ const HELP_TOOLTIP_SHOW_DELAY = 300
 const HelpIcon = ({
   className,
   showTooltipDelay,
-  tooltip,
+  tooltip
 }) => {
   const delay = !_.isNumber(showTooltipDelay) ? showTooltipDelay : HELP_TOOLTIP_SHOW_DELAY
 
@@ -34,7 +34,7 @@ const HelpIcon = ({
 HelpIcon.propTypes = {
   className: PT.string,
   showTooltipDelay: PT.number,
-  tooltip: PT.node,
+  tooltip: PT.node
 }
 
 export default HelpIcon

@@ -60,7 +60,7 @@ class TextInput extends Component {
 }
 
 TextInput.defaultProps = {
-  onChange: () => {},
+  onChange: () => {}
 }
 
 TextInput.propTypes = {
@@ -79,7 +79,7 @@ TextInput.propTypes = {
    * Show help icon next to the value with the tooltip defined by this prop
    * This only has any effect if `readonly` is set to `true`
    */
-  readonlyValueTooltip: PT.node,
+  readonlyValueTooltip: PT.node
 }
 
 export default hoc(TextInput)
