@@ -39,6 +39,10 @@ RichDataTableHeader = require './components/RichDataTable/RichDataTableHeader'
 
 FullHeightContainer = require './components/FullHeightContainer/FullHeightContainer'
 
+# Screen
+LoginScreen         = require './components/LoginScreen'
+Wizard              = require './components/Wizard/Wizard'
+
 module.exports =
   NavBar            : NavBar.default
   NavLink           : NavLink.default
@@ -64,9 +68,8 @@ module.exports =
   ManageSteps       : ManageSteps.default
   StepRow           : StepRow.default
   SubNav            : SubNav.default
-  SwitchButton          : SwitchButton.default
+  SwitchButton      : SwitchButton.default
   Icons             : Icons.default
-
   Tabs              : Tabs.default
   Tab               : Tab.default
   FilePicker        : FilePicker.default
@@ -80,3 +83,7 @@ module.exports =
   RichDataTableHeader : RichDataTableHeader.default
   
   FullHeightContainer : FullHeightContainer.default
+
+# Screen
+  LoginScreen       : LoginScreen.default
+  Wizard            : Wizard.default

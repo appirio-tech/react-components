@@ -1,0 +1,190 @@
+@import '~tc-ui/src/styles/tc-includes';
+@import '../Wizard/screen-size.scss';
+
+:global {
+  .PinVerificationScreen {
+
+    .Loader {
+      margin-top: -150px !important;
+    }
+
+    .container {
+      width: 80%;
+
+      @include mobile {
+        width: 90%;
+      }
+
+      .title {
+        color: #1E1E1F;
+        font-size: 32px;
+        font-weight: 300;
+        line-height: 35px;
+        margin-top: 50px;
+
+        @include mobile {
+          font-size: 24px;
+        }
+      }
+
+      .sub-title {
+        color: #85807C;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 20px;
+        margin-top: 15px;
+        text-transform: uppercase;
+      }
+
+      .description {
+        color: #151516;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 20px;
+        margin-top: 50px;
+
+        @include mobile {
+          line-height: 25px;
+        }
+
+        a {
+          color: $tc-dark-blue;
+        }
+      }
+
+      .form-container {
+        width: 100%;
+        margin-top: 50px;
+
+        .tc-label {
+          color: #A0958C;
+          font-size: 12px;
+          font-weight: 400;
+          line-height: 15px;
+          text-align: left;
+          margin-top: 10px;
+          text-transform: none;
+        }
+
+        .form {
+          width: 100%;
+
+          .error-message {
+            padding: 10px;
+            background: #FFF4F4;
+            border: 1px solid #FFD4D1;
+            font-style: italic;
+            font-size: 13px;
+            line-height: 15px;
+            color: #F22F24;
+            font-weight: 400;
+            margin-bottom: 15px;
+          }
+
+          .verify-pin {
+            position: relative;
+            padding: 0 20px 0 20px;
+            color: #151516;
+            font-size: 15px;
+            font-weight: 700;
+            line-height: 60px;
+            min-height: 60px;
+            background-color: #F1F0F0;
+            border-radius: 6px;
+
+            @media (max-width: 560px) {
+              padding: 0 10px 0 10px;
+            }
+
+            .input-container {
+              position: relative;
+              float: right;
+              width: 70%;
+
+              @include mobile{
+                width: 60%;
+              }
+
+              @media (max-width: 650px) {
+                width: 55%;
+              }
+
+              @media (max-width: 650px) {
+                width: 50%;
+              }
+
+              @media (max-width: 410px) {
+                width: 45%;
+              }
+
+              @include mobile{
+                width: 60%;
+              }
+            }
+
+          }
+
+          .verify-email {
+            position: relative;
+            padding: 0 40px 0 20px;
+            color: #151516;
+            font-size: 15px;
+            font-weight: 700;
+            min-height: 60px;
+            background-color: #F1F0F0;
+            border-radius: 6px;
+            margin-bottom: 10px;
+
+            @media (max-width: 560px) {
+              padding: 0 40px 0 10px;
+            }
+
+            .input-container {
+              position: absolute;
+              right: 15px;
+              left: 130px;
+              top: -22px;
+            }
+
+            a {
+              display: inline-block;
+              position: absolute;
+              right: 20px;
+              color: #A69C93;
+              font-size: 13px;
+              font-weight: 400;
+              cursor: pointer;
+            }
+          }
+
+          .verify-email-form {
+            padding: 0 20px 0 20px;
+
+            .input-container-email {
+              margin-top: 10px;
+            }
+          }
+
+          .bottom-button {
+            margin-top: 25px;
+
+            .verify-pin-btn {
+              margin-left: 15px;
+              margin-right: 15px;
+            }
+          }
+
+          .bottom-button-mail {
+            margin-top: 5px;
+
+            button {
+              margin-top: 10px;
+              margin-bottom: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+  

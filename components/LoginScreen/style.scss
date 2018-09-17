@@ -1,0 +1,172 @@
+@import '~tc-ui/src/styles/tc-includes';
+@import '../Wizard/screen-size.scss';
+
+:global {
+  .LoginScreen {
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
+
+    .tc-file-field__inputs {
+      border-radius: 4px;
+    }
+
+    .tc-btn {
+      font-size: 13px;
+      font-weight: 500;
+      padding: 0 20px;
+      text-transform: none;
+      height: 30px;
+    }
+
+    .top-login-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: #888894;
+
+      @media (max-width: 243px) {
+        top: 40px;
+      }
+
+      .text {
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 30px;
+        margin-right: 10px;
+
+        @include mobile {
+          display: none;
+        }
+      }
+    }
+
+    .top-logo {
+      z-index: 1;
+      top: 20px;
+      left: 20px;
+      position: absolute;
+
+      .title {
+        color: #85807C;
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 2.16px;
+        line-height: 14px;
+        text-align: center;
+
+        @supports (-moz-appearance:none) {
+          font-size: 12px;
+          transform: translateX(4px);
+        }
+      }
+
+      &.with-text {
+        display: inline;
+         
+        @include mobile {
+          display: none;
+        }
+      }
+
+      &.no-text {
+        display: none;
+
+        @include mobile {
+          display: inline;
+        }
+      }
+    }
+
+    .container {
+      width: 100%;
+
+      .title {
+        color: #1E1E1F;
+        line-height: 35px;
+        margin: 0 20px 40px;
+        font-size: 36px;
+        font-weight: 300;
+        color: #262628;
+        line-height: 40px;
+        text-align: center;
+        text-transform: none;
+      }
+
+      .confirmation-block {
+        margin: 5px 0 0;
+        padding: 10px;
+        background: #EFFAE5;
+        border: 1px solid #CFEFB2;
+        font-style: italic;
+        font-size: 15px;
+        color: #55b000;
+        text-align: center;
+        margin-top: -15px;
+        margin-bottom: 10px;
+      }
+
+      .copyright {
+        margin-top: 30px;
+        font-size: 12px;
+        color: #656565;
+        text-align: center;
+        line-height: 15px;
+        font-weight: 300;
+      }
+
+      .form {
+        width: 100%;
+        margin-top: 50px;
+        max-width: 540px;
+        margin: 0 auto;
+        padding: 50px;
+        background: #FFFFFF;
+        box-shadow: 0 2px 9px 0 rgba(38, 38, 40, 0.06);
+        border-radius: 7px;
+        margin-top: 80px;
+
+        .input-container {
+          width: 100%;
+        }
+
+        .bottom-link {
+          font-size: 12px;
+          font-weight: 300;
+          margin-top: 30px;
+          color: $tc-dark-blue-70;
+        }
+
+        .tc-btn {
+          margin-top: 40px;
+        }
+
+        .tc-label {
+          width: 100%;
+          color: #A0958C;
+          font-size: 12px;
+          font-weight: 400;
+          line-height: 15px;
+          text-align: left;
+          margin-top: 10px;
+          text-transform: none;
+        }
+
+        .tc-file-field__inputs {
+          height: 30px;
+          margin-top: 5px;
+        }
+
+        .error-message {
+          margin: 0;
+          padding: 10px;
+          background: #FFF4F4;
+          border: 1px solid #FFD4D1;
+          font-style: italic;
+          font-size: 13px;
+          line-height: 15px;
+          color: #F22F24;
+        }
+      }
+    }
+  }
+}
+  

@@ -18,6 +18,7 @@ class TiledRadioGroup extends Component {
       }
     )
     this.onChange = this.onChange.bind(this)
+    this.getCheckMarkIconActive = this.getCheckMarkIconActive.bind(this)
     this.state.curValue = (this.props.getValue())
   }
 
@@ -34,6 +35,13 @@ class TiledRadioGroup extends Component {
     }
     this.props.setValue(value)
     this.props.onChange(this.props.name, this.state.curValue)
+  }
+
+  getCheckMarkIconActive() {
+    return (this.props.checkMarkActiveIcon ? this.props.checkMarkActiveIcon : (
+      <span className="check-mark">
+      <IconUICheckSimple fill="#fff" width={12} height={12}/>
+    </span>))
   }
 
   render() {
@@ -67,19 +75,25 @@ class TiledRadioGroup extends Component {
               onBlur={handleBlur}
             />
           }
+          {
+            this.props.showCheckMarkBeforeTitle
+            && ((this.state.curValue.indexOf(opt.value) > -1)
+            ? this.getCheckMarkIconActive()
+            : this.props.checkMarkUnActiveIcon)
+          }
           <span className="icon">{ opt.icon && <Icon {...opt.iconOptions} />}</span>
           <span className="title">{opt.title}</span>
           <small>{opt.desc}</small>
           {
-            this.state.curValue.indexOf(opt.value) > -1 &&
-            <span className="check-mark">
-              <IconUICheckSimple fill="#fff" width={12} height={12}/>
-            </span>
+            !this.props.showCheckMarkBeforeTitle
+            && ((this.state.curValue.indexOf(opt.value) > -1)
+            ? this.getCheckMarkIconActive()
+            : this.props.checkMarkUnActiveIcon)
           }
         </a>
       )
       return (
-        <span key={ idx }>
+        <span key={ idx } className="tiled-group-item-container">
         {
           opt.disabled ?
           <Tooltip>
@@ -98,6 +112,11 @@ class TiledRadioGroup extends Component {
 
     return (
       <div className={`${wrapperClass} tiled-group-row`}>
+
+        {this.props.label && (
+          <label className="tc-label">
+          {this.props.label}
+        </label>)}
         {options.map(renderOption)}
       { hasError ? (<p className="error-message">{errorMessage}</p>) : null}
       </div>
@@ -113,12 +132,16 @@ TiledRadioGroup.propTypes = {
       // icon: PropTypes.
     }).isRequired
   ).isRequired,
-  multipleOptions: PropTypes.bool
+  multipleOptions: PropTypes.bool,
+  checkMarkActiveIcon: PropTypes.node,
+  checkMarkUnActiveIcon: PropTypes.node,
+  showCheckMarkBeforeTitle: PropTypes.bool
 }
 
 TiledRadioGroup.defaultProps = {
   onChange: () => {},
-  multipleOptions: false
+  multipleOptions: false,
+  showCheckMarkBeforeTitle: false
 }
 
 export default hoc(TiledRadioGroup)

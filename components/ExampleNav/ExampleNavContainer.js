@@ -34,6 +34,10 @@ const navs = {
   ],
   RichDataTable: [
     'RichDataTableExample'
+  ],
+  Screen: [
+    'LoginScreenExamples',
+    'WizardExamples'
   ]
 }
 

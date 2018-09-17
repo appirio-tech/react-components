@@ -1,0 +1,107 @@
+@import '~tc-ui/src/styles/tc-includes';
+@import '../screen-size.scss';
+
+:global {
+  .WizardRight {
+    background-color: rgba(163, 153, 144, 0.1);
+    position: relative;
+    box-shadow: inset 10px 50px 150px 0px rgba(0,0,0,0.9);
+
+    .top-img {
+      object-fit: cover;
+      object-position: 50% 0;
+      height: 531px;
+      z-index: -2;
+    }
+
+    .top-img-full {
+      object-fit: cover;
+      object-position: 50% 0;
+      max-height: 882px;
+      z-index: -2;
+    }
+
+    .top-login-button {
+      position: absolute;
+      margin-top: 20px;
+      width: 100%;
+
+      .text {
+        color: #FFFFFF;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 30px;
+        margin-right: 10px;
+
+        b {
+          font-weight: bold;
+        }
+      }
+
+      .arrow {
+        margin-left: 10px;
+        margin-top: -3px;
+        -webkit-transform: scaleY(-1);
+        transform: scaleY(-1);
+      }
+
+      .avatar {
+        padding-top: 7px;
+        text-align: center;
+        background-color: #F1F0F0;
+        border-radius: 33px;
+        width: 30px;
+        height: 30px;
+      }
+
+      .tc-btn {
+        font-size: 13px;
+        font-weight: 500;
+        height: 30px;
+        text-align: center;
+
+        @media (max-width: 910px) {
+          padding: 0 5px;
+        }
+
+        @media (max-width: 771px) {
+          padding: 0;
+        }
+      }
+    }
+
+    .trusted-text {
+      color: #ACA199;
+      font-size: 12px;
+      font-weight: 900;
+      text-align: center;
+      height: 50px;
+      padding-top: 20px;
+    }
+
+    .bottom-icon {
+      .icon-link {
+        width: 50%;
+        height: 90px;
+
+        @include super-large {
+          width: 25%;
+        }
+      }
+      .logo-banner {
+        object-fit: fill;
+      }
+    }
+
+    .bottom-link {
+      color: $tc-dark-blue;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 14px;
+      text-align: center;
+      margin-top: 10px;
+      margin-bottom: 35px;
+    }
+  }
+}
+  

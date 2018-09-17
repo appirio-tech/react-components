@@ -1,0 +1,92 @@
+
+@import './screen-size.scss';
+
+:global {
+  .Wizard {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+    flex-wrap: wrap;
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
+
+    input {
+      font-family: "Roboto", Arial, Helvetica, sans-serif;
+    }
+
+    .tc-file-field__inputs {
+      border-radius: 4px;
+    }
+
+    .tc-btn {
+      font-size: 13px;
+      font-weight: 500;
+      padding: 0 10px;
+      text-transform: none;
+    }
+
+    .WizardTop {
+      width : 100%;
+    }
+
+    .WizardLeft {
+      @include super-large {
+        width : 15%;
+      }
+
+      width : 18%;
+
+      @include tablet {
+        width : 23%;
+      }
+
+      @media (max-width: 645px) {
+        width: 40%;
+      }
+
+      @include mobile {
+        width: 100%;
+      }
+    }
+    .WizardMiddle {
+      @include super-large {
+        width : 45%;
+      }
+
+      width : 56%;
+
+      @include tablet {
+        width : 77%;
+      }
+
+      @media (max-width: 645px) {
+        width: 60%;
+      }
+
+      @include mobile {
+        width: 100%;
+      }
+    }
+    .WizardRight {
+      @include super-large {
+        width : 40%;
+      }
+
+      width : 26%;
+  
+      @include mobile-tablet {
+        display: none;
+      }
+    }
+    .WizardBottom {
+      width: 100%;
+      height: 70px;
+      display: none;
+  
+      @include mobile {
+        display: block;
+      }
+    }
+  }
+}
+  

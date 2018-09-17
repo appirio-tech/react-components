@@ -1,0 +1,137 @@
+@import '../screen-size.scss';
+
+:global {
+  .WizardLeft {
+    background-color: rgba(163, 153, 144, 0.1);
+    position: relative;
+
+    .logo {
+      width: 100%;
+      height: 220px;
+      margin: auto;
+
+      @include mobile-tablet {
+        display: none;
+      }
+    }
+
+    .bottom {
+      bottom: 0;
+      position: absolute;
+      color: #A0958C;
+      font-size: 10px;
+      font-weight: 400;
+      line-height: 20px;
+      text-align: center;
+      margin: 10px;
+      left: 0;
+      right: 0;
+
+      @include mobile {
+        display: none;
+      }
+    }
+
+    .title {
+      color: #85807C;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 14px;
+      text-align: center;
+
+      @include tablet {
+        margin-top: 30px;
+      }
+
+      @include mobile {
+        display: none;
+      }
+    }
+
+    .step-container {
+      margin-top: 30px;
+
+      @include mobile {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+      }
+    }
+
+    .bottom-line {
+      .number::before {
+        content: "";
+        width: 4px;
+        height: 22px;
+        background-color: #D7D3D0;
+        position: absolute;
+        top: 23px;
+        margin-left: 1px;
+        border-radius: 2px;
+  
+        @include mobile {
+          width: 46px;
+          height: 4px;
+          margin-top: -14px;
+          margin-left: 18px;
+        }
+      }
+    }
+
+    .bottom-line.selected::after {
+      @include mobile {
+        content: "Create acccount";
+        font-size: 12px;
+        top: 25px;
+        position: absolute;
+        width: 100px;
+        text-align: center;
+      }
+    }
+
+    .step {
+      margin-bottom: 28px;
+      position: relative;
+
+      @include mobile {
+        width: 76px;
+      }
+
+      .number {
+        font-size: 10px;
+        font-weight: 700;
+        width: 20px;
+        height: 20px;
+        text-align: center;
+        border-radius: 10px;
+        color: #A0958C;
+        background: white;
+        text-align: center;
+        border: 3px solid #D7D3D0;
+        line-height: 15px;
+      }
+
+      .selected {
+        color: #FFFFFF;
+        background: black;
+        border: none;
+        line-height: 19px;
+      }
+
+      .name {
+        color: #151516;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 20px;
+        text-align: left;
+        margin-left: 10px;
+        width: 105px;
+
+        @include mobile {
+          display: none;
+        }
+      }
+    }
+  }
+}
+  
