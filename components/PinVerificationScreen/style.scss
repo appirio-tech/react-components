@@ -53,8 +53,12 @@
       }
 
       .form-container {
-        width: 100%;
+        width: 70%;
         margin-top: 50px;
+
+        @include mobile-tablet {
+          width: 100%;
+        }
 
         .tc-label {
           color: #A0958C;
@@ -101,8 +105,12 @@
               float: right;
               width: 70%;
 
-              @include mobile{
+              @media (max-width: 1130px) {
                 width: 60%;
+              }
+
+              @media (max-width: 870px) {
+                width: 50%;
               }
 
               @media (max-width: 650px) {

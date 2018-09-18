@@ -29,7 +29,7 @@ const WizardRight = ({ type, vm }) => {
     <div className="WizardRight flex column">
         {
           (type !== ViewTypes.welcome) ? (
-            <div className="top-login-button flex middle center">
+            <div className="top-login-button flex middle end">
               <span className="text">Already have an account?</span>
               <a className="tc-btn tc-btn-sm tc-btn-default flex center middle" onClick={vm.goToLogin} >Log in</a>
             </div>
@@ -51,20 +51,21 @@ const WizardRight = ({ type, vm }) => {
           )
         }
         
-        {(type === ViewTypes.register) && (<div className="flex column middle center">
-          <div className="trusted-text flex middle center" >TRUSTED BY</div>
-          <div className="bottom-icon flex wrap">
-          {
-            icons.map((icon, i) => {
-              return (
-                <a key={`key-${i}`} className="icon-link flex middle center" href={vm.custommerStoriesUrl}>
-                  <img href="" width="100" height="50" className="logo-banner" src={icon}/>
-                </a>)
-            })
-          }
-          </div>
-          <a className="bottom-link" href={vm.custommerStoriesUrl}>Discover how we can help your organization</a>
-        </div>)}
+        {(type === ViewTypes.register) && (
+          <div className="bottom-container flex column middle">
+            <div className="trusted-text flex middle center" >TRUSTED BY</div>
+            <div className="bottom-icon flex wrap">
+            {
+              icons.map((icon, i) => {
+                return (
+                  <a key={`key-${i}`} className="icon-link flex middle center" href={vm.custommerStoriesUrl}>
+                    <img href="" width="100" height="50" className="logo-banner" src={icon}/>
+                  </a>)
+              })
+            }
+            </div>
+            <a className="bottom-link" href={vm.custommerStoriesUrl}>Discover how we can help your organization</a>
+          </div>)}
         
     </div>
   )

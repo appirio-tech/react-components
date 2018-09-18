@@ -41,7 +41,7 @@ class RegistrationScreen extends Component {
     this.enableButton = this.enableButton.bind(this)
     this.disableButton = this.disableButton.bind(this)
     this.reRender = this.reRender.bind(this)
-    this.idValidForm = this.idValidForm.bind(this)
+    this.isValidForm = this.isValidForm.bind(this)
     this.onChangeCountry = this.onChangeCountry.bind(this)
     this.state = {
       update: true,
@@ -79,10 +79,10 @@ class RegistrationScreen extends Component {
     })
   }
 
-  idValidForm() {
+  isValidForm() {
     const {vm} = this.props
     const {canSubmit} = this.state
-    return !vm.loading && canSubmit && !vm.usernameErrorMessage && !vm.emailErrorMessage && !vm.phoneErrorMessage
+    return !vm.loading && canSubmit && !vm.usernameErrorMessage && !vm.emailErrorMessage && !vm.phoneErrorMessage && this.state.country
   }
 
   submit(form) {
@@ -111,7 +111,6 @@ class RegistrationScreen extends Component {
           <div className="sub-title">First we need to know you a bit better</div>
             {vm.errorMessage && (<div className="server-error-message">{vm.errorMessage}</div>)}
           <Formsy.Form onValidSubmit={this.submit} onValid={this.enableButton} onInvalid={this.disableButton} className="form flex column middle center">
-            {vm.loading && (<Loader />)}
             <TextInput
               wrapperClass={'input-container'}
               label="First and last name"
@@ -202,12 +201,14 @@ class RegistrationScreen extends Component {
               validationErrors={{
                 isDefaultRequiredValue: 'Please enter password',
                 minLength: '8–64 characters',
-                maxLength: '8–64 characters'
+                maxLength: '8–64 characters',
+                matchRegexp: 'The password must contain at least one number or symbol and one character'
 
               }}
               validations={{
                 minLength: 8,
-                maxLength: 64
+                maxLength: 64,
+                matchRegexp: /^((?=.*[a-z])|(?=.*[A-Z]))((?=.*[0-9])|(?=.*[!@#\$%\^&\*]))/
               }}
               required
               showCheckMark
@@ -219,11 +220,12 @@ class RegistrationScreen extends Component {
               required
             />
             <div className="space" />
-            <button type="submit" className="tc-btn tc-btn-sm tc-btn-primary flex middle center"  disabled={vm.loading || !this.state.canSubmit}>Continue</button>
+            <button type="submit" className="tc-btn tc-btn-sm tc-btn-primary flex middle center"  disabled={vm.loading || !this.state.canSubmit || !this.state.country}>Continue</button>
             <div className="by-clicking-continue">By clicking “Continue” you agree to our <a href={vm.termsUrl}>Terms</a> and <a href={vm.privacyUrl}>Privacy Policy</a>.
   We are never going to sell your data or send you spam messages. Your email is going to be used for communication purposes only.</div>
           </Formsy.Form>
         </div>
+        {vm.loading && (<Loader />)}
       </div>
     )
   }
