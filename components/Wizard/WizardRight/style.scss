@@ -5,7 +5,7 @@
   .WizardRight {
     background-color: rgba(163, 153, 144, 0.1);
     position: relative;
-    box-shadow: inset 10px 50px 150px 0px rgba(0,0,0,0.9);
+    box-shadow: inset 0 80px 50px -40px rgba(0,0,0,0.8);
 
     .top-img {
       object-fit: cover;
@@ -17,7 +17,7 @@
     .top-img-full {
       object-fit: cover;
       object-position: 50% 0;
-      max-height: 882px;
+      height: 100%;
       z-index: -2;
     }
 
@@ -25,13 +25,15 @@
       position: absolute;
       margin-top: 20px;
       width: 100%;
+      padding-right: 20px;
 
       .text {
         color: #FFFFFF;
         font-size: 12px;
         font-weight: 400;
-        line-height: 30px;
+        line-height: 15px;
         margin-right: 10px;
+        text-align: right;
 
         b {
           font-weight: bold;
@@ -39,7 +41,8 @@
       }
 
       .arrow {
-        margin-left: 10px;
+        padding: 10px 10px 15px 10px;
+        cursor: pointer;
         margin-top: -3px;
         -webkit-transform: scaleY(-1);
         transform: scaleY(-1);
@@ -52,6 +55,7 @@
         border-radius: 33px;
         width: 30px;
         height: 30px;
+        cursor: pointer;
       }
 
       .tc-btn {
@@ -59,6 +63,7 @@
         font-weight: 500;
         height: 30px;
         text-align: center;
+        white-space: nowrap;
 
         @media (max-width: 910px) {
           padding: 0 5px;
@@ -68,6 +73,11 @@
           padding: 0;
         }
       }
+    }
+
+    .bottom-container {
+      height: 100%;
+      box-shadow: inset 10px 0px 50px -20px rgba(0,0,0,0.8);
     }
 
     .trusted-text {

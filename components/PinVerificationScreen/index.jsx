@@ -30,6 +30,8 @@ class PinVerificationScreen extends React.Component {
     this.sendNewPinClicked = this.sendNewPinClicked.bind(this)
     this.reRender = this.reRender.bind(this)
     this.canSubmitEmail = this.canSubmitEmail.bind(this)
+
+    this.onChangeEmail = this.onChangeEmail.bind(this)
     
     props.vm.reRender = this.reRender
   }
@@ -64,8 +66,17 @@ class PinVerificationScreen extends React.Component {
     })
   }
 
-  handleSubmitEmail() {
+  onChangeEmail(key, newEmail) {
+    const {vm} = this.props
+    vm.email = newEmail
+    console.log('newEmail', newEmail)
+    console.log('vm.email', vm.email)
+  }
 
+  handleSubmitEmail() {
+    const {vm} = this.props
+    console.log('handleSubmitEmail vm.email', vm.email)
+    vm.updateEmailAndResendPIN()
   }
 
   enableButtonEmail() {
@@ -124,11 +135,12 @@ class PinVerificationScreen extends React.Component {
                     validationError="Please enter valid email."
                     required
                     value={vm.email}
+                    onChange={this.onChangeEmail}
                     forceErrorMessage={vm.emailErrorMessage || vm.message}
                     validator={vm.emailIsAvailable}
                   />
                   <div className="bottom-button-mail flex column middle center">
-                    <button type="submit" onClick={vm.updateEmailAndResendPIN} className="tc-btn tc-btn-sm tc-btn-primary flex middle center" disabled={!this.canSubmitEmail()}>Update email and send a new PIN</button>
+                    <button type="submit" className="tc-btn tc-btn-sm tc-btn-primary flex middle center" disabled={!this.canSubmitEmail()}>Update email and send a new PIN</button>
                     <button onClick={this.closeEmailForm} className="tc-btn tc-btn-sm tc-btn-secondary flex middle center" >Cancel</button>
                   </div>
                 </div>) : (

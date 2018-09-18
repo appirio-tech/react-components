@@ -9,9 +9,12 @@
     justify-content: stretch;
     flex-wrap: wrap;
     font-family: "Roboto", Arial, Helvetica, sans-serif;
+    min-height: 1000px;
+    height: 100vh;
 
     input {
       font-family: "Roboto", Arial, Helvetica, sans-serif;
+      border-color: lightgray;
     }
 
     .tc-file-field__inputs {
