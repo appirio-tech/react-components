@@ -7,6 +7,7 @@ import WizardBottom from './WizardBottom'
 import RegistrationScreen from '../RegistrationScreen'
 import PinVerificationScreen from '../PinVerificationScreen'
 import WelcomeScreen from '../WelcomeScreen'
+import classNames from 'classnames'
 
 require('./Wizard.scss')
 
@@ -16,18 +17,27 @@ require('./Wizard.scss')
 export const ViewTypes = {
   register: 'register',
   pin: 'pin',
-  welcome: 'welcome'
+  welcome: 'welcome',
+  selectSolution: 'selectSolution',
+  definedScope: 'definedScope',
+  projectSubmitted: 'projectSubmitted'
 }
 
-const Wizard = ({ type, vm }) => {
+const Wizard = ({ type, vm, children, wrapperClass }) => {
+  const wrapperClasses = classNames(wrapperClass, {
+    Wizard: true,
+    'tc-ui': true
+  })
+
   return (
-    <div className="Wizard tc-ui">
+    <div className={wrapperClasses}>
       <WizardTop type={type} vm={vm} />
       <WizardLeft type={type} />
       <WizardMiddle>
         {(type === ViewTypes.register) && (<RegistrationScreen vm={vm} />)}
         {(type === ViewTypes.pin) && (<PinVerificationScreen vm={vm} />)}
         {(type === ViewTypes.welcome) && (<WelcomeScreen vm={vm} />)}
+        {children}
       </WizardMiddle>
       <WizardRight type={type} vm={vm} />
       <WizardBottom />

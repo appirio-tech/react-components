@@ -50,11 +50,13 @@
 
     .step-container {
       margin-top: 30px;
+      min-height: 300px;
 
       @include mobile {
         display: flex;
         flex-direction: row;
         justify-content: center;
+        min-height: auto;
       }
     }
 
@@ -78,14 +80,29 @@
       }
     }
 
-    .bottom-line.selected::after {
+    .step.selected {
+
       @include mobile {
-        content: "Create acccount";
-        font-size: 12px;
-        top: 25px;
-        position: absolute;
-        width: 100px;
-        text-align: center;
+        &::after {
+            font-size: 12px;
+            top: 25px;
+            position: absolute;
+            width: 100px;
+            text-align: center;
+        }
+        &.step1::after {
+          content: "Create account";
+        }
+        &.step2::after {
+          content: "Select your solution";
+          width: 200px;
+        }
+        &.step3::after {
+          content: "Defined scope";
+        }
+        &.step4::after {
+          content: "Project submitted";
+        }
       }
     }
 
@@ -111,11 +128,13 @@
         line-height: 15px;
       }
 
-      .selected {
-        color: #FFFFFF;
-        background: black;
-        border: none;
-        line-height: 19px;
+      &.selected{
+        .number  {
+          color: #FFFFFF;
+          background: black;
+          border: none;
+          line-height: 19px;
+        }
       }
 
       .name {

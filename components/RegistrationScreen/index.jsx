@@ -89,8 +89,10 @@ class RegistrationScreen extends Component {
     const {vm} = this.props
     const {country} = this.state
     const fullName = form.name
-    /* todo: send these field to server api */
-    console.log('ignore param:', `{ agreeTerm: ${form.agreeTerm}, companyName: ${form.comanyName}, companySize: ${form.companySize}, phone: ${form.phone}, title: ${form.title} }`)
+    vm.phone = form.phone
+    vm.title = form.title
+    vm.companyName = form.companyName
+    vm.companySize = form.companySize
     vm.username = form.username
     vm.password = form.password
     vm.email = form.email
