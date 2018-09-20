@@ -9,18 +9,25 @@ require('./style.scss')
 const WizardTop = ({ type, vm }) => {
   const bannerRegist = require('../Assets/hero-register-01@2x.jpg')
   const bannerPin = require('../Assets/hero-register-02@2x.jpg')
+  const bannerSelectSolution = require('../Assets/hero-project-01@2x.jpg')
+  const bannerdDefineScope = require('../Assets/hero-solution-app@2x.jpg')
   const bannerWelcome = require('../Assets/hero-register-03@2x.jpg')
   let logo = bannerRegist // type == ViewTypes.register
   if (type === ViewTypes.pin) {
     logo = bannerPin
+  } else if (type === ViewTypes.selectSolution) {
+    logo = bannerSelectSolution
+  } else if (type === ViewTypes.definedScope) {
+    logo = bannerdDefineScope
   } else if (type === ViewTypes.welcome) {
     logo = bannerWelcome
   }
   return (
     <div className="WizardTop flex column">
         <img className="top-img" src={logo}/>
+        <div className="shadow"></div>
         {
-          (type !== ViewTypes.welcome) ? (
+          (type === ViewTypes.pin || type === ViewTypes.register) ? (
             <div className="top-login-button flex middle center">
               <span className="text">Already have an account?</span>
               <a className="tc-btn tc-btn-sm tc-btn-default" onClick={vm.goToLogin} >Log in</a>
