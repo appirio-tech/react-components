@@ -40,7 +40,7 @@ const WizardRight = ({ type, vm }) => {
               <a className="tc-btn tc-btn-sm tc-btn-default flex center middle" onClick={vm.goToLogin} >Log in</a>
             </div>
           ) : (
-            <div className="top-login-button flex middle center">
+            <div className="top-login-button flex middle end">
               <span className="text">Hello, <b>{vm.userHandle || ''}</b></span>
               <div className="avatar">
                 <IconMan />
@@ -53,10 +53,10 @@ const WizardRight = ({ type, vm }) => {
           (type === ViewTypes.register) ? (
             <img className="top-img" src={logo}/>
           ) : (
-            <img className="top-img-full" src={logo}/>
+            <img className={`top-img-full ${(type === ViewTypes.definedScope) ? 'defined-scope' : ''}`} src={logo}/>
           )
         }
-        <div className="shadow"></div>
+        <div className={`shadow ${(type === ViewTypes.definedScope) ? 'defined-scope' : ''}`}></div>
         {(type === ViewTypes.register) && (
           <div className="bottom-container flex column middle">
             <div className="trusted-text flex middle center" >TRUSTED BY</div>
@@ -72,7 +72,31 @@ const WizardRight = ({ type, vm }) => {
             </div>
             <a className="bottom-link" href={vm.custommerStoriesUrl}>Discover how we can help your organization</a>
           </div>)}
-        
+
+        {(type === ViewTypes.definedScope) && (
+          <div className="bottom-project-type flex column middle">
+            <div className="top-content flex column middle">
+              <div className="top-content-header flex row middle">
+                <div className="project-icon flex middle center">
+                  {vm.projectType && vm.projectType.iconUI}
+                </div>
+                <div className="flex column middle start">
+                  <div className="title">
+                    {vm.projectType && (vm.projectType.displayName || vm.projectType.name)}
+                  </div>
+                  <div className="sub-title">
+                    Duration depends on scope
+                  </div>
+                </div>
+              </div>
+              <div className="project-content">
+                {vm.projectType && vm.projectType.info}
+              </div>
+              <a className="brochure-link">View the solution brochure (PDF)</a>
+            </div>
+            <div className="bottom-content flex column middle">
+            </div>
+          </div>)}
     </div>
   )
 }
