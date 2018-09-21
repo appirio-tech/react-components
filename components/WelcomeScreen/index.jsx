@@ -21,12 +21,12 @@ class WelcomeScreen extends React.Component {
           <div className="title">Welcome to Topcoder</div>
           <div className="sub-title">The world’s biggest crowdsorginc platform</div>
           <div className="content">
-          Hello, <b>Victor Tian!</b>
+          Hello, <b>{vm.userHandle}</b>
           <br />
           <br />
           Your Topcoder account was successfully created. On the next screen let’s figure out which solution best fits your needs.
           </div>
-          <a href={vm.newProjectUrl} type="button" className="next-btn tc-btn tc-btn-sm tc-btn-primary flex middle center" disabled={!vm.isLoggedIn}>Select your solution</a>
+          <a href={vm.newProjectUrl} type="button" className="next-btn tc-btn tc-btn-sm tc-btn-primary flex middle center">Select your solution</a>
         </div>
       </div>
     )

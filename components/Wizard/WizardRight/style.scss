@@ -5,6 +5,7 @@
   .WizardRight {
     background-color: rgba(163, 153, 144, 0.1);
     position: relative;
+    overflow: hidden;
 
     .shadow {
       box-shadow: inset 0 80px 50px -40px rgba(0,0,0,0.8);
@@ -13,7 +14,13 @@
       height: 100%;
       top: 0;
       left: 0;
+      z-index: 1;
+
+      &.defined-scope {
+        box-shadow: inset 10px 80px 50px -40px rgba(0,0,0,0.8);
+      }
     }
+
     .top-img {
       object-fit: cover;
       object-position: 50% 0;
@@ -27,6 +34,16 @@
       height: 100%;
       max-height: 1000px;
       z-index: 0;
+
+      &.defined-scope {
+        position: absolute;
+        top: -7%;
+        left: -90%;
+
+        @include super-large {
+          left: -20%;
+        }
+      }
     }
 
     .top-login-button {
@@ -34,7 +51,7 @@
       margin-top: 20px;
       width: 100%;
       padding-right: 20px;
-      z-index: 1;
+      z-index: 2;
       cursor: pointer;
 
       .text {
@@ -82,6 +99,82 @@
         @media (max-width: 771px) {
           padding: 0;
         }
+      }
+    }
+
+    .bottom-project-type {
+      height: 100%;
+      margin-top: 286px;
+      background-color: rgba(235, 0, 0, 0.05);
+      z-index: 0;
+
+      .top-content {
+        height: auto;
+        min-height: 318px;
+        width: 100%;
+        background-image: linear-gradient(180deg, rgba(235, 235, 235, 0.75) 0%, #EBEBEB 100%);
+        padding: 20px;
+
+        .top-content-header {
+          width: 100%;
+          margin-bottom: 20px;
+
+          .project-icon {
+            width: 60px;
+            height: 60px;
+            margin-right: 20px;
+            background-color: #FFFFFF;
+            border-radius: 17px;
+            flex: 0 0 60px;
+          }
+
+          .title {
+            text-align: left;
+            width: 100%;
+            color: #151516;
+            font-size: 28px;
+            font-weight: 400;
+            margin-bottom: 5px;
+            margin-top: -5px;
+            text-transform: capitalize;
+          }
+  
+          .sub-title {
+            text-align: left;
+            margin: 0;
+            width: 100%;
+            color: #808080;
+            font-size: 15px;
+            font-weight: 700;
+            text-transform: capitalize;
+          }
+        }
+
+        .project-content {
+          color: #151516;
+          font-size: 12px;
+          font-weight: 400;
+          line-height: 22px;
+          text-align: left;
+          width: 100%;
+        }
+      }
+
+      .bottom-content {
+        height: 100%;
+        width: 100%;
+        background-color: #EBEBEB;
+      }
+
+      .brochure-link {
+        color: $tc-dark-blue;
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 22px;
+        width: 100%;
+        text-align: left;
+        margin-top: 20px;
+        cursor: pointer;
       }
     }
 

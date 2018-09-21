@@ -42,6 +42,8 @@ class PinVerificationScreen extends React.Component {
 
   sendNewPinClicked(event) {
     event.preventDefault()
+    const {vm} = this.props
+    vm.callResendPIN()
   }
 
   openEmailForm() {
@@ -110,6 +112,7 @@ class PinVerificationScreen extends React.Component {
           <div className="title">Make sure you can hear us</div>
           <div className="sub-title">Because communication is very important</div>
             { vm.emailEditSuccess && (<div className="confirmation-block">Your email was updated, and we’ve sent you a new PIN. Please enter it below.</div>)}
+            { vm.resendPinSuccess && (<div className="confirmation-block">We’ve sent you a new PIN. Please enter it below.</div>)}
           {vm.emailEditMode ? (
             <div className="description">
               If you don’t see an email from us right away, wait for a few minutes or check your spam folder. If you don’t receive a message or need help with your account, please contact <a href="mailto:support@topcoder.com">support@topcoder.com</a>.<a href="mailto:support@connect.com"></a>
