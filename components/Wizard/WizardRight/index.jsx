@@ -92,7 +92,7 @@ const WizardRight = ({ type, vm }) => {
               <div className="project-content">
                 {vm.projectType && vm.projectType.info}
               </div>
-              <a className="brochure-link">View the solution brochure (PDF)</a>
+              
             </div>
             <div className="bottom-content flex column middle">
             </div>
