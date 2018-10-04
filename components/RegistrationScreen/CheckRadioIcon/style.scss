@@ -1,0 +1,21 @@
+@import '~tc-ui/src/styles/tc-includes';
+
+:global {
+  .CheckRadioIcon {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    position: absolute;
+    background-color: white;
+    display: inline-block;
+    position: absolute;
+    border: 1px solid #C0C0C0;
+    border-radius: 10px;
+
+    &.active {
+      background-color: white;
+      border: 6px solid $tc-dark-blue;
+    }
+  }
+}
+  

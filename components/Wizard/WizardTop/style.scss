@@ -1,0 +1,125 @@
+@import '~tc-ui/src/styles/tc-includes';
+@import '../screen-size.scss';
+
+:global {
+  .WizardTop {
+    background-color: rgba(163, 153, 144, 0.1);
+    height: 310px;
+    overflow: hidden;
+    position: relative;
+    display: none !important;
+
+    .shadow {
+      box-shadow: inset 0 80px 50px -40px rgba(0,0,0,0.8);
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
+
+    @include mobile-tablet {
+      display: inline !important;
+    }
+
+    @include mobile {
+      height: 270px;
+    }
+
+    .top-img {
+      object-fit: cover;
+      object-position: 0 0;
+      position: absolute !important;
+      width: 100%;
+      z-index: 0;
+      top: 0;
+      left: 0;
+    }
+
+    .top-logo {
+      z-index: 1;
+      margin-top: 20px;
+      margin-left: 20px;
+      top: 0;
+      left: 0;
+      position: absolute;
+
+      .title {
+        color: #85807C;
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 2.16px;
+        line-height: 14px;
+        text-align: center;
+      }
+
+      &.with-text {
+        display: inline;
+         
+        @include mobile {
+          display: none;
+        }
+      }
+
+      &.no-text {
+        display: none;
+
+        @include mobile {
+          display: inline;
+        }
+      }
+    }
+
+    .top-login-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+
+      .text {
+        color: #FFFFFF;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 30px;
+        margin-right: 10px;
+
+        b {
+          font-weight: bold;
+        }
+      }
+
+      .arrow {
+        padding: 10px 10px 15px 10px;
+        margin-top: -3px;
+        -webkit-transform: scaleY(-1);
+        transform: scaleY(-1);
+        cursor: pointer;
+      }
+
+      .avatar {
+        padding-top: 7px;
+        text-align: center;
+        background-color: #F1F0F0;
+        border-radius: 33px;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+      }
+
+      .tc-btn {
+        font-size: 13px;
+        font-weight: 500;
+        height: 30px;
+      }
+    }
+
+    .trusted-text {
+      color: #ACA199;
+      font-size: 12px;
+      font-weight: 900;
+      text-align: center;
+      height: 50px;
+      padding-top: 20px;
+    }
+  }
+}
+  

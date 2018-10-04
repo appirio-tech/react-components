@@ -1,0 +1,52 @@
+@import '~tc-ui/src/styles/tc-includes';
+@import '../Wizard/screen-size.scss';
+
+:global {
+  .WelcomeScreen {
+    .container {
+      width: 70%;
+
+      @include mobile {
+        width: 90%;
+      }
+
+      .title {
+        color: #1E1E1F;
+        font-size: 32px;
+        font-weight: 300;
+        line-height: 35px;
+        margin-top: 50px;
+
+        @include mobile {
+          font-size: 24px;
+        }
+      }
+
+      .sub-title {
+        color: #85807C;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 20px;
+        margin-top: 15px;
+        text-transform: uppercase;
+      }
+
+      .content {
+        color: #151516;
+        font-size: 15px;
+        font-weight: 400;
+        margin-top: 50px;
+        line-height: 25px;
+
+        b {
+          font-weight: bold;
+        }
+      }
+
+      .next-btn {
+        margin-top: 50px;
+      }
+    }
+  }
+}
+  
