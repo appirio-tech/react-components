@@ -44,7 +44,7 @@ class TextInput extends Component {
   isValidInput() {
     const value = this.props.getValue()
     const hasError = !this.props.isPristine() && !this.props.isValid()
-    return (!this.props.forceErrorMessage && value && !hasError)
+    return (!this.props.forceErrorMessage && !!value && !hasError)
   }
 
   render() {
