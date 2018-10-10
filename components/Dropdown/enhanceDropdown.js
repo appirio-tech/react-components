@@ -60,6 +60,7 @@ const enhanceDropdown = (CompositeComponent) => class extends Component {
 
     if (!isDropdown) {
       this.setState({ isOpen: false }, () => {
+        this.props.onToggle()
         this.refreshEventHandlers()
       })
     }
@@ -67,6 +68,7 @@ const enhanceDropdown = (CompositeComponent) => class extends Component {
 
   onClickOtherDropdown() {
     this.setState({ isOpen: false }, () => {
+      this.props.onToggle()
       this.refreshEventHandlers()
     })
   }
