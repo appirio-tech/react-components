@@ -28,7 +28,7 @@
       z-index:-1;
       &:checked + i:before {
         width: 35px;
-        background: $tc-dark-blue-90;
+        background: $tc-dark-blue-100;
       }
       &:checked + i:after {
         left: 18px;
