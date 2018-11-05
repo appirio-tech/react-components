@@ -63,7 +63,7 @@
   
     &:focus{
       background: $tc-white!important;
-      border-color: $tc-dark-blue-90!important;
+      border-color: $tc-dark-blue-100!important;
     }
   
     &.error{
@@ -71,7 +71,7 @@
       background: $tc-gray-neutral-light!important;
       &:focus{
         background: $tc-white!important;
-        // border-color: $tc-dark-blue-90!important;
+        // border-color: $tc-dark-blue-100!important;
       }
     }
   }
@@ -99,7 +99,7 @@
   
     &:focus{
       background: $tc-white!important;
-      border-color: $tc-dark-blue-90!important;
+      border-color: $tc-dark-blue-100!important;
     }
   
     &.error{
@@ -107,7 +107,7 @@
       border: 1px solid $tc-red-70!important;
       &:focus{
         background: $tc-white!important;
-        // border-color: $tc-dark-blue-90!important;
+        // border-color: $tc-dark-blue-100!important;
       }
     }
   }
@@ -159,7 +159,7 @@
           }
         }
         input[type="radio"]:checked + label:after {
-          background: $tc-dark-blue-90;
+          background: $tc-dark-blue-100;
           border-radius: 50%;
           content: "";
           display: inline-block;
@@ -260,7 +260,7 @@
     }
     .check-mark {
       text-align: center;
-      background: $tc-dark-blue-90;
+      background: $tc-dark-blue-100;
       border-radius: 2px;
       display: none;
       height: 15px;
@@ -284,7 +284,7 @@
     }
   
     .rc-slider-handle {
-      border-color: $tc-dark-blue-90;
+      border-color: $tc-dark-blue-100;
       margin-left: -4px;
       bottom: -2px;
       display: none;
@@ -292,7 +292,7 @@
   
     &:not(.null-value) .rc-slider-dot-active {
       border: none;
-      background: $tc-dark-blue-90 url('./images/check-white.svg') no-repeat 6px 7px;
+      background: $tc-dark-blue-100 url('./images/check-white.svg') no-repeat 6px 7px;
       // bottom: -2px;
       // margin-left: -5px;
     }
