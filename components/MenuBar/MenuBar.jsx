@@ -54,7 +54,7 @@ export default class MenuBar extends Component {
       const linkTarget = item.target || '_self'
       const linkContent = this.state.mobile ? <img src={item.img} /> : item.text
 
-      return forReactRouter ?
+      return forReactRouter && !item.absolute ?
         this.renderLinkDom(item, linkContent, itemClass, linkTarget)
         : this.renderAnchorDom(item, linkContent, itemClass, linkTarget)
     }
