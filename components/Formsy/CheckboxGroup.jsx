@@ -21,7 +21,7 @@ class CheckboxGroup extends Component {
   }
 
   render() {
-    const { label, name, options } = this.props
+    const { label, name, options, layout } = this.props
     const hasError = !this.props.isPristine() && !this.props.isValid()
     const disabled = this.props.isFormDisabled() || this.props.disabled
     const errorMessage = this.props.getErrorMessage() || this.props.validationError
@@ -51,9 +51,12 @@ class CheckboxGroup extends Component {
         </div>
       )
     }
-
+    const chkGrpClass = cn('checkbox-group', {
+      horizontal: layout === 'horizontal',
+      vertical: layout === 'vertical'
+    })
     return (
-      <div>
+      <div className={chkGrpClass}>
         <label className="checkbox-group-label">{label}</label>
         <div className="checkbox-group-options">{options.map(renderOption)}</div>
       { hasError ? (<p className="error-message">{errorMessage}</p>) : null}

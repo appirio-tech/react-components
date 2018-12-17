@@ -111,6 +111,16 @@
       }
     }
   }
+
+  .checkbox-group {
+    display: flex;
+  }
+  .checkbox-group.horizontal .checkbox-group-options {
+    flex-direction: row;
+  }
+  .checkbox-group.vertical .checkbox-group-options {
+    flex-direction: column;
+  }
   
   .checkbox-group-item {
     display: inline-block;
