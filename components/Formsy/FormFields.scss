@@ -114,6 +114,7 @@
 
   .checkbox-group .checkbox-group-options {
     display: flex;
+    flex-direction: column;
   }
   .checkbox-group.horizontal .checkbox-group-options {
     flex-direction: row;
