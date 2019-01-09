@@ -5,7 +5,7 @@ require('./style.scss')
 import { ViewTypes } from '../Wizard'
 import ConnectLogo from '../../Icons/ConnectLogoWhite'
 
-const WizardLeft = ({type}) => {
+const WizardLeft = ({type, vm}) => {
   const step1ContainerClass = cn({
     selected: (type === ViewTypes.welcome) || (type === ViewTypes.register) || (type === ViewTypes.pin),
     'bottom-line': true, step1: true,
@@ -26,14 +26,14 @@ const WizardLeft = ({type}) => {
     flex: true, middle: true, center: true
   })
   return (
-    <div className="WizardLeft">
+    <div className={'WizardLeft ' + (vm.hideLeftProgress ? 'hide-left-progress' : '')}>
       <div className="logo flex column middle center">
         <ConnectLogo fill="#47474F" wrapperClass="top-logo with-text" title="CONNECT" />
       </div>
-      <div className="title">
+      {!vm.hideLeftProgress && (<div className="title">
         CREATE A NEW PROJECT
-      </div>
-      <div className="step-container">
+      </div>)}
+      {!vm.hideLeftProgress && (<div className="step-container">
         <div className={step1ContainerClass}>
           <div className="number">1</div>
           <div className="name">Create account</div>
@@ -50,7 +50,7 @@ const WizardLeft = ({type}) => {
           <div className="number">4</div>
           <div className="name">Project submitted</div>
         </div>
-      </div>
+      </div>)}
       <div className="bottom">
       © 2018 Topcoder. All Rights Reserved
       </div>

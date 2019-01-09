@@ -2,9 +2,9 @@ import React from 'react'
 
 require('./style.scss')
 
-const WizardMiddle = ({ children }) => {
+const WizardMiddle = ({ children, vm }) => {
   return (
-    <div className="WizardMiddle">
+    <div className={'WizardMiddle ' + (vm.hideLeftProgress ? 'hide-left-progress' : '')}>
       {children}
     </div>
   )

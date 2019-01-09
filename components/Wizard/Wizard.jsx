@@ -32,8 +32,8 @@ const Wizard = ({ type, vm, children, wrapperClass }) => {
   return (
     <div className={wrapperClasses}>
       <WizardTop type={type} vm={vm} />
-      <WizardLeft type={type} />
-      <WizardMiddle>
+      <WizardLeft type={type} vm={vm} />
+      <WizardMiddle vm={vm} >
         {(type === ViewTypes.register) && (<RegistrationScreen vm={vm} />)}
         {(type === ViewTypes.pin) && (<PinVerificationScreen vm={vm} />)}
         {(type === ViewTypes.welcome) && (<WelcomeScreen vm={vm} />)}
