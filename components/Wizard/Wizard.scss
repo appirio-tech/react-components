@@ -6,7 +6,7 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: stretch;
+    justify-content: center;
     flex-wrap: wrap;
     font-family: "Roboto", Arial, Helvetica, sans-serif;
     min-height: 100vh;
@@ -41,6 +41,10 @@
 
       @include tablet {
         width : 23%;
+
+        &.hide-left-progress {
+          display: none;
+        }
       }
 
       @media (max-width: 645px) {
@@ -60,10 +64,18 @@
 
       @include tablet {
         width : 77%;
+        
+        &.hide-left-progress {
+          width : 100%;
+        }
       }
 
       @media (max-width: 645px) {
         width: 60%;
+        
+        &.hide-left-progress {
+          width : 100%;
+        }
       }
 
       @include mobile {
