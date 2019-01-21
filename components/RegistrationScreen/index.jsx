@@ -106,6 +106,9 @@ class RegistrationScreen extends Component {
 
   render() {
     const {vm} = this.props
+    let preFillName = vm.firstName ? vm.firstName : null
+    preFillName = vm.lastName ? `${preFillName} ${vm.lastName}` : preFillName
+    const preFillEmail = vm.email ? vm.email : null
     return (
       <div className="RegistrationScreen flex column middle center">
         <div className="container flex column middle center">
@@ -121,12 +124,15 @@ class RegistrationScreen extends Component {
               validationError="Please enter name"
               required
               showCheckMark
+              value={preFillName}
             />
             <TextInput
               wrapperClass={'input-container'}
               label="Business email"
               type="email"
               name="email"
+              value={preFillEmail}
+              disabled={!!preFillEmail}
               validations="isEmail"
               validationError="Invalid business email"
               required

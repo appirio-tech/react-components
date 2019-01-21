@@ -102,6 +102,12 @@ class LoginScreen extends Component {
             />
             <a href={vm.forgotPasswordUrl} className="bottom-link">Forgot your password?</a>
             <button type="submit" className="tc-btn tc-btn-sm tc-btn-primary flex middle center" disabled={vm.loading || !this.state.canSubmit}>Log in</button>
+
+            { vm.ssoLoginUrl && (
+              <a className="sso-link" href={vm.ssoLoginUrl}>
+                <span>Single Sign On</span>
+              </a>)
+            }
           </Formsy.Form>
           <p className="copyright">© Topcoder 2018</p>
         </div>
