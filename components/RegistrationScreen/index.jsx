@@ -202,7 +202,7 @@ class RegistrationScreen extends Component {
               validator={vm.usernameIsFree}
               showCheckMark
             />
-            <PasswordInput
+            { !vm.ssoUser && <PasswordInput
               wrapperClass={'input-container'}
               label="Create a password (8–64 characters, A–Z, 0–9, . _ - ! ? allowed)"
               name="password"
@@ -221,6 +221,7 @@ class RegistrationScreen extends Component {
               required
               showCheckMark
             />
+            }
             <Checkbox
               wrapperClass={'input-container'}
               label="I agree to receive other communications from Topcoder."
