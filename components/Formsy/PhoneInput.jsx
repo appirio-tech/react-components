@@ -105,7 +105,7 @@ class PhoneInput extends Component {
                 {
                   this.props.listCountry.map((country, i) => {
                     /* eslint-disable react/jsx-no-bind */
-                    return <li className={(this.state.currentCountry.code === country.code) ? 'selected' : ''} onClick={() => this.choseCountry(country)} key={i}><a href="javascript:;">{country.name}</a></li>
+                    return <li tabIndex="-1" className={(this.state.currentCountry.code === country.code) ? 'selected' : ''} onClick={() => this.choseCountry(country)} key={i}><a href="javascript:;">{country.name}</a></li>
                   })
                 }
               </ul>

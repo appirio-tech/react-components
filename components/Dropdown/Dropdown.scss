@@ -37,6 +37,8 @@
         font-size: 12px;
         display: block;
         line-height: 26px;
+        overflow: hidden;
+        white-space: pre-line;
       }
     }
   }
@@ -86,6 +88,10 @@
       top: 0;
       left: 0;
       height: 100%;
+
+      &:focus {
+        outline: 5px auto -webkit-focus-ring-color;
+      }
     }
   }
   

@@ -123,7 +123,7 @@ class Dropdown  extends React.Component {
     )
     return (
       <div className={ddClasses} onClick={noAutoclose ? () => { } : handleClick}>
-        {handleKeyboardNavigation && (<a onKeyDown={onKeydown} className="handle-keyboard" href="javascript:;"></a>)}
+        {handleKeyboardNavigation && (<a tabIndex="0" onKeyDown={onKeydown} className="handle-keyboard" href="javascript:;"></a>)}
         {
           childrenWithProps.map((child, index) => {
             if (child.props.className.indexOf('dropdown-menu-header') > -1)
