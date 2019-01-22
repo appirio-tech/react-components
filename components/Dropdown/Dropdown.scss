@@ -56,8 +56,10 @@
           @include ellipsis;
         }
   
+        li:focus,
         li:hover {
           background-color: $tc-gray-neutral-dark;
+          outline: none;
         }
       }
     }
@@ -74,6 +76,17 @@
     transform: translateY(-50%) rotate(45deg);
     border-bottom: 2px solid $tc-gray-20;
     border-right: 2px solid $tc-gray-20;
+  }
+
+  .dropdown-wrap {
+    .handle-keyboard {
+      position: absolute;
+      width: 100%;
+      max-height: 40px;
+      top: 0;
+      left: 0;
+      height: 100%;
+    }
   }
   
   .Dropdown.hide {
@@ -155,8 +168,10 @@
           padding: 0 20px;
           @include ellipsis;
         }
+        li:focus,
         li:hover {
           background-color: $tc-gray-neutral-dark;
+          outline: none;
         }
       }
     }
