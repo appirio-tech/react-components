@@ -106,6 +106,9 @@ class RegistrationScreen extends Component {
 
   render() {
     const {vm} = this.props
+    let preFillName = vm.firstName ? vm.firstName : null
+    preFillName = vm.lastName ? `${preFillName} ${vm.lastName}` : preFillName
+    const preFillEmail = vm.email ? vm.email : null
     return (
       <div className="RegistrationScreen flex column middle center">
         <div className="container flex column middle center">
@@ -121,12 +124,15 @@ class RegistrationScreen extends Component {
               validationError="Please enter name"
               required
               showCheckMark
+              value={preFillName}
             />
             <TextInput
               wrapperClass={'input-container'}
               label="Business email"
               type="email"
               name="email"
+              value={preFillEmail}
+              disabled={!!preFillEmail}
               validations="isEmail"
               validationError="Invalid business email"
               required
@@ -196,7 +202,7 @@ class RegistrationScreen extends Component {
               validator={vm.usernameIsFree}
               showCheckMark
             />
-            <PasswordInput
+            { !vm.ssoUser && <PasswordInput
               wrapperClass={'input-container'}
               label="Create a password (8–64 characters, A–Z, 0–9, . _ - ! ? allowed)"
               name="password"
@@ -215,6 +221,7 @@ class RegistrationScreen extends Component {
               required
               showCheckMark
             />
+            }
             <Checkbox
               wrapperClass={'input-container'}
               label="I agree to receive other communications from Topcoder."
