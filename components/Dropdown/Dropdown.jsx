@@ -47,23 +47,37 @@ class Dropdown  extends React.Component {
       }
       listChild[childSelectionIndex].focus()
     }
+    let searchKey = ''
+    let timer
     const focusOnCharacter = (value) => {
+      searchKey += value
+      if (timer) {
+        clearTimeout(timer)
+      }
+      timer = setTimeout(() => { searchKey = '' }, 500)
       const listChild = this.listRef.getElementsByTagName('li')
       if (listChild.length === 0) {
         return
       }
       const length = listChild.length
       for (let i = 0; i < length; i++) {
-        const textContent = listChild[i].textContent
+        let textContent = listChild[i].textContent
         if (textContent && textContent.length > 0) {
-          const firstChar = textContent.charAt(0)
-          if (firstChar === value || firstChar === value.toLowerCase()) {
+          textContent = textContent.toLowerCase()
+          const search = searchKey.toLowerCase()
+          if (textContent.startsWith(search)) {
             listChild[i].focus()
             return true
           }
         }
       }
       return false
+    }
+    const onFocus = () => {
+      this.containerRef.classList.add('focused')
+    }
+    const onBlur = () => {
+      this.containerRef.classList.remove('focused')
     }
     const onKeydown = (e) => {
       if (!handleKeyboardNavigation) {
@@ -100,12 +114,13 @@ class Dropdown  extends React.Component {
           focusOnNextChild()
         } else if (keyCode === 38) {
           focusOnPreviousChild()
-        } else if (keyCode === 13) {
+        } else if (keyCode === 13) { // enter
           const listChild = this.listRef.getElementsByTagName('li')
           if (listChild.length === 0) {
             return
           }
           listChild[childSelectionIndex].click()
+          this.handleKeyboardRef.focus()
         }
         e.preventDefault()
       } else {
@@ -117,13 +132,15 @@ class Dropdown  extends React.Component {
     }
   
     const setListRef = (c) => this.listRef = c
+    const setContainerRef = (c) => this.containerRef = c
+    const setHandleKeyboardRef = (c) => this.handleKeyboardRef = c
 
     const childrenWithProps = React.Children.map(children, child =>
       React.cloneElement(child, {onKeyDown: onChildKeydown})
     )
     return (
-      <div className={ddClasses} onClick={noAutoclose ? () => { } : handleClick}>
-        {handleKeyboardNavigation && (<a tabIndex="0" onKeyDown={onKeydown} className="handle-keyboard" href="javascript:;"></a>)}
+      <div ref={setContainerRef} className={ddClasses} onClick={noAutoclose ? () => { } : handleClick}>
+        {handleKeyboardNavigation && (<a ref={setHandleKeyboardRef} tabIndex="0" onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeydown} className="handle-keyboard" href="javascript:;"></a>)}
         {
           childrenWithProps.map((child, index) => {
             if (child.props.className.indexOf('dropdown-menu-header') > -1)

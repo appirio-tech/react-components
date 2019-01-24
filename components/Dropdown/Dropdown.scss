@@ -37,8 +37,6 @@
         font-size: 12px;
         display: block;
         line-height: 26px;
-        overflow: hidden;
-        white-space: pre-line;
       }
     }
   }
@@ -81,6 +79,10 @@
   }
 
   .dropdown-wrap {
+    &.focused {
+      box-shadow: 0 0 2px 0 rgba(6, 129, 255, 0.7);
+      border: 1px solid $tc-dark-blue-100!important;
+    }
     .handle-keyboard {
       position: absolute;
       width: 100%;
@@ -90,7 +92,7 @@
       height: 100%;
 
       &:focus {
-        outline: 5px auto -webkit-focus-ring-color;
+        outline: none;
       }
     }
   }
