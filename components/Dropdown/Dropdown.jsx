@@ -66,6 +66,7 @@ class Dropdown  extends React.Component {
           textContent = textContent.toLowerCase()
           const search = searchKey.toLowerCase()
           if (textContent.startsWith(search)) {
+            childSelectionIndex = i
             listChild[i].focus()
             return true
           }
