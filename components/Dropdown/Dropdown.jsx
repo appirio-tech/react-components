@@ -31,10 +31,11 @@ class Dropdown  extends React.Component {
         return
       }
       childSelectionIndex += 1
-      if (childSelectionIndex > listChild.length) {
-        childSelectionIndex = 0
+      if (childSelectionIndex >= listChild.length) {
+        childSelectionIndex -= 1
+      } else {
+        listChild[childSelectionIndex].focus()
       }
-      listChild[childSelectionIndex].focus()
     }
     const focusOnPreviousChild = () => {
       const listChild = this.listRef.getElementsByTagName('li')
@@ -43,9 +44,10 @@ class Dropdown  extends React.Component {
       }
       childSelectionIndex -= 1
       if (childSelectionIndex < 0) {
-        childSelectionIndex = listChild.length - 1
+        childSelectionIndex = 0
+      } else {
+        listChild[childSelectionIndex].focus()
       }
-      listChild[childSelectionIndex].focus()
     }
     let searchKey = ''
     let timer
