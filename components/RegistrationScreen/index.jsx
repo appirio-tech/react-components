@@ -97,8 +97,8 @@ class RegistrationScreen extends Component {
     vm.password = form.password
     vm.email = form.email
     vm.country = country
-    vm.firstName = fullName.split(' ').slice(0, -1).join(' ')
-    vm.lastName = fullName.split(' ').slice(-1).join(' ')
+    vm.firstName = fullName.trim().split(' ').slice(0, -1).join(' ')
+    vm.lastName = fullName.trim().split(' ').slice(-1).join(' ')
     
     vm.submit()
 
