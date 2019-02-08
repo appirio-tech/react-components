@@ -13,6 +13,8 @@ require('./FormFields.scss')
 
 const RELAXED_URL_REGEX = /^(http(s?):\/\/)?(www\.)?[a-zA-Z0-9\.\-\_]+(\.[a-zA-Z]{2,15})+(\:[0-9]{2,5})?(\/[a-zA-Z0-9\_\-\s\.\/\?\%\#\&\=]*)?$/
 
+const VALID_NAME_REGEX = /.*\s+.+/i
+
 // validations
 Formsy.addValidationRule('isRequired', (values, value, array) => { // eslint-disable-line no-unused-vars
   return value && ( _.isArray(value) ? value.length > 0 : value.trim().length > 0) ? true : false // eslint-disable-line no-unneeded-ternary
@@ -20,6 +22,10 @@ Formsy.addValidationRule('isRequired', (values, value, array) => { // eslint-dis
 
 Formsy.addValidationRule('isRelaxedUrl', (values, value, array) => { // eslint-disable-line no-unused-vars
   return !value || RELAXED_URL_REGEX.test(value) ? true : false // eslint-disable-line no-unneeded-ternary
+})
+
+Formsy.addValidationRule('isValidName', (values, value, array) => { // eslint-disable-line no-unused-vars
+  return value && VALID_NAME_REGEX.test(value.trim()) ? true : false // eslint-disable-line no-unneeded-ternary
 })
 
 export default {

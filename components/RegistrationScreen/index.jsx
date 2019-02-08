@@ -121,8 +121,9 @@ class RegistrationScreen extends Component {
               label="First and last name"
               type="text"
               name="name"
-              validationError="Please enter name"
+              validationError="Please enter a valid name"
               required
+              isValidName
               showCheckMark
               value={preFillName}
             />
