@@ -123,7 +123,7 @@ class RegistrationScreen extends Component {
               name="name"
               validationError="Please enter a valid name"
               required
-              isValidName
+              validations="isValidName"
               showCheckMark
               value={preFillName}
             />
