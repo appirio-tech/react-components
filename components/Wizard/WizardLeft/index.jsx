@@ -44,7 +44,7 @@ const WizardLeft = ({type, vm}) => {
         </div>
         <div className={step3ContainerClass}>
           <div className="number">3</div>
-          <div className="name">Defined scope</div>
+          <div className="name">Define scope</div>
         </div>
         <div className={step4ContainerClass}>
           <div className="number">4</div>
