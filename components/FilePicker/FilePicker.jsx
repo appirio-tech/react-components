@@ -26,7 +26,8 @@ class FilePicker extends React.Component {
         const filepickerProgress = this.refs.filepickerProgress
 
         const apikey = this.props.apiKey
-        const clientOptions = this.props.options.cname ? {cname: this.props.options.cname} : {}
+        const clientOptions = {}
+        if (this.props.options.cname) { clientOptions.cname = this.props.options.cname }
         const client = filepicker.init(apikey, clientOptions)
 
         const opts = {}
@@ -73,6 +74,7 @@ class FilePicker extends React.Component {
                 this.props.onSuccess(this.props.options.multiple ? files : files[0])
             }
             overlayOpts.storeTo = opts.storeTo
+            overlayOpts.fromSources = this.props.options.fromSources
             client.picker(overlayOpts).open()
         }
 
