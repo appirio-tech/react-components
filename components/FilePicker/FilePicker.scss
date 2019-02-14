@@ -52,6 +52,11 @@
       width: 0;
       background-color: $tc-dark-blue-70;
     }
+
+    .fsp-drop-pane__container {
+      background-color: transparent;
+      border-style: none;
+    }
   }
 }
   
