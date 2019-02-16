@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { HOC as hoc } from 'formsy-react'
 import cn from 'classnames'
+import { find } from "lodash";
+import { numberWithCommas } from './format'
 
 class RadioGroup extends Component {
 
@@ -15,16 +17,28 @@ class RadioGroup extends Component {
     this.props.onChange(this.props.name, value)
   }
 
+  getSelectedOption() {
+    const {options = [], getValue} = this.props;
+    const value = getValue()
+    return find(options, o => value === o.value)
+  }
+
   render() {
     const { label, name, wrapperClass, options } = this.props
     const hasError = !this.props.isPristine() && !this.props.isValid()
     const disabled = this.props.isFormDisabled() || this.props.disabled
     const errorMessage = this.props.getErrorMessage() || this.props.validationError
+    const selectedOption = this.getSelectedOption()
+    const hasPrice = find(options, o => o.quoteUp)
 
     const renderOption = (radio, key) => {
-      const checked = (this.props.getValue() === radio.value)
+      const relativePrice = (selectedOption, radio) => {
+        const price = (radio.quoteUp || 0) - (selectedOption.quoteUp || 0)
+        return (price < 0 ? '-' : '+') + ' $' + numberWithCommas(Math.abs(price))
+      }
+      const checked = (selectedOption && selectedOption.value === radio.value)
       const disabled = this.props.isFormDisabled() || radio.disabled || this.props.disabled
-      const rClass = cn('radio', { disabled })
+      const rClass = cn('radio', { disabled, selected: checked })
       const id = name+'-opt-'+key
       const setRef = (c) => this['element-' + key] = c
       return (
@@ -39,6 +53,15 @@ class RadioGroup extends Component {
             disabled={disabled}
           />
           <label htmlFor={id}>{radio.label}</label>
+          {
+            hasPrice &&
+            !checked &&
+            (radio.quoteUp || selectedOption) &&
+            <div className="radio-option-price"> {selectedOption ? relativePrice(selectedOption, radio) : `$${numberWithCommas(radio.quoteUp)}`} </div>
+          }
+          {
+            radio.description && checked && <div className="radio-option-description"> {radio.description} </div>
+          }
         </div>
       )
     }
