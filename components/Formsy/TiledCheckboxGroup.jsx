@@ -15,13 +15,15 @@ class TiledCheckboxGroup extends Component {
 
   onChange(value) {
     const index = this.state.curValue.indexOf(value)
+    let newValue = [...this.state.curValue]
     if (index > -1) {
-      this.state.curValue.splice(index, 1)
+      newValue.splice(index, 1)
     } else {
-      this.state.curValue.push(value)
+      newValue.push(value)
     }
-    this.props.setValue(this.state.curValue)
-    this.props.onChange(this.props.name, this.state.curValue)
+    this.setState({ curValue: newValue })
+    this.props.setValue(newValue)
+    this.props.onChange(this.props.name, newValue)
   }
 
   getCheckMarkIconActive() {
