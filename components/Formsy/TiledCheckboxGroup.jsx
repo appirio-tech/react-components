@@ -10,18 +10,17 @@ class TiledCheckboxGroup extends Component {
     super(props)
     this.onChange = this.onChange.bind(this)
     this.getCheckMarkIconActive = this.getCheckMarkIconActive.bind(this)
-    this.state = { curValue: props.getValue() || [] }
   }
 
   onChange(value) {
-    const index = this.state.curValue.indexOf(value)
-    let newValue = [...this.state.curValue]
+    const curValue = this.props.getValue() || []
+    const index = curValue.indexOf(value)
+    let newValue = [...curValue]
     if (index > -1) {
       newValue.splice(index, 1)
     } else {
       newValue.push(value)
     }
-    this.setState({ curValue: newValue })
     this.props.setValue(newValue)
     this.props.onChange(this.props.name, newValue)
   }
@@ -35,12 +34,13 @@ class TiledCheckboxGroup extends Component {
 
   render() {
     const { wrapperClass, options, theme, tabable } = this.props
+    const curValue = this.props.getValue() || []
     const hasError = !this.props.isPristine() && !this.props.isValid()
     const disabled = this.props.isFormDisabled() || this.props.disabled
     const errorMessage = this.props.getErrorMessage() || this.props.validationError
 
     const renderOption = (opt, idx) => {
-      const checked = this.state.curValue.indexOf(opt.value) > -1
+      const checked = curValue.indexOf(opt.value) > -1
       const itemClassnames = classNames('tiled-group-item', theme, {
         active: checked
       }, {
