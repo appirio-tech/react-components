@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import Formsy from 'formsy-react'
 import TextInput from '../Formsy/TextInput'
 import PhoneInput from '../Formsy/PhoneInput'
@@ -52,18 +52,18 @@ class RegistrationScreen extends Component {
   }
 
   reRender() {
-    this.setState({update: true})
+    this.setState({ update: true })
   }
 
-  onChangeCountry({country}) {
-    const {vm} = this.props
+  onChangeCountry({ country }) {
+    const { vm } = this.props
 
     if (!country || !country.code) {
       vm.phoneErrorMessage = 'Please enter a valid phone number.'
       this.reRender()
     } else {
       vm.phoneErrorMessage = null
-      this.setState({update: true, country})
+      this.setState({ update: true, country })
     }
   }
 
@@ -80,14 +80,14 @@ class RegistrationScreen extends Component {
   }
 
   isValidForm() {
-    const {vm} = this.props
-    const {canSubmit} = this.state
+    const { vm } = this.props
+    const { canSubmit } = this.state
     return !vm.loading && canSubmit && !vm.usernameErrorMessage && !vm.emailErrorMessage && !vm.phoneErrorMessage && this.state.country
   }
 
   submit(form) {
-    const {vm} = this.props
-    const {country} = this.state
+    const { vm } = this.props
+    const { country } = this.state
     const fullName = form.name
     vm.phone = form.phone
     vm.title = form.title
@@ -99,13 +99,13 @@ class RegistrationScreen extends Component {
     vm.country = country
     vm.firstName = fullName.trim().split(' ').slice(0, -1).join(' ')
     vm.lastName = fullName.trim().split(' ').slice(-1).join(' ')
-    
+
     vm.submit()
 
   }
 
   render() {
-    const {vm} = this.props
+    const { vm } = this.props
     let preFillName = vm.firstName ? vm.firstName : null
     preFillName = vm.lastName ? `${preFillName} ${vm.lastName}` : preFillName
     const preFillEmail = vm.email ? vm.email : null
@@ -114,7 +114,7 @@ class RegistrationScreen extends Component {
         <div className="container flex column middle center">
           <div className="title">Let's start with introductions</div>
           <div className="sub-title">First we need to know you a bit better</div>
-            {vm.errorMessage && (<div className="server-error-message">{vm.errorMessage}</div>)}
+          {vm.errorMessage && (<div className="server-error-message">{vm.errorMessage}</div>)}
           <Formsy.Form onValidSubmit={this.submit} onValid={this.enableButton} onInvalid={this.disableButton} className="form flex column middle center">
             <TextInput
               wrapperClass={'input-container'}
@@ -203,7 +203,7 @@ class RegistrationScreen extends Component {
               validator={vm.usernameIsFree}
               showCheckMark
             />
-            { !vm.ssoUser && <PasswordInput
+            {!vm.ssoUser && <PasswordInput
               wrapperClass={'input-container'}
               label="Create a password (8–64 characters, A–Z, 0–9, . _ - ! ? allowed)"
               name="password"
@@ -227,10 +227,9 @@ class RegistrationScreen extends Component {
               wrapperClass={'input-container'}
               label="I agree to receive other communications from Topcoder."
               name="agreeTerm"
-              required
             />
             <div className="space" />
-            <button type="submit" className="tc-btn tc-btn-sm tc-btn-primary flex middle center"  disabled={vm.loading || !this.state.canSubmit || !this.state.country}>Continue</button>
+            <button type="submit" className="tc-btn tc-btn-sm tc-btn-primary flex middle center" disabled={vm.loading || !this.state.canSubmit || !this.state.country}>Continue</button>
             <div className="by-clicking-continue">By clicking “Continue” you agree to our <a href={vm.termsUrl}>Terms</a> and <a href={vm.privacyUrl}>Privacy Policy</a>.
   We are never going to sell your data or send you spam messages. Your email is going to be used for communication purposes only.</div>
           </Formsy.Form>
