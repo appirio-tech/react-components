@@ -36,7 +36,7 @@ class PhoneInput extends Component {
     this.props.setValue(value)
     let currentCountry
     const asYouType = new AsYouType()
-    asYouType.input('+' + value)
+    asYouType.input(value[0] === '+' ? value : '+' + value)
     if (asYouType.country) {
       currentCountry = _.filter(this.props.listCountry, { alpha2: asYouType.country })[0]
       if (currentCountry) {
