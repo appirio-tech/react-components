@@ -62,7 +62,7 @@ class PhoneInput extends Component {
 
       if (asYouTypeTmp.countryCallingCode) {
         this.setState({ currentCountry: country })
-        this.changeValue({ target: { value: `${asYouTypeTmp.countryCallingCode}${phoneNumber}` } })
+        this.changeValue({ target: { value: `+${asYouTypeTmp.countryCallingCode}${phoneNumber}` } })
       }
     }
   }
