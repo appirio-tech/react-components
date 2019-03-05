@@ -15,10 +15,10 @@ class PhoneInput extends Component {
 
   constructor(props) {
     super(props)
-    
+
     this.changeValue = this.changeValue.bind(this)
     this.choseCountry = this.choseCountry.bind(this)
-    this.isValidInput= this.isValidInput.bind(this)
+    this.isValidInput = this.isValidInput.bind(this)
     this.state = {
       currentCountry: {},
       asYouType: {}
@@ -36,11 +36,11 @@ class PhoneInput extends Component {
     this.props.setValue(value)
     let currentCountry
     const asYouType = new AsYouType()
-    asYouType.input(value)
+    asYouType.input(value[0] === '+' ? value : '+' + value)
     if (asYouType.country) {
-      currentCountry = _.filter(this.props.listCountry, {alpha2: asYouType.country})[0]
+      currentCountry = _.filter(this.props.listCountry, { alpha2: asYouType.country })[0]
       if (currentCountry) {
-        this.setState({asYouType, currentCountry})
+        this.setState({ asYouType, currentCountry })
       }
     }
 
@@ -54,15 +54,15 @@ class PhoneInput extends Component {
   choseCountry(country) {
     if (country.code !== this.state.currentCountry.code) {
       const asYouTypeTmp = new AsYouType(country.alpha2)
-      const {asYouType} = this.state
+      const { asYouType } = this.state
       let phoneNumber = ''
       if (asYouType && asYouType.getNationalNumber) {
         phoneNumber = ` ${asYouType.getNationalNumber()}`
       }
 
       if (asYouTypeTmp.countryCallingCode) {
-        this.setState({currentCountry: country})
-        this.changeValue({target: { value: `+${asYouTypeTmp.countryCallingCode}${phoneNumber}` }})
+        this.setState({ currentCountry: country })
+        this.changeValue({ target: { value: `+${asYouTypeTmp.countryCallingCode}${phoneNumber}` } })
       }
     }
   }
@@ -76,7 +76,7 @@ class PhoneInput extends Component {
       [styles['readonly-wrapper']]: readonly,
       'phone-input-container': true
     })
-    const classes = classNames('tc-file-field__inputs', {error: hasError}, {empty: this.props.getValue() === ''})
+    const classes = classNames('tc-file-field__inputs', { error: hasError }, { empty: this.props.getValue() === '' })
     const errorMessage = this.props.getErrorMessage() || this.props.validationError
 
     return (
@@ -99,20 +99,20 @@ class PhoneInput extends Component {
             max={maxValue}
           />
           <Dropdown handleKeyboardNavigation pointerShadow>
-              <div className="dropdown-menu-header flex center middle">{this.state.currentCountry ? this.state.currentCountry.alpha3 : ''}
+            <div className="dropdown-menu-header flex center middle">{this.state.currentCountry ? this.state.currentCountry.alpha3 : ''}
               <IconDown width={20} height={12} fill="#fff" wrapperClass="arrow" /></div>
-              <ul className="dropdown-menu-list">
-                {
-                  this.props.listCountry.map((country, i) => {
-                    /* eslint-disable react/jsx-no-bind */
-                    return <li tabIndex="-1" className={(this.state.currentCountry.code === country.code) ? 'selected' : ''} onClick={() => this.choseCountry(country)} key={i}><a href="javascript:;">{country.name}</a></li>
-                  })
-                }
-              </ul>
-            </Dropdown>
+            <ul className="dropdown-menu-list">
+              {
+                this.props.listCountry.map((country, i) => {
+                  /* eslint-disable react/jsx-no-bind */
+                  return <li tabIndex="-1" className={(this.state.currentCountry.code === country.code) ? 'selected' : ''} onClick={() => this.choseCountry(country)} key={i}><a href="javascript:;">{country.name}</a></li>
+                })
+              }
+            </ul>
+          </Dropdown>
         </div>
         {this.isValidInput() && showCheckMark && (
-          <IconUICheckSimple wrapperClass="check-success-icon" width={10} height={10} fill="#5CC900"/>
+          <IconUICheckSimple wrapperClass="check-success-icon" width={10} height={10} fill="#5CC900" />
         )}
         {readonly && (
           <div styleName="readonly-value">
@@ -121,14 +121,14 @@ class PhoneInput extends Component {
           </div>
         )}
 
-        { hasError ? (<p className="error-message">{errorMessage}</p>) : (this.props.forceErrorMessage && (<p className="error-message">{this.props.forceErrorMessage}</p>))}
+        {hasError ? (<p className="error-message">{errorMessage}</p>) : (this.props.forceErrorMessage && (<p className="error-message">{this.props.forceErrorMessage}</p>))}
       </div>
     )
   }
 }
 
 PhoneInput.defaultProps = {
-  onChange: () => {},
+  onChange: () => { },
   forceErrorMessage: null,
   listCountry: [],
   showCheckMark: false
