@@ -225,7 +225,7 @@ class RegistrationScreen extends Component {
             }
             <Checkbox
               wrapperClass={'input-container'}
-              label="I agree to receive other communications from Topcoder."
+              label="I agree to receive marketing communications from Topcoder."
               name="agreeTerm"
             />
             <div className="space" />
