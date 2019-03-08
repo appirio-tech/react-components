@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { HOC as hoc } from 'formsy-react'
 import cn from 'classnames'
+import { numberWithCommas } from './format'
 
 class CheckboxGroup extends Component {
 
@@ -21,7 +22,7 @@ class CheckboxGroup extends Component {
   }
 
   render() {
-    const { label, name, options, layout } = this.props
+    const { label, name, options, layout, wrapperClass } = this.props
     const hasError = !this.props.isPristine() && !this.props.isValid()
     const disabled = this.props.isFormDisabled() || this.props.disabled
     const errorMessage = this.props.getErrorMessage() || this.props.validationError
@@ -30,7 +31,7 @@ class CheckboxGroup extends Component {
       const curValue = this.props.getValue() || []
       const checked = curValue.indexOf(cb.value) !== -1
       const disabled = this.props.isFormDisabled() || cb.disabled || this.props.disabled
-      const rClass = cn('checkbox-group-item', { disabled })
+      const rClass = cn('checkbox-group-item', { disabled, selected: checked })
       const id = name+'-opt-'+key
       const setRef = (c) => this['element-' + key] = c
       return (
@@ -48,10 +49,16 @@ class CheckboxGroup extends Component {
             <label htmlFor={id}/>
           </div>
           <label className="tc-checkbox-label" htmlFor={id}>{cb.label}</label>
+          {
+            cb.quoteUp && !checked && <div className="checkbox-option-price"> {`+ $${numberWithCommas(cb.quoteUp)}`} </div>
+          }
+          {
+            cb.description && checked && <div className="checkbox-option-description"> {cb.description} </div>
+          }
         </div>
       )
     }
-    const chkGrpClass = cn('checkbox-group', {
+    const chkGrpClass = cn('checkbox-group', wrapperClass, {
       horizontal: layout === 'horizontal',
       vertical: layout === 'vertical'
     })

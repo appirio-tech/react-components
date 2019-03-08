@@ -8,6 +8,8 @@ import RadioGroup from './RadioGroup'
 import CheckboxGroup from './CheckboxGroup'
 import SliderRadioGroup from './SliderRadioGroup'
 import TiledRadioGroup from './TiledRadioGroup'
+import TiledCheckboxInput from './TiledCheckboxInput'
+import TiledCheckboxGroup from './TiledCheckboxGroup'
 
 require('./FormFields.scss')
 
@@ -37,6 +39,8 @@ export default {
     Checkbox,
     CheckboxGroup,
     SliderRadioGroup,
-    TiledRadioGroup
+    TiledRadioGroup,
+    TiledCheckboxInput,
+    TiledCheckboxGroup
   }
 }
