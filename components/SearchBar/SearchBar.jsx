@@ -15,12 +15,14 @@ class SearchBar extends Component {
     this.state = {
       searchState: initialTerm.length > 0 ? 'filled' : 'empty',
       suggestions: [],
-      searchValue: initialTerm
+      searchValue: initialTerm,
+      finalTerm: initialTerm
     }
     this.onFocus = this.onFocus.bind(this)
     this.onChange = this.onChange.bind(this)
     this.onKeyUp = this.onKeyUp.bind(this)
     this.clearSearch = this.clearSearch.bind(this)
+    this.handleClick = this.handleClick.bind(this)
     this.search = this.search.bind(this)
     this.handleSuggestionSelect = this.handleSuggestionSelect.bind(this)
     this.handleOutsideClick = this.handleOutsideClick.bind(this)
@@ -37,6 +39,13 @@ class SearchBar extends Component {
 
   componentWillUnmount() {
     window.removeEventListener('click', this.handleOutsideClick)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const searchVal = this.getQueryStringValue(nextProps.searchTermKey)
+    if (searchVal !== this.state.searchValue) {
+      this.setState({ searchState: 'filled', searchValue: searchVal })
+    }
   }
 
   handleOutsideClick(evt) {
@@ -56,13 +65,21 @@ class SearchBar extends Component {
       if(this.state.searchValue) {
         this.setState({ searchState: 'filled' })
       } else {
-        this.setState({ searchState: 'empty' })
+        if (this.state.finalTerm && this.state.finalTerm.trim().length > 0) {
+          this.setState({ searchState: 'filled', searchValue: this.state.finalTerm })
+        } else {
+          this.setState({ searchState: 'empty' })
+        }
       }
     }
   }
 
   onFocus() {
     this.setState({ searchState: 'focused' })
+  }
+
+  blur() {
+    this.refs.searchValue.blur()
   }
 
   handleSuggestionsUpdate(requestNo, data) {
@@ -99,8 +116,8 @@ class SearchBar extends Component {
   }
 
   clearSearch() {
-    this.refs.searchValue.value = null
-    this.setState({ searchValue: this.refs.searchValue.value })
+    this.refs.searchValue.value = ''
+    this.setState({ searchValue: this.refs.searchValue.value, finalTerm: '' })
     this.setState({ searchState: 'empty' })
   }
 
@@ -110,8 +127,9 @@ class SearchBar extends Component {
     evt.preventDefault()
     // if return is pressed
     if (eventKey === 13) {
-      this.setState({ searchState: 'filled' }, function() {
+      this.setState({ searchState: 'filled', finalTerm: this.state.searchValue }, function() {
         this.search()
+        this.blur()
       })
     } else if (eventKey === 39) { // right arrow key is pressed
       const suggestion = this.state.suggestions[0]
@@ -155,9 +173,17 @@ class SearchBar extends Component {
   }
 
   search() {
-    const searchTerm = this.state.searchValue ? this.state.searchValue.trim() : ''
+    const searchTerm = this.state.finalTerm ? this.state.finalTerm.trim() : ''
     if(searchTerm.length > 0) {
       this.props.onSearch.apply(this, [searchTerm])
+    }
+  }
+
+  handleClick() {
+    if(this.state.searchValue.length > 0) {
+      this.setState({  searchState: 'filled', finalTerm: this.state.searchValue }, () => {
+        this.search()
+      })
     }
   }
 
@@ -196,8 +222,8 @@ class SearchBar extends Component {
         <input className="search-bar__text" onFocus={ this.onFocus } onChange={ this.onChange } onKeyUp={ this.onKeyUp } ref="searchValue" value={this.state.searchValue} />
         <span className="search-typeahead-text">{ typeaheadText }</span>
         <img className="search-bar__clear" src={ require('./x-mark.svg') } onClick={ this.clearSearch }/>
-        <div className="search-icon-wrap" onClick={ this.search }>
-          <img className="search-bar__icon" src={ require('./ico-mobile-search-selected.svg') } />
+        <div className="search-icon-wrap" onClick={ this.handleClick }>
+          <span className="search-txt">Search</span>
         </div>
         <div className="suggestions-panel">
           {results}
@@ -210,6 +236,7 @@ class SearchBar extends Component {
 
 
 SearchBar.propTypes = {
+  hideSuggestionsWhenEmpty: PropTypes.bool,
   onSearch     : PropTypes.func.isRequired,
   onTermChange : PropTypes.func.isRequired,
   recentTerms  : PropTypes.array,

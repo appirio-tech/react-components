@@ -1,0 +1,33 @@
+@import '~tc-ui/src/styles/tc-includes';
+
+:global {
+  .radio-group-container {
+    .single-action-radio-group {
+      margin-bottom: 50px;
+    }
+    .checkbox-title {
+      font-size: 20px;
+      font-weight: 200;
+      margin-bottom: 20px;
+    }
+    .test {
+      display: flex;
+      flex-direction: row;
+    }
+    .tiled-group-item {
+      margin-right: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .check-mark {
+      background: blue;
+      border-radius: 100%;
+      width: 20px;
+      height: 20px;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+    }
+  }
+}

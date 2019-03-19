@@ -1,15 +1,16 @@
-@import "work/work-includes";
 
-.Checkbox {
-  label {
-    margin-left: 10px;
-  }
-
-  .icon, button {
-    width   : 24px;
-    height  : 24px;
-    /* fixing jumping issues on webkit */
-    outline : none;
-    overflow: hidden;
+:global {
+  .Checkbox {
+    label {
+      margin-left: 10px;
+    }
+  
+    .icon, button {
+      width   : 24px;
+      height  : 24px;
+      /* fixing jumping issues on webkit */
+      outline : none;
+      overflow: hidden;
+    }
   }
 }

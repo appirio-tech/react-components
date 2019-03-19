@@ -1,158 +1,160 @@
-@import "topcoder/tc-includes";
+@import '~tc-ui/src/styles/tc-includes';
 
-$border-color: #D8D8DB;
-$active-icon-wrap-bg: #888894;
-
-.SearchBar {
-  background-color: $white;
-  height: 40px;
-  width: 100%;
-  border: 1px solid $border-color;
-  border-radius: 4px;
-  position: relative;
-  padding-left: 15px;
-  padding-right: 46px;
-
-  &.state-empty {
+:global {
+  .SearchBar {
+    @include roboto;
+    background: $tc-gray-80;
+    height: 30px;
+    width: 100%;
+    border: 0;
+    border-radius: 2px;
+    position: relative;
+    padding-left: 15px;
+    padding-right: 46px;
+  
+    &.state-empty {
+      .search-bar__clear {
+        display: none;
+      }
+    }
+  
+    .search-txt {
+      display: none;
+      color: white;
+    }
+  
+    &.state-empty:before {
+      content: "Search for projects";
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      text-align: left;
+      transform: translateY(-50%);
+      color: $tc-gray-40;
+      font-size: 13px;
+      line-height: 20px;
+      width: 75%;
+      white-space: nowrap;
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+    }
+  
+    &.state-focused:before,
+    &.state-filled:before {
+      content: "";
+    }
+  
+    &.state-filled,
+    &.state-focused {
+      border-color: $tc-gray-40;
+      padding-right: 88px;
+      background-color: white;
+  
+      .search-txt {
+        display: block;
+      }
+  
+      .search-icon-wrap {
+        width: 88px;
+        background-color: $tc-dark-blue-100;
+        z-index: 20;
+        cursor: pointer;
+      }
+    }
+  
+    &.state-focused {
+      .search-typeahead-text {
+        display: block;
+      }
+  
+      .suggestions-panel {
+        display: block;
+      }
+    }
+  
+    .search-bar__text,
+    .search-typeahead-text {
+      @include roboto;
+      outline: 0px;
+      border: 0px none;
+      font-size: 17px;
+      color: $tc-gray-90;
+      line-height: 20px;
+      // NOTE: If uncommented, it causes problems with the proper alignment of
+      //    the typeahead text.
+      // width: calc(100% - 15px - 46px);
+      position: absolute;
+      left: 0;
+      text-indent: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: transparent !important;
+      z-index: 20;
+      padding-left: 0px;
+      height: 30px;
+    }
+  
+    .search-bar__text {
+      padding-right: 130px;
+  
+      &:hover,
+      &:focus {
+        border: none;
+        box-shadow: none;
+      }
+    }
+  
+    .search-typeahead-text {
+      position: absolute;
+      color: $tc-gray-40;
+      display: none;
+      z-index: 20;
+      top: 19px;
+    }
+  
     .search-bar__clear {
-      display: none;
-    }
-  }
-
-  &.state-empty:before {
-    content: "Search Topcoder for challenges, people or content";
-    position: absolute;
-    left: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: $accent-gray;
-    font-size: 15px;
-    line-height: 20px;
-    width: 75%;
-    white-space: nowrap;
-    overflow-x: hidden;
-    text-overflow: ellipsis;
-
-    @media screen and (max-width: 768px) {
-      content: "Search Topcoder";
-    }
-  }
-
-  &.state-focused:before,
-  &.state-filled:before {
-    content: "";
-  }
-
-  &.state-focused {
-    border-color: $accent-gray;
-
-    .search-typeahead-text {
-      display: block;
-    }
-
-    .search-icon-wrap {
-      cursor: pointer;
-      background-color: $active-icon-wrap-bg;
-    }
-
-    .suggestions-panel {
-      display: block;
-    }
-  }
-
-  &.state-filled {
-    border-color: $border-color;
-
-    .search-typeahead-text {
-      display: none;
-    }
-
-    .search-icon-wrap {
-      cursor: pointer;
-      background-color: $active-icon-wrap-bg;
-    }
-
-    .suggestions-panel {
-      display: none;
-    }
-  }
-
-  .search-bar__text,
-  .search-typeahead-text {
-    font-family: "Roboto", Arial, Helvetica, sans-serif;
-    outline: 0px;
-    border: 0px none;
-    font-size: 17px;
-    color: $accent-gray-dark;
-    line-height: 20px;
-    width: 90%;
-    position: absolute;
-    left: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: transparent;
-    z-index: 20;
-    padding-left: 0px;
-  }
-
-  .search-bar__text {
-
-    &:hover,
-    &:focus {
-      border: none;
-      box-shadow: none;
-    }
-  }
-
-  .search-typeahead-text {
-    color: $accent-gray;
-    display: none;
-    z-index: 10;
-    left: 16.5px;
-  }
-
-  .search-bar__clear {
-    position: absolute;
-    top: 50%;
-    right: 60px;
-    transform: translateY(-50%);
-    cursor: pointer;
-    z-index: 30;
-  }
-
-  .search-icon-wrap {
-    width: 46px;
-    height: 40px;
-    position: absolute;
-    top: -1px;
-    right: -1px;
-    background-color: $gray-light;
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
-
-    .search-bar__icon {
       position: absolute;
       top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      right: 110px;
+      transform: translateY(-50%);
+      cursor: pointer;
+      z-index: 20;
     }
-  }
-
-  .suggestions-panel {
-    display: none;
-    position: absolute;
-    top: 43px;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-
-    .loading-suggestions {
+  
+    .search-icon-wrap {
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: 30px;
+      width: 37px;
+      background: $tc-gray-60 url("./ui-16px-2_zoom.svg") 10px 7px no-repeat;
+      border-radius: 0 2px 2px 0;
+      border-left: 1px solid $tc-black;
+      @include roboto;
+      font-size: 12px;
+      color: $tc-white;
+      padding-left: 36px;
+      text-align: left;
+      line-height: 30px;
     }
-
-    .SearchSuggestions {
-      strong {
-        font-weight: 600;
+  
+    .suggestions-panel {
+      display: none;
+      position: absolute;
+      top: 30px;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+  
+      .loading-suggestions {
+      }
+  
+      .SearchSuggestions {
+        strong {
+          font-weight: 600;
+        }
       }
     }
   }
 }
+  

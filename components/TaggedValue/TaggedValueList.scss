@@ -1,9 +1,11 @@
-.TaggedValueList {
-    .items{
-        white-space: normal;
-    }
-    .items-scroll {
-        overflow-x: scroll;
-        white-space: nowrap;
-    }
+:global {
+  .TaggedValueList {
+      .items{
+          white-space: normal;
+      }
+      .items-scroll {
+          overflow-x: scroll;
+          white-space: nowrap;
+      }
+  }
 }

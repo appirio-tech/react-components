@@ -1,7 +1,8 @@
 import React                         from 'react'
 import { Provider }                  from 'react-redux'
 import store                         from '../../store'
-import { Router, Route, IndexRoute, browserHistory } from 'react-router'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+// import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 
 import ExampleApp                    from '../ExampleApp/ExampleApp.jsx'
 const UploadedFileExamples          = require('../UploadedFile/UploadedFileExamples.cjsx')
@@ -32,68 +33,86 @@ import SubTrackDetailsExample        from '../SubTrackDetails/SubTrackDetailsExa
 import PrizeExamples                 from '../Prize/PrizeExamples.jsx'
 import TooltipExamples               from '../Tooltip/TooltipExamples.jsx'
 import ProgressBarExample            from '../ProgressBar/ProgressBarExample.jsx'
+import RichDataTableExample          from '../RichDataTable/RichDataTableExample.jsx'
+import RadioGroupExample             from '../Formsy/RadioGroupExample.jsx'
+import WizardExamples                from '../Wizard/WizardExamples.jsx'
+import LoginScreenExamples           from '../LoginScreen/LoginScreenExamples.jsx'
+
+const renderApp = (component) => () => (
+  <ExampleApp>
+    {component}
+  </ExampleApp>
+)
 
 const Component = () => (
   <Provider store={store}>
-    <Router history={browserHistory}>
-      <Route path="/" component={ExampleApp}>
-        <IndexRoute component={AvatarExamples}/>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" render={renderApp(<AvatarExamples />)}/>
 
-        <Route path="/FileUploaderContainerExamples" component={FileUploaderContainerExamples}/>
+        <Route path="/LoginScreenExamples" render={renderApp(<LoginScreenExamples/>)} />
 
-        <Route path="/UploadedFileExamples" component={UploadedFileExamples}/>
+        <Route path="/WizardExamples" render={renderApp(<WizardExamples/>)} />
 
-        <Route path="/UploadedFilesExamples" component={UploadedFilesExamples}/>
+        <Route path="/FileUploaderContainerExamples" render={renderApp(<FileUploaderContainerExamples/>)} />
 
-        <Route path="/FileUploaderExamples" component={FileUploaderExamples}/>
+        <Route path="/UploadedFileExamples" render={renderApp(<UploadedFileExamples />)} />
 
-        <Route path="/CheckboxExamples" component={CheckboxExamples} />
+        <Route path="/UploadedFilesExamples" render={renderApp(<UploadedFilesExamples />)} />
 
-        <Route path="/ImageViewerHeaderExamples" component={ImageViewerHeaderExamples} />
+        <Route path="/FileUploaderExamples" render={renderApp(<FileUploaderExamples />)} />
 
-        <Route path="/ImageViewerExamples" component={ImageViewerExamples} />
+        <Route path="/CheckboxExamples" render={renderApp(<CheckboxExamples />)} />
 
-        <Route path="/LoaderExamples" component={LoaderExamples} />
+        <Route path="/ImageViewerHeaderExamples" render={renderApp(<ImageViewerHeaderExamples />)} />
 
-        <Route path="/ManageStepsExamples" component={ManageStepsExamples}/>
+        <Route path="/ImageViewerExamples" render={renderApp(<ImageViewerExamples />)} />
 
-        <Route path="/StepRowExamples" component={StepRowExamples} />
+        <Route path="/LoaderExamples" render={renderApp(<LoaderExamples />)} />
 
-        <Route path="/PanelExamples" component={PanelExamples} />
+        <Route path="/ManageStepsExamples" render={renderApp(<ManageStepsExamples />)} />
 
-        <Route path="/StandardListItemExamples" component={StandardListItemExamples} />
+        <Route path="/StepRowExamples" render={renderApp(<StepRowExamples />)} />
 
-        <Route path="/MenuBarExamples" component={MenuBarExamples} />
+        <Route path="/PanelExamples" render={renderApp(<PanelExamples />)} />
 
-        <Route path="/DropdownExamples" component={DropdownExamples} />
+        <Route path="/StandardListItemExamples" render={renderApp(<StandardListItemExamples />)} />
 
-        <Route path="/UserDropdownMenuExamples" component={UserDropdownMenuExamples} />
+        <Route path="/MenuBarExamples" render={renderApp(<MenuBarExamples />)} />
 
-        <Route path="/QuickLinksExample" component={QuickLinksExample} />
+        <Route path="/DropdownExamples" render={renderApp(<DropdownExamples />)} />
 
-        <Route path="/SearchSuggestionsExamples" component={SearchSuggestionsExamples} />
+        <Route path="/UserDropdownMenuExamples" render={renderApp(<UserDropdownMenuExamples />)} />
 
-        <Route path="/SearchBarExample" component={SearchBarExample} />
+        <Route path="/QuickLinksExample" render={renderApp(<QuickLinksExample />)} />
 
-        <Route path="/NavbarExample" component={NavbarExample} />
+        <Route path="/SearchSuggestionsExamples" render={renderApp(<SearchSuggestionsExamples />)} />
 
-        <Route path="/TCFooterExamples" component={TCFooterExamples} />
-        
-        <Route path="/TaggedValueExamples" component={TaggedValueExamples} />
+        <Route path="/SearchBarExample" render={renderApp(<SearchBarExample />)} />
 
-        <Route path="/CarouselExamples" component={CarouselExamples} />
+        <Route path="/NavbarExample" render={renderApp(<NavbarExample />)} />
 
-        <Route path="/SubNavExamples" component={SubNavExamples} />
+        <Route path="/TCFooterExamples" render={renderApp(<TCFooterExamples />)} />
 
-        <Route path="/SubTrackDetailsExample" component={SubTrackDetailsExample} />
+        <Route path="/TaggedValueExamples" render={renderApp(<TaggedValueExamples />)} />
 
-        <Route path="/PrizeExamples" component={PrizeExamples}/>
+        <Route path="/CarouselExamples" render={renderApp(<CarouselExamples />)} />
 
-        <Route path="/TooltipExamples" component={TooltipExamples} />
-        
-        <Route path="/ProgressBarExample" component={ProgressBarExample}/>
-      </Route>
-    </Router>
+        <Route path="/SubNavExamples" render={renderApp(<SubNavExamples />)} />
+
+        <Route path="/SubTrackDetailsExample" render={renderApp(<SubTrackDetailsExample />)} />
+
+        <Route path="/PrizeExamples" render={renderApp(<PrizeExamples />)} />
+
+        <Route path="/TooltipExamples" render={renderApp(<TooltipExamples />)} />
+
+        <Route path="/ProgressBarExample" render={renderApp(<ProgressBarExample />)} />
+
+        <Route path="/RichDataTableExample" render={renderApp(<RichDataTableExample />)} />
+
+        <Route path="/RadioGroupExample" render={renderApp(<RadioGroupExample />)} />
+      </Switch>
+    </BrowserRouter>
   </Provider>
 )
 

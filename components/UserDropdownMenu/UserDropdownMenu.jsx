@@ -1,15 +1,17 @@
 require('./UserDropdownMenu.scss')
 
 import React, {PropTypes} from 'react'
+import classNames from 'classnames'
+import { Link } from 'react-router-dom'
 import Avatar from '../Avatar/Avatar'
 import Dropdown from '../Dropdown/Dropdown'
 
 
-const UserDropdownMenu = ({username, userImage, domain, loginUrl, registerUrl}) => {
+const UserDropdownMenu = ({ userName, userHandle, userImage, domain, loginUrl, registerUrl, menuItems, forReactRouter}) => {
 
   const userDropdownLists = [
     [
-      { label: 'My Profile', link: '/profile/' + username, id: 0 },
+      { label: 'My Profile', link: '/profile/' + userHandle, id: 0 },
       { label: 'Dashboard', link: '/my-dashbaord', id: 1 },
       { label: 'Settings', link: '/settings/profile', id: 2 },
       { label: 'Payments', link: '//community.' + domain  + '/PactsMemberServlet?module=PaymentHistory&full_list=false', id: 3 }
@@ -22,29 +24,49 @@ const UserDropdownMenu = ({username, userImage, domain, loginUrl, registerUrl}) 
     ]
   ]
 
+  const loginButtonClasses= classNames('tc-btn', 'tc-btn-sm', {
+    // if register url is not present, we are not showing register button
+    // and if register button is not there, we assume it is present somewhere on the page itself
+    // and Login button should be secondary in that case
+    'tc-btn-default' : !registerUrl,
+    'tc-btn-primary': registerUrl
+  })
   const publicDOM = (
     <div className="UserDropdownMenu non-logged-in">
-      <a className="login-button tc-btn tc-btn-s tc-btn-ghost" href={loginUrl} >Log in</a>
-      <a className="join-button tc-btn tc-btn-s" href={registerUrl} >Join</a>
+      { registerUrl && <a className="tc-btn tc-btn-sm tc-btn-secondary" href={registerUrl} >Register</a> }
+      { loginUrl && <a className={ loginButtonClasses } href={loginUrl} >Log in</a> }
     </div>
   )
-  
+
+  const menuList = menuItems ? menuItems : userDropdownLists
+  const rendreLink = (link) => {
+    if (link.link) {
+      return forReactRouter && !link.absolute
+      ? <Link to={ link.link }>{ link.label }</Link>
+      : <a href={ link.link }>{ link.label }</a>
+    } else if (link.onClick) {
+      return <a href="#" onClick={link.onClick} >{ link.label }</a>
+    }
+  }
+
   const loggedInDOM = (
     <div className="UserDropdownMenu">
       <Dropdown pointerShadow>
         <div className="dropdown-menu-header">
-          <span className="user-image"><Avatar avatarUrl={userImage} /></span>
-          <span className="username">{ username }</span>
+          <span className="user-image"><Avatar avatarUrl={ userImage } userName={ userName } /></span>
+          <span className="username">{ userHandle }</span>
           <img className="dropdown-arrow" src={ require('./arrow-small-down.svg') } />
         </div>
 
         <div className="dropdown-menu-list">
           {
-            userDropdownLists.map((list, i) => {
+            menuList.map((list, i) => {
               return ( <ul key={ i }>
                 {
                   list.map((link, j) => {
-                    return <li className="user-menu-item transition" key={ j }><a href={ link.link }>{ link.label }</a></li>
+                    return (<li className="user-menu-item transition" key={ j }>
+                      { rendreLink(link) }
+                    </li>)
                   })
                 }
               </ul> )
@@ -56,11 +78,11 @@ const UserDropdownMenu = ({username, userImage, domain, loginUrl, registerUrl}) 
     </div>
   )
 
-  return username ? loggedInDOM : publicDOM
+  return userHandle ? loggedInDOM : publicDOM
 }
 
 UserDropdownMenu.propTypes = {
-  username      : PropTypes.string,
+  userHandle    : PropTypes.string,
   userImage     : PropTypes.string,
   domain        : PropTypes.string.isRequired,
   loginUrl      : PropTypes.string,

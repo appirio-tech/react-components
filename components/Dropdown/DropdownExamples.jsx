@@ -19,7 +19,7 @@ const DropdownExamples = {
             <ul className="dropdown-menu-list">
               {
                 items.map((link, i) => {
-                  return <li key={i}><a href="javascript:;">{link}</a></li>
+                  return <li tabIndex="-1" key={i}><a href="javascript:;">{link}</a></li>
                 })
               }
             </ul>
@@ -32,7 +32,7 @@ const DropdownExamples = {
             <ul className="dropdown-menu-list">
               {
                 items.map((link, i) => {
-                  return <li key={i}><a href="javascript:;">{link}</a></li>
+                  return <li tabIndex="-1" key={i}><a href="javascript:;">{link}</a></li>
                 })
               }
             </ul>
@@ -45,7 +45,7 @@ const DropdownExamples = {
             <ul className="dropdown-menu-list">
               {
                 items.map((link, i) => {
-                  return <li key={i}><a href="javascript:;">{link}</a></li>
+                  return <li tabIndex="-1" key={i}><a href="javascript:;">{link}</a></li>
                 })
               }
             </ul>
@@ -58,7 +58,7 @@ const DropdownExamples = {
             <ul className="dropdown-menu-list">
               {
                 items.map((link, i) => {
-                  return <li key={i}><a href="javascript:;">{link}</a></li>
+                  return <li tabIndex="-1" key={i}><a href="javascript:;">{link}</a></li>
                 })
               }
             </ul>
@@ -71,7 +71,7 @@ const DropdownExamples = {
             <ul className="dropdown-menu-list">
               {
                 items.map((link, i) => {
-                  return <li key={i}><a href="javascript:;">{link}</a></li>
+                  return <li tabIndex="-1" key={i}><a href="javascript:;">{link}</a></li>
                 })
               }
             </ul>
@@ -84,7 +84,7 @@ const DropdownExamples = {
             <ul className="dropdown-menu-list">
               {
                 items.map((link, i) => {
-                  return <li key={i}><a href="javascript:;">{link}</a></li>
+                  return <li tabIndex="-1" key={i}><a href="javascript:;">{link}</a></li>
                 })
               }
             </ul>

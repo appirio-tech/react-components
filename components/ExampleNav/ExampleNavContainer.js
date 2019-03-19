@@ -25,11 +25,19 @@ const navs = {
     'LoaderExamples',
     'PanelExamples',
     'StandardListItemExamples',
-    'TooltipExamples'
+    'TooltipExamples',
+    'RadioGroupExample'
   ],
   ManageSteps: [
     'ManageStepsExamples',
     'StepRowExamples'
+  ],
+  RichDataTable: [
+    'RichDataTableExample'
+  ],
+  Screen: [
+    'LoginScreenExamples',
+    'WizardExamples'
   ]
 }
 

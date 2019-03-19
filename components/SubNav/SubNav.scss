@@ -1,21 +1,21 @@
-@import 'topcoder/tc-includes';
+@import '~tc-ui/src/styles/tc-includes';
 
-$subnav-item-bg-color: #B47DD6;
-$subnav-item-text-color: #7A7F83;
-
-.SubNav {
-  background-color: $accent-gray-dark;
-
-  .StandardListItem {
-    padding: 20px 0px;
-
-    .label {
-      color: $subnav-item-text-color;
-    }
-
-    .label:active,
-    .label:hover {
-      color: $white;
+:global {
+  .SubNav {
+    background-color: $tc-gray-50;
+  
+    .StandardListItem {
+      padding: 20px 0px;
+  
+      .label {
+        color: $tc-gray-60;
+      }
+  
+      .label:active,
+      .label:hover {
+        color: white;
+      }
     }
   }
 }
+  
