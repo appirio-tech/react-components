@@ -284,7 +284,7 @@
   }
 
   // Using long selector for overriding other styles
-  .checkbox-group-item.disabled,
+  .checkbox-group .checkbox-group-options .checkbox-group-item.disabled,
   .radio-group-input .radio-group-options .radio.disabled,
   .tiled-group-row .tiled-group-item-container .disabled {
     cursor: default;
