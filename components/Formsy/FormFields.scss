@@ -282,6 +282,20 @@
       width: 15px;
     }
   }
+
+  // Using long selector for overriding other styles
+  .checkbox-group-item.disabled,
+  .radio-group-input .radio-group-options .radio.disabled,
+  .tiled-group-row .tiled-group-item-container .disabled {
+    cursor: default;
+    color: $tc-gray-30;
+
+    span, label, div, small {
+      color: $tc-gray-30;
+      cursor: default;
+    }
+
+  }
   
   .SliderRadioGroup {
     margin: 25px auto 0px auto;
