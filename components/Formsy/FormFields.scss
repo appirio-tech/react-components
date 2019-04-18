@@ -290,7 +290,7 @@
     cursor: default;
     color: $tc-gray-30;
 
-    span, label, div, small {
+    span, label, div, small, label.tc-checkbox-label {
       color: $tc-gray-30;
       cursor: default;
     }
