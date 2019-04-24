@@ -24,7 +24,7 @@ class RadioGroup extends Component {
   }
 
   render() {
-    const { label, name, wrapperClass, options } = this.props
+    const { label, name, wrapperClass, layout, options } = this.props
     const hasError = !this.props.isPristine() && !this.props.isValid()
     const disabled = this.props.isFormDisabled() || this.props.disabled
     const errorMessage = this.props.getErrorMessage() || this.props.validationError
