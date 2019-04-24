@@ -184,6 +184,18 @@
       }
     }
   }
+
+  .radio-group-input .radio-group-options {
+    display: flex;
+    flex-direction: row;
+  }
+  .radio-group-input.horizontal .radio-group-options {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .radio-group-input.vertical .radio-group-options {
+    flex-direction: column;
+  }
   
   .tiled-group-row {
     display: flex;

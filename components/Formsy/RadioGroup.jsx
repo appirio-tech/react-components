@@ -65,9 +65,12 @@ class RadioGroup extends Component {
         </div>
       )
     }
-
+    const rdoGrpClass = cn('radio-group-input', wrapperClass, {
+      horizontal: layout === 'horizontal',
+      vertical: layout === 'vertical'
+    })
     return (
-      <div className={'radio-group-input ' + wrapperClass }>
+      <div className={rdoGrpClass}>
         <label className="radio-group-label">{label}</label>
         <div className="radio-group-options">{options.map(renderOption)}</div>
       { hasError ? (<p className="error-message">{errorMessage}</p>) : null}
