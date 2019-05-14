@@ -8,23 +8,24 @@ import { HOC as hoc } from 'formsy-react'
 class TiledRadioGroup extends Component {
   constructor(props) {
     super(props)
-    props.multipleOptions?(
+    props.multipleOptions ? (
       this.state = {
         curValue: []
       }
     ):(
       this.state = {
-        curValue: []
+        curValue: null
       }
     )
     this.onChange = this.onChange.bind(this)
     this.getCheckMarkIconActive = this.getCheckMarkIconActive.bind(this)
+    this.isCurrentValue = this.isCurrentValue.bind(this)
     this.state.curValue = (this.props.getValue())
   }
 
   onChange(value) {
-    const index = this.state.curValue.indexOf(value)
     if (this.props.multipleOptions) {
+      const index = this.state.curValue.indexOf(value)
       if (index > -1) {
         this.state.curValue.splice(index, 1)
       } else {
@@ -35,6 +36,12 @@ class TiledRadioGroup extends Component {
     }
     this.props.setValue(value)
     this.props.onChange(this.props.name, this.state.curValue)
+  }
+
+  isCurrentValue(value) {
+    const { multipleOptions } = this.props
+    const { curValue } = this.state
+    return multipleOptions ? curValue.indexOf(value) > -1 : curValue === value
   }
 
   getCheckMarkIconActive() {
@@ -52,7 +59,7 @@ class TiledRadioGroup extends Component {
 
     const renderOption = (opt, idx) => {
       const itemClassnames = classNames('tiled-group-item', theme, {
-        active: this.state.curValue.indexOf(opt.value) > -1
+        active: this.isCurrentValue(opt.value)
       }, {
         disabled: opt.disabled
       })
@@ -77,7 +84,7 @@ class TiledRadioGroup extends Component {
           }
           {
             this.props.showCheckMarkBeforeTitle
-            && ((this.state.curValue.indexOf(opt.value) > -1)
+            && (this.isCurrentValue(opt.value)
             ? this.getCheckMarkIconActive()
             : this.props.checkMarkUnActiveIcon)
           }
@@ -86,7 +93,7 @@ class TiledRadioGroup extends Component {
           <small>{opt.desc}</small>
           {
             !this.props.showCheckMarkBeforeTitle
-            && ((this.state.curValue.indexOf(opt.value) > -1)
+            && (this.isCurrentValue(opt.value)
             ? this.getCheckMarkIconActive()
             : this.props.checkMarkUnActiveIcon)
           }
