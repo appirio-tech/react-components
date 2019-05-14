@@ -84,7 +84,9 @@ class FilePicker extends React.Component {
     }
 
     componentWillUnmount() {
-        this.refs.filepicker.removeEventListener('change', this.onChange, false)
+        if (this.refs.filepicker) {
+            this.refs.filepicker.removeEventListener('change', this.onChange, false)
+        }
     }
 
     render() {
