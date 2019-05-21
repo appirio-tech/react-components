@@ -115,6 +115,7 @@
     "dev": "webpack-dev-server -d --progress --inline --colors --dev --tc",
     "example": "webpack-dev-server -d --progress --inline --colors",
     "lint": "eslint --format table --ext .js,.jsx .",
+    "lint:fix": "eslint --fix --format table --ext .js,.jsx .",
     "test": "cross-env NODE_ENV=test mocha --reporter progress --compilers js:babel-core/register --require ignore-styles --recursive \"./components/**/*.spec.js\"",
     "test:watch": "npm run test -- --watch"
   }

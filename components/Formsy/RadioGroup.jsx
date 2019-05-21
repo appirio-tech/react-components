@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { HOC as hoc } from 'formsy-react'
 import cn from 'classnames'
-import { find } from "lodash";
+import { find } from 'lodash'
 import { numberWithCommas } from './format'
 
 class RadioGroup extends Component {
@@ -18,7 +18,7 @@ class RadioGroup extends Component {
   }
 
   getSelectedOption() {
-    const {options = [], getValue} = this.props;
+    const {options = [], getValue} = this.props
     const value = getValue()
     return find(options, o => value === o.value)
   }

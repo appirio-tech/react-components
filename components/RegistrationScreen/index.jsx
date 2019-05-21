@@ -203,25 +203,27 @@ class RegistrationScreen extends Component {
               validator={vm.usernameIsFree}
               showCheckMark
             />
-            {!vm.ssoUser && <PasswordInput
-              wrapperClass={'input-container'}
-              label="Create a password (8–64 characters, A–Z, 0–9, . _ - ! ? allowed)"
-              name="password"
-              validationErrors={{
-                isDefaultRequiredValue: 'Please enter password',
-                minLength: '8–64 characters',
-                maxLength: '8–64 characters',
-                matchRegexp: 'The password must contain at least one number or symbol and one character'
+            {
+              !vm.ssoUser &&
+              <PasswordInput
+                wrapperClass={'input-container'}
+                label="Create a password (8–64 characters, A–Z, 0–9, . _ - ! ? allowed)"
+                name="password"
+                validationErrors={{
+                  isDefaultRequiredValue: 'Please enter password',
+                  minLength: '8–64 characters',
+                  maxLength: '8–64 characters',
+                  matchRegexp: 'The password must contain at least one number or symbol and one character'
 
-              }}
-              validations={{
-                minLength: 8,
-                maxLength: 64,
-                matchRegexp: /^((?=.*[a-z])|(?=.*[A-Z]))((?=.*[0-9])|(?=.*[!@#\$%\^&\*]))/
-              }}
-              required
-              showCheckMark
-            />
+                }}
+                validations={{
+                  minLength: 8,
+                  maxLength: 64,
+                  matchRegexp: /^((?=.*[a-z])|(?=.*[A-Z]))((?=.*[0-9])|(?=.*[!@#\$%\^&\*]))/
+                }}
+                required
+                showCheckMark
+              />
             }
             <Checkbox
               wrapperClass={'input-container'}

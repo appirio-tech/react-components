@@ -15,7 +15,7 @@ class TiledCheckboxGroup extends Component {
   onChange(value) {
     const curValue = this.props.getValue() || []
     const index = curValue.indexOf(value)
-    let newValue = [...curValue]
+    const newValue = [...curValue]
     if (index > -1) {
       newValue.splice(index, 1)
     } else {
