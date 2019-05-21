@@ -1,7 +1,8 @@
 'use strict'
 
 React = require 'react'
-{ PropTypes, createElement, createClass } = React
+PropTypes = require 'prop-types'
+{ createElement, createClass } = React
 ImageViewerElement = require './ImageViewer.cjsx'
 
 ImageViewer = React.createClass

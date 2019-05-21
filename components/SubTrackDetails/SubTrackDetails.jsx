@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 require('./SubTrackDetails.scss')
@@ -31,10 +32,10 @@ const SubTrackDetails = ({name, code, description, tracks}) => {
 }
 
 SubTrackDetails.propTypes = {
-  name: React.PropTypes.string,
-  code: React.PropTypes.string,
-  description: React.PropTypes.string,
-  tracks: React.PropTypes.array
+  name: PropTypes.string,
+  code: PropTypes.string,
+  description: PropTypes.string,
+  tracks: PropTypes.array
 }
 
 export default SubTrackDetails

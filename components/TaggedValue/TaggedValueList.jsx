@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import TaggedValue from './TaggedValue'
 import classNames from 'classnames'
 
@@ -21,8 +22,8 @@ const TaggedValueList = ({items, layout}) => {
 }
 
 TaggedValueList.propTypes = {
-  items :  React.PropTypes.array,
-  layout : React.PropTypes.oneOf(['scroll', 'wrap'])
+  items :  PropTypes.array,
+  layout : PropTypes.oneOf(['scroll', 'wrap'])
 }
 
 export default TaggedValueList

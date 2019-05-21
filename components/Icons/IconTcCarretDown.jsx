@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const IconCarretDown = (props) => {
   const fill = props.fill || '#62AADC'
@@ -14,11 +15,11 @@ const IconCarretDown = (props) => {
 }
 
 IconCarretDown.propTypes = {
-  wrapperClass   : React.PropTypes.string,
-  fill   : React.PropTypes.string,
-  stroke : React.PropTypes.string,
-  height : React.PropTypes.number,
-  width  : React.PropTypes.number
+  wrapperClass   : PropTypes.string,
+  fill   : PropTypes.string,
+  stroke : PropTypes.string,
+  height : PropTypes.number,
+  width  : PropTypes.number
 }
 
 export default IconCarretDown

@@ -1,7 +1,7 @@
 'use strict'
 
 React                  = require 'react'
-PropTypes              = React.PropTypes
+PropTypes              = require 'prop-types'
 StepRowView            = require './StepRowView'
 { reduxForm }          = require 'redux-form'
 { loadStep,

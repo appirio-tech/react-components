@@ -1,7 +1,8 @@
 require('./NavbarExample.scss')
 
 import Navbar from './Navbar'
-import React, {Component, PropTypes} from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import fetch from 'isomorphic-fetch'
 import _ from 'lodash'
 

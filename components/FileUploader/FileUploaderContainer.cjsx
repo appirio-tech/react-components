@@ -1,12 +1,13 @@
 'use strict'
 
 React          = require 'react'
+PropTypes      = require 'prop-types'
 { connect }    = require 'react-redux'
 { uploadFile } = require 'appirio-tech-client-app-layer'
 classnames     = require 'classnames'
 FileUploader   = require './FileUploader'
 
-{ createClass, createElement, PropTypes } = React
+{ createClass, createElement } = React
 
 mapStateToProps = (state) ->
   { id, assetType, category, loading } = state?.fileUploader

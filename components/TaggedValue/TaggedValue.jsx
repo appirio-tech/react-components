@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 require('./TaggedValue.scss')
@@ -21,10 +22,10 @@ const TaggedValue = ({title, subText, style, count}) => {
 }
 
 TaggedValue.propTypes = {
-  title :  React.PropTypes.string,
-  subText :  React.PropTypes.string,
-  style : React.PropTypes.string,
-  count : React.PropTypes.string
+  title :  PropTypes.string,
+  subText :  PropTypes.string,
+  style : PropTypes.string,
+  count : PropTypes.string
 }
 
 export default TaggedValue

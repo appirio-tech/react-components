@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const IconSocialLinkedin = (props) => {
   const height = props.height || '48'
@@ -13,8 +14,8 @@ const IconSocialLinkedin = (props) => {
 }
 
 IconSocialLinkedin.propTypes = {
-  height: React.PropTypes.number,
-  width: React.PropTypes.number
+  height: PropTypes.number,
+  width: PropTypes.number
 }
 
 export default IconSocialLinkedin

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const IconSocialGooglePlus = (props) => {
   const height = props.height || '48'
@@ -12,8 +13,8 @@ const IconSocialGooglePlus = (props) => {
 }
 
 IconSocialGooglePlus.propTypes = {
-  height: React.PropTypes.number,
-  width: React.PropTypes.number
+  height: PropTypes.number,
+  width: PropTypes.number
 }
 
 export default IconSocialGooglePlus

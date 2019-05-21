@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const IconUIAlert = (props) => {
   const fill = props.fill || '#62AADC'
@@ -16,10 +17,10 @@ const IconUIAlert = (props) => {
 }
 
 IconUIAlert.propTypes = {
-  fill   : React.PropTypes.string,
-  stroke : React.PropTypes.string,
-  height : React.PropTypes.number,
-  width  : React.PropTypes.number
+  fill   : PropTypes.string,
+  stroke : PropTypes.string,
+  height : PropTypes.number,
+  width  : PropTypes.number
 }
 
 export default IconUIAlert

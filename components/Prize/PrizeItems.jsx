@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import TaggedValueList from '../TaggedValue/TaggedValueList'
 
@@ -21,8 +22,8 @@ const PrizeItems = ({type, title, items}) => {
 }
 
 PrizeItems.propTypes = {
-  type :  React.PropTypes.string,
-  items :  React.PropTypes.array
+  type :  PropTypes.string,
+  items :  PropTypes.array
 }
 
 export default PrizeItems
