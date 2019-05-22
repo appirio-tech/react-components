@@ -17,8 +17,8 @@ fields = [
   'status'
 ]
 
-StepRow = React.createClass
-  propTypes:
+class StepRow extends React.Component
+  @propTypes =
     fields       : PropTypes.object.isRequired
     permissions  : PropTypes.array.isRequired
     handleSubmit : PropTypes.func.isRequired
@@ -26,6 +26,10 @@ StepRow = React.createClass
     projectId    : PropTypes.string.isRequired
     stepId       : PropTypes.string
     isNew        : PropTypes.bool
+
+  constructor: (props) ->
+    super(props)
+    this.submit = this.submit.bind this
 
   componentWillMount: ->
     { loadStep, projectId, stepId } = this.props

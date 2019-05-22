@@ -1,26 +1,29 @@
 'use strict'
 
 React = require 'react'
-{ PropTypes, createElement, createClass } = React
+{ PropTypes, createElement } = React
 ImageViewerElement = require './ImageViewer.cjsx'
 
-ImageViewer = React.createClass
-  propTypes:
+class ImageViewer extends React.Component
+  @propTypes =
     files: PropTypes.array.isRequired
     showNotifications: PropTypes.bool
     initialFile: PropTypes.object.isRequired
     onFileChange: PropTypes.func
 
-  getInitialState: ->
-    file = this.props.initialFile
-    currentIndex = this.props.files.indexOf this.props.initialFile
-    nextFile = currentIndex + 1 < this.props.files.length
-    prevFile = currentIndex - 1 >= 0
-
-    file: file
-    currentIndex: currentIndex
-    nextFile: nextFile
-    prevFile: prevFile
+  constructor: (props) ->
+    super(props)
+    currentIndex = props.files.indexOf props.initialFile
+    this.state =
+      file: props.initialFile
+      currentIndex: currentIndex
+      nextFile: currentIndex + 1 < props.files.length
+      prevFile: currentIndex - 1 >= 0
+    this.viewNext = this.viewNext.bind this
+    this.viewPrevious = this.viewPrevious.bind this
+    this.selectFile = this.selectFile.bind this
+    this.updateArrowsState = this.updateArrowsState.bind this
+    this.toggleZoom = this.toggleZoom.bind this
 
   componentWillMount: ->
     this.props.onFileChange({file: this.state.file}) if this.props.onFileChange

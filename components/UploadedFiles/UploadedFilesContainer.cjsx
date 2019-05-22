@@ -7,7 +7,7 @@ UploadedFiles = require './UploadedFiles'
 
 { getAttachments, deleteAttachment } = require 'appirio-tech-client-app-layer'
 
-{ createClass, createElement, PropTypes } = React
+{ createElement, PropTypes } = React
 
 mapStateToProps = (state) ->
   { id, assetType, category, enableCaptions } = state?.fileUploader
@@ -27,8 +27,8 @@ mapStateToProps = (state) ->
 
   { id, assetType, category, files }
 
-container =
-  propTypes:
+class UploadedFilesContainer extends React.Component
+  @propTypes =
     id            : PropTypes.string.isRequired
     assetType     : PropTypes.string.isRequired
     category      : PropTypes.string.isRequired
@@ -36,6 +36,10 @@ container =
     files         : PropTypes.array.isRequired
     enableCaptions: PropTypes.bool
     disabled      : PropTypes.bool
+
+  constructor: (props) ->
+    super(props)
+    this.onDelete = this.onDelete.bind this
 
   onDelete: (file) ->
     this.props.dispatch deleteAttachment file
@@ -54,5 +58,5 @@ container =
       enableCaptions: enableCaptions
       disabled      : disabled
 
-module.exports = connect(mapStateToProps)(createClass(container))
+module.exports = connect(mapStateToProps)(UploadedFilesContainer)
 
