@@ -7,15 +7,15 @@ PropTypes      = require 'prop-types'
 classnames     = require 'classnames'
 FileUploader   = require './FileUploader'
 
-{ createClass, createElement } = React
+{ createElement } = React
 
 mapStateToProps = (state) ->
   { id, assetType, category, loading } = state?.fileUploader
 
   { id, assetType, category, loading }
 
-container =
-  propTypes:
+class FileUploaderContainer extends React.Component
+  @propTypes =
     id          : PropTypes.string.isRequired
     assetType   : PropTypes.string.isRequired
     category    : PropTypes.string.isRequired
@@ -23,6 +23,10 @@ container =
     loading     : PropTypes.bool
     dragAndDrop : PropTypes.bool
     disableClick: PropTypes.bool
+
+  constructor: (props) ->
+    super(props)
+    this.onChange = this.onChange.bind this
 
   onChange: (files) ->
     { dispatch, id, assetType, category } = this.props
@@ -37,5 +41,5 @@ container =
 
     createElement FileUploader, { onChange, loading, dragAndDrop, disableClick }
 
-module.exports = connect(mapStateToProps)(createClass(container))
+module.exports = connect(mapStateToProps)(FileUploaderContainer)
 

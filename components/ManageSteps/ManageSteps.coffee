@@ -6,8 +6,8 @@ ManageStepsView        = require './ManageStepsView'
 { connect }            = require 'react-redux'
 { loadStepsByProject } = require 'appirio-tech-client-app-layer'
 
-ManageSteps = React.createClass
-  propTypes:
+class ManageSteps extends React.Component
+  @propTypes =
     projectId: PropTypes.string.isRequired
     permissions: PropTypes.array
 
