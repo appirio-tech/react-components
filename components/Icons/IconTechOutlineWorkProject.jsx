@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const IconTechOutlineWorkProject = (props) => {
   const stroke = props.stroke || '#262628'
@@ -21,9 +22,9 @@ const IconTechOutlineWorkProject = (props) => {
 }
 
 IconTechOutlineWorkProject.propTypes = {
-  stroke : React.PropTypes.string,
-  height : React.PropTypes.number,
-  width  : React.PropTypes.number
+  stroke : PropTypes.string,
+  height : PropTypes.number,
+  width  : PropTypes.number
 }
 
 export default IconTechOutlineWorkProject

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const IconTextListNumbers = (props) => {
   const fill = props.fill || '#62AADC'
@@ -15,10 +16,10 @@ const IconTextListNumbers = (props) => {
 }
 
 IconTextListNumbers.propTypes = {
-  fill   : React.PropTypes.string,
-  stroke : React.PropTypes.string,
-  height : React.PropTypes.number,
-  width  : React.PropTypes.number
+  fill   : PropTypes.string,
+  stroke : PropTypes.string,
+  height : PropTypes.number,
+  width  : PropTypes.number
 }
 
 export default IconTextListNumbers

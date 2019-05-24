@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import uncontrollable from 'uncontrollable'
 import cn from 'classnames'
 require('./Tabs.scss')
@@ -29,7 +30,7 @@ Tabs.propTypes = {
   /**
    * Mark the Tab with a matching `eventKey` as active.
    */
-  activeKey: React.PropTypes.any,
+  activeKey: PropTypes.any,
 
   /**
    * Callback fired when a Tab is selected.
@@ -41,7 +42,7 @@ Tabs.propTypes = {
    * )
    *
    */
-  onSelect: React.PropTypes.func
+  onSelect: PropTypes.func
 }
 
 

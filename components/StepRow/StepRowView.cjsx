@@ -4,7 +4,7 @@ require './StepRow.scss'
 require 'react-datetime/css/react-datetime.css'
 
 React          = require 'react'
-PropTypes      = React.PropTypes
+PropTypes      = require 'prop-types'
 DateTime       = require 'react-datetime'
 classNames     = require 'classnames'
 StepTypeSelect = require './StepTypeSelect'

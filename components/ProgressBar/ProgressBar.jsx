@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 require('./ProgressBar.scss')
@@ -68,8 +69,8 @@ const ProgressBar = ({completionPercentage, checkPoints}) => {
 }
 
 ProgressBar.propTypes = {
-  completionPercentage :  React.PropTypes.string,
-  checkPoints :  React.PropTypes.array
+  completionPercentage :  PropTypes.string,
+  checkPoints :  PropTypes.array
 }
 
 export default ProgressBar

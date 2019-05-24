@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const IconUIPencil = (props) => {
   const height = props.height || '16'
@@ -13,10 +14,10 @@ const IconUIPencil = (props) => {
 }
 
 IconUIPencil.propTypes = {
-  fill   : React.PropTypes.string,
-  stroke : React.PropTypes.string,
-  height : React.PropTypes.number,
-  width  : React.PropTypes.number
+  fill   : PropTypes.string,
+  stroke : PropTypes.string,
+  height : PropTypes.number,
+  width  : PropTypes.number
 }
 
 export default IconUIPencil

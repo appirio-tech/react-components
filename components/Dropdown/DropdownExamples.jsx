@@ -9,7 +9,7 @@ const items = [
   'Applet Arena'
 ]
 
-const DropdownExamples = {
+class DropdownExamples  extends React.Component {
   render() {
     return (
       <section>
@@ -96,4 +96,4 @@ const DropdownExamples = {
   }
 }
 
-module.exports = React.createClass(DropdownExamples)
+module.exports = DropdownExamples

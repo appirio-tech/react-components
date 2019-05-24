@@ -1,7 +1,8 @@
 require('./SelectDropdown.scss')
 
 import _ from 'lodash'
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Dropdown from '../Dropdown/Dropdown'
 
 class SelectDropdown extends Component {
@@ -44,7 +45,7 @@ class SelectDropdown extends Component {
 
 SelectDropdown.propTypes = {
   onSelect : PropTypes.func,
-  options  : PropTypes.arrayOf(React.PropTypes.object).isRequired,
+  options  : PropTypes.arrayOf(PropTypes.object).isRequired,
   theme    : PropTypes.string
 }
 

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const IconUIBoldAdd = (props) => {
   const height = props.height || '16'
@@ -13,10 +14,10 @@ const IconUIBoldAdd = (props) => {
 }
 
 IconUIBoldAdd.propTypes = {
-  fill   : React.PropTypes.string,
-  stroke : React.PropTypes.string,
-  height : React.PropTypes.number,
-  width  : React.PropTypes.number
+  fill   : PropTypes.string,
+  stroke : PropTypes.string,
+  height : PropTypes.number,
+  width  : PropTypes.number
 }
 
 export default IconUIBoldAdd

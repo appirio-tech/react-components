@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const IconTcTextUnderline = (props) => {
   const fill = props.fill || '#62AADC'
@@ -14,10 +15,10 @@ const IconTcTextUnderline = (props) => {
 }
 
 IconTcTextUnderline.propTypes = {
-  fill   : React.PropTypes.string,
-  stroke : React.PropTypes.string,
-  height : React.PropTypes.number,
-  width  : React.PropTypes.number
+  fill   : PropTypes.string,
+  stroke : PropTypes.string,
+  height : PropTypes.number,
+  width  : PropTypes.number
 }
 
 export default IconTcTextUnderline
