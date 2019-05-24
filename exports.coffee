@@ -24,6 +24,10 @@ ManageSteps         = require './components/ManageSteps/ManageSteps'
 StepRow             = require './components/StepRow/StepRow'
 SubNav              = require './components/SubNav/SubNav'
 SwitchButton        = require './components/SwitchButton/SwitchButton'
+Drawer              = require './components/Drawer/Drawer'
+Toolbar             = require './components/Toolbar/Toolbar'
+ToolbarGroup        = require './components/Toolbar/ToolbarGroup'
+ToolbarTitle        = require './components/Toolbar/ToolbarTitle'
 
 Icons               = require './components/Icons'
 
@@ -73,6 +77,10 @@ module.exports =
   Tabs              : Tabs.default
   Tab               : Tab.default
   FilePicker        : FilePicker.default
+  Drawer            : Drawer.default
+  Toolbar           : Toolbar.default
+  ToolbarGroup      : ToolbarGroup.default
+  ToolbarTitle      : ToolbarTitle.default
 
 
 # Formsy
