@@ -10,7 +10,7 @@ We use node 8.x and npm 6.x, so you may need to download a new version of node. 
 
 Install dependencies by running the following in the root of the project:
  - `npm i`
- - **Note:** You must use npm 3. Type `npm -v` to ensure you have a 3.x version.
+ - **Note:** You must use npm 6. Type `npm -v` to ensure you have a 6.x version.
 
 ## NPM Commands
 - To run locally, run `npm run dev` and head to `localhost:8080`
