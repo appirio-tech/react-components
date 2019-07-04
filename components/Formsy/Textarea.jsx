@@ -8,18 +8,38 @@ class Textarea extends Component {
   constructor(props) {
     super(props)
     this.changeValue = this.changeValue.bind(this)
+    this.onFocusChanged = this.onFocusChanged.bind(this)
+    this.textArea = null
+    this.setTextareaRef = element => {
+      this.textArea = element
+    }
   }
 
-  changeValue(e) {
+  onFocusChanged() {
+    setTimeout(() => {
+      this.textArea._resizeComponent(() => {
+        this.textArea._resizeLock = false
+      })
+    })
+  }
+
+  changeValue(e, instance) {
     const value = e.target.value
     this.props.setValue(value)
     this.props.onChange(this.props.name, value)
+    setTimeout(() => {
+      instance._resizeComponent(() => {
+        instance._resizeLock = false
+      })
+    })
   }
 
   heightChanged(height, instance) {
     if(!instance.state || !instance.state._sizeInitialized) {
       setTimeout(() => {
-        instance._resizeComponent()
+        instance._resizeComponent(() => {
+          instance._resizeLock = false
+        })
       })
       instance.setState({
         _sizeInitialized: true
@@ -28,7 +48,7 @@ class Textarea extends Component {
   }
 
   render() {
-    const { label, name, rows, cols, placeholder, wrapperClass} = this.props
+    const { label, name, rows, cols, placeholder, wrapperClass, minRows = 3 } = this.props
     const hasError = !this.props.isPristine() && !this.props.isValid()
     const classes = classNames('tc-textarea', {error: hasError}, {empty: this.props.getValue() === ''})
     const disabled = this.props.isFormDisabled() || this.props.disabled
@@ -40,6 +60,8 @@ class Textarea extends Component {
         {
           this.props.autoResize ?
             <AutoresizeTextarea
+              autoFocus
+              ref={this.setTextareaRef}
               rows={rows}
               cols={cols}
               id={name}
@@ -47,11 +69,14 @@ class Textarea extends Component {
               placeholder={placeholder}
               className={classes}
               disabled={disabled}
+              onFocus={this.onFocusChanged}
               onChange={this.changeValue}
               value={this.props.getValue()}
+              minRows={minRows}
               onHeightChange={this.heightChanged}
             /> :
             <textarea
+              autoFocus
               rows={rows}
               cols={cols}
               id={name}
