@@ -166,7 +166,8 @@
             height: 19px;
             left: 0;
             position: absolute;
-            top: 0;
+            top: 50%;
+            transform: translateY(-50%);
             width: 19px;
           }
         }
@@ -177,7 +178,8 @@
           display: inline-block;
           left: 4px;
           position: absolute;
-          top:4px;
+          top: 50%;
+          margin-top: -5px;
           height: 11px;
           width: 11px;
         }
