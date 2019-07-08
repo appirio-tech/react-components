@@ -63,7 +63,7 @@ class Textarea extends Component {
   }
 
   render() {
-    const { label, name, rows, cols, placeholder, wrapperClass, minRows = 3 } = this.props
+    const { label, name, rows, cols, placeholder, wrapperClass } = this.props
     const hasError = !this.props.isPristine() && !this.props.isValid()
     const classes = classNames('tc-textarea', {error: hasError}, {empty: this.props.getValue() === ''})
     const disabled = this.props.isFormDisabled() || this.props.disabled
@@ -77,7 +77,6 @@ class Textarea extends Component {
             <AutoresizeTextarea
               ref={this.setTextareaRef}
               inputRef={this.setDomInputRef}
-              rows={rows}
               cols={cols}
               id={name}
               name={name}
@@ -87,7 +86,7 @@ class Textarea extends Component {
               onFocus={this.onFocusChanged}
               onChange={this.changeValue}
               value={this.props.getValue()}
-              minRows={minRows}
+              minRows={rows}
               onHeightChange={this.heightChanged}
             /> :
             <textarea
