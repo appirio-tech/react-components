@@ -9,13 +9,14 @@ class Textarea extends Component {
     super(props)
     this.changeValue = this.changeValue.bind(this)
     this.onFocusChanged = this.onFocusChanged.bind(this)
+    this.setTextareaRef = this.setTextareaRef.bind(this)
+    this.setDomInputRef = this.setDomInputRef.bind(this)
     this.textArea = null
-    this.setTextareaRef = element => {
-      this.textArea = element
-    }
+    this.domInputRef = null
   }
 
   onFocusChanged() {
+    if (!this.textArea) return
     setTimeout(() => {
       this.textArea._resizeComponent(() => {
         this.textArea._resizeLock = false
@@ -23,13 +24,27 @@ class Textarea extends Component {
     })
   }
 
-  changeValue(e, instance) {
+  setTextareaRef(element) {
+    this.textArea = element
+  }
+
+  setDomInputRef(element) {
+    this.domInputRef = element
+  }
+
+  focus() {
+    if (!this.domInputRef) return
+    this.domInputRef.focus()
+  }
+
+  changeValue(e) {
     const value = e.target.value
     this.props.setValue(value)
     this.props.onChange(this.props.name, value)
+    if (!this.textArea) return
     setTimeout(() => {
-      instance._resizeComponent(() => {
-        instance._resizeLock = false
+      this.textArea._resizeComponent(() => {
+        this.textArea._resizeLock = false
       })
     })
   }
@@ -60,8 +75,8 @@ class Textarea extends Component {
         {
           this.props.autoResize ?
             <AutoresizeTextarea
-              autoFocus
               ref={this.setTextareaRef}
+              inputRef={this.setDomInputRef}
               rows={rows}
               cols={cols}
               id={name}
@@ -76,7 +91,6 @@ class Textarea extends Component {
               onHeightChange={this.heightChanged}
             /> :
             <textarea
-              autoFocus
               rows={rows}
               cols={cols}
               id={name}
@@ -88,7 +102,7 @@ class Textarea extends Component {
               value={this.props.getValue()}
             />
         }
-      { hasError ? (<p className="error-message">{errorMessage}</p>) : null}
+        { hasError ? (<p className="error-message">{errorMessage}</p>) : null}
       </div>
 
     )
