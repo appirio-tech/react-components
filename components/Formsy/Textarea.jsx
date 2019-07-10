@@ -11,17 +11,21 @@ class Textarea extends Component {
     this.onFocusChanged = this.onFocusChanged.bind(this)
     this.setTextareaRef = this.setTextareaRef.bind(this)
     this.setDomInputRef = this.setDomInputRef.bind(this)
+    this.resizeTextarea = this.resizeTextarea.bind(this)
     this.textArea = null
     this.domInputRef = null
   }
 
+  resizeTextarea() {
+    this.textArea._resizeLock = true
+    this.textArea._resizeComponent(() => {
+      this.textArea._resizeLock = false
+    })
+  }
+
   onFocusChanged() {
     if (!this.textArea) return
-    setTimeout(() => {
-      this.textArea._resizeComponent(() => {
-        this.textArea._resizeLock = false
-      })
-    })
+    this.resizeTextarea()
   }
 
   setTextareaRef(element) {
@@ -42,24 +46,7 @@ class Textarea extends Component {
     this.props.setValue(value)
     this.props.onChange(this.props.name, value)
     if (!this.textArea) return
-    setTimeout(() => {
-      this.textArea._resizeComponent(() => {
-        this.textArea._resizeLock = false
-      })
-    })
-  }
-
-  heightChanged(height, instance) {
-    if(!instance.state || !instance.state._sizeInitialized) {
-      setTimeout(() => {
-        instance._resizeComponent(() => {
-          instance._resizeLock = false
-        })
-      })
-      instance.setState({
-        _sizeInitialized: true
-      })
-    }
+    this.resizeTextarea()
   }
 
   render() {
@@ -87,7 +74,6 @@ class Textarea extends Component {
               onChange={this.changeValue}
               value={this.props.getValue()}
               minRows={rows}
-              onHeightChange={this.heightChanged}
             /> :
             <textarea
               rows={rows}
