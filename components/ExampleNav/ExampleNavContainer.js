@@ -26,7 +26,7 @@ const navs = {
     'PanelExamples',
     'StandardListItemExamples',
     'TooltipExamples',
-    'RadioGroupExample',
+    'RadioGroupExample'
   ],
   ManageSteps: [
     'ManageStepsExamples',
