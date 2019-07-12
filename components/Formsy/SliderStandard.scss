@@ -27,18 +27,20 @@
 
     .rc-slider-mark {
       left: 2px;
-      top: -24px;
+      top: -30px;
       width: calc(100% + 4px);
 
+      .rc-slider-mark-text,
+      .rc-slider-mark-text.rc-slider-mark-text-active {
+        @include tc-label-lg;
+        line-height: 5 * $base_unit;
+        color: $tc-gray-80;
+        letter-spacing: 0;
+      }
       .rc-slider-mark-text {
         white-space: nowrap;
         font-weight: 400;
         font-size: 15px;
-        color: $tc-gray-60;
-
-        &.rc-slider-mark-text-active {
-          color: $tc-gray-60;
-        }
       }
     }
   }
