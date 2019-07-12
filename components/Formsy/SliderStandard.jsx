@@ -17,6 +17,7 @@ class SliderStandard extends Component {
 
   onChange(value) {
     const {name} = this.props
+    this.props.setValue(value.toString())
     this.props.onChange(name, value)
   }
 
