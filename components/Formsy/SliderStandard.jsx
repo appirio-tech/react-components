@@ -42,6 +42,7 @@ class SliderStandard extends Component {
           min={min}
           max={max}
           step={step}
+          value={value}
           marks={marks}
           onChange={ this.onChange }
         />
