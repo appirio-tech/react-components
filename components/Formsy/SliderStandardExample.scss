@@ -16,18 +16,19 @@
       width: 20px;
       height: 20px;
       bottom: -7px;
-
-      &.rc-slider-dot-active {
-        border-color: $tc-dark-blue;
-      }
     }
 
     .rc-slider-track {
-      background-color: $tc-dark-blue;
+      background-color: transparent;
     }
 
     .rc-slider-handle {
-      display: none;
+      background: $tc-dark-blue;
+      border: none;
+      width: 20px;
+      height: 20px;
+      margin-top: -9px;
+      margin-left: -4px;
     }
 
     .rc-slider-mark {
