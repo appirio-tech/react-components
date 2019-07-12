@@ -45,6 +45,8 @@ class SliderStandard extends Component {
           value={value}
           marks={marks}
           onChange={ this.onChange }
+          // handles onAfterChange to fix issue when user clicks on first value/step of untouched slider
+          onAfterChange={ this.onChange }
         />
       </div>
     )
