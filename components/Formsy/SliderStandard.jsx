@@ -7,6 +7,8 @@ import 'rc-slider/assets/index.css'
 import cn from 'classnames'
 import { HOC as hoc } from 'formsy-react'
 
+import './SliderStandard.scss'
+
 class SliderStandard extends Component {
   constructor(props) {
     super(props)
@@ -25,7 +27,12 @@ class SliderStandard extends Component {
     const value = this.props.getValue()
     const marks = {}
     for(let i=0; i < options.length; i++) {
-      marks[options[i].value] = options[i].title
+      if (options[i].value !== null && options[i].value !== undefined && !isNaN(options[i].value)) {
+        marks[options[i].value] = options[i].title
+      } else {
+        const unit = (max - min)/(options.length - 1)
+        marks[i * unit + min] = options[i].title
+      }
     }
     return (
       <div>
