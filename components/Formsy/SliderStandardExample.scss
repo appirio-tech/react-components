@@ -1,0 +1,44 @@
+@import '~tc-ui/src/styles/tc-includes';
+
+:global {
+  .slider-standard-container {
+    margin: 50px 100px;
+    display: flex;
+    flex-direction: column;
+    height: 100px;
+    justify-content: space-between;
+
+    .rc-slider-dot {
+      left: 0%;
+      background: #ffffff;
+      border: 4px solid #d5d5d5;
+      border-radius: 18px;
+      width: 20px;
+      height: 20px;
+      bottom: -7px;
+
+      &.rc-slider-dot-active {
+        border-color: $tc-dark-blue;
+      }
+    }
+
+    .rc-slider-track {
+      background-color: $tc-dark-blue;
+    }
+
+    .rc-slider-handle {
+      display: none;
+    }
+
+    .rc-slider-mark {
+      left: 2px;
+      top: -24px;
+      width: calc(100% + 4px);
+
+      .rc-slider-mark-text {
+        white-space: nowrap;
+        font-size: 14px;
+      }
+    }
+  }
+}

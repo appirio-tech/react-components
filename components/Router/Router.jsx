@@ -35,6 +35,7 @@ import TooltipExamples               from '../Tooltip/TooltipExamples.jsx'
 import ProgressBarExample            from '../ProgressBar/ProgressBarExample.jsx'
 import RichDataTableExample          from '../RichDataTable/RichDataTableExample.jsx'
 import RadioGroupExample             from '../Formsy/RadioGroupExample.jsx'
+import SliderStandardExample         from '../Formsy/SliderStandardExample.jsx'
 import WizardExamples                from '../Wizard/WizardExamples.jsx'
 import LoginScreenExamples           from '../LoginScreen/LoginScreenExamples.jsx'
 
@@ -111,6 +112,8 @@ const Component = () => (
         <Route path="/RichDataTableExample" render={renderApp(<RichDataTableExample />)} />
 
         <Route path="/RadioGroupExample" render={renderApp(<RadioGroupExample />)} />
+
+        <Route path="/SliderStandardExample" render={renderApp(<SliderStandardExample />)} />
       </Switch>
     </BrowserRouter>
   </Provider>
