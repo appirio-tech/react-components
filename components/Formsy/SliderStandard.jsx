@@ -24,17 +24,11 @@ class SliderStandard extends Component {
   noOp() {}
 
   render() {
-    const { options, min, max, step} = this.props
+    const { minLabel, maxLabel, min, max, step} = this.props
     const value = this.props.getValue()
     const marks = {}
-    for(let i=0; i < options.length; i++) {
-      if (options[i].value !== null && options[i].value !== undefined && !isNaN(options[i].value)) {
-        marks[options[i].value] = options[i].title
-      } else {
-        const unit = (max - min)/(options.length - 1)
-        marks[i * unit + min] = options[i].title
-      }
-    }
+    marks[min] = minLabel
+    marks[max] = maxLabel
     return (
       <div>
         <Slider
@@ -54,7 +48,8 @@ class SliderStandard extends Component {
 }
 
 SliderStandard.propTypes = {
-  options: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  minLabel: PropTypes.string.isRequired,
+  maxLabel: PropTypes.string.isRequired,
   min: PropTypes.number.isRequired,
   max: PropTypes.number.isRequired,
   step: PropTypes.number.isRequired
