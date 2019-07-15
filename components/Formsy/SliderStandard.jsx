@@ -36,7 +36,7 @@ class SliderStandard extends Component {
           min={min}
           max={max}
           step={step}
-          value={value}
+          value={parseInt(value)}
           marks={marks}
           onChange={ this.onChange }
           // handles onAfterChange to fix issue when user clicks on first value/step of untouched slider
