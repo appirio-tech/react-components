@@ -7,6 +7,7 @@ import Checkbox from './Checkbox'
 import RadioGroup from './RadioGroup'
 import CheckboxGroup from './CheckboxGroup'
 import SliderRadioGroup from './SliderRadioGroup'
+import SliderStandard from './SliderStandard'
 import TiledRadioGroup from './TiledRadioGroup'
 import TiledCheckboxInput from './TiledCheckboxInput'
 import TiledCheckboxGroup from './TiledCheckboxGroup'
@@ -39,6 +40,7 @@ export default {
     Checkbox,
     CheckboxGroup,
     SliderRadioGroup,
+    SliderStandard,
     TiledRadioGroup,
     TiledCheckboxInput,
     TiledCheckboxGroup
