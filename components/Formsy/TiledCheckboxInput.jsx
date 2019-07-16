@@ -1,5 +1,6 @@
 'use strict'
-import React, { PropTypes, Component } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import _ from 'lodash'
 import { HOC as hoc } from 'formsy-react'

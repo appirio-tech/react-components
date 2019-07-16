@@ -3,7 +3,7 @@
 require 'react-select/dist/react-select.css'
 
 React      = require 'react'
-PropTypes  = React.PropTypes
+PropTypes  = require 'prop-types'
 Select     = require 'react-select'
 find       = require 'lodash/find'
 

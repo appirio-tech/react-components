@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const IconArrowPriorityHigh = (props) => {
   const fill = props.fill || '#62AADC'
@@ -14,9 +15,9 @@ const IconArrowPriorityHigh = (props) => {
 }
 
 IconArrowPriorityHigh.propTypes = {
-  fill   : React.PropTypes.string,
-  height : React.PropTypes.number,
-  width  : React.PropTypes.number
+  fill   : PropTypes.string,
+  height : PropTypes.number,
+  width  : PropTypes.number
 }
 
 export default IconArrowPriorityHigh

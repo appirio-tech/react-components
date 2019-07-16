@@ -1,6 +1,7 @@
 'use strict'
 
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css'
 import cn from 'classnames'

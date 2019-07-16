@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const IconUICheckSimple = (props) => {
   const fill = props.fill || '#62AADC'
@@ -14,11 +15,11 @@ const IconUICheckSimple = (props) => {
 }
 
 IconUICheckSimple.propTypes = {
-  fill   : React.PropTypes.string,
-  stroke : React.PropTypes.string,
-  height : React.PropTypes.number,
-  width  : React.PropTypes.number,
-  wrapperClass: React.PropTypes.string
+  fill   : PropTypes.string,
+  stroke : PropTypes.string,
+  height : PropTypes.number,
+  width  : PropTypes.number,
+  wrapperClass: PropTypes.string
 }
 
 export default IconUICheckSimple

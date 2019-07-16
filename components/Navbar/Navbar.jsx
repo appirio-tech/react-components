@@ -1,6 +1,7 @@
 require('./Navbar.scss')
 
-import React, {PropTypes, Component} from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import MenuBar from '../MenuBar/MenuBar'
 import SearchBar from '../SearchBar/SearchBar'
 import QuickLinks from '../QuickLinks/QuickLinks'

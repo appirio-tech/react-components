@@ -3,6 +3,7 @@
 require './ManageSteps.scss'
 
 React      = require 'react'
+PropTypes  = require 'prop-types'
 classNames = require 'classnames'
 StepRow    = require '../StepRow/StepRow.coffee'
 
@@ -59,9 +60,9 @@ component = ({projectId, stepIds, fetching, permissions}) ->
   </div>
 
 component.propTypes =
-  projectId: React.PropTypes.string.isRequired
-  stepIds: React.PropTypes.array.isRequired
-  permissions: React.PropTypes.array.isRequired
-  fetching: React.PropTypes.bool
+  projectId: PropTypes.string.isRequired
+  stepIds: PropTypes.array.isRequired
+  permissions: PropTypes.array.isRequired
+  fetching: PropTypes.bool
 
 module.exports = component

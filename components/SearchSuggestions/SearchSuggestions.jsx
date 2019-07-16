@@ -1,6 +1,7 @@
 require('./SearchSuggestions.scss')
 
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import StandardListItem from '../StandardListItem/StandardListItem'
 import Panel from '../Panel/Panel'
 import classNames from 'classnames'
