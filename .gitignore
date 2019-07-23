@@ -8,5 +8,3 @@ coverage
 .env
 npm-debug.log
 .DS_Store
-dist
-submit
