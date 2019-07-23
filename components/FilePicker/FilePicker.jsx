@@ -8,7 +8,10 @@ require('./FilePicker.scss')
 class FilePicker extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {dragText: props.options.dragText}
+    this.state = {
+      dragText: props.options.dragText,
+      dropPaneId: _.uniqueId('filepicker-drag-drop-pane_')
+    }
     this.onChange = this.onChange.bind(this)
   }
 
@@ -32,7 +35,7 @@ class FilePicker extends React.Component {
 
     const opts = {}
     opts.displayMode = 'dropPane'
-    opts.container = 'filepicker-drag-drop-pane'
+    opts.container = this.state.dropPaneId
     opts.maxFiles = 4
 
     opts.storeTo = {}
@@ -101,7 +104,7 @@ class FilePicker extends React.Component {
     return (
       <div ref="filepicker" className="filepicker">
         <input type={mode} onChange={this.onChange} {...opts}/>
-        <div className="filepicker-drag-drop-pane" id="filepicker-drag-drop-pane" {...opts}>
+        <div className="filepicker-drag-drop-pane" id={this.state.dropPaneId} {...opts}>
           <span className="filepicker-drag-drop-text">{ dragText }</span>
           <button type="button" className="tc-btn tc-btn-secondary tc-btn-sm">Add File</button>
         </div>
