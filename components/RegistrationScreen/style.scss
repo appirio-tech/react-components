@@ -284,7 +284,10 @@
           }
         }
       }
+
+      .requiredMarker {
+        color: $tc-red-100;
+      }
     }
   }
 }
-  

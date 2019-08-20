@@ -88,7 +88,6 @@ class RegistrationScreen extends Component {
   submit(form) {
     const { vm } = this.props
     const { country } = this.state
-    const fullName = form.name
     vm.phone = form.phone
     vm.title = form.title
     vm.companyName = form.companyName
@@ -97,8 +96,8 @@ class RegistrationScreen extends Component {
     vm.password = form.password
     vm.email = form.email
     vm.country = country
-    vm.firstName = fullName.trim().split(' ').slice(0, -1).join(' ')
-    vm.lastName = fullName.trim().split(' ').slice(-1).join(' ')
+    vm.firstName = form.firstName
+    vm.lastName = form.lastName
 
     vm.submit()
 
@@ -106,9 +105,10 @@ class RegistrationScreen extends Component {
 
   render() {
     const { vm } = this.props
-    let preFillName = vm.firstName ? vm.firstName : null
-    preFillName = vm.lastName ? `${preFillName} ${vm.lastName}` : preFillName
+    const preFillFirstName = vm.firstName
+    const preFillLastName = vm.lastName
     const preFillEmail = vm.email ? vm.email : null
+    const renderRequired = (label) => <span><span>{label}</span>&nbsp;<sup className="requiredMarker">*</sup></span>
     return (
       <div className="RegistrationScreen flex column middle center">
         <div className="container flex column middle center">
@@ -118,18 +118,27 @@ class RegistrationScreen extends Component {
           <Formsy.Form onValidSubmit={this.submit} onValid={this.enableButton} onInvalid={this.disableButton} className="form flex column middle center">
             <TextInput
               wrapperClass={'input-container'}
-              label="First and last name"
+              label={renderRequired('First Name')}
               type="text"
-              name="name"
-              validationError="Please enter your full name"
+              name="firstName"
+              validationError="Please enter your first name"
               required
-              validations="isValidName"
               showCheckMark
-              value={preFillName}
+              value={preFillFirstName}
             />
             <TextInput
               wrapperClass={'input-container'}
-              label="Business email"
+              label={renderRequired('Last Name')}
+              type="text"
+              name="lastName"
+              validationError="Please enter your last name"
+              required
+              showCheckMark
+              value={preFillLastName}
+            />
+            <TextInput
+              wrapperClass={'input-container'}
+              label={renderRequired('Business email')}
               type="email"
               name="email"
               value={preFillEmail}
@@ -143,7 +152,7 @@ class RegistrationScreen extends Component {
             />
             <PhoneInput
               wrapperClass={'input-container'}
-              label="Business phone (include the country code)"
+              label={renderRequired('Business phone (include the country code)')}
               type="phone"
               name="phone"
               validationError="Invalid business phone"
@@ -155,7 +164,7 @@ class RegistrationScreen extends Component {
             />
             <TextInput
               wrapperClass={'input-container'}
-              label="Your title"
+              label={renderRequired('Your title')}
               type="text"
               name="title"
               validationError="Please enter title"
@@ -164,7 +173,7 @@ class RegistrationScreen extends Component {
             />
             <TextInput
               wrapperClass={'input-container'}
-              label="Company name"
+              label={renderRequired('Company name')}
               type="text"
               name="companyName"
               validationError="Please enter company name"
@@ -184,7 +193,7 @@ class RegistrationScreen extends Component {
             <div className="space" />
             <TextInput
               wrapperClass={'input-container'}
-              label="Create a username (5–15 characters, A–Z, 0–9)"
+              label={renderRequired('Create a username (5–15 characters, A–Z, 0–9)')}
               type="text"
               name="username"
               validationErrors={{
@@ -207,7 +216,7 @@ class RegistrationScreen extends Component {
               !vm.ssoUser &&
               <PasswordInput
                 wrapperClass={'input-container'}
-                label="Create a password (8–64 characters, A–Z, 0–9, . _ - ! ? allowed)"
+                label={renderRequired('Create a password (8–64 characters, A–Z, 0–9, . _ - ! ? allowed)')}
                 name="password"
                 validationErrors={{
                   isDefaultRequiredValue: 'Please enter password',
