@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 import Formsy from 'formsy-react'
+import { find, orderBy } from 'lodash'
+import cn from 'classnames'
 import TextInput from '../Formsy/TextInput'
 import PhoneInput from '../Formsy/PhoneInput'
 import PasswordInput from '../Formsy/PasswordInput'
 import TiledRadioGroup from '../Formsy/TiledRadioGroup'
+import FormsySelect from '../Formsy/FormsySelect'
 import Checkbox from '../Formsy/Checkbox'
 import CheckRadioIcon from './CheckRadioIcon'
 import Loader from '../Loader/Loader'
@@ -42,20 +45,30 @@ class RegistrationScreen extends Component {
     this.disableButton = this.disableButton.bind(this)
     this.reRender = this.reRender.bind(this)
     this.isValidForm = this.isValidForm.bind(this)
-    this.onChangeCountry = this.onChangeCountry.bind(this)
+    this.onBusinessPhoneChange = this.onBusinessPhoneChange.bind(this)
+    this.onCountryChange = this.onCountryChange.bind(this)
     this.state = {
       update: true,
       canSubmit: false,
+      countryList: null,
       country: null
     }
     props.vm.reRender = this.reRender
+  }
+
+  componentDidMount() {
+    if (this.props.vm && this.props.vm.countries) {
+      this.setState({
+        countryList: orderBy(this.props.vm.countries, ['name'], ['asc']).map(c => ({...c, label: c.name, value: c.name}))
+      })
+    }
   }
 
   reRender() {
     this.setState({ update: true })
   }
 
-  onChangeCountry({ country }) {
+  onBusinessPhoneChange({ country }) {
     const { vm } = this.props
 
     if (!country || !country.code) {
@@ -63,7 +76,22 @@ class RegistrationScreen extends Component {
       this.reRender()
     } else {
       vm.phoneErrorMessage = null
+      // When the business phone's country code changes, we should change the country selection also
+      this.refs.countrySelect.setValue(country.name)
       this.setState({ update: true, country })
+    }
+  }
+
+  onCountryChange(value) {
+    // when the country selection is changed, we have to change the country code of business phone
+    if (!this.state.country || this.state.country.name !== value) {
+      const country = find(this.props.vm.countries, c => c.name === value)
+
+      if (country) {
+        this.setState({
+          country
+        })
+      }
     }
   }
 
@@ -87,7 +115,6 @@ class RegistrationScreen extends Component {
 
   submit(form) {
     const { vm } = this.props
-    const { country } = this.state
     vm.phone = form.phone
     vm.title = form.title
     vm.companyName = form.companyName
@@ -95,7 +122,7 @@ class RegistrationScreen extends Component {
     vm.username = form.username
     vm.password = form.password
     vm.email = form.email
-    vm.country = country
+    vm.country = form.country
     vm.firstName = form.firstName
     vm.lastName = form.lastName
 
@@ -105,6 +132,7 @@ class RegistrationScreen extends Component {
 
   render() {
     const { vm } = this.props
+    const { country, countryList } = this.state
     const preFillFirstName = vm.firstName
     const preFillLastName = vm.lastName
     const preFillEmail = vm.email ? vm.email : null
@@ -151,7 +179,7 @@ class RegistrationScreen extends Component {
               showCheckMark
             />
             <PhoneInput
-              wrapperClass={'input-container'}
+              wrapperClass={cn('input-container', {'valid-phone': !vm.phoneErrorMessage})}
               label={renderRequired('Business phone (include the country code)')}
               type="phone"
               name="phone"
@@ -159,9 +187,11 @@ class RegistrationScreen extends Component {
               required
               listCountry={vm.countries}
               forceErrorMessage={vm.phoneErrorMessage}
-              onChangeCountry={this.onChangeCountry}
+              onChangeCountry={this.onBusinessPhoneChange}
+              forceCountry={country && country.name}
               showCheckMark
             />
+            <div className="warningText">Note: Changing the country code also updates your country selection</div>
             <TextInput
               wrapperClass={'input-container'}
               label={renderRequired('Your title')}
@@ -190,6 +220,20 @@ class RegistrationScreen extends Component {
               checkMarkActiveIcon={(<CheckRadioIcon active />)}
               checkMarkUnActiveIcon={(<CheckRadioIcon active={false} />)}
             />
+            <FormsySelect
+              ref="countrySelect"
+              wrapperClass={'input-container'}
+              label={renderRequired('Country')}
+              name="country"
+              value=""
+              options={countryList}
+              onChange={this.onCountryChange}
+              required
+              placeholder="- Select country -"
+              showDropdownIndicator
+              setValueOnly
+            />
+            <div className="warningText">Note: Changing the country also updates the country code of business phone.</div>
             <div className="space" />
             <TextInput
               wrapperClass={'input-container'}
