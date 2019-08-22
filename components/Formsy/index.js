@@ -20,7 +20,29 @@ const VALID_NAME_REGEX = /.*\s+.+/i
 
 // validations
 Formsy.addValidationRule('isRequired', (values, value, array) => { // eslint-disable-line no-unused-vars
-  return value && ( _.isArray(value) ? value.length > 0 : value.trim().length > 0) ? true : false // eslint-disable-line no-unneeded-ternary
+  if (_.isUndefined(value) || _.isNull(value)) {
+    return false
+  }
+
+  if (_.isArray(value)) {
+    return value.length > 0
+  }
+
+  if (_.isObject(value)) {
+    return !_.isEmpty(value)
+  }
+
+  if (_.isNumber(value)) {
+    // actually any numeric value should pass this check
+    return value.toString().length > 0
+  }
+
+  if (_.isString(value)) {
+    return value.trim().length > 0
+  }
+
+  // if some unexpected type of `value` has been passed, treat as not provided
+  return false
 })
 
 Formsy.addValidationRule('isRelaxedUrl', (values, value, array) => { // eslint-disable-line no-unused-vars
