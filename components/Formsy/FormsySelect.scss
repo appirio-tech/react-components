@@ -1,0 +1,13 @@
+@import "~tc-ui/src/styles/tc-includes";
+
+:global {
+  .formsySelectComponent {
+    .Select-control > .Select-input > input,
+    .Select-control > .Select-input > input:focus {
+      box-shadow: none;
+      outline: none;
+      padding: 0;
+      border: 0;
+    }
+  }
+}

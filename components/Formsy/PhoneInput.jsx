@@ -25,23 +25,59 @@ class PhoneInput extends Component {
     }
   }
 
+  componentWillReceiveProps(newProps) {
+    let stateUpdate
+    // initialize currentCountry and asYouType states
+    if (_.isEmpty(this.state.asYouType) && this.props.getValue()) {
+      const { country: currentCountry, asYouType} = this.getCountryFromPhoneNumber(this.props.getValue())
+
+      if (asYouType.country && currentCountry) {
+        stateUpdate = { asYouType, currentCountry }
+        this.setState(stateUpdate)
+      }
+    }
+
+    // If a new country is forced externally, update the country code
+    if (newProps.forceCountry && newProps.forceCountry !== this.props.forceCountry ) {
+      const currentCountry = _.get(this.state, 'currentCountry.name') || _.get(stateUpdate, 'currentCountry.name')
+      if (newProps.forceCountry !== currentCountry) {
+        const country = _.find(this.props.listCountry, c => c.name === newProps.forceCountry)
+        this.choseCountry(country, stateUpdate)
+      }
+    }
+  }
+
   isValidInput() {
     const value = this.props.getValue()
     const hasError = !this.props.isPristine() && !this.props.isValid()
     return (!this.props.forceErrorMessage && value && !hasError && this.state.currentCountry.code)
   }
 
+  /**
+   * Gets the country object and associated asYouType object for the given phone number
+   * @param {string} phoneNumber The phone number
+   */
+  getCountryFromPhoneNumber(phoneNumber) {
+    let country
+    const asYouType = new AsYouType()
+    asYouType.input(phoneNumber[0] === '+' ? phoneNumber : '+' + phoneNumber)
+    if (asYouType.country) {
+      country = _.filter(this.props.listCountry, { alpha2: asYouType.country })[0]
+    }
+
+    return {
+      country,
+      asYouType
+    }
+  }
+
   changeValue(e) {
     const value = e.target.value
     this.props.setValue(value)
-    let currentCountry
-    const asYouType = new AsYouType()
-    asYouType.input(value[0] === '+' ? value : '+' + value)
-    if (asYouType.country) {
-      currentCountry = _.filter(this.props.listCountry, { alpha2: asYouType.country })[0]
-      if (currentCountry) {
-        this.setState({ asYouType, currentCountry })
-      }
+
+    const { country: currentCountry, asYouType} = this.getCountryFromPhoneNumber(value)
+    if (asYouType.country && currentCountry) {
+      this.setState({ asYouType, currentCountry })
     }
 
     this.props.onChange(this.props.name, value)
@@ -51,10 +87,10 @@ class PhoneInput extends Component {
     })
   }
 
-  choseCountry(country) {
+  choseCountry(country, updatedState) {
     if (country.code !== this.state.currentCountry.code) {
       const asYouTypeTmp = new AsYouType(country.alpha2)
-      const { asYouType } = this.state
+      const { asYouType } = updatedState || this.state
       let phoneNumber = ''
       if (asYouType && asYouType.getNationalNumber) {
         phoneNumber = ` ${asYouType.getNationalNumber()}`

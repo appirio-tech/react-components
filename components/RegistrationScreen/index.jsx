@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 import Formsy from 'formsy-react'
+import { find, orderBy } from 'lodash'
+import cn from 'classnames'
 import TextInput from '../Formsy/TextInput'
 import PhoneInput from '../Formsy/PhoneInput'
 import PasswordInput from '../Formsy/PasswordInput'
 import TiledRadioGroup from '../Formsy/TiledRadioGroup'
+import FormsySelect from '../Formsy/FormsySelect'
 import Checkbox from '../Formsy/Checkbox'
 import CheckRadioIcon from './CheckRadioIcon'
 import Loader from '../Loader/Loader'
@@ -42,20 +45,30 @@ class RegistrationScreen extends Component {
     this.disableButton = this.disableButton.bind(this)
     this.reRender = this.reRender.bind(this)
     this.isValidForm = this.isValidForm.bind(this)
-    this.onChangeCountry = this.onChangeCountry.bind(this)
+    this.onBusinessPhoneChange = this.onBusinessPhoneChange.bind(this)
+    this.onCountryChange = this.onCountryChange.bind(this)
     this.state = {
       update: true,
       canSubmit: false,
+      countryList: null,
       country: null
     }
     props.vm.reRender = this.reRender
+  }
+
+  componentDidMount() {
+    if (this.props.vm && this.props.vm.countries) {
+      this.setState({
+        countryList: orderBy(this.props.vm.countries, ['name'], ['asc']).map(c => ({...c, label: c.name, value: c.name}))
+      })
+    }
   }
 
   reRender() {
     this.setState({ update: true })
   }
 
-  onChangeCountry({ country }) {
+  onBusinessPhoneChange({ country }) {
     const { vm } = this.props
 
     if (!country || !country.code) {
@@ -63,7 +76,22 @@ class RegistrationScreen extends Component {
       this.reRender()
     } else {
       vm.phoneErrorMessage = null
+      // When the business phone's country code changes, we should change the country selection also
+      this.refs.countrySelect.setValue(country.name)
       this.setState({ update: true, country })
+    }
+  }
+
+  onCountryChange(value) {
+    // when the country selection is changed, we have to change the country code of business phone
+    if (!this.state.country || this.state.country.name !== value) {
+      const country = find(this.props.vm.countries, c => c.name === value)
+
+      if (country) {
+        this.setState({
+          country
+        })
+      }
     }
   }
 
@@ -87,8 +115,6 @@ class RegistrationScreen extends Component {
 
   submit(form) {
     const { vm } = this.props
-    const { country } = this.state
-    const fullName = form.name
     vm.phone = form.phone
     vm.title = form.title
     vm.companyName = form.companyName
@@ -96,9 +122,9 @@ class RegistrationScreen extends Component {
     vm.username = form.username
     vm.password = form.password
     vm.email = form.email
-    vm.country = country
-    vm.firstName = fullName.trim().split(' ').slice(0, -1).join(' ')
-    vm.lastName = fullName.trim().split(' ').slice(-1).join(' ')
+    vm.country = form.country
+    vm.firstName = form.firstName
+    vm.lastName = form.lastName
 
     vm.submit()
 
@@ -106,9 +132,11 @@ class RegistrationScreen extends Component {
 
   render() {
     const { vm } = this.props
-    let preFillName = vm.firstName ? vm.firstName : null
-    preFillName = vm.lastName ? `${preFillName} ${vm.lastName}` : preFillName
+    const { country, countryList } = this.state
+    const preFillFirstName = vm.firstName
+    const preFillLastName = vm.lastName
     const preFillEmail = vm.email ? vm.email : null
+    const renderRequired = (label) => <span><span>{label}</span>&nbsp;<sup className="requiredMarker">*</sup></span>
     return (
       <div className="RegistrationScreen flex column middle center">
         <div className="container flex column middle center">
@@ -118,18 +146,27 @@ class RegistrationScreen extends Component {
           <Formsy.Form onValidSubmit={this.submit} onValid={this.enableButton} onInvalid={this.disableButton} className="form flex column middle center">
             <TextInput
               wrapperClass={'input-container'}
-              label="First and last name"
+              label={renderRequired('First Name')}
               type="text"
-              name="name"
-              validationError="Please enter your full name"
+              name="firstName"
+              validationError="Please enter your first name"
               required
-              validations="isValidName"
               showCheckMark
-              value={preFillName}
+              value={preFillFirstName}
             />
             <TextInput
               wrapperClass={'input-container'}
-              label="Business email"
+              label={renderRequired('Last Name')}
+              type="text"
+              name="lastName"
+              validationError="Please enter your last name"
+              required
+              showCheckMark
+              value={preFillLastName}
+            />
+            <TextInput
+              wrapperClass={'input-container'}
+              label={renderRequired('Business email')}
               type="email"
               name="email"
               value={preFillEmail}
@@ -142,20 +179,22 @@ class RegistrationScreen extends Component {
               showCheckMark
             />
             <PhoneInput
-              wrapperClass={'input-container'}
-              label="Business phone (include the country code)"
+              wrapperClass={cn('input-container', {'valid-phone': !vm.phoneErrorMessage})}
+              label={renderRequired('Business phone (include the country code)')}
               type="phone"
               name="phone"
               validationError="Invalid business phone"
               required
               listCountry={vm.countries}
               forceErrorMessage={vm.phoneErrorMessage}
-              onChangeCountry={this.onChangeCountry}
+              onChangeCountry={this.onBusinessPhoneChange}
+              forceCountry={country && country.name}
               showCheckMark
             />
+            <div className="warningText">Note: Changing the country code also updates your country selection</div>
             <TextInput
               wrapperClass={'input-container'}
-              label="Your title"
+              label={renderRequired('Your title')}
               type="text"
               name="title"
               validationError="Please enter title"
@@ -164,7 +203,7 @@ class RegistrationScreen extends Component {
             />
             <TextInput
               wrapperClass={'input-container'}
-              label="Company name"
+              label={renderRequired('Company name')}
               type="text"
               name="companyName"
               validationError="Please enter company name"
@@ -181,10 +220,24 @@ class RegistrationScreen extends Component {
               checkMarkActiveIcon={(<CheckRadioIcon active />)}
               checkMarkUnActiveIcon={(<CheckRadioIcon active={false} />)}
             />
+            <FormsySelect
+              ref="countrySelect"
+              wrapperClass={'input-container'}
+              label={renderRequired('Country')}
+              name="country"
+              value=""
+              options={countryList}
+              onChange={this.onCountryChange}
+              required
+              placeholder="- Select country -"
+              showDropdownIndicator
+              setValueOnly
+            />
+            <div className="warningText">Note: Changing the country also updates the country code of business phone.</div>
             <div className="space" />
             <TextInput
               wrapperClass={'input-container'}
-              label="Create a username (5–15 characters, A–Z, 0–9)"
+              label={renderRequired('Create a username (5–15 characters, A–Z, 0–9)')}
               type="text"
               name="username"
               validationErrors={{
@@ -207,7 +260,7 @@ class RegistrationScreen extends Component {
               !vm.ssoUser &&
               <PasswordInput
                 wrapperClass={'input-container'}
-                label="Create a password (8–64 characters, A–Z, 0–9, . _ - ! ? allowed)"
+                label={renderRequired('Create a password (8–64 characters, A–Z, 0–9, . _ - ! ? allowed)')}
                 name="password"
                 validationErrors={{
                   isDefaultRequiredValue: 'Please enter password',

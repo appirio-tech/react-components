@@ -284,7 +284,22 @@
           }
         }
       }
+
+      .requiredMarker {
+        color: $tc-red-100;
+      }
+
+      .warningText {
+        font-size: 12px;
+        margin-top: 6px;
+        color: $tc-red-100;
+        width: 100%;
+        margin-bottom: 6px;
+      }
+
+      .valid-phone+.warningText {
+        margin-top: -4px;
+      }
     }
   }
 }
-  
