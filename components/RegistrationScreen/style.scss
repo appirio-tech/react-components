@@ -289,10 +289,9 @@
         color: $tc-red-100;
       }
 
-      .warningText {
-        font-size: 12px;
+      .form .warningText {
+        @extend .error-message;
         margin-top: 6px;
-        color: $tc-red-100;
         width: 100%;
         margin-bottom: 6px;
       }

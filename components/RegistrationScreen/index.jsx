@@ -51,7 +51,9 @@ class RegistrationScreen extends Component {
       update: true,
       canSubmit: false,
       countryList: null,
-      country: null
+      country: null,
+      countrySelectDirty: false,
+      businessPhoneDirty: false
     }
     props.vm.reRender = this.reRender
   }
@@ -68,7 +70,7 @@ class RegistrationScreen extends Component {
     this.setState({ update: true })
   }
 
-  onBusinessPhoneChange({ country }) {
+  onBusinessPhoneChange({ country, externalChange }) {
     const { vm } = this.props
 
     if (!country || !country.code) {
@@ -79,6 +81,12 @@ class RegistrationScreen extends Component {
       // When the business phone's country code changes, we should change the country selection also
       this.refs.countrySelect.setValue(country.name)
       this.setState({ update: true, country })
+    }
+
+    if (!externalChange) {
+      this.setState({
+        businessPhoneDirty: true
+      })
     }
   }
 
@@ -93,6 +101,10 @@ class RegistrationScreen extends Component {
         })
       }
     }
+
+    this.setState({
+      countrySelectDirty: true
+    })
   }
 
   enableButton() {
@@ -122,17 +134,22 @@ class RegistrationScreen extends Component {
     vm.username = form.username
     vm.password = form.password
     vm.email = form.email
-    vm.country = form.country
+    vm.country = find(vm.countries, {name: form.country})
     vm.firstName = form.firstName
     vm.lastName = form.lastName
 
     vm.submit()
 
+    this.setState({
+      businessPhoneDirty: false,
+      countrySelectDirty: false
+    })
+
   }
 
   render() {
     const { vm } = this.props
-    const { country, countryList } = this.state
+    const { country, countryList, businessPhoneDirty, countrySelectDirty } = this.state
     const preFillFirstName = vm.firstName
     const preFillLastName = vm.lastName
     const preFillEmail = vm.email ? vm.email : null
@@ -191,7 +208,7 @@ class RegistrationScreen extends Component {
               forceCountry={country && country.name}
               showCheckMark
             />
-            <div className="warningText">Note: Changing the country code also updates your country selection</div>
+            { businessPhoneDirty && <div className="warningText">Note: Changing the country code also updates your country selection</div> }
             <TextInput
               wrapperClass={'input-container'}
               label={renderRequired('Your title')}
@@ -233,7 +250,7 @@ class RegistrationScreen extends Component {
               showDropdownIndicator
               setValueOnly
             />
-            <div className="warningText">Note: Changing the country also updates the country code of business phone.</div>
+            {countrySelectDirty && <div className="warningText">Note: Changing the country also updates the country code of business phone.</div> }
             <div className="space" />
             <TextInput
               wrapperClass={'input-container'}
