@@ -19,6 +19,7 @@ class PhoneInput extends Component {
     this.changeValue = this.changeValue.bind(this)
     this.choseCountry = this.choseCountry.bind(this)
     this.isValidInput = this.isValidInput.bind(this)
+    this.onDocClick = this.onDocClick.bind(this)
     this.state = {
       currentCountry: {},
       asYouType: {}
@@ -44,6 +45,20 @@ class PhoneInput extends Component {
         const country = _.find(this.props.listCountry, c => c.name === newProps.forceCountry)
         this.choseCountry(country, stateUpdate, true)
       }
+    }
+  }
+
+  componentDidMount() {
+    document.addEventListener('click', this.onDocClick)
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('click', this.onDocClick)
+  }
+
+  onDocClick(e) {
+    if (!e.path.includes(this.refs.wrapper)) {
+      this.props.onOutsideClick()
     }
   }
 
@@ -117,7 +132,7 @@ class PhoneInput extends Component {
     const errorMessage = this.props.getErrorMessage() || this.props.validationError
 
     return (
-      <div className={wrapperClasses}>
+      <div className={wrapperClasses} ref="wrapper">
         <label className="tc-label">
           {label}
           {labelHelpTooltip && <HelpIcon tooltip={labelHelpTooltip} />}
@@ -166,6 +181,7 @@ class PhoneInput extends Component {
 
 PhoneInput.defaultProps = {
   onChange: () => { },
+  onOutsideClick: () => { },
   forceErrorMessage: null,
   listCountry: [],
   showCheckMark: false
@@ -203,6 +219,11 @@ PhoneInput.propTypes = {
    * event when change phone
    */
   onChangeCountry: PT.func,
+
+  /**
+   * triggered when clicked outside
+   */
+  onOutsideClick: PT.func,
 
   /**
    * should show check mark icon when valid input

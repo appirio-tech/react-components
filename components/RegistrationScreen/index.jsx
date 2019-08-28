@@ -47,6 +47,9 @@ class RegistrationScreen extends Component {
     this.isValidForm = this.isValidForm.bind(this)
     this.onBusinessPhoneChange = this.onBusinessPhoneChange.bind(this)
     this.onCountryChange = this.onCountryChange.bind(this)
+    this.hideCountrySelectAlert = this.hideCountrySelectAlert.bind(this)
+    this.hideBusinessPhoneAlert = this.hideBusinessPhoneAlert.bind(this)
+
     this.state = {
       update: true,
       canSubmit: false,
@@ -64,6 +67,18 @@ class RegistrationScreen extends Component {
         countryList: orderBy(this.props.vm.countries, ['name'], ['asc']).map(c => ({...c, label: c.name, value: c.name}))
       })
     }
+  }
+
+  hideCountrySelectAlert() {
+    this.setState({
+      countrySelectDirty: false
+    })
+  }
+
+  hideBusinessPhoneAlert () {
+    this.setState({
+      businessPhoneDirty: false
+    })
   }
 
   reRender() {
@@ -144,7 +159,6 @@ class RegistrationScreen extends Component {
       businessPhoneDirty: false,
       countrySelectDirty: false
     })
-
   }
 
   render() {
@@ -200,6 +214,7 @@ class RegistrationScreen extends Component {
               label={renderRequired('Business phone (include the country code)')}
               type="phone"
               name="phone"
+              value=""
               validationError="Invalid business phone"
               required
               listCountry={vm.countries}
@@ -207,6 +222,7 @@ class RegistrationScreen extends Component {
               onChangeCountry={this.onBusinessPhoneChange}
               forceCountry={country && country.name}
               showCheckMark
+              onOutsideClick={this.hideBusinessPhoneAlert}
             />
             { businessPhoneDirty && <div className="warningText">Note: Changing the country code also updates your country selection</div> }
             <TextInput
@@ -249,6 +265,7 @@ class RegistrationScreen extends Component {
               placeholder="- Select country -"
               showDropdownIndicator
               setValueOnly
+              onBlur={this.hideCountrySelectAlert}
             />
             {countrySelectDirty && <div className="warningText">Note: Changing the country also updates the country code of business phone.</div> }
             <div className="space" />
