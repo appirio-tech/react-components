@@ -42,7 +42,7 @@ class PhoneInput extends Component {
       const currentCountry = _.get(this.state, 'currentCountry.name') || _.get(stateUpdate, 'currentCountry.name')
       if (newProps.forceCountry !== currentCountry) {
         const country = _.find(this.props.listCountry, c => c.name === newProps.forceCountry)
-        this.choseCountry(country, stateUpdate)
+        this.choseCountry(country, stateUpdate, true)
       }
     }
   }
@@ -71,7 +71,7 @@ class PhoneInput extends Component {
     }
   }
 
-  changeValue(e) {
+  changeValue(e, externalChange) {
     const value = e.target.value
     this.props.setValue(value)
 
@@ -83,11 +83,12 @@ class PhoneInput extends Component {
     this.props.onChange(this.props.name, value)
     this.props.onChangeCountry({
       phone: value,
-      country: currentCountry || {}
+      country: currentCountry || {},
+      externalChange
     })
   }
 
-  choseCountry(country, updatedState) {
+  choseCountry(country, updatedState, externalChange) {
     if (country.code !== this.state.currentCountry.code) {
       const asYouTypeTmp = new AsYouType(country.alpha2)
       const { asYouType } = updatedState || this.state
@@ -98,7 +99,7 @@ class PhoneInput extends Component {
 
       if (asYouTypeTmp.countryCallingCode) {
         this.setState({ currentCountry: country })
-        this.changeValue({ target: { value: `+${asYouTypeTmp.countryCallingCode}${phoneNumber}` } })
+        this.changeValue({ target: { value: `+${asYouTypeTmp.countryCallingCode}${phoneNumber}` } }, externalChange)
       }
     }
   }
