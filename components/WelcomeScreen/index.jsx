@@ -19,7 +19,7 @@ class WelcomeScreen extends React.Component {
       <div className="WelcomeScreen flex column middle center">
         <div className="container flex column middle center">
           <div className="title">Welcome to Topcoder</div>
-          <div className="sub-title">The world’s biggest crowdsorginc platform</div>
+          <div className="sub-title">The world’s biggest crowdsourcing platform</div>
           <div className="content">
           Hello, <b>{vm.userHandle}</b>
           <br />
