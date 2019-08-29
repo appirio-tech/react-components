@@ -289,10 +289,12 @@
         color: $tc-red-100;
       }
 
-      .warningText {
-        font-size: 12px;
+      .form .warningText {
+        @extend .error-message;
+        background-color: $tc-red-10;
+        border: 1px solid $tc-orange-30;
+        color: $tc-orange-70;
         margin-top: 6px;
-        color: $tc-red-100;
         width: 100%;
         margin-bottom: 6px;
       }

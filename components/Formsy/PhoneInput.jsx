@@ -19,6 +19,7 @@ class PhoneInput extends Component {
     this.changeValue = this.changeValue.bind(this)
     this.choseCountry = this.choseCountry.bind(this)
     this.isValidInput = this.isValidInput.bind(this)
+    this.onDocClick = this.onDocClick.bind(this)
     this.state = {
       currentCountry: {},
       asYouType: {}
@@ -42,8 +43,22 @@ class PhoneInput extends Component {
       const currentCountry = _.get(this.state, 'currentCountry.name') || _.get(stateUpdate, 'currentCountry.name')
       if (newProps.forceCountry !== currentCountry) {
         const country = _.find(this.props.listCountry, c => c.name === newProps.forceCountry)
-        this.choseCountry(country, stateUpdate)
+        this.choseCountry(country, stateUpdate, true)
       }
+    }
+  }
+
+  componentDidMount() {
+    document.addEventListener('click', this.onDocClick)
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('click', this.onDocClick)
+  }
+
+  onDocClick(e) {
+    if (!e.path.includes(this.refs.wrapper)) {
+      this.props.onOutsideClick()
     }
   }
 
@@ -71,7 +86,7 @@ class PhoneInput extends Component {
     }
   }
 
-  changeValue(e) {
+  changeValue(e, externalChange) {
     const value = e.target.value
     this.props.setValue(value)
 
@@ -83,11 +98,12 @@ class PhoneInput extends Component {
     this.props.onChange(this.props.name, value)
     this.props.onChangeCountry({
       phone: value,
-      country: currentCountry || {}
+      country: currentCountry || {},
+      externalChange
     })
   }
 
-  choseCountry(country, updatedState) {
+  choseCountry(country, updatedState, externalChange) {
     if (country.code !== this.state.currentCountry.code) {
       const asYouTypeTmp = new AsYouType(country.alpha2)
       const { asYouType } = updatedState || this.state
@@ -98,7 +114,7 @@ class PhoneInput extends Component {
 
       if (asYouTypeTmp.countryCallingCode) {
         this.setState({ currentCountry: country })
-        this.changeValue({ target: { value: `+${asYouTypeTmp.countryCallingCode}${phoneNumber}` } })
+        this.changeValue({ target: { value: `+${asYouTypeTmp.countryCallingCode}${phoneNumber}` } }, externalChange)
       }
     }
   }
@@ -116,7 +132,7 @@ class PhoneInput extends Component {
     const errorMessage = this.props.getErrorMessage() || this.props.validationError
 
     return (
-      <div className={wrapperClasses}>
+      <div className={wrapperClasses} ref="wrapper">
         <label className="tc-label">
           {label}
           {labelHelpTooltip && <HelpIcon tooltip={labelHelpTooltip} />}
@@ -165,6 +181,7 @@ class PhoneInput extends Component {
 
 PhoneInput.defaultProps = {
   onChange: () => { },
+  onOutsideClick: () => { },
   forceErrorMessage: null,
   listCountry: [],
   showCheckMark: false
@@ -202,6 +219,11 @@ PhoneInput.propTypes = {
    * event when change phone
    */
   onChangeCountry: PT.func,
+
+  /**
+   * triggered when clicked outside
+   */
+  onOutsideClick: PT.func,
 
   /**
    * should show check mark icon when valid input
