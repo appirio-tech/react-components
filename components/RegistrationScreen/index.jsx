@@ -87,6 +87,7 @@ class RegistrationScreen extends Component {
 
   onBusinessPhoneChange({ country, externalChange }) {
     const { vm } = this.props
+    const { country: previousSelectedCountry } = this.state
 
     if (!country || !country.code) {
       vm.phoneErrorMessage = 'Please enter a valid phone number.'
@@ -98,7 +99,10 @@ class RegistrationScreen extends Component {
       this.setState({ update: true, country })
     }
 
-    if (!externalChange) {
+    const countryName = country && country.name
+    const previousCountryName = previousSelectedCountry && previousSelectedCountry.name
+    const countryCodeChanged = countryName && previousCountryName && countryName !== previousCountryName
+    if (!externalChange && countryCodeChanged) {
       this.setState({
         businessPhoneDirty: true
       })
