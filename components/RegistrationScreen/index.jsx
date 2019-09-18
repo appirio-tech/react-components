@@ -5,36 +5,11 @@ import cn from 'classnames'
 import TextInput from '../Formsy/TextInput'
 import PhoneInput from '../Formsy/PhoneInput'
 import PasswordInput from '../Formsy/PasswordInput'
-import TiledRadioGroup from '../Formsy/TiledRadioGroup'
 import FormsySelect from '../Formsy/FormsySelect'
 import Checkbox from '../Formsy/Checkbox'
-import CheckRadioIcon from './CheckRadioIcon'
 import Loader from '../Loader/Loader'
 
 require('./style.scss')
-
-const optsCompanySize = [
-  {
-    title: '1-15',
-    value: '1-15',
-    desc: null
-  },
-  {
-    title: '16-50',
-    value: '16-50',
-    desc: null
-  },
-  {
-    title: '51-500',
-    value: '51-500',
-    desc: null
-  },
-  {
-    title: '500+',
-    value: '500+',
-    desc: null
-  }
-]
 
 class RegistrationScreen extends Component {
 
@@ -176,7 +151,7 @@ class RegistrationScreen extends Component {
       <div className="RegistrationScreen flex column middle center">
         <div className="container flex column middle center">
           <div className="title">Let's start with introductions</div>
-          <div className="sub-title">First we need to know you a bit better</div>
+          <div className="sub-title">We're excited to meet you!</div>
           {vm.errorMessage && (<div className="server-error-message">{vm.errorMessage}</div>)}
           <Formsy.Form onValidSubmit={this.submit} onValid={this.enableButton} onInvalid={this.disableButton} className="form flex column middle center">
             <TextInput
@@ -247,16 +222,6 @@ class RegistrationScreen extends Component {
               required
               showCheckMark
             />
-            <TiledRadioGroup
-              wrapperClass={'input-container'}
-              label="Company size"
-              name="companySize"
-              options={optsCompanySize}
-              value={optsCompanySize[0].value}
-              showCheckMarkBeforeTitle
-              checkMarkActiveIcon={(<CheckRadioIcon active />)}
-              checkMarkUnActiveIcon={(<CheckRadioIcon active={false} />)}
-            />
             <FormsySelect
               ref="countrySelect"
               wrapperClass={'input-container'}
@@ -318,7 +283,7 @@ class RegistrationScreen extends Component {
             }
             <Checkbox
               wrapperClass={'input-container'}
-              label="I agree to receive marketing communications from Topcoder."
+              label="I do not want to receive marketing communications from Topcoder."
               name="agreeTerm"
             />
             <div className="space" />

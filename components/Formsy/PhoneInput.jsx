@@ -138,6 +138,18 @@ class PhoneInput extends Component {
           {labelHelpTooltip && <HelpIcon tooltip={labelHelpTooltip} />}
         </label>
         <div className="input-container">
+          <Dropdown handleKeyboardNavigation pointerShadow>
+            <div className="dropdown-menu-header flex center middle">{this.state.currentCountry && this.state.currentCountry.alpha3 ? this.state.currentCountry.alpha3 : 'Country code'}
+              <IconDown width={20} height={12} fill="#fff" wrapperClass="arrow" /></div>
+            <ul className="dropdown-menu-list">
+              {
+                this.props.listCountry.map((country, i) => {
+                  /* eslint-disable react/jsx-no-bind */
+                  return <li tabIndex="-1" className={(this.state.currentCountry.code === country.code) ? 'selected' : ''} onClick={() => this.choseCountry(country)} key={i}><a href="javascript:;">{country.name}</a></li>
+                })
+              }
+            </ul>
+          </Dropdown>
           <input
             name={name}
             className={classes}
@@ -150,18 +162,6 @@ class PhoneInput extends Component {
             min={minValue}
             max={maxValue}
           />
-          <Dropdown handleKeyboardNavigation pointerShadow>
-            <div className="dropdown-menu-header flex center middle">{this.state.currentCountry ? this.state.currentCountry.alpha3 : ''}
-              <IconDown width={20} height={12} fill="#fff" wrapperClass="arrow" /></div>
-            <ul className="dropdown-menu-list">
-              {
-                this.props.listCountry.map((country, i) => {
-                  /* eslint-disable react/jsx-no-bind */
-                  return <li tabIndex="-1" className={(this.state.currentCountry.code === country.code) ? 'selected' : ''} onClick={() => this.choseCountry(country)} key={i}><a href="javascript:;">{country.name}</a></li>
-                })
-              }
-            </ul>
-          </Dropdown>
         </div>
         {this.isValidInput() && showCheckMark && (
           <IconUICheckSimple wrapperClass="check-success-icon" width={10} height={10} fill="#5CC900" />
