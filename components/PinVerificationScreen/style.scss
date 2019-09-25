@@ -193,6 +193,14 @@
         }
       }
     }
+
+    .pin-case-sensitive-message {
+      color: $tc-red-100;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 15px;
+      margin-top: 10px;
+      text-align: right;
+    }
   }
 }
-  

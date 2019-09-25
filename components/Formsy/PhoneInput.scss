@@ -22,7 +22,7 @@
     position: relative;
 
     .tc-file-field__inputs {
-      padding-right: 66px;
+      padding-left: 106px;
     }
 
     .input-container {
@@ -32,10 +32,10 @@
     .dropdown-wrap {
       position: absolute;
       bottom: 1px;
-      right: 1px;
+      left: 1px;
       height: 28px;
       background: #D7D3D0;
-      width: 60px;
+      width: 100px;
       border-radius: 0 3px 3px 0;
 
       .dropdown-wrap {

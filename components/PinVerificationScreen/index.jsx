@@ -32,7 +32,7 @@ class PinVerificationScreen extends React.Component {
     this.canSubmitEmail = this.canSubmitEmail.bind(this)
 
     this.onChangeEmail = this.onChangeEmail.bind(this)
-    
+
     props.vm.reRender = this.reRender
   }
 
@@ -103,7 +103,7 @@ class PinVerificationScreen extends React.Component {
     vm.pin = pin
     vm.submit()
   }
-  
+
   render() {
     const {vm} = this.props
     return (
@@ -118,7 +118,7 @@ class PinVerificationScreen extends React.Component {
               If you don’t see an email from us right away, wait for a few minutes or check your spam folder. If you don’t receive a message or need help with your account, please contact <a href="mailto:support@topcoder.com">support@topcoder.com</a>.<a href="mailto:support@connect.com"></a>
             </div>
           ) : (<div className="description">
-            We’ve sent you a one-time PIN number on the email you provided us. Please check your inbox for a message from Topcoder and either use the provided link, or enter the PIN. Allow for 5-10 minutes if the email didn’t go through.
+            We've sent a 1-time PIN to your email. Check your inbox and enter the PIN provided. If its been a few minutes and you have not received your PIN, check your spam folder first and then request a new PIN be sent if not found.
           </div>)}
 
           <div className="form-container flex column middle center">
@@ -151,7 +151,7 @@ class PinVerificationScreen extends React.Component {
                     <a onClick={this.openEmailForm}>change email</a>
                   </div>
                 )}
-              
+
             </Formsy.Form>
             {!vm.emailEditMode&& (
               <Formsy.Form className="form flex column center" onValidSubmit={this.handleSubmitPin} onValid={this.enableButtonPin} onInvalid={this.disableButtonPin}>
@@ -165,6 +165,7 @@ class PinVerificationScreen extends React.Component {
                     required
                   />
                 </div>
+                <div className="pin-case-sensitive-message">* PIN is case-sensitive</div>
                 <div className="bottom-button flex middle center">
                   <button onClick={this.sendNewPinClicked} className="tc-btn tc-btn-sm tc-btn-default flex middle center" >Send a new PIN</button>
                   <button type="submit" className="verify-pin-btn tc-btn tc-btn-sm tc-btn-primary flex middle center" disabled={!this.state.canSubmitPin}>Verify PIN</button>

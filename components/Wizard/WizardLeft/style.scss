@@ -70,7 +70,7 @@
         top: 23px;
         margin-left: 1px;
         border-radius: 2px;
-  
+
         @include mobile {
           width: 46px;
           height: 4px;
@@ -91,17 +91,14 @@
             text-align: center;
         }
         &.step1::after {
-          content: "Create account";
+          content: "Profile";
         }
         &.step2::after {
-          content: "Select your solution";
+          content: "Validation";
           width: 200px;
         }
         &.step3::after {
-          content: "Define scope";
-        }
-        &.step4::after {
-          content: "Project submitted";
+          content: "Registered";
         }
       }
     }
@@ -153,4 +150,3 @@
     }
   }
 }
-  
