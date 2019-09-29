@@ -1,12 +1,10 @@
 @import '~tc-ui/src/styles/tc-includes';
 
-
-
 :global {
   .filepicker {
     position: relative;
     height: 130px;
-  
+
     .filepicker-drag-drop-pane {
       @include roboto-medium;
       position: absolute;
@@ -15,35 +13,35 @@
       top: 0;
       width: 100%;
       height: 100%;
-      padding: $base-unit*4;
+      padding: $base-unit * 4;
       background: $tc-gray-neutral-light;
       font-size: $tc-label-lg;
       color: $tc-gray-80;
       text-align: center;
       border: 1px dashed $tc-gray-40;
     }
-  
+
     .filepicker-progress {
       display: none;
     }
-  
+
     &.in-progress {
       .filepicker-progress {
         display: block;
       }
-  
+
       .filepicker-drag-drop-text,
       .filepicker-picker + button {
         display: none;
       }
     }
-  
+
     &.drag-entered {
       .filepicker-drag-drop-pane {
         border: 1px solid $tc-gray-80;
       }
     }
-  
+
     .filepicker-progress {
       position: absolute;
       left: 0;
@@ -56,7 +54,10 @@
     .fsp-drop-pane__container {
       background-color: transparent;
       border-style: none;
+
+      .fsp-drop-pane__drop-zone {
+        z-index: 1;
+      }
     }
   }
 }
-  
