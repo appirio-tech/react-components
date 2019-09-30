@@ -5,6 +5,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 import { Manager, Target, Popper, Arrow } from 'react-popper'
+import { Portal } from 'react-portal'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import cn from 'classnames'
 import _ from 'lodash'
@@ -102,7 +103,7 @@ class Tooltip extends Component {
 
   render() {
     const { isPopoverOpen } = this.state
-    const { popMethod, pointerWidth, tooltipShowDuration, tooltipHideDuration } = this.props
+    const { popMethod, pointerWidth, tooltipShowDuration, tooltipHideDuration, usePortal } = this.props
 
     // pointer height is adjacent of the triangle with angle 45 degrees
     // cosinus(45)=sqrt(2)/2
@@ -172,23 +173,48 @@ class Tooltip extends Component {
               }}
               classNames="fade"
             >
-              <Popper
-                key="popper"
-                placement="top"
-                ref={this.popperMounted}
-                className="tooltip-popper"
-                modifiers={{
-                  offset: {
-                    offset: `0, ${pointerHeight}`
-                  }
-                }}
-                {..._.pick(popMethodHandler, [
-                  'onMouseEnter',
-                  'onMouseLeave']
-                )}
-              >
-                {body}
-              </Popper>
+              {usePortal ? (
+                <Portal>
+                  <Popper
+                    key="popper"
+                    placement="top"
+                    ref={this.popperMounted}
+                    className="tooltip-popper"
+                    modifiers={{
+                      offset: {
+                        offset: `0, ${pointerHeight}`
+                      },
+                      preventOverflow: {
+                        boundariesElement: 'viewport'
+                      }
+                    }}
+                    {..._.pick(popMethodHandler, [
+                      'onMouseEnter',
+                      'onMouseLeave']
+                    )}
+                  >
+                    {body}
+                  </Popper>
+                </Portal>
+              ) : (
+                <Popper
+                  key="popper"
+                  placement="top"
+                  ref={this.popperMounted}
+                  className="tooltip-popper"
+                  modifiers={{
+                    offset: {
+                      offset: `0, ${pointerHeight}`
+                    }
+                  }}
+                  {..._.pick(popMethodHandler, [
+                    'onMouseEnter',
+                    'onMouseLeave']
+                  )}
+                >
+                  {body}
+                </Popper>
+              )}
             </CSSTransition>
           )}
         </TransitionGroup>
@@ -206,7 +232,8 @@ Tooltip.propTypes = {
   tooltipShowDuration: PropTypes.number,
   tooltipHideDuration: PropTypes.number,
   theme: PropTypes.string,
-  popMethod: PropTypes.oneOf(['hover', 'click'])
+  popMethod: PropTypes.oneOf(['hover', 'click']),
+  usePortal: PropTypes.bool // set to true to append tooltup in body of DOM
 }
 
 Tooltip.defaultProps = {
@@ -216,7 +243,8 @@ Tooltip.defaultProps = {
   tooltipShowDuration: 200,
   tooltipHideDuration: 0,
   theme: 'default',
-  popMethod: 'hover'
+  popMethod: 'hover',
+  usePortal: false
 }
 
 export default Tooltip
