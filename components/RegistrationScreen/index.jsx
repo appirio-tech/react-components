@@ -131,6 +131,7 @@ class RegistrationScreen extends Component {
     vm.country = find(vm.countries, {name: form.country})
     vm.firstName = form.firstName
     vm.lastName = form.lastName
+    vm.agreeTerm = form.agreeTerm ? form.agreeTerm : false
 
     vm.submit()
 
