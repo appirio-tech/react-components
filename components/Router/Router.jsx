@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import ExampleApp                    from '../ExampleApp/ExampleApp.jsx'
 const UploadedFileExamples          = require('../UploadedFile/UploadedFileExamples.cjsx')
 const UploadedFilesExamples         = require('../UploadedFiles/UploadedFilesExamples.cjsx')
+import FilePickerExample             from '../FilePicker/FilePickerExample.jsx'
 const FileUploaderExamples          = require('../FileUploader/FileUploaderExamples.cjsx')
 const FileUploaderContainerExamples = require('../FileUploader/FileUploaderContainerExamples.cjsx')
 import AvatarExamples                from '../Avatar/AvatarExamples.jsx'
@@ -60,6 +61,8 @@ const Component = () => (
         <Route path="/UploadedFileExamples" render={renderApp(<UploadedFileExamples />)} />
 
         <Route path="/UploadedFilesExamples" render={renderApp(<UploadedFilesExamples />)} />
+
+        <Route path="/FilePickerExample" render={renderApp(<FilePickerExample />)} />
 
         <Route path="/FileUploaderExamples" render={renderApp(<FileUploaderExamples />)} />
 
