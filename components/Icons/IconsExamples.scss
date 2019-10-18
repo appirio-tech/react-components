@@ -1,0 +1,10 @@
+@import '~tc-ui/src/styles/tc-styles';
+
+:global {
+  
+  .icon-container {
+    width: 20px;
+    height: 20px; 
+    background-color: $tc-dark-blue-100
+    }
+}

@@ -10,7 +10,8 @@ const navs = {
     'SearchBarExample',
     'NavbarExample',
     'TCFooterExamples',
-    'MenuBarExamples'
+    'MenuBarExamples',
+    'TabsExamples'
   ],
   FileUploader: [
     'FileUploaderContainerExamples',
@@ -27,7 +28,8 @@ const navs = {
     'StandardListItemExamples',
     'TooltipExamples',
     'RadioGroupExample',
-    'DrawerExamples'
+    'DrawerExamples',
+    'IconsExamples'
   ],
   ManageSteps: [
     'ManageStepsExamples',

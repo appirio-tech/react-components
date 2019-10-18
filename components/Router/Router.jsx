@@ -38,6 +38,8 @@ import RadioGroupExample             from '../Formsy/RadioGroupExample.jsx'
 import WizardExamples                from '../Wizard/WizardExamples.jsx'
 import LoginScreenExamples           from '../LoginScreen/LoginScreenExamples.jsx'
 import DrawerExamples                from '../Drawer/DrawerExamples.jsx'
+import IconsExamples                 from '../Icons/IconsExamples.jsx'
+import TabsExamples                 from '../Tabs/TabsExamples.jsx'
 
 const renderApp = (component) => () => (
   <ExampleApp>
@@ -49,6 +51,8 @@ const Component = () => (
   <Provider store={store}>
     <BrowserRouter>
       <Switch>
+        <Route exact path="/IconsExamples" render={renderApp(<IconsExamples />)}/>
+        <Route exact path="/TabsExamples" render={renderApp(<TabsExamples />)}/>
         <Route exact path="/" render={renderApp(<AvatarExamples />)}/>
 
         <Route path="/LoginScreenExamples" render={renderApp(<LoginScreenExamples/>)} />
