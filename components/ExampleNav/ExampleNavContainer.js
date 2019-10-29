@@ -16,7 +16,8 @@ const navs = {
     'FileUploaderContainerExamples',
     'FileUploaderExamples',
     'UploadedFileExamples',
-    'UploadedFilesExamples'
+    'UploadedFilesExamples',
+    'FilePickerExample'
   ],
   Misc: [
     'CheckboxExamples',
