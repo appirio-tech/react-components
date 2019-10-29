@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PT from 'prop-types'
 import { HOC as hoc } from 'formsy-react'
 import classNames from 'classnames'
+import _ from 'lodash'
 
 import HelpIcon from '../HelpIcon/HelpIcon'
 import Dropdown from '../Dropdown/Dropdown'

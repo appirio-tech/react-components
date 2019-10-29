@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import ExampleApp                    from '../ExampleApp/ExampleApp.jsx'
 const UploadedFileExamples          = require('../UploadedFile/UploadedFileExamples.cjsx')
 const UploadedFilesExamples         = require('../UploadedFiles/UploadedFilesExamples.cjsx')
+import FilePickerExample             from '../FilePicker/FilePickerExample.jsx'
 const FileUploaderExamples          = require('../FileUploader/FileUploaderExamples.cjsx')
 const FileUploaderContainerExamples = require('../FileUploader/FileUploaderContainerExamples.cjsx')
 import AvatarExamples                from '../Avatar/AvatarExamples.jsx'
@@ -35,6 +36,7 @@ import TooltipExamples               from '../Tooltip/TooltipExamples.jsx'
 import ProgressBarExample            from '../ProgressBar/ProgressBarExample.jsx'
 import RichDataTableExample          from '../RichDataTable/RichDataTableExample.jsx'
 import RadioGroupExample             from '../Formsy/RadioGroupExample.jsx'
+import FormExamples                  from '../Formsy/FormExamples.jsx'
 import WizardExamples                from '../Wizard/WizardExamples.jsx'
 import LoginScreenExamples           from '../LoginScreen/LoginScreenExamples.jsx'
 import DrawerExamples                from '../Drawer/DrawerExamples.jsx'
@@ -64,6 +66,8 @@ const Component = () => (
         <Route path="/UploadedFileExamples" render={renderApp(<UploadedFileExamples />)} />
 
         <Route path="/UploadedFilesExamples" render={renderApp(<UploadedFilesExamples />)} />
+
+        <Route path="/FilePickerExample" render={renderApp(<FilePickerExample />)} />
 
         <Route path="/FileUploaderExamples" render={renderApp(<FileUploaderExamples />)} />
 
@@ -116,6 +120,8 @@ const Component = () => (
         <Route path="/RichDataTableExample" render={renderApp(<RichDataTableExample />)} />
 
         <Route path="/RadioGroupExample" render={renderApp(<RadioGroupExample />)} />
+
+        <Route path="/FormExamples" render={renderApp(<FormExamples />)} />
 
         <Route path="/DrawerExamples" render={renderApp(<DrawerExamples />)} />
       </Switch>

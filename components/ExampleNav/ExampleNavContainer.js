@@ -17,7 +17,8 @@ const navs = {
     'FileUploaderContainerExamples',
     'FileUploaderExamples',
     'UploadedFileExamples',
-    'UploadedFilesExamples'
+    'UploadedFilesExamples',
+    'FilePickerExample'
   ],
   Misc: [
     'CheckboxExamples',
@@ -29,7 +30,8 @@ const navs = {
     'TooltipExamples',
     'RadioGroupExample',
     'DrawerExamples',
-    'IconsExamples'
+    'IconsExamples',
+    'FormExamples'
   ],
   ManageSteps: [
     'ManageStepsExamples',
