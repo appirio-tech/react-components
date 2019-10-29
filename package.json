@@ -67,7 +67,7 @@
     "classnames": "^2.2.3",
     "coffee-script": "^1.12.7",
     "coffeescript": "^1.12.7",
-    "filestack-js": "^3.8.0",
+    "filestack-js": "^1.13.2",
     "formsy-react": "^0.19.5",
     "isomorphic-fetch": "^2.2.1",
     "libphonenumber-js": "^1.4.6",

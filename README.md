@@ -19,6 +19,10 @@ Install dependencies by running the following in the root of the project:
 - Check js code linting and trying to fix errors automatically: `npm run lint:fix`
 - To create the build: `npm run build`
 
+## FilePickerExample
+
+To make `FilePickerExample` work the `FILE_PICKER_API_KEY_DEV` environment variable has to be provided. So on the Linux/macOS the demo cam be run like `FILE_PICKER_API_KEY_DEV=<value> npm run dev`.
+
 ## Contributing
 
 ### Pull Requests
