@@ -28,7 +28,8 @@ const navs = {
     'StandardListItemExamples',
     'TooltipExamples',
     'RadioGroupExample',
-    'DrawerExamples'
+    'DrawerExamples',
+    'FormExamples'
   ],
   ManageSteps: [
     'ManageStepsExamples',
