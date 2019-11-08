@@ -4,6 +4,7 @@ import { find, orderBy } from 'lodash'
 import cn from 'classnames'
 import TextInput from '../Formsy/TextInput'
 import PhoneInput from '../Formsy/PhoneInput'
+import TimezoneInput from '../Formsy/TimezoneInput'
 import PasswordInput from '../Formsy/PasswordInput'
 import FormsySelect from '../Formsy/FormsySelect'
 import Checkbox from '../Formsy/Checkbox'
@@ -132,6 +133,7 @@ class RegistrationScreen extends Component {
     vm.firstName = form.firstName
     vm.lastName = form.lastName
     vm.agreeTerm = form.agreeTerm ? form.agreeTerm : false
+    vm.timeZone = form.timeZone
 
     vm.submit()
 
@@ -148,6 +150,18 @@ class RegistrationScreen extends Component {
     const preFillLastName = vm.lastName
     const preFillEmail = vm.email ? vm.email : null
     const renderRequired = (label) => <span><span>{label}</span>&nbsp;<sup className="requiredMarker">*</sup></span>
+
+    const renderTimezoneOptions = ( timezoneOptions, filterFn ) => (
+      <FormsySelect
+        required
+        name="timeZone"
+        filterOption={filterFn}
+        options={timezoneOptions}
+        wrapperClass={'input-container'}
+        label={renderRequired('Local Timezone')}
+      />
+    )
+
     return (
       <div className="RegistrationScreen flex column middle center">
         <div className="container flex column middle center">
@@ -225,7 +239,7 @@ class RegistrationScreen extends Component {
             />
             <FormsySelect
               ref="countrySelect"
-              wrapperClass={'input-container'}
+              wrapperClass={'input-container country-input'}
               label={renderRequired('Country')}
               name="country"
               value=""
@@ -238,6 +252,9 @@ class RegistrationScreen extends Component {
               onBlur={this.hideCountrySelectAlert}
             />
             {countrySelectDirty && <div className="warningText">Note: Changing the country also updates the country code of business phone.</div> }
+            <TimezoneInput
+              render={renderTimezoneOptions}
+            />
             <div className="space" />
             <TextInput
               wrapperClass={'input-container'}
