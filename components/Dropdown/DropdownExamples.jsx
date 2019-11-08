@@ -1,6 +1,7 @@
 require('./DropdownExamples.scss')
 
 import Dropdown from './Dropdown'
+import DropdownItem from './DropdownItem'
 import React from 'react'
 
 const items = [
@@ -91,6 +92,31 @@ class DropdownExamples  extends React.Component {
           </Dropdown>
         </div>
         
+        
+        <div className="dropdown-example full-width">
+          <Dropdown pointerShadow>
+            <a className="dropdown-menu-header">Dropdown with DropdownItem</a>
+            <ul className="dropdown-menu-list">
+              {
+                items.map((link, i) => {
+                  const editOptions={
+                    label: link,
+                    val: i + ''
+                  }
+                  return (
+                    <DropdownItem 
+                      key={i} 
+                      item={editOptions}
+                      onItemClick={function(val) {console.log('DropdownItem val:' + val)}}
+                      currentSelection="1"
+                    />
+                  )
+                })
+              }
+            </ul>
+          </Dropdown>
+        </div>
+
       </section>
     )
   }

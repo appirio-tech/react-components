@@ -10,13 +10,15 @@ const navs = {
     'SearchBarExample',
     'NavbarExample',
     'TCFooterExamples',
-    'MenuBarExamples'
+    'MenuBarExamples',
+    'TabsExamples'
   ],
   FileUploader: [
     'FileUploaderContainerExamples',
     'FileUploaderExamples',
     'UploadedFileExamples',
-    'UploadedFilesExamples'
+    'UploadedFilesExamples',
+    'FilePickerExample'
   ],
   Misc: [
     'CheckboxExamples',
@@ -27,7 +29,9 @@ const navs = {
     'StandardListItemExamples',
     'TooltipExamples',
     'RadioGroupExample',
-    'DrawerExamples'
+    'DrawerExamples',
+    'IconsExamples',
+    'FormExamples'
   ],
   ManageSteps: [
     'ManageStepsExamples',
