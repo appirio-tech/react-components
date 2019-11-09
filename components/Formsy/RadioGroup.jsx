@@ -47,7 +47,7 @@ class RadioGroup extends Component {
           <input
             ref={setRef}
             id={id}
-            checked={checked}
+            checked={!!checked}
             type="radio"
             value={radio.value}
             onChange={this.changeValue}
@@ -81,7 +81,7 @@ class RadioGroup extends Component {
 }
 
 
-RadioGroup.PropTypes = {
+RadioGroup.propTypes = {
   options: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
