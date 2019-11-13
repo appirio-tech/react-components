@@ -21,13 +21,23 @@ class WelcomeScreen extends React.Component {
           <div className="title">Welcome to Topcoder</div>
           <div className="sub-title">The world’s largest crowdsourcing platform</div>
           <div className="content">
-          Hello, <b>{vm.userHandle}</b>
-          <br />
-          <br />
-          Your Topcoder account was successfully created. On the catalog let’s figure out which solution best fits your needs.
+            Hi <b>{vm.userHandle}</b>,
+            <br />
+
+            Welcome to Connect! Your account was created successfully.
+            <br/><br/>
+
+            <div className="intro-question">What is Connect?</div>
+            <div>Connect is Topcoder's application where clients start new projects, oversee progress and collaborate with delivery teams.</div>
+
+            <div className="intro-question">What do you want to do next in Connect?</div>
+            <div>
+              <ul className="getting-started-list">
+                <li><a href={vm.connectDashboardUrl}>Join the projects</a> I've been invited to</li>
+                <li><a href={vm.newProjectUrl}>Start a new project</a> myself</li>
+              </ul>
+            </div>
           </div>
-          <a href={vm.newProjectUrl} type="button" className="next-btn tc-btn tc-btn-sm tc-btn-primary flex middle center">Review Catalog</a>
-          <div className="next-btn flex center middle">or go to&nbsp;<a href={vm.connectDashboardUrl} type="button" className="tc-link ">Dashboard</a></div>
         </div>
       </div>
     )
