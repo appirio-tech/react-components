@@ -15,12 +15,25 @@ class FilePicker extends React.Component {
     this.onChange = this.onChange.bind(this)
   }
 
-  onChange(event) {
-    this.props.onSuccess(this.props.options.multiple ? event.fpfiles : event.fpfile)
+  static getDerivedStateFromProps(nextProps, prevState){
+    const dragText =  nextProps.options.dragText
+    // every setState will invoke this, so cache dragText
+    if(prevState.preDragText === undefined) {
+      return {
+        preDragText: nextProps.options.dragText
+      }
+    }
+
+    // if props change
+    if (nextProps.options.dragText !== prevState.preDragText) {
+      prevState.preDragText = dragText
+      prevState.dragText = dragText
+    }
+    return  prevState
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({dragText: nextProps.options.dragText})
+  onChange(event) {
+    this.props.onSuccess(this.props.options.multiple ? event.fpfiles : event.fpfile)
   }
 
   componentDidMount() {

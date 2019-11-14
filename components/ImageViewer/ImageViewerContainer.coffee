@@ -26,7 +26,7 @@ class ImageViewer extends React.Component
     this.updateArrowsState = this.updateArrowsState.bind this
     this.toggleZoom = this.toggleZoom.bind this
 
-  componentWillMount: ->
+  componentDidMount: ->
     this.props.onFileChange({file: this.state.file}) if this.props.onFileChange
 
   componentWillUpdate: ->

@@ -73,7 +73,7 @@ class CheckboxGroup extends Component {
   }
 }
 
-CheckboxGroup.PropTypes = {
+CheckboxGroup.propTypes = {
   options: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 

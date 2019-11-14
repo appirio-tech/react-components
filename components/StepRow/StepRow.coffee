@@ -3,23 +3,15 @@
 React                  = require 'react'
 PropTypes              = require 'prop-types'
 StepRowView            = require './StepRowView'
+{ connect }            = require 'react-redux'
 { reduxForm }          = require 'redux-form'
 { loadStep,
   createStep,
   updateStep }         = require 'appirio-tech-client-app-layer'
 
-fields = [
-  'name'
-  'startsAt'
-  'details.submissionsDueBy'
-  'endsAt'
-  'stepType'
-  'status'
-]
 
 class StepRow extends React.Component
   @propTypes =
-    fields       : PropTypes.object.isRequired
     permissions  : PropTypes.array.isRequired
     handleSubmit : PropTypes.func.isRequired
     submitting   : PropTypes.bool.isRequired
@@ -39,6 +31,10 @@ class StepRow extends React.Component
 
   submit: (values) ->
     { isNew, projectId, stepId, createStep, updateStep, resetForm, initializeForm } = this.props
+    if values.status
+      values.status = values.status.value
+    if values.stepType
+      values.stepType = values.stepType.value
 
     if isNew
       createStep(projectId, values).then( () => resetForm() )
@@ -53,7 +49,6 @@ class StepRow extends React.Component
 
 formProps =
   form: 'stepRow'
-  fields: fields
 
 mapStateToProps = (state, ownProps) ->
   initialValues: state.entities.steps[ownProps.stepId]
@@ -64,4 +59,4 @@ actionsToBind = {
   updateStep,
 }
 
-module.exports = reduxForm(formProps, mapStateToProps, actionsToBind)(StepRow)
+module.exports = connect(mapStateToProps, actionsToBind)(reduxForm(formProps )(StepRow))

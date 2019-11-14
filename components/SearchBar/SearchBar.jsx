@@ -9,10 +9,16 @@ import classNames from 'classnames'
 
 //states: empty, filled, focused
 
+
+
+const getQueryStringValue = (key) => {
+  return unescape(window.location.href.replace(new RegExp('^(?:.*[&\\?]' + escape(key).replace(/[\.\+\*]/g, '\\$&') + '(?:\\=([^&]*))?)?.*$', 'i'), '$1'))
+}
+
 class SearchBar extends Component {
   constructor(props) {
     super(props)
-    const initialTerm = this.getQueryStringValue(props.searchTermKey)
+    const initialTerm = getQueryStringValue(props.searchTermKey)
     this.state = {
       searchState: initialTerm.length > 0 ? 'filled' : 'empty',
       suggestions: [],
@@ -30,8 +36,28 @@ class SearchBar extends Component {
     this.handleSuggestionsUpdate = this.handleSuggestionsUpdate.bind(this)
   }
 
-  getQueryStringValue (key) {
-    return unescape(window.location.href.replace(new RegExp('^(?:.*[&\\?]' + escape(key).replace(/[\.\+\*]/g, '\\$&') + '(?:\\=([^&]*))?)?.*$', 'i'), '$1'))
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const searchVal = getQueryStringValue(nextProps.searchTermKey)
+    // every setState will invoke this, so cache preSearchVal
+    if(prevState.preSearchVal === undefined) {
+      return {
+        preSearchVal: searchVal
+      }
+    }
+    // if props change
+    if (searchVal !== prevState.preSearchVal) {
+      if(searchVal !== prevState.searchVal) {
+        return {
+          searchState: 'filled',
+          searchValue: searchVal,
+          preSearchVal: searchVal
+        }
+      }
+      //cache preSearchVal
+      prevState.preSearchVal = searchVal
+    }
+    return  prevState
   }
 
   componentDidMount() {
@@ -42,12 +68,6 @@ class SearchBar extends Component {
     window.removeEventListener('click', this.handleOutsideClick)
   }
 
-  componentWillReceiveProps(nextProps) {
-    const searchVal = this.getQueryStringValue(nextProps.searchTermKey)
-    if (searchVal !== this.state.searchValue) {
-      this.setState({ searchState: 'filled', searchValue: searchVal })
-    }
-  }
 
   handleOutsideClick(evt) {
     let t = evt.target
@@ -121,7 +141,7 @@ class SearchBar extends Component {
     this.refs.searchValue.value = ''
     this.setState({ searchValue: this.refs.searchValue.value, finalTerm: '' })
     this.setState({ searchState: 'empty' })
-    this.setState({ suggestions: false })
+    this.setState({ suggestions: [] })
     this.props.onClearSearch()
   }
 

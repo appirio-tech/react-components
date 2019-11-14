@@ -243,7 +243,7 @@ class RegistrationScreen extends Component {
               label={renderRequired('Country')}
               name="country"
               value=""
-              options={countryList}
+              options={countryList || []}
               onChange={this.onCountryChange}
               required
               placeholder="- Select country -"

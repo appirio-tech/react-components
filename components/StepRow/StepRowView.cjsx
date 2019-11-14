@@ -5,13 +5,30 @@ require 'react-datetime/css/react-datetime.css'
 
 React          = require 'react'
 PropTypes      = require 'prop-types'
+{ Field }       = require 'redux-form'
 DateTime       = require 'react-datetime'
 classNames     = require 'classnames'
 StepTypeSelect = require './StepTypeSelect'
 StatusSelect   = require './StatusSelect'
 
-StepRow = ({ 
-  fields: { name, startsAt, details, endsAt, stepType, status }
+
+
+renderDateInput = (field) ->
+    if typeof field.input.value == 'object'
+      field.input.value = field.input.value.format('MM/DD/YYYY')
+    <input  type='text'{...field.input} disabled={field.disabled} className={field.className} placeholder={field.placeholder}/>
+
+renderDateTime = (field) ->
+    <DateTime {...field.input} className={field.className}/>
+
+renderStepTypeSelect = (field) ->
+    <StepTypeSelect isNew={field.isNew} formProps={field.input} editable={field.editable} />
+
+
+renderStatusSelect = (field) ->
+    <StatusSelect isNew={field.isNew} formProps={field.input} editable={field.editable} />
+
+StepRow = ({
   handleSubmit
   submitting
   dirty
@@ -32,40 +49,47 @@ StepRow = ({
     {
       if editable
         <div className="flex middle">
-          <input type="text" className="name" {...name} />
 
-          <DateTime className="DateTime" {...startsAt} />
+          <Field name="name" className="name" type="text" component='input'/>
 
-          <DateTime className="DateTime" {...details.submissionsDueBy} />
+          <Field name="startsAt" className="DateTime"  component={renderDateTime}/>
 
-          <DateTime className="DateTime" {...endsAt} />
+          <Field name="details.submissionsDueBy" className="DateTime"  component={renderDateTime}/>
+
+          <Field name="endsAt" className="DateTime"  component={renderDateTime}/>
+
         </div>
       else
         if isNew
           <div className="flex middle">
-            <input type="text" className="name" disabled=true placeholder="Name edit disabled" />
 
-            <input type="text" className="DateTime disabled" disabled=true placeholder="Date edit disabled"/>
+            <Field name="name" className="name" type="text" component="input" disabled={true} placeholder="Name edit disabled"/>
 
-            <input type="text" className="DateTime disabled" disabled=true placeholder="Date edit disabled"/>
+            <Field name="startsAt" className="DateTime disabled" type="text" component={renderDateInput} disabled={true} placeholder="Date edit disabled"/>
 
-            <input type="text" className="DateTime disabled" disabled=true placeholder="Date edit disabled"/>
+            <Field name="details.submissionsDueBy" className="DateTime disabled" type="text" component={renderDateInput} disabled={true} placeholder="Date edit disabled"/>
+
+            <Field name="endsAt" className="DateTime disabled" type="text" component={renderDateInput} disabled={true} placeholder="Date edit disabled"/>
           </div>
         else
           <div className="flex middle">
-            <p className="name">{name.value}</p>
 
-            <p className="DateTime disabled">{startsAt.value}</p>
 
-            <p className="DateTime disabled">{details.submissionsDueBy.value}</p>
+            <Field name="name" className="name" type="text" component="input" disabled={true} placeholder="Name edit disabled"/>
 
-            <p className="DateTime disabled">{endsAt.value}</p>
+            <Field name="startsAt" className="DateTime disabled" type="text" component={renderDateInput} disabled={true} placeholder="Date edit disabled"/>
+
+            <Field name="details.submissionsDueBy" className="DateTime disabled" type="text" component={renderDateInput} disabled={true} placeholder="Date edit disabled"/>
+
+            <Field name="endsAt" className="DateTime disabled" type="text" component={renderDateInput} disabled={true} placeholder="Date edit disabled"/>
           </div>
     }
 
-    <StepTypeSelect isNew={isNew} formProps={stepType} editable={editable} />
 
-    <StatusSelect isNew={isNew} formProps={status} editable={editable} />
+
+    <Field name="stepType" isNew={isNew} editable={editable} component={renderStepTypeSelect}/>
+
+    <Field name="status" isNew={isNew} editable={editable} component={renderStatusSelect}/>
 
     {
       if editable && (dirty || isNew)
@@ -76,7 +100,6 @@ StepRow = ({
   </form>
 
 StepRow.propTypes =
-  fields       : PropTypes.object.isRequired
   handleSubmit : PropTypes.func.isRequired
   submitting   : PropTypes.bool.isRequired
   permissions  : PropTypes.array.isRequired

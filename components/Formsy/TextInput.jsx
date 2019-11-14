@@ -67,7 +67,7 @@ class TextInput extends Component {
           className={classes}
           type={type}
           placeholder={placeholder}
-          value={value}
+          value={value || ''}
           disabled={disabled}
           onChange={this.changeValue}
           maxLength={maxLength}

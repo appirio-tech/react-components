@@ -12,7 +12,7 @@ class PasswordInput extends Component {
 
   constructor(props) {
     super(props)
-    
+
     this.changeValue = this.changeValue.bind(this)
     this.toggleShowHide = this.toggleShowHide.bind(this)
     this.isValidInput= this.isValidInput.bind(this)
@@ -76,7 +76,7 @@ class PasswordInput extends Component {
           className={classes}
           type={this.state.type}
           placeholder={placeholder}
-          value={this.props.getValue()}
+          value={this.props.getValue() || ''}
           disabled={disabled}
           onChange={this.changeValue}
           maxLength={maxLength}

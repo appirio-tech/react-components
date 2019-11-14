@@ -3,7 +3,7 @@ import FilePicker from './FilePicker'
 
 const FilePickerExample = () => {
   const onFileUpload = (files) => {
-    alert(JSON.strinigify(files, null, 2))
+    alert(JSON.stringify(files, null, 2))
   }
 
   const FILE_PICKER_API_KEY = process.env.FILE_PICKER_API_KEY_DEV

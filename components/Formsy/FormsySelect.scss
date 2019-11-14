@@ -1,6 +1,14 @@
 @import "~tc-ui/src/styles/tc-includes";
 
 :global {
+  .basic-single-select{
+    .select__input {
+      input {
+        height: 10px;
+      }
+    }
+
+  }
   .formsySelectComponent {
     .Select-control > .Select-input > input,
     .Select-control > .Select-input > input:focus {

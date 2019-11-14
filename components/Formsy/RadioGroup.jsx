@@ -37,7 +37,7 @@ class RadioGroup extends Component {
         const price = (radio.quoteUp || 0) - (selectedOption.quoteUp || 0)
         return (price < 0 ? '-' : '+') + ' $' + numberWithCommas(Math.abs(price))
       }
-      const checked = (selectedOption && selectedOption.value === radio.value)
+      const checked = (selectedOption && selectedOption.value === radio.value) || false
       const disabled = this.props.isFormDisabled() || radio.disabled || this.props.disabled
       const rClass = cn('radio', { disabled, selected: checked })
       const id = name+'-opt-'+key
@@ -81,7 +81,7 @@ class RadioGroup extends Component {
 }
 
 
-RadioGroup.PropTypes = {
+RadioGroup.propTypes = {
   options: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
