@@ -78,9 +78,9 @@ class ExampleNavContainer extends Component {
     const { onClick, onBack } = this
 
     if (root) {
-      return React.createElement(ExampleNav, { links, onClick })
+      return <ExampleNav links={links} onClick={onClick} />
     } else {
-      return React.createElement(ExampleNav, { links, onBack })
+      return <ExampleNav links={links} onBack={onBack} />
     }
   }
 }

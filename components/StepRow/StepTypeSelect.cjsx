@@ -1,10 +1,9 @@
 'use strict'
 
-require 'react-select/dist/react-select.css'
 
+import Select from 'react-select'
 React      = require 'react'
 PropTypes  = require 'prop-types'
-Select     = require 'react-select'
 find       = require 'lodash/find'
 
 types = [
@@ -24,27 +23,32 @@ types = [
   value: 'codeFinalFixes'
 ]
 
-StepRow = ({ 
+StepRow = ({
   formProps
   isNew
   editable
 }) ->
   typeLabel = find(types, (t) -> t.value == formProps.value)?.label
 
+  if typeof formProps.value == 'string'
+    formProps.value = {value:formProps.value, label: typeLabel }
+
   if isNew
     if editable
       <Select
         {...formProps}
-        className   = "types"
+        className   = "types basic-single-select"
         options     = {types}
-        clearable   = false
+        clearable   = {false}
         placeholder = "Step Type"
         onBlur      = { (event) ->
           formProps.onBlur(formProps.value) }
       />
     else
-      <Select className="types" placeholder="Type disabled" disabled />
+      <Select {...formProps} options={types} className="types basic-single-select" placeholder="Type disabled" isDisabled />
   else
+    if typeof formProps.value == 'object'
+      typeLabel = formProps.value.label
     <p className="types">{typeLabel}</p>
 
 StepRow.propTypes =

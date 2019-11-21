@@ -8,12 +8,23 @@ import IconArrowMinimalLeft from '../Icons/IconArrowMinimalLeft'
 import IconArrowMinimalRight from '../Icons/IconArrowMinimalRight'
 
 export default class Carousel extends Component {
-  componentWillMount() {
-    this.handleResize = this.handleResize.bind(this)
-    window.addEventListener('resize', this.handleResize)
+  constructor(props) {
+    super(props)
     this.handlePageUp = this.handlePageUp.bind(this)
     this.handlePageDown = this.handlePageDown.bind(this)
-    this.setState({firstVisibleItem: this.props.firstVisibleItem || 0})
+    this.handleResize = this.handleResize.bind(this)
+    this.state = {
+      firstVisibleItem: this.props.firstVisibleItem || 0
+    }
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', this.handleResize)
+    this.validatePagers()
+  }
+
+  componentDidUpdate() {
+    this.validatePagers()
   }
 
   componentWillUnmount() {
@@ -21,14 +32,6 @@ export default class Carousel extends Component {
   }
 
   handleResize() {
-    this.validatePagers()
-  }
-
-  componentDidMount() {
-    this.validatePagers()    
-  }
-
-  componentDidUpdate() {
     this.validatePagers()
   }
 

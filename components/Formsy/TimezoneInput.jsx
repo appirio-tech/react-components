@@ -54,7 +54,7 @@ class TimezoneInput extends React.Component {
   }
 }
 
-TimezoneInput.PropTypes = {
+TimezoneInput.propTypes = {
   render: PropTypes.func.isRequired
 }
 

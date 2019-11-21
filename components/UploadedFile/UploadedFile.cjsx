@@ -13,7 +13,7 @@ UploadedFile = ({ status, preview, progress, fileName, enableCaptions, captions,
           <div className="failed flex column center">
             <img className="icon" src={require './icon-alert-red.svg'}/>
 
-            <button className="clean" onClick="" type="button">
+            <button className="clean" type="button">
               retry
             </button>
           </div>
@@ -50,7 +50,7 @@ UploadedFile = ({ status, preview, progress, fileName, enableCaptions, captions,
 
     {
       if enableCaptions
-        <textarea placeholder="enter a caption" value={captions} />
+        <textarea placeholder="enter a caption" onChange={()=>{}} value={captions} />
     }
   </div>
 

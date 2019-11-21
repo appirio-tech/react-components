@@ -20,7 +20,7 @@ ImageViewerExamples = ->
   <div className="ImageViewerExamples">
     <h1>With Files (Required)</h1>
     <div className="imageViewer">
-      <ImageViewerContainer files={files}, initialFile={files[1]}/>
+      <ImageViewerContainer files={files} initialFile={files[1]}/>
     </div>
   </div>
 

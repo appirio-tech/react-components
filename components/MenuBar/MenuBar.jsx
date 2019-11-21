@@ -7,9 +7,17 @@ import NavLink from '../NavLink/NavLink'
 require('./MenuBar.scss')
 
 export default class MenuBar extends Component {
-  componentWillMount() {
+  constructor(props) {
+    super(props)
+
     this.handleResize = this.handleResize.bind(this)
-    this.handleResize()
+
+    this.state = {
+      mobile : window.innerWidth <= this.props.mobileBreakPoint
+    }
+  }
+
+  componentDidMount() {
     window.addEventListener('resize', this.handleResize)
   }
 
@@ -20,7 +28,6 @@ export default class MenuBar extends Component {
   handleResize() {
     this.setState({ mobile: window.innerWidth <= this.props.mobileBreakPoint })
   }
-
 
   renderLinkDom(item, linkContent, itemClass, linkTarget) {
     // _.self forces a full page refresh using underlying Link

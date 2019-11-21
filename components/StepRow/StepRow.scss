@@ -5,32 +5,39 @@
     .name {
       width: 162px;
     }
-  
+
     .DateTime {
       margin-left: 20px;
       width: 135px;
-  
+
       &.disabled {
         width: 138px;
       }
     }
-  
+
+    .basic-single-select {
+      margin-bottom: 10px;
+      width: 162px;
+      input {
+        height: 16px;
+      }
+    }
     .Select {
       width: 162px;
     }
-  
+
     .icon.warning {
       margin-left: 10px;
     }
-  
+
     .types {
       margin-left : 30px;
       margin-right: 10px;
       width       : 162px;
     }
-  
+
     button {
-  
+
      &.addButton {
        margin-left: 15px;
      }

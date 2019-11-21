@@ -3,7 +3,15 @@ require('./RichDataTableExample.scss')
 import React from'react'
 import RichDataTableHeader from './RichDataTableHeader'
 
-const columns = ['Type', 'Projects', 'Status', 'Status Date', 'Customer', 'Copilot']
+const columns = [
+  {key: 'Type'},
+  {key: 'Projects'},
+  {key: 'Status'},
+  {key: 'Status Date'},
+  {key: 'Customer'},
+  {key: 'Copilot'}
+]
+
 const sortColumns = {
   Projects: [
     {

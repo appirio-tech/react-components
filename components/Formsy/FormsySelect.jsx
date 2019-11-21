@@ -9,6 +9,7 @@ import './FormsySelect.scss'
  * This component is a formsy wrapper for the React Select component
  * @param {Object} props Component props
  */
+
 const FormsySelect = props => {
   const { onChange, wrapperClass, label } = props
   const selectedOption = props.getValue()
@@ -22,12 +23,19 @@ const FormsySelect = props => {
   return (
     <div className={cn(wrapperClass, 'formsySelectComponent')}>
       <label className="tc-label">{label}</label>
-      <Select {...props} value={value} onChange={onSelectionChange} />
+      <Select
+        {...props}
+        value={value}
+        className="basic-single-select"
+        classNamePrefix="select"
+        isClearable
+        onChange={onSelectionChange}
+      />
     </div>
   )
 }
 
-FormsySelect.PropTypes = {
+FormsySelect.propTypes = {
   onChange: PropTypes.func,
   setValueOnly: PropTypes.bool,
   options: PropTypes.array.isRequired
