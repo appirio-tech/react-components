@@ -1,0 +1,36 @@
+.workingHourSelectionContainer {
+  // global is required to make it work in both connect and registration page.
+  :global {
+    .selectRow {
+      display: flex;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+
+    .selectWrapper {
+      width: 100%;
+
+      &:last-child {
+        margin-top: 10px;
+      }
+    }
+
+    @media (min-width: 960px) {
+      .selectRow {
+        flex-wrap: nowrap;
+      }
+
+      .selectWrapper {
+        width: 50%;
+
+        &:last-child {
+          margin-top: 0;
+        }
+
+        &:first-child {
+          margin-right: 8px;
+        }
+      }
+    }
+  }
+}

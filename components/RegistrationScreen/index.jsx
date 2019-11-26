@@ -5,6 +5,7 @@ import cn from 'classnames'
 import TextInput from '../Formsy/TextInput'
 import PhoneInput from '../Formsy/PhoneInput'
 import TimezoneInput from '../Formsy/TimezoneInput'
+import WorkingHoursSelection from '../Formsy/WorkingHoursSelection'
 import PasswordInput from '../Formsy/PasswordInput'
 import FormsySelect from '../Formsy/FormsySelect'
 import Checkbox from '../Formsy/Checkbox'
@@ -134,6 +135,8 @@ class RegistrationScreen extends Component {
     vm.lastName = form.lastName
     vm.agreeTerm = form.agreeTerm ? form.agreeTerm : false
     vm.timeZone = form.timeZone
+    vm.workingHourStart = form.workingHourStart
+    vm.workingHourEnd = form.workingHourEnd
 
     vm.submit()
 
@@ -157,7 +160,7 @@ class RegistrationScreen extends Component {
         name="timeZone"
         filterOption={filterFn}
         options={timezoneOptions}
-        wrapperClass={'input-container'}
+        wrapperClass={'input-container timezone-input'}
         label={renderRequired('Local Timezone')}
       />
     )
@@ -254,6 +257,14 @@ class RegistrationScreen extends Component {
             {countrySelectDirty && <div className="warningText">Note: Changing the country also updates the country code of business phone.</div> }
             <TimezoneInput
               render={renderTimezoneOptions}
+            />
+            <WorkingHoursSelection
+              startHourLabel="Start Time"
+              endHourLabel="End Time"
+              startHourName="workingHourStart"
+              endHourName="workingHourEnd"
+              label="Normal Working Hours"
+              wrapperClass={'input-container'}
             />
             <div className="space" />
             <TextInput
