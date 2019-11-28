@@ -13,6 +13,7 @@ import Textarea from './Textarea'
 import TextInput from './TextInput'
 import TiledCheckboxGroup from './TiledCheckboxGroup'
 import TiledRadioGroup from './TiledRadioGroup'
+import WorkingHoursSelection from './WorkingHoursSelection'
 import Formsy from 'formsy-react'
 
 import './FormExamples.scss'
@@ -129,7 +130,9 @@ class FormExamples extends React.Component {
     if (name === 'tiledRadioGroup') {
       this.setState({ tiledRadioGroupvalue: value })
     }
-
+    if (name === 'workingHourStart' || name === 'workingHourEnd') {
+      this.setState({ [name]: value })
+    }
   }
 
   render() {
@@ -312,6 +315,23 @@ class FormExamples extends React.Component {
           <div className="field-value">
             Selected value: {this.state.tiledRadioGroupvalue ? this.state.tiledRadioGroupvalue : ''}
           </div>
+
+          {/* Working hours selection */}
+          <div className="field-title">Working Hours Selection:</div>
+          <WorkingHoursSelection
+            startHourLabel="Start Time"
+            endHourLabel="End Time"
+            startHourName="workingHourStart"
+            endHourName="workingHourEnd"
+            wrapperClass="working-hour-example"
+            onChange={this.onChange}
+          />
+          {
+            this.state.workingHourStart && this.state.workingHourEnd &&
+            <div className="field-value">
+              Selected value: {this.state.workingHourStart || ''} to {this.state.workingHourEnd || ''}
+            </div>
+          }
 
           <div className="padding-top-20 padding-bottom-30">
             <button type="submit" onClick={this.submitForm} className="tc-btn tc-btn-sm tc-btn-primary flex middle center" >Submit</button>

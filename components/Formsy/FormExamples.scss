@@ -2,6 +2,12 @@
 
 :global {
   .form-container {
+    margin-bottom: 140px;
+
+    .working-hour-example {
+      max-width: 600px;
+    }
+
     .input-container {
       max-width: 400px;
       input {
