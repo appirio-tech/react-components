@@ -21,7 +21,7 @@ statuses = [
   value: 'CLOSED'
 ]
 
-StepRow = ({ 
+StepRow = ({
   formProps
   editable
   isNew
@@ -33,7 +33,7 @@ StepRow = ({
       {...formProps}
       className   = "statuses"
       options     = {statuses}
-      clearable   = false
+      clearable   = {false}
       placeholder = "Status"
       onBlur      = { (event) ->
         formProps.onBlur(formProps.value) }
