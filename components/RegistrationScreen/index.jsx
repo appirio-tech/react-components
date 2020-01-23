@@ -66,7 +66,7 @@ class RegistrationScreen extends Component {
     const { vm } = this.props
     const { country: previousSelectedCountry } = this.state
 
-    if (!isValid) {
+    if (!country || !country.code  ||!isValid) {
       vm.phoneErrorMessage = 'Please enter a valid phone number.'
       this.reRender()
     } else {
