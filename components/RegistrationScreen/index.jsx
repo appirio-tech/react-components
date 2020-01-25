@@ -62,11 +62,11 @@ class RegistrationScreen extends Component {
     this.setState({ update: true })
   }
 
-  onBusinessPhoneChange({ country, externalChange }) {
+  onBusinessPhoneChange({ country, externalChange, isValid }) {
     const { vm } = this.props
     const { country: previousSelectedCountry } = this.state
 
-    if (!country || !country.code) {
+    if (!country || !country.code  ||!isValid) {
       vm.phoneErrorMessage = 'Please enter a valid phone number.'
       this.reRender()
     } else {
@@ -121,9 +121,24 @@ class RegistrationScreen extends Component {
     return !vm.loading && canSubmit && !vm.usernameErrorMessage && !vm.emailErrorMessage && !vm.phoneErrorMessage && this.state.country
   }
 
+  /**
+   * format phone bofore send to server
+   * if phone is not started with '+', add '+'
+   *
+   * @param {String}        phone
+   * @returns {String}
+   */
+  formatPhone (phone) {
+    if(phone[0] === '+') {
+      return phone
+    }else{
+      return '+' + phone
+    }
+  }
+
   submit(form) {
     const { vm } = this.props
-    vm.phone = form.phone
+    vm.phone = this.formatPhone(form.phone)
     vm.title = form.title
     vm.companyName = form.companyName
     vm.companySize = form.companySize
