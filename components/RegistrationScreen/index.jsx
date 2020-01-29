@@ -224,6 +224,9 @@ class RegistrationScreen extends Component {
             <PhoneInput
               wrapperClass={cn('input-container', {'valid-phone': !vm.phoneErrorMessage})}
               label={renderRequired('Business phone (include the country code)')}
+              validations={{
+                isValid: () => !vm.phoneErrorMessage
+              }}
               type="phone"
               name="phone"
               value=""
