@@ -10,7 +10,7 @@ classNames     = require 'classnames'
 StepTypeSelect = require './StepTypeSelect'
 StatusSelect   = require './StatusSelect'
 
-StepRow = ({ 
+StepRow = ({
   fields: { name, startsAt, details, endsAt, stepType, status }
   handleSubmit
   submitting
@@ -43,13 +43,13 @@ StepRow = ({
       else
         if isNew
           <div className="flex middle">
-            <input type="text" className="name" disabled=true placeholder="Name edit disabled" />
+            <input type="text" className="name" disabled={true} placeholder="Name edit disabled" />
 
-            <input type="text" className="DateTime disabled" disabled=true placeholder="Date edit disabled"/>
+            <input type="text" className="DateTime disabled" disabled={true} placeholder="Date edit disabled"/>
 
-            <input type="text" className="DateTime disabled" disabled=true placeholder="Date edit disabled"/>
+            <input type="text" className="DateTime disabled" disabled={true} placeholder="Date edit disabled"/>
 
-            <input type="text" className="DateTime disabled" disabled=true placeholder="Date edit disabled"/>
+            <input type="text" className="DateTime disabled" disabled={true} placeholder="Date edit disabled"/>
           </div>
         else
           <div className="flex middle">

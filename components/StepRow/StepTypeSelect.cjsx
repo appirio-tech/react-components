@@ -24,7 +24,7 @@ types = [
   value: 'codeFinalFixes'
 ]
 
-StepRow = ({ 
+StepRow = ({
   formProps
   isNew
   editable
@@ -37,7 +37,7 @@ StepRow = ({
         {...formProps}
         className   = "types"
         options     = {types}
-        clearable   = false
+        clearable   = {false}
         placeholder = "Step Type"
         onBlur      = { (event) ->
           formProps.onBlur(formProps.value) }
