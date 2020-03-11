@@ -52,6 +52,18 @@ Formsy.addValidationRule('isRelaxedUrl', (values, value, array) => { // eslint-d
 Formsy.addValidationRule('isValidName', (values, value, array) => { // eslint-disable-line no-unused-vars
   return value && VALID_NAME_REGEX.test(value.trim()) ? true : false // eslint-disable-line no-unneeded-ternary
 })
+Formsy.addValidationRule('isPositiveNumber', (values, value, array) => { // eslint-disable-line no-unused-vars
+  if (_.isNumber(value) && (value === 0 || value > 0)) {
+    return true
+  }
+  return false
+})
+Formsy.addValidationRule('isNonNegativeNumber', (values, value, array) => { // eslint-disable-line no-unused-vars
+  if (_.isNumber(value) && (value === 0 || value > 0)) {
+    return true
+  }
+  return false
+})
 
 export default {
   Formsy,
