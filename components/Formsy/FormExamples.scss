@@ -1,0 +1,73 @@
+@import '~tc-ui/src/styles/tc-includes';
+
+:global {
+  .form-container {
+    margin-bottom: 140px;
+
+    .working-hour-example {
+      max-width: 600px;
+    }
+
+    .input-container {
+      max-width: 400px;
+      input {
+        height: 30px;
+      }
+    }
+    .field-title {
+      font-size: 20px;
+      font-weight: 200;
+      margin-bottom: 10px;
+      margin-top: 20px;
+    }
+
+    .field-value {
+      margin-top: 10px;
+    }
+    .test {
+      display: flex;
+      flex-direction: row;
+    }
+    .tiled-group-item {
+      margin-right: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .check-mark {
+      background: blue;
+      border-radius: 100%;
+      width: 20px;
+      height: 20px;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+    }
+    .padding-top-20{
+      padding-top: 20px;
+    }
+    .padding-bottom-30{
+      padding-bottom: 30px;
+    }
+    .slider-radio-group{
+      padding-left: 20px;
+      max-width: 80%;
+    }
+  }
+  .phone-input-container .dropdown-wrap {
+    height: 28px;
+  }
+  .phone-input-container .check-success-icon {
+    position: absolute;
+    top: 14px;
+    right: -20px;
+    width: 10px;
+    height: 10px;
+  }
+  .phone-input-container > .input-container > input {
+    margin-bottom: 0;
+  }
+  .phone-input-container .Dropdown{
+    left: 140px;
+  }
+}

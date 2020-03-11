@@ -36,9 +36,12 @@ import TooltipExamples               from '../Tooltip/TooltipExamples.jsx'
 import ProgressBarExample            from '../ProgressBar/ProgressBarExample.jsx'
 import RichDataTableExample          from '../RichDataTable/RichDataTableExample.jsx'
 import RadioGroupExample             from '../Formsy/RadioGroupExample.jsx'
+import FormExamples                  from '../Formsy/FormExamples.jsx'
 import WizardExamples                from '../Wizard/WizardExamples.jsx'
 import LoginScreenExamples           from '../LoginScreen/LoginScreenExamples.jsx'
 import DrawerExamples                from '../Drawer/DrawerExamples.jsx'
+import IconsExamples                 from '../Icons/IconsExamples.jsx'
+import TabsExamples                 from '../Tabs/TabsExamples.jsx'
 
 const renderApp = (component) => () => (
   <ExampleApp>
@@ -50,6 +53,8 @@ const Component = () => (
   <Provider store={store}>
     <BrowserRouter>
       <Switch>
+        <Route exact path="/IconsExamples" render={renderApp(<IconsExamples />)}/>
+        <Route exact path="/TabsExamples" render={renderApp(<TabsExamples />)}/>
         <Route exact path="/" render={renderApp(<AvatarExamples />)}/>
 
         <Route path="/LoginScreenExamples" render={renderApp(<LoginScreenExamples/>)} />
@@ -115,6 +120,8 @@ const Component = () => (
         <Route path="/RichDataTableExample" render={renderApp(<RichDataTableExample />)} />
 
         <Route path="/RadioGroupExample" render={renderApp(<RadioGroupExample />)} />
+
+        <Route path="/FormExamples" render={renderApp(<FormExamples />)} />
 
         <Route path="/DrawerExamples" render={renderApp(<DrawerExamples />)} />
       </Switch>

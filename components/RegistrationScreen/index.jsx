@@ -4,6 +4,8 @@ import { find, orderBy } from 'lodash'
 import cn from 'classnames'
 import TextInput from '../Formsy/TextInput'
 import PhoneInput from '../Formsy/PhoneInput'
+import TimezoneInput from '../Formsy/TimezoneInput'
+import WorkingHoursSelection from '../Formsy/WorkingHoursSelection'
 import PasswordInput from '../Formsy/PasswordInput'
 import FormsySelect from '../Formsy/FormsySelect'
 import Checkbox from '../Formsy/Checkbox'
@@ -60,11 +62,11 @@ class RegistrationScreen extends Component {
     this.setState({ update: true })
   }
 
-  onBusinessPhoneChange({ country, externalChange }) {
+  onBusinessPhoneChange({ country, externalChange, isValid }) {
     const { vm } = this.props
     const { country: previousSelectedCountry } = this.state
 
-    if (!country || !country.code) {
+    if (!country || !country.code  ||!isValid) {
       vm.phoneErrorMessage = 'Please enter a valid phone number.'
       this.reRender()
     } else {
@@ -119,9 +121,24 @@ class RegistrationScreen extends Component {
     return !vm.loading && canSubmit && !vm.usernameErrorMessage && !vm.emailErrorMessage && !vm.phoneErrorMessage && this.state.country
   }
 
+  /**
+   * format phone bofore send to server
+   * if phone is not started with '+', add '+'
+   *
+   * @param {String}        phone
+   * @returns {String}
+   */
+  formatPhone (phone) {
+    if(phone[0] === '+') {
+      return phone
+    }else{
+      return '+' + phone
+    }
+  }
+
   submit(form) {
     const { vm } = this.props
-    vm.phone = form.phone
+    vm.phone = this.formatPhone(form.phone)
     vm.title = form.title
     vm.companyName = form.companyName
     vm.companySize = form.companySize
@@ -132,6 +149,9 @@ class RegistrationScreen extends Component {
     vm.firstName = form.firstName
     vm.lastName = form.lastName
     vm.agreeTerm = form.agreeTerm ? form.agreeTerm : false
+    vm.timeZone = form.timeZone
+    vm.workingHourStart = form.workingHourStart
+    vm.workingHourEnd = form.workingHourEnd
 
     vm.submit()
 
@@ -148,6 +168,18 @@ class RegistrationScreen extends Component {
     const preFillLastName = vm.lastName
     const preFillEmail = vm.email ? vm.email : null
     const renderRequired = (label) => <span><span>{label}</span>&nbsp;<sup className="requiredMarker">*</sup></span>
+
+    const renderTimezoneOptions = ( timezoneOptions, filterFn ) => (
+      <FormsySelect
+        required
+        name="timeZone"
+        filterOption={filterFn}
+        options={timezoneOptions}
+        wrapperClass={'input-container timezone-input'}
+        label={renderRequired('Local Timezone')}
+      />
+    )
+
     return (
       <div className="RegistrationScreen flex column middle center">
         <div className="container flex column middle center">
@@ -192,6 +224,9 @@ class RegistrationScreen extends Component {
             <PhoneInput
               wrapperClass={cn('input-container', {'valid-phone': !vm.phoneErrorMessage})}
               label={renderRequired('Business phone (include the country code)')}
+              validations={{
+                isValid: () => !vm.phoneErrorMessage
+              }}
               type="phone"
               name="phone"
               value=""
@@ -225,7 +260,7 @@ class RegistrationScreen extends Component {
             />
             <FormsySelect
               ref="countrySelect"
-              wrapperClass={'input-container'}
+              wrapperClass={'input-container country-input'}
               label={renderRequired('Country')}
               name="country"
               value=""
@@ -238,6 +273,17 @@ class RegistrationScreen extends Component {
               onBlur={this.hideCountrySelectAlert}
             />
             {countrySelectDirty && <div className="warningText">Note: Changing the country also updates the country code of business phone.</div> }
+            <TimezoneInput
+              render={renderTimezoneOptions}
+            />
+            <WorkingHoursSelection
+              startHourLabel="Start Time"
+              endHourLabel="End Time"
+              startHourName="workingHourStart"
+              endHourName="workingHourEnd"
+              label="Normal Working Hours"
+              wrapperClass={'input-container'}
+            />
             <div className="space" />
             <TextInput
               wrapperClass={'input-container'}

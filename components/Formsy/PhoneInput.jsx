@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PT from 'prop-types'
 import { HOC as hoc } from 'formsy-react'
 import classNames from 'classnames'
+import _ from 'lodash'
 
 import HelpIcon from '../HelpIcon/HelpIcon'
 import Dropdown from '../Dropdown/Dropdown'
@@ -86,6 +87,22 @@ class PhoneInput extends Component {
     }
   }
 
+  /**
+   * checkPhone
+   *
+   * @param {String}        phone
+   * @returns {Boolean}
+   */
+  checkPhone (phone)  {
+    if (phone !== null && phone.trim().length !== 0) {
+      const  REG = /^(\+)?(?:[0-9] ?){6,14}[0-9]$/
+      if (REG.test(phone.trim())) {
+        return true
+      }
+    }
+    return false
+  }
+
   changeValue(e, externalChange) {
     const value = e.target.value
     this.props.setValue(value)
@@ -96,10 +113,12 @@ class PhoneInput extends Component {
     }
 
     this.props.onChange(this.props.name, value)
+    const isValid = this.checkPhone(value)
     this.props.onChangeCountry({
       phone: value,
       country: currentCountry || {},
-      externalChange
+      externalChange,
+      isValid
     })
   }
 
