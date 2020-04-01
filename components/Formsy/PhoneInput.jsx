@@ -108,18 +108,22 @@ class PhoneInput extends Component {
     this.props.setValue(value)
 
     const { country: currentCountry, asYouType} = this.getCountryFromPhoneNumber(value)
-    if (asYouType.country && currentCountry) {
-      this.setState({ asYouType, currentCountry })
+    const finish = () => {
+      this.props.onChange(this.props.name, value)
+      const isValid = this.checkPhone(value)
+      this.props.onChangeCountry({
+        phone: value,
+        country: currentCountry || {},
+        externalChange,
+        isValid
+      })
     }
 
-    this.props.onChange(this.props.name, value)
-    const isValid = this.checkPhone(value)
-    this.props.onChangeCountry({
-      phone: value,
-      country: currentCountry || {},
-      externalChange,
-      isValid
-    })
+    if (asYouType.country && currentCountry) {
+      this.setState({ asYouType, currentCountry }, finish)
+    } else {
+      finish()
+    }
   }
 
   choseCountry(country, updatedState, externalChange) {
