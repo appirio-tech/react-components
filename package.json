@@ -70,7 +70,7 @@
     "filestack-js": "^1.13.2",
     "formsy-react": "^0.19.5",
     "isomorphic-fetch": "^2.2.1",
-    "libphonenumber-js": "^1.4.6",
+    "libphonenumber-js": "1.4.6",
     "lodash": "^4.0.0",
     "material-ui": "^0.20.2",
     "moment": "^2.11.2",
