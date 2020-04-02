@@ -18,6 +18,14 @@ const RELAXED_URL_REGEX = /^(http(s?):\/\/)?(www\.)?[a-zA-Z0-9\.\-\_]+(\.[a-zA-Z
 
 const VALID_NAME_REGEX = /.*\s+.+/i
 
+// regexp logic:
+// first part: "\d*[1-9]+\d*[.]\d+" - allow decimal value with not 0 before '.' and 0 after '.'
+// second part: "(?:\d*[.])?\d*[1-9]+\d*" - allow integer value but not 0
+//                                           or decimal value with 0 before '.' and not 0 after '.'
+const POSITIVE_NUMBER_REGEX = /^[+]?(?:\d*[1-9]+\d*[.]\d+|(?:\d*[.])?\d*[1-9]+\d*)$/
+
+const NON_NEGATIVE_NUMBER_REGEX = /^[+]?(?:\d*[.])?\d+$/
+
 // validations
 Formsy.addValidationRule('isRequired', (values, value, array) => { // eslint-disable-line no-unused-vars
   if (_.isUndefined(value) || _.isNull(value)) {
@@ -51,6 +59,16 @@ Formsy.addValidationRule('isRelaxedUrl', (values, value, array) => { // eslint-d
 
 Formsy.addValidationRule('isValidName', (values, value, array) => { // eslint-disable-line no-unused-vars
   return value && VALID_NAME_REGEX.test(value.trim()) ? true : false // eslint-disable-line no-unneeded-ternary
+})
+
+Formsy.addValidationRule('isPositiveNumber', (values, value) => { // eslint-disable-line no-unused-vars
+  // use Regexp, as `value` usually comes as a string and it should be faster than parse it to number
+  return _.isUndefined(value) || value.toString().trim() === '' || POSITIVE_NUMBER_REGEX.test(value.toString())
+})
+
+Formsy.addValidationRule('isNonNegativeNumber', (values, value) => { // eslint-disable-line no-unused-vars
+  // use Regexp, as `value` usually comes as a string and it should be faster than parse it to number
+  return _.isUndefined(value) || value.toString().trim() === '' || NON_NEGATIVE_NUMBER_REGEX.test(value.toString())
 })
 
 export default {

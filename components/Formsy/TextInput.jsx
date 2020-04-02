@@ -49,7 +49,7 @@ class TextInput extends Component {
 
   render() {
     const { label, name, type, minValue, maxValue, placeholder, wrapperClass, maxLength, theme,
-      labelHelpTooltip, readonly, readonlyValueTooltip, showCheckMark } = this.props
+      labelHelpTooltip, readonly, readonlyValueTooltip, showCheckMark, inputRef } = this.props
     const hasError = !this.props.isPristine() && !this.props.isValid()
     const disabled = this.props.isFormDisabled() || this.props.disabled
     const wrapperClasses = classNames(wrapperClass, theme, { [styles['readonly-wrapper']]: readonly })
@@ -63,6 +63,7 @@ class TextInput extends Component {
           {labelHelpTooltip && <HelpIcon tooltip={labelHelpTooltip} />}
         </label>
         <input
+          ref={inputRef}
           name={name}
           className={classes}
           type={type}
@@ -127,7 +128,12 @@ TextInput.propTypes = {
   /**
    * should show check mark icon when valid input
    */
-  showCheckMark: PT.bool
+  showCheckMark: PT.bool,
+
+  /**
+   * ref of input
+   */
+  inputRef: PT.any,
 }
 
 export default hoc(TextInput)
