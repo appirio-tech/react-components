@@ -114,7 +114,7 @@ class WorkingHoursSelection extends React.Component {
 
 
 WorkingHoursSelection.defaultProps = {
-  isRequired: false,
+  isRequired: false
 }
 
 
