@@ -59,7 +59,8 @@ class WorkingHoursSelection extends React.Component {
       startHourValue,
       endHourValue,
       selectElement,
-      selectElementProps
+      selectElementProps,
+      isRequired
     } = this.props
 
     const Select = selectElement || FormsySelect
@@ -82,9 +83,11 @@ class WorkingHoursSelection extends React.Component {
               name={startHourName}
               onChange={this.onStartHourChange}
               value={startHourValue}
+              required={isRequired}
               {...(selectElement && selectElementProps
                 ? selectElementProps
                 : {})}
+              validationError={`Please enter ${startHourLabel}`}
             />
           </div>
 
@@ -96,9 +99,11 @@ class WorkingHoursSelection extends React.Component {
               name={endHourName}
               onChange={this.onEndHourChange}
               value={endHourValue}
+              required={isRequired}
               {...(selectElement && selectElementProps
                 ? selectElementProps
                 : {})}
+              validationError={`Please enter ${endHourLabel}`}
             />
           </div>
         </div>
@@ -106,6 +111,12 @@ class WorkingHoursSelection extends React.Component {
     )
   }
 }
+
+
+WorkingHoursSelection.defaultProps = {
+  isRequired: false
+}
+
 
 WorkingHoursSelection.PropTypes = {
   startHourLabel: PT.string.isRequired,
@@ -117,6 +128,7 @@ WorkingHoursSelection.PropTypes = {
   startHourValue: PT.string,
   endHourValue: PT.string,
   selectElement: PT.element,
-  selectElementProps: PT.object
+  selectElementProps: PT.object,
+  isRequired: PT.bool
 }
 export default WorkingHoursSelection
