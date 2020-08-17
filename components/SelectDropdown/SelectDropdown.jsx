@@ -8,7 +8,11 @@ import Dropdown from '../Dropdown/Dropdown'
 class SelectDropdown extends Component {
   constructor(props) {
     super(props)
-    this.state = _.assign(this.state, { selectedOption : null })
+    let option = null
+    if(props && props.options && props.value) {
+      option = _.find(props.options, {value: props.value})
+    }
+    this.state = _.assign(this.state, { selectedOption : option })
   }
 
   handleClick(option) {
