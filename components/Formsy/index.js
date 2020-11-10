@@ -49,6 +49,11 @@ Formsy.addValidationRule('isRequired', (values, value, array) => { // eslint-dis
     return value.trim().length > 0
   }
 
+  // we treat any boolean value as value is set
+  if (_.isBoolean(value)) {
+    return true
+  }
+
   // if some unexpected type of `value` has been passed, treat as not provided
   return false
 })
