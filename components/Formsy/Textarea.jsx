@@ -50,7 +50,7 @@ class Textarea extends Component {
   }
 
   render() {
-    const { label, name, rows, cols, placeholder, wrapperClass } = this.props
+    const { label, name, rows, cols, placeholder, wrapperClass, maxLength } = this.props
     const hasError = !this.props.isPristine() && !this.props.isValid()
     const classes = classNames('tc-textarea', {error: hasError}, {empty: this.props.getValue() === ''})
     const disabled = this.props.isFormDisabled() || this.props.disabled
@@ -74,6 +74,7 @@ class Textarea extends Component {
               onChange={this.changeValue}
               value={this.props.getValue()}
               minRows={rows}
+              maxLength={maxLength}
             /> :
             <textarea
               rows={rows}
@@ -85,6 +86,7 @@ class Textarea extends Component {
               disabled={disabled}
               onChange={this.changeValue}
               value={this.props.getValue()}
+              maxLength={maxLength}
             />
         }
         { hasError ? (<p className="error-message">{errorMessage}</p>) : null}
